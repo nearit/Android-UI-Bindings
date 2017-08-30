@@ -43,6 +43,7 @@
                 android:drawablePadding="-19dp"
                 android:paddingLeft="19dp"
                 android:stateListAnimator="@null"
+                android:textColor="@drawable/selector_button_text_color"
                 android:text="@string/nearit_ui_location" />
 
             <Button
@@ -55,6 +56,7 @@
                 android:drawablePadding="-19dp"
                 android:paddingLeft="19dp"
                 android:stateListAnimator="@null"
+                android:textColor="@drawable/selector_button_text_color"
                 android:text="@string/nearit_ui_bluetooth" />
 
             <TextView

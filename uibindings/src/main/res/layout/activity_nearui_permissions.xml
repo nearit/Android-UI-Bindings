@@ -42,6 +42,7 @@
                 android:drawableLeft="@drawable/localizzazione"
                 android:drawablePadding="-19dp"
                 android:paddingLeft="19dp"
+                android:textColor="@drawable/selector_button_text_color"
                 android:text="@string/nearit_ui_location" />
 
             <Button
@@ -53,56 +54,7 @@
                 android:drawableLeft="@drawable/bluetooth"
                 android:drawablePadding="-19dp"
                 android:paddingLeft="19dp"
-                android:text="@string/nearit_ui_bluetooth" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin3"
-                android:background="@drawable/selector_button"
-                android:drawableLeft="@drawable/bluetooth"
-                android:drawablePadding="-19dp"
-                android:paddingLeft="19dp"
-                android:text="@string/nearit_ui_bluetooth" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin3"
-                android:background="@drawable/selector_button"
-                android:drawableLeft="@drawable/bluetooth"
-                android:drawablePadding="-19dp"
-                android:paddingLeft="19dp"
-                android:text="@string/nearit_ui_bluetooth" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin3"
-                android:background="@drawable/selector_button"
-                android:drawableLeft="@drawable/bluetooth"
-                android:drawablePadding="-19dp"
-                android:paddingLeft="19dp"
-                android:text="@string/nearit_ui_bluetooth" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin3"
-                android:background="@drawable/selector_button"
-                android:drawableLeft="@drawable/bluetooth"
-                android:drawablePadding="-19dp"
-                android:paddingLeft="19dp"
-                android:text="@string/nearit_ui_bluetooth" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin3"
-                android:background="@drawable/selector_button"
-                android:drawableLeft="@drawable/bluetooth"
-                android:drawablePadding="-19dp"
-                android:paddingLeft="19dp"
+                android:textColor="@drawable/selector_button_text_color"
                 android:text="@string/nearit_ui_bluetooth" />
 
             <TextView
