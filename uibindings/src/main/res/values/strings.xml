@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">ui_bindings</string>
+    <string name="app_name" translatable="false">ui_bindings</string>
+    <string name="nearui_permissions_explanation_text">Vuoi ricevere esclusivi contenuti personalizzati? Consenti l\'accesso ai dati relativi alla tua posizione.</string>
+    <string name="nearui_close_permissions_text">Close</string>
+    <string name="bluetooth">BLUETOOTH</string>
+    <string name="location">LOCATION</string>
 </resources>
