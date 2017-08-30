@@ -6,7 +6,7 @@
         android:allowBackup="true"
         android:label="@string/nearit_ui_app_name">
         <activity
-            android:name=".PermissionsActivity"
+            android:name=".permissions.PermissionsActivity"
             android:theme="@style/PermissionsDialog"
             android:exported="false" />
     </application>

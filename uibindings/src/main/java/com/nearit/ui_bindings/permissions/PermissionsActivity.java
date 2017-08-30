@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings;
+package com.nearit.ui_bindings.permissions;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,8 @@ import android.view.View;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 
-import com.nearit.ui_bindings.permissions.PermissionsRequestIntentExtras;
+import com.nearit.ui_bindings.ExtraConstants;
+import com.nearit.ui_bindings.R;
 
 /**
  * Created by Federico Boschini on 28/08/17.
@@ -44,7 +45,7 @@ public class PermissionsActivity extends AppCompatActivity {
             isNonBlockingBLE = params.isNonBlockingBLE();
         }
 
-        if(!isInvisibleLayoutMode){
+        if (!isInvisibleLayoutMode) {
             setContentView(R.layout.activity_nearui_permissions);
         }
 
@@ -59,7 +60,7 @@ public class PermissionsActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        if(isNoBLE) {
+        if (isNoBLE) {
             bleButton.setVisibility(View.GONE);
         } else {
             bleButton.setVisibility(View.VISIBLE);
