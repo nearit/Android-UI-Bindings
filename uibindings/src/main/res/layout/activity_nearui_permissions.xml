@@ -21,98 +21,98 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/permissions_activity_padding"
-            android:paddingRight="@dimen/permissions_activity_padding">
+            android:paddingLeft="@dimen/nearit_ui_permissions_activity_padding"
+            android:paddingRight="@dimen/nearit_ui_permissions_activity_padding">
 
             <TextView
                 android:id="@+id/permissions_explanation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/permissions_activity_margin1"
-                android:text="@string/nearui_permissions_explanation_text"
+                android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin1"
+                android:text="@string/nearit_ui_permissions_explanation_text"
                 android:textAlignment="center" />
 
             <Button
                 android:id="@+id/location_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/permissions_activity_margin2"
+                android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin2"
                 android:background="@drawable/selector_button"
                 android:drawableLeft="@drawable/localizzazione"
                 android:drawablePadding="-19dp"
                 android:paddingLeft="19dp"
-                android:text="@string/location" />
+                android:text="@string/nearit_ui_location" />
 
             <Button
                 android:id="@+id/ble_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/permissions_activity_margin3"
+                android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin3"
                 android:background="@drawable/selector_button"
                 android:drawableLeft="@drawable/bluetooth"
                 android:drawablePadding="-19dp"
                 android:paddingLeft="19dp"
-                android:text="@string/bluetooth" />
+                android:text="@string/nearit_ui_bluetooth" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/permissions_activity_margin3"
+                android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin3"
                 android:background="@drawable/selector_button"
                 android:drawableLeft="@drawable/bluetooth"
                 android:drawablePadding="-19dp"
                 android:paddingLeft="19dp"
-                android:text="@string/bluetooth" />
+                android:text="@string/nearit_ui_bluetooth" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/permissions_activity_margin3"
+                android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin3"
                 android:background="@drawable/selector_button"
                 android:drawableLeft="@drawable/bluetooth"
                 android:drawablePadding="-19dp"
                 android:paddingLeft="19dp"
-                android:text="@string/bluetooth" />
+                android:text="@string/nearit_ui_bluetooth" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/permissions_activity_margin3"
+                android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin3"
                 android:background="@drawable/selector_button"
                 android:drawableLeft="@drawable/bluetooth"
                 android:drawablePadding="-19dp"
                 android:paddingLeft="19dp"
-                android:text="@string/bluetooth" />
+                android:text="@string/nearit_ui_bluetooth" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/permissions_activity_margin3"
+                android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin3"
                 android:background="@drawable/selector_button"
                 android:drawableLeft="@drawable/bluetooth"
                 android:drawablePadding="-19dp"
                 android:paddingLeft="19dp"
-                android:text="@string/bluetooth" />
+                android:text="@string/nearit_ui_bluetooth" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/permissions_activity_margin3"
+                android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin3"
                 android:background="@drawable/selector_button"
                 android:drawableLeft="@drawable/bluetooth"
                 android:drawablePadding="-19dp"
                 android:paddingLeft="19dp"
-                android:text="@string/bluetooth" />
+                android:text="@string/nearit_ui_bluetooth" />
 
             <TextView
                 android:id="@+id/close_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/permissions_activity_margin5"
-                android:layout_marginTop="@dimen/permissions_activity_margin4"
-                android:text="@string/nearui_close_permissions_text"
+                android:layout_marginBottom="@dimen/nearit_ui_permissions_activity_margin5"
+                android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin4"
+                android:text="@string/nearit_ui_close_permissions_text"
                 android:textAlignment="center" />
 
         </LinearLayout>

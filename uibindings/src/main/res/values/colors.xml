@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="pale_red">#e54d4c</color>
-    <color name="dark_lime_green">#68c600</color>
+    <color name="nearit_ui_error_color">#e54d4c</color>
+    <color name="nearit_ui_expired_coupon_color">#d0011b</color>
+    <color name="nearit_ui_black">#333333</color>
+    <color name="nearit_ui_valid_coupon_color">#68c600</color>
+    <color name="nearit_ui_white">#f2f2f2</color>
+    <color name="nearit_ui_real_white">#ffffff</color>
     <color name="warm_grey">#777777</color>
     <color name="black_25">#40000000</color>
-    <color name="black">#333333</color>
-    <color name="white">#f2f2f2</color>
-    <color name="white_two">#ffffff</color>
+
+    <color name="nearit_ui_selected_button_background_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_snackbar_background_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_permission_not_given_button_background_color">@color/nearit_ui_white</color>
 </resources>

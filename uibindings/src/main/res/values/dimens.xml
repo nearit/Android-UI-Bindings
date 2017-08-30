@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="permissions_activity_width">300dp</dimen>
-    <dimen name="permissions_activity_height">410dp</dimen>
-    <dimen name="permissions_activity_margin1">36dp</dimen>
-    <dimen name="permissions_activity_margin2">34dp</dimen>
-    <dimen name="permissions_activity_margin3">10dp</dimen>
-    <dimen name="permissions_activity_margin4">24dp</dimen>
-    <dimen name="permissions_activity_padding">25dp</dimen>
-    <dimen name="permissions_activity_margin5">30dp</dimen>
+    <dimen name="nearit_ui_permissions_activity_margin1">36dp</dimen>
+    <dimen name="nearit_ui_permissions_activity_margin2">34dp</dimen>
+    <dimen name="nearit_ui_permissions_activity_margin3">10dp</dimen>
+    <dimen name="nearit_ui_permissions_activity_margin4">24dp</dimen>
+    <dimen name="nearit_ui_permissions_activity_padding">25dp</dimen>
+    <dimen name="nearit_ui_permissions_activity_margin5">30dp</dimen>
 </resources>
