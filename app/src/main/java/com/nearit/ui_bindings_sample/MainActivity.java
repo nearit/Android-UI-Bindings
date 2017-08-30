@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
                                 .createPermissionRequestIntentBuilder()
 //                                .setEnableTapOutsideToClose(true)
 //                                .setNoBLE(true)
+                                .setInvisibleLayoutMode(true)
                                 .build(),
                         NEAR_PERMISSION_REQUEST);
             }
