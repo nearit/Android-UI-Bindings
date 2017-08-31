@@ -6,12 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -44,13 +42,16 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
     private static final int LOCATION_SETTINGS_CODE = 5000;
     public static final int PERMISSION_REQUEST_FINE_LOCATION = 6000;
 
-    private boolean permissionGiven = false;
     private PermissionsRequestIntentExtras params;
     private boolean isEnableTapToClose = false;
     private boolean isInvisibleLayoutMode = false;
     private boolean isAutoStartRadar = false;
     private boolean isNoBLE = false;
     private boolean isNonBlockingBLE = false;
+
+    private boolean isBluetoothOn = false;
+    private boolean isLocationOn = false;
+    private boolean permissionsGiven = false;
 
     @Nullable
     private Button bleButton;
@@ -78,7 +79,7 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
             bleButton = (Button) findViewById(R.id.ble_button);
             closeButton = (TextView) findViewById(R.id.close_text);
         } else {
-            if (!permissionGiven) {
+            if (!permissionsGiven) {
                 askPermissions();
             } else {
                 setResult(Activity.RESULT_OK);
@@ -131,6 +132,10 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
         return super.onTouchEvent(event);
     }
 
+    private boolean checkBluetoothIsOn() {
+        return BluetoothAdapter.getDefaultAdapter() != null && BluetoothAdapter.getDefaultAdapter().isEnabled();
+    }
+
     /**
      * Checks and asks for missing permissions for Android 23+ devices.
      * Otherwise request for enabling system wise location services.
@@ -176,16 +181,49 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
         } else {
             onPermissionsReady();
         }
-
     }
 
     private void onPermissionsReady() {
         // You have all the right permissions to start the NearIT radar
-        permissionGiven = true;
+        permissionsGiven = true;
         setResult(Activity.RESULT_OK);
         finish();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == LOCATION_SETTINGS_CODE) {
+            if (resultCode == Activity.RESULT_OK && !isNoBLE) {
+                    openBluetoothSettings();
+            } else finish();
+
+        } else if (requestCode == BLUETOOTH_SETTINGS_CODE) {
+            switch(resultCode){
+                case Activity.RESULT_CANCELED :
+                    isBluetoothOn = false;
+                    if(isNonBlockingBLE) {
+                        onPermissionsReady();
+                    }
+                    break;
+                case Activity.RESULT_OK :
+                    isBluetoothOn = true;
+                    onPermissionsReady();
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_FINE_LOCATION) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openLocationSettings();
+            } else {
+                finish();
+            }
+        }
+    }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -205,7 +243,11 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
                     case LocationSettingsStatusCodes.SUCCESS:
                         // The bluetooth permissions are strictly necessary for beacons,
                         // but not for geofences
-                        openBluetoothSettings();
+                        if (!isNoBLE) {
+                            openBluetoothSettings();
+                        } else {
+                            onPermissionsReady();
+                        }
                         break;
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                         try {
