@@ -7,7 +7,7 @@
         android:allowBackup="true">
         <activity
             android:name=".permissions.PermissionsActivity"
-            android:theme="@style/PermissionsDialog"
+            android:theme="@style/NearItUIPermissionsDialog"
             android:exported="false" />
     </application>
 
