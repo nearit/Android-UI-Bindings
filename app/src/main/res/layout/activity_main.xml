@@ -16,21 +16,51 @@
         android:text="Permissions"/>
 
     <Button
-        android:id="@+id/coupon_detail"
+        android:id="@+id/permissions_invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Coupon detail"/>
+        android:text="Permissions Invisible Layout"/>
 
     <Button
-        android:id="@+id/feedback_detail"
+        android:id="@+id/permissions_no_beacon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Feedback detail"/>
+        android:text="Permissions No beacon"/>
 
     <Button
-        android:id="@+id/content_detail"
+        android:id="@+id/permissions_beacon_nonblocking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Content detail"/>
+        android:text="Permissions beacon non blocking"/>
+
+    <Button
+        android:id="@+id/invisible_no_beacon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="invisible no beacon"/>
+
+    <Button
+        android:id="@+id/invisible_non_blocking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="invisible non blocking"/>
+
+    <!--<Button-->
+        <!--android:id="@+id/coupon_detail"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Coupon detail"/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/feedback_detail"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Feedback detail"/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/content_detail"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Content detail"/>-->
 
 </LinearLayout>
