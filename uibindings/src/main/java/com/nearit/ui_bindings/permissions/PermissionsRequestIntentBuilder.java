@@ -11,8 +11,8 @@ public class PermissionsRequestIntentBuilder {
     private boolean mEnableTapOutsideToClose = false;
     private boolean mRadarAutoStart = false;
     private boolean mInvisibleLayoutMode = false;
-    private boolean mNoBLE = false;
-    private boolean mNonBlockingBLE = true;
+    private boolean mNoBeacon = false;
+    private boolean mNonBlockingBeacon = false;
 
     public PermissionsRequestIntentBuilder(Context context) {
         mContext = context;
@@ -23,8 +23,8 @@ public class PermissionsRequestIntentBuilder {
      * <p>
      * <p> default is false
      */
-    public PermissionsRequestIntentBuilder setEnableTapOutsideToClose(boolean enabled) {
-        mEnableTapOutsideToClose = enabled;
+    public PermissionsRequestIntentBuilder enableTapOutsideToClose() {
+        mEnableTapOutsideToClose = true;
         return this;
     }
 
@@ -33,8 +33,8 @@ public class PermissionsRequestIntentBuilder {
      * <p>
      * <p> Automatic radar start default is false
      */
-    public PermissionsRequestIntentBuilder setAutomaticRadarStart(boolean enabled) {
-        mRadarAutoStart = enabled;
+    public PermissionsRequestIntentBuilder automaticRadarStart() {
+        mRadarAutoStart = true;
         return this;
     }
 
@@ -43,28 +43,28 @@ public class PermissionsRequestIntentBuilder {
      * <p>
      * <p> Default: false
      */
-    public PermissionsRequestIntentBuilder setInvisibleLayoutMode(boolean enabled) {
-        mInvisibleLayoutMode = enabled;
+    public PermissionsRequestIntentBuilder invisibleLayoutMode() {
+        mInvisibleLayoutMode = true;
         return this;
     }
 
     /**
      * Sets BLE requirement
      * <p>
-     * <p> Default: true = bluetooth is NOT required
+     * <p> Default: false = bluetooth is required
      */
-    public PermissionsRequestIntentBuilder setNoBLE(boolean enabled) {
-        mNoBLE = enabled;
+    public PermissionsRequestIntentBuilder noBeacon() {
+        mNoBeacon = true;
         return this;
     }
 
     /**
      * Sets BLE requirement as non blocking
      * <p>
-     * <p> Default: true = bluetooth is required but non blocking
+     * <p> Default: false = bluetooth is required and blocking
      */
-    public PermissionsRequestIntentBuilder setNonBlockingBLE(boolean enabled) {
-        mNonBlockingBLE = enabled;
+    public PermissionsRequestIntentBuilder nonBlockingBeacon() {
+        mNonBlockingBeacon = true;
         return this;
     }
 
@@ -77,8 +77,8 @@ public class PermissionsRequestIntentBuilder {
                 mEnableTapOutsideToClose,
                 mRadarAutoStart,
                 mInvisibleLayoutMode,
-                mNoBLE,
-                mNonBlockingBLE);
+                mNoBeacon,
+                mNonBlockingBeacon);
     }
 
 }

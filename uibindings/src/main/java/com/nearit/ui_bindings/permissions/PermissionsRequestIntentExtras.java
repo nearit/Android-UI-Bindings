@@ -17,20 +17,20 @@ public class PermissionsRequestIntentExtras implements Parcelable {
     private final boolean enableTapToClose;
     private final boolean autoStartRadar;
     private final boolean invisibleLayoutMode;
-    private final boolean noBLE;
-    private final boolean nonBlockingBLE;
+    private final boolean noBeacon;
+    private final boolean nonBlockingBeacon;
 
     PermissionsRequestIntentExtras(
             boolean enableTapToClose,
             boolean autoStartRadar,
             boolean invisibleLayoutMode,
-            boolean noBLE,
-            boolean nonBlockingBLE) {
+            boolean noBeacon,
+            boolean nonBlockingBeacon) {
         this.enableTapToClose = enableTapToClose;
         this.autoStartRadar = autoStartRadar;
         this.invisibleLayoutMode = invisibleLayoutMode;
-        this.noBLE = noBLE;
-        this.nonBlockingBLE = nonBlockingBLE;
+        this.noBeacon = noBeacon;
+        this.nonBlockingBeacon = nonBlockingBeacon;
     }
 
     /**
@@ -62,8 +62,8 @@ public class PermissionsRequestIntentExtras implements Parcelable {
         dest.writeInt(enableTapToClose ? 1 : 0);
         dest.writeInt(autoStartRadar ? 1 : 0);
         dest.writeInt(invisibleLayoutMode ? 1 : 0);
-        dest.writeInt(noBLE ? 1 : 0);
-        dest.writeInt(nonBlockingBLE ? 1 : 0);
+        dest.writeInt(noBeacon ? 1 : 0);
+        dest.writeInt(nonBlockingBeacon ? 1 : 0);
     }
 
     @Override
@@ -77,15 +77,15 @@ public class PermissionsRequestIntentExtras implements Parcelable {
             boolean enableTapToClose = in.readInt() != 0;
             boolean autoStartRadar = in.readInt() != 0;
             boolean invisibleLayoutMode = in.readInt() != 0;
-            boolean noBLE = in.readInt() != 0;
-            boolean nonBlockingBLE = in.readInt() != 0;
+            boolean noBeacon = in.readInt() != 0;
+            boolean nonBlockingBeacon = in.readInt() != 0;
 
             return new PermissionsRequestIntentExtras(
                     enableTapToClose,
                     autoStartRadar,
                     invisibleLayoutMode,
-                    noBLE,
-                    nonBlockingBLE);
+                    noBeacon,
+                    nonBlockingBeacon);
         }
 
         @Override
@@ -106,11 +106,11 @@ public class PermissionsRequestIntentExtras implements Parcelable {
         return invisibleLayoutMode;
     }
 
-    public boolean isNoBLE() {
-        return noBLE;
+    public boolean isNoBeacon() {
+        return noBeacon;
     }
 
-    public boolean isNonBlockingBLE() {
-        return nonBlockingBLE;
+    public boolean isNonBlockingBeacon() {
+        return nonBlockingBeacon;
     }
 }
