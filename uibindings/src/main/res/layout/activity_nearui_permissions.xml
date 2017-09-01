@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
@@ -33,29 +34,25 @@
                 android:text="@string/nearit_ui_permissions_explanation_text"
                 android:textAlignment="center" />
 
-            <Button
+            <com.nearit.ui_bindings.permissions.views.PermissionButton
                 android:id="@+id/location_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin2"
-                android:background="@drawable/selector_button"
-                android:drawableLeft="@drawable/localizzazione"
-                android:drawablePadding="-19dp"
-                android:paddingLeft="19dp"
-                android:textColor="@drawable/selector_button_text_color"
-                android:text="@string/nearit_ui_location" />
+                android:clickable="true"
+                android:enabled="true"
+                app:buttonText="@string/nearit_ui_location"
+                app:iconRes="@drawable/localizzazione" />
 
-            <Button
+            <com.nearit.ui_bindings.permissions.views.PermissionButton
                 android:id="@+id/ble_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin3"
-                android:background="@drawable/selector_button"
-                android:drawableLeft="@drawable/bluetooth"
-                android:drawablePadding="-19dp"
-                android:paddingLeft="19dp"
-                android:textColor="@drawable/selector_button_text_color"
-                android:text="@string/nearit_ui_bluetooth" />
+                android:clickable="true"
+                android:enabled="true"
+                app:buttonText="@string/nearit_ui_bluetooth"
+                app:iconRes="@drawable/bluetooth" />
 
             <TextView
                 android:id="@+id/close_text"
@@ -64,6 +61,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/nearit_ui_permissions_activity_margin5"
                 android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin4"
+                android:padding="8dp"
                 android:text="@string/nearit_ui_close_permissions_text"
                 android:textAlignment="center" />
 

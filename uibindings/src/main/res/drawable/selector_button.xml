@@ -3,4 +3,5 @@
     <item android:drawable="@drawable/button" android:state_active="true"/>
     <item android:drawable="@drawable/button" android:state_pressed="false"/>
     <item android:drawable="@drawable/button_selected" android:state_pressed="true"/>
+    <item android:drawable="@drawable/button_selected" android:state_checked="true"/>
 </selector>
