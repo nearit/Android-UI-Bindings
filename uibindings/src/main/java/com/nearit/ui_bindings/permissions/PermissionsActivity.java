@@ -6,15 +6,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager.LayoutParams;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -29,6 +31,7 @@ import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
+import com.nearit.ui_bindings.permissions.views.PermissionButton;
 
 /**
  * Created by Federico Boschini on 28/08/17.
@@ -36,25 +39,28 @@ import com.nearit.ui_bindings.R;
 
 public class PermissionsActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    private static final String TAG = "MainActivity";
     private GoogleApiClient mGoogleApiClient;
     private static final int BLUETOOTH_SETTINGS_CODE = 4000;
     private static final int LOCATION_SETTINGS_CODE = 5000;
     public static final int PERMISSION_REQUEST_FINE_LOCATION = 6000;
 
-    private PermissionsRequestIntentExtras params;
+    /**
+     * Flow parameters
+     */
     private boolean isEnableTapToClose = false;
     private boolean isInvisibleLayoutMode = false;
-    private boolean isAutoStartRadar = false;
-    private boolean isNoBLE = false;
-    private boolean isNonBlockingBLE = false;
+    private boolean isNoBeacon = false;
+    private boolean isNonBlockingBeacon = false;
 
     private boolean isBluetoothOn = false;
     private boolean isLocationOn = false;
-    private boolean permissionsGiven = false;
+    private boolean locationPermissionGranted = false;
+    private boolean allPermissionsGiven = false;
 
     @Nullable
-    private Button bleButton;
+    private PermissionButton locationButton;
+    @Nullable
+    private PermissionButton bleButton;
     @Nullable
     private TextView closeButton;
 
@@ -62,35 +68,36 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getWindow().setFlags(LayoutParams.FLAG_NOT_TOUCH_MODAL, LayoutParams.FLAG_NOT_TOUCH_MODAL);
         getWindow().setFlags(LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH, LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH);
 
         Intent intent = getIntent();
         if (intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
-            params = PermissionsRequestIntentExtras.fromIntent(intent);
+            PermissionsRequestIntentExtras params = PermissionsRequestIntentExtras.fromIntent(intent);
             isEnableTapToClose = params.isEnableTapToClose();
             isInvisibleLayoutMode = params.isInvisibleLayoutMode();
-            isAutoStartRadar = params.isAutoStartRadar();
-            isNoBLE = params.isNoBLE();
-            isNonBlockingBLE = params.isNonBlockingBLE();
+            isNoBeacon = params.isNoBeacon();
+            isNonBlockingBeacon = params.isNonBlockingBeacon();
+//            isAutoStartRadar = params.isAutoStartRadar();
         }
+
+        isBluetoothOn = checkBluetooth();
+        isLocationOn = checkLocation();
+        allPermissionsGiven = isBluetoothOn && isLocationOn;
 
         if (!isInvisibleLayoutMode) {
             setContentView(R.layout.activity_nearui_permissions);
-            bleButton = (Button) findViewById(R.id.ble_button);
+            bleButton = (PermissionButton) findViewById(R.id.ble_button);
             closeButton = (TextView) findViewById(R.id.close_text);
+            locationButton = (PermissionButton) findViewById(R.id.location_button);
         } else {
-            if (!permissionsGiven) {
+            if (!allPermissionsGiven) {
                 askPermissions();
             } else {
                 setResult(Activity.RESULT_OK);
                 finish();
             }
         }
-
-
-//        just a reminder
-//        bleButton.setCompoundDrawables(spunta, null, null, null);
-
     }
 
     public static Intent createIntent(Context context, PermissionsRequestIntentExtras params) {
@@ -98,16 +105,51 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
     }
 
     @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (MotionEvent.ACTION_OUTSIDE == event.getAction()) {
+            if (isEnableTapToClose) {
+                finalCheck();
+                return true;
+            }
+        }
+        return super.onTouchEvent(event);
+    }
+
+    @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        if (isNoBLE) {
+        if (locationButton != null) {
+            if (isLocationOn) {
+                setButtonChecked(locationButton);
+            } else {
+                locationButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        askPermissions();
+                    }
+                });
+            }
+        }
+
+        if (isNoBeacon) {
             if (bleButton != null) {
                 bleButton.setVisibility(View.GONE);
             }
         } else {
             if (bleButton != null) {
                 bleButton.setVisibility(View.VISIBLE);
+                Log.d("BLEBUTTON", String.valueOf(bleButton.isEnabled()));
+                if (isBluetoothOn) {
+                    setButtonChecked(bleButton);
+                } else {
+                    bleButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            openBluetoothSettings();
+                        }
+                    });
+                }
             }
         }
 
@@ -115,24 +157,38 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    finish();
+                    finalCheck();
                 }
             });
         }
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (MotionEvent.ACTION_OUTSIDE == event.getAction()) {
-            if (isEnableTapToClose) {
+
+    public void finalCheck() {
+        if (isLocationOn) {
+            if (checkBluetooth() || isNoBeacon || isNonBlockingBeacon) {
+                onPermissionsReady();
+            } else {
                 finish();
             }
-            return true;
+        } else {
+            finish();
         }
-        return super.onTouchEvent(event);
     }
 
-    private boolean checkBluetoothIsOn() {
+    public boolean checkLocation() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        boolean anyLocationProv = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        anyLocationProv |= locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+        int permissionCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
+
+        return anyLocationProv &&
+                permissionCheck == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private boolean checkBluetooth() {
         return BluetoothAdapter.getDefaultAdapter() != null && BluetoothAdapter.getDefaultAdapter().isEnabled();
     }
 
@@ -165,6 +221,19 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
     }
 
     /**
+     * Asks to enable bluetooth
+     */
+    private void openBluetoothSettings() {
+        if (!checkBluetooth()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, BLUETOOTH_SETTINGS_CODE);
+        } else {
+            // bt on
+            finalCheck();
+        }
+    }
+
+    /**
      * Asks for location permissions.
      */
     private void requestFineLocationPermission() {
@@ -173,41 +242,66 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
         }
     }
 
-    private void openBluetoothSettings() {
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (mBluetoothAdapter != null && !mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, BLUETOOTH_SETTINGS_CODE);
-        } else {
-            onPermissionsReady();
-        }
-    }
-
     private void onPermissionsReady() {
         // You have all the right permissions to start the NearIT radar
-        permissionsGiven = true;
+        allPermissionsGiven = true;
         setResult(Activity.RESULT_OK);
         finish();
     }
 
+    private void onLocationSettingsOkResult() {
+        isLocationOn = true;
+        if (isInvisibleLayoutMode) {
+            if (!isNoBeacon) {
+                openBluetoothSettings();
+            } else {
+                finalCheck();
+            }
+        } else {
+            if (isNoBeacon) {
+                finalCheck();
+            } else {
+                if (locationButton != null) {
+                    setButtonChecked(locationButton);
+                }
+                if (isBluetoothOn) {
+                    finalCheck();
+                }
+            }
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //  LOCATION DIALOG CALLBACK
         if (requestCode == LOCATION_SETTINGS_CODE) {
-            if (resultCode == Activity.RESULT_OK && !isNoBLE) {
-                    openBluetoothSettings();
-            } else finish();
-
+            if (resultCode == Activity.RESULT_OK) {
+                onLocationSettingsOkResult();
+            } else {
+                isLocationOn = false;
+                if (isInvisibleLayoutMode) {
+                    finalCheck();
+                }
+            }
+            //  BLUETOOTH DIALOG CALLBACK
         } else if (requestCode == BLUETOOTH_SETTINGS_CODE) {
-            switch(resultCode){
-                case Activity.RESULT_CANCELED :
-                    isBluetoothOn = false;
-                    if(isNonBlockingBLE) {
-                        onPermissionsReady();
+            if (resultCode == Activity.RESULT_OK) {
+                //  bt on
+                isBluetoothOn = true;
+                if (bleButton != null) {
+                    setButtonChecked(bleButton);
+                }
+                if (isLocationOn) {
+                    finalCheck();
+                }
+            } else {
+                if (isInvisibleLayoutMode) {
+                    finalCheck();
+                } else {
+                    if (isNonBlockingBeacon && locationPermissionGranted && isLocationOn) {
+                        finalCheck();
                     }
-                    break;
-                case Activity.RESULT_OK :
-                    isBluetoothOn = true;
-                    onPermissionsReady();
+                }
             }
         }
     }
@@ -218,9 +312,12 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
         if (requestCode == PERMISSION_REQUEST_FINE_LOCATION) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                locationPermissionGranted = true;
                 openLocationSettings();
             } else {
-                finish();
+                if (isInvisibleLayoutMode) {
+                    finalCheck();
+                }
             }
         }
     }
@@ -241,13 +338,7 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
                 final Status status = locationSettingsResult.getStatus();
                 switch (status.getStatusCode()) {
                     case LocationSettingsStatusCodes.SUCCESS:
-                        // The bluetooth permissions are strictly necessary for beacons,
-                        // but not for geofences
-                        if (!isNoBLE) {
-                            openBluetoothSettings();
-                        } else {
-                            onPermissionsReady();
-                        }
+                        onLocationSettingsOkResult();
                         break;
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                         try {
@@ -256,7 +347,6 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
                                     LOCATION_SETTINGS_CODE);
                         } catch (IntentSender.SendIntentException e) {
                             e.printStackTrace();
-
                         }
                         break;
                     case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
@@ -269,11 +359,18 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
 
     @Override
     public void onConnectionSuspended(int i) {
-
+        finish();
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        finish();
     }
+
+    private void setButtonChecked(PermissionButton button) {
+        button.setIcon(R.drawable.spunta);
+        button.setOnClickListener(null);
+        button.setCheckedRecursive(false);
+    }
+
 }
