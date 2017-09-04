@@ -20,12 +20,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button permissions = (Button) findViewById(R.id.permissions);
-        Button permissionsInvisibleLayout = (Button) findViewById(R.id.permissions_invisible);
         Button permissionsNoBeacon = (Button) findViewById(R.id.permissions_no_beacon);
         Button permissionsBeaconNonBlocking = (Button) findViewById(R.id.permissions_beacon_nonblocking);
 
+        Button permissionsInvisibleLayout = (Button) findViewById(R.id.permissions_invisible);
         Button invisibleNoBeacon = (Button) findViewById(R.id.invisible_no_beacon);
         Button invisibleNonBlocking = (Button) findViewById(R.id.invisible_non_blocking);
+
+        Button autoStartRadar = (Button) findViewById(R.id.autostart_radar);
 
 
         permissions.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +100,18 @@ public class MainActivity extends AppCompatActivity {
                                 .createPermissionRequestIntentBuilder()
                                 .invisibleLayoutMode()
                                 .nonBlockingBeacon()
+                                .build(),
+                        NEAR_PERMISSION_REQUEST);
+            }
+        });
+
+        autoStartRadar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(
+                        NearITUIBindings.getInstance(getApplicationContext())
+                                .createPermissionRequestIntentBuilder()
+                                .automaticRadarStart()
                                 .build(),
                         NEAR_PERMISSION_REQUEST);
             }

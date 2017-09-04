@@ -16,12 +16,6 @@
         android:text="Permissions"/>
 
     <Button
-        android:id="@+id/permissions_invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Permissions Invisible Layout"/>
-
-    <Button
         android:id="@+id/permissions_no_beacon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,6 +26,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Permissions beacon non blocking"/>
+
+    <Button
+        android:id="@+id/permissions_invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Permissions Invisible Layout"/>
 
     <Button
         android:id="@+id/invisible_no_beacon"
@@ -45,11 +46,12 @@
         android:layout_height="wrap_content"
         android:text="invisible non blocking"/>
 
-    <!--<Button-->
-        <!--android:id="@+id/coupon_detail"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Coupon detail"/>-->
+    <Button
+        android:id="@+id/autostart_radar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Autostart radar"/>
 
     <!--<Button-->
         <!--android:id="@+id/feedback_detail"-->
