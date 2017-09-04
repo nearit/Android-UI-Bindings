@@ -33,6 +33,8 @@ import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.permissions.views.PermissionButton;
 
+import it.near.sdk.NearItManager;
+
 /**
  * Created by Federico Boschini on 28/08/17.
  */
@@ -51,6 +53,7 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
     private boolean isInvisibleLayoutMode = false;
     private boolean isNoBeacon = false;
     private boolean isNonBlockingBeacon = false;
+    private boolean isAutoStartRadar = false;
 
     private boolean isBluetoothOn = false;
     private boolean isLocationOn = false;
@@ -78,7 +81,7 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
             isInvisibleLayoutMode = params.isInvisibleLayoutMode();
             isNoBeacon = params.isNoBeacon();
             isNonBlockingBeacon = params.isNonBlockingBeacon();
-//            isAutoStartRadar = params.isAutoStartRadar();
+            isAutoStartRadar = params.isAutoStartRadar();
         }
 
         isBluetoothOn = checkBluetooth();
@@ -245,6 +248,9 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
     private void onPermissionsReady() {
         // You have all the right permissions to start the NearIT radar
         allPermissionsGiven = true;
+        if(isAutoStartRadar) {
+            NearItManager.getInstance().startRadar();
+        }
         setResult(Activity.RESULT_OK);
         finish();
     }
