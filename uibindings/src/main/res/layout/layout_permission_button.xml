@@ -6,10 +6,12 @@
 
     <ImageView
         android:id="@+id/permission_button_icon"
-        android:layout_width="wrap_content"
+        android:layout_width="15dp"
+
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/nearit_ui_permissions_activity_icon_margin" />
+        android:layout_marginLeft="@dimen/nearit_ui_permissions_activity_icon_margin"
+        android:scaleType="centerInside" />
 
     <TextView
         android:id="@+id/permission_button_text"
