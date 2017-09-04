@@ -17,12 +17,7 @@ import com.nearit.ui_bindings.R;
  * Created by Federico Boschini on 31/08/17.
  */
 
-public class PermissionButton extends RelativeLayout implements Checkable {
-
-    private static final int[] CHECKED_STATE_SET = {
-            android.R.attr.state_checked
-    };
-    boolean checked = false;
+public class PermissionButton extends RelativeLayout {
 
     public static final int NO_ICON = 0;
     private ImageView icon;
@@ -88,35 +83,5 @@ public class PermissionButton extends RelativeLayout implements Checkable {
                     ResourcesCompat.getDrawable(getResources(), iconRes, null)
             );
         }
-    }
-
-    @Override
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-
-    public void setCheckedRecursive(boolean checked) {
-        setChecked(checked);
-        for( int i = 0; i<this.getChildCount(); i++){
-            this.getChildAt(i).setEnabled(checked);
-        }
-    }
-
-    @Override
-    public boolean isChecked() {
-        return checked;
-    }
-
-    @Override
-    public void toggle() {
-        setChecked(!checked);
-    }
-
-    @Override
-    protected int[] onCreateDrawableState(int extraSpace) {
-        int[] drawableState = super.onCreateDrawableState(extraSpace + 1);
-        if (checked) mergeDrawableStates(drawableState, CHECKED_STATE_SET);
-
-        return drawableState;
     }
 }
