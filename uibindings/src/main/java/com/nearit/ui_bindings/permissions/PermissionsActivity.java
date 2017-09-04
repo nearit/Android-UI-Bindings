@@ -139,9 +139,9 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
         } else {
             if (bleButton != null) {
                 bleButton.setVisibility(View.VISIBLE);
-                Log.d("BLEBUTTON", String.valueOf(bleButton.isEnabled()));
-                if (isBluetoothOn) {
+                if (checkBluetooth()) {
                     setButtonChecked(bleButton);
+                    Log.d("BLEBUTTON", String.valueOf(bleButton.isEnabled()));
                 } else {
                     bleButton.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -264,7 +264,7 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
                 if (locationButton != null) {
                     setButtonChecked(locationButton);
                 }
-                if (isBluetoothOn) {
+                if (checkBluetooth()) {
                     finalCheck();
                 }
             }
@@ -278,10 +278,10 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
             if (resultCode == Activity.RESULT_OK) {
                 onLocationSettingsOkResult();
             } else {
-                isLocationOn = false;
                 if (isInvisibleLayoutMode) {
                     finalCheck();
                 }
+                isLocationOn = false;
             }
             //  BLUETOOTH DIALOG CALLBACK
         } else if (requestCode == BLUETOOTH_SETTINGS_CODE) {
@@ -328,7 +328,7 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
         locationRequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(locationRequest)
-                .setNeedBle(true);
+                .setNeedBle(!isNoBeacon);
 
         final PendingResult<LocationSettingsResult> result =
                 LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
@@ -370,7 +370,9 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
     private void setButtonChecked(PermissionButton button) {
         button.setIcon(R.drawable.spunta);
         button.setOnClickListener(null);
-        button.setCheckedRecursive(false);
+        button.setEnabled(false);
+        button.setActivated(true);
+//        button.setClickable(false);
     }
 
 }
