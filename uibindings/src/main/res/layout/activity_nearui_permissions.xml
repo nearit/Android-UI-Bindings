@@ -31,6 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
                 android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin1"
                 android:textAppearance="@style/NearItUIPermissionsTextAppearance"
                 android:text="@string/nearit_ui_permissions_explanation_text"

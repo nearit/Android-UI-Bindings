@@ -24,6 +24,7 @@ public class PermissionButton extends RelativeLayout {
     private TextView text;
 
     private String buttonText;
+    private int originalIconRes;
     private int iconRes;
 
     public PermissionButton(Context context) {
@@ -50,6 +51,7 @@ public class PermissionButton extends RelativeLayout {
                 0, 0);
         try {
             buttonText = a.getString(R.styleable.PermissionButtonView_buttonText);
+            originalIconRes = a.getResourceId(R.styleable.PermissionButtonView_iconRes, NO_ICON);
             iconRes = a.getResourceId(R.styleable.PermissionButtonView_iconRes, NO_ICON);
         } finally {
             a.recycle();
@@ -68,10 +70,30 @@ public class PermissionButton extends RelativeLayout {
         requestLayout();
     }
 
+    public void resetIcon() {
+        iconRes = originalIconRes;
+        invalidate();
+        requestLayout();
+    }
+
     public void setText(String buttonText) {
         this.buttonText = buttonText;
         invalidate();
         requestLayout();
+    }
+
+    public void setChecked() {
+        this.setIcon(R.drawable.spunta);
+        this.setOnClickListener(null);
+        this.setEnabled(false);
+        this.setActivated(true);
+    }
+
+    public void setUnchecked() {
+        this.resetIcon();
+        this.setText(buttonText);
+        this.setEnabled(true);
+        this.setActivated(false);
     }
 
     @Override
