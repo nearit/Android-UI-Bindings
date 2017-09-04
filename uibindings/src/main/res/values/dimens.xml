@@ -6,4 +6,8 @@
     <dimen name="nearit_ui_permissions_activity_margin4">16dp</dimen>
     <dimen name="nearit_ui_permissions_activity_margin5">22dp</dimen>
     <dimen name="nearit_ui_permissions_activity_padding">25dp</dimen>
+
+    <dimen name="nearit_ui_permissions_text_size">15sp</dimen>
+    <dimen name="nearit_ui_permission_button_text_size">15sp</dimen>
+    <dimen name="nearit_ui_permissions_activity_icon_margin">17dp</dimen>
 </resources>

@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/nearit_ui_permissions_activity_background_color"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -31,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin1"
+                android:textAppearance="@style/NearItUIPermissionsTextAppearance"
                 android:text="@string/nearit_ui_permissions_explanation_text"
                 android:textAlignment="center" />
 
@@ -61,6 +63,7 @@
                 android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin4"
                 android:padding="8dp"
                 android:text="@string/nearit_ui_close_permissions_text"
+                android:textAppearance="@style/NearItUIPermissionsCloseTextAppearance"
                 android:textAlignment="center" />
 
         </LinearLayout>

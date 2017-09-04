@@ -6,12 +6,14 @@
     <color name="nearit_ui_valid_coupon_color">#68c600</color>
     <color name="nearit_ui_white">#f2f2f2</color>
     <color name="nearit_ui_real_white">#ffffff</color>
-    <color name="warm_grey">#777777</color>
+    <color name="nearit_ui_warm_grey">#777777</color>
     <color name="black_25">#40000000</color>
 
     <color name="nearit_ui_snackbar_background_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_permissions_activity_background_color">@color/nearit_ui_real_white</color>
     <color name="nearit_ui_selected_button_background_color">@color/nearit_ui_black</color>
-    <color name="nearit_ui_selected_button_text_color">@color/nearit_ui_white</color>
+    <color name="nearit_ui_selected_button_text_color">@color/nearit_ui_real_white</color>
     <color name="nearit_ui_permission_not_given_button_background_color">@color/nearit_ui_white</color>
     <color name="nearit_ui_permission_not_given_button_text_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_permissions_text_color">@color/nearit_ui_warm_grey</color>
 </resources>
