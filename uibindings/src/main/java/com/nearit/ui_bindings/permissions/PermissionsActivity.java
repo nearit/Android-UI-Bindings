@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -71,8 +72,8 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getWindow().setFlags(LayoutParams.FLAG_NOT_TOUCH_MODAL, LayoutParams.FLAG_NOT_TOUCH_MODAL);
-        getWindow().setFlags(LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH, LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH);
+//        getWindow().setFlags(LayoutParams.FLAG_NOT_TOUCH_MODAL, LayoutParams.FLAG_NOT_TOUCH_MODAL);
+//        getWindow().setFlags(LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH, LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH);
 
         Intent intent = getIntent();
         if (intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
@@ -108,14 +109,18 @@ public class PermissionsActivity extends AppCompatActivity implements GoogleApiC
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (MotionEvent.ACTION_OUTSIDE == event.getAction()) {
-            if (isEnableTapToClose) {
-                finalCheck();
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Rect dialogBounds = new Rect();
+        getWindow().getDecorView().getHitRect(dialogBounds);
+
+        if (!dialogBounds.contains((int) ev.getX(), (int) ev.getY())) {
+            if(!isEnableTapToClose) {
                 return true;
             }
+            // Tapped outside so we finish the activity
+            finalCheck();
         }
-        return super.onTouchEvent(event);
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override
