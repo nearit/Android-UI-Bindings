@@ -40,7 +40,6 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin2"
                 android:clickable="true"
-                android:enabled="true"
                 app:buttonText="@string/nearit_ui_location"
                 app:iconRes="@drawable/localizzazione" />
 
@@ -50,7 +49,6 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin3"
                 android:clickable="true"
-                android:enabled="true"
                 app:buttonText="@string/nearit_ui_bluetooth"
                 app:iconRes="@drawable/bluetooth" />
 
