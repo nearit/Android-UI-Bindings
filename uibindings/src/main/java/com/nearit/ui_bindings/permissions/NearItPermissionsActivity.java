@@ -57,8 +57,6 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
     private boolean isNonBlockingBeacon = false;
     private boolean isAutoStartRadar = false;
 
-    private boolean allPermissionsGiven = false;
-
     @Nullable
     private PermissionButton locationButton;
     @Nullable
@@ -84,7 +82,7 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
             isNoBeacon = true;
         }
 
-        allPermissionsGiven = checkBluetooth() && checkLocation();
+        boolean allPermissionsGiven = checkBluetooth() && checkLocation();
 
         if (!isInvisibleLayoutMode) {
             setContentView(R.layout.activity_nearui_permissions);
@@ -137,18 +135,6 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
                     finalCheck();
                 }
             });
-        }
-    }
-
-    public void finalCheck() {
-        if (checkLocation()) {
-            if (checkBluetooth() || isNoBeacon || isNonBlockingBeacon) {
-                onPermissionsReady();
-            } else {
-                finish();
-            }
-        } else {
-            finish();
         }
     }
 
@@ -218,13 +204,37 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
         }
     }
 
-    private void onPermissionsReady() {
-        // You have all the right permissions to start the NearIT radar
-        if (isAutoStartRadar) {
-            NearItManager.getInstance().startRadar();
+    /**
+     *  Manages location and bluetooth callbacks
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        setLocationButton();
+        setBluetoothButton();
+
+        if (requestCode == LOCATION_SETTINGS_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                onLocationSettingsOkResult();
+            } else {
+                if (isInvisibleLayoutMode) {
+                    finalCheck();
+                }
+            }
+        } else if (requestCode == BLUETOOTH_SETTINGS_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (checkLocation()) {
+                    finalCheck();
+                }
+            } else {
+                if (isInvisibleLayoutMode) {
+                    finalCheck();
+                } else {
+                    if (isNonBlockingBeacon && checkLocation()) {
+                        finalCheck();
+                    }
+                }
+            }
         }
-        setResult(Activity.RESULT_OK);
-        finish();
     }
 
     private void onLocationSettingsOkResult() {
@@ -245,40 +255,9 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        setLocationButton();
-        setBluetoothButton();
-
-        //  LOCATION DIALOG CALLBACK
-        if (requestCode == LOCATION_SETTINGS_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                onLocationSettingsOkResult();
-            } else {
-                if (isInvisibleLayoutMode) {
-                    finalCheck();
-                }
-            }
-            //  BLUETOOTH DIALOG CALLBACK
-        } else if (requestCode == BLUETOOTH_SETTINGS_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                //  bt on
-                if (checkLocation()) {
-                    finalCheck();
-                }
-            } else {
-                if (isInvisibleLayoutMode) {
-                    finalCheck();
-                } else {
-                    if (isNonBlockingBeacon && checkLocation()) {
-                        finalCheck();
-                    }
-                }
-            }
-        }
-    }
-
+    /**
+     *  Manages permissions request callbacks
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -292,6 +271,47 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
                 }
             }
         }
+    }
+
+    /**
+     *  Checks for BLE availability
+     */
+    private boolean isBleAvailable() {
+        boolean available = false;
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            NearLog.d(TAG, "BLE not supported prior to API 18");
+        } else if (!this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+            NearLog.d(TAG, "BLE not available on this device");
+        } else {
+            available = true;
+        }
+        return available;
+    }
+
+    /**
+     *  Checks one last time that everything is ok
+     */
+    public void finalCheck() {
+        if (checkLocation()) {
+            if (checkBluetooth() || isNoBeacon || isNonBlockingBeacon) {
+                onPermissionsReady();
+            } else {
+                finish();
+            }
+        } else {
+            finish();
+        }
+    }
+
+    /**
+     * If everything is fine we set result code to RESULT_OK and we close the activity
+     */
+    private void onPermissionsReady() {
+        if (isAutoStartRadar) {
+            NearItManager.getInstance().startRadar();
+        }
+        setResult(Activity.RESULT_OK);
+        finish();
     }
 
     @Override
@@ -337,20 +357,6 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         finish();
-    }
-
-    private boolean isBleAvailable() {
-        boolean available = false;
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
-//            BLE not supported prior to API 18
-            NearLog.d(TAG, "BLE not supported prior to API 18");
-        } else if (!this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
-//            BLE not available
-            NearLog.d(TAG, "BLE not available on this device");
-        } else {
-            available = true;
-        }
-        return available;
     }
 
     private void setBluetoothButton() {
