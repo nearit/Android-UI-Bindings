@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nearit-ui/nearit-ui.iml" filepath="$PROJECT_DIR$/nearit-ui/nearit-ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/nearit-ui-android.iml" filepath="$PROJECT_DIR$/nearit-ui-android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/uibindings/uibindings.iml" filepath="$PROJECT_DIR$/uibindings/uibindings.iml" />
     </modules>
   </component>
 </project>
