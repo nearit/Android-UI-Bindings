@@ -85,7 +85,7 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
         boolean allPermissionsGiven = checkBluetooth() && checkLocation();
 
         if (!isInvisibleLayoutMode) {
-            setContentView(R.layout.activity_nearui_permissions);
+            setContentView(R.layout.nearit_ui_activity_permissions);
             locationButton = (PermissionButton) findViewById(R.id.location_button);
             bleButton = (PermissionButton) findViewById(R.id.ble_button);
             closeButton = (TextView) findViewById(R.id.close_text);

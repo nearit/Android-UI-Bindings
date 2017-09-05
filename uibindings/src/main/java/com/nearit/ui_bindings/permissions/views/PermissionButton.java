@@ -5,8 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
-import android.widget.Checkable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -47,19 +45,19 @@ public class PermissionButton extends RelativeLayout {
     private void obtainAttrs(AttributeSet attrs) {
         TypedArray a = getContext().getTheme().obtainStyledAttributes(
                 attrs,
-                R.styleable.PermissionButtonView,
+                R.styleable.NearItUIPermissionButtonView,
                 0, 0);
         try {
-            buttonText = a.getString(R.styleable.PermissionButtonView_buttonText);
-            originalIconRes = a.getResourceId(R.styleable.PermissionButtonView_iconRes, NO_ICON);
-            iconRes = a.getResourceId(R.styleable.PermissionButtonView_iconRes, NO_ICON);
+            buttonText = a.getString(R.styleable.NearItUIPermissionButtonView_nearItUIPermissionButtonText);
+            originalIconRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_nearItUiIconResource, NO_ICON);
+            iconRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_nearItUiIconResource, NO_ICON);
         } finally {
             a.recycle();
         }
     }
 
     private void init() {
-        inflate(getContext(), R.layout.layout_permission_button, this);
+        inflate(getContext(), R.layout.nearit_ui_layout_permission_button, this);
         icon = (ImageView) findViewById(R.id.permission_button_icon);
         text = (TextView) findViewById(R.id.permission_button_text);
     }
@@ -83,7 +81,7 @@ public class PermissionButton extends RelativeLayout {
     }
 
     public void setChecked() {
-        this.setIcon(R.drawable.spunta);
+        this.setIcon(R.drawable.ic_nearit_ui_check);
         this.setOnClickListener(null);
         this.setEnabled(false);
         this.setActivated(true);

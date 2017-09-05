@@ -7,7 +7,7 @@
     <color name="nearit_ui_white">#f2f2f2</color>
     <color name="nearit_ui_real_white">#ffffff</color>
     <color name="nearit_ui_warm_grey">#777777</color>
-    <color name="black_25">#40000000</color>
+    <color name="nearit_ui_black_25">#40000000</color>
 
     <color name="nearit_ui_snackbar_background_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_permissions_activity_background_color">@color/nearit_ui_real_white</color>
