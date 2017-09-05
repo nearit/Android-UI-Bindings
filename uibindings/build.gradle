@@ -1,14 +1,62 @@
+buildscript {
+    repositories {
+//        maven { url 'https://maven.fabric.io/public' }
+        jcenter()
+        flatDir{
+            dirs 'libs'
+        }
+    }
+    dependencies {
+        classpath 'com.novoda:build-properties-plugin:1.2.1'
+    }
+}
+
+plugins {
+    id "com.jfrog.bintray" version "1.7.3"
+}
+
 apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.novoda.build-properties'
+
+/*
+ * Gets the version name from the latest Git tag
+ */
+def getVersionName = {
+    def stdout = new ByteArrayOutputStream()
+    try {
+        exec {
+            commandLine 'git', 'describe', '--tags', '--abbrev=0'
+            standardOutput = stdout
+        }
+        return stdout.toString().trim()
+    }
+    catch (e) {
+        println("Can't get version from git: " + e);
+        return "adhoc"
+    }
+}
+
+allprojects{
+    version = "${getVersionName()}"
+}
+
+buildProperties {
+    localProperties {
+        file project.file("local.properties")
+    }
+}
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName version
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -21,13 +69,30 @@ android {
     }
 }
 
+bintray {
+    user = (buildProperties.localProperties['bintray.user'] | buildProperties.env['BINTRAY_USER']).string
+    key = (buildProperties.localProperties['bintray.apikey'] | buildProperties.env['BINTRAY_APIKEY']).string
+    configurations = ['archives']
+
+    pkg {
+        repo = 'maven'
+        name = 'it.near.sdk:nearit-ui'
+        vcsUrl = 'https://bitbucket.org/Synapsev2/nearit-ui-android.git'
+        websiteUrl = 'https://nearit.com'
+
+        licenses = ['MIT']
+        publish = true
+    }
+}
+
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
-    provided 'it.near.sdk:nearit:[2.1.36, )'
+    compile 'com.android.support:appcompat-v7:25.+'
+    provided 'it.near.sdk:nearit:2.2.+'
 
     testCompile 'junit:junit:4.12'
 }
