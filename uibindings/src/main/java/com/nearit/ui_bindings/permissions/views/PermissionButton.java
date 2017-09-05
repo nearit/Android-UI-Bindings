@@ -48,9 +48,9 @@ public class PermissionButton extends RelativeLayout {
                 R.styleable.NearItUIPermissionButtonView,
                 0, 0);
         try {
-            buttonText = a.getString(R.styleable.NearItUIPermissionButtonView_nearItUIPermissionButtonText);
-            originalIconRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_nearItUiIconResource, NO_ICON);
-            iconRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_nearItUiIconResource, NO_ICON);
+            buttonText = a.getString(R.styleable.NearItUIPermissionButtonView_buttonText);
+            originalIconRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_iconRes, NO_ICON);
+            iconRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_iconRes, NO_ICON);
         } finally {
             a.recycle();
         }
