@@ -85,6 +85,7 @@ bintray {
     }
 }
 
+group = 'it.near.sdk'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
