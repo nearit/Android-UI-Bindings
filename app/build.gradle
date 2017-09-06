@@ -7,7 +7,7 @@ buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
         jcenter()
-        flatDir{
+        flatDir {
             dirs 'libs'
         }
     }
@@ -51,10 +51,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'it.near.sdk:nearit:2.2.0'
-    testCompile 'junit:junit:4.12'
 
     compile project(':nearit-ui')
 //    compile 'it.near.sdk:nearit-ui:prealpha-4'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'it.near.sdk:nearit:2.2.0'
+    testCompile 'junit:junit:4.12'
 }
