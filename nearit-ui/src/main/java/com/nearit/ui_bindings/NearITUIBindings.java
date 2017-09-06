@@ -1,6 +1,8 @@
 package com.nearit.ui_bindings;
 
 import android.content.Context;
+
+import com.nearit.ui_bindings.coupon.CouponDetailIntentBuilder;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
 import it.near.sdk.NearItManager;
 
@@ -22,6 +24,10 @@ public class NearITUIBindings {
 
     public PermissionsRequestIntentBuilder createPermissionRequestIntentBuilder() {
         return new PermissionsRequestIntentBuilder(mContext);
+    }
+
+    public CouponDetailIntentBuilder createCouponDetailIntentBuilder() {
+        return new CouponDetailIntentBuilder(mContext);
     }
 
 }

@@ -9,6 +9,9 @@
             android:name=".permissions.NearItPermissionsActivity"
             android:theme="@style/NearItUIPermissionsDialog"
             android:exported="false" />
+
+        <activity android:name=".coupon.NearItCouponDetailActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
