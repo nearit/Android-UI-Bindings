@@ -8,7 +8,7 @@ public class NearITUIBindings {
 
     private Context mContext;
 
-    public static void init(Context context) {
+    public static void init() {
         NearItManager.getInstance();
     }
 
