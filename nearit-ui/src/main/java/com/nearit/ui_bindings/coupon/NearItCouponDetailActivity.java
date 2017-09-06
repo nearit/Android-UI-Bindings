@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -34,9 +33,8 @@ public class NearItCouponDetailActivity extends AppCompatActivity {
         setContentView(R.layout.nearit_ui_activity_coupon_detail);
 
         ImageView qrCode = (ImageView) findViewById(R.id.qr_code);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            qrCode.setImageBitmap(generateQR("0123456789", 200, 200));
-        }
+        qrCode.setImageBitmap(generateQR("0123456789", 768, 768));
+
     }
 
     public static Intent createIntent(Context context, CouponDetailIntentExtras params) {
