@@ -3,6 +3,7 @@
     package="com.nearit.ui_bindings">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true">
         <activity

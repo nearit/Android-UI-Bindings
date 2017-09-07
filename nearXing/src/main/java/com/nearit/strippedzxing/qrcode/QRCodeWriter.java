@@ -35,7 +35,7 @@ import java.util.Map;
  */
 public final class QRCodeWriter implements Writer {
 
-  private static final int QUIET_ZONE_SIZE = 4;
+  private static final int QUIET_ZONE_SIZE = 0;
 
   @Override
   public BitMatrix encode(String contents, BarcodeFormat format, int width, int height)
