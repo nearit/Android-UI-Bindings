@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(
-                        NearITUIBindings.getInstance(getApplicationContext())
+                        NearITUIBindings.getInstance(MainActivity.this)
                                 .createPermissionRequestIntentBuilder()
                                 .enableTapOutsideToClose()
                                 .build(),
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(
-                        NearITUIBindings.getInstance(getApplicationContext())
+                        NearITUIBindings.getInstance(MainActivity.this)
                                 .createPermissionRequestIntentBuilder()
                                 .invisibleLayoutMode()
                                 .build(),
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(
-                        NearITUIBindings.getInstance(getApplicationContext())
+                        NearITUIBindings.getInstance(MainActivity.this)
                                 .createPermissionRequestIntentBuilder()
                                 .noBeacon()
                                 .enableTapOutsideToClose()
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(
-                        NearITUIBindings.getInstance(getApplicationContext())
+                        NearITUIBindings.getInstance(MainActivity.this)
                                 .createPermissionRequestIntentBuilder()
                                 .nonBlockingBeacon()
                                 .build(),
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(
-                        NearITUIBindings.getInstance(getApplicationContext())
+                        NearITUIBindings.getInstance(MainActivity.this)
                                 .createPermissionRequestIntentBuilder()
                                 .invisibleLayoutMode()
                                 .noBeacon()
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(
-                        NearITUIBindings.getInstance(getApplicationContext())
+                        NearITUIBindings.getInstance(MainActivity.this)
                                 .createPermissionRequestIntentBuilder()
                                 .invisibleLayoutMode()
                                 .nonBlockingBeacon()
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(
-                        NearITUIBindings.getInstance(getApplicationContext())
+                        NearITUIBindings.getInstance(MainActivity.this)
                                 .createPermissionRequestIntentBuilder()
                                 .automaticRadarStart()
                                 .build(),
