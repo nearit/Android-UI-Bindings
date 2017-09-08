@@ -20,6 +20,8 @@ Add the NearIT-UI library dependency. If your project uses Gradle build system, 
  }
 ```
 
+**Important**: NearIT-UI will only work with NearIT SDK version 2.2.0 or higher.
+
 ## NearIt-UI for permissions request
 If your app integrates NearIT services you surely want that your user gives your app the location permission. NearIT supports the use of Beacon technology, so bluetooth could be a requirement for your app.
 
@@ -61,6 +63,7 @@ If your app does not use Beacons technology, you should not ask a user to turn o
 ```
 
 If your app uses Beacons but you consider the bluetooth a non-blocking requirement, just use `nonBlockingBeacon()` method
+
 ```java
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
@@ -69,12 +72,16 @@ If your app uses Beacons but you consider the bluetooth a non-blocking requireme
                 .build(),
         NEAR_PERMISSION_REQUEST);
 ```
+
 **Note**: Please, keep in mind that calling `nonBlockingBeacon()` and `noBeacon()` will cause no-beacon behaviour.
 
 #### No-UI request
 The previous examples can be reproduced without UI. Our `Intent` will cause the opening of system dialogs that ask user for permissions.
+
 ![NearIT-UI permissions request demo on Android](demo_invisible.gif)
+
 In order to kick off this flow without UI you should call `invisibleLayoutMode()` and then the methods needed to define the behaviour of the flow (see [More examples](#more-examples)).
+
 ```java
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
@@ -88,6 +95,7 @@ In order to kick off this flow without UI you should call `invisibleLayoutMode()
 ## UI Customization
 
 If you wish to change the message in the permissions dialog, the existing strings can be overridden by name in your application. See the module's strings.xml file and simply redefine a string to change it:
+
 ```xml
 <resources>
     <!--    ...   -->
@@ -98,6 +106,7 @@ If you wish to change the message in the permissions dialog, the existing string
 The same strategy can be applied to override colors. If you want the buttons to look accordingly to your app style, you can override two resources of NearIT-UI. Just place a selector for the background and one for the text color.
 
 Selector for the background, `drawable/nearit_ui_selector_permission_button` :
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
@@ -108,6 +117,7 @@ Selector for the background, `drawable/nearit_ui_selector_permission_button` :
 ```
 
 Selector for the text color, `drawable/nearit_ui_selector_permission_button_text_color` :
+
 ```xml
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:color="@color/your_color_for_activated_state" android:state_activated="true"/>
@@ -117,14 +127,16 @@ Selector for the text color, `drawable/nearit_ui_selector_permission_button_text
 ```
 
 Image resources can't be overridden. For example, if you wish to replace the header image of the permissions request dialog, you must provide your own image and pass it to the following method of the builder:
+
 ```java
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
                 .createPermissionRequestIntentBuilder()
                 // ...
-                .setHeaderResourceId                                                                                                                                                                                                                                                                        (R.drawable.your_png_image)
+                .setHeaderResourceId(R.drawable.your_image)                                                                                                                                                                                                                                                                        (R.drawable.your_png_image)
                 .build(),
         NEAR_PERMISSION_REQUEST);
 ```
+
 **Note**: The header image width will define the overall width of the dialog. Please notice that images with wrong aspect-ratio can cause an unwanted layout distortion.
 The default header dimensions are: `width=300dp` and `height=110dp`. Please consider using the same dimensions.
