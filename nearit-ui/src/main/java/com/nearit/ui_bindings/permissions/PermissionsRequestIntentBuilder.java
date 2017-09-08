@@ -2,6 +2,7 @@ package com.nearit.ui_bindings.permissions;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 
 /**
  * Created by Federico Boschini on 29/08/17.
@@ -13,6 +14,7 @@ public class PermissionsRequestIntentBuilder {
     private boolean mInvisibleLayoutMode = false;
     private boolean mNoBeacon = false;
     private boolean mNonBlockingBeacon = false;
+    private int mHeaderDrawable;
 
     public PermissionsRequestIntentBuilder(Context context) {
         mContext = context;
@@ -68,6 +70,14 @@ public class PermissionsRequestIntentBuilder {
         return this;
     }
 
+    /**
+     *
+     */
+    public PermissionsRequestIntentBuilder setHeaderResourceId(int header) {
+        mHeaderDrawable = header;
+        return this;
+    }
+
     public Intent build() {
         return NearItPermissionsActivity.createIntent(mContext, getParams());
     }
@@ -78,7 +88,8 @@ public class PermissionsRequestIntentBuilder {
                 mRadarAutoStart,
                 mInvisibleLayoutMode,
                 mNoBeacon,
-                mNonBlockingBeacon);
+                mNonBlockingBeacon,
+                mHeaderDrawable);
     }
 
 }

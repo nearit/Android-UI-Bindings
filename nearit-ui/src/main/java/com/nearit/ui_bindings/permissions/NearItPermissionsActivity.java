@@ -16,6 +16,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -44,9 +45,9 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
     private static final String TAG = "NearItPermissionsActivity";
 
     private GoogleApiClient mGoogleApiClient;
-    private static final int BLUETOOTH_SETTINGS_CODE = 4000;
-    private static final int LOCATION_SETTINGS_CODE = 5000;
-    public static final int PERMISSION_REQUEST_FINE_LOCATION = 6000;
+    private static final int NEAR_BLUETOOTH_SETTINGS_CODE = 4000;
+    private static final int NEAR_LOCATION_SETTINGS_CODE = 5000;
+    private static final int NEAR_PERMISSION_REQUEST_FINE_LOCATION = 6000;
 
     /**
      * Flow parameters
@@ -56,6 +57,7 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
     private boolean isNoBeacon = false;
     private boolean isNonBlockingBeacon = false;
     private boolean isAutoStartRadar = false;
+    private int headerDrawable = 0;
 
     @Nullable
     private PermissionButton locationButton;
@@ -63,6 +65,8 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
     private PermissionButton bleButton;
     @Nullable
     private TextView closeButton;
+    @Nullable
+    private ImageView headerImageView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,6 +80,7 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
             isNoBeacon = params.isNoBeacon();
             isNonBlockingBeacon = params.isNonBlockingBeacon();
             isAutoStartRadar = params.isAutoStartRadar();
+            headerDrawable = params.getHeaderDrawable();
         }
 
         if (!isBleAvailable()) {
@@ -89,6 +94,7 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
             locationButton = (PermissionButton) findViewById(R.id.location_button);
             bleButton = (PermissionButton) findViewById(R.id.ble_button);
             closeButton = (TextView) findViewById(R.id.close_text);
+            headerImageView = (ImageView) findViewById(R.id.header);
         } else {
             if (!allPermissionsGiven) {
                 askPermissions();
@@ -122,7 +128,11 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
         super.onStart();
 //        locationPermissionGranted = Build.VERSION.SDK_INT < Build.VERSION_CODES.M || checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
 
-        if(isNoBeacon && bleButton!=null) {
+        if (headerImageView != null && headerDrawable != 0) {
+            headerImageView.setBackgroundResource(headerDrawable);
+        }
+
+        if (isNoBeacon && bleButton != null) {
             bleButton.setVisibility(View.GONE);
         }
         setBluetoothButton();
@@ -188,7 +198,7 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
     private void openBluetoothSettings() {
         if (!checkBluetooth()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, BLUETOOTH_SETTINGS_CODE);
+            startActivityForResult(enableBtIntent, NEAR_BLUETOOTH_SETTINGS_CODE);
         } else {
             // bt on
             finalCheck();
@@ -200,19 +210,19 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
      */
     private void requestFineLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_FINE_LOCATION);
+            requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, NEAR_PERMISSION_REQUEST_FINE_LOCATION);
         }
     }
 
     /**
-     *  Manages location and bluetooth callbacks
+     * Manages location and bluetooth callbacks
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         setLocationButton();
         setBluetoothButton();
 
-        if (requestCode == LOCATION_SETTINGS_CODE) {
+        if (requestCode == NEAR_LOCATION_SETTINGS_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 onLocationSettingsOkResult();
             } else {
@@ -220,7 +230,7 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
                     finalCheck();
                 }
             }
-        } else if (requestCode == BLUETOOTH_SETTINGS_CODE) {
+        } else if (requestCode == NEAR_BLUETOOTH_SETTINGS_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 if (checkLocation()) {
                     finalCheck();
@@ -256,12 +266,12 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
     }
 
     /**
-     *  Manages permissions request callbacks
+     * Manages permissions request callbacks
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PERMISSION_REQUEST_FINE_LOCATION) {
+        if (requestCode == NEAR_PERMISSION_REQUEST_FINE_LOCATION) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openLocationSettings();
@@ -274,7 +284,7 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
     }
 
     /**
-     *  Checks for BLE availability
+     * Checks for BLE availability
      */
     private boolean isBleAvailable() {
         boolean available = false;
@@ -289,7 +299,7 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
     }
 
     /**
-     *  Checks one last time that everything is ok
+     * Checks one last time that everything is ok
      */
     public void finalCheck() {
         if (checkLocation()) {
@@ -336,7 +346,7 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
                         try {
                             status.startResolutionForResult(
                                     NearItPermissionsActivity.this,
-                                    LOCATION_SETTINGS_CODE);
+                                    NEAR_LOCATION_SETTINGS_CODE);
                         } catch (IntentSender.SendIntentException e) {
                             e.printStackTrace();
                         }
