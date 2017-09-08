@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 
+import it.near.sdk.NearItManager;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int NEAR_PERMISSION_REQUEST = 1000;
@@ -29,35 +31,27 @@ public class MainActivity extends AppCompatActivity {
 
         Button autoStartRadar = (Button) findViewById(R.id.autostart_radar);
 
+        Button customHeader = (Button) findViewById(R.id.custom_header);
+
 
         permissions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivityForResult(
+                        //  Basic config: location and bluetooth required
                         NearITUIBindings.getInstance(MainActivity.this)
                                 .createPermissionRequestIntentBuilder()
-                                .enableTapOutsideToClose()
                                 .build(),
                         NEAR_PERMISSION_REQUEST);
             }
         });
 
-        permissionsInvisibleLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivityForResult(
-                        NearITUIBindings.getInstance(MainActivity.this)
-                                .createPermissionRequestIntentBuilder()
-                                .invisibleLayoutMode()
-                                .build(),
-                        NEAR_PERMISSION_REQUEST);
-            }
-        });
 
         permissionsNoBeacon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivityForResult(
+                        //  Asks only for location + tap outside to close enabled
                         NearITUIBindings.getInstance(MainActivity.this)
                                 .createPermissionRequestIntentBuilder()
                                 .noBeacon()
@@ -71,9 +65,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(
+                        //  Asks for location and bluetooth
+                        //  but the latter is not a blocking requirement
                         NearITUIBindings.getInstance(MainActivity.this)
                                 .createPermissionRequestIntentBuilder()
                                 .nonBlockingBeacon()
+                                .build(),
+                        NEAR_PERMISSION_REQUEST);
+            }
+        });
+        permissionsInvisibleLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(
+                        //  Invisible layout: asks for location and bluetooth via system dialogs
+                        NearITUIBindings.getInstance(MainActivity.this)
+                                .createPermissionRequestIntentBuilder()
+                                .invisibleLayoutMode()
                                 .build(),
                         NEAR_PERMISSION_REQUEST);
             }
@@ -83,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(
+                        //  Invisible layout: asks only for location
                         NearITUIBindings.getInstance(MainActivity.this)
                                 .createPermissionRequestIntentBuilder()
                                 .invisibleLayoutMode()
@@ -96,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(
+                        //  Invisible layout: asks for location and bluetooth
+                        //  but the latter is not a blocking requirement
                         NearITUIBindings.getInstance(MainActivity.this)
                                 .createPermissionRequestIntentBuilder()
                                 .invisibleLayoutMode()
@@ -109,9 +120,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(
+                        //  Asks for permissions (basic config) and if user grants all
+                        //  NearIT-UI will automatically start the NearIT radar
                         NearITUIBindings.getInstance(MainActivity.this)
                                 .createPermissionRequestIntentBuilder()
                                 .automaticRadarStart()
+                                .build(),
+                        NEAR_PERMISSION_REQUEST);
+            }
+        });
+
+        customHeader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(
+                        //  Basic config + custom header
+                        NearITUIBindings.getInstance(MainActivity.this)
+                                .createPermissionRequestIntentBuilder()
+                                .setHeaderResourceId(R.drawable.logo)
                                 .build(),
                         NEAR_PERMISSION_REQUEST);
             }
@@ -120,8 +146,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK) {
             Toast.makeText(this, "Result OK", Toast.LENGTH_SHORT).show();
+            NearItManager.getInstance().startRadar();
         } else Toast.makeText(this, "Result KO", Toast.LENGTH_SHORT).show();
     }
 }
