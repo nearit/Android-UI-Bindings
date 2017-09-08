@@ -139,7 +139,7 @@ Additionaly, if you wish to replace the header image of the permissions request 
         NearITUIBindings.getInstance(YourActivity.this)
                 .createPermissionRequestIntentBuilder()
                 // ...
-                .setHeaderResourceId(R.drawable.your_image)                                                                                                                                                                                                                                                                        (R.drawable.your_png_image)
+                .setHeaderResourceId(R.drawable.your_image) 
                 .build(),
         NEAR_PERMISSION_REQUEST);
 ```
