@@ -42,7 +42,9 @@ If you want your app to ask user for both location and bluetooth permissions (an
 In this basic example, both location and bluetooth are required to be granted and turned on: you can check if the request succeded or failed in `onActivityResult(...)` by referring to the same request code.
 
 ![NearIT-UI permissions request demo on Android](demo_basic.gif)
+
 **Note**: Also app permission to access user location is included in the location request flow (but not screen recorded due to Android limitation on overlay screens)
+
 ![NearIT-UI location permissions](location_permission.png)
 
 #### More examples
