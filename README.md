@@ -13,10 +13,19 @@ For example, using NearIT-UI, a developer can launch a dialog to request locatio
 
 ## Configuration
 Add the NearIT-UI library dependency. If your project uses Gradle build system, add the following dependency to `build.gradle` of your app:
+
 ```groovy
+ repositories {
+     maven {
+         url "https://dl.bintray.com/federicoboschini/maven"
+     }
+ }
+ 
+ // ...
+ 
  dependencies {
     //  ...
-    compile 'it.nearit.sdk:nearitui:alpha'
+    compile 'it.nearit.sdk:nearitui:1.0'
  }
 ```
 
@@ -29,6 +38,7 @@ To launch a permission request, your app should start an activity and wait for i
 
 #### Basic example
 If you want your app to ask user for both location and bluetooth permissions (and turning on both), you can use the following code:
+
 ```java
  // You can choose an arbitrary request code
  private static final int NEAR_PERMISSION_REQUEST = 1000;
@@ -41,6 +51,7 @@ If you want your app to ask user for both location and bluetooth permissions (an
                 .build(),
         NEAR_PERMISSION_REQUEST);
 ```
+
 In this basic example, both location and bluetooth are required to be granted and turned on: you can check if the request succeded or failed in `onActivityResult(...)` by referring to the same request code.
 
 ![NearIT-UI permissions request demo on Android](demo_basic.gif)
@@ -53,6 +64,7 @@ In this basic example, both location and bluetooth are required to be granted an
 You can define the permissions request behaviour via our builder.
 
 If your app does not use Beacons technology, you should not ask a user to turn on the Bluetooth adapter. You can achieve this via `noBeacon()` method.
+
 ```java
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
