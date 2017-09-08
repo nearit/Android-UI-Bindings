@@ -9,3 +9,11 @@ local.properties
 .externalNativeBuild
 
 \.idea/vcs\.xml
+
+\.idea/
+
+app/src/main/res/drawable-hdpi/
+
+app/src/main/res/drawable-xxhdpi/
+
+app/src/main/res/drawable-xhdpi/
