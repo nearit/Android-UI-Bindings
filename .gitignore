@@ -13,3 +13,7 @@ local.properties
 \.idea/markdown-navigator\.xml
 
 \.idea/markdown-navigator/profiles_settings\.xml
+
+app/src/main/res/drawable/
+
+\.idea/
