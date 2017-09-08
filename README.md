@@ -1,6 +1,6 @@
 # NearIT-UI for Android
 NearIT-UI is an open-source library that provides customizable UI bindings on top of the core [NearIT SDK](https://github.com/nearit/Android-SDK).
-This library aims to minimize the effort needed to create the UI for NearIT contents and dialogs.
+This library aims to minimize the efforts to create the UI for NearIT contents and dialogs.
 
 For example, using NearIT-UI, a developer can launch a dialog to request location/bluetooth permissions to the user by writing a few lines of code.
 
@@ -32,12 +32,10 @@ Add the NearIT-UI library dependency. If your project uses Gradle build system, 
 **Important**: NearIT-UI will only work with NearIT SDK version 2.2.0 or higher.
 
 ## NearIt-UI for permissions request
-If your app integrates NearIT services you surely want your user to grant your app the location permission. NearIT supports the use of Beacon technology, so bluetooth could be a requirement for your app.
-
-To launch a permission request, your app should start an activity and wait for its result. The activity (`Intent`) is provided by our convenient and customizable builder. It exposes a number of methods that enable a developer to define which permissions are needed and how to request them.
+If your app integrates NearIT services, you surely want your user to grant your app location permissions. NearIT supports the use of Beacon technology, so bluetooth could also be a requirement for your app.
 
 #### Basic example
-If you want your app to ask user for both location and bluetooth permissions (and turning on both), you can use the following code:
+If you want your app to ask user for both location and bluetooth permissions (and turning both on), use the following code:
 
 ```java
  // You can choose an arbitrary request code
@@ -56,14 +54,10 @@ In this basic example, both location and bluetooth are required to be granted an
 
 ![NearIT-UI permissions request demo on Android](demo_basic.gif)
 
-**Note**: Also app permission to access user location is included in the location request flow (but not screen recorded due to Android limitation on overlay screens)
-
-![NearIT-UI location permissions](location_permission.png)
-
-#### More examples
+#### Advanced examples
 You can define the permissions request behaviour via our builder.
 
-If your app does not use Beacons technology, you should not ask a user to turn on the Bluetooth adapter. You can achieve this via `noBeacon()` method.
+If your app does not use Beacons technology, you should not ask your user to turn Bluetooth on. You can achieve this with the `noBeacon()` method.
 
 ```java
  startActivityForResult(
@@ -85,14 +79,14 @@ If your app uses Beacons but you consider the bluetooth a non-blocking requireme
         NEAR_PERMISSION_REQUEST);
 ```
 
-**Note**: Please, keep in mind that calling `nonBlockingBeacon()` and `noBeacon()` will cause no-beacon behaviour.
+**Note**: Please, keep in mind that calling both `nonBlockingBeacon()` and `noBeacon()` will cause no-beacon behaviour.
 
 #### No-UI request
-The previous examples can be reproduced without UI. Our `Intent` will cause the opening of system dialogs that ask user for permissions.
+The whole permisison request flow, can be started without UI. 
 
 ![NearIT-UI permissions request demo on Android](demo_invisible.gif)
 
-In order to kick off this flow without UI you should call `invisibleLayoutMode()` and then the methods needed to define the behaviour of the flow (see [More examples](#more-examples)).
+In order to kick this flow off, without UI you should chain `invisibleLayoutMode()` 
 
 ```java
  startActivityForResult(
@@ -138,7 +132,7 @@ Selector for the text color, `drawable/nearit_ui_selector_permission_button_text
 </selector>
 ```
 
-Image resources can't be overridden. For example, if you wish to replace the header image of the permissions request dialog, you must provide your own image and pass it to the following method of the builder:
+Additionaly, if you wish to replace the header image of the permissions request dialog, you must provide your own image and pass its id to the following method of the builder:
 
 ```java
  startActivityForResult(
