@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--    NEARIT-UI STYLE OVERRIDE    -->
+    <!--<style name="NearItUIPermissionsTextAppearance">-->
+        <!--<item name="android:textSize">10sp</item>-->
+    <!--</style>-->
+
 </resources>

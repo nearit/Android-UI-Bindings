@@ -1,1 +1,1 @@
-include ':app', ':uibindings'
+include ':app', ':nearit-ui'
