@@ -23,7 +23,7 @@ Add the NearIT-UI library dependency. If your project uses Gradle build system, 
 **Important**: NearIT-UI will only work with NearIT SDK version 2.2.0 or higher.
 
 ## NearIt-UI for permissions request
-If your app integrates NearIT services you surely want that your user gives your app the location permission. NearIT supports the use of Beacon technology, so bluetooth could be a requirement for your app.
+If your app integrates NearIT services you surely want your user to grant your app the location permission. NearIT supports the use of Beacon technology, so bluetooth could be a requirement for your app.
 
 To launch a permission request, your app should start an activity and wait for its result. The activity (`Intent`) is provided by our convenient and customizable builder. It exposes a number of methods that enable a developer to define which permissions are needed and how to request them.
 
