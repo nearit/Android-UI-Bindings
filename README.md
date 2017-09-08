@@ -68,7 +68,7 @@ If your app does not use Beacons technology, you should not ask your user to tur
         NEAR_PERMISSION_REQUEST);
 ```
 
-If your app uses Beacons but you consider the bluetooth a non-blocking requirement, just use `nonBlockingBeacon()` method
+If your app uses Beacons, but you consider the bluetooth a non-blocking requirement, just use `nonBlockingBeacon()` method
 
 ```java
  startActivityForResult(
@@ -86,7 +86,7 @@ The whole permisison request flow, can be started without UI.
 
 ![NearIT-UI permissions request demo on Android](demo_invisible.gif)
 
-In order to kick this flow off, without UI you should chain `invisibleLayoutMode()` 
+In order to start the permission flow without UI, you should chain `invisibleLayoutMode()` in the builder.
 
 ```java
  startActivityForResult(
@@ -144,5 +144,5 @@ Additionaly, if you wish to replace the header image of the permissions request 
         NEAR_PERMISSION_REQUEST);
 ```
 
-**Note**: The header image width will define the overall width of the dialog. Please notice that images with wrong aspect-ratio can cause an unwanted layout distortion.
+**Note**: The header image width will define the overall width of the dialog, but still can't make it smaller than a set minimum. Please notice that images with wrong aspect-ratio can cause an unwanted layout distortion.
 The default header dimensions are: `width=300dp` and `height=110dp`. Please consider using the same dimensions.
