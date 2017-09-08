@@ -12,7 +12,7 @@ For example, using NearIT-UI, a developer can launch a dialog to request locatio
 - Missing permissions alert snackbar
 
 ## Configuration
-Add the NearIT-UI library dependency. If your project uses Gradle build system, add the following dependency:
+Add the NearIT-UI library dependency. If your project uses Gradle build system, add the following dependency to `build.gradle` of your app:
 ```groovy
  dependencies {
     //  ...
@@ -23,7 +23,7 @@ Add the NearIT-UI library dependency. If your project uses Gradle build system, 
 ## NearIt-UI for permissions request
 If your app integrates NearIT services you surely want that your user gives your app the location permission. NearIT supports the use of Beacon technology, so bluetooth could be a requirement for your app.
 
-To launch a permission request, your app should start an activity (`Intent`) and wait for its result. The activity is provided by our convenient and customizable builder. It exposes a number of methods that enable a developer to define which permissions are needed and how to request them.
+To launch a permission request, your app should start an activity and wait for its result. The activity (`Intent`) is provided by our convenient and customizable builder. It exposes a number of methods that enable a developer to define which permissions are needed and how to request them.
 
 #### Basic example
 If you want your app to ask user for both location and bluetooth permissions (and turning on both), you can use the following code:
@@ -39,7 +39,10 @@ If you want your app to ask user for both location and bluetooth permissions (an
                 .build(),
         NEAR_PERMISSION_REQUEST);
 ```
-In this basic example, both location and bluetooth are required to be granted and turned on: you can check if the request succeded or failed in onActivityResult(...) by referring to the same request code.
+In this basic example, both location and bluetooth are required to be granted and turned on: you can check if the request succeded or failed in `onActivityResult(...)` by referring to the same request code.
+
+![NearIT-UI permissions request demo on Android](demo_basic.gif)
+**Note**: 
 
 #### More examples
 You can define the permissions request behaviour via our builder.
@@ -63,7 +66,7 @@ If your app uses Beacons but you consider the bluetooth a non-blocking requireme
                 .build(),
         NEAR_PERMISSION_REQUEST);
 ```
-
+**Note**: Please, keep in mind that calling `nonBlockingBeacon()` and `noBeacon()` will cause no-beacon behaviour.
 #### No-UI request
 The previous examples can be reproduced without UI. Our `Intent` will cause the opening of system dialogs that ask user for permissions.
 
@@ -109,13 +112,15 @@ Selector for the text color, `drawable/nearit_ui_selector_permission_button_text
 </selector>
 ```
 
-Image resources can't be overridden. For example, if you wish to replace the header image of the dialog, you must provide your own image with the same aspect-ratio of the default one and pass it to the following method of the builder:
+Image resources can't be overridden. For example, if you wish to replace the header image of the permissions request dialog, you must provide your own image and pass it to the following method of the builder:
 ```java
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
                 .createPermissionRequestIntentBuilder()
                 // ...
-                .setHeaderResource(R.drawable.your_png_image)
+                .setHeaderResourceId                                                                                                                                                                                                                                                                        (R.drawable.your_png_image)
                 .build(),
         NEAR_PERMISSION_REQUEST);
 ```
+**Note**: The header image width will define the overall width of the dialog. Please notice that images with wrong aspect-ratio can cause an unwanted layout distortion.
+The default header dimensions are: `width=300dp` and `height=110dp`. Please consider using the same dimensions.
