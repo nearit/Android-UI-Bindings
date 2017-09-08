@@ -10,16 +10,8 @@ local.properties
 
 \.idea/vcs\.xml
 
-\.idea/markdown-navigator\.xml
-
-\.idea/markdown-navigator/profiles_settings\.xml
-
 app/src/main/res/drawable/
-
 \.idea/
-
 app/src/main/res/drawable-xxhdpi/
-
 app/src/main/res/drawable-xhdpi/
-
 app/src/main/res/drawable-hdpi/
