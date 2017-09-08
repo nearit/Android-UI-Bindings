@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">ui_bindings</string>
+    <string name="nearit_ui_app_name" translatable="false">ui_bindings</string>
+    <string name="nearit_ui_permissions_explanation_text">Do you want to receive personalized contents? Allow us to know your location</string>
+    <string name="nearit_ui_close_permissions_text">Close</string>
+    <string name="nearit_ui_bluetooth">BLUETOOTH</string>
+    <string name="nearit_ui_location">LOCATION</string>
 </resources>
