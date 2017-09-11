@@ -4,6 +4,30 @@
     android:layout_height="wrap_content"
     android:background="@color/nearit_ui_real_white">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="17sp"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/coupon_validity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Validity:"
+            android:textColor="@color/nearit_ui_black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/coupon_validity_period"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="from .... to ...."
+            android:textColor="@color/nearit_ui_warm_grey"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/validity_text"
         android:layout_width="wrap_content"
