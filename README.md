@@ -15,17 +15,9 @@ For example, using NearIT-UI, a developer can launch a dialog to request locatio
 Add the NearIT-UI library dependency. If your project uses Gradle build system, add the following dependency to `build.gradle` of your app:
 
 ```groovy
- repositories {
-     maven {
-         url "https://dl.bintray.com/federicoboschini/maven"
-     }
- }
- 
- // ...
- 
  dependencies {
     //  ...
-    compile 'it.nearit.sdk:nearitui:1.0'
+    compile 'it.nearit.sdk:nearit-ui:1.0.1'
  }
 ```
 
