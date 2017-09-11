@@ -3,8 +3,7 @@
     package="com.nearit.ui_bindings">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <application
-        android:allowBackup="true">
+    <application>
         <activity
             android:name=".permissions.NearItPermissionsActivity"
             android:theme="@style/NearItUIPermissionsDialog"
