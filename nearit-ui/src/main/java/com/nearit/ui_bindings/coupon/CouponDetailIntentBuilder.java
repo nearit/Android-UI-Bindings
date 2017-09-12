@@ -20,13 +20,27 @@ import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 public class CouponDetailIntentBuilder {
     private Context mContext;
+    private int mIconDrawable;
 
     public CouponDetailIntentBuilder(Context context) {
         mContext = context;
     }
 
+    /**
+     * Sets a custom icon as a placeholder for coupons without icon
+     */
+    public CouponDetailIntentBuilder setIconPlaceholderResourceId(int icon) {
+        mIconDrawable = icon;
+        return this;
+    }
+
     public Intent build(Coupon coupon) {
-        return NearItCouponDetailActivity.createIntent(mContext, coupon);
+        return NearItCouponDetailActivity.createIntent(mContext, coupon, getParams());
+    }
+
+    private CouponDetailIntentExtras getParams() {
+        return new CouponDetailIntentExtras(
+                mIconDrawable);
     }
 
 }
