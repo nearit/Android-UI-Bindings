@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context="com.nearit.ui_bindings_sample.CouponsActivity">
 
     <Button
         android:id="@+id/valid_coupon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Valid Coupon"/>
+        android:text="Valid Coupon" />
+
+    <Button
+        android:id="@+id/inactive_coupon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inactive Coupon" />
+
+    <Button
+        android:id="@+id/expired_coupon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Expired Coupon" />
+
+    <!--<Button-->
+        <!--android:id="@+id/long_text_coupon"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Long Text Coupon" />-->
+
 
 </LinearLayout>
