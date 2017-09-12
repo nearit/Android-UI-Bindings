@@ -8,7 +8,7 @@
     <string name="nearit_ui_inactive_coupon_text">Inactive coupon</string>
     <string name="nearit_ui_coupon_validity_label_valid">Validity:</string>
     <string name="nearit_ui_coupon_validity_label_valid_no_period">Valid</string>
-    <string name="nearit_ui_coupon_validity_label_redeemed">Redeemed:</string>
+    <string name="nearit_ui_coupon_validity_label_redeemed">Redeemed at:</string>
     <string name="nearit_ui_redeemed_coupon_text">Already used coupon</string>
     <string name="nearit_ui_coupon_validity_period_from">from %1$s</string>
     <string name="nearit_ui_coupon_validity_period_until">until %2$s</string>

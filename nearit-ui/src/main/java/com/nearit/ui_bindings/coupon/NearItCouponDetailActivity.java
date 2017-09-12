@@ -15,17 +15,7 @@ import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.coupon.views.CouponDetailTopSection;
 import com.nearit.ui_bindings.utils.LoadImageFromURL;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import it.near.sdk.reactions.couponplugin.model.Coupon;
-
-import static com.nearit.ui_bindings.coupon.CouponConstants.EXPIRED;
-import static com.nearit.ui_bindings.coupon.CouponConstants.NOT_YET_VALID;
-import static com.nearit.ui_bindings.coupon.CouponConstants.REDEEMED;
-import static com.nearit.ui_bindings.coupon.CouponConstants.VALID;
 
 /**
  * Created by Federico Boschini on 06/09/17.
@@ -34,6 +24,8 @@ import static com.nearit.ui_bindings.coupon.CouponConstants.VALID;
 public class NearItCouponDetailActivity extends AppCompatActivity {
 
     private final static String TAG = "NearItCouponDetailActivity";
+
+    private int iconDrawable = 0;
 
     @Nullable
     private ImageView couponIcon;
@@ -47,6 +39,12 @@ public class NearItCouponDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.nearit_ui_activity_coupon_detail);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
+            CouponDetailIntentExtras params = CouponDetailIntentExtras.fromIntent(intent);
+            iconDrawable = params.getIconDrawable();
+        }
 
         Coupon coupon = getIntent().getParcelableExtra(ExtraConstants.COUPON_EXTRA);
 
@@ -64,18 +62,24 @@ public class NearItCouponDetailActivity extends AppCompatActivity {
         couponDescription = (TextView) findViewById(R.id.coupon_description);
         couponDescription.setText(coupon.description);
 
-        if((coupon.getRedeemableFromDate() != null) && (coupon.getRedeemableFromDate().getTime() > System.currentTimeMillis())) {
+        if ((coupon.getRedeemableFromDate() != null) && (coupon.getRedeemableFromDate().getTime() > System.currentTimeMillis()) || coupon.getRedeemedAtDate() != null) {
             couponName.setTextColor(ContextCompat.getColor(this, R.color.nearit_ui_black_35));
             couponValue.setTextColor(ContextCompat.getColor(this, R.color.nearit_ui_black_35));
             couponDescription.setTextColor(ContextCompat.getColor(this, R.color.nearit_ui_black_35));
         }
 
-//        new LoadImageFromURL(couponIcon, iconProgressBar).execute("https://res.cloudinary.com/crunchbase-production/image/upload/v1469444473/t2gogkgbugvfjhcaokz6.png");
+        if (iconDrawable != 0 && couponIcon != null) {
+            couponIcon.setBackgroundResource(iconDrawable);
+        }
+
+//        new LoadImageFromURL(couponIcon, iconProgressBar).execute(coupon.getIconSet().getFullSize());
 
     }
 
-    public static Intent createIntent(Context context, Coupon coupon) {
-        return new Intent(context, NearItCouponDetailActivity.class).putExtra(ExtraConstants.COUPON_EXTRA, coupon);
+    public static Intent createIntent(Context context, Coupon coupon, CouponDetailIntentExtras params) {
+        return new Intent(context, NearItCouponDetailActivity.class)
+                .putExtra(ExtraConstants.COUPON_EXTRA, coupon)
+                .putExtra(ExtraConstants.EXTRA_FLOW_PARAMS, params);
     }
 
 }

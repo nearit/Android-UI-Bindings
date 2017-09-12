@@ -30,6 +30,9 @@ import static com.nearit.ui_bindings.coupon.CouponConstants.VALID;
  */
 
 public class CouponDetailTopSection extends RelativeLayout {
+
+    SimpleDateFormat formatDate = new SimpleDateFormat(getResources().getString(R.string.nearit_ui_date_pretty_format), Locale.US);
+
     @Nullable
     private TextView notValidTextView;
     @Nullable
@@ -71,7 +74,6 @@ public class CouponDetailTopSection extends RelativeLayout {
 
     public void setCouponView(Coupon coupon) {
         if (validityPeriodTextView != null) {
-            SimpleDateFormat formatDate = new SimpleDateFormat(getResources().getString(R.string.nearit_ui_date_pretty_format), Locale.US);
             String formattedExp = "", formattedRedeem = "";
             String validityPeriod = "";
 
@@ -162,7 +164,9 @@ public class CouponDetailTopSection extends RelativeLayout {
             case REDEEMED:
                 if (validityTextView != null) {
                     validityTextView.setText(getResources().getString(R.string.nearit_ui_coupon_validity_label_redeemed));
+                    validityTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_expired_coupon_color));
                 }
+                validityPeriodTextView.setText(formatDate.format(coupon.getRedeemedAtDate()));
                 if (notValidTextView != null) {
                     notValidTextView.setVisibility(VISIBLE);
                     notValidTextView.setText(getResources().getString(R.string.nearit_ui_redeemed_coupon_text));
