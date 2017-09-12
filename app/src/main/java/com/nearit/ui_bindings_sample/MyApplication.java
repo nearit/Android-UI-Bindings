@@ -12,8 +12,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // NearItManager.init(this, getString(R.string.near_api_key));
-
         NearITUIBindings.init();
     }
 }
