@@ -8,56 +8,59 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp">
+        android:orientation="vertical">
 
         <com.nearit.ui_bindings.coupon.views.CouponDetailTopSection
             android:id="@+id/coupon_detail_top_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <ImageView
+        <View
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/trapezio_1" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/trapezio_2" />
+            android:background="@drawable/nearit_ui_coupon_layout_separator" />
 
         <LinearLayout
             android:id="@+id/coupon_detail_bottom_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/nearit_ui_real_white"
+            android:background="@drawable/nearit_ui_coupon_bottom_section_background"
             android:orientation="vertical"
-            android:paddingBottom="37dp">
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingBottom="45dp">
 
-            <ImageView
-                android:id="@+id/coupon_icon"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="17dp" />
-
-            <ProgressBar
-                android:id="@+id/coupon_icon_progress_bar"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="17dp" />
-
-            <TextView
-                android:id="@+id/coupon_name"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="23dp"
-                android:gravity="center_horizontal"
-                android:text="Coupon name"
-                android:textColor="@color/nearit_ui_black"
-                android:textSize="15sp" />
+                android:orientation="horizontal"
+                android:layout_marginTop="19dp">
+
+                <ProgressBar
+                    android:id="@+id/coupon_icon_progress_bar"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal" />
+
+                <ImageView
+                    android:id="@+id/coupon_icon"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/nearit_ui_brand_nearit_black" />
+
+                <TextView
+                    android:id="@+id/coupon_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="Coupon name"
+                    android:textColor="@color/nearit_ui_black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/coupon_value"
@@ -78,7 +81,6 @@
                 android:text="Coupon description"
                 android:textColor="@color/nearit_ui_warm_grey"
                 android:textSize="13sp" />
-
 
 
         </LinearLayout>

@@ -2,27 +2,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/nearit_ui_real_white">
+    android:background="@drawable/nearit_ui_coupon_top_section_background"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp">
 
     <LinearLayout
+        android:id="@+id/coupon_validity_section"
         android:layout_width="match_parent"
         android:layout_height="17sp"
         android:orientation="horizontal"
+        android:gravity="center_horizontal"
         android:layout_marginTop="15dp">
 
         <TextView
             android:id="@+id/coupon_validity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Validity:"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:textColor="@color/nearit_ui_black"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/coupon_validity_period"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="from .... to ...."
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="2dp"
             android:textColor="@color/nearit_ui_warm_grey"
             android:textSize="12sp" />
 
@@ -33,36 +38,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_gravity="center"
         android:layout_marginBottom="29dp"
-        android:layout_marginTop="49dp"
-        android:text="Expired coupon"
+        android:layout_marginTop="33dp"
+        android:layout_below="@id/coupon_validity_section"
         android:textColor="@color/nearit_ui_black"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:visibility="gone" />
 
     <ImageView
         android:id="@+id/qr_code"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/validity_text"
         android:layout_marginTop="20dp" />
 
     <ProgressBar
         android:id="@+id/qr_code_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/qr_code"
         android:layout_marginTop="20dp" />
 
     <TextView
         android:id="@+id/coupon_serial"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="19dp"
         android:layout_marginTop="16dp"
-        android:gravity="center_horizontal"
-        android:text="0123456789"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/qr_code_progress_bar"
         android:textColor="@color/nearit_ui_black"
         android:textSize="20sp" />
 
