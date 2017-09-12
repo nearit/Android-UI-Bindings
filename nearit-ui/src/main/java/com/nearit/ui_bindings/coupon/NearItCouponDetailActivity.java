@@ -63,9 +63,9 @@ public class NearItCouponDetailActivity extends AppCompatActivity {
         couponDescription.setText(coupon.description);
 
         if ((coupon.getRedeemableFromDate() != null) && (coupon.getRedeemableFromDate().getTime() > System.currentTimeMillis()) || coupon.getRedeemedAtDate() != null) {
-            couponName.setTextColor(ContextCompat.getColor(this, R.color.nearit_ui_black_35));
-            couponValue.setTextColor(ContextCompat.getColor(this, R.color.nearit_ui_black_35));
-            couponDescription.setTextColor(ContextCompat.getColor(this, R.color.nearit_ui_black_35));
+            couponName.setTextColor(ContextCompat.getColor(this, R.color.nearit_ui_coupon_detail_disabled_text_color));
+            couponValue.setTextColor(ContextCompat.getColor(this, R.color.nearit_ui_coupon_detail_disabled_text_color));
+            couponDescription.setTextColor(ContextCompat.getColor(this, R.color.nearit_ui_coupon_detail_disabled_text_color));
         }
 
         if (iconDrawable != 0 && couponIcon != null) {

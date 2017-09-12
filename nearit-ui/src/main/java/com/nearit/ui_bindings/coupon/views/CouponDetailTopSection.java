@@ -105,7 +105,7 @@ public class CouponDetailTopSection extends RelativeLayout {
         switch (checkValidity(coupon)) {
             case VALID:
                 if (validityTextView != null) {
-                    validityTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_valid_coupon_color));
+                    validityTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_valid_coupon_color));
                 }
                 if (notValidTextView != null) {
                     notValidTextView.setVisibility(GONE);
@@ -122,12 +122,12 @@ public class CouponDetailTopSection extends RelativeLayout {
             case EXPIRED:
                 if (validityTextView != null) {
                     validityTextView.setText(getResources().getString(R.string.nearit_ui_coupon_validity_label_valid));
-                    validityTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_expired_coupon_color));
+                    validityTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_expired_coupon_color));
                 }
                 if (notValidTextView != null) {
                     notValidTextView.setVisibility(VISIBLE);
                     notValidTextView.setText(getResources().getString(R.string.nearit_ui_expired_coupon_text));
-                    notValidTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_expired_coupon_color));
+                    notValidTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_expired_coupon_color));
                 }
 
                 if (qrCodeImageView != null) {
@@ -143,12 +143,12 @@ public class CouponDetailTopSection extends RelativeLayout {
             case NOT_YET_VALID:
                 if (validityTextView != null) {
                     validityTextView.setText(getResources().getString(R.string.nearit_ui_coupon_validity_label_valid));
-                    validityTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_expired_coupon_color));
+                    validityTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_expired_coupon_color));
                 }
                 if (notValidTextView != null) {
                     notValidTextView.setVisibility(VISIBLE);
                     notValidTextView.setText(getResources().getString(R.string.nearit_ui_inactive_coupon_text));
-                    notValidTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_inactive_coupon_color));
+                    notValidTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_inactive_coupon_color));
                 }
 
                 if (qrCodeImageView != null) {
@@ -164,13 +164,13 @@ public class CouponDetailTopSection extends RelativeLayout {
             case REDEEMED:
                 if (validityTextView != null) {
                     validityTextView.setText(getResources().getString(R.string.nearit_ui_coupon_validity_label_redeemed));
-                    validityTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_expired_coupon_color));
+                    validityTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_expired_coupon_color));
                 }
                 validityPeriodTextView.setText(formatDate.format(coupon.getRedeemedAtDate()));
                 if (notValidTextView != null) {
                     notValidTextView.setVisibility(VISIBLE);
                     notValidTextView.setText(getResources().getString(R.string.nearit_ui_redeemed_coupon_text));
-                    notValidTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_expired_coupon_color));
+                    notValidTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_expired_coupon_color));
                 }
 
                 if (qrCodeImageView != null) {

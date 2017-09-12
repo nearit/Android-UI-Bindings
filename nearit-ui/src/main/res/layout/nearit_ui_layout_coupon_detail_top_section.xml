@@ -19,7 +19,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textColor="@color/nearit_ui_black"
             android:textSize="12sp" />
 
         <TextView
@@ -28,7 +27,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:layout_marginLeft="2dp"
-            android:textColor="@color/nearit_ui_warm_grey"
+            android:textColor="@color/nearit_ui_coupon_detail_coupon_validity_period_color"
             android:textSize="12sp" />
 
     </LinearLayout>
@@ -41,7 +40,6 @@
         android:layout_marginBottom="29dp"
         android:layout_marginTop="33dp"
         android:layout_below="@id/coupon_validity_section"
-        android:textColor="@color/nearit_ui_black"
         android:textSize="20sp"
         android:visibility="gone" />
 
@@ -69,7 +67,7 @@
         android:layout_marginTop="16dp"
         android:layout_centerInParent="true"
         android:layout_below="@id/qr_code_progress_bar"
-        android:textColor="@color/nearit_ui_black"
+        android:textColor="@color/nearit_ui_coupon_detail_coupon_serial"
         android:textSize="20sp" />
 
 </RelativeLayout>
