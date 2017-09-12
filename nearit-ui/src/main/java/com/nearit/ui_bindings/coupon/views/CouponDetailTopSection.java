@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,6 +36,8 @@ public class CouponDetailTopSection extends RelativeLayout {
 
     @Nullable
     private TextView notValidTextView;
+    @Nullable
+    private LinearLayout qrCodeContainer;
     @Nullable
     private ImageView qrCodeImageView;
     @Nullable
@@ -67,6 +70,7 @@ public class CouponDetailTopSection extends RelativeLayout {
         validityTextView = (TextView) findViewById(R.id.coupon_validity);
         validityPeriodTextView = (TextView) findViewById(R.id.coupon_validity_period);
 
+        qrCodeContainer = (LinearLayout) findViewById(R.id.qr_code_container);
         qrCodeSpinner = (ProgressBar) findViewById(R.id.qr_code_progress_bar);
         qrCodeImageView = (ImageView) findViewById(R.id.qr_code);
         serialTextView = (TextView) findViewById(R.id.coupon_serial);
@@ -130,6 +134,9 @@ public class CouponDetailTopSection extends RelativeLayout {
                     notValidTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_expired_coupon_color));
                 }
 
+                if (qrCodeContainer != null) {
+                    qrCodeContainer.setVisibility(GONE);
+                }
                 if (qrCodeImageView != null) {
                     qrCodeImageView.setVisibility(GONE);
                 }
@@ -151,6 +158,9 @@ public class CouponDetailTopSection extends RelativeLayout {
                     notValidTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_inactive_coupon_color));
                 }
 
+                if (qrCodeContainer != null) {
+                    qrCodeContainer.setVisibility(GONE);
+                }
                 if (qrCodeImageView != null) {
                     qrCodeImageView.setVisibility(GONE);
                 }
@@ -173,6 +183,9 @@ public class CouponDetailTopSection extends RelativeLayout {
                     notValidTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_expired_coupon_color));
                 }
 
+                if (qrCodeContainer != null) {
+                    qrCodeContainer.setVisibility(GONE);
+                }
                 if (qrCodeImageView != null) {
                     qrCodeImageView.setVisibility(GONE);
                 }
