@@ -21,6 +21,7 @@ import it.near.sdk.reactions.couponplugin.model.Coupon;
 public class CouponDetailIntentBuilder {
     private Context mContext;
     private int mIconDrawable;
+    private int mSeparatorDrawable;
 
     public CouponDetailIntentBuilder(Context context) {
         mContext = context;
@@ -34,13 +35,22 @@ public class CouponDetailIntentBuilder {
         return this;
     }
 
+    /**
+     * Sets a custom separator
+     */
+    public CouponDetailIntentBuilder setSeparatorResourceId(int separator) {
+        mSeparatorDrawable = separator;
+        return this;
+    }
+
     public Intent build(Coupon coupon) {
         return NearItCouponDetailActivity.createIntent(mContext, coupon, getParams());
     }
 
     private CouponDetailIntentExtras getParams() {
         return new CouponDetailIntentExtras(
-                mIconDrawable);
+                mIconDrawable,
+                mSeparatorDrawable);
     }
 
 }

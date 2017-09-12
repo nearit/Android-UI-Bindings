@@ -15,9 +15,11 @@ import com.nearit.ui_bindings.permissions.PermissionsRequestIntentExtras;
 class CouponDetailIntentExtras implements Parcelable {
 
     private final int iconDrawable;
+    private final int separatorDrawable;
 
-    CouponDetailIntentExtras(int iconDrawable) {
+    CouponDetailIntentExtras(int iconDrawable, int separatorDrawable) {
         this.iconDrawable = iconDrawable;
+        this.separatorDrawable = separatorDrawable;
     }
 
     /**
@@ -48,8 +50,10 @@ class CouponDetailIntentExtras implements Parcelable {
         @Override
         public CouponDetailIntentExtras createFromParcel(Parcel in) {
             int iconDrawable = in.readInt();
+            int separatorDrawable = in.readInt();
             return new CouponDetailIntentExtras(
-                    iconDrawable
+                    iconDrawable,
+                    separatorDrawable
             );
         }
 
@@ -67,9 +71,14 @@ class CouponDetailIntentExtras implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(iconDrawable);
+        dest.writeInt(separatorDrawable);
     }
 
     public int getIconDrawable() {
         return iconDrawable;
+    }
+
+    public int getSeparatorDrawable() {
+        return separatorDrawable;
     }
 }
