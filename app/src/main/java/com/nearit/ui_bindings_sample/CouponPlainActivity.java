@@ -2,9 +2,10 @@ package com.nearit.ui_bindings_sample;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
-import com.nearit.ui_bindings.coupon.NearItCouponDetailFragment;
+import com.nearit.ui_bindings.NearITUIBindings;
 
 import java.util.ArrayList;
 
@@ -33,7 +34,11 @@ public class CouponPlainActivity extends AppCompatActivity {
         validCoupon.claims = new ArrayList<>();
         validCoupon.claims.add(validCouponClaim);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, NearItCouponDetailFragment.newInstance(validCoupon, null)).commit();
+        Fragment couponFragment = NearITUIBindings.getInstance(this)
+                .createCouponDetailFragmentBuilder()
+                .build(validCoupon);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, couponFragment).commit();
 
     }
 }

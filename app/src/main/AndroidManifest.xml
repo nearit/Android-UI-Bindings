@@ -23,7 +23,8 @@
 
         <activity android:name=".CouponsActivity" />
         <activity android:name=".PermissionsActivity" />
-        <activity android:name=".CouponPlainActivity" />
+        <activity android:name=".CouponPlainActivity"
+            android:label="Coupon detail activity"/>
     </application>
 
 </manifest>
