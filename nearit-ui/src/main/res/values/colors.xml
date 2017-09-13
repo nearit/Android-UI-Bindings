@@ -10,6 +10,7 @@
     <color name="nearit_ui_valid_green">#68c600</color>
     <color name="nearit_ui_expired_red">#FF3434</color>
     <color name="nearit_ui_inactive_orange">#FC8C2A</color>
+    <color name="nearit_ui_transparent">#00000000</color>
 
     <color name="nearit_ui_snackbar_background_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_permissions_activity_background_color">@color/nearit_ui_real_white</color>
@@ -28,4 +29,6 @@
     <color name="nearit_ui_coupon_detail_valid_coupon_color">@color/nearit_ui_valid_green</color>
     <color name="nearit_ui_coupon_detail_expired_coupon_color">@color/nearit_ui_expired_red</color>
     <color name="nearit_ui_coupon_detail_inactive_coupon_color">@color/nearit_ui_inactive_orange</color>
+    <color name="nearit_ui_coupon_detail_activity_container_background_color">@color/nearit_ui_transparent</color>
+
 </resources>

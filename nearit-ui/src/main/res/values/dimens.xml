@@ -18,10 +18,10 @@
     <dimen name="nearit_ui_coupon_detail_margin2">15dp</dimen>
     <dimen name="nearit_ui_coupon_detail_margin3">9dp</dimen>
     <dimen name="nearit_ui_coupon_detail_margin4">15dp</dimen>
-    <dimen name="nearit_ui_coupon_detail_margin5">15dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_margin5">23dp</dimen>
     <dimen name="nearit_ui_coupon_detail_margin6">2dp</dimen>
     <dimen name="nearit_ui_coupon_detail_margin7">29dp</dimen>
-    <dimen name="nearit_ui_coupon_detail_margin8">33dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_margin8">25dp</dimen>
     <dimen name="nearit_ui_coupon_detail_margin9">33dp</dimen>
     <dimen name="nearit_ui_coupon_detail_margin10">19dp</dimen>
     <dimen name="nearit_ui_coupon_detail_margin11">16dp</dimen>

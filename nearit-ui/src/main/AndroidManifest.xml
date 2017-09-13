@@ -12,6 +12,7 @@
             android:exported="false" />
 
         <activity android:name=".coupon.NearItCouponDetailActivity"
+            android:theme="@style/NearItUICouponDetailDialog"
             android:exported="false" />
     </application>
 
