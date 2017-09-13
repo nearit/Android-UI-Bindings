@@ -47,21 +47,20 @@
         android:id="@+id/qr_code_container"
         android:layout_width="@dimen/nearit_ui_coupon_detail_qrcode_dimensions"
         android:layout_height="@dimen/nearit_ui_coupon_detail_qrcode_dimensions"
-        android:layout_marginTop="@dimen/nearit_ui_coupon_detail_margin9"
         android:layout_below="@id/coupon_validity_section"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/nearit_ui_coupon_detail_margin9"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/qr_code"
             android:layout_width="@dimen/nearit_ui_coupon_detail_qrcode_dimensions"
-            android:layout_height="@dimen/nearit_ui_coupon_detail_qrcode_dimensions"
-            android:layout_gravity="center_horizontal" />
+            android:layout_height="@dimen/nearit_ui_coupon_detail_qrcode_dimensions" />
 
         <ProgressBar
             android:id="@+id/qr_code_progress_bar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
