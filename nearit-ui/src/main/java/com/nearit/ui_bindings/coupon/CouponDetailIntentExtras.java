@@ -16,10 +16,12 @@ class CouponDetailIntentExtras implements Parcelable {
 
     private final int iconDrawable;
     private final int separatorDrawable;
+    private final boolean enableTapOutsideToClose;
 
-    CouponDetailIntentExtras(int iconDrawable, int separatorDrawable) {
+    CouponDetailIntentExtras(int iconDrawable, int separatorDrawable, boolean enableTapOutsideToClose) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
+        this.enableTapOutsideToClose = enableTapOutsideToClose;
     }
 
     /**
@@ -51,9 +53,11 @@ class CouponDetailIntentExtras implements Parcelable {
         public CouponDetailIntentExtras createFromParcel(Parcel in) {
             int iconDrawable = in.readInt();
             int separatorDrawable = in.readInt();
+            boolean enableTapToClose = in.readInt() !=0;
             return new CouponDetailIntentExtras(
                     iconDrawable,
-                    separatorDrawable
+                    separatorDrawable,
+                    enableTapToClose
             );
         }
 
@@ -72,6 +76,7 @@ class CouponDetailIntentExtras implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(iconDrawable);
         dest.writeInt(separatorDrawable);
+        dest.writeInt(enableTapOutsideToClose ? 1 : 0);
     }
 
     public int getIconDrawable() {
@@ -80,5 +85,9 @@ class CouponDetailIntentExtras implements Parcelable {
 
     public int getSeparatorDrawable() {
         return separatorDrawable;
+    }
+
+    public boolean isEnableTapOutsideToClose() {
+        return enableTapOutsideToClose;
     }
 }

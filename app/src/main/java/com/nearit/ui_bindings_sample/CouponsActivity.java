@@ -136,8 +136,9 @@ public class CouponsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(
                         NearITUIBindings.getInstance(CouponsActivity.this)
-                        .createCouponDetailIntentBuilder()
-                        .build(coupons.get(0))
+                                .createCouponDetailIntentBuilder()
+                                .enableTapOutsideToClose()
+                                .build(coupons.get(0))
                 );
             }
         });

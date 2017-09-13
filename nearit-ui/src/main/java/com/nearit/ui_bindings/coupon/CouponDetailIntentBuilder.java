@@ -22,6 +22,7 @@ public class CouponDetailIntentBuilder {
     private Context mContext;
     private int mIconDrawable;
     private int mSeparatorDrawable;
+    private boolean mEnableTapOutsideToClose = false;
 
     public CouponDetailIntentBuilder(Context context) {
         mContext = context;
@@ -43,6 +44,16 @@ public class CouponDetailIntentBuilder {
         return this;
     }
 
+    /**
+     * Enables or disables tap outside the dialog to close
+     * <p>
+     * <p> default is false
+     */
+    public CouponDetailIntentBuilder enableTapOutsideToClose() {
+        mEnableTapOutsideToClose = true;
+        return this;
+    }
+
     public Intent build(Coupon coupon) {
         return NearItCouponDetailActivity.createIntent(mContext, coupon, getParams());
     }
@@ -50,7 +61,8 @@ public class CouponDetailIntentBuilder {
     private CouponDetailIntentExtras getParams() {
         return new CouponDetailIntentExtras(
                 mIconDrawable,
-                mSeparatorDrawable);
+                mSeparatorDrawable,
+                mEnableTapOutsideToClose);
     }
 
 }

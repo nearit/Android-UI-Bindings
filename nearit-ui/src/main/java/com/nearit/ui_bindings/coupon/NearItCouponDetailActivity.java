@@ -2,9 +2,11 @@ package com.nearit.ui_bindings.coupon;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -22,6 +24,7 @@ public class NearItCouponDetailActivity extends AppCompatActivity {
     private final static String TAG = "NearItCouponDetailActiv";
 
     private CouponDetailIntentExtras extras;
+    private boolean isEnableTapToClose = false;
 
     @Nullable
     LinearLayout closeButton;
@@ -45,6 +48,7 @@ public class NearItCouponDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
             extras = CouponDetailIntentExtras.fromIntent(intent);
+            isEnableTapToClose = extras.isEnableTapOutsideToClose();
         }
 
         Coupon coupon = getIntent().getParcelableExtra(ExtraConstants.COUPON_EXTRA);
@@ -59,6 +63,20 @@ public class NearItCouponDetailActivity extends AppCompatActivity {
         return new Intent(context, NearItCouponDetailActivity.class)
                 .putExtra(ExtraConstants.COUPON_EXTRA, coupon)
                 .putExtra(ExtraConstants.EXTRA_FLOW_PARAMS, params);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Rect dialogBounds = new Rect();
+        getWindow().getDecorView().getHitRect(dialogBounds);
+
+        if (!dialogBounds.contains((int) ev.getX(), (int) ev.getY())) {
+            if (!isEnableTapToClose) {
+                return true;
+            }
+            finish();
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
 }
