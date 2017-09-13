@@ -23,7 +23,7 @@ public class NearItCouponDetailActivity extends AppCompatActivity {
 
     private final static String TAG = "NearItCouponDetailActiv";
 
-    private CouponDetailIntentExtras extras;
+    private CouponDetailExtraParams extras;
     private boolean isEnableTapToClose = false;
 
     @Nullable
@@ -47,19 +47,20 @@ public class NearItCouponDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
-            extras = CouponDetailIntentExtras.fromIntent(intent);
+            extras = CouponDetailExtraParams.fromIntent(intent);
             isEnableTapToClose = extras.isEnableTapOutsideToClose();
         }
 
         Coupon coupon = getIntent().getParcelableExtra(ExtraConstants.COUPON_EXTRA);
 
-        NearItCouponDetailFragment fragment = NearItCouponDetailFragment.newInstance(coupon, extras);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, NearItCouponDetailFragment.newInstance(coupon, extras))
+                .commit();
 
     }
 
-    public static Intent createIntent(Context context, Coupon coupon, CouponDetailIntentExtras params) {
+    public static Intent createIntent(Context context, Coupon coupon, CouponDetailExtraParams params) {
         return new Intent(context, NearItCouponDetailActivity.class)
                 .putExtra(ExtraConstants.COUPON_EXTRA, coupon)
                 .putExtra(ExtraConstants.EXTRA_FLOW_PARAMS, params);

@@ -40,7 +40,7 @@ public class NearItCouponDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         coupon = getArguments().getParcelable(ARG_COUPON);
-        CouponDetailIntentExtras extras = getArguments().getParcelable(ARG_EXTRAS);
+        CouponDetailExtraParams extras = getArguments().getParcelable(ARG_EXTRAS);
         if (extras != null) {
             separatorDrawable = extras.getSeparatorDrawable();
             iconDrawable = extras.getIconDrawable();
