@@ -1,9 +1,11 @@
 package com.nearit.ui_bindings_sample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 
@@ -117,11 +119,13 @@ public class CouponsActivity extends AppCompatActivity {
             }
         });
 
-
+        final Button realRedeemed = (Button) findViewById(R.id.real_redeemed_coupon);
+        realRedeemed.setEnabled(false);
         NearItManager.getInstance().getCoupons(new CouponListener() {
             @Override
             public void onCouponsDownloaded(List<Coupon> list) {
                 coupons = list;
+                realRedeemed.setEnabled(true);
             }
 
             @Override
@@ -130,16 +134,25 @@ public class CouponsActivity extends AppCompatActivity {
             }
         });
 
-        Button realRedeemed = (Button) findViewById(R.id.real_redeemed_coupon);
         realRedeemed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(
-                        NearITUIBindings.getInstance(CouponsActivity.this)
-                                .createCouponDetailIntentBuilder()
-                                .enableTapOutsideToClose()
-                                .build(coupons.get(0))
-                );
+                if(!coupons.isEmpty()){
+                    startActivity(
+                            NearITUIBindings.getInstance(CouponsActivity.this)
+                                    .createCouponDetailIntentBuilder()
+                                    .enableTapOutsideToClose()
+                                    .build(coupons.get(0))
+                    );
+                } else Toast.makeText(CouponsActivity.this, "You have no real coupon", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button plainActivity = (Button) findViewById(R.id.plain_coupon_activity);
+        plainActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CouponsActivity.this, CouponPlainActivity.class));
             }
         });
 
