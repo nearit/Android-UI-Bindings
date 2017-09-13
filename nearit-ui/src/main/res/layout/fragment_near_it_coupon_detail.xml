@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/nearit_ui_coupon_detail_overall_width"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:keepScreenOn="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.nearit.ui_bindings.coupon.views.CouponDetailTopSection
+            android:id="@+id/coupon_detail_top_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:id="@+id/coupon_detail_separator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/nearit_ui_coupon_layout_separator" />
+
+        <LinearLayout
+            android:id="@+id/coupon_detail_bottom_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/nearit_ui_coupon_bottom_section_background"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/nearit_ui_coupon_detail_bottom_padding"
+            android:paddingLeft="@dimen/nearit_ui_coupon_detail_horizontal_padding"
+            android:paddingRight="@dimen/nearit_ui_coupon_detail_horizontal_padding">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/nearit_ui_coupon_detail_margin1"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/coupon_icon_progress_bar"
+                    android:layout_width="@dimen/nearit_ui_coupon_detail_icon_dimensions"
+                    android:layout_height="@dimen/nearit_ui_coupon_detail_icon_dimensions"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/coupon_icon"
+                    android:layout_width="@dimen/nearit_ui_coupon_detail_icon_dimensions"
+                    android:layout_height="@dimen/nearit_ui_coupon_detail_icon_dimensions"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/nearit_ui_brand_nearit_black" />
+
+                <TextView
+                    android:id="@+id/coupon_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/nearit_ui_coupon_detail_margin2"
+                    android:textColor="@color/nearit_ui_coupon_detail_coupon_name_color"
+                    android:textSize="@dimen/nearit_ui_coupon_detail_coupon_name_text_size" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/coupon_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/nearit_ui_coupon_detail_margin3"
+                android:gravity="center_horizontal"
+                android:textColor="@color/nearit_ui_coupon_detail_coupon_value_color"
+                android:textSize="@dimen/nearit_ui_coupon_detail_coupon_value_text_size" />
+
+            <TextView
+                android:id="@+id/coupon_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/nearit_ui_coupon_detail_margin4"
+                android:gravity="center_horizontal"
+                android:textColor="@color/nearit_ui_coupon_detail_coupon_description_color"
+                android:textSize="@dimen/nearit_ui_coupon_detail_coupon_description_text_size" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+
