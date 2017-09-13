@@ -10,18 +10,17 @@
 
     <LinearLayout
         android:id="@+id/close_icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_gravity="right"
-        android:gravity="center_horizontal">
+        android:gravity="center"
+        android:paddingLeft="2.5dp">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="0dp"
             android:background="@drawable/ic_nearit_ui_close_icon" />
+        
     </LinearLayout>
 
 </FrameLayout>
