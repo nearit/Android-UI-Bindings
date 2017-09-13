@@ -6,40 +6,45 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.nearit.ui_bindings.ExtraConstants;
-import com.nearit.ui_bindings.permissions.PermissionsRequestIntentExtras;
 
 /**
  * Created by Federico Boschini on 06/09/17.
  */
 
-class CouponDetailIntentExtras implements Parcelable {
+class CouponDetailExtraParams implements Parcelable {
 
     private final int iconDrawable;
     private final int separatorDrawable;
     private final boolean enableTapOutsideToClose;
 
-    CouponDetailIntentExtras(int iconDrawable, int separatorDrawable, boolean enableTapOutsideToClose) {
+    CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean enableTapOutsideToClose) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
         this.enableTapOutsideToClose = enableTapOutsideToClose;
     }
 
+    public CouponDetailExtraParams(int iconDrawable, int separatorDrawable) {
+        this.iconDrawable = iconDrawable;
+        this.separatorDrawable = separatorDrawable;
+        this.enableTapOutsideToClose = false;
+    }
+
     /**
-     * Extract CouponDetailIntentExtras from an Intent.
+     * Extract CouponDetailExtraParams from an Intent.
      */
-    public static CouponDetailIntentExtras fromIntent(Intent intent) {
+    public static CouponDetailExtraParams fromIntent(Intent intent) {
         return intent.getParcelableExtra(ExtraConstants.EXTRA_FLOW_PARAMS);
     }
 
     /**
-     * Extract CouponDetailIntentExtras from a Bundle.
+     * Extract CouponDetailExtraParams from a Bundle.
      */
-    public static CouponDetailIntentExtras fromBundle(Bundle bundle) {
+    public static CouponDetailExtraParams fromBundle(Bundle bundle) {
         return bundle.getParcelable(ExtraConstants.EXTRA_FLOW_PARAMS);
     }
 
     /**
-     * Create a bundle containing this CouponDetailIntentExtras object as {@link
+     * Create a bundle containing this CouponDetailExtraParams object as {@link
      * ExtraConstants#EXTRA_FLOW_PARAMS}.
      */
     public Bundle toBundle() {
@@ -48,13 +53,13 @@ class CouponDetailIntentExtras implements Parcelable {
         return bundle;
     }
 
-    public static final Creator<CouponDetailIntentExtras> CREATOR = new Creator<CouponDetailIntentExtras>() {
+    public static final Creator<CouponDetailExtraParams> CREATOR = new Creator<CouponDetailExtraParams>() {
         @Override
-        public CouponDetailIntentExtras createFromParcel(Parcel in) {
+        public CouponDetailExtraParams createFromParcel(Parcel in) {
             int iconDrawable = in.readInt();
             int separatorDrawable = in.readInt();
             boolean enableTapToClose = in.readInt() !=0;
-            return new CouponDetailIntentExtras(
+            return new CouponDetailExtraParams(
                     iconDrawable,
                     separatorDrawable,
                     enableTapToClose
@@ -62,8 +67,8 @@ class CouponDetailIntentExtras implements Parcelable {
         }
 
         @Override
-        public CouponDetailIntentExtras[] newArray(int size) {
-            return new CouponDetailIntentExtras[size];
+        public CouponDetailExtraParams[] newArray(int size) {
+            return new CouponDetailExtraParams[size];
         }
     };
 
