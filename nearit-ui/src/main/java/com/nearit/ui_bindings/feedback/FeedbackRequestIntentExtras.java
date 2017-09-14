@@ -13,9 +13,11 @@ import com.nearit.ui_bindings.ExtraConstants;
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 public class FeedbackRequestIntentExtras implements Parcelable {
+    private final boolean hideDate, enableTextResponse;
 
-    FeedbackRequestIntentExtras() {
-
+    FeedbackRequestIntentExtras(boolean hideDate, boolean enableTextResponse) {
+        this.hideDate = hideDate;
+        this.enableTextResponse = enableTextResponse;
     }
 
     /**
@@ -44,6 +46,8 @@ public class FeedbackRequestIntentExtras implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(hideDate ? 1 : 0);
+        dest.writeInt(enableTextResponse ? 1 : 0);
     }
 
     @Override
@@ -54,9 +58,12 @@ public class FeedbackRequestIntentExtras implements Parcelable {
     public static final Creator<FeedbackRequestIntentExtras> CREATOR = new Creator<FeedbackRequestIntentExtras>() {
         @Override
         public FeedbackRequestIntentExtras createFromParcel(Parcel in) {
-
+            boolean hideDate = in.readInt() != 0;
+            boolean enableTextResponse = in.readInt() != 0;
             return new FeedbackRequestIntentExtras(
-                    );
+                    hideDate,
+                    enableTextResponse
+            );
         }
 
         @Override
@@ -65,5 +72,11 @@ public class FeedbackRequestIntentExtras implements Parcelable {
         }
     };
 
+    public boolean isHideDate() {
+        return hideDate;
+    }
 
+    public boolean isEnableTextResponse() {
+        return enableTextResponse;
+    }
 }

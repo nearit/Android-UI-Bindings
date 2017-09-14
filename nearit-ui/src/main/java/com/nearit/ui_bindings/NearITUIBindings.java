@@ -1,6 +1,8 @@
 package com.nearit.ui_bindings;
 
 import android.content.Context;
+
+import com.nearit.ui_bindings.feedback.FeedbackIntentBuilder;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
 import it.near.sdk.NearItManager;
 
@@ -18,6 +20,10 @@ public class NearITUIBindings {
 
     public PermissionsRequestIntentBuilder createPermissionRequestIntentBuilder() {
         return new PermissionsRequestIntentBuilder(mContext);
+    }
+
+    public FeedbackIntentBuilder createFeedbackIntentBuilder() {
+        return new FeedbackIntentBuilder(mContext);
     }
 
 }

@@ -3,16 +3,26 @@ package com.nearit.ui_bindings.feedback;
 import android.content.Context;
 import android.content.Intent;
 
-import com.nearit.ui_bindings.permissions.NearItPermissionsActivity;
-
 /**
  * Created by Federico Boschini on 29/08/17.
  */
 public class FeedbackIntentBuilder {
     private Context mContext;
+    private boolean mHideDate;
+    private boolean mEnableTextResponse;
 
     public FeedbackIntentBuilder(Context context) {
         mContext = context;
+    }
+
+    public FeedbackIntentBuilder hideDate() {
+        this.mHideDate = true;
+        return this;
+    }
+
+    public FeedbackIntentBuilder enableTextResponse() {
+        this.mEnableTextResponse = true;
+        return this;
     }
 
     public Intent build() {
@@ -20,7 +30,10 @@ public class FeedbackIntentBuilder {
     }
 
     private FeedbackRequestIntentExtras getParams() {
-        return new FeedbackRequestIntentExtras();
+        return new FeedbackRequestIntentExtras(
+                mHideDate,
+                mEnableTextResponse
+        );
     }
 
 }
