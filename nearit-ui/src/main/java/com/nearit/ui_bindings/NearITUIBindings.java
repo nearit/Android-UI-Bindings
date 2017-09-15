@@ -4,7 +4,8 @@ import android.content.Context;
 
 import com.nearit.ui_bindings.feedback.FeedbackIntentBuilder;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
-import it.near.sdk.NearItManager;
+
+import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 
 public class NearITUIBindings {
 
@@ -25,5 +26,9 @@ public class NearITUIBindings {
     public FeedbackIntentBuilder createFeedbackIntentBuilder() {
         return new FeedbackIntentBuilder(mContext);
     }
+
+//    public FeedbackFragmentBuilder createFeedbackFragmentBuilder(Feedback feedback) {
+//        return new FeedbackFragmentBuilder(mContext);
+//    }
 
 }
