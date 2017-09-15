@@ -5,14 +5,14 @@ If you want your app to display a coupon in a beautiful pop-up dialog, use this 
 ```java
  // ...
  startActivity(
-         NearITUIBindings.getInstance(getApplicationContext())
+         NearITUIBindings.getInstance(YourActivity.this)
             .createCouponDetailIntentBuilder()
             .build(coupon));
 ```
 
 where, `coupon` is an instance of NearIT SDK `Coupon` class. Further information on coupons and other in-app content can be found [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/).
 
-![NearIT-UI permissions request demo on Android](demo_basic.gif)
+![NearIT-UI coupon dialog](demo_coupon.gif)
 
 #### Advanced examples
 NearIT-UI is shipped with our brand as icon placeholder. If you need to replace it just add one line of code:
@@ -20,7 +20,7 @@ NearIT-UI is shipped with our brand as icon placeholder. If you need to replace 
 ```java
   // ...
   startActivity(
-          NearITUIBindings.getInstance(getApplicationContext())
+          NearITUIBindings.getInstance(YourActivity.this)
              .createCouponDetailIntentBuilder()
              .setIconPlaceholderResourceId(R.drawable.your_drawable)
              .build(coupon));
@@ -32,7 +32,7 @@ Optionally, you can display the coupon in your custom Activity by adding a Fragm
 
 ```java
   // ...
-  Fragment couponFragment = NearITUIBindings.getInstance(this)
+  Fragment couponFragment = NearITUIBindings.getInstance(YourActivity.this)
         .createCouponDetailFragmentBuilder()
         //  here you can call other methods of the builder
         .build(coupon);
