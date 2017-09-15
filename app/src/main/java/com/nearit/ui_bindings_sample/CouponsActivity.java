@@ -29,23 +29,20 @@ public class CouponsActivity extends AppCompatActivity {
         final Coupon validCoupon = new Coupon();
         Claim validCouponClaim = new Claim();
         validCouponClaim.serial_number = "0123456789";
-        validCoupon.name = "Nome di questo coupon lun";
-        validCoupon.description = "Descrizione del coupon, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali.";
-        validCoupon.value = "Valoreqwertyuioplkjhgfdsazxcvbnmpoiuytrewqasdfghj!";
+        validCoupon.name = "Long name for a coupon";
+        validCoupon.description = "Long coupon description, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali.";
+        validCoupon.value = "Value qwertyuioplkjhgfdsazxcvbnmpoiuytrewqasdfghj!";
         validCoupon.redeemable_from = "2017-09-01T00:00:00.000Z";
         validCoupon.expires_at = "2017-10-20T23:59:59.999Z";
         validCoupon.claims = new ArrayList<>();
         validCoupon.claims.add(validCouponClaim);
-//        Image icon = new Image();
-//        icon.imageMap = new HashMap<>();
-//        icon.imageMap.put("icon", new HashMap<>().put("url","https://prod-nearit-media.s3.amazonaws.com/uploads/image/image/482fb24f-695d-4564-9902-cdf286fd27ff/square_300_file.png"));
-//        validCoupon.icon = icon;
 
         Button valid = (Button) findViewById(R.id.valid_coupon);
         valid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(
+                        //  Basic example with a valid coupon
                         NearITUIBindings.getInstance(getApplicationContext())
                                 .createCouponDetailIntentBuilder()
                                 .build(validCoupon));
@@ -55,9 +52,9 @@ public class CouponsActivity extends AppCompatActivity {
         final Coupon inactiveCoupon = new Coupon();
         Claim inactiveCouponClaim = new Claim();
         inactiveCouponClaim.serial_number = "0123456789";
-        inactiveCoupon.name = "Nome di questo coupon lun";
-        inactiveCoupon.description = "Descrizione del coupon, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali.";
-        inactiveCoupon.value = "Valoreqwertyuioplkjhgfdsazxcvbnmpoiuytrewqasdfghj!";
+        inactiveCoupon.name = "Long name for a coupon";
+        inactiveCoupon.description = "Long coupon description, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali.";
+        inactiveCoupon.value = "Value qwertyuioplkjhgfdsazxcvbnmpoiuytrewqasdfghj!";
         inactiveCoupon.redeemable_from = "2017-10-01T00:00:00.000Z";
         inactiveCoupon.expires_at = "2017-10-20T23:59:59.999Z";
         inactiveCoupon.claims = new ArrayList<>();
@@ -68,6 +65,7 @@ public class CouponsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(
+                        //  Basic example with a coupon not yet valid
                         NearITUIBindings.getInstance(getApplicationContext())
                                 .createCouponDetailIntentBuilder()
                                 .build(inactiveCoupon));
@@ -77,9 +75,9 @@ public class CouponsActivity extends AppCompatActivity {
         final Coupon expiredCoupon = new Coupon();
         Claim expiredCouponClaim = new Claim();
         expiredCouponClaim.serial_number = "0123456789";
-        expiredCoupon.name = "Nome di questo coupon lun";
-        expiredCoupon.description = "Descrizione del coupon, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali.";
-        expiredCoupon.value = "Valoreqwertyuioplkjhgfdsazxcvbnmpoiuytrewqasdfghj!";
+        expiredCoupon.name = "Long name for a coupon";
+        expiredCoupon.description = "Long coupon description, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali.";
+        expiredCoupon.value = "Value qwertyuioplkjhgfdsazxcvbnmpoiuytrewqasdfghj!";
         expiredCoupon.expires_at = "2017-08-20T23:59:59.999Z";
         expiredCoupon.redeemable_from = "2017-08-01T00:00:00.000Z";
         expiredCoupon.claims = new ArrayList<>();
@@ -90,8 +88,11 @@ public class CouponsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(
+                        //  Basic example with an expired coupon
+                        //  + enable tap outside the dialog to close it
                         NearITUIBindings.getInstance(getApplicationContext())
                                 .createCouponDetailIntentBuilder()
+                                .enableTapOutsideToClose()
                                 .build(expiredCoupon));
             }
         });
@@ -99,9 +100,9 @@ public class CouponsActivity extends AppCompatActivity {
         final Coupon customIconCoupon = new Coupon();
         Claim customIconCouponClaim = new Claim();
         customIconCouponClaim.serial_number = "0123456789";
-        customIconCoupon.name = "Nome di questo coupon lun";
-        customIconCoupon.description = "Descrizione del coupon, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali.";
-        customIconCoupon.value = "Valoreqwertyuioplkjhgfdsazxcvbnmpoiuytrewqasdfghj!";
+        customIconCoupon.name = "Long name for a coupon";
+        customIconCoupon.description = "Long coupon description, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali.";
+        customIconCoupon.value = "Value qwertyuioplkjhgfdsazxcvbnmpoiuytrewqasdfghj!";
         customIconCoupon.redeemable_from = "2017-09-01T00:00:00.000Z";
         customIconCoupon.expires_at = "2017-10-20T23:59:59.999Z";
         customIconCoupon.claims = new ArrayList<>();
@@ -112,6 +113,7 @@ public class CouponsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(
+                        //  Change the default icon placeholder
                         NearITUIBindings.getInstance(getApplicationContext())
                                 .createCouponDetailIntentBuilder()
                                 .setIconPlaceholderResourceId(R.drawable.shop_circle)
@@ -119,13 +121,29 @@ public class CouponsActivity extends AppCompatActivity {
             }
         });
 
-        final Button realRedeemed = (Button) findViewById(R.id.real_redeemed_coupon);
-        realRedeemed.setEnabled(false);
+        final Button realCoupon = (Button) findViewById(R.id.real_coupon);
+        realCoupon.setEnabled(false);
         NearItManager.getInstance().getCoupons(new CouponListener() {
             @Override
             public void onCouponsDownloaded(List<Coupon> list) {
                 coupons = list;
-                realRedeemed.setEnabled(true);
+                realCoupon.setEnabled(true);
+                realCoupon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(!coupons.isEmpty()){
+                            startActivity(
+                                    //  Example with a real NearIT coupon
+                                    //  this is enabled only if there is a real coupon
+                                    //  for the installation
+                                    NearITUIBindings.getInstance(CouponsActivity.this)
+                                            .createCouponDetailIntentBuilder()
+                                            .setNoSeparator()
+                                            .build(coupons.get(0))
+                            );
+                        } else Toast.makeText(CouponsActivity.this, "You have no real coupon", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -134,25 +152,12 @@ public class CouponsActivity extends AppCompatActivity {
             }
         });
 
-        realRedeemed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!coupons.isEmpty()){
-                    startActivity(
-                            NearITUIBindings.getInstance(CouponsActivity.this)
-                                    .createCouponDetailIntentBuilder()
-                                    .enableTapOutsideToClose()
-                                    .setNoSeparator()
-                                    .build(coupons.get(0))
-                    );
-                } else Toast.makeText(CouponsActivity.this, "You have no real coupon", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         Button plainActivity = (Button) findViewById(R.id.plain_coupon_activity);
         plainActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //  start a plain activity that shows the fragment fullscreen
+                //  please check it
                 startActivity(new Intent(CouponsActivity.this, CouponPlainActivity.class));
             }
         });

@@ -26,9 +26,9 @@ public class CouponPlainActivity extends AppCompatActivity {
         final Coupon validCoupon = new Coupon();
         Claim validCouponClaim = new Claim();
         validCouponClaim.serial_number = "0123456789";
-        validCoupon.name = "Nome di questo coupon lun";
-        validCoupon.description = "Descrizione del coupon, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali.";
-        validCoupon.value = "Valoreqwertyuioplkjhgfdsazxcvbnmpoiuytrewqasdfghj!";
+        validCoupon.name = "Long name for a coupon";
+        validCoupon.description = "Long coupon description, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali.";
+        validCoupon.value = "Value qwertyuioplkjhgfdsazxcvbnmpoiuytrewqasdfghj!";
         validCoupon.redeemable_from = "2017-09-01T00:00:00.000Z";
         validCoupon.expires_at = "2017-10-20T23:59:59.999Z";
         validCoupon.claims = new ArrayList<>();
