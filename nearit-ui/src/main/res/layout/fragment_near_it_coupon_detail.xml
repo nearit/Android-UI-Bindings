@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
+    android:fillViewport="true"
     android:keepScreenOn="true">
 
     <LinearLayout
@@ -20,13 +21,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/nearit_ui_coupon_layout_separator"
-            android:scaleType="fitXY"
-            android:background="@color/nearit_ui_warm_grey"/>
+            android:scaleType="fitXY" />
 
         <LinearLayout
             android:id="@+id/coupon_detail_bottom_section"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/nearit_ui_coupon_bottom_section_background"
             android:orientation="vertical"
             android:paddingBottom="@dimen/nearit_ui_coupon_detail_bottom_padding"
