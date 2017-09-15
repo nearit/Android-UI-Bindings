@@ -142,6 +142,7 @@ public class CouponsActivity extends AppCompatActivity {
                             NearITUIBindings.getInstance(CouponsActivity.this)
                                     .createCouponDetailIntentBuilder()
                                     .enableTapOutsideToClose()
+                                    .setNoSeparator()
                                     .build(coupons.get(0))
                     );
                 } else Toast.makeText(CouponsActivity.this, "You have no real coupon", Toast.LENGTH_SHORT).show();
