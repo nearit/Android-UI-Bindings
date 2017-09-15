@@ -10,11 +10,11 @@ local.properties
 
 \.idea/vcs\.xml
 
-app/src/main/res/drawable-xxhdpi/
+app/src/main/res/drawable-xxhdpi/logo2.png
 
-app/src/main/res/drawable-xhdpi/
+app/src/main/res/drawable-xhdpi/logo2.png
 
-app/src/main/res/drawable-hdpi/
+app/src/main/res/drawable-hdpi/logo2.png
 
 \.idea/
 
