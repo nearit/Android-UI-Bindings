@@ -6,6 +6,7 @@ import com.nearit.ui_bindings.coupon.CouponDetailFragmentBuilder;
 import com.nearit.ui_bindings.coupon.CouponDetailIntentBuilder;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
 import it.near.sdk.NearItManager;
+import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 public class NearITUIBindings {
 
@@ -23,12 +24,12 @@ public class NearITUIBindings {
         return new PermissionsRequestIntentBuilder(mContext);
     }
 
-    public CouponDetailIntentBuilder createCouponDetailIntentBuilder() {
-        return new CouponDetailIntentBuilder(mContext);
+    public CouponDetailIntentBuilder createCouponDetailIntentBuilder(Coupon coupon) {
+        return new CouponDetailIntentBuilder(mContext, coupon);
     }
 
-    public CouponDetailFragmentBuilder createCouponDetailFragmentBuilder() {
-        return new CouponDetailFragmentBuilder(mContext);
+    public CouponDetailFragmentBuilder createCouponDetailFragmentBuilder(Coupon coupon) {
+        return new CouponDetailFragmentBuilder(mContext, coupon);
     }
 
 }

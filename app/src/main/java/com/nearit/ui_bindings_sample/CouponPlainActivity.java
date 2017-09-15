@@ -35,8 +35,8 @@ public class CouponPlainActivity extends AppCompatActivity {
         validCoupon.claims.add(validCouponClaim);
 
         Fragment couponFragment = NearITUIBindings.getInstance(this)
-                .createCouponDetailFragmentBuilder()
-                .build(validCoupon);
+                .createCouponDetailFragmentBuilder(validCoupon)
+                .build();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, couponFragment).commit();
 

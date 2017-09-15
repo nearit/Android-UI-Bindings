@@ -44,8 +44,8 @@ public class CouponsActivity extends AppCompatActivity {
                 startActivity(
                         //  Basic example with a valid coupon
                         NearITUIBindings.getInstance(getApplicationContext())
-                                .createCouponDetailIntentBuilder()
-                                .build(validCoupon));
+                                .createCouponDetailIntentBuilder(validCoupon)
+                                .build());
             }
         });
 
@@ -67,8 +67,8 @@ public class CouponsActivity extends AppCompatActivity {
                 startActivity(
                         //  Basic example with a coupon not yet valid
                         NearITUIBindings.getInstance(getApplicationContext())
-                                .createCouponDetailIntentBuilder()
-                                .build(inactiveCoupon));
+                                .createCouponDetailIntentBuilder(inactiveCoupon)
+                                .build());
             }
         });
 
@@ -91,9 +91,9 @@ public class CouponsActivity extends AppCompatActivity {
                         //  Basic example with an expired coupon
                         //  + enable tap outside the dialog to close it
                         NearITUIBindings.getInstance(getApplicationContext())
-                                .createCouponDetailIntentBuilder()
+                                .createCouponDetailIntentBuilder(expiredCoupon)
                                 .enableTapOutsideToClose()
-                                .build(expiredCoupon));
+                                .build());
             }
         });
 
@@ -115,40 +115,9 @@ public class CouponsActivity extends AppCompatActivity {
                 startActivity(
                         //  Change the default icon placeholder
                         NearITUIBindings.getInstance(getApplicationContext())
-                                .createCouponDetailIntentBuilder()
+                                .createCouponDetailIntentBuilder(customIconCoupon)
                                 .setIconPlaceholderResourceId(R.drawable.shop_circle)
-                                .build(customIconCoupon));
-            }
-        });
-
-        final Button realCoupon = (Button) findViewById(R.id.real_coupon);
-        realCoupon.setEnabled(false);
-        NearItManager.getInstance().getCoupons(new CouponListener() {
-            @Override
-            public void onCouponsDownloaded(List<Coupon> list) {
-                coupons = list;
-                realCoupon.setEnabled(true);
-                realCoupon.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(!coupons.isEmpty()){
-                            startActivity(
-                                    //  Example with a real NearIT coupon
-                                    //  this is enabled only if there is a real coupon
-                                    //  for the installation
-                                    NearITUIBindings.getInstance(CouponsActivity.this)
-                                            .createCouponDetailIntentBuilder()
-                                            .setNoSeparator()
-                                            .build(coupons.get(0))
-                            );
-                        } else Toast.makeText(CouponsActivity.this, "You have no real coupon", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-
-            @Override
-            public void onCouponDownloadError(String s) {
-
+                                .build());
             }
         });
 

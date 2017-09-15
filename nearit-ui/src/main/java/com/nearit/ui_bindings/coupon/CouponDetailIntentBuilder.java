@@ -15,9 +15,11 @@ public class CouponDetailIntentBuilder {
     private int mSeparatorDrawable;
     private boolean mNoSeparator = false;
     private boolean mEnableTapOutsideToClose = false;
+    private Coupon mCoupon;
 
-    public CouponDetailIntentBuilder(Context context) {
+    public CouponDetailIntentBuilder(Context context, Coupon coupon) {
         mContext = context;
+        mCoupon = coupon;
     }
 
     /**
@@ -54,8 +56,8 @@ public class CouponDetailIntentBuilder {
         return this;
     }
 
-    public Intent build(Coupon coupon) {
-        return NearItCouponDetailActivity.createIntent(mContext, coupon, getParams());
+    public Intent build() {
+        return NearItCouponDetailActivity.createIntent(mContext, mCoupon, getParams());
     }
 
     private CouponDetailExtraParams getParams() {
