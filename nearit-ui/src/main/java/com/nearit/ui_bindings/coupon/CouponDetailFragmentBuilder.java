@@ -12,6 +12,7 @@ public class CouponDetailFragmentBuilder {
     private Context mContext;
     private int mIconDrawable;
     private int mSeparatorDrawable;
+    private boolean mNoSeparator;
 
     public CouponDetailFragmentBuilder(Context context) {
         mContext = context;
@@ -33,6 +34,14 @@ public class CouponDetailFragmentBuilder {
         return this;
     }
 
+    /**
+     * Sets no separator
+     */
+    public CouponDetailFragmentBuilder setNoSeparator() {
+        mNoSeparator = true;
+        return this;
+    }
+
     public NearItCouponDetailFragment build(Coupon coupon) {
         return NearItCouponDetailFragment.newInstance(coupon, getParams());
     }
@@ -40,7 +49,8 @@ public class CouponDetailFragmentBuilder {
     private CouponDetailExtraParams getParams() {
         return new CouponDetailExtraParams(
                 mIconDrawable,
-                mSeparatorDrawable);
+                mSeparatorDrawable,
+                mNoSeparator);
     }
 
 }

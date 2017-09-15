@@ -13,6 +13,7 @@ public class CouponDetailIntentBuilder {
     private Context mContext;
     private int mIconDrawable;
     private int mSeparatorDrawable;
+    private boolean mNoSeparator = false;
     private boolean mEnableTapOutsideToClose = false;
 
     public CouponDetailIntentBuilder(Context context) {
@@ -36,6 +37,14 @@ public class CouponDetailIntentBuilder {
     }
 
     /**
+     * Sets no separator
+     */
+    public CouponDetailIntentBuilder setNoSeparator() {
+        mNoSeparator = true;
+        return this;
+    }
+
+    /**
      * Enables or disables tap outside the dialog to close
      * <p>
      * <p> default is false
@@ -53,6 +62,7 @@ public class CouponDetailIntentBuilder {
         return new CouponDetailExtraParams(
                 mIconDrawable,
                 mSeparatorDrawable,
+                mNoSeparator,
                 mEnableTapOutsideToClose);
     }
 

@@ -15,24 +15,27 @@ class CouponDetailExtraParams implements Parcelable {
 
     private final int iconDrawable;
     private final int separatorDrawable;
+    private final boolean noSeparator;
     private final boolean enableTapOutsideToClose;
 
-    CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean enableTapOutsideToClose) {
+    CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean enableTapOutsideToClose) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
+        this.noSeparator = noSeparator;
         this.enableTapOutsideToClose = enableTapOutsideToClose;
     }
 
-    public CouponDetailExtraParams(int iconDrawable, int separatorDrawable) {
+    CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
+        this.noSeparator = noSeparator;
         this.enableTapOutsideToClose = false;
     }
 
     /**
      * Extract CouponDetailExtraParams from an Intent.
      */
-    public static CouponDetailExtraParams fromIntent(Intent intent) {
+    static CouponDetailExtraParams fromIntent(Intent intent) {
         return intent.getParcelableExtra(ExtraConstants.EXTRA_FLOW_PARAMS);
     }
 
@@ -58,10 +61,12 @@ class CouponDetailExtraParams implements Parcelable {
         public CouponDetailExtraParams createFromParcel(Parcel in) {
             int iconDrawable = in.readInt();
             int separatorDrawable = in.readInt();
+            boolean noSeparator = in.readInt() !=0;
             boolean enableTapToClose = in.readInt() !=0;
             return new CouponDetailExtraParams(
                     iconDrawable,
                     separatorDrawable,
+                    noSeparator,
                     enableTapToClose
             );
         }
@@ -81,18 +86,23 @@ class CouponDetailExtraParams implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(iconDrawable);
         dest.writeInt(separatorDrawable);
+        dest.writeInt(noSeparator ? 1 : 0);
         dest.writeInt(enableTapOutsideToClose ? 1 : 0);
     }
 
-    public int getIconDrawable() {
+    int getIconDrawable() {
         return iconDrawable;
     }
 
-    public int getSeparatorDrawable() {
+    int getSeparatorDrawable() {
         return separatorDrawable;
     }
 
-    public boolean isEnableTapOutsideToClose() {
+    boolean isEnableTapOutsideToClose() {
         return enableTapOutsideToClose;
+    }
+
+    public boolean isNoSeparator() {
+        return noSeparator;
     }
 }

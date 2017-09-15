@@ -23,6 +23,7 @@ public class NearItCouponDetailFragment extends Fragment {
 
     private Coupon coupon;
     private int separatorDrawable = 0, iconDrawable = 0;
+    private boolean noSeparator = false;
 
     public NearItCouponDetailFragment() {
     }
@@ -45,6 +46,7 @@ public class NearItCouponDetailFragment extends Fragment {
         if (extras != null) {
             separatorDrawable = extras.getSeparatorDrawable();
             iconDrawable = extras.getIconDrawable();
+            noSeparator = extras.isNoSeparator();
         }
 
     }
@@ -59,11 +61,14 @@ public class NearItCouponDetailFragment extends Fragment {
 
         ProgressBar iconProgressBar = (ProgressBar) rootView.findViewById(R.id.coupon_icon_progress_bar);
         ImageView couponIcon = (ImageView) rootView.findViewById(R.id.coupon_icon);
-        View separator = rootView.findViewById(R.id.coupon_detail_separator);
+        ImageView separator = (ImageView) rootView.findViewById(R.id.coupon_detail_separator);
 
+        if (noSeparator) {
+            separator.setVisibility(View.GONE);
+        }
 
-        if (separatorDrawable != 0 && separator != null) {
-            separator.setBackgroundResource(separatorDrawable);
+        if (!noSeparator && separatorDrawable != 0 && separator != null) {
+            separator.setImageResource(separatorDrawable);
         }
 
         TextView couponName = (TextView) rootView.findViewById(R.id.coupon_name);
@@ -83,7 +88,7 @@ public class NearItCouponDetailFragment extends Fragment {
             couponIcon.setBackgroundResource(iconDrawable);
         }
 
-        if(coupon.getIconSet() != null) {
+        if (coupon.getIconSet() != null) {
             new LoadImageFromURL(couponIcon, iconProgressBar).execute(coupon.getIconSet().getFullSize());
         }
 
