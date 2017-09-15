@@ -1,6 +1,7 @@
 package com.nearit.ui_bindings.permissions;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -19,18 +20,21 @@ public class PermissionsRequestExtraParams implements Parcelable {
     private final boolean invisibleLayoutMode;
     private final boolean noBeacon;
     private final boolean nonBlockingBeacon;
+    private final int headerDrawable;
 
     PermissionsRequestExtraParams(
             boolean enableTapToClose,
             boolean autoStartRadar,
             boolean invisibleLayoutMode,
             boolean noBeacon,
-            boolean nonBlockingBeacon) {
+            boolean nonBlockingBeacon,
+            int headerDrawable) {
         this.enableTapToClose = enableTapToClose;
         this.autoStartRadar = autoStartRadar;
         this.invisibleLayoutMode = invisibleLayoutMode;
         this.noBeacon = noBeacon;
         this.nonBlockingBeacon = nonBlockingBeacon;
+        this.headerDrawable = headerDrawable;
     }
 
     /**
@@ -64,6 +68,7 @@ public class PermissionsRequestExtraParams implements Parcelable {
         dest.writeInt(invisibleLayoutMode ? 1 : 0);
         dest.writeInt(noBeacon ? 1 : 0);
         dest.writeInt(nonBlockingBeacon ? 1 : 0);
+        dest.writeInt(headerDrawable);
     }
 
     @Override
@@ -79,13 +84,15 @@ public class PermissionsRequestExtraParams implements Parcelable {
             boolean invisibleLayoutMode = in.readInt() != 0;
             boolean noBeacon = in.readInt() != 0;
             boolean nonBlockingBeacon = in.readInt() != 0;
+            int headerDrawable = in.readInt();
 
             return new PermissionsRequestExtraParams(
                     enableTapToClose,
                     autoStartRadar,
                     invisibleLayoutMode,
                     noBeacon,
-                    nonBlockingBeacon);
+                    nonBlockingBeacon,
+                    headerDrawable);
         }
 
         @Override
@@ -112,5 +119,9 @@ public class PermissionsRequestExtraParams implements Parcelable {
 
     public boolean isNonBlockingBeacon() {
         return nonBlockingBeacon;
+    }
+
+    public int getHeaderDrawable() {
+        return headerDrawable;
     }
 }

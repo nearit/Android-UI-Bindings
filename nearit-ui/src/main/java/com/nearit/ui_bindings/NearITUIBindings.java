@@ -11,10 +11,6 @@ public class NearITUIBindings {
 
     private Context mContext;
 
-    public static void init() {
-        NearItManager.getInstance();
-    }
-
     private NearITUIBindings(Context context) {
         mContext = context;
     }
