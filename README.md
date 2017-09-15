@@ -183,7 +183,7 @@ Optionally, you can display the coupon in your custom Activity by adding a Fragm
         .build(coupon);
 ```
 
-Even if our pop-up dialog is well designed, you can try to do a better job by overriding resources (see [UI Customization](#ui-customization)). As the separator is a PNG file you may want to replace it.
+Even if our pop-up dialog is well designed, you can try to do a better job by overriding resources (see [UI Customization](#ui-customization-1)). As the separator is a PNG file you may want to replace it.
 Methods `setSeparatorResourceId(R.drawable.your_separator_drawable)` and `setNoSeparator()` are available for both of the builders.
 
 ## UI Customization
