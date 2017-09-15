@@ -45,5 +45,5 @@ Even if our pop-up dialog is well designed, you can try to do a better job by ov
 
 Methods `setSeparatorResourceId(R.drawable.your_separator_drawable)` and `setNoSeparator()` are available for both of the builders.
 
-##UI Customization
+## UI Customization
 
