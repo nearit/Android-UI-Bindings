@@ -32,7 +32,7 @@ import static com.nearit.ui_bindings.coupon.CouponConstants.VALID;
 
 public class CouponDetailTopSection extends RelativeLayout {
 
-    SimpleDateFormat formatDate = new SimpleDateFormat(getResources().getString(R.string.nearit_ui_date_pretty_format), Locale.US);
+    SimpleDateFormat formatDate = new SimpleDateFormat(getResources().getString(R.string.nearit_ui_coupon_date_pretty_format), Locale.US);
 
     @Nullable
     private TextView notValidTextView;
@@ -130,7 +130,7 @@ public class CouponDetailTopSection extends RelativeLayout {
                 }
                 if (notValidTextView != null) {
                     notValidTextView.setVisibility(VISIBLE);
-                    notValidTextView.setText(getResources().getString(R.string.nearit_ui_expired_coupon_text));
+                    notValidTextView.setText(getResources().getString(R.string.nearit_ui_coupon_expired_text));
                     notValidTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_expired_coupon_color));
                 }
 
@@ -154,7 +154,7 @@ public class CouponDetailTopSection extends RelativeLayout {
                 }
                 if (notValidTextView != null) {
                     notValidTextView.setVisibility(VISIBLE);
-                    notValidTextView.setText(getResources().getString(R.string.nearit_ui_inactive_coupon_text));
+                    notValidTextView.setText(getResources().getString(R.string.nearit_ui_coupon_inactive_text));
                     notValidTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_inactive_coupon_color));
                 }
 
@@ -179,7 +179,7 @@ public class CouponDetailTopSection extends RelativeLayout {
                 validityPeriodTextView.setText(formatDate.format(coupon.getRedeemedAtDate()));
                 if (notValidTextView != null) {
                     notValidTextView.setVisibility(VISIBLE);
-                    notValidTextView.setText(getResources().getString(R.string.nearit_ui_redeemed_coupon_text));
+                    notValidTextView.setText(getResources().getString(R.string.nearit_ui_coupon_redeemed_text));
                     notValidTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_expired_coupon_color));
                 }
 
