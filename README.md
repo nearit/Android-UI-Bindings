@@ -15,7 +15,6 @@ where, `coupon` is an instance of NearIT SDK `Coupon` class. Further information
 ![NearIT-UI active coupon dialog](valid_coupon.png)
 ![NearIT-UI inactive coupon dialog](inactive_coupon.png)
 ![NearIT-UI expired coupon dialog](expired_coupon.png)
-![NearIT-UI custom icon coupon dialog](custom_icon_coupon.png)
 
 #### Advanced examples
 NearIT-UI is shipped with our brand as icon placeholder. If you need to replace it just add one line of code:
@@ -30,6 +29,8 @@ NearIT-UI is shipped with our brand as icon placeholder. If you need to replace 
 ```
 
 Please, keep in mind that the icon should be a square: a different aspect-ratio can potentially break the layout.
+
+![NearIT-UI custom icon coupon dialog](custom_icon_coupon.png)
 
 Optionally, you can display the coupon in your custom Activity by adding a Fragment to it. You can get a Fragment via another builder:
 
