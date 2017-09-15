@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="25dp"
@@ -13,7 +13,7 @@
         android:id="@+id/feedback_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:text="1 Settembre 2017"
         android:textAlignment="center"
         android:textColor="@color/nearit_ui_warm_grey"
@@ -24,16 +24,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="29dp"
+        android:gravity="center"
         android:text="Testo di spiegazione dei permessi. Perché li chiediamo e quali vantaggi?"
-        android:textAlignment="center"
         android:textColor="@color/nearit_ui_black"
         android:textSize="15sp" />
 
     <!--<com.nearit.ui_bindings.feedback.views.NearItRatingBar-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:progressDrawable=""-->
-        <!--android:layout_marginTop="30dp"/>-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:progressDrawable=""-->
+    <!--android:layout_marginTop="30dp"/>-->
 
     <RatingBar
         android:id="@+id/feedback_rating"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:numStars="5"
-        android:stepSize="0.1" />
+        android:stepSize="1" />
 
     <LinearLayout
         android:id="@+id/feedback_comment_section"
@@ -49,49 +49,58 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/feedback_comment_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Lascia un commento (opzionale)"
-            android:textAlignment="center"
             android:textColor="@color/nearit_ui_warm_grey"
             android:textSize="13sp" />
 
         <EditText
             android:id="@+id/feedback_comment_box"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/nearit_ui_edittext_background" />
-
-        <TextView
-            android:id="@+id/feedback_error_alert"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Oops, c’è stato un errore!"
-            android:textAlignment="center"
-            android:textColor="@color/nearit_ui_error_color"
-            android:textSize="15sp" />
-
-        <com.nearit.ui_bindings.views.NearItUIButton
-            android:id="@+id/feedback_send_comment_button"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="25dp"
-            app:genericButtonText="SEND" />
-
+            android:layout_marginBottom="23dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/nearit_ui_edittext_background"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:lines="3"
+            android:minLines="3"
+            android:scrollbars="vertical" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/feedback_error_alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginBottom="13dp"
+        android:layout_marginTop="23dp"
+        android:gravity="center"
+        android:text="Oops, c’è stato un errore!"
+        android:textColor="@color/nearit_ui_error_color"
+        android:textSize="15sp" />
+
+    <com.nearit.ui_bindings.views.NearItUIButton
+        android:id="@+id/feedback_send_comment_button"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="45dp"
+        app:genericButtonText="SEND" />
 
     <TextView
         android:id="@+id/feedback_dismiss_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="No, grazie"
-        android:textAlignment="center"
         android:textColor="@color/nearit_ui_warm_grey"
         android:textSize="15sp" />
 
