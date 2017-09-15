@@ -183,7 +183,7 @@ Optionally, you can display the coupon in your custom Activity by adding a Fragm
         .build(coupon);
 ```
 
-Even if our pop-up dialog is well designed, you can try to do a better job by overriding resources (see [UI Customization](##ui-customization)). As the separator is a PNG file you may want to replace it.
+Even if our pop-up dialog is well designed, you can try to do a better job by overriding resources (see [UI Customization](#ui-customization)). As the separator is a PNG file you may want to replace it.
 Methods `setSeparatorResourceId(R.drawable.your_separator_drawable)` and `setNoSeparator()` are available for both of the builders.
 
 ## UI Customization
@@ -211,4 +211,4 @@ The same is for colors. Please have a look at this `res/values/colors.xml`
     <!-- -->
 ```
 
-The background of the coupon is composed by two sections (and a separator), the overriding of the color resource `@color/nearit_ui_coupon_background_color` will change the tint of both (not the separator, see the last paragraph of [this](####advanced-examples)).
+The background of the coupon is composed by two sections (and a separator), the overriding of the color resource `@color/nearit_ui_coupon_background_color` will change the tint of both (not the separator, see the last paragraph of [this](#advanced-examples)).
