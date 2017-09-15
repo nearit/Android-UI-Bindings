@@ -12,7 +12,10 @@ If you want your app to display a coupon in a beautiful pop-up dialog, use this 
 
 where, `coupon` is an instance of NearIT SDK `Coupon` class. Further information on coupons and other in-app content can be found [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/).
 
-![NearIT-UI coupon dialog](demo_coupon.gif)
+![NearIT-UI active coupon dialog](active_coupon.png)
+![NearIT-UI inactive coupon dialog](inactive_coupon.png)
+![NearIT-UI expired coupon dialog](expired_coupon.png)
+![NearIT-UI custom icon coupon dialog](custom_icon_coupon.png)
 
 #### Advanced examples
 NearIT-UI is shipped with our brand as icon placeholder. If you need to replace it just add one line of code:
@@ -38,6 +41,9 @@ Optionally, you can display the coupon in your custom Activity by adding a Fragm
         .build(coupon);
 ```
 
-Even if our pop-up dialog is well designed, you can try to do a better job by overriding resources (see LINK TO "UI CUSTOMIZATION"). As the separator is a PNG file you may want to replace it.
+Even if our pop-up dialog is well designed, you can try to do a better job by overriding resources (see [UI Customization](##UI Customization")). As the separator is a PNG file you may want to replace it.
 
-Method `setSeparatorResourceId(R.drawable.your_separator_drawable)` is available for both of our builders.
+Methods `setSeparatorResourceId(R.drawable.your_separator_drawable)` and `setNoSeparator()` are available for both of the builders.
+
+##UI Customization
+
