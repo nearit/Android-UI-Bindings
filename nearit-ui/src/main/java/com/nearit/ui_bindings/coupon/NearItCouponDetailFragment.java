@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.coupon.views.CouponDetailTopSection;
+import com.nearit.ui_bindings.utils.LoadImageFromURL;
 
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
@@ -82,7 +83,10 @@ public class NearItCouponDetailFragment extends Fragment {
             couponIcon.setBackgroundResource(iconDrawable);
         }
 
-//        new LoadImageFromURL(couponIcon, iconProgressBar).execute(coupon.getIconSet().getFullSize());
+        if(coupon.getIconSet() != null) {
+            new LoadImageFromURL(couponIcon, iconProgressBar).execute(coupon.getIconSet().getFullSize());
+        }
+
 
         return rootView;
     }
