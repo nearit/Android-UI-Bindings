@@ -12,7 +12,7 @@ If you want your app to display a coupon in a beautiful pop-up dialog, use this 
 
 where, `coupon` is an instance of NearIT SDK `Coupon` class. Further information on coupons and other in-app content can be found [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/).
 
-![NearIT-UI active coupon dialog](active_coupon.png)
+![NearIT-UI active coupon dialog](valid_coupon.png)
 ![NearIT-UI inactive coupon dialog](inactive_coupon.png)
 ![NearIT-UI expired coupon dialog](expired_coupon.png)
 ![NearIT-UI custom icon coupon dialog](custom_icon_coupon.png)
