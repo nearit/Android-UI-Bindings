@@ -21,6 +21,10 @@
             android:name="near_api_key"
             android:value="@string/near_api_key" />
 
+        <activity android:name=".CouponsActivity" />
+        <activity android:name=".PermissionsActivity" />
+        <activity android:name=".CouponPlainActivity"
+            android:label="Coupon detail activity"/>
     </application>
 
 </manifest>

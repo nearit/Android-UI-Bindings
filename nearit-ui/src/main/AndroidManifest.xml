@@ -3,12 +3,16 @@
     package="com.nearit.ui_bindings">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application>
         <activity
             android:name=".permissions.NearItPermissionsActivity"
-            android:exported="false"
-            android:theme="@style/NearItUIPermissionsDialog" />
+            android:theme="@style/NearItUIPermissionsDialog"
+            android:exported="false" />
+
+        <activity android:name=".coupon.NearItCouponDetailActivity"
+            android:theme="@style/NearItUICouponDetailDialog"
+            android:exported="false" />
         <activity
             android:name=".feedback.NearItFeedbackActivity"
             android:theme="@style/NearItUIFeedbackDialog"/>

@@ -4,4 +4,15 @@
     <string name="nearit_ui_close_permissions_text">Close</string>
     <string name="nearit_ui_bluetooth">BLUETOOTH</string>
     <string name="nearit_ui_location">LOCATION</string>
+
+    <string name="nearit_ui_coupon_expired_text">Expired coupon</string>
+    <string name="nearit_ui_coupon_inactive_text">Inactive coupon</string>
+    <string name="nearit_ui_coupon_redeemed_text">Already used coupon</string>
+    <string name="nearit_ui_coupon_validity_label_valid">Validity:</string>
+    <string name="nearit_ui_coupon_validity_label_valid_no_period">Valid</string>
+    <string name="nearit_ui_coupon_validity_label_redeemed">Redeemed at:</string>
+    <string name="nearit_ui_coupon_validity_period_from">from %1$s</string>
+    <string name="nearit_ui_coupon_validity_period_until">until %2$s</string>
+    <string name="nearit_ui_coupon_validity_period_from_to">from %1$s to %2$s</string>
+    <string name="nearit_ui_coupon_date_pretty_format">MM-dd-yyyy</string>
 </resources>

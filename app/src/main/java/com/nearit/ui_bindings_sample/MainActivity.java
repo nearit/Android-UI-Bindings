@@ -21,11 +21,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button feedback = (Button) findViewById(R.id.feedback_demo);
-        feedback.setOnClickListener(new View.OnClickListener() {
+        Button coupon = (Button) findViewById(R.id.coupon_demo);
+        coupon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, FeedbackActivity.class));
+                startActivity(new Intent(MainActivity.this, CouponsActivity.class));
             }
         });
 

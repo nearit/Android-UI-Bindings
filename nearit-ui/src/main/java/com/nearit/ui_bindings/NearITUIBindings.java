@@ -2,8 +2,12 @@ package com.nearit.ui_bindings;
 
 import android.content.Context;
 
+import com.nearit.ui_bindings.coupon.CouponDetailFragmentBuilder;
+import com.nearit.ui_bindings.coupon.CouponDetailIntentBuilder;
+
 import com.nearit.ui_bindings.feedback.FeedbackIntentBuilder;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
+import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 
@@ -21,6 +25,14 @@ public class NearITUIBindings {
 
     public PermissionsRequestIntentBuilder createPermissionRequestIntentBuilder() {
         return new PermissionsRequestIntentBuilder(mContext);
+    }
+
+    public CouponDetailIntentBuilder createCouponDetailIntentBuilder(Coupon coupon) {
+        return new CouponDetailIntentBuilder(mContext, coupon);
+    }
+
+    public CouponDetailFragmentBuilder createCouponDetailFragmentBuilder(Coupon coupon) {
+        return new CouponDetailFragmentBuilder(mContext, coupon);
     }
 
     public FeedbackIntentBuilder createFeedbackIntentBuilder() {

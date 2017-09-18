@@ -13,7 +13,7 @@ import com.nearit.ui_bindings.ExtraConstants;
  * Created by Federico Boschini on 29/08/17.
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-public class PermissionsRequestIntentExtras implements Parcelable {
+public class PermissionsRequestExtraParams implements Parcelable {
 
     private final boolean enableTapToClose;
     private final boolean autoStartRadar;
@@ -22,7 +22,7 @@ public class PermissionsRequestIntentExtras implements Parcelable {
     private final boolean nonBlockingBeacon;
     private final int headerDrawable;
 
-    PermissionsRequestIntentExtras(
+    PermissionsRequestExtraParams(
             boolean enableTapToClose,
             boolean autoStartRadar,
             boolean invisibleLayoutMode,
@@ -38,21 +38,21 @@ public class PermissionsRequestIntentExtras implements Parcelable {
     }
 
     /**
-     * Extract PermissionsRequestIntentExtras from an Intent.
+     * Extract PermissionsRequestExtraParams from an Intent.
      */
-    public static PermissionsRequestIntentExtras fromIntent(Intent intent) {
+    public static PermissionsRequestExtraParams fromIntent(Intent intent) {
         return intent.getParcelableExtra(ExtraConstants.EXTRA_FLOW_PARAMS);
     }
 
     /**
-     * Extract PermissionsRequestIntentExtras from a Bundle.
+     * Extract PermissionsRequestExtraParams from a Bundle.
      */
-    public static PermissionsRequestIntentExtras fromBundle(Bundle bundle) {
+    public static PermissionsRequestExtraParams fromBundle(Bundle bundle) {
         return bundle.getParcelable(ExtraConstants.EXTRA_FLOW_PARAMS);
     }
 
     /**
-     * Create a bundle containing this PermissionsRequestIntentExtras object as {@link
+     * Create a bundle containing this PermissionsRequestExtraParams object as {@link
      * ExtraConstants#EXTRA_FLOW_PARAMS}.
      */
     public Bundle toBundle() {
@@ -76,9 +76,9 @@ public class PermissionsRequestIntentExtras implements Parcelable {
         return 0;
     }
 
-    public static final Creator<PermissionsRequestIntentExtras> CREATOR = new Creator<PermissionsRequestIntentExtras>() {
+    public static final Creator<PermissionsRequestExtraParams> CREATOR = new Creator<PermissionsRequestExtraParams>() {
         @Override
-        public PermissionsRequestIntentExtras createFromParcel(Parcel in) {
+        public PermissionsRequestExtraParams createFromParcel(Parcel in) {
             boolean enableTapToClose = in.readInt() != 0;
             boolean autoStartRadar = in.readInt() != 0;
             boolean invisibleLayoutMode = in.readInt() != 0;
@@ -86,7 +86,7 @@ public class PermissionsRequestIntentExtras implements Parcelable {
             boolean nonBlockingBeacon = in.readInt() != 0;
             int headerDrawable = in.readInt();
 
-            return new PermissionsRequestIntentExtras(
+            return new PermissionsRequestExtraParams(
                     enableTapToClose,
                     autoStartRadar,
                     invisibleLayoutMode,
@@ -96,8 +96,8 @@ public class PermissionsRequestIntentExtras implements Parcelable {
         }
 
         @Override
-        public PermissionsRequestIntentExtras[] newArray(int size) {
-            return new PermissionsRequestIntentExtras[size];
+        public PermissionsRequestExtraParams[] newArray(int size) {
+            return new PermissionsRequestExtraParams[size];
         }
     };
 
