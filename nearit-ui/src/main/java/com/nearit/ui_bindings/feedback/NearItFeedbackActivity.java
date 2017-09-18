@@ -18,10 +18,19 @@ public class NearItFeedbackActivity extends AppCompatActivity {
     @Nullable
     RatingBar ratingBar;
 
+    private boolean isEnableTapToClose = false;
+    private FeedbackRequestIntentExtras extras;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nearit_ui_activity_feedback);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
+            extras = FeedbackRequestIntentExtras.fromIntent(intent);
+            isEnableTapToClose = extras.isEnableTapOutsideToClose();
+        }
 
         ratingBar = (RatingBar) findViewById(R.id.feedback_rating);
 
@@ -46,10 +55,10 @@ public class NearItFeedbackActivity extends AppCompatActivity {
         getWindow().getDecorView().getHitRect(dialogBounds);
 
         if (!dialogBounds.contains((int) ev.getX(), (int) ev.getY())) {
-//            if (!isEnableTapToClose) {
-//                return true;
-//            }
-//            finalCheck();
+            if (!isEnableTapToClose) {
+                return true;
+            }
+            finish();
         }
         return super.dispatchTouchEvent(ev);
     }

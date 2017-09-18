@@ -13,11 +13,12 @@ import com.nearit.ui_bindings.ExtraConstants;
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 public class FeedbackRequestIntentExtras implements Parcelable {
-    private final boolean hideDate, enableTextResponse;
+    private final boolean hideDate, enableTextResponse, enableTapOutsideToClose;
 
-    FeedbackRequestIntentExtras(boolean hideDate, boolean enableTextResponse) {
+    FeedbackRequestIntentExtras(boolean hideDate, boolean enableTextResponse, boolean enableTapOutsideToClose) {
         this.hideDate = hideDate;
         this.enableTextResponse = enableTextResponse;
+        this.enableTapOutsideToClose = enableTapOutsideToClose;
     }
 
     /**
@@ -48,6 +49,7 @@ public class FeedbackRequestIntentExtras implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(hideDate ? 1 : 0);
         dest.writeInt(enableTextResponse ? 1 : 0);
+        dest.writeInt(enableTapOutsideToClose ? 1 : 0);
     }
 
     @Override
@@ -60,9 +62,11 @@ public class FeedbackRequestIntentExtras implements Parcelable {
         public FeedbackRequestIntentExtras createFromParcel(Parcel in) {
             boolean hideDate = in.readInt() != 0;
             boolean enableTextResponse = in.readInt() != 0;
+            boolean enableTapOutsideToClose = in.readInt() != 0;
             return new FeedbackRequestIntentExtras(
                     hideDate,
-                    enableTextResponse
+                    enableTextResponse,
+                    enableTapOutsideToClose
             );
         }
 
@@ -78,5 +82,9 @@ public class FeedbackRequestIntentExtras implements Parcelable {
 
     public boolean isEnableTextResponse() {
         return enableTextResponse;
+    }
+
+    public boolean isEnableTapOutsideToClose() {
+        return enableTapOutsideToClose;
     }
 }

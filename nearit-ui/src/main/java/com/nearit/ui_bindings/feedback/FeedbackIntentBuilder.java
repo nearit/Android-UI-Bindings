@@ -10,6 +10,7 @@ public class FeedbackIntentBuilder {
     private Context mContext;
     private boolean mHideDate;
     private boolean mEnableTextResponse;
+    private boolean mEnableTapOutside;
 
     public FeedbackIntentBuilder(Context context) {
         mContext = context;
@@ -25,6 +26,11 @@ public class FeedbackIntentBuilder {
         return this;
     }
 
+    public FeedbackIntentBuilder enableTapOutsideToClose() {
+        this.mEnableTapOutside = true;
+        return this;
+    }
+
     public Intent build() {
         return NearItFeedbackActivity.createIntent(mContext, getParams());
     }
@@ -32,7 +38,8 @@ public class FeedbackIntentBuilder {
     private FeedbackRequestIntentExtras getParams() {
         return new FeedbackRequestIntentExtras(
                 mHideDate,
-                mEnableTextResponse
+                mEnableTextResponse,
+                mEnableTapOutside
         );
     }
 
