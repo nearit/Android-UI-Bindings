@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 
+import it.near.sdk.reactions.feedbackplugin.model.Feedback;
+
 public class FeedbackActivity extends AppCompatActivity {
 
     @Override
@@ -14,13 +16,17 @@ public class FeedbackActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
 
+        final FeedbackFactory feedbackFactory = new FeedbackFactory();
+
         Button completeFeedback = (Button) findViewById(R.id.complete);
         completeFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //  In a real scenario the question is provided by the NearIT SDK
+                Feedback feedback = feedbackFactory.getFeedback();
                 startActivity(
                         NearITUIBindings.getInstance(FeedbackActivity.this)
-                                .createFeedbackIntentBuilder()
+                                .createFeedbackIntentBuilder(feedback)
                                 .build()
                 );
             }
