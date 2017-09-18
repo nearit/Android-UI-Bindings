@@ -82,8 +82,8 @@ public class PermissionsRequestIntentBuilder {
         return NearItPermissionsActivity.createIntent(mContext, getParams());
     }
 
-    private PermissionsRequestIntentExtras getParams() {
-        return new PermissionsRequestIntentExtras(
+    private PermissionsRequestExtraParams getParams() {
+        return new PermissionsRequestExtraParams(
                 mEnableTapOutsideToClose,
                 mRadarAutoStart,
                 mInvisibleLayoutMode,

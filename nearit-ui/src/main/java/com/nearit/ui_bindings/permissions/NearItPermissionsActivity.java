@@ -74,7 +74,7 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
 
         Intent intent = getIntent();
         if (intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
-            PermissionsRequestIntentExtras params = PermissionsRequestIntentExtras.fromIntent(intent);
+            PermissionsRequestExtraParams params = PermissionsRequestExtraParams.fromIntent(intent);
             isEnableTapToClose = params.isEnableTapToClose();
             isInvisibleLayoutMode = params.isInvisibleLayoutMode();
             isNoBeacon = params.isNoBeacon();
@@ -105,7 +105,7 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
         }
     }
 
-    public static Intent createIntent(Context context, PermissionsRequestIntentExtras params) {
+    public static Intent createIntent(Context context, PermissionsRequestExtraParams params) {
         return new Intent(context, NearItPermissionsActivity.class).putExtra(ExtraConstants.EXTRA_FLOW_PARAMS, params);
     }
 
