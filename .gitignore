@@ -12,6 +12,3 @@ local.properties
 
 app/src/main/res/drawable/
 \.idea/
-app/src/main/res/drawable-xxhdpi/
-app/src/main/res/drawable-xhdpi/
-app/src/main/res/drawable-hdpi/
