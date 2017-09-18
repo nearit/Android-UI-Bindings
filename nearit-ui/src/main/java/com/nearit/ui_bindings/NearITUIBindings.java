@@ -35,8 +35,8 @@ public class NearITUIBindings {
         return new CouponDetailFragmentBuilder(mContext, coupon);
     }
 
-    public FeedbackIntentBuilder createFeedbackIntentBuilder() {
-        return new FeedbackIntentBuilder(mContext);
+    public FeedbackIntentBuilder createFeedbackIntentBuilder(Feedback feedback) {
+        return new FeedbackIntentBuilder(mContext, feedback);
     }
 
 //    public FeedbackFragmentBuilder createFeedbackFragmentBuilder(Feedback feedback) {

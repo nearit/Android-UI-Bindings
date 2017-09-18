@@ -35,19 +35,29 @@
     <!--android:progressDrawable=""-->
     <!--android:layout_marginTop="30dp"/>-->
 
-    <RatingBar
-        android:id="@+id/feedback_rating"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:numStars="5"
-        android:stepSize="1" />
+        android:gravity="center_horizontal">
+
+        <RatingBar
+            android:id="@+id/feedback_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginBottom="8dp"
+            android:progressDrawable="@drawable/nearit_ui_rating_bar"
+            android:max="5"
+            android:numStars="5"
+            android:stepSize="1" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/feedback_comment_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="22dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:visibility="gone">
@@ -79,19 +89,18 @@
         android:id="@+id/feedback_error_alert"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_marginBottom="13dp"
-        android:layout_marginTop="23dp"
         android:gravity="center"
         android:text="Oops, c’è stato un errore!"
         android:textColor="@color/nearit_ui_error_color"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:visibility="gone" />
 
     <com.nearit.ui_bindings.views.NearItUIButton
         android:id="@+id/feedback_send_comment_button"
         android:layout_width="match_parent"
-        android:visibility="gone"
         android:layout_height="45dp"
+        android:visibility="gone"
         app:genericButtonText="SEND" />
 
     <TextView

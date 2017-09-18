@@ -16,7 +16,6 @@ import com.nearit.ui_bindings.R;
 public class NearItUIButton extends RelativeLayout {
 
     private TextView text;
-
     private String buttonText;
 
     public NearItUIButton(Context context) {
@@ -57,6 +56,14 @@ public class NearItUIButton extends RelativeLayout {
         this.buttonText = buttonText;
         invalidate();
         requestLayout();
+    }
+
+    public void setChecked() {
+        this.setActivated(true);
+    }
+
+    public void setUnchecked() {
+        this.setActivated(false);
     }
 
     @Override

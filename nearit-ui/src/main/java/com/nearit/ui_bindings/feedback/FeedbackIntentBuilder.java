@@ -3,17 +3,21 @@ package com.nearit.ui_bindings.feedback;
 import android.content.Context;
 import android.content.Intent;
 
+import it.near.sdk.reactions.feedbackplugin.model.Feedback;
+
 /**
  * Created by Federico Boschini on 29/08/17.
  */
 public class FeedbackIntentBuilder {
     private Context mContext;
+    private Feedback mFeedback;
     private boolean mHideDate;
     private boolean mEnableTextResponse;
     private boolean mEnableTapOutside;
 
-    public FeedbackIntentBuilder(Context context) {
+    public FeedbackIntentBuilder(Context context, Feedback feedback) {
         mContext = context;
+        mFeedback = feedback;
     }
 
     public FeedbackIntentBuilder hideDate() {
@@ -32,7 +36,7 @@ public class FeedbackIntentBuilder {
     }
 
     public Intent build() {
-        return NearItFeedbackActivity.createIntent(mContext, getParams());
+        return NearItFeedbackActivity.createIntent(mContext, mFeedback, getParams());
     }
 
     private FeedbackRequestIntentExtras getParams() {
