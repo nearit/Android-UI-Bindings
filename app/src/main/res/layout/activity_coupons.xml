@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.nearit.ui_bindings_sample.CouponsActivity">
+
+    <Button
+        android:id="@+id/valid_coupon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valid Coupon" />
+
+    <Button
+        android:id="@+id/inactive_coupon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inactive Coupon" />
+
+    <Button
+        android:id="@+id/expired_coupon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Expired Coupon" />
+
+    <Button
+        android:id="@+id/custom_icon_coupon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Custom Icon Coupon" />
+
+    <Button
+        android:id="@+id/plain_coupon_activity"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coupon in activity"/>
+
+
+</LinearLayout>

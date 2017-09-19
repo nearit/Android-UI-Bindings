@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="nearit_ui_error_color">#e54d4c</color>
-    <color name="nearit_ui_expired_coupon_color">#d0011b</color>
     <color name="nearit_ui_black">#333333</color>
-    <color name="nearit_ui_valid_coupon_color">#68c600</color>
     <color name="nearit_ui_white">#f2f2f2</color>
     <color name="nearit_ui_real_white">#ffffff</color>
     <color name="nearit_ui_warm_grey">#777777</color>
     <color name="nearit_ui_black_25">#40000000</color>
+    <color name="nearit_ui_black_35">#59333333</color>
+    <color name="nearit_ui_valid_green">#68c600</color>
+    <color name="nearit_ui_expired_red">#FF3434</color>
+    <color name="nearit_ui_inactive_orange">#FC8C2A</color>
+    <color name="nearit_ui_transparent">#00000000</color>
 
     <color name="nearit_ui_snackbar_background_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_permissions_activity_background_color">@color/nearit_ui_real_white</color>
@@ -16,4 +19,17 @@
     <color name="nearit_ui_permission_not_given_button_background_color">@color/nearit_ui_white</color>
     <color name="nearit_ui_permission_not_given_button_text_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_permissions_text_color">@color/nearit_ui_warm_grey</color>
+
+    <color name="nearit_ui_coupon_detail_coupon_name_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_coupon_detail_coupon_value_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_coupon_detail_coupon_description_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_coupon_detail_coupon_validity_period_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_coupon_detail_coupon_serial">@color/nearit_ui_black</color>
+    <color name="nearit_ui_coupon_detail_disabled_text_color">@color/nearit_ui_black_35</color>
+    <color name="nearit_ui_coupon_detail_valid_coupon_color">@color/nearit_ui_valid_green</color>
+    <color name="nearit_ui_coupon_detail_expired_coupon_color">@color/nearit_ui_expired_red</color>
+    <color name="nearit_ui_coupon_detail_inactive_coupon_color">@color/nearit_ui_inactive_orange</color>
+    <color name="nearit_ui_coupon_detail_activity_container_background_color">@color/nearit_ui_transparent</color>
+    <color name="nearit_ui_coupon_background_color">@color/nearit_ui_real_white</color>
+
 </resources>
