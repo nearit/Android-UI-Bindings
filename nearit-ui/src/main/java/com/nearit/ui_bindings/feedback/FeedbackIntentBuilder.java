@@ -12,7 +12,8 @@ public class FeedbackIntentBuilder {
     private Context mContext;
     private Feedback mFeedback;
     private boolean mHideDate;
-    private boolean mEnableTextResponse;
+    private boolean mHideTextResponse;
+    private boolean mEnableTextResponseOnStart;
     private boolean mEnableTapOutside;
 
     public FeedbackIntentBuilder(Context context, Feedback feedback) {
@@ -25,8 +26,13 @@ public class FeedbackIntentBuilder {
         return this;
     }
 
-    public FeedbackIntentBuilder enableTextResponse() {
-        this.mEnableTextResponse = true;
+    public FeedbackIntentBuilder hideTextResponse() {
+        this.mHideTextResponse = true;
+        return this;
+    }
+
+    public FeedbackIntentBuilder enableTextResponseOnStart() {
+        this.mEnableTextResponseOnStart = true;
         return this;
     }
 
@@ -42,7 +48,8 @@ public class FeedbackIntentBuilder {
     private FeedbackRequestIntentExtras getParams() {
         return new FeedbackRequestIntentExtras(
                 mHideDate,
-                mEnableTextResponse,
+                mHideTextResponse,
+                mEnableTextResponseOnStart,
                 mEnableTapOutside
         );
     }

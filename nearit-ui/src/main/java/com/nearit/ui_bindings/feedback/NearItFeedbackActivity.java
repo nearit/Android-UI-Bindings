@@ -31,13 +31,14 @@ public class NearItFeedbackActivity extends AppCompatActivity {
     @Nullable
     NearItUIButton sendButton;
     @Nullable
-    TextView closeButton;
+    TextView closeButton, errorText, dateText;
     @Nullable
     EditText commentBox;
-    @Nullable
-    TextView errorText;
 
     private boolean isEnableTapToClose = false;
+    private boolean isHideDate = false;
+    private boolean isHideTextResponse = false;
+    private boolean isEnableTextResponseOnStart = false;
     private FeedbackRequestIntentExtras extras;
     private float userRating;
     private String userComment;
@@ -51,16 +52,29 @@ public class NearItFeedbackActivity extends AppCompatActivity {
         if (intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
             extras = FeedbackRequestIntentExtras.fromIntent(intent);
             isEnableTapToClose = extras.isEnableTapOutsideToClose();
+            isHideDate = extras.isHideDate();
+            isHideTextResponse = extras.isHideTextResponse();
+            isEnableTextResponseOnStart = extras.isEnableTextResponseOnStart();
         }
 
         final Feedback feedback = getIntent().getParcelableExtra(ExtraConstants.FEEDBACK_EXTRA);
 
+        dateText = (TextView) findViewById(R.id.feedback_date);
         ratingBar = (RatingBar) findViewById(R.id.feedback_rating);
         commentSection = (LinearLayout) findViewById(R.id.feedback_comment_section);
         sendButton = (NearItUIButton) findViewById(R.id.feedback_send_comment_button);
         closeButton = (TextView) findViewById(R.id.feedback_dismiss_text);
         commentBox = (EditText) findViewById(R.id.feedback_comment_box);
         errorText = (TextView) findViewById(R.id.feedback_error_alert);
+
+        if(dateText != null) {
+            if(isHideDate) {
+                dateText.setVisibility(View.GONE);
+            }
+//            else {
+//                dateText.setText("");
+//            }
+        }
 
         if (closeButton != null) {
             closeButton.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +95,7 @@ public class NearItFeedbackActivity extends AppCompatActivity {
 
                     userRating = rating;
 
-                    if (commentSection != null) {
+                    if (!isHideTextResponse && commentSection != null) {
                         commentSection.setVisibility(View.VISIBLE);
                     }
                     if (sendButton != null) {
