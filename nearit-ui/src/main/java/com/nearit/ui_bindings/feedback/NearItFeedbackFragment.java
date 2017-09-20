@@ -115,7 +115,6 @@ public class NearItFeedbackFragment extends Fragment {
                     }
 
                     if (sendButton != null) {
-//                        sendButton.noCommentBox(hideTextResponse);
                         sendButton.setVisibility(View.VISIBLE);
                     }
                 }

@@ -83,16 +83,6 @@ public class NearItUIFeedbackButton extends RelativeLayout {
         spinner.setVisibility(VISIBLE);
     }
 
-//    public void noCommentBox(boolean b) {
-//        int buttonMarginTop = getResources().getDimensionPixelSize(R.dimen.nearit_ui_feedback_no_comment_button_margin);
-//        int buttonHeight = getResources().getDimensionPixelSize(R.dimen.nearit_ui_feedback_button_height_margin);
-//        if (b) {
-//            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, buttonHeight);
-//            params.setMargins(0, buttonMarginTop, 0, 0);
-//            button.setLayoutParams(params);
-//        }
-//    }
-
     @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
