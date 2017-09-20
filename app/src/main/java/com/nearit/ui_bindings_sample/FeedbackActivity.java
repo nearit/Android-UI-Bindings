@@ -31,6 +31,38 @@ public class FeedbackActivity extends AppCompatActivity {
                 );
             }
         });
+
+        Button noTextResponseFeedback = (Button) findViewById(R.id.no_text_box);
+        noTextResponseFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  In a real scenario the question is provided by the NearIT SDK
+                Feedback feedback = feedbackFactory.getFeedback();
+                startActivity(
+                        NearITUIBindings.getInstance(FeedbackActivity.this)
+                                .createFeedbackIntentBuilder(feedback)
+                                .hideTextResponse()
+                                .enableTapOutsideToClose()
+                                .build()
+                );
+            }
+        });
+
+        Button textBoxVisible = (Button) findViewById(R.id.text_box_visibile_from_start);
+        textBoxVisible.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  In a real scenario the question is provided by the NearIT SDK
+                Feedback feedback = feedbackFactory.getFeedback();
+                startActivity(
+                        NearITUIBindings.getInstance(FeedbackActivity.this)
+                                .createFeedbackIntentBuilder(feedback)
+                                .enableTextResponseOnStart()
+                                .build()
+                );
+            }
+        });
+
     }
 
 }
