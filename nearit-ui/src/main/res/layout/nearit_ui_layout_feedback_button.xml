@@ -7,7 +7,7 @@
         android:id="@+id/custom_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/nearit_ui_selector_button">
+        android:background="@drawable/nearit_ui_selector_feedback_button">
 
         <TextView
             android:id="@+id/button_text"
@@ -16,7 +16,7 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:textAppearance="@style/NearItUIButtonTextAppearance"
-            android:textColor="@color/nearit_ui_real_white" />
+            android:textColor="@drawable/nearit_ui_selector_feedback_button_text_color" />
 
     </RelativeLayout>
 

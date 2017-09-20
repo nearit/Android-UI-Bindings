@@ -66,12 +66,14 @@ public class NearItUIFeedbackButton extends RelativeLayout {
         button.setVisibility(VISIBLE);
         spinner.setVisibility(GONE);
         button.setActivated(true);
+        this.setText("RETRY");
     }
 
     public void setUnchecked() {
         button.setVisibility(VISIBLE);
         spinner.setVisibility(GONE);
         button.setActivated(false);
+        this.setText("SEND");
     }
 
     public boolean isChecked() {

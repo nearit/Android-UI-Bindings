@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="nearit_ui_error_color">#e54d4c</color>
+    <color name="nearit_ui_error_color_50">#80e54d4c</color>
     <color name="nearit_ui_black">#333333</color>
     <color name="nearit_ui_white">#f2f2f2</color>
     <color name="nearit_ui_real_white">#ffffff</color>
     <color name="nearit_ui_warm_grey">#777777</color>
+    <color name="nearit_ui_warm_grey_50">#80777777</color>
     <color name="nearit_ui_black_25">#40000000</color>
     <color name="nearit_ui_black_35">#59333333</color>
     <color name="nearit_ui_valid_green">#68c600</color>
@@ -31,6 +33,21 @@
     <color name="nearit_ui_coupon_detail_inactive_coupon_color">@color/nearit_ui_inactive_orange</color>
     <color name="nearit_ui_coupon_detail_activity_container_background_color">@color/nearit_ui_transparent</color>
     <color name="nearit_ui_coupon_background_color">@color/nearit_ui_real_white</color>
+
     <color name="nearit_ui_feedback_background_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_feedback_close_text_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_feedback_close_pressed_text_color">@color/nearit_ui_warm_grey_50</color>
+    <color name="nearit_ui_feedback_send_button_text_color">@color/nearit_ui_white</color>
+    <color name="nearit_ui_feedback_send_button_pressed_text_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_feedback_send_button_error_text_color">@color/nearit_ui_white</color>
+    <color name="nearit_ui_feedback_send_button_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_feedback_send_button_pressed_color">@color/nearit_ui_white</color>
+    <color name="nearit_ui_feedback_send_button_error_color">@color/nearit_ui_error_color</color>
+    <color name="nearit_ui_feedback_send_button_error_pressed_color">@color/nearit_ui_error_color_50</color>
+    <color name="nearit_ui_feedback_send_button_error_pressed_text_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_feedback_question_text_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_feedback_comment_box_description_text_color">@color/nearit_ui_warm_grey
+    </color>
+    <color name="nearit_ui_feedback_error_message_text_color">@color/nearit_ui_error_color</color>
 
 </resources>

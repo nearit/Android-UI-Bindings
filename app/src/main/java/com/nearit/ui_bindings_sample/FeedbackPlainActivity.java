@@ -14,6 +14,7 @@ import it.near.sdk.reactions.feedbackplugin.model.Feedback;
  */
 
 public class FeedbackPlainActivity extends AppCompatActivity {
+    Fragment feedbackFragment;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,11 +26,23 @@ public class FeedbackPlainActivity extends AppCompatActivity {
         //  In a real scenario the feedback request is provided by the NearIT SDK
         Feedback feedback = couponFactory.getFeedback();
 
-        Fragment feedbackFragment = NearITUIBindings.getInstance(this)
-                .createFeedbackFragmentBuilder(feedback)
-                .build();
+        if (savedInstanceState != null) {
+            //  Restore the fragment instance
+            feedbackFragment = getSupportFragmentManager().getFragment(savedInstanceState, "feedbackFragment");
+        } else {
+            feedbackFragment = NearITUIBindings.getInstance(this)
+                    .createFeedbackFragmentBuilder(feedback)
+                    .build();
+        }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.feedback_container, feedbackFragment).commit();
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //  Save the fragment instance
+        getSupportFragmentManager().putFragment(outState, "feedbackFragment", feedbackFragment);
     }
 }

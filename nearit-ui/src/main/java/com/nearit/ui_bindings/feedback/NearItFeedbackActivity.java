@@ -16,6 +16,7 @@ public class NearItFeedbackActivity extends AppCompatActivity {
 
     private FeedbackRequestExtras extras;
     private boolean isEnableTapToClose = false;
+    NearItFeedbackFragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +31,24 @@ public class NearItFeedbackActivity extends AppCompatActivity {
 
         final Feedback feedback = getIntent().getParcelableExtra(ExtraConstants.FEEDBACK_EXTRA);
 
+        if (savedInstanceState != null) {
+            //  Restore the fragment instance
+            mFragment = (NearItFeedbackFragment) getSupportFragmentManager().getFragment(savedInstanceState, "feedbackFragment");
+        } else {
+            mFragment = NearItFeedbackFragment.newInstance(feedback, extras);
+        }
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.feedback_fragment_container, NearItFeedbackFragment.newInstance(feedback, extras))
+                .replace(R.id.feedback_fragment_container, mFragment)
                 .commit();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //  Save the fragment instance
+        getSupportFragmentManager().putFragment(outState, "feedbackFragment", mFragment);
     }
 
     public static Intent createIntent(Context context, Feedback feedback, FeedbackRequestExtras params) {

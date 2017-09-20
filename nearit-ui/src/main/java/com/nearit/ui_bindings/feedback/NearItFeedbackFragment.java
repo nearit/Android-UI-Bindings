@@ -23,6 +23,8 @@ import it.near.sdk.recipes.NearITEventHandler;
 public class NearItFeedbackFragment extends Fragment {
     private static final String ARG_FEEDBACK = "feedback";
     private static final String ARG_EXTRAS = "extras";
+    private static final String SAVED_RATING = "rating";
+    private static final String SAVED_IS_BUTTON_CHECKED = "button_state";
 
     private Feedback feedback;
     private boolean hideTextResponse = false;
@@ -63,6 +65,36 @@ public class NearItFeedbackFragment extends Fragment {
             hideTextResponse = extras.isHideTextResponse();
         }
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //Save the fragment's state here
+        if (ratingBar != null) {
+            outState.putFloat(SAVED_RATING, ratingBar.getRating());
+        }
+        if (sendButton != null) {
+            outState.putBoolean(SAVED_IS_BUTTON_CHECKED, sendButton.isChecked());
+        }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (savedInstanceState != null) {
+            //Restore the fragment's state here
+            if (ratingBar != null) {
+                ratingBar.setRating(savedInstanceState.getFloat(SAVED_RATING));
+            }
+            if (sendButton != null) {
+                if(savedInstanceState.getBoolean(SAVED_IS_BUTTON_CHECKED)) {
+                    sendButton.setChecked();
+                } else {
+                    sendButton.setUnchecked();
+                }
+            }
+        }
     }
 
     @Override
@@ -122,7 +154,6 @@ public class NearItFeedbackFragment extends Fragment {
         }
 
         if (sendButton != null) {
-            sendButton.setText("SEND");
             sendButton.setUnchecked();
             sendButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -143,7 +174,6 @@ public class NearItFeedbackFragment extends Fragment {
                             if (errorText != null) {
                                 errorText.setVisibility(View.VISIBLE);
                             }
-                            sendButton.setText("RETRY");
                             sendButton.setChecked();
                         }
                     });
