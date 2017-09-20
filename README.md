@@ -17,7 +17,7 @@ Add the NearIT-UI library dependency. If your project uses Gradle build system, 
 ```groovy
  dependencies {
     //  ...
-    compile 'it.nearit.sdk:nearit-ui:1.0.1'
+    compile 'it.nearit.sdk:nearit-ui:1.0.2'
  }
 ```
 
@@ -147,8 +147,8 @@ If you want your app to display a coupon in a beautiful pop-up dialog, use this 
  // ...
  startActivity(
          NearITUIBindings.getInstance(YourActivity.this)
-            .createCouponDetailIntentBuilder()
-            .build(coupon));
+            .createCouponDetailIntentBuilder(coupon)
+            .build());
 ```
 
 where, `coupon` is an instance of NearIT SDK `Coupon` class. Further information on coupons and other in-app content can be found [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/).
@@ -164,9 +164,9 @@ NearIT-UI is shipped with our brand as icon placeholder. If you need to replace 
   // ...
   startActivity(
           NearITUIBindings.getInstance(YourActivity.this)
-             .createCouponDetailIntentBuilder()
+             .createCouponDetailIntentBuilder(coupon)
              .setIconPlaceholderResourceId(R.drawable.your_drawable)
-             .build(coupon));
+             .build());
 ```
 
 Please, keep in mind that the icon should be a square: a different aspect-ratio can potentially break the layout.
@@ -178,9 +178,9 @@ Optionally, you can display the coupon in your custom Activity by adding a Fragm
 ```java
   // ...
   Fragment couponFragment = NearITUIBindings.getInstance(YourActivity.this)
-        .createCouponDetailFragmentBuilder()
+        .createCouponDetailFragmentBuilder(coupon)
         //  here you can call other methods of the builder
-        .build(coupon);
+        .build();
 ```
 
 If you need to tweak the way your dialog looks, you can override some resources (see [UI Customization](#ui-customization-1)). As the separator is a PNG file you may want to replace it.
