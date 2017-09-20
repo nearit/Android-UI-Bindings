@@ -31,15 +31,15 @@ public class NearItFeedbackActivity extends AppCompatActivity {
     @Nullable
     NearItUIButton sendButton;
     @Nullable
-    TextView closeButton, errorText, dateText;
+    TextView closeButton, errorText, feedbackQuestionTextView;
     @Nullable
     EditText commentBox;
 
     private boolean isEnableTapToClose = false;
-    private boolean isHideDate = false;
     private boolean isHideTextResponse = false;
     private boolean isEnableTextResponseOnStart = false;
     private FeedbackRequestIntentExtras extras;
+    private String feedbackQuestion;
     private float userRating;
     private String userComment;
 
@@ -52,28 +52,31 @@ public class NearItFeedbackActivity extends AppCompatActivity {
         if (intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
             extras = FeedbackRequestIntentExtras.fromIntent(intent);
             isEnableTapToClose = extras.isEnableTapOutsideToClose();
-            isHideDate = extras.isHideDate();
             isHideTextResponse = extras.isHideTextResponse();
             isEnableTextResponseOnStart = extras.isEnableTextResponseOnStart();
         }
 
         final Feedback feedback = getIntent().getParcelableExtra(ExtraConstants.FEEDBACK_EXTRA);
+        feedbackQuestion = feedback.question;
 
-        dateText = (TextView) findViewById(R.id.feedback_date);
         ratingBar = (RatingBar) findViewById(R.id.feedback_rating);
         commentSection = (LinearLayout) findViewById(R.id.feedback_comment_section);
         sendButton = (NearItUIButton) findViewById(R.id.feedback_send_comment_button);
         closeButton = (TextView) findViewById(R.id.feedback_dismiss_text);
         commentBox = (EditText) findViewById(R.id.feedback_comment_box);
         errorText = (TextView) findViewById(R.id.feedback_error_alert);
+        feedbackQuestionTextView = (TextView) findViewById(R.id.feedback_question);
 
-        if(dateText != null) {
-            if(isHideDate) {
-                dateText.setVisibility(View.GONE);
+        if (feedbackQuestionTextView != null) {
+            feedbackQuestionTextView.setText(feedbackQuestion);
+        }
+
+        if (commentSection != null) {
+            if (isEnableTextResponseOnStart) {
+                commentSection.setVisibility(View.VISIBLE);
+            } else {
+                commentSection.setVisibility(View.GONE);
             }
-//            else {
-//                dateText.setText("");
-//            }
         }
 
         if (closeButton != null) {
@@ -95,9 +98,14 @@ public class NearItFeedbackActivity extends AppCompatActivity {
 
                     userRating = rating;
 
-                    if (!isHideTextResponse && commentSection != null) {
-                        commentSection.setVisibility(View.VISIBLE);
+                    if (commentSection != null) {
+                        if (!isHideTextResponse) {
+                            commentSection.setVisibility(View.VISIBLE);
+                        } else {
+                            commentSection.setVisibility(View.GONE);
+                        }
                     }
+
                     if (sendButton != null) {
                         sendButton.setVisibility(View.VISIBLE);
                     }
@@ -106,9 +114,12 @@ public class NearItFeedbackActivity extends AppCompatActivity {
         }
 
         if (sendButton != null) {
+            sendButton.setText("SEND");
+            sendButton.setUnchecked();
             sendButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    sendButton.setLoading();
                     if (userRating < 1.0f) {
                         userRating = 1.0f;
                     }
@@ -124,7 +135,7 @@ public class NearItFeedbackActivity extends AppCompatActivity {
                             if (errorText != null) {
                                 errorText.setVisibility(View.VISIBLE);
                             }
-                            sendButton.setText("RIPROVA");
+                            sendButton.setText("RETRY");
                             sendButton.setChecked();
                         }
                     });

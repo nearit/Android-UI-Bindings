@@ -11,7 +11,6 @@ import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 public class FeedbackIntentBuilder {
     private Context mContext;
     private Feedback mFeedback;
-    private boolean mHideDate;
     private boolean mHideTextResponse;
     private boolean mEnableTextResponseOnStart;
     private boolean mEnableTapOutside;
@@ -19,11 +18,6 @@ public class FeedbackIntentBuilder {
     public FeedbackIntentBuilder(Context context, Feedback feedback) {
         mContext = context;
         mFeedback = feedback;
-    }
-
-    public FeedbackIntentBuilder hideDate() {
-        this.mHideDate = true;
-        return this;
     }
 
     public FeedbackIntentBuilder hideTextResponse() {
@@ -47,7 +41,6 @@ public class FeedbackIntentBuilder {
 
     private FeedbackRequestIntentExtras getParams() {
         return new FeedbackRequestIntentExtras(
-                mHideDate,
                 mHideTextResponse,
                 mEnableTextResponseOnStart,
                 mEnableTapOutside

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,8 +16,10 @@ import com.nearit.ui_bindings.R;
 
 public class NearItUIButton extends RelativeLayout {
 
-    private TextView text;
-    private String buttonText;
+    private RelativeLayout button;
+    private TextView buttonTextView;
+    private RelativeLayout spinner;
+    private String text;
 
     public NearItUIButton(Context context) {
         super(context);
@@ -41,7 +44,7 @@ public class NearItUIButton extends RelativeLayout {
                 R.styleable.NearItUIButtonView,
                 0, 0);
         try {
-            buttonText = a.getString(R.styleable.NearItUIButtonView_genericButtonText);
+            text = a.getString(R.styleable.NearItUIButtonView_genericButtonText);
         } finally {
             a.recycle();
         }
@@ -49,26 +52,41 @@ public class NearItUIButton extends RelativeLayout {
 
     private void init() {
         inflate(getContext(), R.layout.nearit_ui_layout_button, this);
-        text = (TextView) findViewById(R.id.button_text);
+        buttonTextView = (TextView) findViewById(R.id.button_text);
+        button = (RelativeLayout) findViewById(R.id.custom_button);
+        spinner = (RelativeLayout) findViewById(R.id.spinner_container);
     }
 
-    public void setText(String buttonText) {
-        this.buttonText = buttonText;
+    public void setText(String text) {
+        this.text = text;
         invalidate();
         requestLayout();
     }
 
     public void setChecked() {
-        this.setActivated(true);
+        button.setVisibility(VISIBLE);
+        spinner.setVisibility(GONE);
+        button.setActivated(true);
     }
 
     public void setUnchecked() {
-        this.setActivated(false);
+        button.setVisibility(VISIBLE);
+        spinner.setVisibility(GONE);
+        button.setActivated(false);
+    }
+
+    public boolean isChecked() {
+        return button.isActivated();
+    }
+
+    public void setLoading() {
+        button.setVisibility(GONE);
+        spinner.setVisibility(VISIBLE);
     }
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
-        text.setText(buttonText);
+        buttonTextView.setText(text);
     }
 }
