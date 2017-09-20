@@ -1,10 +1,9 @@
-package com.nearit.ui_bindings.views;
+package com.nearit.ui_bindings.feedback.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,25 +13,25 @@ import com.nearit.ui_bindings.R;
  * Created by Federico Boschini on 14/09/17.
  */
 
-public class NearItUIButton extends RelativeLayout {
+public class NearItUIFeedbackButton extends RelativeLayout {
 
     private RelativeLayout button;
     private TextView buttonTextView;
     private RelativeLayout spinner;
     private String text;
 
-    public NearItUIButton(Context context) {
+    public NearItUIFeedbackButton(Context context) {
         super(context);
         init();
     }
 
-    public NearItUIButton(Context context, AttributeSet attrs) {
+    public NearItUIFeedbackButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         obtainAttrs(attrs);
         init();
     }
 
-    public NearItUIButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public NearItUIFeedbackButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         obtainAttrs(attrs);
         init();
@@ -51,7 +50,7 @@ public class NearItUIButton extends RelativeLayout {
     }
 
     private void init() {
-        inflate(getContext(), R.layout.nearit_ui_layout_button, this);
+        inflate(getContext(), R.layout.nearit_ui_layout_feedback_button, this);
         buttonTextView = (TextView) findViewById(R.id.button_text);
         button = (RelativeLayout) findViewById(R.id.custom_button);
         spinner = (RelativeLayout) findViewById(R.id.spinner_container);
@@ -83,6 +82,16 @@ public class NearItUIButton extends RelativeLayout {
         button.setVisibility(GONE);
         spinner.setVisibility(VISIBLE);
     }
+
+//    public void noCommentBox(boolean b) {
+//        int buttonMarginTop = getResources().getDimensionPixelSize(R.dimen.nearit_ui_feedback_no_comment_button_margin);
+//        int buttonHeight = getResources().getDimensionPixelSize(R.dimen.nearit_ui_feedback_button_height_margin);
+//        if (b) {
+//            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, buttonHeight);
+//            params.setMargins(0, buttonMarginTop, 0, 0);
+//            button.setLayoutParams(params);
+//        }
+//    }
 
     @Override
     protected void dispatchDraw(Canvas canvas) {

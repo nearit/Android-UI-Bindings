@@ -19,4 +19,7 @@
     <string name="nearit_ui_feedback_leave_a_comment">Leave a comment (optional)</string>
     <string name="nearit_ui_feedback_error_message">Ops, something went wrong!</string>
     <string name="nearit_ui_feedback_close_button">No, thank you</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

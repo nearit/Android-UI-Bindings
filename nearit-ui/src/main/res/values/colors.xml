@@ -31,5 +31,6 @@
     <color name="nearit_ui_coupon_detail_inactive_coupon_color">@color/nearit_ui_inactive_orange</color>
     <color name="nearit_ui_coupon_detail_activity_container_background_color">@color/nearit_ui_transparent</color>
     <color name="nearit_ui_coupon_background_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_feedback_background_color">@color/nearit_ui_real_white</color>
 
 </resources>

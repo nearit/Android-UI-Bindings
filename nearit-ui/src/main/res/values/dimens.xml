@@ -33,4 +33,6 @@
     <dimen name="nearit_ui_coupon_detail_coupon_description_text_size">13sp</dimen>
     <dimen name="nearit_ui_coupon_detail_coupon_validity_text_size">12sp</dimen>
     <dimen name="nearit_ui_coupon_detail_coupon_not_valid_text_size">20sp</dimen>
+    <dimen name="nearit_ui_feedback_no_comment_button_margin">30dp</dimen>
+    <dimen name="nearit_ui_feedback_button_height_margin">45dp</dimen>
 </resources>
