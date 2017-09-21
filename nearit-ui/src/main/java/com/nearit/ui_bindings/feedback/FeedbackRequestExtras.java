@@ -12,18 +12,20 @@ import com.nearit.ui_bindings.ExtraConstants;
  */
 
 class FeedbackRequestExtras implements Parcelable {
-    private final boolean hideTextResponse, enableTapOutsideToClose;
+    private final boolean hideTextResponse, enableTapOutsideToClose, noSuccessIcon;
     private final int iconResId;
 
-    FeedbackRequestExtras(boolean hideTextResponse, int iconResId, boolean enableTapOutsideToClose) {
+    FeedbackRequestExtras(boolean hideTextResponse, int iconResId, boolean noSuccessIcon, boolean enableTapOutsideToClose) {
         this.hideTextResponse = hideTextResponse;
         this.iconResId = iconResId;
+        this.noSuccessIcon = noSuccessIcon;
         this.enableTapOutsideToClose = enableTapOutsideToClose;
     }
 
-    FeedbackRequestExtras(boolean hideTextResponse, int iconResId) {
+    FeedbackRequestExtras(boolean hideTextResponse, int iconResId, boolean noSuccessIcon) {
         this.hideTextResponse = hideTextResponse;
         this.iconResId = iconResId;
+        this.noSuccessIcon = noSuccessIcon;
         this.enableTapOutsideToClose = false;
     }
 
@@ -55,6 +57,7 @@ class FeedbackRequestExtras implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(hideTextResponse ? 1 : 0);
         dest.writeInt(iconResId);
+        dest.writeInt(noSuccessIcon ? 1 : 0);
         dest.writeInt(enableTapOutsideToClose ? 1 : 0);
     }
 
@@ -68,10 +71,12 @@ class FeedbackRequestExtras implements Parcelable {
         public FeedbackRequestExtras createFromParcel(Parcel in) {
             boolean hideTextResponse = in.readInt() != 0;
             int iconResId = in.readInt();
+            boolean noSuccessIcon = in.readInt() != 0;
             boolean enableTapOutsideToClose = in.readInt() != 0;
             return new FeedbackRequestExtras(
                     hideTextResponse,
                     iconResId,
+                    noSuccessIcon,
                     enableTapOutsideToClose
             );
         }
@@ -90,7 +95,11 @@ class FeedbackRequestExtras implements Parcelable {
         return enableTapOutsideToClose;
     }
 
-    public int getIconResId() {
+    int getIconResId() {
         return iconResId;
+    }
+
+    public boolean isNoSuccessIcon() {
+        return noSuccessIcon;
     }
 }

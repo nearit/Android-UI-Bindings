@@ -12,6 +12,7 @@ public class FeedbackIntentBuilder {
     private Context mContext;
     private Feedback mFeedback;
     private boolean mHideTextResponse;
+    private boolean mNoSuccessIcon;
     private int mIconResId;
     private boolean mEnableTapOutside;
 
@@ -37,6 +38,14 @@ public class FeedbackIntentBuilder {
     }
 
     /**
+     * Sets no icon on the success view
+     */
+    public FeedbackIntentBuilder setNoSuccessIcon() {
+        this.mNoSuccessIcon = true;
+        return this;
+    }
+
+    /**
      * Sets tap outside the dialog to close enabled
      */
     public FeedbackIntentBuilder enableTapOutsideToClose() {
@@ -52,6 +61,7 @@ public class FeedbackIntentBuilder {
         return new FeedbackRequestExtras(
                 mHideTextResponse,
                 mIconResId,
+                mNoSuccessIcon,
                 mEnableTapOutside
         );
     }

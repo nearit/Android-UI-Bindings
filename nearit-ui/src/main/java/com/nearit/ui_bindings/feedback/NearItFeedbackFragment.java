@@ -33,6 +33,7 @@ public class NearItFeedbackFragment extends Fragment {
     private Feedback feedback;
 
     private boolean hideTextResponse = false;
+    private boolean noSuccessIcon = false;
     private int successIconResId = 0;
 
     private String feedbackQuestion;
@@ -75,6 +76,7 @@ public class NearItFeedbackFragment extends Fragment {
         if (extras != null) {
             hideTextResponse = extras.isHideTextResponse();
             successIconResId = extras.getIconResId();
+            noSuccessIcon = extras.isNoSuccessIcon();
         }
 
     }
@@ -218,7 +220,7 @@ public class NearItFeedbackFragment extends Fragment {
                             if (positiveResultMessage != null) {
                                 positiveResultMessage.setVisibility(View.VISIBLE);
                             }
-                            if (positiveResultIcon != null) {
+                            if (!noSuccessIcon && positiveResultIcon != null) {
                                 positiveResultIcon.setVisibility(View.VISIBLE);
                             }
 

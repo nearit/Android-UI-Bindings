@@ -11,6 +11,7 @@ import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 public class FeedbackFragmentBuilder {
     private Context mContext;
     private boolean mHideTextResponse;
+    private boolean mNoSuccessIcon;
     private int mIconResId;
     private Feedback mFeedback;
 
@@ -35,6 +36,14 @@ public class FeedbackFragmentBuilder {
         return this;
     }
 
+    /**
+     * Sets no icon on the success view
+     */
+    public FeedbackFragmentBuilder setNoSuccessIcon() {
+        mNoSuccessIcon = true;
+        return this;
+    }
+
     public NearItFeedbackFragment build() {
         return NearItFeedbackFragment.newInstance(mFeedback, getParams());
     }
@@ -42,7 +51,9 @@ public class FeedbackFragmentBuilder {
     private FeedbackRequestExtras getParams() {
         return new FeedbackRequestExtras(
                 mHideTextResponse,
-                mIconResId);
+                mIconResId,
+                mNoSuccessIcon,
+                mNoSuccessIcon);
     }
 
 }
