@@ -13,14 +13,17 @@ import com.nearit.ui_bindings.ExtraConstants;
 
 class FeedbackRequestExtras implements Parcelable {
     private final boolean hideTextResponse, enableTapOutsideToClose;
+    private final int iconResId;
 
-    FeedbackRequestExtras(boolean hideTextResponse, boolean enableTapOutsideToClose) {
+    FeedbackRequestExtras(boolean hideTextResponse, int iconResId, boolean enableTapOutsideToClose) {
         this.hideTextResponse = hideTextResponse;
+        this.iconResId = iconResId;
         this.enableTapOutsideToClose = enableTapOutsideToClose;
     }
 
-    FeedbackRequestExtras(boolean hideTextResponse) {
+    FeedbackRequestExtras(boolean hideTextResponse, int iconResId) {
         this.hideTextResponse = hideTextResponse;
+        this.iconResId = iconResId;
         this.enableTapOutsideToClose = false;
     }
 
@@ -51,6 +54,7 @@ class FeedbackRequestExtras implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(hideTextResponse ? 1 : 0);
+        dest.writeInt(iconResId);
         dest.writeInt(enableTapOutsideToClose ? 1 : 0);
     }
 
@@ -63,9 +67,11 @@ class FeedbackRequestExtras implements Parcelable {
         @Override
         public FeedbackRequestExtras createFromParcel(Parcel in) {
             boolean hideTextResponse = in.readInt() != 0;
+            int iconResId = in.readInt();
             boolean enableTapOutsideToClose = in.readInt() != 0;
             return new FeedbackRequestExtras(
                     hideTextResponse,
+                    iconResId,
                     enableTapOutsideToClose
             );
         }
@@ -82,5 +88,9 @@ class FeedbackRequestExtras implements Parcelable {
 
     boolean isEnableTapOutsideToClose() {
         return enableTapOutsideToClose;
+    }
+
+    public int getIconResId() {
+        return iconResId;
     }
 }

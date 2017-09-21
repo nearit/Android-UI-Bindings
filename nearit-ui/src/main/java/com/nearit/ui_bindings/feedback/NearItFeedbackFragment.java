@@ -28,12 +28,13 @@ public class NearItFeedbackFragment extends Fragment {
     private static final String SAVED_RATING = "rating";
     private static final String SAVED_IS_BUTTON_CHECKED = "button_state";
     private static final String SAVED_IS_ALERT_VISIBLE = "alert_state";
-
-
     private static int NEAR_AUTOCLOSE_DELAY = 2000;
 
     private Feedback feedback;
+
     private boolean hideTextResponse = false;
+    private int successIconResId = 0;
+
     private String feedbackQuestion;
     private float userRating;
     private String userComment;
@@ -73,6 +74,7 @@ public class NearItFeedbackFragment extends Fragment {
         FeedbackRequestExtras extras = getArguments().getParcelable(ARG_EXTRAS);
         if (extras != null) {
             hideTextResponse = extras.isHideTextResponse();
+            successIconResId = extras.getIconResId();
         }
 
     }
@@ -135,6 +137,10 @@ public class NearItFeedbackFragment extends Fragment {
 
         positiveResultMessage = (TextView) rootView.findViewById(R.id.feedback_success_message);
         positiveResultIcon = (ImageView) rootView.findViewById(R.id.feedback_success_icon);
+
+        if (successIconResId != 0 && positiveResultIcon != null) {
+            positiveResultIcon.setImageResource(successIconResId);
+        }
 
         if (feedbackQuestionTextView != null) {
             feedbackQuestionTextView.setText(feedbackQuestion);

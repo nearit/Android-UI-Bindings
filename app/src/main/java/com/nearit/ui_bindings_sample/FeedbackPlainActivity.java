@@ -30,6 +30,7 @@ public class FeedbackPlainActivity extends AppCompatActivity {
             //  Restore the fragment instance
             feedbackFragment = getSupportFragmentManager().getFragment(savedInstanceState, "feedbackFragment");
         } else {
+            //  Create a new fragment instance
             feedbackFragment = NearITUIBindings.getInstance(this)
                     .createFeedbackFragmentBuilder(feedback)
                     .build();

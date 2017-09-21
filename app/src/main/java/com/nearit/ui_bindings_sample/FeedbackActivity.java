@@ -40,6 +40,8 @@ public class FeedbackActivity extends AppCompatActivity {
                 //  In a real scenario the question is provided by the NearIT SDK
                 Feedback feedback = feedbackFactory.getFeedback();
                 startActivity(
+                        //  The text response is disabled
+                        //  + tap outside to close is enabled
                         NearITUIBindings.getInstance(FeedbackActivity.this)
                                 .createFeedbackIntentBuilder(feedback)
                                 .hideTextResponse()
