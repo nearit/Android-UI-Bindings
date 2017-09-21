@@ -46,11 +46,9 @@
     <color name="nearit_ui_feedback_send_button_error_pressed_color">@color/nearit_ui_error_color_50</color>
     <color name="nearit_ui_feedback_send_button_error_pressed_text_color">@color/nearit_ui_real_white</color>
     <color name="nearit_ui_feedback_question_text_color">@color/nearit_ui_black</color>
-    <color name="nearit_ui_feedback_comment_box_description_text_color">@color/nearit_ui_warm_grey
-    </color>
+    <color name="nearit_ui_feedback_comment_box_description_text_color">@color/nearit_ui_warm_grey</color>
     <color name="nearit_ui_feedback_error_message_text_color">@color/nearit_ui_error_color</color>
     <color name="nearit_ui_feedback_comment_box_border_color">#e1e1e1</color>
-    <color name="nearit_ui_feedback_comment_box_background_color">@color/nearit_ui_real_white
-    </color>
+    <color name="nearit_ui_feedback_comment_box_background_color">@color/nearit_ui_real_white</color>
 
 </resources>
