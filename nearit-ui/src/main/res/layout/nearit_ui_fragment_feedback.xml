@@ -13,6 +13,26 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="25dp">
+        
+        <ImageView
+            android:id="@+id/feedback_success_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:visibility="gone"
+            android:src="@drawable/ic_nearit_ui_feedback_positive_result"/>
+        <TextView
+            android:id="@+id/feedback_success_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textColor="@color/nearit_ui_warm_grey"
+            android:visibility="gone"
+            android:text="Grazie per aver inviato\nil tuo feedback!"/>
 
         <TextView
             android:id="@+id/feedback_question"
@@ -24,6 +44,7 @@
             android:textSize="15sp" />
 
         <LinearLayout
+            android:id="@+id/feedback_rating_bar_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
