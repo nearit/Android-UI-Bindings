@@ -16,17 +16,32 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".FeedbackActivity" />
         <meta-data
             android:name="near_api_key"
             android:value="@string/near_api_key" />
 
+        <activity android:name=".FeedbackActivity" />
         <activity android:name=".CouponsActivity" />
         <activity android:name=".PermissionsActivity" />
         <activity android:name=".CouponPlainActivity"
             android:label="Coupon detail activity"/>
         <activity android:name=".FeedbackPlainActivity"
             android:label="Feedback activity"/>
+
+        <!-- built in background receiver -->
+        <receiver
+            android:name="it.near.sdk.recipes.background.NearItBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="it.near.sdk.permission.GEO_MESSAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="it.near.sdk.permission.PUSH_MESSAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
