@@ -53,7 +53,7 @@ public class NearItCouponDetailFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_near_it_coupon_detail, container, false);
+        View rootView = inflater.inflate(R.layout.nearit_ui_fragment_coupon_detail, container, false);
 
         CouponDetailTopSection topSection = (CouponDetailTopSection) rootView.findViewById(R.id.coupon_detail_top_section);
 
