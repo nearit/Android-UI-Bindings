@@ -15,6 +15,7 @@ public class PermissionsRequestIntentBuilder {
     private boolean mNoBeacon = false;
     private boolean mNonBlockingBeacon = false;
     private int mHeaderDrawable;
+    private boolean mNoHeader = false;
 
     public PermissionsRequestIntentBuilder(Context context) {
         mContext = context;
@@ -71,10 +72,18 @@ public class PermissionsRequestIntentBuilder {
     }
 
     /**
-     *
+     *  Sets a custom header
      */
     public PermissionsRequestIntentBuilder setHeaderResourceId(int header) {
         mHeaderDrawable = header;
+        return this;
+    }
+
+    /**
+     *  Sets no header
+     */
+    public PermissionsRequestIntentBuilder setNoHeader() {
+        mNoHeader = true;
         return this;
     }
 
@@ -89,7 +98,8 @@ public class PermissionsRequestIntentBuilder {
                 mInvisibleLayoutMode,
                 mNoBeacon,
                 mNonBlockingBeacon,
-                mHeaderDrawable);
+                mHeaderDrawable,
+                mNoHeader);
     }
 
 }
