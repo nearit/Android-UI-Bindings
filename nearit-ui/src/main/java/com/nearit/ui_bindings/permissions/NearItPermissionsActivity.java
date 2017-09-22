@@ -274,6 +274,9 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        setLocationButton();
+        setBluetoothButton();
+        
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == NEAR_PERMISSION_REQUEST_FINE_LOCATION) {
             if (grantResults.length > 0
