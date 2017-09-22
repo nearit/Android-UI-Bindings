@@ -3,26 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context="com.nearit.ui_bindings_sample.MainActivity">
+    android:orientation="vertical"
+    tools:context="com.nearit.ui_bindings_sample.FeedbackActivity">
 
     <Button
-        android:id="@+id/permissions_demo"
+        android:id="@+id/complete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Permissions" />
+        android:text="complete feedback" />
 
     <Button
-        android:id="@+id/coupon_demo"
+        android:id="@+id/no_text_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Coupon"/>
+        android:text="no text response feedback" />
 
     <Button
-        android:id="@+id/feedback_demo"
+        android:id="@+id/feedback_in_plain_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Feedback" />
+        android:text="feedback in activity" />
 
 </LinearLayout>

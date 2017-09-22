@@ -11,3 +11,4 @@ local.properties
 \.idea/vcs\.xml
 
 \.idea/
+app/google-services\.json
