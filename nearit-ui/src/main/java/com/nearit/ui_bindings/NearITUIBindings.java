@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.nearit.ui_bindings.coupon.CouponDetailFragmentBuilder;
 import com.nearit.ui_bindings.coupon.CouponDetailIntentBuilder;
+import com.nearit.ui_bindings.headsup.NearItUIProximityListenerBuilder;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
 import it.near.sdk.NearItManager;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
@@ -30,6 +31,10 @@ public class NearITUIBindings {
 
     public CouponDetailFragmentBuilder createCouponDetailFragmentBuilder(Coupon coupon) {
         return new CouponDetailFragmentBuilder(mContext, coupon);
+    }
+
+    public NearItUIProximityListenerBuilder createProximityListenerBuilder() {
+        return new NearItUIProximityListenerBuilder(mContext);
     }
 
 }

@@ -29,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button notification = (Button) findViewById(R.id.notifications_demo);
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, NotificationsActivity.class));
+            }
+        });
+
     }
 
 }
