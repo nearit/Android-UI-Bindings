@@ -31,7 +31,7 @@ public class CouponsActivity extends AppCompatActivity {
                 Coupon validCoupon = couponFactory.getValidCoupon();
                 startActivity(
                         //  Basic example with a valid coupon
-                        NearITUIBindings.getInstance(getApplicationContext())
+                        NearITUIBindings.getInstance(CouponsActivity.this)
                                 .createCouponDetailIntentBuilder(validCoupon)
                                 .build());
             }
@@ -45,7 +45,7 @@ public class CouponsActivity extends AppCompatActivity {
                 Coupon inactiveCoupon = couponFactory.getInactiveCoupon();
                 startActivity(
                         //  Basic example with a coupon not yet valid
-                        NearITUIBindings.getInstance(getApplicationContext())
+                        NearITUIBindings.getInstance(CouponsActivity.this)
                                 .createCouponDetailIntentBuilder(inactiveCoupon)
                                 .build());
             }
@@ -60,7 +60,7 @@ public class CouponsActivity extends AppCompatActivity {
                 startActivity(
                         //  Basic example with an expired coupon
                         //  + enable tap outside the dialog to close it
-                        NearITUIBindings.getInstance(getApplicationContext())
+                        NearITUIBindings.getInstance(CouponsActivity.this)
                                 .createCouponDetailIntentBuilder(expiredCoupon)
                                 .enableTapOutsideToClose()
                                 .build());
@@ -75,7 +75,7 @@ public class CouponsActivity extends AppCompatActivity {
                 Coupon validCoupon = couponFactory.getValidCoupon();
                 startActivity(
                         //  Change the default icon placeholder
-                        NearITUIBindings.getInstance(getApplicationContext())
+                        NearITUIBindings.getInstance(CouponsActivity.this)
                                 .createCouponDetailIntentBuilder(validCoupon)
                                 .setIconPlaceholderResourceId(R.drawable.my_custom_placeholder)
                                 .build());
