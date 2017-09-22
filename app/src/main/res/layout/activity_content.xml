@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context="com.nearit.ui_bindings_sample.MainActivity">
+    tools:context="com.nearit.ui_bindings_sample.ContentActivity">
 
     <Button
-        android:id="@+id/permissions_demo"
+        android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Permissions"/>
+        android:text="Content" />
 
     <Button
-        android:id="@+id/coupon_demo"
+        android:id="@+id/plain_content_activity"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Coupon"/>
-
-    <Button
-        android:id="@+id/content_demo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Content"/>
+        android:text="Content in activity"/>
 
 </LinearLayout>
