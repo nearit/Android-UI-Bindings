@@ -20,10 +20,4 @@
         android:layout_height="wrap_content"
         android:text="Coupon"/>
 
-    <Button
-        android:id="@+id/notifications_demo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Notifications"/>
-
 </LinearLayout>

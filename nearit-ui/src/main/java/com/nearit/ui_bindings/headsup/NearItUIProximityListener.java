@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Parcelable;
 
+import it.near.sdk.NearItManager;
 import it.near.sdk.geopolis.beacons.ranging.ProximityListener;
 import it.near.sdk.reactions.contentplugin.model.Content;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
@@ -25,7 +26,7 @@ import it.near.sdk.utils.NearUtils;
 public class NearItUIProximityListener implements ProximityListener, CoreContentsListener {
 
     private NotificationManager mNotificationManager;
-    //  make it a param
+    //  make it a param ?
     private boolean useHeadsUpNotification = true;
 
     private int customIcon = 0;
@@ -33,9 +34,14 @@ public class NearItUIProximityListener implements ProximityListener, CoreContent
     private Context mContext;
     private static final int NEARITUI_NOTIFICATION_ID = 9999;
 
-    NearItUIProximityListener(Context context, NotificationsExtraParams params) {
-        mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    public NearItUIProximityListener(Context context) {
         mContext = context;
+        init();
+    }
+
+    private void init() {
+        mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        NearItManager.getInstance().addProximityListener(this);
     }
 
     @Override
