@@ -13,7 +13,7 @@ import com.nearit.ui_bindings.ExtraConstants;
  * Created by Federico Boschini on 29/08/17.
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-public class PermissionsRequestExtraParams implements Parcelable {
+class PermissionsRequestExtraParams implements Parcelable {
 
     private final boolean enableTapToClose;
     private final boolean autoStartRadar;
@@ -21,6 +21,7 @@ public class PermissionsRequestExtraParams implements Parcelable {
     private final boolean noBeacon;
     private final boolean nonBlockingBeacon;
     private final int headerDrawable;
+    private final boolean noHeader;
 
     PermissionsRequestExtraParams(
             boolean enableTapToClose,
@@ -28,19 +29,21 @@ public class PermissionsRequestExtraParams implements Parcelable {
             boolean invisibleLayoutMode,
             boolean noBeacon,
             boolean nonBlockingBeacon,
-            int headerDrawable) {
+            int headerDrawable,
+            boolean noHeader) {
         this.enableTapToClose = enableTapToClose;
         this.autoStartRadar = autoStartRadar;
         this.invisibleLayoutMode = invisibleLayoutMode;
         this.noBeacon = noBeacon;
         this.nonBlockingBeacon = nonBlockingBeacon;
         this.headerDrawable = headerDrawable;
+        this.noHeader = noHeader;
     }
 
     /**
      * Extract PermissionsRequestExtraParams from an Intent.
      */
-    public static PermissionsRequestExtraParams fromIntent(Intent intent) {
+    static PermissionsRequestExtraParams fromIntent(Intent intent) {
         return intent.getParcelableExtra(ExtraConstants.EXTRA_FLOW_PARAMS);
     }
 
@@ -69,6 +72,7 @@ public class PermissionsRequestExtraParams implements Parcelable {
         dest.writeInt(noBeacon ? 1 : 0);
         dest.writeInt(nonBlockingBeacon ? 1 : 0);
         dest.writeInt(headerDrawable);
+        dest.writeInt(noHeader ? 1 : 0);
     }
 
     @Override
@@ -85,6 +89,7 @@ public class PermissionsRequestExtraParams implements Parcelable {
             boolean noBeacon = in.readInt() != 0;
             boolean nonBlockingBeacon = in.readInt() != 0;
             int headerDrawable = in.readInt();
+            boolean noHeader = in.readInt() != 0;
 
             return new PermissionsRequestExtraParams(
                     enableTapToClose,
@@ -92,7 +97,8 @@ public class PermissionsRequestExtraParams implements Parcelable {
                     invisibleLayoutMode,
                     noBeacon,
                     nonBlockingBeacon,
-                    headerDrawable);
+                    headerDrawable,
+                    noHeader);
         }
 
         @Override
@@ -101,27 +107,31 @@ public class PermissionsRequestExtraParams implements Parcelable {
         }
     };
 
-    public boolean isEnableTapToClose() {
+    boolean isEnableTapToClose() {
         return enableTapToClose;
     }
 
-    public boolean isAutoStartRadar() {
+    boolean isAutoStartRadar() {
         return autoStartRadar;
     }
 
-    public boolean isInvisibleLayoutMode() {
+    boolean isInvisibleLayoutMode() {
         return invisibleLayoutMode;
     }
 
-    public boolean isNoBeacon() {
+    boolean isNoBeacon() {
         return noBeacon;
     }
 
-    public boolean isNonBlockingBeacon() {
+    boolean isNonBlockingBeacon() {
         return nonBlockingBeacon;
     }
 
-    public int getHeaderDrawable() {
+    int getHeaderDrawable() {
         return headerDrawable;
+    }
+
+    boolean isNoHeader() {
+        return noHeader;
     }
 }
