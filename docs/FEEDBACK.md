@@ -11,6 +11,7 @@ If you want your app to display a feedback request in a beautiful pop-up dialog,
 ```
 
 where, `feedback` is an instance of NearIT SDK `Feedback` class. Further information on coupons and other in-app content can be found [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/).
+The Feedback UI also takes care of delivering the user response to the SDK library and showing the proper success or failure status of the user action.
 
 ![NearIT-UI feedback request dialog, success](feedback_request_success.gif)
 ![NearIT-UI feedback request dialog, fail](feedback_request_fail.gif)
