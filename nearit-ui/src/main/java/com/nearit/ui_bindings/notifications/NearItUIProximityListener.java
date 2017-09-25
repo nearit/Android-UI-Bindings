@@ -45,6 +45,7 @@ public class NearItUIProximityListener implements ProximityListener, CoreContent
 //    private int customIcon = 0;
 
     private Context mContext;
+    private String notifTitle;
 
     public NearItUIProximityListener(Context context) {
         mContext = context;
@@ -52,8 +53,8 @@ public class NearItUIProximityListener implements ProximityListener, CoreContent
     }
 
     private void init() {
-//        mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         NearItManager.getInstance().addProximityListener(this);
+        notifTitle = mContext.getApplicationInfo().loadLabel(mContext.getPackageManager()).toString();
     }
 
     @Override
@@ -61,13 +62,10 @@ public class NearItUIProximityListener implements ProximityListener, CoreContent
         NearUtils.parseCoreContents(content, trackingInfo, this);
     }
 
-
-
     @Override
     public void gotSimpleNotification(SimpleNotification simpleNotification, TrackingInfo trackingInfo) {
         sendNotifiedTracking(trackingInfo);
 
-        String notifTitle = mContext.getApplicationInfo().loadLabel(mContext.getPackageManager()).toString();
         String notifText = simpleNotification.notificationMessage;
         Intent simpleIntent = new Intent();
         simpleIntent.putExtra(NearItIntentConstants.TRACKING_INFO, trackingInfo);
@@ -79,7 +77,6 @@ public class NearItUIProximityListener implements ProximityListener, CoreContent
     public void gotCouponNotification(Coupon coupon, TrackingInfo trackingInfo) {
         sendNotifiedTracking(trackingInfo);
 
-        String notifTitle = mContext.getApplicationInfo().loadLabel(mContext.getPackageManager()).toString();
         String notifText = coupon.notificationMessage;
         Intent couponIntent = new Intent();
         couponIntent.putExtra(NearItIntentConstants.CONTENT, coupon);
@@ -92,7 +89,6 @@ public class NearItUIProximityListener implements ProximityListener, CoreContent
     public void gotFeedbackNotification(Feedback feedback, TrackingInfo trackingInfo) {
         sendNotifiedTracking(trackingInfo);
 
-        String notifTitle = mContext.getApplicationInfo().loadLabel(mContext.getPackageManager()).toString();
         String notifText = feedback.notificationMessage;
         Intent feedbackIntent = new Intent();
         feedbackIntent.putExtra(NearItIntentConstants.CONTENT, feedback);

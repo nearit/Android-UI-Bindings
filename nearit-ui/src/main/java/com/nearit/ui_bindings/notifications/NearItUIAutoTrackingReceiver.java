@@ -25,14 +25,23 @@ import it.near.sdk.utils.NearUtils;
 public class NearItUIAutoTrackingReceiver extends WakefulBroadcastReceiver implements CoreContentsListener {
 
     private Context context;
+    private static final String FROM_INTENT_SERVICE = "auto_tracking_from_intent_service";
+    private boolean fromIntentService;
+    private Intent launcherIntent;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // sends tracking
         TrackingInfo trackingInfo = intent.getParcelableExtra(NearItIntentConstants.TRACKING_INFO);
         NearItManager.getInstance().sendTracking(trackingInfo, Recipe.ENGAGED_STATUS);
 
+        fromIntentService = intent.getBooleanExtra(FROM_INTENT_SERVICE, false);
+
         this.context = context;
+
+        launcherIntent = context.getPackageManager()
+                .getLaunchIntentForPackage(context.getPackageName())
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
+                .putExtras(intent.getExtras());
 
         NearUtils.parseCoreContents(intent, this);
     }
@@ -43,22 +52,31 @@ public class NearItUIAutoTrackingReceiver extends WakefulBroadcastReceiver imple
     }
 
     @Override
-    public void gotSimpleNotification(SimpleNotification simpleNotification, TrackingInfo trackingInfo) {
-        //  No reaction
-    }
-
-    @Override
     public void gotFeedbackNotification(Feedback feedback, TrackingInfo trackingInfo) {
         context.startActivity(NearITUIBindings.getInstance(context).createFeedbackIntentBuilder(feedback).build().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
     }
 
     @Override
+    public void gotSimpleNotification(SimpleNotification simpleNotification, TrackingInfo trackingInfo) {
+        if (fromIntentService) {
+            //  it means that we got here from a background notification
+            context.startActivity(launcherIntent);
+        }
+    }
+
+    @Override
     public void gotContentNotification(Content content, TrackingInfo trackingInfo) {
-        //  Not yet implemented
+        if (fromIntentService) {
+            //  it means that we got here from a background notification
+            context.startActivity(launcherIntent);
+        }
     }
 
     @Override
     public void gotCustomJSONNotification(CustomJSON customJSON, TrackingInfo trackingInfo) {
-        //  No reaction
+        if (fromIntentService) {
+            //  it means that we got here from a background notification
+            context.startActivity(launcherIntent);
+        }
     }
 }
