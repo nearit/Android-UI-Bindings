@@ -1,8 +1,8 @@
 # NearIT-UI for Android
 NearIT-UI is an open-source library that provides customizable UI bindings on top of the core [NearIT SDK](https://github.com/nearit/Android-SDK).
-This library aims to minimize the efforts to create the UI for NearIT contents and dialogs.
+This library aims to minimize the effort of creating UI for NearIT contents and dialogs.
 
-For example, using NearIT-UI, a developer can launch a dialog to request location/bluetooth permissions to the user by writing a few lines of code.
+For example, using NearIT-UI, a developer can launch a dialog for requesting the user location/bluetooth permissions by writing a few lines of code.
 
 #### Features
 - [Permissions request](docs/PERMISSIONS.md)
@@ -13,7 +13,7 @@ For example, using NearIT-UI, a developer can launch a dialog to request locatio
 - Heads up notifications for in-app content
 - Content notifications
 - Missing permissions alert snackbar
-- Coupons list
+- Coupon list
 
 ## Configuration
 Add the NearIT-UI library dependency. If your project uses Gradle build system, add the following dependency to `build.gradle` of your app:
