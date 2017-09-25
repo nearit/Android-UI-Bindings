@@ -8,9 +8,9 @@ For example, using NearIT-UI, a developer can launch a dialog for requesting the
 - [Permissions request](docs/PERMISSIONS.md)
 - [Coupon detail](docs/COUPON.md)
 - [Feedback request](docs/FEEDBACK.md)
+- [Heads up notifications for in-app content](docs/NOTIFICATIONS.md)
 
 #### Upcoming features
-- Heads up notifications for in-app content
 - Content notifications
 - Missing permissions alert snackbar
 - Coupon list
@@ -21,7 +21,7 @@ Add the NearIT-UI library dependency. If your project uses Gradle build system, 
 ```groovy
  dependencies {
     //  ...
-    compile 'it.nearit.sdk:nearit-ui:1.0.4'
+    compile 'it.nearit.sdk:nearit-ui:1.0.5'
  }
 ```
 
