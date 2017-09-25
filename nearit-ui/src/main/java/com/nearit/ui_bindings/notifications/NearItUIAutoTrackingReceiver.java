@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings.headsup;
+package com.nearit.ui_bindings.notifications;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +16,6 @@ import it.near.sdk.recipes.models.Recipe;
 import it.near.sdk.trackings.TrackingInfo;
 import it.near.sdk.utils.CoreContentsListener;
 import it.near.sdk.utils.NearItIntentConstants;
-import it.near.sdk.utils.NearNotification;
 import it.near.sdk.utils.NearUtils;
 
 /**

@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings.headsup;
+package com.nearit.ui_bindings.notifications;
 
 import android.app.Notification;
 import android.app.NotificationManager;

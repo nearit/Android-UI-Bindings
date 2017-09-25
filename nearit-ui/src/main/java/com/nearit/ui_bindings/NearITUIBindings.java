@@ -6,7 +6,7 @@ import com.nearit.ui_bindings.coupon.CouponDetailFragmentBuilder;
 import com.nearit.ui_bindings.coupon.CouponDetailIntentBuilder;
 import com.nearit.ui_bindings.feedback.FeedbackFragmentBuilder;
 import com.nearit.ui_bindings.feedback.FeedbackIntentBuilder;
-import com.nearit.ui_bindings.headsup.NearItUIProximityListener;
+import com.nearit.ui_bindings.notifications.NearItUIProximityListener;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
 
 import it.near.sdk.reactions.couponplugin.model.Coupon;
