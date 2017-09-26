@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/snackbar_relative_layout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@color/nearit_ui_black"
@@ -23,35 +24,21 @@
         android:background="@drawable/ic_nearit_ui_location_white" />
 
     <TextView
-        android:id="@+id/text_message"
+        android:id="@+id/alert_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="31dp"
-        android:text="Fornisci tutte\nle autorizzazioni necessarie"
+        android:text="Provide\nall the missing authorizations"
         android:layout_centerVertical="true"
         android:textColor="@color/nearit_ui_real_white"
         android:textSize="13sp" />
 
-    <RelativeLayout
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:gravity="center"
+    <com.nearit.ui_bindings.permissions.views.PermissionSnackbarButton
+        android:id="@+id/ok_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/nearit_ui_permission_snackbar_button">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@drawable/nearit_ui_selector_permission_button_text_color"
-            android:textSize="15sp"
-            android:text="OK!"/>
-
-    </RelativeLayout>
+        android:layout_centerVertical="true"/>
 
 </RelativeLayout>
