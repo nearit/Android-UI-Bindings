@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/permission_main_layout"
+<LinearLayout android:id="@+id/permission_main_layout"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context="com.nearit.ui_bindings_sample.PermissionsActivity">
+    tools:context="com.nearit.ui_bindings_sample.PermissionsActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.nearit.ui_bindings.permissions.views.PermissionSnackbar
+        android:id="@+id/permission_snackbar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:snackbarButtonText="OK!"/>
 
     <Button
         android:id="@+id/permissions"

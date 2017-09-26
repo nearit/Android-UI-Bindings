@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.nearit.ui_bindings.NearITUIBindings;
+import com.nearit.ui_bindings.permissions.views.PermissionSnackbar;
 
 import it.near.sdk.NearItManager;
 
@@ -20,6 +21,9 @@ public class PermissionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permissions);
+
+        PermissionSnackbar snackbar = (PermissionSnackbar) findViewById(R.id.permission_snackbar);
+        snackbar.setActivity(this, NEAR_PERMISSION_REQUEST);
 
         Button permissions = (Button) findViewById(R.id.permissions);
         Button permissionsNoBeacon = (Button) findViewById(R.id.permissions_no_beacon);

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,21 +20,31 @@ public class PermissionSnackbarButton extends RelativeLayout {
 
     private TextView textView;
 
+    final Context context;
+
     public PermissionSnackbarButton(Context context) {
         super(context);
+        this.context = context;
         init();
     }
 
     public PermissionSnackbarButton(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         obtainAttrs(attrs);
         init();
     }
 
     public PermissionSnackbarButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.context = context;
         obtainAttrs(attrs);
         init();
+    }
+
+    private void init() {
+        inflate(getContext(), R.layout.nearit_ui_layout_permission_snackbar_button, this);
+        textView = (TextView) findViewById(R.id.snackbar_button_text);
     }
 
     private void obtainAttrs(AttributeSet attrs) {
@@ -48,14 +59,18 @@ public class PermissionSnackbarButton extends RelativeLayout {
         }
     }
 
-    private void init() {
-        inflate(getContext(), R.layout.nearit_ui_layout_permission_snackbar_button, this);
-        textView = (TextView) findViewById(R.id.snackbar_button_text);
+    public void setButtonText(String text) {
+        textView.setText(text);
     }
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
         textView.setText(buttonText);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
     }
 }

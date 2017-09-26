@@ -14,7 +14,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@drawable/nearit_ui_selector_permission_button_text_color"
-        android:textSize="15sp"
-        android:text="OK!"/>
+        android:textSize="15sp" />
 
 </RelativeLayout>
