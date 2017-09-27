@@ -1,6 +1,7 @@
 package com.nearit.ui_bindings.notifications;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 
 import com.nearit.ui_bindings.R;
@@ -36,7 +38,9 @@ public class NearItUINotificationFactory {
     private static final long[] VIBRATE_PATTERN = new long[]{100L, 200L, 100L, 500L};
     private static final int DEFAULT_GEO_NOTIFICATION_ICON = R.drawable.icon_geo_default_24dp;
     private static final int DEFAULT_PUSH_NOTIFICATION_ICON = R.drawable.icon_push_default_24dp;
+    private static final int NEARIT_UI_RANGING_NOTIFICATION_CODE = 6699;
     private static final String FROM_INTENT_SERVICE = "auto_tracking_from_intent_service";
+    private static final String NOTIFICATION_CHANNEL_ID = "NearUINotifications";
 
 
     static void sendSimpleNotification(Context context, @NonNull Intent intent) {
@@ -57,7 +61,7 @@ public class NearItUINotificationFactory {
         );
     }
 
-    static void sendHeadsUpNotification(Context context, Intent intent) {
+    static void sendHeadsUpNotificationForBackgroundEvent(Context context, Intent intent) {
         sendHeadsUpNotification(context, intent, false);
     }
 
@@ -66,27 +70,56 @@ public class NearItUINotificationFactory {
         String contentText = content.notificationMessage;
         String title = context.getApplicationInfo().loadLabel(context.getPackageManager()).toString();
 
-        NotificationCompat.Builder notificationBuilder = getBuilder(context, title, contentText, intent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            buildChannel(context);
+        }
+
+        NotificationCompat.Builder notificationBuilder = getBuilder(context, title, contentText, getAutoTrackingTargetIntent(intent, context), autoDismiss);
         Notification notification = notificationBuilder.build();
-        showNotification(context, uniqueNotificationCode(), notification, autoDismiss);
+
+        int notificationCode;
+        if (autoDismiss) {
+            notificationCode = NEARIT_UI_RANGING_NOTIFICATION_CODE;
+        } else notificationCode = uniqueNotificationCode();
+
+        showNotification(context, notificationCode, notification, autoDismiss);
+    }
+
+    @RequiresApi(
+            api = 26
+    )
+    private static void buildChannel(Context context) {
+        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_MAX);
+        notificationChannel.setDescription("Channel description");
+        notificationChannel.enableLights(true);
+        notificationChannel.setLightColor(Color.RED);
+        notificationChannel.enableVibration(true);
+        notificationChannel.setVibrationPattern(VIBRATE_PATTERN);
+        mNotificationManager.createNotificationChannel(notificationChannel);
     }
 
     private static NotificationCompat.Builder getBuilder(Context context,
                                                          String title,
                                                          String contentText,
-                                                         Intent resultIntent) {
+                                                         Intent resultIntent,
+                                                         boolean autoDismiss) {
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
                 .setContentText(contentText)
                 .setContentIntent(getPendingIntent(context, resultIntent))
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setSmallIcon(DEFAULT_GEO_NOTIFICATION_ICON)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setSmallIcon(imgResFromIntent(resultIntent))
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(contentText))
                 .setLights(Color.RED, LIGHTS_ON_MILLIS, LIGHTS_OFF_MILLIS)
                 .setSound(getSoundNotificationUri())
                 .setAutoCancel(true)
                 .setVibrate(VIBRATE_PATTERN);
+
+        if (autoDismiss) {
+            builder.setTimeoutAfter(5000);
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             builder.setCategory(NotificationCompat.CATEGORY_MESSAGE);
@@ -132,12 +165,14 @@ public class NearItUINotificationFactory {
 
     private static int imgResFromIntent(@NonNull Intent intent) {
         GlobalConfig globalConfig = NearItManager.getInstance().globalConfig;
-        if (intent.getAction().equals(NearItManager.PUSH_MESSAGE_ACTION)) {
-            return fetchPushNotification(globalConfig);
-        } else if (intent.getAction().equals(NearItManager.GEO_MESSAGE_ACTION)) {
-            return fetchProximityNotification(globalConfig);
-        } else
-            return fetchProximityNotification(globalConfig);
+        if (intent.hasExtra("action")) {
+            if (intent.getStringExtra("action").equals(NearItManager.PUSH_MESSAGE_ACTION)) {
+                return fetchPushNotification(globalConfig);
+            } else if (intent.getStringExtra("action").equals(NearItManager.GEO_MESSAGE_ACTION)) {
+                return fetchProximityNotification(globalConfig);
+            }
+        }
+        return fetchProximityNotification(globalConfig);
     }
 
     private static int fetchProximityNotification(GlobalConfig globalConfig) {

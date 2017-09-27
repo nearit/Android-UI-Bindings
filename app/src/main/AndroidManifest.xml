@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.nearit.ui_bindings_sample">
 
     <application
@@ -31,23 +30,6 @@
         <activity
             android:name=".FeedbackPlainActivity"
             android:label="Feedback activity" />
-
-        <receiver
-            android:name="com.nearit.ui_bindings.notifications.NearItUIBroadcastReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="it.near.sdk.permission.PUSH_MESSAGE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="it.near.sdk.permission.GEO_MESSAGE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
-
-        <receiver
-            android:name="it.near.sdk.recipes.background.NearItBroadcastReceiver"
-            tools:node="remove" />
 
     </application>
 
