@@ -94,7 +94,7 @@ public class PermissionSnackbar extends RelativeLayout {
                 if (activity != null) {
                     activity.startActivityForResult(
                             NearITUIBindings.getInstance(activity).createPermissionRequestIntentBuilder().invisibleLayoutMode().build()
-                            .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT),
+                                    .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT),
                             requestCode
                     );
                 }
@@ -206,11 +206,10 @@ public class PermissionSnackbar extends RelativeLayout {
                     } else {
                         showLocationIcon();
                         if (checkBluetooth()) {
-                            PermissionSnackbar.this.setVisibility(GONE);
+                            hideBluetoothIcon();
                         } else {
                             showBluetoothIcon();
                         }
-
                     }
                 }
             }
