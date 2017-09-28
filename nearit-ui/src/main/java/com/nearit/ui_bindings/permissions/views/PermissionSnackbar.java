@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 import com.nearit.ui_bindings.R;
+import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
 
 /**
  * Created by Federico Boschini on 25/09/17.
@@ -29,12 +30,15 @@ import com.nearit.ui_bindings.R;
 public class PermissionSnackbar extends RelativeLayout {
 
     public static final int NO_ICON = 0;
+    final Context context;
+
     ImageView btIcon, locIcon;
     TextView alertMessage;
     PermissionSnackbarButton okButton;
+
+    boolean noBeacon, nonBlockingBeacon, invisibleMode, noDialogHeader, autostartRadar;
     String buttonText, alertMessageText;
-    int btIconResId, locIconResId;
-    final Context context;
+    int btIconResId, locIconResId, dialogHeaderResId;
 
     @Nullable
     private Activity activity;
@@ -75,6 +79,13 @@ public class PermissionSnackbar extends RelativeLayout {
             alertMessageText = a.getString(R.styleable.NearItUISnackbar_snackbarAlertText);
             btIconResId = a.getResourceId(R.styleable.NearItUISnackbar_snackbarBluetoothIcon, NO_ICON);
             locIconResId = a.getResourceId(R.styleable.NearItUISnackbar_snackbarLocationIcon, NO_ICON);
+
+            noBeacon = a.getBoolean(R.styleable.NearItUISnackbar_noBeacon, false);
+            nonBlockingBeacon = a.getBoolean(R.styleable.NearItUISnackbar_nonBlockingBeacon, false);
+            invisibleMode = a.getBoolean(R.styleable.NearItUISnackbar_invisibleMode, true);
+            dialogHeaderResId = a.getResourceId(R.styleable.NearItUISnackbar_dialogHeader, NO_ICON);
+            noDialogHeader = a.getBoolean(R.styleable.NearItUISnackbar_noDialogHeader, false);
+            autostartRadar = a.getBoolean(R.styleable.NearItUISnackbar_autostartRadar, false);
         } finally {
             a.recycle();
         }
@@ -88,13 +99,35 @@ public class PermissionSnackbar extends RelativeLayout {
         okButton = (PermissionSnackbarButton) findViewById(R.id.ok_button);
         okButton.setClickable(true);
 
+        final PermissionsRequestIntentBuilder builder = NearITUIBindings.getInstance(context).createPermissionRequestIntentBuilder();
+
+        if (noBeacon) {
+            builder.noBeacon();
+        }
+        if (nonBlockingBeacon) {
+            builder.nonBlockingBeacon();
+        }
+        if (invisibleMode) {
+            builder.invisibleLayoutMode();
+        }
+        if (noDialogHeader) {
+            builder.setNoHeader();
+        }
+        if (autostartRadar) {
+            builder.automaticRadarStart();
+        }
+        if (dialogHeaderResId != NO_ICON) {
+            builder.setHeaderResourceId(dialogHeaderResId);
+        }
+
         okButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (activity != null) {
                     activity.startActivityForResult(
-                            NearITUIBindings.getInstance(activity).createPermissionRequestIntentBuilder().invisibleLayoutMode().build()
-                                    .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT),
+                            builder
+                            .build()
+                            .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT),
                             requestCode
                     );
                 }
@@ -139,6 +172,7 @@ public class PermissionSnackbar extends RelativeLayout {
     @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
+        alertMessage.setText(alertMessageText);
         okButton.setButtonText(buttonText);
         if (btIconResId != NO_ICON) {
             btIcon.setImageDrawable(
