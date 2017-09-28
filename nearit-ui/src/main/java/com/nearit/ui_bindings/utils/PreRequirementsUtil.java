@@ -12,33 +12,28 @@ import it.near.sdk.logging.NearLog;
  * Created by Federico Boschini on 28/09/17.
  */
 
-public class PermissionsChecker {
+public class PreRequirementsUtil {
 
-    private final static String TAG = "PermissionsChecker";
-    private Context context;
+    private final static String TAG = "PreRequirementsUtil";
 
-    public PermissionsChecker(Context context) {
-        this.context = context;
-    }
-
-    public boolean checkLocationPermission() {
+    public static boolean checkLocationPermission(Context context) {
         return ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
 
-    public boolean checkLocation() {
+    public static boolean checkLocation(Context context) {
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) | locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
-    public boolean checkBluetooth() {
-        return isBleAvailable() && BluetoothAdapter.getDefaultAdapter() != null && BluetoothAdapter.getDefaultAdapter().isEnabled();
+    public static boolean checkBluetooth(Context context) {
+        return !isBleAvailable(context) || (BluetoothAdapter.getDefaultAdapter() != null && BluetoothAdapter.getDefaultAdapter().isEnabled());
     }
 
 
     /**
      * Checks for BLE availability
      */
-    private boolean isBleAvailable() {
+    public static boolean isBleAvailable(Context context) {
         boolean available = false;
         if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
             NearLog.d(TAG, "BLE not supported prior to API 18");

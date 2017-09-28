@@ -6,12 +6,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.location.LocationManager;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.view.View;
@@ -22,7 +20,7 @@ import android.widget.TextView;
 import com.nearit.ui_bindings.NearITUIBindings;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
-import com.nearit.ui_bindings.utils.PermissionsChecker;
+import com.nearit.ui_bindings.utils.PreRequirementsUtil;
 
 /**
  * Created by Federico Boschini on 25/09/17.
@@ -32,7 +30,6 @@ public class PermissionSnackbar extends RelativeLayout {
 
     public static final int NO_ICON = 0;
     final Context context;
-    PermissionsChecker permissionsChecker;
 
     ImageView btIcon, locIcon;
     TextView alertMessage;
@@ -104,8 +101,6 @@ public class PermissionSnackbar extends RelativeLayout {
     private void init() {
         inflate(getContext(), R.layout.nearit_ui_layout_permission_snackbar, this);
 
-        permissionsChecker = new PermissionsChecker(context);
-
         btIcon = (ImageView) findViewById(R.id.bluetooth_icon);
         locIcon = (ImageView) findViewById(R.id.location_icon);
         alertMessage = (TextView) findViewById(R.id.alert_message);
@@ -139,8 +134,8 @@ public class PermissionSnackbar extends RelativeLayout {
                 if (activity != null) {
                     activity.startActivityForResult(
                             builder
-                            .build()
-                            .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT),
+                                    .build()
+                                    .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT),
                             requestCode
                     );
                 }
@@ -150,15 +145,15 @@ public class PermissionSnackbar extends RelativeLayout {
         getContext().registerReceiver(mReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
         getContext().registerReceiver(mReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
 
-        if (permissionsChecker.checkLocationPermission() && permissionsChecker.checkLocation() && permissionsChecker.checkBluetooth()) {
+        if (PreRequirementsUtil.checkLocationPermission(context) && PreRequirementsUtil.checkLocation(context) && PreRequirementsUtil.checkBluetooth(context)) {
             this.setVisibility(GONE);
         } else {
-            if (permissionsChecker.checkLocationPermission() && permissionsChecker.checkLocation()) {
+            if (PreRequirementsUtil.checkLocationPermission(context) && PreRequirementsUtil.checkLocation(context)) {
                 hideLocationIcon();
             } else {
                 showLocationIcon();
             }
-            if (permissionsChecker.checkBluetooth()) {
+            if (PreRequirementsUtil.checkBluetooth(context)) {
                 hideBluetoothIcon();
             } else {
                 showBluetoothIcon();
@@ -206,16 +201,16 @@ public class PermissionSnackbar extends RelativeLayout {
             PermissionSnackbar.this.setVisibility(VISIBLE);
 
             if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
-                if (!permissionsChecker.checkBluetooth()) {
+                if (!PreRequirementsUtil.checkBluetooth(context)) {
                     showBluetoothIcon();
-                    if (permissionsChecker.checkLocation() && permissionsChecker.checkLocationPermission()) {
+                    if (PreRequirementsUtil.checkLocation(context) && PreRequirementsUtil.checkLocationPermission(context)) {
                         hideLocationIcon();
                     } else {
                         showLocationIcon();
                     }
                 } else {
                     hideBluetoothIcon();
-                    if (permissionsChecker.checkLocation() && permissionsChecker.checkLocationPermission()) {
+                    if (PreRequirementsUtil.checkLocation(context) && PreRequirementsUtil.checkLocationPermission(context)) {
                         PermissionSnackbar.this.setVisibility(GONE);
                     } else {
                         showLocationIcon();
@@ -224,22 +219,22 @@ public class PermissionSnackbar extends RelativeLayout {
             }
 
             if (LocationManager.PROVIDERS_CHANGED_ACTION.equals(action)) {
-                if (!permissionsChecker.checkLocation()) {
+                if (!PreRequirementsUtil.checkLocation(context)) {
                     showLocationIcon();
-                    if (!permissionsChecker.checkBluetooth()) {
+                    if (!PreRequirementsUtil.checkBluetooth(context)) {
                         showBluetoothIcon();
                     }
                 } else {
-                    if (permissionsChecker.checkLocationPermission()) {
+                    if (PreRequirementsUtil.checkLocationPermission(context)) {
                         hideLocationIcon();
-                        if (permissionsChecker.checkBluetooth()) {
+                        if (PreRequirementsUtil.checkBluetooth(context)) {
                             PermissionSnackbar.this.setVisibility(GONE);
                         } else {
                             showBluetoothIcon();
                         }
                     } else {
                         showLocationIcon();
-                        if (permissionsChecker.checkBluetooth()) {
+                        if (PreRequirementsUtil.checkBluetooth(context)) {
                             hideBluetoothIcon();
                         } else {
                             showBluetoothIcon();
