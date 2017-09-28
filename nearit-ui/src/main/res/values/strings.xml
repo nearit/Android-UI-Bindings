@@ -21,4 +21,6 @@
     <string name="nearit_ui_feedback_close_button">No, thank you</string>
     <string name="nearit_ui_feedback_send_success_message">Thanks for your feedback!</string>
     <string name="nearit_ui_feedback_send_button_default_text">SEND</string>
+    
+    <string name="nearit_ui_coupon_list_empty_list_text">No coupons available</string>
 </resources>

@@ -56,4 +56,5 @@
     <dimen name="nearit_ui_feedback_error_message_text_size">15sp</dimen>
     <dimen name="nearit_ui_feedback_success_message_text_size">15sp</dimen>
     <dimen name="nearit_ui_feedback_close_text_size">15sp</dimen>
+    <dimen name="nearit_ui_coupon_list_empty_list_text_size">18sp</dimen>
 </resources>
