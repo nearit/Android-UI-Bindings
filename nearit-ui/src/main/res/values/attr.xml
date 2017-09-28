@@ -12,5 +12,12 @@
         <attr name="snackbarAlertText" format="string" />
         <attr name="snackbarBluetoothIcon" format="reference" />
         <attr name="snackbarLocationIcon" format="reference" />
+
+        <attr name="noBeacon" format="boolean" />
+        <attr name="nonBlockingBeacon" format="boolean" />
+        <attr name="invisibleMode" format="boolean" />
+        <attr name="dialogHeader" format="reference" />
+        <attr name="noDialogHeader" format="boolean" />
+        <attr name="autostartRadar" format="boolean" />
     </declare-styleable>
 </resources>

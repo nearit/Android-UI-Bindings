@@ -3,8 +3,8 @@
     android:id="@+id/snackbar_relative_layout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/nearit_ui_black"
-    android:padding="9dp">
+    android:background="@color/nearit_ui_permission_snackbar_background_color"
+    android:padding="@dimen/nearit_ui_permission_snackbar_main_padding">
 
     <ImageView
         android:id="@+id/bluetooth_icon"
@@ -12,27 +12,27 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/ic_nearit_ui_bluetooth_white" />
+        android:src="@drawable/ic_nearit_ui_bluetooth_white" />
 
     <ImageView
         android:id="@+id/location_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/bluetooth_icon"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="@dimen/nearit_ui_permission_snackbar_margin1"
         android:layout_centerVertical="true"
-        android:background="@drawable/ic_nearit_ui_location_white" />
+        android:src="@drawable/ic_nearit_ui_location_white" />
 
     <TextView
         android:id="@+id/alert_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="31dp"
-        android:text="Provide\nall the missing authorizations"
+        android:layout_marginLeft="@dimen/nearit_ui_permission_snackbar_margin2"
+        android:text="@string/nearit_ui_permission_snackbar_alert_text"
         android:layout_centerVertical="true"
-        android:textColor="@color/nearit_ui_real_white"
-        android:textSize="13sp" />
+        android:textColor="@color/nearit_ui_permission_snackbar_alert_text_color"
+        android:textSize="@dimen/nearit_ui_permission_snackbar_alert_text_size" />
 
     <com.nearit.ui_bindings.permissions.views.PermissionSnackbarButton
         android:id="@+id/ok_button"

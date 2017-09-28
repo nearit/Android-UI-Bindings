@@ -6,14 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context="com.nearit.ui_bindings_sample.PermissionsActivity"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context="com.nearit.ui_bindings_sample.PermissionsActivity">
 
     <com.nearit.ui_bindings.permissions.views.PermissionSnackbar
         android:id="@+id/permission_snackbar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:snackbarButtonText="OK!"/>
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/permissions"
