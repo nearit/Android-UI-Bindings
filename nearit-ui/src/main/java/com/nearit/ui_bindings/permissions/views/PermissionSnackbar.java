@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.nearit.ui_bindings.NearITUIBindings;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
+import com.nearit.ui_bindings.utils.PermissionsChecker;
 
 /**
  * Created by Federico Boschini on 25/09/17.
@@ -31,6 +32,7 @@ public class PermissionSnackbar extends RelativeLayout {
 
     public static final int NO_ICON = 0;
     final Context context;
+    PermissionsChecker permissionsChecker;
 
     ImageView btIcon, locIcon;
     TextView alertMessage;
@@ -101,6 +103,9 @@ public class PermissionSnackbar extends RelativeLayout {
 
     private void init() {
         inflate(getContext(), R.layout.nearit_ui_layout_permission_snackbar, this);
+
+        permissionsChecker = new PermissionsChecker(context);
+
         btIcon = (ImageView) findViewById(R.id.bluetooth_icon);
         locIcon = (ImageView) findViewById(R.id.location_icon);
         alertMessage = (TextView) findViewById(R.id.alert_message);
@@ -145,15 +150,15 @@ public class PermissionSnackbar extends RelativeLayout {
         getContext().registerReceiver(mReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
         getContext().registerReceiver(mReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
 
-        if (checkLocationPermission() && checkLocation() && checkBluetooth()) {
+        if (permissionsChecker.checkLocationPermission() && permissionsChecker.checkLocation() && permissionsChecker.checkBluetooth()) {
             this.setVisibility(GONE);
         } else {
-            if (checkLocationPermission() && checkLocation()) {
+            if (permissionsChecker.checkLocationPermission() && permissionsChecker.checkLocation()) {
                 hideLocationIcon();
             } else {
                 showLocationIcon();
             }
-            if (checkBluetooth()) {
+            if (permissionsChecker.checkBluetooth()) {
                 hideBluetoothIcon();
             } else {
                 showBluetoothIcon();
@@ -194,19 +199,6 @@ public class PermissionSnackbar extends RelativeLayout {
         }
     }
 
-    private boolean checkLocationPermission() {
-        return ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    public boolean checkLocation() {
-        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) | locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-    }
-
-    private boolean checkBluetooth() {
-        return BluetoothAdapter.getDefaultAdapter() != null && BluetoothAdapter.getDefaultAdapter().isEnabled();
-    }
-
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -214,16 +206,16 @@ public class PermissionSnackbar extends RelativeLayout {
             PermissionSnackbar.this.setVisibility(VISIBLE);
 
             if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
-                if (!checkBluetooth()) {
+                if (!permissionsChecker.checkBluetooth()) {
                     showBluetoothIcon();
-                    if (checkLocation() && checkLocationPermission()) {
+                    if (permissionsChecker.checkLocation() && permissionsChecker.checkLocationPermission()) {
                         hideLocationIcon();
                     } else {
                         showLocationIcon();
                     }
                 } else {
                     hideBluetoothIcon();
-                    if (checkLocation() && checkLocationPermission()) {
+                    if (permissionsChecker.checkLocation() && permissionsChecker.checkLocationPermission()) {
                         PermissionSnackbar.this.setVisibility(GONE);
                     } else {
                         showLocationIcon();
@@ -232,22 +224,22 @@ public class PermissionSnackbar extends RelativeLayout {
             }
 
             if (LocationManager.PROVIDERS_CHANGED_ACTION.equals(action)) {
-                if (!checkLocation()) {
+                if (!permissionsChecker.checkLocation()) {
                     showLocationIcon();
-                    if (!checkBluetooth()) {
+                    if (!permissionsChecker.checkBluetooth()) {
                         showBluetoothIcon();
                     }
                 } else {
-                    if (checkLocationPermission()) {
+                    if (permissionsChecker.checkLocationPermission()) {
                         hideLocationIcon();
-                        if (checkBluetooth()) {
+                        if (permissionsChecker.checkBluetooth()) {
                             PermissionSnackbar.this.setVisibility(GONE);
                         } else {
                             showBluetoothIcon();
                         }
                     } else {
                         showLocationIcon();
-                        if (checkBluetooth()) {
+                        if (permissionsChecker.checkBluetooth()) {
                             hideBluetoothIcon();
                         } else {
                             showBluetoothIcon();
