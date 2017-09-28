@@ -31,7 +31,7 @@ public class PermissionsChecker {
     }
 
     public boolean checkBluetooth() {
-        return BluetoothAdapter.getDefaultAdapter() != null && BluetoothAdapter.getDefaultAdapter().isEnabled();
+        return isBleAvailable() && BluetoothAdapter.getDefaultAdapter() != null && BluetoothAdapter.getDefaultAdapter().isEnabled();
     }
 
 
