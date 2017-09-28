@@ -13,7 +13,6 @@
         android:id="@+id/snackbar_button_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nearit_ui_permission_snackbar_button_text"
         android:textColor="@drawable/nearit_ui_selector_permission_button_text_color"
         android:textSize="@dimen/nearit_ui_permission_snackbar_button_text_size" />
 

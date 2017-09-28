@@ -75,8 +75,16 @@ public class PermissionSnackbar extends RelativeLayout {
                 R.styleable.NearItUISnackbar,
                 0, 0);
         try {
-            buttonText = a.getString(R.styleable.NearItUISnackbar_snackbarButtonText);
-            alertMessageText = a.getString(R.styleable.NearItUISnackbar_snackbarAlertText);
+            if (a.getString(R.styleable.NearItUISnackbar_snackbarButtonText) != null) {
+                buttonText = a.getString(R.styleable.NearItUISnackbar_snackbarButtonText);
+            } else {
+                buttonText = getContext().getResources().getString(R.string.nearit_ui_permission_snackbar_button_text);
+            }
+            if (a.getString(R.styleable.NearItUISnackbar_snackbarButtonText) != null) {
+                alertMessageText = a.getString(R.styleable.NearItUISnackbar_snackbarAlertText);
+            } else {
+                alertMessageText = getContext().getResources().getString(R.string.nearit_ui_permission_snackbar_alert_text);
+            }
             btIconResId = a.getResourceId(R.styleable.NearItUISnackbar_snackbarBluetoothIcon, NO_ICON);
             locIconResId = a.getResourceId(R.styleable.NearItUISnackbar_snackbarLocationIcon, NO_ICON);
 

@@ -29,7 +29,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/nearit_ui_permission_snackbar_margin2"
-        android:text="@string/nearit_ui_permission_snackbar_alert_text"
         android:layout_centerVertical="true"
         android:textColor="@color/nearit_ui_permission_snackbar_alert_text_color"
         android:textSize="@dimen/nearit_ui_permission_snackbar_alert_text_size" />
