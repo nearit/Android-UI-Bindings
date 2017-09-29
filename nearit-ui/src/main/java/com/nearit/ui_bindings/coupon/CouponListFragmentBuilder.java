@@ -13,6 +13,11 @@ public class CouponListFragmentBuilder {
     private int mSeparatorDrawable;
     private boolean mNoSeparator;
     private boolean mNoIcon;
+    private boolean mValidOnly = false;
+    private boolean mExpiredOnly = false;
+    private boolean mInactiveOnly = false;
+    private boolean mRedeemedOnly = false;
+    private boolean mIncludeRedeemed = false;
 
     public CouponListFragmentBuilder() {
     }
@@ -49,6 +54,31 @@ public class CouponListFragmentBuilder {
         return this;
     }
 
+    public CouponListFragmentBuilder getValidOnly() {
+        mValidOnly = true;
+        return this;
+    }
+
+    public CouponListFragmentBuilder getExpiredOnly() {
+        mExpiredOnly = true;
+        return this;
+    }
+
+    public CouponListFragmentBuilder getInactiveOnly() {
+        mInactiveOnly = true;
+        return this;
+    }
+
+    public CouponListFragmentBuilder getRedeemedOnly() {
+        mRedeemedOnly = true;
+        return this;
+    }
+
+    public CouponListFragmentBuilder includeRedeemed() {
+        mIncludeRedeemed = true;
+        return this;
+    }
+
     public NearItCouponListFragment build() {
         return NearItCouponListFragment.newInstance(getParams());
     }
@@ -58,7 +88,12 @@ public class CouponListFragmentBuilder {
                 mIconDrawable,
                 mSeparatorDrawable,
                 mNoSeparator,
-                mNoIcon);
+                mNoIcon,
+                mValidOnly,
+                mExpiredOnly,
+                mInactiveOnly,
+                mRedeemedOnly,
+                mIncludeRedeemed);
     }
 
 }

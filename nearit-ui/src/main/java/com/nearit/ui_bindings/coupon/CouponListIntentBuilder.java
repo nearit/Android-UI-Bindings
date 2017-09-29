@@ -14,6 +14,11 @@ public class CouponListIntentBuilder {
     private boolean mNoSeparator = false;
     private boolean mNoIcon = false;
     private boolean mEnableTapOutsideToClose = false;
+    private boolean mValidOnly = false;
+    private boolean mExpiredOnly = false;
+    private boolean mInactiveOnly = false;
+    private boolean mRedeemedOnly = false;
+    private boolean mIncludeRedeemed = false;
 
     public CouponListIntentBuilder(Context context) {
         mContext = context;
@@ -61,6 +66,32 @@ public class CouponListIntentBuilder {
         return this;
     }
 
+    public CouponListIntentBuilder getValidOnly() {
+        mValidOnly = true;
+        return this;
+    }
+
+    public CouponListIntentBuilder getExpiredOnly() {
+        mExpiredOnly = true;
+        return this;
+    }
+
+    public CouponListIntentBuilder getInactiveOnly() {
+        mInactiveOnly = true;
+        return this;
+    }
+
+    public CouponListIntentBuilder getRedeemedOnly() {
+        mRedeemedOnly = true;
+        return this;
+    }
+
+    public CouponListIntentBuilder includeRedeemed() {
+        mIncludeRedeemed = true;
+        return this;
+    }
+
+
     public Intent build() {
         return NearItCouponListActivity.createIntent(mContext, getParams());
     }
@@ -71,7 +102,12 @@ public class CouponListIntentBuilder {
                 mSeparatorDrawable,
                 mNoSeparator,
                 mNoIcon,
-                mEnableTapOutsideToClose);
+                mEnableTapOutsideToClose,
+                mValidOnly,
+                mExpiredOnly,
+                mInactiveOnly,
+                mRedeemedOnly,
+                mIncludeRedeemed);
     }
 
 }
