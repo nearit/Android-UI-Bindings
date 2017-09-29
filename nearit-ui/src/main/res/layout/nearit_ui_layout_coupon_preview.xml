@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:paddingRight="25dp"
-    android:paddingLeft="25dp"
-    android:paddingBottom="14dp"
-    android:layout_marginTop="10dp"
-    android:paddingTop="22dp"
+    android:layout_height="@dimen/nearit_ui_coupon_list_coupon_height"
+    android:paddingRight="@dimen/nearit_ui_coupon_list_coupon_padding_left_right"
+    android:paddingLeft="@dimen/nearit_ui_coupon_list_coupon_padding_left_right"
+    android:paddingBottom="@dimen/nearit_ui_coupon_list_coupon_padding_bottom"
+    android:layout_marginTop="@dimen/nearit_ui_coupon_list_coupon_margin1"
+    android:paddingTop="@dimen/nearit_ui_coupon_list_coupon_padding_top"
     android:background="@drawable/nearit_ui_coupon_list_coupon_background_selector"
     android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginRight="18dp">
+        android:id="@+id/coupon_icon_container"
+        android:layout_width="@dimen/nearit_ui_coupon_list_coupon_icon_width_height"
+        android:layout_height="@dimen/nearit_ui_coupon_list_coupon_icon_width_height"
+        android:layout_marginTop="@dimen/nearit_ui_coupon_list_coupon_margin2"
+        android:layout_marginRight="@dimen/nearit_ui_coupon_list_coupon_margin3">
 
         <ImageView
             android:id="@+id/coupon_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/nearit_ui_coupon_list_coupon_icon_width_height"
+            android:layout_height="@dimen/nearit_ui_coupon_list_coupon_icon_width_height"
             android:src="@drawable/ic_nearit_ui_brand_nearit_black"/>
 
         <ProgressBar
             android:id="@+id/coupon_icon_progress_bar"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_width="@dimen/nearit_ui_coupon_list_coupon_icon_width_height"
+            android:layout_height="@dimen/nearit_ui_coupon_list_coupon_icon_width_height" />
 
     </LinearLayout>
 
@@ -39,30 +40,30 @@
         <TextView
             android:id="@+id/coupon_title"
             android:layout_width="match_parent"
-            android:layout_height="19dp"
+            android:layout_height="@dimen/nearit_ui_coupon_list_coupon_title_height"
             android:gravity="center_vertical"
-            android:layout_marginRight="2dp"
-            android:textSize="15sp"
+            android:layout_marginRight="@dimen/nearit_ui_coupon_list_coupon_margin4"
+            android:textSize="@dimen/nearit_ui_coupon_list_coupon_title_text_size"
             android:textColor="@color/nearit_ui_black" />
 
         <TextView
             android:id="@+id/coupon_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="2dp"
-            android:layout_marginTop="9dp"
+            android:layout_marginRight="@dimen/nearit_ui_coupon_list_coupon_margin5"
+            android:layout_marginTop="@dimen/nearit_ui_coupon_list_coupon_margin6"
             android:gravity="center_vertical"
             android:maxLines="2"
             android:textColor="@color/nearit_ui_black"
-            android:textSize="20sp" />
+            android:textSize="@dimen/nearit_ui_coupon_list_coupon_value_text_size" />
 
         <TextView
             android:id="@+id/coupon_validity"
             android:layout_width="match_parent"
-            android:layout_height="17dp"
-            android:layout_marginTop="18dp"
+            android:layout_height="@dimen/nearit_ui_coupon_list_coupon_validity_height"
+            android:layout_marginTop="@dimen/nearit_ui_coupon_list_coupon_margin7"
             android:gravity="end"
-            android:textSize="13sp" />
+            android:textSize="@dimen/nearit_ui_coupon_list_coupon_validity_text_size" />
 
     </LinearLayout>
 

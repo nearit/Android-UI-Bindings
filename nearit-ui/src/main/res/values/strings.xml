@@ -5,6 +5,7 @@
     <string name="nearit_ui_bluetooth">BLUETOOTH</string>
     <string name="nearit_ui_location">LOCATION</string>
 
+    <string name="nearit_ui_coupon_valid_text">Valid coupon</string>
     <string name="nearit_ui_coupon_expired_text">Expired coupon</string>
     <string name="nearit_ui_coupon_inactive_text">Inactive coupon</string>
     <string name="nearit_ui_coupon_redeemed_text">Already used coupon</string>

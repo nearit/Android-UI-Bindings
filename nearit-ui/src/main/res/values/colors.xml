@@ -60,5 +60,6 @@
     <color name="nearit_ui_coupon_list_inactive_text_color">@color/nearit_ui_grey</color>
     <color name="nearit_ui_coupon_list_expired_text_color">@color/nearit_ui_scarlet_red</color>
     <color name="nearit_ui_coupon_list_background_color">@color/nearit_ui_white</color>
+    <color name="nearit_ui_coupon_list_redeemed_text_color">@color/nearit_ui_scarlet_red</color>
 
 </resources>

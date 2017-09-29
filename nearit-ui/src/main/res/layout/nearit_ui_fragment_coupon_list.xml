@@ -22,8 +22,8 @@
             android:id="@+id/coupons_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
+            android:paddingLeft="@dimen/nearit_ui_coupon_list_padding_left_right"
+            android:paddingRight="@dimen/nearit_ui_coupon_list_padding_left_right" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>
