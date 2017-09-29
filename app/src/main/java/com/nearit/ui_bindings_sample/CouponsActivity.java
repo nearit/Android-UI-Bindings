@@ -92,5 +92,17 @@ public class CouponsActivity extends AppCompatActivity {
             }
         });
 
+        Button couponList = (Button) findViewById(R.id.coupon_list);
+        couponList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  start an activity that shows a list of coupon
+                startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
+                        .createCouponListIntentBuilder()
+                        .build()
+                );
+            }
+        });
+
     }
 }
