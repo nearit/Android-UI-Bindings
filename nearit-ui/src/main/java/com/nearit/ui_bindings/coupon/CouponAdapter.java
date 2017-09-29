@@ -1,7 +1,6 @@
 package com.nearit.ui_bindings.coupon;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -30,15 +29,17 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Coupon> couponList;
     private Context context;
     private Item.CouponListener couponListener;
+    private int iconPlaceholderResId = 0;
 
-    CouponAdapter(Context context, Item.CouponListener couponListener) {
+    CouponAdapter(Context context, Item.CouponListener couponListener, int iconPlaceholderResId) {
         this.context = context;
         this.couponListener = couponListener;
+        this.iconPlaceholderResId = iconPlaceholderResId;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new Item(LayoutInflater.from(context).inflate(R.layout.nearit_ui_layout_coupon_preview, parent, false), couponListener, context);
+        return new Item(LayoutInflater.from(context).inflate(R.layout.nearit_ui_layout_coupon_preview, parent, false), couponListener, context, iconPlaceholderResId);
     }
 
     @Override
@@ -63,6 +64,7 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         CouponListener couponListener;
         Context context;
         View itemView;
+        int iconPlaceholderResId;
         @Nullable
         ImageView couponIcon;
         @Nullable
@@ -70,11 +72,12 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Nullable
         TextView couponTitle, couponValue, couponValidity;
 
-        Item(View itemView, CouponListener couponListener, Context context) {
+        Item(View itemView, CouponListener couponListener, Context context, int iconPlaceholderResId) {
             super(itemView);
             this.itemView = itemView;
             this.couponListener = couponListener;
             this.context = context;
+            this.iconPlaceholderResId = iconPlaceholderResId;
             couponIcon = (ImageView) itemView.findViewById(R.id.coupon_icon);
             iconProgressBar = (ProgressBar) itemView.findViewById(R.id.coupon_icon_progress_bar);
             couponTitle = (TextView) itemView.findViewById(R.id.coupon_title);
@@ -87,6 +90,11 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         void bindData(final Coupon coupon) {
+            if(iconPlaceholderResId != 0) {
+                if (couponIcon != null) {
+                    couponIcon.setImageResource(iconPlaceholderResId);
+                }
+            }
             if (coupon.getIconSet() != null) {
                 new LoadImageFromURL(couponIcon, iconProgressBar).execute(coupon.getIconSet().getFullSize());
             }

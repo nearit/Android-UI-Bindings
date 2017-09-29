@@ -95,7 +95,7 @@ class CouponListExtraParams implements Parcelable {
         return enableTapOutsideToClose;
     }
 
-    public boolean isNoSeparator() {
+    boolean isNoSeparator() {
         return noSeparator;
     }
 }

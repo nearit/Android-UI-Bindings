@@ -31,9 +31,10 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
     @Nullable
     private SwipeRefreshLayout refreshLayout;
     private CouponAdapter couponAdapter;
-    private LinearLayoutManager layoutManager;
-    private RecyclerView couponsRecyclerView;
     private TextView noCouponPlaceholder;
+
+    private int separatorDrawable = 0, iconDrawable = 0;
+    private boolean noSeparator = false;
 
     public NearItCouponListFragment() {
     }
@@ -52,7 +53,9 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
 
         CouponListExtraParams extras = getArguments().getParcelable(ARG_EXTRAS);
         if (extras != null) {
-
+            separatorDrawable = extras.getSeparatorDrawable();
+            iconDrawable = extras.getIconDrawable();
+            noSeparator = extras.isNoSeparator();
         }
 
     }
@@ -63,9 +66,9 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
 
         noCouponPlaceholder = (TextView) rootView.findViewById(R.id.no_coupons_text);
 
-        couponAdapter = new CouponAdapter(getContext(), this);
-        layoutManager = new LinearLayoutManager(getContext());
-        couponsRecyclerView = rootView.findViewById(R.id.coupons_list);
+        couponAdapter = new CouponAdapter(getContext(), this, iconDrawable);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        RecyclerView couponsRecyclerView = rootView.findViewById(R.id.coupons_list);
         couponsRecyclerView.setLayoutManager(layoutManager);
         couponsRecyclerView.setAdapter(couponAdapter);
 
@@ -134,6 +137,16 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
 
     @Override
     public void onCouponClicked(Coupon coupon) {
-        startActivity(NearITUIBindings.getInstance(getContext()).createCouponDetailIntentBuilder(coupon).build());
+        CouponDetailIntentBuilder builder = NearITUIBindings.getInstance(getContext()).createCouponDetailIntentBuilder(coupon);
+        if (noSeparator) {
+            builder.setNoSeparator();
+        }
+        if (iconDrawable != 0) {
+            builder.setIconPlaceholderResourceId(iconDrawable);
+        }
+        if (separatorDrawable != 0) {
+            builder.setSeparatorResourceId(separatorDrawable);
+        }
+        startActivity(builder.build());
     }
 }
