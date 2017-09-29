@@ -34,7 +34,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
     private TextView noCouponPlaceholder;
 
     private int separatorDrawable = 0, iconDrawable = 0;
-    private boolean noSeparator = false;
+    private boolean noSeparator = false, noIcon;
 
     public NearItCouponListFragment() {
     }
@@ -56,6 +56,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
             separatorDrawable = extras.getSeparatorDrawable();
             iconDrawable = extras.getIconDrawable();
             noSeparator = extras.isNoSeparator();
+            noIcon = extras.isNoIcon();
         }
 
     }
@@ -64,9 +65,9 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_coupon_list, container, false);
 
-        noCouponPlaceholder = (TextView) rootView.findViewById(R.id.no_coupons_text);
+        noCouponPlaceholder = rootView.findViewById(R.id.no_coupons_text);
 
-        couponAdapter = new CouponAdapter(getContext(), this, iconDrawable);
+        couponAdapter = new CouponAdapter(getContext(), this, iconDrawable, noIcon);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         RecyclerView couponsRecyclerView = rootView.findViewById(R.id.coupons_list);
         couponsRecyclerView.setLayoutManager(layoutManager);
@@ -88,7 +89,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
         }
         Collections.shuffle(couponList);
 
-        refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.refresh_layout);
+        refreshLayout = rootView.findViewById(R.id.refresh_layout);
         if (refreshLayout != null) {
             refreshLayout.post(new Runnable() {
                 @Override

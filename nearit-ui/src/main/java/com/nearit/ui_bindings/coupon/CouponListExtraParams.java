@@ -16,13 +16,23 @@ class CouponListExtraParams implements Parcelable {
     private final int iconDrawable;
     private final int separatorDrawable;
     private final boolean noSeparator;
+    private final boolean noIcon;
     private final boolean enableTapOutsideToClose;
 
-    CouponListExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean enableTapOutsideToClose) {
+    CouponListExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean noIcon, boolean enableTapOutsideToClose) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
         this.noSeparator = noSeparator;
+        this.noIcon = noIcon;
         this.enableTapOutsideToClose = enableTapOutsideToClose;
+    }
+
+    CouponListExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean noIcon) {
+        this.iconDrawable = iconDrawable;
+        this.separatorDrawable = separatorDrawable;
+        this.noSeparator = noSeparator;
+        this.noIcon = noIcon;
+        this.enableTapOutsideToClose = false;
     }
 
     /**
@@ -54,12 +64,14 @@ class CouponListExtraParams implements Parcelable {
         public CouponListExtraParams createFromParcel(Parcel in) {
             int iconDrawable = in.readInt();
             int separatorDrawable = in.readInt();
-            boolean noSeparator = in.readInt() !=0;
-            boolean enableTapToClose = in.readInt() !=0;
+            boolean noSeparator = in.readInt() != 0;
+            boolean noIcon = in.readInt() != 0;
+            boolean enableTapToClose = in.readInt() != 0;
             return new CouponListExtraParams(
                     iconDrawable,
                     separatorDrawable,
                     noSeparator,
+                    noIcon,
                     enableTapToClose
             );
         }
@@ -80,6 +92,7 @@ class CouponListExtraParams implements Parcelable {
         dest.writeInt(iconDrawable);
         dest.writeInt(separatorDrawable);
         dest.writeInt(noSeparator ? 1 : 0);
+        dest.writeInt(noIcon ? 1 : 0);
         dest.writeInt(enableTapOutsideToClose ? 1 : 0);
     }
 
@@ -97,5 +110,9 @@ class CouponListExtraParams implements Parcelable {
 
     boolean isNoSeparator() {
         return noSeparator;
+    }
+
+    boolean isNoIcon() {
+        return noIcon;
     }
 }

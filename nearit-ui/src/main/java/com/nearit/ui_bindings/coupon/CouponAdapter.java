@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -30,16 +31,18 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private Item.CouponListener couponListener;
     private int iconPlaceholderResId = 0;
+    private boolean noIcon;
 
-    CouponAdapter(Context context, Item.CouponListener couponListener, int iconPlaceholderResId) {
+    CouponAdapter(Context context, Item.CouponListener couponListener, int iconPlaceholderResId, boolean noIcon) {
         this.context = context;
         this.couponListener = couponListener;
         this.iconPlaceholderResId = iconPlaceholderResId;
+        this.noIcon = noIcon;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new Item(LayoutInflater.from(context).inflate(R.layout.nearit_ui_layout_coupon_preview, parent, false), couponListener, context, iconPlaceholderResId);
+        return new Item(LayoutInflater.from(context).inflate(R.layout.nearit_ui_layout_coupon_preview, parent, false), couponListener, context, iconPlaceholderResId, noIcon);
     }
 
     @Override
@@ -65,6 +68,7 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         Context context;
         View itemView;
         int iconPlaceholderResId;
+        boolean noIcon;
         @Nullable
         ImageView couponIcon;
         @Nullable
@@ -72,17 +76,18 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Nullable
         TextView couponTitle, couponValue, couponValidity;
 
-        Item(View itemView, CouponListener couponListener, Context context, int iconPlaceholderResId) {
+        Item(View itemView, CouponListener couponListener, Context context, int iconPlaceholderResId, boolean noIcon) {
             super(itemView);
             this.itemView = itemView;
             this.couponListener = couponListener;
             this.context = context;
             this.iconPlaceholderResId = iconPlaceholderResId;
-            couponIcon = (ImageView) itemView.findViewById(R.id.coupon_icon);
-            iconProgressBar = (ProgressBar) itemView.findViewById(R.id.coupon_icon_progress_bar);
-            couponTitle = (TextView) itemView.findViewById(R.id.coupon_title);
-            couponValue = (TextView) itemView.findViewById(R.id.coupon_value);
-            couponValidity = (TextView) itemView.findViewById(R.id.coupon_validity);
+            this.noIcon = noIcon;
+            couponIcon = itemView.findViewById(R.id.coupon_icon);
+            iconProgressBar = itemView.findViewById(R.id.coupon_icon_progress_bar);
+            couponTitle = itemView.findViewById(R.id.coupon_title);
+            couponValue = itemView.findViewById(R.id.coupon_value);
+            couponValidity = itemView.findViewById(R.id.coupon_validity);
         }
 
         interface CouponListener {
@@ -90,13 +95,22 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         void bindData(final Coupon coupon) {
-            if(iconPlaceholderResId != 0) {
+            if(noIcon) {
                 if (couponIcon != null) {
-                    couponIcon.setImageResource(iconPlaceholderResId);
+                    couponIcon.setVisibility(View.GONE);
                 }
-            }
-            if (coupon.getIconSet() != null) {
-                new LoadImageFromURL(couponIcon, iconProgressBar).execute(coupon.getIconSet().getFullSize());
+                if (iconProgressBar != null) {
+                    iconProgressBar.setVisibility(View.GONE);
+                }
+            } else {
+                if(iconPlaceholderResId != 0) {
+                    if (couponIcon != null) {
+                        couponIcon.setImageResource(iconPlaceholderResId);
+                    }
+                }
+                if (coupon.getIconSet() != null) {
+                    new LoadImageFromURL(couponIcon, iconProgressBar).execute(coupon.getIconSet().getFullSize());
+                }
             }
             if (couponTitle != null) {
                 couponTitle.setText(coupon.name);
@@ -104,7 +118,7 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (couponValue != null) {
                 couponValue.setText(coupon.value);
             }
-            setValidity(coupon.getRedeemableFromDate(), coupon.getExpiresAtDate());
+            setValidity(coupon.getRedeemableFromDate(), coupon.getExpiresAtDate(), coupon.getRedeemedAtDate());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -113,27 +127,34 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             });
         }
 
-        void setValidity(@Nullable Date redeemableFrom, @Nullable Date expiresAt) {
-            if (expiresAt != null) {
-                if (System.currentTimeMillis() < expiresAt.getTime()) {
-                    if (redeemableFrom != null) {
-                        if (System.currentTimeMillis() > redeemableFrom.getTime()) {
-                            if (couponValidity != null) {
-                                couponValidity.setText("Valid coupon");
+        void setValidity(@Nullable Date redeemableFrom, @Nullable Date expiresAt, @Nullable Date redeemedAt) {
+            if (redeemedAt != null) {
+                if (couponValidity != null) {
+                    couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_redeemed_text));
+                }
+                couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_redeemed_text_color));
+            } else {
+                if (expiresAt != null) {
+                    if (System.currentTimeMillis() < expiresAt.getTime()) {
+                        if (redeemableFrom != null) {
+                            if (System.currentTimeMillis() > redeemableFrom.getTime()) {
+                                if (couponValidity != null) {
+                                    couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_valid_text));
+                                }
+                                couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_valid_text_color));
+                            } else {
+                                if (couponValidity != null) {
+                                    couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_inactive_text));
+                                }
+                                couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_inactive_text_color));
                             }
-                            couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_valid_text_color));
-                        } else {
-                            if (couponValidity != null) {
-                                couponValidity.setText("Inactive coupon");
-                            }
-                            couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_inactive_text_color));
                         }
+                    } else {
+                        if (couponValidity != null) {
+                            couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_expired_text));
+                        }
+                        couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_expired_text_color));
                     }
-                } else {
-                    if (couponValidity != null) {
-                        couponValidity.setText("Expired coupon");
-                    }
-                    couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_expired_text_color));
                 }
             }
         }

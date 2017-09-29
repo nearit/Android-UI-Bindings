@@ -12,6 +12,7 @@ public class CouponListFragmentBuilder {
     private int mIconDrawable;
     private int mSeparatorDrawable;
     private boolean mNoSeparator;
+    private boolean mNoIcon;
 
     public CouponListFragmentBuilder() {
     }
@@ -40,15 +41,24 @@ public class CouponListFragmentBuilder {
         return this;
     }
 
+    /**
+     * Sets no icon
+     */
+    public CouponListFragmentBuilder setNoIcon() {
+        mNoIcon = true;
+        return this;
+    }
+
     public NearItCouponListFragment build() {
         return NearItCouponListFragment.newInstance(getParams());
     }
 
-    private CouponDetailExtraParams getParams() {
-        return new CouponDetailExtraParams(
+    private CouponListExtraParams getParams() {
+        return new CouponListExtraParams(
                 mIconDrawable,
                 mSeparatorDrawable,
-                mNoSeparator);
+                mNoSeparator,
+                mNoIcon);
     }
 
 }

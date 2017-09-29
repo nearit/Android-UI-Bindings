@@ -3,8 +3,6 @@ package com.nearit.ui_bindings.coupon;
 import android.content.Context;
 import android.content.Intent;
 
-import it.near.sdk.reactions.couponplugin.model.Coupon;
-
 /**
  * Created by Federico Boschini on 06/09/17.
  */
@@ -14,6 +12,7 @@ public class CouponListIntentBuilder {
     private int mIconDrawable;
     private int mSeparatorDrawable;
     private boolean mNoSeparator = false;
+    private boolean mNoIcon = false;
     private boolean mEnableTapOutsideToClose = false;
 
     public CouponListIntentBuilder(Context context) {
@@ -45,6 +44,14 @@ public class CouponListIntentBuilder {
     }
 
     /**
+     * Sets no icon
+     */
+    public CouponListIntentBuilder setNoIcon() {
+        mNoIcon = true;
+        return this;
+    }
+
+    /**
      * Enables or disables tap outside the dialog to close
      * <p>
      * <p> default is false
@@ -63,6 +70,7 @@ public class CouponListIntentBuilder {
                 mIconDrawable,
                 mSeparatorDrawable,
                 mNoSeparator,
+                mNoIcon,
                 mEnableTapOutsideToClose);
     }
 
