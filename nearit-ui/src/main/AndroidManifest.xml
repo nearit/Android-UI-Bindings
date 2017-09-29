@@ -15,10 +15,15 @@
             android:name=".coupon.NearItCouponDetailActivity"
             android:launchMode="singleInstance"
             android:theme="@style/NearItUICouponDetailDialog" />
+
         <activity
             android:name=".feedback.NearItFeedbackActivity"
             android:launchMode="singleInstance"
             android:theme="@style/NearItUIFeedbackDialog" />
+
+        <activity
+            android:name=".coupon.NearItCouponListActivity"
+            android:launchMode="singleInstance" />
     </application>
 
 </manifest>
