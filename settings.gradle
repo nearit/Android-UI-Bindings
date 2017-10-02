@@ -1,1 +1,1 @@
-include ':app', ':nearit-ui', ':nearXing'
+include ':app', ':nearit-ui'
