@@ -34,7 +34,6 @@ public class NearItCouponListActivity extends AppCompatActivity {
             isEnableTapToClose = extras.isEnableTapOutsideToClose();
         }
 
-
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.coupons_fragment_container, NearItCouponListFragment.newInstance(extras))

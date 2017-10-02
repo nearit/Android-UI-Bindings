@@ -85,7 +85,7 @@ public class NearItCouponDetailFragment extends Fragment {
         }
 
         if (iconDrawable != 0 && couponIcon != null) {
-            couponIcon.setBackgroundResource(iconDrawable);
+            couponIcon.setImageResource(iconDrawable);
         }
 
         if (coupon.getIconSet() != null) {

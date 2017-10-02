@@ -51,7 +51,7 @@
                     android:layout_width="@dimen/nearit_ui_coupon_detail_icon_dimensions"
                     android:layout_height="@dimen/nearit_ui_coupon_detail_icon_dimensions"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/ic_nearit_ui_brand_nearit_black" />
+                    android:src="@drawable/ic_nearit_ui_brand_nearit_black" />
 
                 <TextView
                     android:id="@+id/coupon_name"

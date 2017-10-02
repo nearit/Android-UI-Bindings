@@ -96,9 +96,74 @@ public class CouponsActivity extends AppCompatActivity {
         couponList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  start an activity that shows a list of coupon
+                //  start an activity that shows a list of coupons
                 startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
                         .createCouponListIntentBuilder()
+                        .build()
+                );
+            }
+        });
+
+        Button validCouponList = (Button) findViewById(R.id.valid_coupon_list);
+        validCouponList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  start an activity that shows a list of valid coupons
+                startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
+                        .createCouponListIntentBuilder()
+                        .getValidOnly()
+                        .build()
+                );
+            }
+        });
+
+        Button expiredCouponList = (Button) findViewById(R.id.expired_coupon_list);
+        expiredCouponList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  start an activity that shows a list of expired coupons
+                startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
+                        .createCouponListIntentBuilder()
+                        .getExpiredOnly()
+                        .build()
+                );
+            }
+        });
+
+        Button inactiveCouponList = (Button) findViewById(R.id.inactive_coupon_list);
+        inactiveCouponList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  start an activity that shows a list of inactive coupons
+                startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
+                        .createCouponListIntentBuilder()
+                        .getInactiveOnly()
+                        .build()
+                );
+            }
+        });
+
+        Button redeemedCouponList = (Button) findViewById(R.id.redeemed_coupon_list);
+        redeemedCouponList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  start an activity that shows a list of already redeemed coupons
+                startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
+                        .createCouponListIntentBuilder()
+                        .getRedeemedOnly()
+                        .build()
+                );
+            }
+        });
+
+        Button completeList = (Button) findViewById(R.id.include_redeemed_coupon_list);
+        completeList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  start an activity that shows the complete list of coupons
+                startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
+                        .createCouponListIntentBuilder()
+                        .includeRedeemed()
                         .build()
                 );
             }

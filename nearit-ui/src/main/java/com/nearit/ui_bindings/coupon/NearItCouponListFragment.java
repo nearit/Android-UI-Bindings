@@ -36,7 +36,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
 
     private int separatorDrawable = 0, iconDrawable = 0;
     private boolean noSeparator = false, noIcon;
-    private boolean validOnly = false, expiredOnly = false, inactiveOnly = false, redeemedOnly = false, includeRedeemed = false;
+    private boolean validOnly, expiredOnly, inactiveOnly, redeemedOnly, includeRedeemed;
 
     public NearItCouponListFragment() {
     }
@@ -74,28 +74,6 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
 
         noCouponPlaceholder = rootView.findViewById(R.id.no_coupons_text);
 
-        couponAdapter = new CouponAdapter(getContext(), this, iconDrawable, noIcon);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        RecyclerView couponsRecyclerView = rootView.findViewById(R.id.coupons_list);
-        couponsRecyclerView.setLayoutManager(layoutManager);
-        couponsRecyclerView.setAdapter(couponAdapter);
-
-        couponList = new ArrayList();
-
-        for (int i = 0; i <= 5; i++) {
-            CouponFactory cf = new CouponFactory();
-            couponList.add(cf.getValidCoupon());
-        }
-        for (int i = 0; i <= 5; i++) {
-            CouponFactory cf = new CouponFactory();
-            couponList.add(cf.getInactiveCoupon());
-        }
-        for (int i = 0; i <= 5; i++) {
-            CouponFactory cf = new CouponFactory();
-            couponList.add(cf.getExpiredCoupon());
-        }
-        Collections.shuffle(couponList);
-
         refreshLayout = rootView.findViewById(R.id.refresh_layout);
         if (refreshLayout != null) {
             refreshLayout.post(new Runnable() {
@@ -114,6 +92,12 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
             });
         }
 
+        couponAdapter = new CouponAdapter(getContext(), this, iconDrawable, noIcon);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        RecyclerView couponsRecyclerView = rootView.findViewById(R.id.coupons_list);
+        couponsRecyclerView.setLayoutManager(layoutManager);
+        couponsRecyclerView.setAdapter(couponAdapter);
+
         return rootView;
     }
 
@@ -121,21 +105,20 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
         NearItManager.getInstance().getCoupons(new CouponListener() {
             @Override
             public void onCouponsDownloaded(List<Coupon> list) {
-                if (list.size() > 0) {
-                    couponList = list;
-                }
-                if (!includeRedeemed) {
+                couponList = list;
+
+                if (!includeRedeemed && !redeemedOnly) {
                     couponList = filterCoupons(couponList);
-                } else {
-                    if (validOnly) {
-                        couponList = getValidOnly(couponList);
-                    } else if (inactiveOnly) {
-                        couponList = getInactiveOnly(couponList);
-                    } else if (expiredOnly) {
-                        couponList = getExpiredOnly(couponList);
-                    } else if (redeemedOnly) {
-                        couponList = getRedeemedOnly(couponList);
-                    }
+                }
+
+                if (validOnly) {
+                    couponList = getValidOnly(couponList);
+                } else if (inactiveOnly) {
+                    couponList = getInactiveOnly(couponList);
+                } else if (expiredOnly) {
+                    couponList = getExpiredOnly(couponList);
+                } else if (redeemedOnly) {
+                    couponList = getRedeemedOnly(couponList);
                 }
 
                 couponAdapter.addData(couponList);
@@ -150,6 +133,12 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
 
             @Override
             public void onCouponDownloadError(String s) {
+                couponList = new ArrayList<>();
+                couponAdapter.addData(couponList);
+                couponAdapter.notifyDataSetChanged();
+                if (couponAdapter.getItemCount() == 0) {
+                    noCouponPlaceholder.setVisibility(View.VISIBLE);
+                }
                 if (refreshLayout != null) {
                     refreshLayout.setRefreshing(false);
                 }
@@ -172,11 +161,15 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
         startActivity(builder.build());
     }
 
+    /**
+     * excludes already redeemed coupons (default)
+     */
     private List<Coupon> filterCoupons(List<Coupon> couponList) {
         Iterator<Coupon> iterator = couponList.iterator();
         while (iterator.hasNext()) {
-            if (iterator.next().getRedeemedAtDate() != null) {
-                couponList.remove(iterator.next());
+            Coupon c = iterator.next();
+            if (c.getRedeemedAtDate() != null) {
+                iterator.remove();
             }
         }
         return couponList;
@@ -185,15 +178,12 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
     private List<Coupon> getValidOnly(List<Coupon> couponList) {
         Iterator<Coupon> iterator = couponList.iterator();
         while (iterator.hasNext()) {
-            if (iterator.next().getExpiresAtDate() != null) {
-                couponList.remove(iterator.next());
-            } else {
-                if (iterator.next().getExpiresAtDate() != null && iterator.next().getExpiresAtDate().getTime() < System.currentTimeMillis()) {
-                    couponList.remove(iterator.next());
-                }
-                if (iterator.next().getRedeemableFromDate() != null && iterator.next().getRedeemableFromDate().getTime() > System.currentTimeMillis()) {
-                    couponList.remove(iterator.next());
-                }
+            Coupon c = iterator.next();
+            if (c.getExpiresAtDate() != null && c.getExpiresAtDate().getTime() < System.currentTimeMillis()) {
+                iterator.remove();
+            }
+            if (c.getRedeemableFromDate() != null && c.getRedeemableFromDate().getTime() > System.currentTimeMillis()) {
+                iterator.remove();
             }
         }
         return couponList;
@@ -202,11 +192,12 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
     private List<Coupon> getExpiredOnly(List<Coupon> couponList) {
         Iterator<Coupon> iterator = couponList.iterator();
         while (iterator.hasNext()) {
-            if (iterator.next().getExpiresAtDate() != null) {
-                couponList.remove(iterator.next());
+            Coupon c = iterator.next();
+            if (c.getExpiresAtDate() == null) {
+                iterator.remove();
             } else {
-                if (iterator.next().getExpiresAtDate() != null && !(iterator.next().getExpiresAtDate().getTime() < System.currentTimeMillis())) {
-                    couponList.remove(iterator.next());
+                if (c.getExpiresAtDate() != null && !(c.getExpiresAtDate().getTime() < System.currentTimeMillis())) {
+                    iterator.remove();
                 }
             }
         }
@@ -216,12 +207,12 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
     private List<Coupon> getInactiveOnly(List<Coupon> couponList) {
         Iterator<Coupon> iterator = couponList.iterator();
         while (iterator.hasNext()) {
-            if (iterator.next().getExpiresAtDate() != null) {
-                couponList.remove(iterator.next());
-            } else {
-                if (iterator.next().getRedeemableFromDate() != null && !(iterator.next().getRedeemableFromDate().getTime() > System.currentTimeMillis())) {
-                    couponList.remove(iterator.next());
-                }
+            Coupon c = iterator.next();
+            if (c.getRedeemableFromDate() == null) {
+                iterator.remove();
+            }
+            if (c.getRedeemableFromDate() != null && !(c.getRedeemableFromDate().getTime() > System.currentTimeMillis())) {
+                iterator.remove();
             }
         }
         return couponList;
@@ -230,8 +221,9 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
     private List<Coupon> getRedeemedOnly(List<Coupon> couponList) {
         Iterator<Coupon> iterator = couponList.iterator();
         while (iterator.hasNext()) {
-            if (iterator.next().getExpiresAtDate() == null) {
-                couponList.remove(iterator.next());
+            Coupon c = iterator.next();
+            if (c.getRedeemedAtDate() == null) {
+                iterator.remove();
             }
         }
         return couponList;
