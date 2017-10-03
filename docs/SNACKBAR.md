@@ -31,13 +31,13 @@ It is **important** that you pass an Activity reference to the snackbar: by doin
 To set the activity use the following method:
 
 ```java
-snackbar.setActivity(this, NEAR_PERMISSION_REQUEST);
+snackbar.setActivity(YourActivity.this, NEAR_PERMISSION_REQUEST);
 ```
 
 where `NEAR_PERMISSION_REQUEST` is an int value defined by you that will identify the request.
 Then in your activity you should catch the `result` by referring to the same request code.
 
-Because the permissions request flow launched by the `OK!` button is the same provided [here](PERMISSIONS.md), you can customize the behaviour and look.
+Because the permissions request flow launched by the `OK!` button is the same provided [here](PERMISSIONS.md), you can customize its behaviour and look.
 When you add the xml element you can set some attributes:
 
 ```xml
