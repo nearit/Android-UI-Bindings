@@ -24,4 +24,7 @@
     <string name="nearit_ui_feedback_send_button_default_text">SEND</string>
     
     <string name="nearit_ui_coupon_list_empty_list_text">No coupons available</string>
+    <string name="nearit_ui_warning_dialog_button_text">RETRY</string>
+    <string name="nearit_ui_warning_dialog_close_text">Close</string>
+    <string name="nearit_ui_warning_dialog_message">Network problem</string>
 </resources>

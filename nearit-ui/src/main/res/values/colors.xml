@@ -62,4 +62,9 @@
     <color name="nearit_ui_coupon_list_background_color">@color/nearit_ui_white</color>
     <color name="nearit_ui_coupon_list_redeemed_text_color">@color/nearit_ui_scarlet_red</color>
 
+    <color name="nearit_ui_warning_dialog_text_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_warning_dialog_button_pressed_color">@color/nearit_ui_error_color_50</color>
+    <color name="nearit_ui_warning_dialog_button_color">@color/nearit_ui_error_color</color>
+    <color name="nearit_ui_warning_dialog_button_text_color">@color/nearit_ui_real_white</color>
+
 </resources>

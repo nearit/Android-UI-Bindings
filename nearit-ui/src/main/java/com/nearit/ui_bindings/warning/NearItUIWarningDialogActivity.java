@@ -1,0 +1,54 @@
+package com.nearit.ui_bindings.warning;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.TextView;
+
+import com.nearit.ui_bindings.R;
+import com.nearit.ui_bindings.warning.views.NearItUIRetryButton;
+
+/**
+ * Created by Federico Boschini on 03/10/17.
+ */
+
+public class NearItUIWarningDialogActivity extends AppCompatActivity {
+
+    private static final int NEAR_RETRY_CODE = 1111;
+    private static final int NEAR_CLOSE_CODE = 2222;
+
+    NearItUIRetryButton retryButton;
+    TextView closeButton;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.nearit_ui_layout_network_warning);
+        retryButton = (NearItUIRetryButton) findViewById(R.id.retry_button);
+        retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(NEAR_RETRY_CODE);
+                finish();
+            }
+        });
+
+        closeButton = (TextView) findViewById(R.id.close_dialog_text);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(NEAR_CLOSE_CODE);
+                finish();
+            }
+        });
+
+    }
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, NearItUIWarningDialogActivity.class);
+    }
+
+}
