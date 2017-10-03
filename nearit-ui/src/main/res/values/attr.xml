@@ -4,4 +4,7 @@
         <attr name="buttonText" format="string" />
         <attr name="iconRes" format="reference" />
     </declare-styleable>
+    <declare-styleable name="NearItUIButtonView">
+        <attr name="genericButtonText" format="string" />
+    </declare-styleable>
 </resources>

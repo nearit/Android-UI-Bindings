@@ -58,6 +58,7 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
     private boolean isNonBlockingBeacon = false;
     private boolean isAutoStartRadar = false;
     private int headerDrawable = 0;
+    private boolean isNoHeader = false;
 
     @Nullable
     private PermissionButton locationButton;
@@ -81,6 +82,7 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
             isNonBlockingBeacon = params.isNonBlockingBeacon();
             isAutoStartRadar = params.isAutoStartRadar();
             headerDrawable = params.getHeaderDrawable();
+            isNoHeader = params.isNoHeader();
         }
 
         if (!isBleAvailable()) {
@@ -128,7 +130,9 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
         super.onStart();
 //        locationPermissionGranted = Build.VERSION.SDK_INT < Build.VERSION_CODES.M || checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
 
-        if (headerImageView != null && headerDrawable != 0) {
+        if (isNoHeader && headerImageView != null) {
+            headerImageView.setVisibility(View.GONE);
+        } else if (headerImageView != null && headerDrawable != 0) {
             headerImageView.setBackgroundResource(headerDrawable);
         }
 
@@ -270,6 +274,9 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        setLocationButton();
+        setBluetoothButton();
+        
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == NEAR_PERMISSION_REQUEST_FINE_LOCATION) {
             if (grantResults.length > 0
