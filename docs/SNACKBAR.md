@@ -5,9 +5,9 @@ Your app should ask the user to grant location permission and to turn on the blu
 If you want to show a persistent snackbar that alert the user if any permission is missing, this library provides a convenient `View`.
 This snackbar visually specifies what is missing (by showing/hiding the two icons) and will automatically hide itself when every permission has been granted.
 
-[!missing_both](docs/snackbar.gif)
-[!missing_bt](docs/missing_bt.png)
-[!missing_loc](docs/missing_loc.png)
+![missing_both](docs/snackbar.gif)
+![missing_bt](docs/missing_bt.png)
+![missing_loc](docs/missing_loc.png)
 
 Add the following xml element where you want to show the snackbar
 
@@ -26,7 +26,7 @@ PermissionSnackbar snackbar = (PermissionSnackbar) findViewById(R.id.permission_
 
 It is **important** that you pass an Activity reference to the snackbar: by doing this, clicking the snackbar button will cause the launch of the permissions request flow.
 
-[!snackbar](docs/snackbar.gif)
+![snackbar](docs/snackbar.gif)
 
 To set the activity use the following method:
 
