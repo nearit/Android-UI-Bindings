@@ -1,4 +1,4 @@
-#NearIt-UI for missing permissions alert
+# NearIt-UI for missing permissions alert
 
 Your app should ask the user to grant location permission and to turn on the bluetooth (if your use case implies beacons).
 
