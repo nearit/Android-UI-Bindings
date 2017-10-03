@@ -50,11 +50,11 @@ buildProperties {
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName version
 
@@ -74,17 +74,17 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
 }
 
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
+//task javadoc(type: Javadoc) {
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+//
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
 artifacts {
-    archives javadocJar
+//    archives javadocJar
     archives sourcesJar
 }
 
@@ -96,7 +96,7 @@ bintray {
     pkg {
         repo = 'maven'
         name = 'it.near.sdk:nearit-ui'
-        vcsUrl = 'https://bitbucket.org/Synapsev2/nearit-ui-android.git'
+        vcsUrl = 'https://github.com/nearit/Android-UI-Bindings.git'
         websiteUrl = 'https://nearit.com'
 
         licenses = ['MIT']
@@ -112,12 +112,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile project(':nearXing')
-
-
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:support-compat:26.1.0'
     compile 'com.android.support:recyclerview-v7:26.1.0'
+    compile 'com.android.support:appcompat-v7:26.1.0'
     testCompile 'junit:junit:4.12'
     provided 'it.near.sdk:nearit:[2.2.0, 2.2.2]'
 }

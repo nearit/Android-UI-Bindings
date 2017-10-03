@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.nearit.strippedzxing.BarcodeFormat;
-import com.nearit.strippedzxing.WriterException;
-import com.nearit.strippedzxing.common.BitMatrix;
-import com.nearit.strippedzxing.qrcode.QRCodeWriter;
+import com.nearit.ui_bindings.nearXing.BarcodeFormat;
+import com.nearit.ui_bindings.nearXing.WriterException;
+import com.nearit.ui_bindings.nearXing.common.BitMatrix;
+import com.nearit.ui_bindings.nearXing.qrcode.QRCodeWriter;
 
 /**
  * Created by Federico Boschini on 07/09/17.
