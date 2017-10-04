@@ -2,18 +2,18 @@
 
 Your app should ask the user to grant location permission and to turn on the bluetooth (if your use case implies beacons).
 
-If you want to show a persistent snackbar that alert the user if any permission is missing, this library provides a convenient `View`.
-This snackbar visually specifies what is missing (by showing/hiding the two icons) and will automatically hide itself when every permission has been granted.
+If you want to show a persistent bar that alert the user if any permission is missing, this library provides a convenient `View`.
+This bar visually specifies what is missing (by showing/hiding the two icons) and will automatically hide itself when every permission has been granted.
 
 ![missing_both](missing_both.png)
 ![missing_bt](missing_bt.png)
 ![missing_loc](missing_loc.png)
 
-Add the following xml element where you want to show the snackbar
+Add the following xml element where you want to show the bar
 
 ```xml
-<com.nearit.ui_bindings.permissions.views.PermissionSnackbar
-        android:id="@+id/permission_snackbar"
+<com.nearit.ui_bindings.permissions.views.PermissionBar
+        android:id="@+id/permission_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 ```
@@ -21,17 +21,17 @@ Add the following xml element where you want to show the snackbar
 and keep a reference in your activity
 
 ```java
-PermissionSnackbar snackbar = (PermissionSnackbar) findViewById(R.id.permission_snackbar);
+PermissionBar bar = (PermissionBar) findViewById(R.id.permission_bar);
 ```
 
-It is **important** that you pass an Activity reference to the snackbar: by doing this, clicking the snackbar button will cause the launch of the permissions request flow.
+It is **important** that you pass an Activity reference to the bar: by doing this, clicking the bar button will cause the launch of the permissions request flow.
 
-![snackbar](snackbar.gif)
+![bar](bar.gif)
 
-To set the activity use the following method:
+To set the activity use the following method in your activity `onCreate`:
 
 ```java
-snackbar.bindToActivity(YourActivity.this, NEAR_PERMISSION_REQUEST);
+bar.bindToActivity(YourActivity.this, NEAR_PERMISSION_REQUEST);
 ```
 
 where `NEAR_PERMISSION_REQUEST` is an int value defined by you that will identify the request made by the view.
@@ -51,18 +51,18 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 
-To unbind the activity call the following method in your activity `onStop`
+To unbind the activity call the following method in your activity `onDestroy`
 
 ```java
-snackbar.unbindFromActivity();
+bar.unbindFromActivity();
 ```
 
 Because the permissions request flow launched by the `OK!` button is the same provided [here](PERMISSIONS.md), you can customize its behaviour and look.
 When you add the xml element you can set some attributes:
 
 ```xml
-<com.nearit.ui_bindings.permissions.views.PermissionSnackbar
-        android:id="@+id/permission_snackbar"
+<com.nearit.ui_bindings.permissions.views.PermissionBar
+        android:id="@+id/permission_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         
@@ -77,15 +77,15 @@ Please read the permission UI [section](PERMISSIONS.md) of these docs to have a 
 
 ## UI customization
 
-If you want to change the alert message, add the following attribute to the `PermissionSnackbar` element of your layout:
+If you want to change the alert message, add the following attribute to the `PermissionBar` element of your layout:
 
 ```xml
-<com.nearit.ui_bindings.permissions.views.PermissionSnackbar
-        android:id="@+id/permission_snackbar"
+<com.nearit.ui_bindings.permissions.views.PermissionBar
+        android:id="@+id/permission_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         
-        app:snackbarAlertText="Your custom alert message"
+        app:barAlertText="Your custom alert message"
         
         />
 ```
@@ -93,25 +93,25 @@ If you want to change the alert message, add the following attribute to the `Per
 The other UI customizations available from xml attributes are:
 
 ```xml
-<com.nearit.ui_bindings.permissions.views.PermissionSnackbar
-        android:id="@+id/permission_snackbar"
+<com.nearit.ui_bindings.permissions.views.PermissionBar
+        android:id="@+id/permission_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         
-        app:snackbarBluetoothIcon="@drawable/your_drawable_bt_icon"
-        app:snackbarLocationIcon="@drawable/your_drawable_loc_icon"
+        app:barBluetoothIcon="@drawable/your_drawable_bt_icon"
+        app:barLocationIcon="@drawable/your_drawable_loc_icon"
         
         />
 ```
 
 and let you change the bluetooth and location icons.
 
-As usual, you can override our string/color/dimen resources by name. Just as a short example, you can change the snackbar colors this way:
+As usual, you can override our string/color/dimen resources by name. Just as a short example, you can change the bar colors this way:
 ```xml
 <!--  This is the res/values/colors.xml file of your app
        ...     -->
-<color name="nearit_ui_permission_snackbar_background_color">your_color</color>
-<color name="nearit_ui_permission_snackbar_alert_text_color">your_color</color>
-<color name="nearit_ui_permission_snackbar_button_background_color">your_color</color>
+<color name="nearit_ui_permission_bar_background_color">your_color</color>
+<color name="nearit_ui_permission_bar_alert_text_color">your_color</color>
+<color name="nearit_ui_permission_bar_button_background_color">your_color</color>
 <!--    ...     -->
 ```

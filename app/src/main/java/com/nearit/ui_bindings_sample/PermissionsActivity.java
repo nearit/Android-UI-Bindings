@@ -16,15 +16,15 @@ import it.near.sdk.NearItManager;
 public class PermissionsActivity extends AppCompatActivity {
 
     private static final int NEAR_PERMISSION_REQUEST = 1000;
-    PermissionBar snackbar;
+    PermissionBar bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permissions);
 
-        snackbar = (PermissionBar) findViewById(R.id.permission_snackbar);
-        snackbar.bindToActivity(this, NEAR_PERMISSION_REQUEST);
+        bar = (PermissionBar) findViewById(R.id.permission_bar);
+        bar.bindToActivity(this, NEAR_PERMISSION_REQUEST);
 
         Button permissions = (Button) findViewById(R.id.permissions);
         Button permissionsNoBeacon = (Button) findViewById(R.id.permissions_no_beacon);
@@ -162,8 +162,8 @@ public class PermissionsActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        snackbar.unbindFromActivity();
-        super.onStop();
+    protected void onDestroy() {
+        bar.unbindFromActivity();
+        super.onDestroy();
     }
 }

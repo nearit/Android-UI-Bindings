@@ -9,7 +9,7 @@
     tools:context="com.nearit.ui_bindings_sample.PermissionsActivity">
 
     <com.nearit.ui_bindings.permissions.views.PermissionBar
-        android:id="@+id/permission_snackbar"
+        android:id="@+id/permission_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
