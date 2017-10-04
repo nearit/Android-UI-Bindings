@@ -9,17 +9,22 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.nearit.ui_bindings.NearITUIBindings;
+import com.nearit.ui_bindings.permissions.views.PermissionBar;
 
 import it.near.sdk.NearItManager;
 
 public class PermissionsActivity extends AppCompatActivity {
 
     private static final int NEAR_PERMISSION_REQUEST = 1000;
+    PermissionBar bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permissions);
+
+        bar = (PermissionBar) findViewById(R.id.permission_bar);
+        bar.bindToActivity(this, NEAR_PERMISSION_REQUEST);
 
         Button permissions = (Button) findViewById(R.id.permissions);
         Button permissionsNoBeacon = (Button) findViewById(R.id.permissions_no_beacon);
@@ -148,10 +153,17 @@ public class PermissionsActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            Toast.makeText(this, "Result OK", Toast.LENGTH_SHORT).show();
-            NearItManager.getInstance().startRadar();
-        } else Toast.makeText(this, "Result KO", Toast.LENGTH_SHORT).show();
+        if (requestCode == NEAR_PERMISSION_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                Toast.makeText(this, "Result OK", Toast.LENGTH_SHORT).show();
+                NearItManager.getInstance().startRadar();
+            } else Toast.makeText(this, "Result KO", Toast.LENGTH_SHORT).show();
+        }
     }
 
+    @Override
+    protected void onDestroy() {
+        bar.unbindFromActivity();
+        super.onDestroy();
+    }
 }

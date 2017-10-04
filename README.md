@@ -8,11 +8,11 @@ For example, using NearIT-UI, a developer can launch a dialog for requesting the
 - [Permissions request](docs/PERMISSIONS.md)
 - [Coupon detail](docs/COUPON.md)
 - [Feedback request](docs/FEEDBACK.md)
+- [Missing permissions alert bar](docs/PERMISSIONBAR.md)
 
 #### Upcoming features
 - Heads up notifications for in-app content
 - Content notifications
-- Missing permissions alert snackbar
 - Coupon list
 
 ## Configuration

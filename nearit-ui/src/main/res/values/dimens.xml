@@ -56,4 +56,14 @@
     <dimen name="nearit_ui_feedback_error_message_text_size">15sp</dimen>
     <dimen name="nearit_ui_feedback_success_message_text_size">15sp</dimen>
     <dimen name="nearit_ui_feedback_close_text_size">15sp</dimen>
+
+    <dimen name="nearit_ui_permission_bar_main_padding">9dp</dimen>
+    <dimen name="nearit_ui_permission_bar_margin1">5dp</dimen>
+    <dimen name="nearit_ui_permission_bar_margin2">31dp</dimen>
+    <dimen name="nearit_ui_permission_bar_alert_text_size">13sp</dimen>
+    <dimen name="nearit_ui_permission_bar_button_height">30dp</dimen>
+    <dimen name="nearit_ui_permission_bar_button_width">50dp</dimen>
+    <dimen name="nearit_ui_permission_bar_button_left_right_padding">5dp</dimen>
+    <dimen name="nearit_ui_permission_bar_button_top_bottom_padding">4dp</dimen>
+    <dimen name="nearit_ui_permission_bar_button_text_size">15sp</dimen>
 </resources>
