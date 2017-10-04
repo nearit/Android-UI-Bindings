@@ -1,6 +1,6 @@
 # NearIt-UI for notifications
 ### Heads-up notifications for in-app content
-NearIt-UI can manage and show in-app content (read more about background and foreground notifications[here](http://nearit-android.readthedocs.io/en/latest/in-app-content/))
+NearIt-UI can manage and show in-app content (read more about background and foreground notifications [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/))
 for you. When a user enters in a specific beacon range, an heads-up notification (on devices with Android API level 21+) will show. If the user clicks on it, the right dialog will appear and the right tracking events will be handled.
 
 ![ranging_notif](notifications.gif)
