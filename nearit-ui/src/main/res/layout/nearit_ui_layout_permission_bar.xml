@@ -6,30 +6,39 @@
     android:background="@color/nearit_ui_permission_bar_background_color"
     android:padding="@dimen/nearit_ui_permission_bar_main_padding">
 
-    <ImageView
-        android:id="@+id/bluetooth_icon"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/bt_loc_icons"
+        android:layout_width="31dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/ic_nearit_ui_bluetooth_white" />
+        android:orientation="horizontal"
+        android:layout_centerVertical="true">
 
-    <ImageView
-        android:id="@+id/location_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/bluetooth_icon"
-        android:layout_marginLeft="@dimen/nearit_ui_permission_bar_margin1"
-        android:layout_centerVertical="true"
-        android:src="@drawable/ic_nearit_ui_location_white" />
+        <ImageView
+            android:id="@+id/bluetooth_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_nearit_ui_bluetooth_white" />
+
+        <ImageView
+            android:id="@+id/location_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/nearit_ui_permission_bar_margin1"
+            android:src="@drawable/ic_nearit_ui_location_white" />
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/alert_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/nearit_ui_permission_bar_margin2"
         android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/bt_loc_icons"
         android:textColor="@color/nearit_ui_permission_bar_alert_text_color"
         android:textSize="@dimen/nearit_ui_permission_bar_alert_text_size" />
 
