@@ -63,9 +63,13 @@ public class PermissionSnackbar extends RelativeLayout {
         init();
     }
 
-    public void setActivity(@Nullable Activity activity, int requestCode) {
+    public void bindToActivity(@Nullable Activity activity, int requestCode) {
         this.activity = activity;
         this.requestCode = requestCode;
+    }
+
+    public void unbindFromActivity() {
+        this.activity = null;
     }
 
     private void obtainAttrs(AttributeSet attrs) {

@@ -31,11 +31,31 @@ It is **important** that you pass an Activity reference to the snackbar: by doin
 To set the activity use the following method:
 
 ```java
-snackbar.setActivity(YourActivity.this, NEAR_PERMISSION_REQUEST);
+snackbar.bindToActivity(YourActivity.this, NEAR_PERMISSION_REQUEST);
 ```
 
-where `NEAR_PERMISSION_REQUEST` is an int value defined by you that will identify the request.
-Then in your activity you should catch the `result` by referring to the same request code.
+where `NEAR_PERMISSION_REQUEST` is an int value defined by you that will identify the request made by the view.
+Then in your activity you should catch the `result` by referring to the same request code, this way:
+
+```java
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == YOUR_REQUEST_CODE) {
+        if (resultCode == Activity.RESULT_OK) {
+            //  all the necessary prerequirements are ok, in the most common scenarios you should start NearIT radar here
+            NearItManager.getInstance().startRadar();
+        } else {
+            //  some permission is still missing
+        }
+    }
+}
+```
+
+To unbind the activity call the following method in your activity `onStop`
+
+```java
+snackbar.unbindFromActivity();
+```
 
 Because the permissions request flow launched by the `OK!` button is the same provided [here](PERMISSIONS.md), you can customize its behaviour and look.
 When you add the xml element you can set some attributes:
