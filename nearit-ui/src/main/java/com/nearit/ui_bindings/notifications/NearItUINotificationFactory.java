@@ -31,7 +31,7 @@ import it.near.sdk.utils.NearNotification;
  * Created by Federico Boschini on 26/09/17.
  */
 
-public class NearItUINotificationFactory {
+class NearItUINotificationFactory {
 
     private static final int LIGHTS_ON_MILLIS = 500;
     private static final int LIGHTS_OFF_MILLIS = 500;

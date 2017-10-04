@@ -33,23 +33,3 @@ public class NearItUIIntentService extends NearBackgroundJobIntentService {
         return super.onStopCurrentWork();
     }
 }
-
-//public class NearItUIIntentService extends IntentService {
-//
-//    public NearItUIIntentService() {
-//        super(NearItUIIntentService.class.getName());
-//    }
-//
-//    @Override
-//    protected void onHandleIntent(@Nullable Intent intent) {
-//        if (intent != null && NearUtils.carriesNearItContent(intent)) {
-//            if (AppVisibilityDetector.sIsForeground) {
-//                NearItUINotificationFactory.sendHeadsUpNotificationForBackgroundEvent(this, intent);
-//            } else {
-//                NearItUINotificationFactory.sendSimpleNotification(this, intent);
-//            }
-//            NearItUIBroadcastReceiver.completeWakefulIntent(intent);
-//        }
-//    }
-//
-//}
