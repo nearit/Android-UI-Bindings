@@ -62,6 +62,7 @@
     <dimen name="nearit_ui_permission_snackbar_margin2">31dp</dimen>
     <dimen name="nearit_ui_permission_snackbar_alert_text_size">13sp</dimen>
     <dimen name="nearit_ui_permission_snackbar_button_height">30dp</dimen>
+    <dimen name="nearit_ui_permission_snackbar_button_width">50dp</dimen>
     <dimen name="nearit_ui_permission_snackbar_button_left_right_padding">5dp</dimen>
     <dimen name="nearit_ui_permission_snackbar_button_top_bottom_padding">4dp</dimen>
     <dimen name="nearit_ui_permission_snackbar_button_text_size">15sp</dimen>

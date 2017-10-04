@@ -4,6 +4,7 @@
     <color name="nearit_ui_error_color_50">#80e54d4c</color>
     <color name="nearit_ui_black">#333333</color>
     <color name="nearit_ui_white">#f2f2f2</color>
+    <color name="nearit_ui_white_50">#80f2f2f2</color>
     <color name="nearit_ui_real_white">#ffffff</color>
     <color name="nearit_ui_warm_grey">#777777</color>
     <color name="nearit_ui_warm_grey_50">#80777777</color>
@@ -54,5 +55,6 @@
     <color name="nearit_ui_permission_snackbar_background_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_permission_snackbar_alert_text_color">@color/nearit_ui_real_white</color>
     <color name="nearit_ui_permission_snackbar_button_background_color">@color/nearit_ui_white</color>
+    <color name="nearit_ui_permission_snackbar_button_pressed_background_color">@color/nearit_ui_white_50</color>
 
 </resources>
