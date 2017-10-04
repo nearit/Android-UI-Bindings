@@ -4,7 +4,7 @@ NearIt-UI can manage and show in-app content (read more about background and for
 for you. When a user enters in a specific beacon range, an heads-up notification (on devices with Android API level 21+) will show. If the user clicks on it, the right dialog will appear and the right tracking events will be handled.
 
 To enable this behaviour you have to add one line of code.
-You *MUST* add this in the `onCreate()` method of your `Application`
+You **MUST** add this in the `onCreate()` method of your `Application`
 
 ```java
 public class YourApplication extends Application {
@@ -22,8 +22,8 @@ Please note that foreground notifications will auto-dismiss after a small amount
 
 ### Background notifications
 
-NearIT-SDK has a built-in receiver that will handle every background events and show simple notifications.
-If you want to directly show contents with the convenient UIs, once a notification is tapped, you have to add the `NearItUIBroadcastReceiver` to the manifest of your application.
+NearIT-SDK has a built-in receiver that will handle every background event and show simple notifications.
+If you want to directly show contents with the convenient UIs when a notification is tapped, you have to add the `NearItUIBroadcastReceiver` to the manifest of your application.
 
 You can simply copy the following code and paste it in the `<application>` scope of the manifest.
 
