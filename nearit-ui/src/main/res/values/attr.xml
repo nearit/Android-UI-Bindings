@@ -7,11 +7,11 @@
     <declare-styleable name="NearItUIButtonView">
         <attr name="genericButtonText" format="string" />
     </declare-styleable>
-    <declare-styleable name="NearItUISnackbar">
-        <attr name="snackbarButtonText" format="string" />
-        <attr name="snackbarAlertText" format="string" />
-        <attr name="snackbarBluetoothIcon" format="reference" />
-        <attr name="snackbarLocationIcon" format="reference" />
+    <declare-styleable name="NearItUIBar">
+        <attr name="barButtonText" format="string" />
+        <attr name="barAlertText" format="string" />
+        <attr name="barBluetoothIcon" format="reference" />
+        <attr name="barLocationIcon" format="reference" />
 
         <attr name="noBeacon" format="boolean" />
         <attr name="nonBlockingBeacon" format="boolean" />

@@ -22,6 +22,6 @@
     <string name="nearit_ui_feedback_send_success_message">Thanks for your feedback!</string>
     <string name="nearit_ui_feedback_send_button_default_text">SEND</string>
 
-    <string name="nearit_ui_permission_snackbar_alert_text">Provide\nall the missing authorizations</string>
-    <string name="nearit_ui_permission_snackbar_button_text">OK!</string>
+    <string name="nearit_ui_permission_bar_alert_text">Provide\nall the missing authorizations</string>
+    <string name="nearit_ui_permission_bar_button_text">OK!</string>
 </resources>

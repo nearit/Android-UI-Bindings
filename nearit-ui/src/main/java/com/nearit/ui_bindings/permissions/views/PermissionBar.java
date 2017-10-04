@@ -26,14 +26,14 @@ import com.nearit.ui_bindings.utils.PreRequirementsUtil;
  * Created by Federico Boschini on 25/09/17.
  */
 
-public class PermissionSnackbar extends RelativeLayout {
+public class PermissionBar extends RelativeLayout {
 
     public static final int NO_ICON = 0;
     final Context context;
 
     ImageView btIcon, locIcon;
     TextView alertMessage;
-    PermissionSnackbarButton okButton;
+    PermissionBarButton okButton;
 
     boolean noBeacon, nonBlockingBeacon, invisibleMode, noDialogHeader, autostartRadar;
     String buttonText, alertMessageText;
@@ -43,20 +43,20 @@ public class PermissionSnackbar extends RelativeLayout {
     private Activity activity;
     private int requestCode;
 
-    public PermissionSnackbar(Context context) {
+    public PermissionBar(Context context) {
         super(context);
         this.context = context;
         init();
     }
 
-    public PermissionSnackbar(Context context, AttributeSet attrs) {
+    public PermissionBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
         obtainAttrs(attrs);
         init();
     }
 
-    public PermissionSnackbar(Context context, AttributeSet attrs, int defStyleAttr) {
+    public PermissionBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         obtainAttrs(attrs);
@@ -75,40 +75,40 @@ public class PermissionSnackbar extends RelativeLayout {
     private void obtainAttrs(AttributeSet attrs) {
         TypedArray a = getContext().getTheme().obtainStyledAttributes(
                 attrs,
-                R.styleable.NearItUISnackbar,
+                R.styleable.NearItUIBar,
                 0, 0);
         try {
-            if (a.getString(R.styleable.NearItUISnackbar_snackbarButtonText) != null) {
-                buttonText = a.getString(R.styleable.NearItUISnackbar_snackbarButtonText);
+            if (a.getString(R.styleable.NearItUIBar_barButtonText) != null) {
+                buttonText = a.getString(R.styleable.NearItUIBar_barButtonText);
             } else {
-                buttonText = getContext().getResources().getString(R.string.nearit_ui_permission_snackbar_button_text);
+                buttonText = getContext().getResources().getString(R.string.nearit_ui_permission_bar_button_text);
             }
-            if (a.getString(R.styleable.NearItUISnackbar_snackbarButtonText) != null) {
-                alertMessageText = a.getString(R.styleable.NearItUISnackbar_snackbarAlertText);
+            if (a.getString(R.styleable.NearItUIBar_barButtonText) != null) {
+                alertMessageText = a.getString(R.styleable.NearItUIBar_barAlertText);
             } else {
-                alertMessageText = getContext().getResources().getString(R.string.nearit_ui_permission_snackbar_alert_text);
+                alertMessageText = getContext().getResources().getString(R.string.nearit_ui_permission_bar_alert_text);
             }
-            btIconResId = a.getResourceId(R.styleable.NearItUISnackbar_snackbarBluetoothIcon, NO_ICON);
-            locIconResId = a.getResourceId(R.styleable.NearItUISnackbar_snackbarLocationIcon, NO_ICON);
+            btIconResId = a.getResourceId(R.styleable.NearItUIBar_barBluetoothIcon, NO_ICON);
+            locIconResId = a.getResourceId(R.styleable.NearItUIBar_barLocationIcon, NO_ICON);
 
-            noBeacon = a.getBoolean(R.styleable.NearItUISnackbar_noBeacon, false);
-            nonBlockingBeacon = a.getBoolean(R.styleable.NearItUISnackbar_nonBlockingBeacon, false);
-            invisibleMode = a.getBoolean(R.styleable.NearItUISnackbar_invisibleMode, true);
-            dialogHeaderResId = a.getResourceId(R.styleable.NearItUISnackbar_dialogHeader, NO_ICON);
-            noDialogHeader = a.getBoolean(R.styleable.NearItUISnackbar_noDialogHeader, false);
-            autostartRadar = a.getBoolean(R.styleable.NearItUISnackbar_autostartRadar, false);
+            noBeacon = a.getBoolean(R.styleable.NearItUIBar_noBeacon, false);
+            nonBlockingBeacon = a.getBoolean(R.styleable.NearItUIBar_nonBlockingBeacon, false);
+            invisibleMode = a.getBoolean(R.styleable.NearItUIBar_invisibleMode, true);
+            dialogHeaderResId = a.getResourceId(R.styleable.NearItUIBar_dialogHeader, NO_ICON);
+            noDialogHeader = a.getBoolean(R.styleable.NearItUIBar_noDialogHeader, false);
+            autostartRadar = a.getBoolean(R.styleable.NearItUIBar_autostartRadar, false);
         } finally {
             a.recycle();
         }
     }
 
     private void init() {
-        inflate(getContext(), R.layout.nearit_ui_layout_permission_snackbar, this);
+        inflate(getContext(), R.layout.nearit_ui_layout_permission_bar, this);
 
         btIcon = (ImageView) findViewById(R.id.bluetooth_icon);
         locIcon = (ImageView) findViewById(R.id.location_icon);
         alertMessage = (TextView) findViewById(R.id.alert_message);
-        okButton = (PermissionSnackbarButton) findViewById(R.id.ok_button);
+        okButton = (PermissionBarButton) findViewById(R.id.ok_button);
         okButton.setClickable(true);
 
         final PermissionsRequestIntentBuilder builder = NearITUIBindings.getInstance(context).createPermissionRequestIntentBuilder();
@@ -202,7 +202,7 @@ public class PermissionSnackbar extends RelativeLayout {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
 
-            PermissionSnackbar.this.setVisibility(VISIBLE);
+            PermissionBar.this.setVisibility(VISIBLE);
 
             if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
                 if (!PreRequirementsUtil.checkBluetooth(context)) {
@@ -215,7 +215,7 @@ public class PermissionSnackbar extends RelativeLayout {
                 } else {
                     hideBluetoothIcon();
                     if (PreRequirementsUtil.checkLocation(context) && PreRequirementsUtil.checkLocationPermission(context)) {
-                        PermissionSnackbar.this.setVisibility(GONE);
+                        PermissionBar.this.setVisibility(GONE);
                     } else {
                         showLocationIcon();
                     }
@@ -232,7 +232,7 @@ public class PermissionSnackbar extends RelativeLayout {
                     if (PreRequirementsUtil.checkLocationPermission(context)) {
                         hideLocationIcon();
                         if (PreRequirementsUtil.checkBluetooth(context)) {
-                            PermissionSnackbar.this.setVisibility(GONE);
+                            PermissionBar.this.setVisibility(GONE);
                         } else {
                             showBluetoothIcon();
                         }

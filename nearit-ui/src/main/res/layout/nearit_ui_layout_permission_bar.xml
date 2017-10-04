@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/snackbar_relative_layout"
+    android:id="@+id/bar_relative_layout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/nearit_ui_permission_snackbar_background_color"
-    android:padding="@dimen/nearit_ui_permission_snackbar_main_padding">
+    android:background="@color/nearit_ui_permission_bar_background_color"
+    android:padding="@dimen/nearit_ui_permission_bar_main_padding">
 
     <ImageView
         android:id="@+id/bluetooth_icon"
@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/bluetooth_icon"
-        android:layout_marginLeft="@dimen/nearit_ui_permission_snackbar_margin1"
+        android:layout_marginLeft="@dimen/nearit_ui_permission_bar_margin1"
         android:layout_centerVertical="true"
         android:src="@drawable/ic_nearit_ui_location_white" />
 
@@ -28,12 +28,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="@dimen/nearit_ui_permission_snackbar_margin2"
+        android:layout_marginLeft="@dimen/nearit_ui_permission_bar_margin2"
         android:layout_centerVertical="true"
-        android:textColor="@color/nearit_ui_permission_snackbar_alert_text_color"
-        android:textSize="@dimen/nearit_ui_permission_snackbar_alert_text_size" />
+        android:textColor="@color/nearit_ui_permission_bar_alert_text_color"
+        android:textSize="@dimen/nearit_ui_permission_bar_alert_text_size" />
 
-    <com.nearit.ui_bindings.permissions.views.PermissionSnackbarButton
+    <com.nearit.ui_bindings.permissions.views.PermissionBarButton
         android:id="@+id/ok_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

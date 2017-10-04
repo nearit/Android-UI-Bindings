@@ -8,7 +8,7 @@
     android:gravity="center_horizontal"
     tools:context="com.nearit.ui_bindings_sample.PermissionsActivity">
 
-    <com.nearit.ui_bindings.permissions.views.PermissionSnackbar
+    <com.nearit.ui_bindings.permissions.views.PermissionBar
         android:id="@+id/permission_snackbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

@@ -14,7 +14,7 @@ import com.nearit.ui_bindings.R;
  * Created by Federico Boschini on 26/09/17.
  */
 
-public class PermissionSnackbarButton extends RelativeLayout {
+public class PermissionBarButton extends RelativeLayout {
 
     private String buttonText;
 
@@ -22,20 +22,20 @@ public class PermissionSnackbarButton extends RelativeLayout {
 
     final Context context;
 
-    public PermissionSnackbarButton(Context context) {
+    public PermissionBarButton(Context context) {
         super(context);
         this.context = context;
         init();
     }
 
-    public PermissionSnackbarButton(Context context, AttributeSet attrs) {
+    public PermissionBarButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
         obtainAttrs(attrs);
         init();
     }
 
-    public PermissionSnackbarButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public PermissionBarButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         obtainAttrs(attrs);
@@ -43,17 +43,17 @@ public class PermissionSnackbarButton extends RelativeLayout {
     }
 
     private void init() {
-        inflate(getContext(), R.layout.nearit_ui_layout_permission_snackbar_button, this);
-        textView = (TextView) findViewById(R.id.snackbar_button_text);
+        inflate(getContext(), R.layout.nearit_ui_layout_permission_bar_button, this);
+        textView = (TextView) findViewById(R.id.bar_button_text);
     }
 
     private void obtainAttrs(AttributeSet attrs) {
         TypedArray a = getContext().getTheme().obtainStyledAttributes(
                 attrs,
-                R.styleable.NearItUISnackbar,
+                R.styleable.NearItUIBar,
                 0, 0);
         try {
-            buttonText = a.getString(R.styleable.NearItUISnackbar_snackbarButtonText);
+            buttonText = a.getString(R.styleable.NearItUIBar_barButtonText);
         } finally {
             a.recycle();
         }
