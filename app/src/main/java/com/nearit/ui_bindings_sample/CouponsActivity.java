@@ -108,7 +108,7 @@ public class CouponsActivity extends AppCompatActivity {
         validCouponList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  start an activity that shows a list of valid coupons
+                //  start an activity that shows a list of valid coupons ONLY
                 startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
                         .createCouponListIntentBuilder()
                         .getValidOnly()
@@ -121,7 +121,7 @@ public class CouponsActivity extends AppCompatActivity {
         expiredCouponList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  start an activity that shows a list of expired coupons
+                //  start an activity that shows a list of expired coupons ONLY
                 startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
                         .createCouponListIntentBuilder()
                         .getExpiredOnly()
@@ -134,7 +134,7 @@ public class CouponsActivity extends AppCompatActivity {
         inactiveCouponList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  start an activity that shows a list of inactive coupons
+                //  start an activity that shows a list of inactive coupons ONLY
                 startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
                         .createCouponListIntentBuilder()
                         .getInactiveOnly()
@@ -147,7 +147,7 @@ public class CouponsActivity extends AppCompatActivity {
         redeemedCouponList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  start an activity that shows a list of already redeemed coupons
+                //  start an activity that shows a list of already redeemed coupons ONLY
                 startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
                         .createCouponListIntentBuilder()
                         .getRedeemedOnly()
@@ -160,7 +160,7 @@ public class CouponsActivity extends AppCompatActivity {
         completeList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  start an activity that shows the complete list of coupons
+                //  start an activity that shows the complete list of coupons (redeemed included)
                 startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
                         .createCouponListIntentBuilder()
                         .includeRedeemed()

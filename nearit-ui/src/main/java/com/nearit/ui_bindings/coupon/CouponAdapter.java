@@ -14,9 +14,11 @@ import android.widget.TextView;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.utils.LoadImageFromURL;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import it.near.sdk.reactions.couponplugin.model.Coupon;
@@ -54,10 +56,64 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    void addData(List<Coupon> couponList) {
-        this.couponList = couponList;
-        //  sort by claim date
-        Collections.sort(couponList, new Comparator<Coupon>() {
+    void addValidOnly(List<Coupon> couponList, boolean includeRedeemed) {
+        sortByClaimedAtDate(couponList);
+        List<Coupon> redeemedList = getRedeemedOnly(couponList);
+        excludeRedeemed(couponList);
+        List<Coupon> validList = getValidOnly(couponList);
+        if(includeRedeemed) {
+            validList.addAll(getValidOnly(redeemedList));
+        }
+        this.couponList = validList;
+        notifyDataSetChanged();
+    }
+
+    void addExpiredOnly(List<Coupon> couponList, boolean includeRedeemed) {
+        sortByClaimedAtDate(couponList);
+        List<Coupon> redeemedList = getRedeemedOnly(couponList);
+        excludeRedeemed(couponList);
+        List<Coupon> expiredList = getExpiredOnly(couponList);
+        if(includeRedeemed) {
+            expiredList.addAll(getExpiredOnly(redeemedList));
+        }
+        this.couponList = expiredList;
+        notifyDataSetChanged();
+    }
+
+    void addRedeemedOnly(List<Coupon> couponList) {
+        sortByClaimedAtDate(couponList);
+        this.couponList = getRedeemedOnly(couponList);
+        notifyDataSetChanged();
+    }
+
+    void addInactiveOnly(List<Coupon> couponList) {
+        sortByClaimedAtDate(couponList);
+        excludeRedeemed(couponList);
+        this.couponList = getInactiveOnly(couponList);
+        notifyDataSetChanged();
+    }
+
+    void addData(List<Coupon> couponList, boolean includeRedeemed) {
+        sortByClaimedAtDate(couponList);
+        List<Coupon> redeemedList = getRedeemedOnly(couponList);
+        excludeRedeemed(couponList);
+        List<Coupon> validList = getValidOnly(couponList);
+        List<Coupon> inactiveList = getInactiveOnly(couponList);
+        List<Coupon> expiredAndRedeemedList = getExpiredOnly(couponList);
+        if (includeRedeemed) {
+            expiredAndRedeemedList.addAll(redeemedList);
+            sortByClaimedAtDate(expiredAndRedeemedList);
+        }
+        List<Coupon> finalList = new ArrayList<>();
+        finalList.addAll(validList);
+        finalList.addAll(inactiveList);
+        finalList.addAll(expiredAndRedeemedList);
+        this.couponList = finalList;
+        notifyDataSetChanged();
+    }
+
+    private void sortByClaimedAtDate(List<Coupon> list) {
+        Collections.sort(list, new Comparator<Coupon>() {
             @Override
             public int compare(Coupon c1, Coupon c2) {
                 if(c1.getClaimedAtDate() == null || c2.getClaimedAt() == null) {
@@ -67,7 +123,74 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 return c2.getClaimedAtDate() != null ? c2.getClaimedAtDate().compareTo(c1Date) : 0;
             }
         });
-        notifyDataSetChanged();
+    }
+
+    private void excludeRedeemed(List<Coupon> couponList) {
+        Iterator<Coupon> iterator = couponList.iterator();
+        while (iterator.hasNext()) {
+            Coupon c = iterator.next();
+            if (c.getRedeemedAtDate() != null) {
+                iterator.remove();
+            }
+        }
+    }
+
+    private List<Coupon> getValidOnly(List<Coupon> couponList) {
+        List<Coupon> list = new ArrayList<>(couponList);
+        Iterator<Coupon> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Coupon c = iterator.next();
+            if (c.getExpiresAtDate() != null && c.getExpiresAtDate().getTime() < System.currentTimeMillis()) {
+                iterator.remove();
+            }
+            if (c.getRedeemableFromDate() != null && c.getRedeemableFromDate().getTime() > System.currentTimeMillis()) {
+                iterator.remove();
+            }
+        }
+        return list;
+    }
+
+    private List<Coupon> getExpiredOnly(List<Coupon> couponList) {
+        List<Coupon> list = new ArrayList<>(couponList);
+        Iterator<Coupon> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Coupon c = iterator.next();
+            if (c.getExpiresAtDate() == null) {
+                iterator.remove();
+            } else {
+                if (c.getExpiresAtDate() != null && !(c.getExpiresAtDate().getTime() < System.currentTimeMillis())) {
+                    iterator.remove();
+                }
+            }
+        }
+        return list;
+    }
+
+    private List<Coupon> getInactiveOnly(List<Coupon> couponList) {
+        List<Coupon> list = new ArrayList<>(couponList);
+        Iterator<Coupon> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Coupon c = iterator.next();
+            if (c.getRedeemableFromDate() == null) {
+                iterator.remove();
+            }
+            if (c.getRedeemableFromDate() != null && !(c.getRedeemableFromDate().getTime() > System.currentTimeMillis())) {
+                iterator.remove();
+            }
+        }
+        return list;
+    }
+
+    private List<Coupon> getRedeemedOnly(List<Coupon> couponList) {
+        List<Coupon> list = new ArrayList<>(couponList);
+        Iterator<Coupon> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Coupon c = iterator.next();
+            if (c.getRedeemedAtDate() == null) {
+                iterator.remove();
+            }
+        }
+        return list;
     }
 
     @Override
@@ -198,5 +321,6 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_redeemed_text_color));
             }
         }
+
     }
 }
