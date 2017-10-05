@@ -23,10 +23,40 @@ public class ContentActivity extends AppCompatActivity {
         complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  In a real scenario the coupon is provided by the NearIT SDK
+                //  In a real scenario the content is provided by the NearIT SDK
                 Content content = contentFactory.getCompleteContent();
                 startActivity(
-                        //  Basic example with a valid coupon
+                        //  Basic example with a complete content
+                        NearITUIBindings.getInstance(getApplicationContext())
+                                .createContentDetailIntentBuilder(content)
+                                .build());
+            }
+        });
+
+        Button noImage = (Button) findViewById(R.id.no_image);
+        noImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  In a real scenario the content is provided by the NearIT SDK
+                Content content = contentFactory.getNoImageContent();
+                startActivity(
+                        //  Example with a content without image
+                        //  + enable tapping outside the dialog to close it
+                        NearITUIBindings.getInstance(getApplicationContext())
+                                .createContentDetailIntentBuilder(content)
+                                .enableTapOutsideToClose()
+                                .build());
+            }
+        });
+
+        Button noCta = (Button) findViewById(R.id.no_cta);
+        noCta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  In a real scenario the content is provided by the NearIT SDK
+                Content content = contentFactory.getNoCTAContent();
+                startActivity(
+                        //  Example with a content without image
                         NearITUIBindings.getInstance(getApplicationContext())
                                 .createContentDetailIntentBuilder(content)
                                 .build());
