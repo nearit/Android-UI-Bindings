@@ -22,17 +22,14 @@
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:visibility="gone"
-            android:layout_marginBottom="19dp"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/content_image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:cropToPadding="false"
-                android:background="#d8d8d8"/>
+                android:scaleType="fitXY" />
 
             <ProgressBar
                 android:id="@+id/content_image_progress_bar"
@@ -48,9 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="15dp"
+            android:paddingTop="19dp"
             android:gravity="center_horizontal"
-            android:text="Nome/Titolo"
             android:textColor="@color/nearit_ui_black"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -60,17 +56,16 @@
             android:id="@+id/content_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Testo notifica, testo notifica, testo testo testo, testo contenuto contenuto contenuto, testo.
-Testo notifica, testo notifica, testo testo testo, notifica, testo contenuto contenuto contenuto, testo. Testo notifica, testo notifica, testo testo testo, notifica, testo contenuto contenuto contenuto, testo. Testo notifica, testo notifica, testo testo testo, notifica, testo contenuto contenuto contenuto."
             android:textColor="@color/nearit_ui_black"
             android:textSize="15sp"
-            android:layout_marginBottom="33dp"
+            android:paddingTop="15dp"
             android:visibility="gone" />
 
         <com.nearit.ui_bindings.content.views.ContentCTAButton
             android:id="@+id/cta_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="33dp"
             android:visibility="gone" />
 
     </LinearLayout>
