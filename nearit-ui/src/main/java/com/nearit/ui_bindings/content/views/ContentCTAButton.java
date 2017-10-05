@@ -19,14 +19,17 @@ public class ContentCTAButton extends RelativeLayout {
 
     public ContentCTAButton(Context context) {
         super(context);
+        init();
     }
 
     public ContentCTAButton(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public ContentCTAButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
     }
 
     private void init() {

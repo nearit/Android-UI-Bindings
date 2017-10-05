@@ -20,6 +20,7 @@
             android:layout_height="match_parent"
             android:paddingTop="20dp"
             android:layout_gravity="center_horizontal"
+            android:gravity="center"
             android:visibility="gone"
             android:layout_marginBottom="19dp"
             android:orientation="vertical">
@@ -28,16 +29,16 @@
                 android:id="@+id/content_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:adjustViewBounds="false"
-                android:scaleType="center"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:cropToPadding="false"
                 android:background="#d8d8d8"/>
 
             <ProgressBar
                 android:id="@+id/content_image_progress_bar"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_gravity="center_horizontal"
-                android:visibility="gone" />
+                android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
 
