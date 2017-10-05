@@ -31,7 +31,8 @@
             android:name=".FeedbackPlainActivity"
             android:label="Feedback activity" />
 
-        <!--  Built-in NearIT-UI Intent service, replace with your own if you want to handle notifications -->
+        <!--  Built-in NearIT-UI Intent service, replace with your own if you want to handle notifications
+              For info, read the documentation section about -->
         <service
             android:name="com.nearit.ui_bindings.notifications.NearItUIIntentService"
             android:exported="false"

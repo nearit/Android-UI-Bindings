@@ -13,6 +13,7 @@ public class NearItUISample extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        //  this library will handle foreground notifications automatically and show the right dialog on tap
         NearITUIBindings.enableAutomaticForegroundNotifications(this);
     }
 }

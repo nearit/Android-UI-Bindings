@@ -1,7 +1,9 @@
 # NearIt-UI for notifications
 ### Heads-up notifications for in-app content
-NearIt-UI can manage and show in-app content (read more about background and foreground notifications [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/))
-for you. When a user enters in a specific beacon range, an heads-up notification (on devices with Android API level 21+) will show. If the user clicks on it, the right dialog will appear and the right tracking events will be handled.
+NearIt-UI can be set to manage and show notifications for foreground content (read more [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/))
+for you. Foreground content will be delivered through an heads-up system notification. If the user clicks on it, the right dialog will appear and the right tracking events will be handled.
+
+**Note**: the heads-up notification overlay is only available for API level 21+. On older devices the notification will still appear, but with no overlay.
 
 ![ranging_notif](notifications.gif)
 
@@ -24,8 +26,8 @@ Please note that foreground notifications will auto-dismiss after a small amount
 
 ### Background notifications
 
-NearIT-SDK has a built-in service that will handle every background event and show simple notifications.
-If you want to directly show contents with the convenient UIs when a notification is tapped, you have to add the `NearItUIIntentService` to the manifest of your application.
+NearIT-SDK has a built-in service that will handle every background event and show simple notifications, tapping on those notification will deliver an Intent to your app launcher.
+If you prefer to let the NearIt-UI library handle the tap and immediately show the convininent UIs when a notification is tapped, you have to add the `NearItUIIntentService` to the manifest of your application.
 
 You can simply copy the following code and paste it in the `<application>` scope of the manifest.
 
