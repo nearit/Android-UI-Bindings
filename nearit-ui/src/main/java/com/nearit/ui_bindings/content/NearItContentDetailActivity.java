@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.nearit.ui_bindings.ExtraConstants;
@@ -34,6 +35,8 @@ public class NearItContentDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.nearit_ui_activity_content_detail);
+
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         closeButton = (LinearLayout) findViewById(R.id.content_close_icon);
         if (closeButton != null) {
