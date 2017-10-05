@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cta_button"
     android:layout_width="match_parent"
-    android:layout_height="45dp"
-    android:minWidth="250dp"
+    android:layout_height="@dimen/nearit_ui_content_cta_button_height"
+    android:minWidth="@dimen/nearit_ui_content_cta_button_min_width"
     android:background="@drawable/nearit_ui_selector_cta_button">
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:textSize="15sp"
+        android:textSize="@dimen/nearit_ui_content_cta_button_text_size"
         android:textStyle="bold"
         android:textAllCaps="true"
         android:textColor="@color/nearit_ui_cta_button_text_color" />
