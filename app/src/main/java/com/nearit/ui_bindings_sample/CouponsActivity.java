@@ -92,6 +92,8 @@ public class CouponsActivity extends AppCompatActivity {
             }
         });
 
+
+
         Button couponList = (Button) findViewById(R.id.coupon_list);
         couponList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +168,16 @@ public class CouponsActivity extends AppCompatActivity {
                         .includeRedeemed()
                         .build()
                 );
+            }
+        });
+
+        Button listInActivity = (Button) findViewById(R.id.coupon_list_in_activity);
+        listInActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  start a plain activity that shows the fragment fullscreen
+                //  please check it
+                startActivity(new Intent(CouponsActivity.this, CouponListPlainActivity.class));
             }
         });
 

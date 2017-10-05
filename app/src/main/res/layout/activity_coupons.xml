@@ -81,6 +81,12 @@
             android:layout_height="wrap_content"
             android:text="Complete Coupon List" />
 
+        <Button
+            android:id="@+id/coupon_list_in_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coupon List in activity" />
+
 
     </LinearLayout>
 </ScrollView>
