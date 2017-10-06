@@ -18,6 +18,8 @@ you are able to show the list of coupons with this sorting rationale:
 - not yet active coupons
 - expired coupons
 
+each set is ordered by the date the user earned the coupons.
+
 ![coupon list](coupon_list.png)
 
 If your app needs to show already redeemed coupons too, just add `.includeRedeemed()` call:
