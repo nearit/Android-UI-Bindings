@@ -23,10 +23,10 @@
         <activity android:name=".FeedbackActivity" />
         <activity android:name=".CouponsActivity" />
         <activity android:name=".PermissionsActivity" />
-        <activity android:name=".CouponPlainActivity"
-            android:label="Coupon detail activity"/>
-        <activity android:name=".FeedbackPlainActivity"
-            android:label="Feedback activity"/>
+        <activity android:name=".ContentActivity" />
+        <activity android:name=".CouponPlainActivity" android:label="Coupon detail activity"/>
+        <activity android:name=".FeedbackPlainActivity" android:label="Feedback activity"/>
+        <activity android:name=".ContentPlainActivity" android:label="Content detail activity"/>
 
     </application>
 
