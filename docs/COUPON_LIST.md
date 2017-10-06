@@ -18,6 +18,8 @@ you are able to show the list of coupons with this sorting rationale:
 - not yet active coupons
 - expired coupons
 
+![coupon list](coupon_list.png)
+
 If your app needs to show already redeemed coupons too, just add `.includeRedeemed()` call:
 
 ```java
@@ -28,7 +30,9 @@ startActivity(NearITUIBindings.getInstance(YourActivity.this)
               );
 ```
 
-and the coupons already used by the user are shown at the bottom of the list, mixed with the expired ones.
+and the coupons already used by the user will be shown at the bottom of the list, mixed with the expired ones.
+
+If a server or network problem occurs while the coupon list is being downloaded, an alert dialog will pop-up and the user will be able to simply close it or to retry the download, triggering a refresh of the coupon list and dismissing the dialog. 
 
 #### Advanced examples
 In your application you may want to show only coupons that are in certain states. With our builder you can request a list of only valid coupons:
