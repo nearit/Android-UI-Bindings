@@ -47,5 +47,5 @@ You can simply copy the following code and paste it in the `<application>` scope
 </service>
 ```
 
-If your app is in background (e.g. an user closed it and maybe killed it) your user will receive a simple notification. When the notification is tapped, the app is launched and the content dialog appears.
-When your app is in foreground, background events are notified in heads-up style.
+When your app is in background (e.g. an user closed it and maybe killed it) your user will receive a simple notification. When the notification is tapped, the app is launched and the content dialog appears.
+Additionally, when your app is in foreground, background events are notified in heads-up style.
