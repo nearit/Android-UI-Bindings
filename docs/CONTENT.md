@@ -14,7 +14,7 @@ where, `content` is an instance of NearIT SDK `Content` class. Further informati
 
 ![NearIT-UI content dialog](content.png)
 
-If the user taps on the button, the link will be open: some types of link will be managed by a specific app, if that app is installed (e.g. a Facebook link).
+When the user taps on the button, the link will be opened: some types of link will be managed by a specific app, if that app is installed (e.g. a Facebook link).
 
 Optionally, you can display the content in your custom Activity by adding a Fragment to it. You can get a Fragment via another builder:
 
@@ -26,7 +26,7 @@ Optionally, you can display the content in your custom Activity by adding a Frag
 ```
 
 #### Advanced examples
-If you want to enable the tap outside to close functionality, add `.enableTapOutsideToClose()` call on the builder, like the following example:
+If you want to enable the tap-outside-to-close functionality, add `.enableTapOutsideToClose()` call on the builder, like the following example:
 ```java
  // ...
  startActivity(
