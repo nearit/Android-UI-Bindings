@@ -9,11 +9,11 @@ For example, using NearIT-UI, a developer can launch a dialog for requesting the
 - [Coupon detail](docs/COUPON.md)
 - [Feedback request](docs/FEEDBACK.md)
 - [Missing permissions alert bar](docs/PERMISSIONBAR.md)
+- [Coupon list](docs/COUPON_LIST.md)
 
 #### Upcoming features
 - Heads up notifications for in-app content
 - Content notifications
-- Coupon list
 
 ## Configuration
 Add the NearIT-UI library dependency. If your project uses Gradle build system, add the following dependency to `build.gradle` of your app:
