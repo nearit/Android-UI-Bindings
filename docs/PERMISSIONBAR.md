@@ -1,6 +1,6 @@
 # NearIt-UI for missing permissions alert
 
-Your app should ask the user to grant location permission and to turn on the bluetooth (if your use case implies beacons).
+Your app should ask the user to grant location permission and to turn the bluetooth on (if your use case implies beacons).
 
 If you want to show a persistent bar that alert the user if any permission is missing, this library provides a convenient `View`.
 This bar visually specifies what is missing (by showing/hiding the two icons) and will automatically hide itself when every permission has been granted.
