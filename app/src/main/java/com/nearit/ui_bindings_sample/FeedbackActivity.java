@@ -44,7 +44,7 @@ public class FeedbackActivity extends AppCompatActivity {
                         //  + tap outside to close is enabled
                         NearITUIBindings.getInstance(FeedbackActivity.this)
                                 .createFeedbackIntentBuilder(feedback)
-                                .hideTextResponse()
+                                .withoutComment()
                                 .enableTapOutsideToClose()
                                 .build()
                 );

@@ -77,6 +77,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/nearit_ui_feedback_leave_a_comment"
+                android:textStyle="italic"
                 android:textColor="@color/nearit_ui_feedback_comment_box_description_text_color"
                 android:textSize="@dimen/nearit_ui_feedback_leave_a_comment_text_size" />
 
@@ -104,6 +105,7 @@
             android:text="@string/nearit_ui_feedback_error_message"
             android:textColor="@color/nearit_ui_feedback_error_message_text_color"
             android:textSize="@dimen/nearit_ui_feedback_error_message_text_size"
+            android:textStyle="italic"
             android:visibility="gone" />
 
         <com.nearit.ui_bindings.feedback.views.NearItUIFeedbackButton
@@ -121,6 +123,7 @@
             android:layout_marginTop="@dimen/nearit_ui_feedback_margin11"
             android:gravity="center"
             android:text="@string/nearit_ui_feedback_close_button"
+            android:textStyle="italic"
             android:textColor="@drawable/nearit_ui_selector_feedback_close_text_color"
             android:textSize="@dimen/nearit_ui_feedback_close_text_size" />
 

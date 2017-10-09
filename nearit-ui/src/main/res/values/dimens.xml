@@ -26,12 +26,12 @@
     <dimen name="nearit_ui_coupon_detail_margin11">16dp</dimen>
     <dimen name="nearit_ui_coupon_detail_icon_dimensions">60dp</dimen>
     <dimen name="nearit_ui_coupon_detail_qrcode_dimensions">100dp</dimen>
-    <dimen name="nearit_ui_coupon_detail_coupon_name_text_size">16sp</dimen>
-    <dimen name="nearit_ui_coupon_detail_coupon_serial_text_size">20sp</dimen>
-    <dimen name="nearit_ui_coupon_detail_coupon_value_text_size">20sp</dimen>
-    <dimen name="nearit_ui_coupon_detail_coupon_description_text_size">13sp</dimen>
-    <dimen name="nearit_ui_coupon_detail_coupon_validity_text_size">12sp</dimen>
-    <dimen name="nearit_ui_coupon_detail_coupon_not_valid_text_size">20sp</dimen>
+    <dimen name="nearit_ui_coupon_detail_title_text_size">16sp</dimen>
+    <dimen name="nearit_ui_coupon_detail_serial_text_size">20sp</dimen>
+    <dimen name="nearit_ui_coupon_detail_value_text_size">20sp</dimen>
+    <dimen name="nearit_ui_coupon_detail_description_text_size">13sp</dimen>
+    <dimen name="nearit_ui_coupon_detail_validity_text_size">12sp</dimen>
+    <dimen name="nearit_ui_coupon_detail_not_valid_text_size">20sp</dimen>
 
     <dimen name="nearit_ui_feedback_no_comment_button_margin">30dp</dimen>
     <dimen name="nearit_ui_feedback_button_height_margin">45dp</dimen>
