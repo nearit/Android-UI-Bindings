@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -58,6 +59,15 @@ public class NearItCouponDetailFragment extends Fragment {
         CouponDetailTopSection topSection = (CouponDetailTopSection) rootView.findViewById(R.id.coupon_detail_top_section);
 
         topSection.setCouponView(coupon);
+
+        if (coupon.getRedeemedAtDate() == null &&
+                (coupon.getRedeemableFromDate()!= null && coupon.getRedeemableFromDate().getTime() < System.currentTimeMillis()) &&
+                (coupon.getExpiresAtDate() != null && coupon.getExpiresAtDate().getTime() > System.currentTimeMillis())) {
+
+            WindowManager.LayoutParams layout = getActivity().getWindow().getAttributes();
+            layout.screenBrightness = 1F;
+            getActivity().getWindow().setAttributes(layout);
+        }
 
         ProgressBar iconProgressBar = (ProgressBar) rootView.findViewById(R.id.coupon_icon_progress_bar);
         ImageView couponIcon = (ImageView) rootView.findViewById(R.id.coupon_icon);
