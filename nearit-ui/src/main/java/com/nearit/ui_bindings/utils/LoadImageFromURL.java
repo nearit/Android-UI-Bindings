@@ -22,6 +22,8 @@ public final class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
     @Nullable
     private ProgressBar progressBar;
 
+    private String url;
+
     public LoadImageFromURL(@Nullable ImageView imageView, @Nullable ProgressBar progressBar) {
         this.imageView = imageView;
         this.progressBar = progressBar;
@@ -44,6 +46,7 @@ public final class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
     @Override
     protected Bitmap doInBackground(String... urls) {
         String url = urls[0];
+        this.url = url;
         Bitmap icon = null;
         InputStream in;
         try {
@@ -60,7 +63,20 @@ public final class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
         if (imageView != null) {
             imageView.setVisibility(View.VISIBLE);
             if (icon != null) {
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                imageView.setAdjustViewBounds(true);
+                imageView.setMinimumHeight(0);
+                imageView.setBackgroundDrawable(null);
                 imageView.setImageBitmap(icon);
+            } else {
+                imageView.setScaleType(ImageView.ScaleType.CENTER);
+                imageView.setAdjustViewBounds(false);
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new LoadImageFromURL(imageView, progressBar).execute(url);
+                    }
+                });
             }
         }
         if (progressBar != null) {

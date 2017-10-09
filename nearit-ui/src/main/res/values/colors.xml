@@ -64,5 +64,6 @@
     <color name="nearit_ui_cta_button_text_color">@color/nearit_ui_white</color>
     <color name="nearit_ui_content_title_text_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_content_text_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_content_image_background_color">@color/nearit_ui_white</color>
 
 </resources>
