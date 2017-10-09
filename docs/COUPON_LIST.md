@@ -3,6 +3,17 @@
 Providing the list of the coupons earned by the user is a common feature of the apps that integrate NearIT.
 With NearIt-UI you can launch an activity or get a fragment that contains the coupons with our proposed sorting.
 
+#### Introduction
+
+To understand the examples in this section it is important to know how NearIT coupons work.
+A coupon can have a date from which an user can redeem it and an expiration date: at a certain date a coupon could be in one of these states:
+- valid: redeemable, not expired and not already used.
+- not yet active: not yet redeemable
+- expired: current date is beyond the expiration one
+- redeemed: coupon code has been used
+
+Please note that the list is implemented as a `RecyclerView`: this means that adds an additional dependency but lets you show a large amount of coupons and keep the UX smooth. 
+
 #### Basic example 
 With these few lines of code
 
@@ -32,9 +43,11 @@ startActivity(NearITUIBindings.getInstance(YourActivity.this)
               );
 ```
 
-and the coupons already used by the user will be shown at the bottom of the list, mixed with the expired ones.
+and the coupons already used by the user will be shown at the bottom of the list, with the expired ones.
 
-If a server or network problem occurs while the coupon list is being downloaded, an alert dialog will pop-up and the user will be able to simply close it or to retry the download, triggering a refresh of the coupon list and dismissing the dialog. 
+If a server or network problem occurs while the coupon list is being downloaded, an alert dialog will pop-up and the user will be able to simply close it or to retry the download, triggering a refresh of the coupon list and dismissing the dialog.
+ 
+![network problem](net_problem.gif)
 
 #### Advanced examples
 In your application you may want to show only coupons that are in certain states. With our builder you can request a list of only valid coupons:
