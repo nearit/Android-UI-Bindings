@@ -19,7 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textSize="@dimen/nearit_ui_coupon_detail_coupon_validity_text_size" />
+            android:textStyle="bold|italic"
+            android:textSize="@dimen/nearit_ui_coupon_detail_validity_text_size" />
 
         <TextView
             android:id="@+id/coupon_validity_period"
@@ -27,8 +28,9 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/nearit_ui_coupon_detail_margin6"
             android:gravity="center_vertical"
-            android:textColor="@color/nearit_ui_coupon_detail_coupon_validity_period_color"
-            android:textSize="@dimen/nearit_ui_coupon_detail_coupon_validity_text_size" />
+            android:textStyle="italic"
+            android:textColor="@color/nearit_ui_coupon_detail_validity_period_color"
+            android:textSize="@dimen/nearit_ui_coupon_detail_validity_text_size" />
 
     </LinearLayout>
 
@@ -40,7 +42,7 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/nearit_ui_coupon_detail_margin7"
         android:layout_marginTop="@dimen/nearit_ui_coupon_detail_margin8"
-        android:textSize="@dimen/nearit_ui_coupon_detail_coupon_not_valid_text_size"
+        android:textSize="@dimen/nearit_ui_coupon_detail_not_valid_text_size"
         android:visibility="gone" />
 
     <LinearLayout
@@ -72,7 +74,7 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/nearit_ui_coupon_detail_margin10"
         android:layout_marginTop="@dimen/nearit_ui_coupon_detail_margin11"
-        android:textColor="@color/nearit_ui_coupon_detail_coupon_serial"
-        android:textSize="@dimen/nearit_ui_coupon_detail_coupon_serial_text_size" />
+        android:textColor="@color/nearit_ui_coupon_detail_serial"
+        android:textSize="@dimen/nearit_ui_coupon_detail_serial_text_size" />
 
 </RelativeLayout>

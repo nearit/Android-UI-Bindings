@@ -17,6 +17,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="NearItUIContentDetailDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="NearItUIPermissionButtonTextAppearance" parent="TextAppearance.AppCompat.Button">
         <!--    ASAP-MEDIUM  -->
         <item name="android:textSize">@dimen/nearit_ui_permission_button_text_size</item>
@@ -36,7 +41,6 @@
     <style name="NearItUIPermissionsCloseTextAppearance">
         <!--    ASAP-ITALIC  -->
         <item name="android:textSize">@dimen/nearit_ui_permissions_text_size</item>
-        <item name="android:textColor">@color/nearit_ui_permissions_text_color</item>
     </style>
 
 </resources>

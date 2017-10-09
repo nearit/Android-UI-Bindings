@@ -24,5 +24,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Feedback" />
+    <Button
+        android:id="@+id/content_demo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Content"/>
 
 </LinearLayout>
