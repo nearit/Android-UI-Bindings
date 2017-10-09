@@ -24,7 +24,7 @@ If you need to simplify the feedback request you are able to ask the user for th
   startActivity(
           NearITUIBindings.getInstance(YourActivity.this)
              .createFeedbackIntentBuilder(feedback)
-             .hideTextResponse()
+             .withoutComment()
              .build());
 ```
 

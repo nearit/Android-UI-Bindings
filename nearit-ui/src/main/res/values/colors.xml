@@ -22,16 +22,18 @@
     <color name="nearit_ui_permission_not_given_button_background_color">@color/nearit_ui_white</color>
     <color name="nearit_ui_permission_not_given_button_text_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_permissions_text_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_permissions_close_text_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_permissions_close_pressed_text_color">@color/nearit_ui_warm_grey_50</color>
 
-    <color name="nearit_ui_coupon_detail_coupon_name_color">@color/nearit_ui_black</color>
-    <color name="nearit_ui_coupon_detail_coupon_value_color">@color/nearit_ui_black</color>
-    <color name="nearit_ui_coupon_detail_coupon_description_color">@color/nearit_ui_warm_grey</color>
-    <color name="nearit_ui_coupon_detail_coupon_validity_period_color">@color/nearit_ui_warm_grey</color>
-    <color name="nearit_ui_coupon_detail_coupon_serial">@color/nearit_ui_black</color>
+    <color name="nearit_ui_coupon_detail_title_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_coupon_detail_value_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_coupon_detail_description_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_coupon_detail_validity_period_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_coupon_detail_serial">@color/nearit_ui_black</color>
     <color name="nearit_ui_coupon_detail_disabled_text_color">@color/nearit_ui_black_35</color>
-    <color name="nearit_ui_coupon_detail_valid_coupon_color">@color/nearit_ui_valid_green</color>
-    <color name="nearit_ui_coupon_detail_expired_coupon_color">@color/nearit_ui_expired_red</color>
-    <color name="nearit_ui_coupon_detail_inactive_coupon_color">@color/nearit_ui_inactive_orange</color>
+    <color name="nearit_ui_coupon_detail_valid_color">@color/nearit_ui_valid_green</color>
+    <color name="nearit_ui_coupon_detail_expired_color">@color/nearit_ui_expired_red</color>
+    <color name="nearit_ui_coupon_detail_inactive_color">@color/nearit_ui_inactive_orange</color>
     <color name="nearit_ui_coupon_detail_activity_container_background_color">@color/nearit_ui_transparent</color>
     <color name="nearit_ui_coupon_background_color">@color/nearit_ui_real_white</color>
 
@@ -39,10 +41,10 @@
     <color name="nearit_ui_feedback_close_text_color">@color/nearit_ui_warm_grey</color>
     <color name="nearit_ui_feedback_close_pressed_text_color">@color/nearit_ui_warm_grey_50</color>
     <color name="nearit_ui_feedback_send_button_text_color">@color/nearit_ui_white</color>
-    <color name="nearit_ui_feedback_send_button_pressed_text_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_feedback_send_button_pressed_text_color">@color/nearit_ui_real_white</color>
     <color name="nearit_ui_feedback_send_button_error_text_color">@color/nearit_ui_white</color>
     <color name="nearit_ui_feedback_send_button_color">@color/nearit_ui_black</color>
-    <color name="nearit_ui_feedback_send_button_pressed_color">@color/nearit_ui_white</color>
+    <color name="nearit_ui_feedback_send_button_pressed_color">@color/nearit_ui_black_35</color>
     <color name="nearit_ui_feedback_send_button_error_color">@color/nearit_ui_error_color</color>
     <color name="nearit_ui_feedback_send_button_error_pressed_color">@color/nearit_ui_error_color_50</color>
     <color name="nearit_ui_feedback_send_button_error_pressed_text_color">@color/nearit_ui_real_white</color>

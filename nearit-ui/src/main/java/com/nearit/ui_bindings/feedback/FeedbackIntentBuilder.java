@@ -24,7 +24,7 @@ public class FeedbackIntentBuilder {
     /**
      * Sets no text response
      */
-    public FeedbackIntentBuilder hideTextResponse() {
+    public FeedbackIntentBuilder withoutComment() {
         this.mHideTextResponse = true;
         return this;
     }

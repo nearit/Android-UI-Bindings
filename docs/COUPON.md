@@ -44,6 +44,8 @@ Optionally, you can display the coupon in your custom Activity by adding a Fragm
 
 If you need to tweak the way your dialog looks, you can override some resources (see [UI Customization](#ui-customization)). As the separator is a PNG file you may want to replace it.
 Methods `setSeparatorResourceId(R.drawable.your_separator_drawable)` and `setNoSeparator()` are available for both of the builders.
+
+In order to provide a better UX in a real scenario, our `Fragment` keeps the screen on and increases its brightness to the max value when the coupon that is shown is valid. If you need to disable this feature, call the following method of the builder: `disableAutoMaxBrightness`.
 ## UI Customization
 
 If you wish to change some messages, the existing strings can be overridden by name in your application. For example, consider the following `res/values/strings.xml`
