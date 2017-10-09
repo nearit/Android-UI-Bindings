@@ -14,6 +14,7 @@ public class CouponDetailIntentBuilder {
     private int mIconDrawable;
     private int mSeparatorDrawable;
     private boolean mNoSeparator = false;
+    private boolean mNoWakeLock = false;
     private boolean mEnableTapOutsideToClose = false;
     private Coupon mCoupon;
 
@@ -56,6 +57,14 @@ public class CouponDetailIntentBuilder {
         return this;
     }
 
+    /**
+     *  Disable wake-lock and max brightness
+     */
+    public CouponDetailIntentBuilder disableAutoMaxBrightness() {
+        mNoWakeLock = true;
+        return this;
+    }
+
     public Intent build() {
         return NearItCouponDetailActivity.createIntent(mContext, mCoupon, getParams());
     }
@@ -65,6 +74,7 @@ public class CouponDetailIntentBuilder {
                 mIconDrawable,
                 mSeparatorDrawable,
                 mNoSeparator,
+                mNoWakeLock,
                 mEnableTapOutsideToClose);
     }
 

@@ -16,19 +16,22 @@ class CouponDetailExtraParams implements Parcelable {
     private final int iconDrawable;
     private final int separatorDrawable;
     private final boolean noSeparator;
+    private final boolean noWakeLock;
     private final boolean enableTapOutsideToClose;
 
-    CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean enableTapOutsideToClose) {
+    CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean noWakeLock, boolean enableTapOutsideToClose) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
         this.noSeparator = noSeparator;
+        this.noWakeLock = noWakeLock;
         this.enableTapOutsideToClose = enableTapOutsideToClose;
     }
 
-    CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator) {
+    CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean noWakeLock) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
         this.noSeparator = noSeparator;
+        this.noWakeLock = noWakeLock;
         this.enableTapOutsideToClose = false;
     }
 
@@ -62,11 +65,13 @@ class CouponDetailExtraParams implements Parcelable {
             int iconDrawable = in.readInt();
             int separatorDrawable = in.readInt();
             boolean noSeparator = in.readInt() !=0;
+            boolean noWakeLock = in.readInt() !=0;
             boolean enableTapToClose = in.readInt() !=0;
             return new CouponDetailExtraParams(
                     iconDrawable,
                     separatorDrawable,
                     noSeparator,
+                    noWakeLock,
                     enableTapToClose
             );
         }
@@ -87,6 +92,7 @@ class CouponDetailExtraParams implements Parcelable {
         dest.writeInt(iconDrawable);
         dest.writeInt(separatorDrawable);
         dest.writeInt(noSeparator ? 1 : 0);
+        dest.writeInt(noWakeLock ? 1 : 0);
         dest.writeInt(enableTapOutsideToClose ? 1 : 0);
     }
 
@@ -102,7 +108,11 @@ class CouponDetailExtraParams implements Parcelable {
         return enableTapOutsideToClose;
     }
 
-    public boolean isNoSeparator() {
+    boolean isNoSeparator() {
         return noSeparator;
+    }
+
+    boolean isNoWakeLock() {
+        return noWakeLock;
     }
 }

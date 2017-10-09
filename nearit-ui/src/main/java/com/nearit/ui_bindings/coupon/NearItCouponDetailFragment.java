@@ -25,6 +25,7 @@ public class NearItCouponDetailFragment extends Fragment {
     private Coupon coupon;
     private int separatorDrawable = 0, iconDrawable = 0;
     private boolean noSeparator = false;
+    private boolean noWakeLock = false;
 
     public NearItCouponDetailFragment() {
     }
@@ -48,6 +49,7 @@ public class NearItCouponDetailFragment extends Fragment {
             separatorDrawable = extras.getSeparatorDrawable();
             iconDrawable = extras.getIconDrawable();
             noSeparator = extras.isNoSeparator();
+            noWakeLock = extras.isNoWakeLock();
         }
 
     }
@@ -60,7 +62,8 @@ public class NearItCouponDetailFragment extends Fragment {
 
         topSection.setCouponView(coupon);
 
-        if (coupon.getRedeemedAtDate() == null &&
+        if (!noWakeLock &&
+                coupon.getRedeemedAtDate() == null &&
                 (coupon.getRedeemableFromDate()!= null && coupon.getRedeemableFromDate().getTime() < System.currentTimeMillis()) &&
                 (coupon.getExpiresAtDate() != null && coupon.getExpiresAtDate().getTime() > System.currentTimeMillis())) {
 

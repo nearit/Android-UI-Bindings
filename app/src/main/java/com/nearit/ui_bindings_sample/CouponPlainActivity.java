@@ -7,9 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 
-import java.util.ArrayList;
-
-import it.near.sdk.reactions.couponplugin.model.Claim;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 /**
@@ -30,6 +27,7 @@ public class CouponPlainActivity extends AppCompatActivity {
 
         Fragment couponFragment = NearITUIBindings.getInstance(this)
                 .createCouponDetailFragmentBuilder(validCoupon)
+                .disableAutoMaxBrightness()
                 .build();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, couponFragment).commit();
