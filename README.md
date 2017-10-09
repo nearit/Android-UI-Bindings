@@ -14,7 +14,6 @@ For example, using NearIT-UI, a developer can launch a dialog for requesting the
 
 #### Upcoming features
 - Heads up notifications for in-app content
-- Coupon list
 
 ## Configuration
 Add the NearIT-UI library dependency. If your project uses Gradle build system, add the following dependency to `build.gradle` of your app:
