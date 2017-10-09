@@ -41,10 +41,10 @@
     <color name="nearit_ui_feedback_close_text_color">@color/nearit_ui_warm_grey</color>
     <color name="nearit_ui_feedback_close_pressed_text_color">@color/nearit_ui_warm_grey_50</color>
     <color name="nearit_ui_feedback_send_button_text_color">@color/nearit_ui_white</color>
-    <color name="nearit_ui_feedback_send_button_pressed_text_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_feedback_send_button_pressed_text_color">@color/nearit_ui_real_white</color>
     <color name="nearit_ui_feedback_send_button_error_text_color">@color/nearit_ui_white</color>
     <color name="nearit_ui_feedback_send_button_color">@color/nearit_ui_black</color>
-    <color name="nearit_ui_feedback_send_button_pressed_color">@color/nearit_ui_white</color>
+    <color name="nearit_ui_feedback_send_button_pressed_color">@color/nearit_ui_black_35</color>
     <color name="nearit_ui_feedback_send_button_error_color">@color/nearit_ui_error_color</color>
     <color name="nearit_ui_feedback_send_button_error_pressed_color">@color/nearit_ui_error_color_50</color>
     <color name="nearit_ui_feedback_send_button_error_pressed_text_color">@color/nearit_ui_real_white</color>
