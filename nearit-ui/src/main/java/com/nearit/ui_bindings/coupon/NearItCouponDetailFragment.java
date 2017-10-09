@@ -71,12 +71,18 @@ public class NearItCouponDetailFragment extends Fragment {
             separator.setImageResource(separatorDrawable);
         }
 
-        TextView couponName = (TextView) rootView.findViewById(R.id.coupon_name);
-        couponName.setText(coupon.name);
+        TextView couponName = (TextView) rootView.findViewById(R.id.coupon_title);
+        if (coupon.getTitle() != null) {
+            couponName.setText(coupon.getTitle());
+        }
         TextView couponValue = (TextView) rootView.findViewById(R.id.coupon_value);
-        couponValue.setText(coupon.value);
+        if (coupon.value != null) {
+            couponValue.setText(coupon.value);
+        }
         TextView couponDescription = (TextView) rootView.findViewById(R.id.coupon_description);
-        couponDescription.setText(coupon.description);
+        if (coupon.description != null) {
+            couponDescription.setText(coupon.description);
+        }
 
         if ((coupon.getRedeemableFromDate() != null) && (coupon.getRedeemableFromDate().getTime() > System.currentTimeMillis()) || coupon.getRedeemedAtDate() != null) {
             couponName.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_disabled_text_color));
