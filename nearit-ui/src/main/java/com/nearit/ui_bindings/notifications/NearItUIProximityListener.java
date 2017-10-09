@@ -70,12 +70,19 @@ public class NearItUIProximityListener implements ProximityListener, CoreContent
         Intent feedbackIntent = new Intent();
         feedbackIntent.putExtra(NearItIntentConstants.CONTENT, feedback);
         feedbackIntent.putExtra(NearItIntentConstants.TRACKING_INFO, trackingInfo);
+
         NearItUINotificationFactory.sendHeadsUpNotification(mContext, getAutoTrackingTargetIntent(feedbackIntent), true);
     }
 
     @Override
     public void gotContentNotification(Content content, TrackingInfo trackingInfo) {
-        //  Not yet implemented
+        sendNotifiedTracking(trackingInfo);
+
+        Intent contentIntent = new Intent();
+        contentIntent.putExtra(NearItIntentConstants.CONTENT, content);
+        contentIntent.putExtra(NearItIntentConstants.TRACKING_INFO, trackingInfo);
+
+        NearItUINotificationFactory.sendHeadsUpNotification(mContext, getAutoTrackingTargetIntent(contentIntent), true);
     }
 
     @Override

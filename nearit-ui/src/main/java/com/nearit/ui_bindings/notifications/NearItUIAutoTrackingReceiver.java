@@ -66,10 +66,7 @@ public class NearItUIAutoTrackingReceiver extends WakefulBroadcastReceiver imple
 
     @Override
     public void gotContentNotification(Content content, TrackingInfo trackingInfo) {
-        if (fromIntentService) {
-            //  it means that we got here from a background notification
-            context.startActivity(launcherIntent);
-        }
+        context.startActivity(NearITUIBindings.getInstance(context).createContentDetailIntentBuilder(content).build().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
     }
 
     @Override
