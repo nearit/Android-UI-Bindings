@@ -78,7 +78,7 @@ public class NearItContentDetailFragment extends Fragment {
 
         if (content.getImageLink() != null) {
             contentImageContainer.setVisibility(View.VISIBLE);
-            new LoadImageFromURL(contentImageView, contentImageSpinner).execute(content.getImageLink().getFullSize());
+            new LoadImageFromURL(contentImageView, contentImageSpinner, true).execute(content.getImageLink().getFullSize());
         }
 
         if (content.getCta() != null) {

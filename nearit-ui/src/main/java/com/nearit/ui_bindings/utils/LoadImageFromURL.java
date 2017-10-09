@@ -23,10 +23,17 @@ public final class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
     private ProgressBar progressBar;
 
     private String url;
+    private boolean enableReload = false;
 
     public LoadImageFromURL(@Nullable ImageView imageView, @Nullable ProgressBar progressBar) {
         this.imageView = imageView;
         this.progressBar = progressBar;
+    }
+
+    public LoadImageFromURL(@Nullable ImageView imageView, @Nullable ProgressBar progressBar, boolean enableReload) {
+        this.imageView = imageView;
+        this.progressBar = progressBar;
+        this.enableReload = enableReload;
     }
 
     public LoadImageFromURL(@Nullable ImageView imageView) {
@@ -63,20 +70,24 @@ public final class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
         if (imageView != null) {
             imageView.setVisibility(View.VISIBLE);
             if (icon != null) {
+                //  show icon
                 imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 imageView.setAdjustViewBounds(true);
                 imageView.setMinimumHeight(0);
                 imageView.setBackgroundDrawable(null);
                 imageView.setImageBitmap(icon);
             } else {
-                imageView.setScaleType(ImageView.ScaleType.CENTER);
-                imageView.setAdjustViewBounds(false);
-                imageView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new LoadImageFromURL(imageView, progressBar).execute(url);
-                    }
-                });
+                //  show reload
+                if (enableReload) {
+                    imageView.setScaleType(ImageView.ScaleType.CENTER);
+                    imageView.setAdjustViewBounds(false);
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            new LoadImageFromURL(imageView, progressBar).execute(url);
+                        }
+                    });
+                }
             }
         }
         if (progressBar != null) {
