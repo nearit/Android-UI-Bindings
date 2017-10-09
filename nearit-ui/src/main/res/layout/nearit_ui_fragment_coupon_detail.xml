@@ -54,12 +54,13 @@
                     android:src="@drawable/ic_nearit_ui_brand_nearit_black" />
 
                 <TextView
-                    android:id="@+id/coupon_name"
+                    android:id="@+id/coupon_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/nearit_ui_coupon_detail_margin2"
-                    android:textColor="@color/nearit_ui_coupon_detail_coupon_name_color"
-                    android:textSize="@dimen/nearit_ui_coupon_detail_coupon_name_text_size" />
+                    android:textStyle="bold"
+                    android:textColor="@color/nearit_ui_coupon_detail_title_color"
+                    android:textSize="@dimen/nearit_ui_coupon_detail_title_text_size" />
 
             </LinearLayout>
 
@@ -70,8 +71,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/nearit_ui_coupon_detail_margin3"
                 android:gravity="center_horizontal"
-                android:textColor="@color/nearit_ui_coupon_detail_coupon_value_color"
-                android:textSize="@dimen/nearit_ui_coupon_detail_coupon_value_text_size" />
+                android:textStyle="bold"
+                android:textColor="@color/nearit_ui_coupon_detail_value_color"
+                android:textSize="@dimen/nearit_ui_coupon_detail_value_text_size" />
 
             <TextView
                 android:id="@+id/coupon_description"
@@ -79,8 +81,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/nearit_ui_coupon_detail_margin4"
                 android:gravity="center_horizontal"
-                android:textColor="@color/nearit_ui_coupon_detail_coupon_description_color"
-                android:textSize="@dimen/nearit_ui_coupon_detail_coupon_description_text_size" />
+                android:textColor="@color/nearit_ui_coupon_detail_description_color"
+                android:textSize="@dimen/nearit_ui_coupon_detail_description_text_size" />
 
 
         </LinearLayout>

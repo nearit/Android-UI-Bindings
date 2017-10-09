@@ -13,6 +13,7 @@ public class CouponDetailFragmentBuilder {
     private int mIconDrawable;
     private int mSeparatorDrawable;
     private boolean mNoSeparator;
+    private boolean mNoWakeLock;
     private Coupon mCoupon;
 
     public CouponDetailFragmentBuilder(Context context, Coupon coupon) {
@@ -44,6 +45,14 @@ public class CouponDetailFragmentBuilder {
         return this;
     }
 
+    /**
+     *  Disable wake-lock and max brightness
+     */
+    public CouponDetailFragmentBuilder disableAutoMaxBrightness() {
+        mNoWakeLock = true;
+        return this;
+    }
+
     public NearItCouponDetailFragment build() {
         return NearItCouponDetailFragment.newInstance(mCoupon, getParams());
     }
@@ -52,7 +61,10 @@ public class CouponDetailFragmentBuilder {
         return new CouponDetailExtraParams(
                 mIconDrawable,
                 mSeparatorDrawable,
-                mNoSeparator);
+                mNoSeparator,
+                mNoWakeLock
+        );
+
     }
 
 }

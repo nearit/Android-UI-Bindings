@@ -46,7 +46,6 @@
     <style name="NearItUIPermissionsCloseTextAppearance">
         <!--    ASAP-ITALIC  -->
         <item name="android:textSize">@dimen/nearit_ui_permissions_text_size</item>
-        <item name="android:textColor">@color/nearit_ui_permissions_text_color</item>
     </style>
 
 </resources>

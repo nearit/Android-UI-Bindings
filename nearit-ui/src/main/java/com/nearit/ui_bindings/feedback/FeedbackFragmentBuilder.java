@@ -23,7 +23,7 @@ public class FeedbackFragmentBuilder {
     /**
      * Sets no text response
      */
-    public FeedbackFragmentBuilder hideTextResponse() {
+    public FeedbackFragmentBuilder withoutComment() {
         mHideTextResponse = true;
         return this;
     }

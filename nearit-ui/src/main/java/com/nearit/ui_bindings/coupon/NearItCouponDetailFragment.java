@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class NearItCouponDetailFragment extends Fragment {
     private Coupon coupon;
     private int separatorDrawable = 0, iconDrawable = 0;
     private boolean noSeparator = false;
+    private boolean noWakeLock = false;
 
     public NearItCouponDetailFragment() {
     }
@@ -47,6 +49,7 @@ public class NearItCouponDetailFragment extends Fragment {
             separatorDrawable = extras.getSeparatorDrawable();
             iconDrawable = extras.getIconDrawable();
             noSeparator = extras.isNoSeparator();
+            noWakeLock = extras.isNoWakeLock();
         }
 
     }
@@ -58,6 +61,16 @@ public class NearItCouponDetailFragment extends Fragment {
         CouponDetailTopSection topSection = (CouponDetailTopSection) rootView.findViewById(R.id.coupon_detail_top_section);
 
         topSection.setCouponView(coupon);
+
+        if (!noWakeLock &&
+                coupon.getRedeemedAtDate() == null &&
+                (coupon.getRedeemableFromDate()!= null && coupon.getRedeemableFromDate().getTime() < System.currentTimeMillis()) &&
+                (coupon.getExpiresAtDate() != null && coupon.getExpiresAtDate().getTime() > System.currentTimeMillis())) {
+
+            WindowManager.LayoutParams layout = getActivity().getWindow().getAttributes();
+            layout.screenBrightness = 1F;
+            getActivity().getWindow().setAttributes(layout);
+        }
 
         ProgressBar iconProgressBar = (ProgressBar) rootView.findViewById(R.id.coupon_icon_progress_bar);
         ImageView couponIcon = (ImageView) rootView.findViewById(R.id.coupon_icon);
@@ -71,12 +84,18 @@ public class NearItCouponDetailFragment extends Fragment {
             separator.setImageResource(separatorDrawable);
         }
 
-        TextView couponName = (TextView) rootView.findViewById(R.id.coupon_name);
-        couponName.setText(coupon.name);
+        TextView couponName = (TextView) rootView.findViewById(R.id.coupon_title);
+        if (coupon.getTitle() != null) {
+            couponName.setText(coupon.getTitle());
+        }
         TextView couponValue = (TextView) rootView.findViewById(R.id.coupon_value);
-        couponValue.setText(coupon.value);
+        if (coupon.value != null) {
+            couponValue.setText(coupon.value);
+        }
         TextView couponDescription = (TextView) rootView.findViewById(R.id.coupon_description);
-        couponDescription.setText(coupon.description);
+        if (coupon.description != null) {
+            couponDescription.setText(coupon.description);
+        }
 
         if ((coupon.getRedeemableFromDate() != null) && (coupon.getRedeemableFromDate().getTime() > System.currentTimeMillis()) || coupon.getRedeemedAtDate() != null) {
             couponName.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_disabled_text_color));
