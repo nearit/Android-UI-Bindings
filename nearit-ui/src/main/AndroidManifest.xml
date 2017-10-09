@@ -15,10 +15,16 @@
             android:name=".coupon.NearItCouponDetailActivity"
             android:launchMode="singleInstance"
             android:theme="@style/NearItUICouponDetailDialog" />
+
         <activity
             android:name=".feedback.NearItFeedbackActivity"
             android:launchMode="singleInstance"
             android:theme="@style/NearItUIFeedbackDialog" />
+
+        <activity
+            android:name=".content.NearItContentDetailActivity"
+            android:launchMode="singleInstance"
+            android:theme="@style/NearItUIContentDetailDialog" />
 
         <receiver android:name="com.nearit.ui_bindings.notifications.NearItUIAutoTrackingReceiver"
             android:exported="false" />

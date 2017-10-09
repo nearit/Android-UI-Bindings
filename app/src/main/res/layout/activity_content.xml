@@ -5,29 +5,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context="com.nearit.ui_bindings_sample.MainActivity">
+    tools:context="com.nearit.ui_bindings_sample.ContentActivity">
 
     <Button
-        android:id="@+id/permissions_demo"
+        android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Permissions" />
+        android:text="Content" />
 
     <Button
-        android:id="@+id/coupon_demo"
+        android:id="@+id/no_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Coupon"/>
+        android:text="Content no image" />
 
     <Button
-        android:id="@+id/feedback_demo"
+        android:id="@+id/no_cta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Feedback" />
+        android:text="Content no cta" />
+
     <Button
-        android:id="@+id/content_demo"
+        android:id="@+id/plain_content_activity"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Content"/>
+        android:text="Content in activity"/>
 
 </LinearLayout>
