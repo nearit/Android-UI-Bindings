@@ -25,8 +25,8 @@ import it.near.sdk.utils.NearUtils;
 public class NearItUIAutoTrackingReceiver extends WakefulBroadcastReceiver implements CoreContentsListener {
 
     private Context context;
-    private static final String FROM_INTENT_SERVICE = "auto_tracking_from_intent_service";
-    private boolean fromIntentService;
+    private static final String SHOULD_AUTODISMISS_IF_APP_IS_FOREGROUND = "should_autodismiss_if_app_is_foreground";
+    private boolean shouldAutoDismiss;
     private Intent launcherIntent;
 
     @Override
@@ -34,7 +34,7 @@ public class NearItUIAutoTrackingReceiver extends WakefulBroadcastReceiver imple
         TrackingInfo trackingInfo = intent.getParcelableExtra(NearItIntentConstants.TRACKING_INFO);
         NearItManager.getInstance().sendTracking(trackingInfo, Recipe.ENGAGED_STATUS);
 
-        fromIntentService = intent.getBooleanExtra(FROM_INTENT_SERVICE, false);
+        shouldAutoDismiss = intent.getBooleanExtra(SHOULD_AUTODISMISS_IF_APP_IS_FOREGROUND, false);
 
         this.context = context;
 
@@ -57,21 +57,21 @@ public class NearItUIAutoTrackingReceiver extends WakefulBroadcastReceiver imple
     }
 
     @Override
+    public void gotContentNotification(Content content, TrackingInfo trackingInfo) {
+        context.startActivity(NearITUIBindings.getInstance(context).createContentDetailIntentBuilder(content).build().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
+    }
+
+    @Override
     public void gotSimpleNotification(SimpleNotification simpleNotification, TrackingInfo trackingInfo) {
-        if (fromIntentService) {
+        if (shouldAutoDismiss) {
             //  it means that we got here from a background notification
             context.startActivity(launcherIntent);
         }
     }
 
     @Override
-    public void gotContentNotification(Content content, TrackingInfo trackingInfo) {
-        context.startActivity(NearITUIBindings.getInstance(context).createContentDetailIntentBuilder(content).build().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
-    }
-
-    @Override
     public void gotCustomJSONNotification(CustomJSON customJSON, TrackingInfo trackingInfo) {
-        if (fromIntentService) {
+        if (shouldAutoDismiss) {
             //  it means that we got here from a background notification
             context.startActivity(launcherIntent);
         }

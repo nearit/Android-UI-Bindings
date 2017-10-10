@@ -39,7 +39,7 @@ class NearItUINotificationFactory {
     private static final int DEFAULT_GEO_NOTIFICATION_ICON = R.drawable.icon_geo_default_24dp;
     private static final int DEFAULT_PUSH_NOTIFICATION_ICON = R.drawable.icon_push_default_24dp;
     private static final int NEARIT_UI_RANGING_NOTIFICATION_CODE = 6699;
-    private static final String FROM_INTENT_SERVICE = "auto_tracking_from_intent_service";
+    private static final String SHOULD_AUTODISMISS_IF_APP_IS_FOREGROUND = "should_autodismiss_if_app_is_foreground";
     private static final String NOTIFICATION_CHANNEL_ID = "NearUINotifications";
 
 
@@ -196,7 +196,7 @@ class NearItUINotificationFactory {
     private static Intent getAutoTrackingTargetIntent(Intent intent, Context context) {
         return new Intent(context, NearItUIAutoTrackingReceiver.class)
                 .putExtras(intent.getExtras())
-                .putExtra(FROM_INTENT_SERVICE, true);
+                .putExtra(SHOULD_AUTODISMISS_IF_APP_IS_FOREGROUND, true);
     }
 
     private static void sendNotifiedTracking(@NonNull Intent intent) {

@@ -1,6 +1,7 @@
 package com.nearit.ui_bindings;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.nearit.ui_bindings.content.ContentDetailFragmentBuilder;
 import com.nearit.ui_bindings.content.ContentDetailIntentBuilder;
@@ -57,6 +58,10 @@ public class NearITUIBindings {
 
     public static void enableAutomaticForegroundNotifications(Context context) {
         new NearItUIProximityListener(context);
+    }
+
+    public static boolean onNewIntent(Context context, Intent intent) {
+        return new NearItUIIntentManager(context).manageIntent(intent);
     }
 
 }
