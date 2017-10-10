@@ -4,20 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.nearit.ui_bindings.NearITUIBindings;
-
-import it.near.sdk.reactions.contentplugin.model.Content;
-import it.near.sdk.reactions.couponplugin.model.Coupon;
-import it.near.sdk.reactions.customjsonplugin.model.CustomJSON;
-import it.near.sdk.reactions.feedbackplugin.model.Feedback;
-import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
-import it.near.sdk.trackings.TrackingInfo;
-import it.near.sdk.utils.CoreContentsListener;
-import it.near.sdk.utils.NearUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,11 +61,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        if (intent != null &&
-                intent.getExtras() != null &&
-                NearUtils.carriesNearItContent(intent)) {
-
-            NearITUIBindings.onNewIntent(this, intent);
-        }
+        NearITUIBindings.onNewIntent(this, intent);
     }
 }
