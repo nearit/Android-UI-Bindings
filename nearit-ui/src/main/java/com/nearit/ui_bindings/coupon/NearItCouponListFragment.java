@@ -148,7 +148,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
                 if (refreshLayout != null) {
                     refreshLayout.setRefreshing(false);
                 }
-                if (NearItCouponListFragment.this.isAdded() && getActivity() != null){
+                if (isAdded() && getActivity() != null){
                     startActivityForResult(NearItUIWarningDialogActivity.createIntent(getActivity()), NEAR_OPEN_WARNING_CODE);
                 }
             }
@@ -167,7 +167,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
         if (separatorDrawable != 0) {
             builder.setSeparatorResourceId(separatorDrawable);
         }
-        if (this.isAdded() && getActivity() != null) {
+        if (isAdded() && getActivity() != null) {
             startActivity(builder.build());
         }
     }
