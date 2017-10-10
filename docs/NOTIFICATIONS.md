@@ -25,9 +25,21 @@ public class YourApplication extends Application {
 Please note that foreground notifications will auto-dismiss after a small amount of time.
 
 ### Background notifications
+The easiest way to handle NearIT contents in your app that already integrates NearIT SDK is to edit the `onNewIntent` method of your _launcher activity_:
+```java
+@Override
+protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    //  ...
+    NearITUIBindings.onNewIntent(this, intent);
+    //  ...
+}
+```
+
+Or you can even go further..
 
 NearIT-SDK has a built-in service that will handle every background event and show simple notifications, tapping on those notification will deliver an Intent to your app launcher.
-If you prefer to let the NearIt-UI library handle the tap and immediately show the convininent UIs when a notification is tapped, you have to add the `NearItUIIntentService` to the manifest of your application.
+If you prefer to let the NearIt-UI library handle the tap and immediately show the convenient UIs when a notification is tapped, you have to add the `NearItUIIntentService` to the manifest of your application.
 
 You can simply copy the following code and paste it in the `<application>` scope of the manifest.
 
