@@ -54,12 +54,10 @@
             android:textStyle="bold"
             android:visibility="gone" />
 
-        <TextView
+        <WebView
             android:id="@+id/content_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/nearit_ui_content_text_color"
-            android:textSize="@dimen/nearit_ui_content_content_text_size"
             android:paddingTop="@dimen/nearit_ui_content_margin2"
             android:visibility="gone" />
 
