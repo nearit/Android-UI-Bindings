@@ -1,4 +1,4 @@
-#How to run this sample
+# How to run this sample
 
 * Load the project in Android Studio.
 
