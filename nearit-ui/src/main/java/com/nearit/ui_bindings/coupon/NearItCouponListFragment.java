@@ -30,7 +30,6 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
     private static final String ARG_EXTRAS = "extras";
 
     private static final int NEAR_RETRY_CODE = 1111;
-    private static final int NEAR_CLOSE_CODE = 2222;
     private static final int NEAR_OPEN_WARNING_CODE = 3333;
 
     @Nullable
@@ -149,7 +148,9 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
                 if (refreshLayout != null) {
                     refreshLayout.setRefreshing(false);
                 }
-                startActivityForResult(NearItUIWarningDialogActivity.createIntent(getActivity()), NEAR_OPEN_WARNING_CODE);
+                if (NearItCouponListFragment.this.isAdded() && getActivity() != null){
+                    startActivityForResult(NearItUIWarningDialogActivity.createIntent(getActivity()), NEAR_OPEN_WARNING_CODE);
+                }
             }
         });
     }
@@ -166,7 +167,9 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
         if (separatorDrawable != 0) {
             builder.setSeparatorResourceId(separatorDrawable);
         }
-        startActivity(builder.build());
+        if (this.isAdded() && getActivity() != null) {
+            startActivity(builder.build());
+        }
     }
 
     @Override

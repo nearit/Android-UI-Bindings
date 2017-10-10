@@ -47,8 +47,12 @@ public class NearItUIWarningDialogActivity extends AppCompatActivity {
 
     }
 
-    public static Intent createIntent(Context context) {
-        return new Intent(context, NearItUIWarningDialogActivity.class);
+    public static Intent createIntent(@Nullable Context context) {
+        Intent intent = null;
+        if (context != null) {
+            intent = new Intent(context, NearItUIWarningDialogActivity.class);
+        }
+        return intent;
     }
 
 }
