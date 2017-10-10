@@ -30,22 +30,22 @@
         <activity android:name=".ContentPlainActivity" android:label="Content detail activity"/>
 
         <!--
-        Built-in NearIT-UI Intent service, replace with your own if you want to handle notifications
+        NearIT-UI Intent service, un-comment to enable this feature or replace it with your own if you want to handle notifications
         For info, read the documentation section about background notifications in the "NearIT-UI for notification" chapter
         -->
-        <service
-            android:name="com.nearit.ui_bindings.notifications.NearItUIIntentService"
-            android:exported="false"
-            android:permission="android.permission.BIND_JOB_SERVICE">
-            <intent-filter>
-                <action android:name="it.near.sdk.permission.PUSH_MESSAGE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="it.near.sdk.permission.GEO_MESSAGE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </service>
+        <!--<service-->
+            <!--android:name="com.nearit.ui_bindings.notifications.NearItUIIntentService"-->
+            <!--android:exported="false"-->
+            <!--android:permission="android.permission.BIND_JOB_SERVICE">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="it.near.sdk.permission.PUSH_MESSAGE" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
+            <!--<intent-filter>-->
+                <!--<action android:name="it.near.sdk.permission.GEO_MESSAGE" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
+        <!--</service>-->
 
     </application>
 
