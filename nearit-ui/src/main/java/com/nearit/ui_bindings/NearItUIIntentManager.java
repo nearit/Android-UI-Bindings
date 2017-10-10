@@ -23,7 +23,6 @@ class NearItUIIntentManager implements CoreContentsListener {
     private static final String TAG = "NearITUIIntentManager";
 
     private Context context;
-    private Intent launcherIntent;
     private boolean intentManaged = false;
 
     NearItUIIntentManager(Context context) {
@@ -31,16 +30,8 @@ class NearItUIIntentManager implements CoreContentsListener {
     }
 
     boolean manageIntent(@Nullable Intent intent) {
-        if(intent != null && intent.getExtras() != null) {
-
-            launcherIntent = context.getPackageManager()
-                    .getLaunchIntentForPackage(context.getPackageName())
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
-                    .putExtras(intent.getExtras());
-
-            if (NearUtils.carriesNearItContent(launcherIntent)) {
-                NearUtils.parseCoreContents(intent, this);
-            }
+        if (intent != null && intent.getExtras() != null && NearUtils.carriesNearItContent(intent)) {
+            NearUtils.parseCoreContents(intent, this);
         }
         return intentManaged;
     }
