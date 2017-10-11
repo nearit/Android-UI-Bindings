@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.nearit.ui_bindings.coupon.NearItCouponListFragment">
+
+    <TextView
+        android:id="@+id/no_coupons_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/nearit_ui_coupon_list_empty_list_text_color"
+        android:textSize="@dimen/nearit_ui_coupon_list_empty_list_text_size"
+        android:text="@string/nearit_ui_coupon_list_empty_list_text" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/coupons_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/nearit_ui_coupon_list_padding_left_right"
+            android:paddingRight="@dimen/nearit_ui_coupon_list_padding_left_right" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</RelativeLayout>

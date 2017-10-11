@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/nearit_ui_warning_dialog_overall_width"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/nearit_ui_warning_dialog_overall_padding">
+
+    <ImageView
+        android:id="@+id/warning_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/nearit_ui_warning_dialog_margin1"
+        android:src="@drawable/ic_nearit_ui_warning" />
+
+    <TextView
+        android:id="@+id/warning_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/nearit_ui_warning_dialog_margin2"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:text="@string/nearit_ui_warning_dialog_message"
+        android:textColor="@color/nearit_ui_warning_dialog_text_color"
+        android:textSize="@dimen/nearit_ui_warning_dialog_text_size" />
+
+    <com.nearit.ui_bindings.warning.views.NearItUIRetryButton
+        android:id="@+id/retry_button"
+        android:layout_width="@dimen/nearit_ui_warning_dialog_button_width"
+        android:layout_height="@dimen/nearit_ui_warning_dialog_button_height"
+        app:genericButtonText="@string/nearit_ui_warning_dialog_button_text"
+        android:layout_marginTop="@dimen/nearit_ui_warning_dialog_margin3" />
+
+    <TextView
+        android:id="@+id/close_dialog_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/nearit_ui_warning_dialog_margin5"
+        android:layout_marginTop="@dimen/nearit_ui_warning_dialog_margin4"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:text="@string/nearit_ui_warning_dialog_close_text"
+        android:textColor="@color/nearit_ui_warning_dialog_text_color"
+        android:textSize="@dimen/nearit_ui_warning_dialog_text_size" />
+
+</LinearLayout>
