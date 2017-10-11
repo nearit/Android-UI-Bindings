@@ -66,22 +66,22 @@ public class CouponListIntentBuilder {
         return this;
     }
 
-    public CouponListIntentBuilder getValidOnly() {
+    public CouponListIntentBuilder onlyValidCoupons() {
         mValidOnly = true;
         return this;
     }
 
-    public CouponListIntentBuilder getExpiredOnly() {
+    public CouponListIntentBuilder onlyExpiredCoupons() {
         mExpiredOnly = true;
         return this;
     }
 
-    public CouponListIntentBuilder getInactiveOnly() {
+    public CouponListIntentBuilder onlyInactiveCoupons() {
         mInactiveOnly = true;
         return this;
     }
 
-    public CouponListIntentBuilder getRedeemedOnly() {
+    public CouponListIntentBuilder onlyRedeemedCoupons() {
         mRedeemedOnly = true;
         return this;
     }

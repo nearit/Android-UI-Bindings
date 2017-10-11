@@ -8,10 +8,6 @@ import android.widget.Button;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import it.near.sdk.reactions.couponplugin.model.Claim;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 public class CouponsActivity extends AppCompatActivity {
@@ -113,7 +109,7 @@ public class CouponsActivity extends AppCompatActivity {
                 //  start an activity that shows a list of REAL valid coupons ONLY
                 startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
                         .createCouponListIntentBuilder()
-                        .getValidOnly()
+                        .onlyValidCoupons()
                         .build()
                 );
             }
@@ -126,7 +122,7 @@ public class CouponsActivity extends AppCompatActivity {
                 //  start an activity that shows a list of REAL expired coupons ONLY
                 startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
                         .createCouponListIntentBuilder()
-                        .getExpiredOnly()
+                        .onlyExpiredCoupons()
                         .build()
                 );
             }
@@ -139,7 +135,7 @@ public class CouponsActivity extends AppCompatActivity {
                 //  start an activity that shows a list of REAL inactive coupons ONLY
                 startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
                         .createCouponListIntentBuilder()
-                        .getInactiveOnly()
+                        .onlyInactiveCoupons()
                         .build()
                 );
             }
@@ -152,7 +148,7 @@ public class CouponsActivity extends AppCompatActivity {
                 //  start an activity that shows a list of REAL already redeemed coupons ONLY
                 startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
                         .createCouponListIntentBuilder()
-                        .getRedeemedOnly()
+                        .onlyRedeemedCoupons()
                         .build()
                 );
             }

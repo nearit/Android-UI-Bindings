@@ -54,22 +54,22 @@ public class CouponListFragmentBuilder {
         return this;
     }
 
-    public CouponListFragmentBuilder getValidOnly() {
+    public CouponListFragmentBuilder onlyValidCoupons() {
         mValidOnly = true;
         return this;
     }
 
-    public CouponListFragmentBuilder getExpiredOnly() {
+    public CouponListFragmentBuilder onlyExpiredCoupons() {
         mExpiredOnly = true;
         return this;
     }
 
-    public CouponListFragmentBuilder getInactiveOnly() {
+    public CouponListFragmentBuilder onlyInactiveCoupons() {
         mInactiveOnly = true;
         return this;
     }
 
-    public CouponListFragmentBuilder getRedeemedOnly() {
+    public CouponListFragmentBuilder onlyRedeemedCoupons() {
         mRedeemedOnly = true;
         return this;
     }
