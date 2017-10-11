@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/coupon_background">
+    <corners android:radius="2dp"/>
+    <solid android:color="@color/nearit_ui_coupon_list_coupon_pressed_background_color" />
+</shape>
