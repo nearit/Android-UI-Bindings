@@ -13,11 +13,11 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.feedback.views.NearItUIFeedbackButton;
+import com.nearit.ui_bindings.feedback.views.NearItUIRatingBar;
 
 import it.near.sdk.NearItManager;
 import it.near.sdk.reactions.feedbackplugin.FeedbackEvent;
@@ -44,7 +44,7 @@ public class NearItFeedbackFragment extends Fragment {
     private String userComment;
 
     @Nullable
-    RatingBar ratingBar;
+    NearItUIRatingBar ratingBar;
     @Nullable
     LinearLayout commentSection, ratingBarContainer;
     @Nullable
@@ -172,9 +172,9 @@ public class NearItFeedbackFragment extends Fragment {
         }
 
         if (ratingBar != null) {
-            ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            ratingBar.setOnRatingBarChangeListener(new NearItUIRatingBar.OnRatingBarChangeListener() {
                 @Override
-                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                public void onRatingChanged(NearItUIRatingBar ratingBar, float rating, boolean fromUser) {
                     if (rating < 1.0f) {
                         ratingBar.setRating(1.0f);
                     }

@@ -1,34 +1,49 @@
+/*
+    Modified version of https://github.com/FlyingPumba/SimpleRatingBar
+
+    The original code is under Apache License, Version 2.0:
+
+
+    Copyright 2016 Iván Arcuschin
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+ */
 package com.nearit.ui_bindings.feedback.views;
 
-import android.animation.Animator;
-import android.animation.Animator.AnimatorListener;
-import android.animation.ValueAnimator;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Dimension;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.Interpolator;
-import android.widget.ProgressBar;
 
 import com.nearit.ui_bindings.R;
+
+import java.util.Locale;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
@@ -42,7 +57,7 @@ public class NearItUIRatingBar extends View {
     /**
      * Represents gravity of the fill in the bar.
      */
-    public enum Gravity {
+    private enum Gravity {
         /**
          * Left gravity is default: the bar will be filled starting from left to right.
          */
@@ -53,6 +68,7 @@ public class NearItUIRatingBar extends View {
         Right(1);
 
         int id;
+
         Gravity(int id) {
             this.id = id;
         }
@@ -62,20 +78,36 @@ public class NearItUIRatingBar extends View {
                 if (f.id == id) return f;
             }
             // default value
-            Log.w("NearItUIRatingBar", String.format("Gravity chosen is neither 'left' nor 'right', I will set it to Left"));
+            Log.w("NearItUIRatingBar", "Gravity chosen is neither 'left' nor 'right', I will set it to Left");
             return Left;
         }
     }
 
     // Configurable variables
-    private @ColorInt int borderColor;
-    private @ColorInt int fillColor;
-    private @ColorInt int backgroundColor;
-    private @ColorInt int starBackgroundColor;
-    private @ColorInt int pressedBorderColor;
-    private @ColorInt int pressedFillColor;
-    private @ColorInt int pressedBackgroundColor;
-    private @ColorInt int pressedStarBackgroundColor;
+    private
+    @ColorInt
+    int borderColor;
+    private
+    @ColorInt
+    int fillColor;
+    private
+    @ColorInt
+    int backgroundColor;
+    private
+    @ColorInt
+    int starBackgroundColor;
+    private
+    @ColorInt
+    int pressedBorderColor;
+    private
+    @ColorInt
+    int pressedFillColor;
+    private
+    @ColorInt
+    int pressedBackgroundColor;
+    private
+    @ColorInt
+    int pressedStarBackgroundColor;
     private int numberOfStars;
     private float starsSeparation;
     private float desiredStarSize;
@@ -95,9 +127,7 @@ public class NearItUIRatingBar extends View {
     private Paint paintStarBorder;
     private Paint paintStarFill;
     private Paint paintStarBackground;
-    private CornerPathEffect cornerPathEffect;
     private Path starPath;
-    private ValueAnimator ratingAnimator;
     private OnRatingBarChangeListener ratingListener;
     private OnClickListener clickListener;
     private boolean touchInProgress;
@@ -132,7 +162,6 @@ public class NearItUIRatingBar extends View {
      */
     private void initView() {
         starPath = new Path();
-//        cornerPathEffect = new CornerPathEffect(starCornerRadius);
 
         paintStarOutline = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
         paintStarOutline.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -141,14 +170,12 @@ public class NearItUIRatingBar extends View {
         paintStarOutline.setStrokeJoin(Paint.Join.ROUND);
         paintStarOutline.setStrokeCap(Paint.Cap.ROUND);
         paintStarOutline.setColor(Color.BLACK);
-        paintStarOutline.setPathEffect(cornerPathEffect);
 
         paintStarBorder = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
         paintStarBorder.setStyle(Paint.Style.STROKE);
         paintStarBorder.setStrokeJoin(Paint.Join.ROUND);
         paintStarBorder.setStrokeCap(Paint.Cap.ROUND);
         paintStarBorder.setStrokeWidth(starBorderWidth);
-        paintStarBorder.setPathEffect(cornerPathEffect);
 
         paintStarBackground = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
         paintStarBackground.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -173,24 +200,24 @@ public class NearItUIRatingBar extends View {
     private void parseAttrs(AttributeSet attrs) {
         TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.NearItUIRatingBar);
 
-//        borderColor = arr.getColor(R.styleable.NearItUIRatingBar_srb_borderColor, getResources().getColor(R.color.golden_stars));
-//        fillColor = arr.getColor(R.styleable.NearItUIRatingBar_srb_fillColor, borderColor);
-//        starBackgroundColor = arr.getColor(R.styleable.NearItUIRatingBar_srb_starBackgroundColor, Color.TRANSPARENT);
+        borderColor = arr.getColor(R.styleable.NearItUIRatingBar_srb_borderColor, ContextCompat.getColor(getContext(), R.color.nearit_ui_rating_bar_star_border_color));
+        fillColor = arr.getColor(R.styleable.NearItUIRatingBar_srb_fillColor, borderColor);
+        starBackgroundColor = arr.getColor(R.styleable.NearItUIRatingBar_srb_starBackgroundColor, Color.TRANSPARENT);
         backgroundColor = arr.getColor(R.styleable.NearItUIRatingBar_srb_backgroundColor, Color.TRANSPARENT);
 
-//        pressedBorderColor = arr.getColor(R.styleable.NearItUIRatingBar_srb_pressedBorderColor, borderColor);
-//        pressedFillColor = arr.getColor(R.styleable.NearItUIRatingBar_srb_pressedFillColor, fillColor);
-//        pressedStarBackgroundColor = arr.getColor(R.styleable.NearItUIRatingBar_srb_pressedStarBackgroundColor, starBackgroundColor);
-//        pressedBackgroundColor = arr.getColor(R.styleable.NearItUIRatingBar_srb_pressedBackgroundColor, backgroundColor);
+        pressedBorderColor = arr.getColor(R.styleable.NearItUIRatingBar_srb_pressedBorderColor, borderColor);
+        pressedFillColor = arr.getColor(R.styleable.NearItUIRatingBar_srb_pressedFillColor, fillColor);
+        pressedStarBackgroundColor = arr.getColor(R.styleable.NearItUIRatingBar_srb_pressedStarBackgroundColor, starBackgroundColor);
+        pressedBackgroundColor = arr.getColor(R.styleable.NearItUIRatingBar_srb_pressedBackgroundColor, backgroundColor);
 
         numberOfStars = arr.getInteger(R.styleable.NearItUIRatingBar_srb_numberOfStars, 5);
 
-        starsSeparation = arr.getDimensionPixelSize(R.styleable.NearItUIRatingBar_srb_starsSeparation, (int)valueToPixels(4, Dimension.DP));
+        starsSeparation = arr.getDimensionPixelSize(R.styleable.NearItUIRatingBar_srb_starsSeparation, (int) valueToPixels(4, Dimension.DP));
         maxStarSize = arr.getDimensionPixelSize(R.styleable.NearItUIRatingBar_srb_maxStarSize, Integer.MAX_VALUE);
         desiredStarSize = arr.getDimensionPixelSize(R.styleable.NearItUIRatingBar_srb_starSize, Integer.MAX_VALUE);
-        stepSize = arr.getFloat(R.styleable.NearItUIRatingBar_srb_stepSize, 1f);
-        starBorderWidth = arr.getFloat(R.styleable.NearItUIRatingBar_srb_starBorderWidth, 0f);
-        starCornerRadius = arr.getFloat(R.styleable.NearItUIRatingBar_srb_starCornerRadius, 0f);
+        stepSize = arr.getFloat(R.styleable.NearItUIRatingBar_srb_stepSize, 0.1f);
+        starBorderWidth = arr.getDimensionPixelSize(R.styleable.NearItUIRatingBar_srb_starBorderWidth, (int) valueToPixels(2, Dimension.DP));
+        starCornerRadius = arr.getFloat(R.styleable.NearItUIRatingBar_srb_starCornerRadius, 6f);
 
         rating = normalizeRating(arr.getFloat(R.styleable.NearItUIRatingBar_srb_rating, 0f));
         isIndicator = arr.getBoolean(R.styleable.NearItUIRatingBar_srb_isIndicator, false);
@@ -208,23 +235,23 @@ public class NearItUIRatingBar extends View {
      */
     private void validateAttrs() {
         if (numberOfStars <= 0) {
-            throw new IllegalArgumentException(String.format("NearItUIRatingBar initialized with invalid value for numberOfStars. Found %d, but should be greater than 0", numberOfStars));
+            throw new IllegalArgumentException(String.format(Locale.ENGLISH, "NearItUIRatingBar initialized with invalid value for numberOfStars. Found %d, but should be greater than 0", numberOfStars));
         }
         if (desiredStarSize != Integer.MAX_VALUE && maxStarSize != Integer.MAX_VALUE && desiredStarSize
                 > maxStarSize) {
             Log.w("NearItUIRatingBar", String.format("Initialized with conflicting values: starSize is greater than maxStarSize (%f > %f). I will ignore maxStarSize", desiredStarSize, maxStarSize));
         }
         if (stepSize <= 0) {
-            throw new IllegalArgumentException(String.format("NearItUIRatingBar initialized with invalid value for stepSize. Found %f, but should be greater than 0", stepSize));
+            throw new IllegalArgumentException(String.format(Locale.ENGLISH, "NearItUIRatingBar initialized with invalid value for stepSize. Found %f, but should be greater than 0", stepSize));
         }
-//        if (starBorderWidth <= 0) {
-//            throw new IllegalArgumentException(String.format("NearItUIRatingBar initialized with invalid value for starBorderWidth. Found %f, but should be greater than 0",
-//                    starBorderWidth));
-//        }
-//        if (starCornerRadius < 0) {
-//            throw new IllegalArgumentException(String.format("NearItUIRatingBar initialized with invalid value for starCornerRadius. Found %f, but should be greater or equal than 0",
-//                    starBorderWidth));
-//        }
+        if (starBorderWidth < 0) {
+            throw new IllegalArgumentException(String.format(Locale.ENGLISH, "NearItUIRatingBar initialized with invalid value for starBorderWidth. Found %f, but should be greater than 0",
+                    starBorderWidth));
+        }
+        if (starCornerRadius < 0) {
+            throw new IllegalArgumentException(String.format(Locale.ENGLISH, "NearItUIRatingBar initialized with invalid value for starCornerRadius. Found %f, but should be greater or equal than 0",
+                    starBorderWidth));
+        }
     }
 
     @Override
@@ -260,16 +287,13 @@ public class NearItUIRatingBar extends View {
             //Be whatever you want
             if (desiredStarSize != Integer.MAX_VALUE) {
                 // user specified a specific star size, so there is a desired width
-                int desiredWidth = calculateTotalWidth(desiredStarSize, numberOfStars, starsSeparation, true);
-                width = desiredWidth;
+                width = calculateTotalWidth(desiredStarSize, numberOfStars, starsSeparation, true);
             } else if (maxStarSize != Integer.MAX_VALUE) {
                 // user specified a max star size, so there is a desired width
-                int desiredWidth = calculateTotalWidth(maxStarSize, numberOfStars, starsSeparation, true);
-                width = desiredWidth;
+                width = calculateTotalWidth(maxStarSize, numberOfStars, starsSeparation, true);
             } else {
                 // using defaults
-                int desiredWidth = calculateTotalWidth(defaultStarSize, numberOfStars, starsSeparation, true);
-                width = desiredWidth;
+                width = calculateTotalWidth(defaultStarSize, numberOfStars, starsSeparation, true);
             }
         }
 
@@ -283,31 +307,28 @@ public class NearItUIRatingBar extends View {
             //Can't be bigger than...
             if (desiredStarSize != Integer.MAX_VALUE) {
                 // user specified a specific star size, so there is a desired width
-                int desiredHeight = calculateTotalHeight(desiredStarSize, numberOfStars, starsSeparation, true);
+                int desiredHeight = calculateTotalHeight(desiredStarSize, true);
                 height = Math.min(desiredHeight, heightSize);
             } else if (maxStarSize != Integer.MAX_VALUE) {
                 // user specified a max star size, so there is a desired width
-                int desiredHeight = calculateTotalHeight(maxStarSize, numberOfStars, starsSeparation, true);
+                int desiredHeight = calculateTotalHeight(maxStarSize, true);
                 height = Math.min(desiredHeight, heightSize);
             } else {
                 // using defaults
-                int desiredHeight = calculateTotalHeight(tentativeStarSize, numberOfStars, starsSeparation, true);
+                int desiredHeight = calculateTotalHeight(tentativeStarSize, true);
                 height = Math.min(desiredHeight, heightSize);
             }
         } else {
             //Be whatever you want
             if (desiredStarSize != Integer.MAX_VALUE) {
                 // user specified a specific star size, so there is a desired width
-                int desiredHeight = calculateTotalHeight(desiredStarSize, numberOfStars, starsSeparation, true);
-                height = desiredHeight;
+                height = calculateTotalHeight(desiredStarSize, true);
             } else if (maxStarSize != Integer.MAX_VALUE) {
                 // user specified a max star size, so there is a desired width
-                int desiredHeight = calculateTotalHeight(maxStarSize, numberOfStars, starsSeparation, true);
-                height = desiredHeight;
+                height = calculateTotalHeight(maxStarSize, true);
             } else {
                 // using defaults
-                int desiredHeight = calculateTotalHeight(tentativeStarSize, numberOfStars, starsSeparation, true);
-                height = desiredHeight;
+                height = calculateTotalHeight(tentativeStarSize, true);
             }
         }
 
@@ -315,7 +336,8 @@ public class NearItUIRatingBar extends View {
         setMeasuredDimension(width, height);
     }
 
-    @Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
         int width = getWidth();
@@ -331,13 +353,14 @@ public class NearItUIRatingBar extends View {
     /**
      * Calculates largest possible star size, based on chosen width and height.
      * If maxStarSize is present, it will be considered and star size will not be greater than this value.
-     * @param width
-     * @param height
-     * */
+     *
+     * @param width  width
+     * @param height height
+     */
     private float calculateBestStarSize(int width, int height) {
         if (maxStarSize != Integer.MAX_VALUE) {
             float desiredTotalWidth = calculateTotalWidth(maxStarSize, numberOfStars, starsSeparation, true);
-            float desiredTotalHeight = calculateTotalHeight(maxStarSize, numberOfStars, starsSeparation, true);
+            float desiredTotalHeight = calculateTotalHeight(maxStarSize, true);
             if (desiredTotalWidth >= width || desiredTotalHeight >= height) {
                 // we need to shrink the size of the stars
                 float sizeBasedOnWidth = (width - getPaddingLeft() - getPaddingRight() - starsSeparation * (numberOfStars - 1)) / numberOfStars;
@@ -356,14 +379,15 @@ public class NearItUIRatingBar extends View {
 
     /**
      * Performs auxiliary calculations to later speed up drawing phase.
-     * @param width
-     * @param height
+     *
+     * @param width  width
+     * @param height height
      */
     private void performStarSizeAssociatedCalculations(int width, int height) {
         float totalStarsWidth = calculateTotalWidth(currentStarSize, numberOfStars, starsSeparation, false);
-        float totalStarsHeight = calculateTotalHeight(currentStarSize, numberOfStars, starsSeparation, false);
-        float startingX = (width - getPaddingLeft() - getPaddingRight())/2 - totalStarsWidth/2 + getPaddingLeft();
-        float startingY = (height - getPaddingTop() - getPaddingBottom())/2 - totalStarsHeight/2 + getPaddingTop();
+        float totalStarsHeight = calculateTotalHeight(currentStarSize, false);
+        float startingX = (width - getPaddingLeft() - getPaddingRight()) / 2 - totalStarsWidth / 2 + getPaddingLeft();
+        float startingY = (height - getPaddingTop() - getPaddingBottom()) / 2 - totalStarsHeight / 2 + getPaddingTop();
         starsDrawingSpace = new RectF(startingX, startingY, startingX + totalStarsWidth, startingY + totalStarsHeight);
         float aux = starsDrawingSpace.width() * 0.05f;
         starsTouchSpace = new RectF(starsDrawingSpace.left - aux, starsDrawingSpace.top, starsDrawingSpace.right + aux, starsDrawingSpace.bottom);
@@ -378,42 +402,42 @@ public class NearItUIRatingBar extends View {
         float innerBottomVerticalMargin = currentStarSize * 0.6f;
         float innerCenterVerticalMargin = currentStarSize * 0.27f;
 
-        starVertex = new float[] {
-                tipHorizontalMargin, innerUpHorizontalMargin, // top left
-                tipHorizontalMargin + triangleSide, innerUpHorizontalMargin,
+        starVertex = new float[]{
+                tipHorizontalMargin, innerUpHorizontalMargin + 0.6f, // top left
+                tipHorizontalMargin + triangleSide - 2f, innerUpHorizontalMargin - 1f,
                 half, tipVerticalMargin, // top tip
-                currentStarSize - tipHorizontalMargin - triangleSide, innerUpHorizontalMargin,
-                currentStarSize - tipHorizontalMargin, innerUpHorizontalMargin, // top right
-                currentStarSize - innerBottomHorizontalMargin, innerBottomVerticalMargin,
-                currentStarSize - bottomFromMargin, currentStarSize - tipVerticalMargin, // bottom right
-                half, currentStarSize - innerCenterVerticalMargin,
-                bottomFromMargin, currentStarSize - tipVerticalMargin, // bottom left
-                innerBottomHorizontalMargin, innerBottomVerticalMargin
+                currentStarSize - tipHorizontalMargin - triangleSide + 2f, innerUpHorizontalMargin - 1f,
+                currentStarSize - tipHorizontalMargin, innerUpHorizontalMargin + 0.6f, // top right
+                currentStarSize - innerBottomHorizontalMargin + 3f, innerBottomVerticalMargin + 1f,
+                currentStarSize - bottomFromMargin + 0.6f, currentStarSize - tipVerticalMargin, // bottom right
+                half, currentStarSize - innerCenterVerticalMargin + 2f,
+                bottomFromMargin - 0.6f, currentStarSize - tipVerticalMargin, // bottom left
+                innerBottomHorizontalMargin - 3f, innerBottomVerticalMargin + 1f
         };
     }
 
     /**
      * Calculates total width to occupy based on several parameters
-     * @param starSize
-     * @param numberOfStars
-     * @param starsSeparation
-     * @param padding
-     * @return
+     *
+     * @param starSize        size of the star
+     * @param numberOfStars   number of stars
+     * @param starsSeparation separation between stars
+     * @param padding         padding
+     * @return total width
      */
     private int calculateTotalWidth(float starSize, int numberOfStars, float starsSeparation, boolean padding) {
-        return Math.round(starSize * numberOfStars + starsSeparation * (numberOfStars -1))
-                +  (padding ? getPaddingLeft() + getPaddingRight() : 0);
+        return Math.round(starSize * numberOfStars + starsSeparation * (numberOfStars - 1))
+                + (padding ? getPaddingLeft() + getPaddingRight() : 0);
     }
 
     /**
      * Calculates total height to occupy based on several parameters
-     * @param starSize
-     * @param numberOfStars
-     * @param starsSeparation
-     * @param padding
-     * @return
+     *
+     * @param starSize size of the star
+     * @param padding  padding
+     * @return total height
      */
-    private int calculateTotalHeight(float starSize, int numberOfStars, float starsSeparation, boolean padding) {
+    private int calculateTotalHeight(float starSize, boolean padding) {
         return Math.round(starSize) + (padding ? getPaddingTop() + getPaddingBottom() : 0);
     }
 
@@ -426,8 +450,9 @@ public class NearItUIRatingBar extends View {
 
     /**
      * Generates internal canvas on which the ratingbar will be drawn.
-     * @param w
-     * @param h
+     *
+     * @param w width
+     * @param h height
      */
     private void generateInternalCanvas(int w, int h) {
         if (internalBitmap != null) {
@@ -443,7 +468,8 @@ public class NearItUIRatingBar extends View {
         }
     }
 
-    @Override protected void onDraw(Canvas canvas) {
+    @Override
+    protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         int height = getHeight();
@@ -515,7 +541,8 @@ public class NearItUIRatingBar extends View {
 
     /**
      * Draws the view when gravity is Left
-     * @param internalCanvas
+     *
+     * @param internalCanvas canvas
      */
     private void drawFromLeftToRight(Canvas internalCanvas) {
         float remainingTotalRating = rating;
@@ -535,7 +562,8 @@ public class NearItUIRatingBar extends View {
 
     /**
      * Draws the view when gravity is Right
-     * @param internalCanvas
+     *
+     * @param internalCanvas canvas
      */
     private void drawFromRightToLeft(Canvas internalCanvas) {
         float remainingTotalRating = rating;
@@ -555,10 +583,11 @@ public class NearItUIRatingBar extends View {
 
     /**
      * Draws a star in the provided canvas.
-     * @param canvas
-     * @param x left of the star
-     * @param y top of the star
-     * @param filled between 0 and 1
+     *
+     * @param canvas  canvas
+     * @param x       left of the star
+     * @param y       top of the star
+     * @param filled  between 0 and 1
      * @param gravity Left or Right
      */
     private void drawStar(Canvas canvas, float x, float y, float filled, Gravity gravity) {
@@ -568,8 +597,8 @@ public class NearItUIRatingBar extends View {
         // prepare path for star
         starPath.reset();
         starPath.moveTo(x + starVertex[0], y + starVertex[1]);
-        for(int i = 2; i < starVertex.length; i=i+2) {
-            starPath.lineTo(x + starVertex[i], y + starVertex[i+1]);
+        for (int i = 2; i < starVertex.length; i = i + 2) {
+            starPath.lineTo(x + starVertex[i], y + starVertex[i + 1]);
         }
         starPath.close();
 
@@ -579,12 +608,12 @@ public class NearItUIRatingBar extends View {
         // Note: below, currentStarSize*0.02f is a minor correction so the user won't see a vertical black line in between the fill and empty color
         if (gravity == Gravity.Left) {
             // color star fill
-            canvas.drawRect(x, y, x + fill + currentStarSize *0.02f, y + currentStarSize, paintStarFill);
+            canvas.drawRect(x, y, x + fill + currentStarSize * 0.02f, y + currentStarSize, paintStarFill);
             // draw star background
             canvas.drawRect(x + fill, y, x + currentStarSize, y + currentStarSize, paintStarBackground);
         } else {
             // color star fill
-            canvas.drawRect(x + currentStarSize - (fill+ currentStarSize *0.02f), y, x + currentStarSize, y + currentStarSize, paintStarFill);
+            canvas.drawRect(x + currentStarSize - (fill + currentStarSize * 0.02f), y, x + currentStarSize, y + currentStarSize, paintStarFill);
             // draw star background
             canvas.drawRect(x, y, x + currentStarSize - fill, y + currentStarSize, paintStarBackground);
         }
@@ -597,18 +626,18 @@ public class NearItUIRatingBar extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (isIndicator  || (ratingAnimator != null && ratingAnimator.isRunning())) {
+        if (isIndicator) {
             return false;
         }
 
         int action = event.getAction() & MotionEvent.ACTION_MASK;
-        switch(action) {
+        switch (action) {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:
                 // check if action is performed on stars
                 if (starsTouchSpace.contains(event.getX(), event.getY())) {
                     touchInProgress = true;
-                    setNewRatingFromTouch(event.getX(), event.getY());
+                    setNewRatingFromTouch(event.getX());
                 } else {
                     if (touchInProgress && ratingListener != null) {
                         ratingListener.onRatingChanged(this, rating, true);
@@ -618,7 +647,7 @@ public class NearItUIRatingBar extends View {
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                setNewRatingFromTouch(event.getX(), event.getY());
+                setNewRatingFromTouch(event.getX());
                 if (clickListener != null) {
                     clickListener.onClick(this);
                 }
@@ -637,10 +666,10 @@ public class NearItUIRatingBar extends View {
 
     /**
      * Assigns a rating to the touch event.
-     * @param x
-     * @param y
+     *
+     * @param x x
      */
-    private void setNewRatingFromTouch(float x, float y) {
+    private void setNewRatingFromTouch(float x) {
         // normalize x to inside starsDrawinSpace
         if (gravity != Gravity.Left) {
             x = getWidth() - x;
@@ -650,22 +679,22 @@ public class NearItUIRatingBar extends View {
         if (x < starsDrawingSpace.left) {
             rating = 0;
             return;
-        } else if (x >  starsDrawingSpace.right) {
+        } else if (x > starsDrawingSpace.right) {
             rating = numberOfStars;
             return;
         }
 
         x = x - starsDrawingSpace.left;
         // reduce the width to allow the user reach the top and bottom values of rating (0 and numberOfStars)
-        rating = (float)numberOfStars / starsDrawingSpace.width() * x;
+        rating = (float) numberOfStars / starsDrawingSpace.width() * x;
 
         // correct rating in case step size is present
         float mod = rating % stepSize;
-        if (mod < stepSize/4) {
+        if (mod < stepSize / 4) {
             rating = rating - mod;
             rating = Math.max(0, rating);
         } else {
-            rating =  rating - mod + stepSize;
+            rating = rating - mod + stepSize;
             rating = Math.min(numberOfStars, rating);
         }
     }
@@ -699,17 +728,12 @@ public class NearItUIRatingBar extends View {
         };
         private float rating = 0.0f;
 
-        protected SavedState(Parcel source) {
+        SavedState(Parcel source) {
             super(source);
             rating = source.readFloat();
         }
 
-        @TargetApi(Build.VERSION_CODES.N)
-        protected SavedState(Parcel source, ClassLoader loader) {
-            super(source, loader);
-        }
-
-        protected SavedState(Parcelable superState) {
+        SavedState(Parcelable superState) {
             super(superState);
         }
 
@@ -722,7 +746,7 @@ public class NearItUIRatingBar extends View {
 
   /* ----------- GETTERS AND SETTERS ----------- */
 
-    public float getRating(){
+    public float getRating() {
         return rating;
     }
 
@@ -730,364 +754,16 @@ public class NearItUIRatingBar extends View {
      * Sets rating.
      * If provided value is less than 0, rating will be set to 0.
      * * If provided value is greater than numberOfStars, rating will be set to numberOfStars.
-     * @param rating
+     *
+     * @param rating value
      */
     public void setRating(float rating) {
         this.rating = normalizeRating(rating);
         // request redraw of the view
         invalidate();
-        if (ratingListener != null && (ratingAnimator == null || !ratingAnimator.isRunning())) {
+        if (ratingListener != null) {
             ratingListener.onRatingChanged(this, rating, false);
         }
-    }
-
-    public float getStepSize() {
-        return stepSize;
-    }
-
-    /**
-     * Sets step size of rating.
-     * Throws IllegalArgumentException if provided value is less or equal than zero.
-     * @param stepSize
-     */
-    public void setStepSize(float stepSize) {
-        this.stepSize = stepSize;
-        if (stepSize <= 0) {
-            throw new IllegalArgumentException(String.format("NearItUIRatingBar initialized with invalid value for stepSize. Found %f, but should be greater than 0", stepSize));
-        }
-        // request redraw of the view
-        invalidate();
-    }
-
-    public boolean isIndicator() {
-        return isIndicator;
-    }
-
-    /**
-     * Sets indicator property.
-     * If provided value is true, touch events will be deactivated, and thus user interaction will be deactivated.
-     * @param indicator
-     */
-    public void setIndicator(boolean indicator) {
-        isIndicator = indicator;
-        touchInProgress = false;
-    }
-
-    /**
-     * Returns max star size in pixels.
-     * @return
-     */
-    public float getMaxStarSize() {
-        return maxStarSize;
-    }
-
-    /**
-     * Returns max star size in the requested dimension.
-     * @param dimen
-     * @return
-     */
-    public float getMaxStarSize(@Dimension int dimen) {
-        return valueFromPixels(maxStarSize, dimen);
-    }
-
-    /**
-     * Sets maximum star size in pixels.
-     * If current star size is less than provided value, this has no effect on the view.
-     * @param maxStarSize
-     */
-    public void setMaxStarSize(float maxStarSize) {
-        this.maxStarSize = maxStarSize;
-        if (currentStarSize > maxStarSize) {
-            // force re-calculating the layout dimension
-            requestLayout();
-            generateInternalCanvas(getWidth(), getHeight());
-            // request redraw of the view
-            invalidate();
-        }
-    }
-
-    /**
-     * Sets maximum star size using the given dimension.
-     * If current star size is less than provided value, this has no effect on the view.
-     * @param maxStarSize
-     */
-    public void setMaxStarSize(float maxStarSize, @Dimension int dimen) {
-        setMaxStarSize(valueToPixels(maxStarSize, dimen));
-    }
-
-    /**
-     * Return star size in pixels.
-     * @return
-     */
-    public float getStarSize() {
-        return currentStarSize;
-    }
-
-    /**
-     * Return star size in the requested dimension.
-     * @param dimen
-     * @return
-     */
-    public float getStarSize(@Dimension int dimen) {
-        return valueFromPixels(currentStarSize, dimen);
-    }
-
-    /**
-     * Sets exact star size in pixels.
-     * @param starSize
-     */
-    public void setStarSize(float starSize) {
-        this.desiredStarSize = starSize;
-        if (starSize != Integer.MAX_VALUE && maxStarSize != Integer.MAX_VALUE && starSize > maxStarSize) {
-            Log.w("NearItUIRatingBar", String.format("Initialized with conflicting values: starSize is greater than maxStarSize (%f > %f). I will ignore maxStarSize", starSize, maxStarSize));
-        }
-        // force re-calculating the layout dimension
-        requestLayout();
-        generateInternalCanvas(getWidth(), getHeight());
-        // request redraw of the view
-        invalidate();
-    }
-
-    /**
-     * Sets exact star size using the given dimension.
-     * @param starSize
-     * @param dimen
-     */
-    public void setStarSize(float starSize, @Dimension int dimen) {
-        setStarSize(valueToPixels(starSize, dimen));
-    }
-
-    /**
-     * Returns stars separation in pixels.
-     * @return
-     */
-    public float getStarsSeparation() {
-        return starsSeparation;
-    }
-
-    /**
-     * Returns stars separation in the requested dimension.
-     * @param dimen
-     * @return
-     */
-    public float getStarsSeparation(@Dimension int dimen) {
-        return valueFromPixels(starsSeparation, dimen);
-    }
-
-    /**
-     * Sets separation between stars in pixels.
-     * @param starsSeparation
-     */
-    public void setStarsSeparation(float starsSeparation) {
-        this.starsSeparation = starsSeparation;
-        // force re-calculating the layout dimension
-        requestLayout();
-        generateInternalCanvas(getWidth(), getHeight());
-        // request redraw of the view
-        invalidate();
-    }
-
-    /**
-     * Sets separation between stars using the given dimension.
-     * @param starsSeparation
-     */
-    public void setStarsSeparation(float starsSeparation, @Dimension int dimen) {
-        setStarsSeparation(valueToPixels(starsSeparation, dimen));
-    }
-
-    public int getNumberOfStars() {
-        return numberOfStars;
-    }
-
-    /**
-     * Sets number of stars.
-     * It also sets the rating to zero.
-     * Throws IllegalArgumentException if provided value is less or equal than zero.
-     * @param numberOfStars
-     */
-    public void setNumberOfStars(int numberOfStars) {
-        this.numberOfStars = numberOfStars;
-        if (numberOfStars <= 0) {
-            throw new IllegalArgumentException(String.format("NearItUIRatingBar initialized with invalid value for numberOfStars. Found %d, but should be greater than 0", numberOfStars));
-        }
-        this.rating = 0;
-        // force re-calculating the layout dimension
-        requestLayout();
-        generateInternalCanvas(getWidth(), getHeight());
-        // request redraw of the view
-        invalidate();
-    }
-
-    /**
-     * Returns star border width in pixels.
-     * @return
-     */
-    public float getStarBorderWidth() {
-        return starBorderWidth;
-    }
-
-    /**
-     * Returns star border width in the requested dimension.
-     * @param dimen
-     * @return
-     */
-    public float getStarBorderWidth(@Dimension int dimen) {
-        return valueFromPixels(starBorderWidth, dimen);
-    }
-
-    /**
-     * Sets border width of stars in pixels.
-     * Throws IllegalArgumentException if provided value is less or equal than zero.
-     * @param starBorderWidth
-     */
-    public void setStarBorderWidth(float starBorderWidth) {
-        this.starBorderWidth = starBorderWidth;
-        if (starBorderWidth <= 0) {
-            throw new IllegalArgumentException(String.format("NearItUIRatingBar initialized with invalid value for starBorderWidth. Found %f, but should be greater than 0",
-                    starBorderWidth));
-        }
-        paintStarBorder.setStrokeWidth(starBorderWidth);
-        // request redraw of the view
-        invalidate();
-    }
-
-    /**
-     * Sets border width of stars using the given dimension.
-     * Throws IllegalArgumentException if provided value is less or equal than zero.
-     * @param starBorderWidth
-     * @param dimen
-     */
-    public void setStarBorderWidth(float starBorderWidth, @Dimension int dimen) {
-        setStarBorderWidth(valueToPixels(starBorderWidth, dimen));
-    }
-
-    /**
-     * Returns start corner radius in pixels,
-     * @return
-     */
-    public float getStarCornerRadius() {
-        return starCornerRadius;
-    }
-
-    /**
-     * Returns start corner radius in the requested dimension,
-     * @param dimen
-     * @return
-     */
-    public float getStarCornerRadius(@Dimension int dimen) {
-        return valueFromPixels(starCornerRadius, dimen);
-    }
-
-    /**
-     * Sets radius of star corner in pixels.
-     * Throws IllegalArgumentException if provided value is less than zero.
-     * @param starCornerRadius
-     */
-    public void setStarCornerRadius(float starCornerRadius) {
-        this.starCornerRadius = starCornerRadius;
-        if (starCornerRadius < 0) {
-            throw new IllegalArgumentException(String.format("NearItUIRatingBar initialized with invalid value for starCornerRadius. Found %f, but should be greater or equal than 0",
-                    starCornerRadius));
-        }
-        cornerPathEffect = new CornerPathEffect(starCornerRadius);
-        paintStarBorder.setPathEffect(cornerPathEffect);
-        paintStarOutline.setPathEffect(cornerPathEffect);
-        // request redraw of the view
-        invalidate();
-    }
-
-    /**
-     * Sets radius of star corner using the given dimension.
-     * Throws IllegalArgumentException if provided value is less than zero.
-     * @param starCornerRadius
-     * @param dimen
-     */
-    public void setStarCornerRadius(float starCornerRadius, @Dimension int dimen) {
-        setStarCornerRadius(valueToPixels(starCornerRadius, dimen));
-    }
-
-    public @ColorInt int getBorderColor() {
-        return borderColor;
-    }
-
-    /**
-     * Sets border color of stars in normal state.
-     * @param borderColor
-     */
-    public void setBorderColor(@ColorInt int borderColor) {
-        this.borderColor = borderColor;
-        // request redraw of the view
-        invalidate();
-    }
-
-    public @ColorInt int getFillColor() {
-        return fillColor;
-    }
-
-    /**
-     * Sets fill color of stars in normal state.
-     * @param fillColor
-     */
-    public void setFillColor(@ColorInt int fillColor) {
-        this.fillColor = fillColor;
-        // request redraw of the view
-        invalidate();
-    }
-
-    public @ColorInt int getStarBackgroundColor() {
-        return starBackgroundColor;
-    }
-
-    /**
-     * Sets background color of stars in normal state.
-     * @param starBackgroundColor
-     */
-    public void setStarBackgroundColor(@ColorInt int starBackgroundColor) {
-        this.starBackgroundColor = starBackgroundColor;
-        // request redraw of the view
-        invalidate();
-    }
-
-    public @ColorInt int getPressedBorderColor() {
-        return pressedBorderColor;
-    }
-
-    /**
-     * Sets border color of stars in pressed state.
-     * @param pressedBorderColor
-     */
-    public void setPressedBorderColor(@ColorInt int pressedBorderColor) {
-        this.pressedBorderColor = pressedBorderColor;
-        // request redraw of the view
-        invalidate();
-    }
-
-    public @ColorInt int getPressedFillColor() {
-        return pressedFillColor;
-    }
-
-    /**
-     * Sets fill color of stars in pressed state.
-     * @param pressedFillColor
-     */
-    public void setPressedFillColor(@ColorInt int pressedFillColor) {
-        this.pressedFillColor = pressedFillColor;
-        // request redraw of the view
-        invalidate();
-    }
-
-    public @ColorInt int getPressedStarBackgroundColor() {
-        return pressedStarBackgroundColor;
-    }
-
-    /**
-     * Sets background color of stars in pressed state.
-     * @param pressedStarBackgroundColor
-     */
-    public void setPressedStarBackgroundColor(@ColorInt int pressedStarBackgroundColor) {
-        this.pressedStarBackgroundColor = pressedStarBackgroundColor;
-        // request redraw of the view
-        invalidate();
     }
 
     public Gravity getGravity() {
@@ -1096,7 +772,8 @@ public class NearItUIRatingBar extends View {
 
     /**
      * Sets gravity of fill.
-     * @param gravity
+     *
+     * @param gravity gravity of fill
      */
     public void setGravity(Gravity gravity) {
         this.gravity = gravity;
@@ -1104,26 +781,12 @@ public class NearItUIRatingBar extends View {
         invalidate();
     }
 
-    public boolean isDrawBorderEnabled() {
-        return drawBorderEnabled;
-    }
-
-    /**
-     * Sets drawBorder property.
-     * If provided value is true, border will be drawn, otherwise it will be omithed.
-     * @param drawBorderEnabled
-     */
-    public void setDrawBorderEnabled(boolean drawBorderEnabled) {
-        this.drawBorderEnabled = drawBorderEnabled;
-        // request redraw of the view
-        invalidate();
-    }
-
     /**
      * Convenience method to convert a value in the given dimension to pixels.
-     * @param value
-     * @param dimen
-     * @return
+     *
+     * @param value float value
+     * @param dimen dp value
+     * @return pixels
      */
     private float valueToPixels(float value, @Dimension int dimen) {
         switch (dimen) {
@@ -1137,90 +800,10 @@ public class NearItUIRatingBar extends View {
     }
 
     /**
-     * Convenience method to convert a value from pixels to the given dimension.
-     * @param value
-     * @param dimen
-     * @return
-     */
-    private float valueFromPixels(float value, @Dimension int dimen) {
-        switch (dimen) {
-            case Dimension.DP:
-                return value / getResources().getDisplayMetrics().density;
-            case Dimension.SP:
-                return value / getResources().getDisplayMetrics().scaledDensity;
-            default:
-                return value;
-        }
-    }
-
-    /**
-     * Sets rating with animation.
-     * @param builder
-     */
-    private void animateRating(AnimationBuilder builder) {
-        builder.ratingTarget = normalizeRating(builder.ratingTarget);
-        ratingAnimator = ValueAnimator.ofFloat(0, builder.ratingTarget);
-        ratingAnimator.setDuration(builder.duration);
-        ratingAnimator.setRepeatCount(builder.repeatCount);
-        ratingAnimator.setRepeatMode(builder.repeatMode);
-
-        // Callback that executes on animation steps.
-        ratingAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = ((Float) (animation.getAnimatedValue())).floatValue();
-                setRating(value);
-            }
-        });
-
-        if (builder.interpolator != null) {
-            ratingAnimator.setInterpolator(builder.interpolator);
-        }
-        if (builder.animatorListener != null) {
-            ratingAnimator.addListener(builder.animatorListener);
-        }
-        ratingAnimator.addListener(new AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                if (ratingListener != null) {
-                    ratingListener.onRatingChanged(NearItUIRatingBar.this, rating, false);
-                }
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-                if (ratingListener != null) {
-                    ratingListener.onRatingChanged(NearItUIRatingBar.this, rating, false);
-                }
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-                if (ratingListener != null) {
-                    ratingListener.onRatingChanged(NearItUIRatingBar.this, rating, false);
-                }
-            }
-        });
-        ratingAnimator.start();
-    }
-
-    /**
-     * Returns a new AnimationBuilder.
-     * @return
-     */
-    public AnimationBuilder getAnimationBuilder() {
-        return new AnimationBuilder(this);
-    }
-
-    /**
      * Normalizes rating passed by argument between 0 and numberOfStars.
-     * @param rating
-     * @return
+     *
+     * @param rating value
+     * @return normalized
      */
     private float normalizeRating(float rating) {
         if (rating < 0) {
@@ -1236,15 +819,18 @@ public class NearItUIRatingBar extends View {
 
     /**
      * Sets OnClickListener.
-     * @param listener
+     *
+     * @param listener listener
      */
-    @Override public void setOnClickListener(OnClickListener listener) {
+    @Override
+    public void setOnClickListener(OnClickListener listener) {
         this.clickListener = listener;
     }
 
     /**
      * Sets OnRatingBarChangeListener.
-     * @param listener
+     *
+     * @param listener listener
      */
     public void setOnRatingBarChangeListener(OnRatingBarChangeListener listener) {
         this.ratingListener = listener;
@@ -1260,105 +846,13 @@ public class NearItUIRatingBar extends View {
          * lifting the touch.
          *
          * @param nearItUIRatingBar The RatingBar whose rating has changed.
-         * @param rating The current rating. This will be in the range
-         *            0..numStars.
-         * @param fromUser True if the rating change was initiated by a user's
-         *            touch gesture or arrow key/horizontal trackbell movement.
+         * @param rating            The current rating. This will be in the range
+         *                          0..numStars.
+         * @param fromUser          True if the rating change was initiated by a user's
+         *                          touch gesture or arrow key/horizontal trackbell movement.
          */
         void onRatingChanged(NearItUIRatingBar nearItUIRatingBar, float rating, boolean fromUser);
 
     }
 
-    /**
-     * Helper class to build rating animation.
-     * Provides good defaults:
-     * - Target rating: numberOfStars
-     * - Animation: Bounce
-     * - Duration: 2s
-     */
-    public class AnimationBuilder {
-        private NearItUIRatingBar ratingBar;
-        private long duration;
-        private Interpolator interpolator;
-        private float ratingTarget;
-        private int repeatCount;
-        private int repeatMode;
-        private AnimatorListener animatorListener;
-
-        private AnimationBuilder(NearItUIRatingBar ratingBar) {
-            this.ratingBar = ratingBar;
-            this.duration = 2000;
-            this.interpolator = new BounceInterpolator();
-            this.ratingTarget = ratingBar.getNumberOfStars();
-            this.repeatCount = 1;
-            this.repeatMode = ValueAnimator.REVERSE;
-        }
-
-        /**
-         * Sets duration of animation.
-         * @param duration
-         * @return
-         */
-        public AnimationBuilder setDuration(long duration) {
-            this.duration = duration;
-            return this;
-        }
-
-        /**
-         * Sets interpolator for animation.
-         * @param interpolator
-         * @return
-         */
-        public AnimationBuilder setInterpolator(Interpolator interpolator) {
-            this.interpolator = interpolator;
-            return this;
-        }
-
-        /**
-         * Sets rating after animation has ended.
-         * @param ratingTarget
-         * @return
-         */
-        public AnimationBuilder setRatingTarget(float ratingTarget) {
-            this.ratingTarget = ratingTarget;
-            return this;
-        }
-
-        /**
-         * Sets repeat count for animation.
-         * @param repeatCount must be a positive value or ValueAnimator.INFINITE
-         * @return
-         */
-        public AnimationBuilder setRepeatCount(int repeatCount) {
-            this.repeatCount = repeatCount;
-            return this;
-        }
-
-        /**
-         * Sets repeat mode for animation.
-         * @param repeatMode must be ValueAnimator.RESTART or ValueAnimator.REVERSE
-         * @return
-         */
-        public AnimationBuilder setRepeatMode(int repeatMode) {
-            this.repeatMode = repeatMode;
-            return this;
-        }
-
-        /**
-         * Sets AnimatorListener.
-         * @param animatorListener
-         * @return
-         */
-        public AnimationBuilder setAnimatorListener(AnimatorListener animatorListener) {
-            this.animatorListener = animatorListener;
-            return this;
-        }
-
-        /**
-         * Starts animation.
-         */
-        public void start() {
-            ratingBar.animateRating(this);
-        }
-    }
 }

@@ -60,6 +60,7 @@
                 <!--android:progressDrawable="@drawable/nearit_ui_feedback_rating_bar"-->
                 <!--android:stepSize="1" />-->
 
+
             <com.nearit.ui_bindings.feedback.views.NearItUIRatingBar
                 android:id="@+id/feedback_rating"
                 android:layout_width="wrap_content"
@@ -67,8 +68,13 @@
                 android:layout_marginBottom="@dimen/nearit_ui_feedback_margin6"
                 app:srb_numberOfStars="5"
                 app:srb_stepSize="1"
-                app:srb_starSize="35dp"
-                app:srb_starsSeparation="7dp"/>
+                app:srb_starSize="@dimen/nearit_ui_feedback_rating_bar_star_size"
+                app:srb_maxStarSize="@dimen/nearit_ui_feedback_rating_bar_star_size"
+                app:srb_starBorderWidth="@dimen/nearit_ui_feedback_rating_bar_star_border_size"
+                app:srb_borderColor="@color/nearit_ui_rating_bar_star_border_color"
+                app:srb_fillColor="@color/nearit_ui_rating_bar_fill_star_background_color"
+                app:srb_starBackgroundColor="@color/nearit_ui_rating_bar_empty_star_background_color"
+                app:srb_starsSeparation="@dimen/nearit_ui_feedback_rating_bar_stars_separation"/>
 
         </LinearLayout>
 
@@ -98,6 +104,7 @@
                 android:layout_marginBottom="@dimen/nearit_ui_feedback_margin8"
                 android:layout_marginTop="@dimen/nearit_ui_feedback_margin9"
                 android:background="@drawable/nearit_ui_edittext_background"
+                android:padding="2dp"
                 android:gravity="top|left"
                 android:inputType="textMultiLine"
                 android:lines="@integer/nearit_ui_feedback_comment_box_lines"
