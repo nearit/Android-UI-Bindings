@@ -37,9 +37,9 @@ public class NearItFeedbackFragment extends Fragment {
     private boolean hideTextResponse = false;
     private boolean noSuccessIcon = false;
     private boolean autoClose = false;
+    private boolean showCloseButton = false;
     private int successIconResId = 0;
 
-    private String feedbackQuestion;
     private float userRating;
     private String userComment;
 
@@ -81,6 +81,7 @@ public class NearItFeedbackFragment extends Fragment {
             successIconResId = extras.getIconResId();
             noSuccessIcon = extras.isNoSuccessIcon();
             autoClose = extras.isAutoClose();
+            showCloseButton = extras.isShowCloseButton();
         }
 
     }
@@ -130,7 +131,7 @@ public class NearItFeedbackFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_feedback, container, false);
 
-        feedbackQuestion = feedback.question;
+        String feedbackQuestion = feedback.question;
 
         ratingBarContainer = rootView.findViewById(R.id.feedback_rating_bar_container);
         ratingBar = rootView.findViewById(R.id.feedback_rating);
@@ -156,7 +157,8 @@ public class NearItFeedbackFragment extends Fragment {
             commentSection.setVisibility(View.GONE);
         }
 
-        if (closeButton != null) {
+        if (showCloseButton && closeButton != null) {
+            closeButton.setVisibility(View.VISIBLE);
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

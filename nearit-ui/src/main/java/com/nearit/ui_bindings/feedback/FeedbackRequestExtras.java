@@ -16,14 +16,16 @@ class FeedbackRequestExtras implements Parcelable {
     private final boolean enableTapOutsideToClose;
     private final boolean noSuccessIcon;
     private boolean autoClose;
+    private boolean showCloseButton;
     private final int iconResId;
 
-    FeedbackRequestExtras(boolean hideTextResponse, int iconResId, boolean noSuccessIcon, boolean enableTapOutsideToClose, boolean autoClose) {
+    FeedbackRequestExtras(boolean hideTextResponse, int iconResId, boolean noSuccessIcon, boolean enableTapOutsideToClose, boolean autoClose, boolean showCloseButton) {
         this.hideTextResponse = hideTextResponse;
         this.iconResId = iconResId;
         this.noSuccessIcon = noSuccessIcon;
         this.enableTapOutsideToClose = enableTapOutsideToClose;
         this.autoClose = autoClose;
+        this.showCloseButton = showCloseButton;
     }
 
     FeedbackRequestExtras(boolean hideTextResponse, int iconResId, boolean noSuccessIcon) {
@@ -32,6 +34,7 @@ class FeedbackRequestExtras implements Parcelable {
         this.noSuccessIcon = noSuccessIcon;
         this.enableTapOutsideToClose = false;
         this.autoClose = false;
+        this.showCloseButton = false;
     }
 
 
@@ -66,6 +69,7 @@ class FeedbackRequestExtras implements Parcelable {
         dest.writeInt(noSuccessIcon ? 1 : 0);
         dest.writeInt(enableTapOutsideToClose ? 1 : 0);
         dest.writeInt(autoClose ? 1 : 0);
+        dest.writeInt(showCloseButton ? 1 : 0);
     }
 
     @Override
@@ -81,12 +85,14 @@ class FeedbackRequestExtras implements Parcelable {
             boolean noSuccessIcon = in.readInt() != 0;
             boolean enableTapOutsideToClose = in.readInt() != 0;
             boolean autoClose = in.readInt() != 0;
+            boolean showCloseButton = in.readInt() != 0;
             return new FeedbackRequestExtras(
                     hideTextResponse,
                     iconResId,
                     noSuccessIcon,
                     enableTapOutsideToClose,
-                    autoClose
+                    autoClose,
+                    showCloseButton
             );
         }
 
@@ -118,5 +124,13 @@ class FeedbackRequestExtras implements Parcelable {
 
     void setAutoClose(boolean autoClose) {
         this.autoClose = autoClose;
+    }
+
+    boolean isShowCloseButton() {
+        return showCloseButton;
+    }
+
+    void setShowCloseButton(boolean showCloseButton) {
+        this.showCloseButton = showCloseButton;
     }
 }

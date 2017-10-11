@@ -13,6 +13,7 @@ public class FeedbackFragmentBuilder {
     private boolean mWithoutComment;
     private boolean mNoSuccessIcon;
     private boolean mAutoClose;
+    private boolean mShowCloseButton;
     private int mIconResId;
     private Feedback mFeedback;
 
@@ -40,13 +41,24 @@ public class FeedbackFragmentBuilder {
     /**
      * Sets no icon on the success view
      */
-    public FeedbackFragmentBuilder setNoSuccessIcon() {
+    public FeedbackFragmentBuilder noSuccessIcon() {
         mNoSuccessIcon = true;
         return this;
     }
 
-    public FeedbackFragmentBuilder setAutoClose() {
+    /**
+     * Enables autoclose of the parent activity
+     */
+    public FeedbackFragmentBuilder autoCloseParentActivityOnFinish() {
         mAutoClose = true;
+        return this;
+    }
+
+    /**
+     * Shows a close/dismiss button (text) at the bottom of the feedback request
+     */
+    public FeedbackFragmentBuilder showCloseButton() {
+        mShowCloseButton = true;
         return this;
     }
 
@@ -61,6 +73,9 @@ public class FeedbackFragmentBuilder {
                 mNoSuccessIcon);
         if (mAutoClose) {
             extras.setAutoClose(true);
+        }
+        if (mShowCloseButton) {
+            extras.setShowCloseButton(true);
         }
         return extras;
     }

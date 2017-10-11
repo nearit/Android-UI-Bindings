@@ -8,12 +8,14 @@ import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 /**
  * Created by Federico Boschini on 29/08/17.
  */
+
 public class FeedbackIntentBuilder {
     private Context mContext;
     private Feedback mFeedback;
     private boolean mHideTextResponse;
     private boolean mNoSuccessIcon;
     private boolean mAutoCloseParentActivity;
+    private boolean mShowCloseButton;
     private int mIconResId;
     private boolean mEnableTapOutside;
 
@@ -21,6 +23,7 @@ public class FeedbackIntentBuilder {
         mContext = context;
         mFeedback = feedback;
         mAutoCloseParentActivity = true;
+        mShowCloseButton = true;
     }
 
     /**
@@ -65,7 +68,8 @@ public class FeedbackIntentBuilder {
                 mIconResId,
                 mNoSuccessIcon,
                 mEnableTapOutside,
-                mAutoCloseParentActivity
+                mAutoCloseParentActivity,
+                mShowCloseButton
         );
     }
 
