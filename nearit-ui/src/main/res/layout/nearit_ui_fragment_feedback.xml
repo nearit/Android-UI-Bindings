@@ -13,7 +13,7 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="@dimen/nearit_ui_feedback_overall_padding">
-        
+
         <ImageView
             android:id="@+id/feedback_success_icon"
             android:layout_width="wrap_content"
@@ -47,25 +47,16 @@
             android:id="@+id/feedback_rating_bar_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/nearit_ui_feedback_margin5"
+
+            android:paddingBottom="28dp"
+            android:paddingTop="28dp"
             android:gravity="center_horizontal">
-
-            <!--<RatingBar-->
-                <!--android:id="@+id/feedback_rating"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="@dimen/nearit_ui_feedback_rating_bar_height"-->
-                <!--android:layout_marginBottom="@dimen/nearit_ui_feedback_margin6"-->
-                <!--android:max="5"-->
-                <!--android:numStars="5"-->
-                <!--android:progressDrawable="@drawable/nearit_ui_feedback_rating_bar"-->
-                <!--android:stepSize="1" />-->
-
 
             <com.nearit.ui_bindings.feedback.views.NearItUIRatingBar
                 android:id="@+id/feedback_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/nearit_ui_feedback_margin6"
+
                 app:srb_numberOfStars="5"
                 app:srb_stepSize="1"
                 app:srb_starSize="@dimen/nearit_ui_feedback_rating_bar_star_size"
@@ -82,7 +73,7 @@
             android:id="@+id/feedback_comment_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/nearit_ui_feedback_margin7"
+
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:visibility="gone">
@@ -93,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/nearit_ui_feedback_leave_a_comment"
+                android:layout_marginBottom="@dimen/nearit_ui_feedback_margin9"
                 android:textStyle="italic"
                 android:textColor="@color/nearit_ui_feedback_comment_box_description_text_color"
                 android:textSize="@dimen/nearit_ui_feedback_leave_a_comment_text_size" />
@@ -102,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/nearit_ui_feedback_margin8"
-                android:layout_marginTop="@dimen/nearit_ui_feedback_margin9"
+
                 android:background="@drawable/nearit_ui_edittext_background"
                 android:padding="2dp"
                 android:gravity="top|left"
@@ -138,7 +130,6 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/nearit_ui_feedback_close_button_padding"
             android:layout_marginTop="@dimen/nearit_ui_feedback_margin11"
-            android:visibility="gone"
             android:gravity="center"
             android:text="@string/nearit_ui_feedback_close_button"
             android:textStyle="italic"
