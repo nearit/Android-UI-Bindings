@@ -12,14 +12,18 @@ import com.nearit.ui_bindings.ExtraConstants;
  */
 
 class FeedbackRequestExtras implements Parcelable {
-    private final boolean hideTextResponse, enableTapOutsideToClose, noSuccessIcon;
+    private final boolean hideTextResponse;
+    private final boolean enableTapOutsideToClose;
+    private final boolean noSuccessIcon;
+    private boolean autoClose;
     private final int iconResId;
 
-    FeedbackRequestExtras(boolean hideTextResponse, int iconResId, boolean noSuccessIcon, boolean enableTapOutsideToClose) {
+    FeedbackRequestExtras(boolean hideTextResponse, int iconResId, boolean noSuccessIcon, boolean enableTapOutsideToClose, boolean autoClose) {
         this.hideTextResponse = hideTextResponse;
         this.iconResId = iconResId;
         this.noSuccessIcon = noSuccessIcon;
         this.enableTapOutsideToClose = enableTapOutsideToClose;
+        this.autoClose = autoClose;
     }
 
     FeedbackRequestExtras(boolean hideTextResponse, int iconResId, boolean noSuccessIcon) {
@@ -27,7 +31,9 @@ class FeedbackRequestExtras implements Parcelable {
         this.iconResId = iconResId;
         this.noSuccessIcon = noSuccessIcon;
         this.enableTapOutsideToClose = false;
+        this.autoClose = false;
     }
+
 
     /**
      * Extract FeedbackRequestExtras from an Intent.
@@ -59,6 +65,7 @@ class FeedbackRequestExtras implements Parcelable {
         dest.writeInt(iconResId);
         dest.writeInt(noSuccessIcon ? 1 : 0);
         dest.writeInt(enableTapOutsideToClose ? 1 : 0);
+        dest.writeInt(autoClose ? 1 : 0);
     }
 
     @Override
@@ -73,11 +80,13 @@ class FeedbackRequestExtras implements Parcelable {
             int iconResId = in.readInt();
             boolean noSuccessIcon = in.readInt() != 0;
             boolean enableTapOutsideToClose = in.readInt() != 0;
+            boolean autoClose = in.readInt() != 0;
             return new FeedbackRequestExtras(
                     hideTextResponse,
                     iconResId,
                     noSuccessIcon,
-                    enableTapOutsideToClose
+                    enableTapOutsideToClose,
+                    autoClose
             );
         }
 
@@ -99,7 +108,15 @@ class FeedbackRequestExtras implements Parcelable {
         return iconResId;
     }
 
-    public boolean isNoSuccessIcon() {
+    boolean isNoSuccessIcon() {
         return noSuccessIcon;
+    }
+
+    boolean isAutoClose() {
+        return autoClose;
+    }
+
+    void setAutoClose(boolean autoClose) {
+        this.autoClose = autoClose;
     }
 }

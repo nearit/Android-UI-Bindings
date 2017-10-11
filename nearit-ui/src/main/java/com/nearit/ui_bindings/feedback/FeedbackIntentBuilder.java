@@ -13,12 +13,14 @@ public class FeedbackIntentBuilder {
     private Feedback mFeedback;
     private boolean mHideTextResponse;
     private boolean mNoSuccessIcon;
+    private boolean mAutoCloseParentActivity;
     private int mIconResId;
     private boolean mEnableTapOutside;
 
     public FeedbackIntentBuilder(Context context, Feedback feedback) {
         mContext = context;
         mFeedback = feedback;
+        mAutoCloseParentActivity = true;
     }
 
     /**
@@ -62,7 +64,8 @@ public class FeedbackIntentBuilder {
                 mHideTextResponse,
                 mIconResId,
                 mNoSuccessIcon,
-                mEnableTapOutside
+                mEnableTapOutside,
+                mAutoCloseParentActivity
         );
     }
 

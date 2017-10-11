@@ -10,8 +10,9 @@ import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 
 public class FeedbackFragmentBuilder {
     private Context mContext;
-    private boolean mHideTextResponse;
+    private boolean mWithoutComment;
     private boolean mNoSuccessIcon;
+    private boolean mAutoClose;
     private int mIconResId;
     private Feedback mFeedback;
 
@@ -24,7 +25,7 @@ public class FeedbackFragmentBuilder {
      * Sets no text response
      */
     public FeedbackFragmentBuilder withoutComment() {
-        mHideTextResponse = true;
+        mWithoutComment = true;
         return this;
     }
 
@@ -44,16 +45,24 @@ public class FeedbackFragmentBuilder {
         return this;
     }
 
+    public FeedbackFragmentBuilder setAutoClose() {
+        mAutoClose = true;
+        return this;
+    }
+
     public NearItFeedbackFragment build() {
         return NearItFeedbackFragment.newInstance(mFeedback, getParams());
     }
 
     private FeedbackRequestExtras getParams() {
-        return new FeedbackRequestExtras(
-                mHideTextResponse,
+        FeedbackRequestExtras extras = new FeedbackRequestExtras(
+                mWithoutComment,
                 mIconResId,
-                mNoSuccessIcon,
                 mNoSuccessIcon);
+        if (mAutoClose) {
+            extras.setAutoClose(true);
+        }
+        return extras;
     }
 
 }
