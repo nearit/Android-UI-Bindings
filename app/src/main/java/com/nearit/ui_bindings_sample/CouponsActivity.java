@@ -8,10 +8,6 @@ import android.widget.Button;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import it.near.sdk.reactions.couponplugin.model.Claim;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 public class CouponsActivity extends AppCompatActivity {
@@ -89,6 +85,95 @@ public class CouponsActivity extends AppCompatActivity {
                 //  start a plain activity that shows the fragment fullscreen
                 //  please check it
                 startActivity(new Intent(CouponsActivity.this, CouponPlainActivity.class));
+            }
+        });
+
+
+
+        Button couponList = (Button) findViewById(R.id.coupon_list);
+        couponList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  start an activity that shows a list of REAL coupons
+                startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
+                        .createCouponListIntentBuilder()
+                        .build()
+                );
+            }
+        });
+
+        Button validCouponList = (Button) findViewById(R.id.valid_coupon_list);
+        validCouponList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  start an activity that shows a list of REAL valid coupons ONLY
+                startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
+                        .createCouponListIntentBuilder()
+                        .onlyValidCoupons()
+                        .build()
+                );
+            }
+        });
+
+        Button expiredCouponList = (Button) findViewById(R.id.expired_coupon_list);
+        expiredCouponList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  start an activity that shows a list of REAL expired coupons ONLY
+                startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
+                        .createCouponListIntentBuilder()
+                        .onlyExpiredCoupons()
+                        .build()
+                );
+            }
+        });
+
+        Button inactiveCouponList = (Button) findViewById(R.id.inactive_coupon_list);
+        inactiveCouponList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  start an activity that shows a list of REAL inactive coupons ONLY
+                startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
+                        .createCouponListIntentBuilder()
+                        .onlyInactiveCoupons()
+                        .build()
+                );
+            }
+        });
+
+        Button redeemedCouponList = (Button) findViewById(R.id.redeemed_coupon_list);
+        redeemedCouponList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  start an activity that shows a list of REAL already redeemed coupons ONLY
+                startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
+                        .createCouponListIntentBuilder()
+                        .onlyRedeemedCoupons()
+                        .build()
+                );
+            }
+        });
+
+        Button completeList = (Button) findViewById(R.id.include_redeemed_coupon_list);
+        completeList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  start an activity that shows the complete list of REAL coupons (redeemed included)
+                startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
+                        .createCouponListIntentBuilder()
+                        .includeRedeemed()
+                        .build()
+                );
+            }
+        });
+
+        Button listInActivity = (Button) findViewById(R.id.coupon_list_in_activity);
+        listInActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  start a plain activity that shows the fragment fullscreen
+                //  please check it
+                startActivity(new Intent(CouponsActivity.this, CouponListPlainActivity.class));
             }
         });
 

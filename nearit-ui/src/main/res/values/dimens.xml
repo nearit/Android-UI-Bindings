@@ -80,4 +80,37 @@
     <dimen name="nearit_ui_content_cta_button_min_width">250dp</dimen>
     <dimen name="nearit_ui_content_cta_button_text_size">15sp</dimen>
 
+
+    <dimen name="nearit_ui_coupon_list_empty_list_text_size">18sp</dimen>
+    <dimen name="nearit_ui_coupon_list_padding_left_right">10dp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_height">150dp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_padding_left_right">25dp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_padding_bottom">14dp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_margin1">10dp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_padding_top">22dp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_elevation">2dp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_icon_width_height">50dp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_margin2">3dp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_margin3">18dp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_title_height">19dp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_margin4">2dp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_title_text_size">15sp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_margin5">2dp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_margin6">9dp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_value_text_size">20sp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_validity_text_size">13sp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_margin7">18dp</dimen>
+    <dimen name="nearit_ui_coupon_list_coupon_validity_height">17dp</dimen>
+
+    <dimen name="nearit_ui_warning_dialog_overall_width">300dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_overall_padding">25dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_margin1">14dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_text_size">15sp</dimen>
+    <dimen name="nearit_ui_warning_dialog_margin2">24dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_margin3">39dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_margin4">20dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_margin5">10dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_button_text_size">15sp</dimen>
+    <dimen name="nearit_ui_warning_dialog_button_width">250dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_button_height">45dp</dimen>
 </resources>

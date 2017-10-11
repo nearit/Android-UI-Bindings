@@ -7,11 +7,13 @@
     <color name="nearit_ui_white_50">#80f2f2f2</color>
     <color name="nearit_ui_real_white">#ffffff</color>
     <color name="nearit_ui_warm_grey">#777777</color>
+    <color name="nearit_ui_grey">#CACACA</color>
     <color name="nearit_ui_warm_grey_50">#80777777</color>
     <color name="nearit_ui_black_25">#40000000</color>
     <color name="nearit_ui_black_35">#59333333</color>
     <color name="nearit_ui_valid_green">#68c600</color>
     <color name="nearit_ui_expired_red">#FF3434</color>
+    <color name="nearit_ui_scarlet_red">#d0011b</color>
     <color name="nearit_ui_inactive_orange">#FC8C2A</color>
     <color name="nearit_ui_transparent">#00000000</color>
 
@@ -62,5 +64,19 @@
     <color name="nearit_ui_cta_button_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_cta_button_color_pressed">@color/nearit_ui_black_35</color>
     <color name="nearit_ui_cta_button_text_color">@color/nearit_ui_white</color>
+
+    <color name="nearit_ui_coupon_list_empty_list_text_color">@color/nearit_ui_grey</color>
+    <color name="nearit_ui_coupon_list_coupon_background_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_coupon_list_coupon_pressed_background_color">#40ffffff</color>
+    <color name="nearit_ui_coupon_list_valid_text_color">@color/nearit_ui_valid_green</color>
+    <color name="nearit_ui_coupon_list_inactive_text_color">@color/nearit_ui_grey</color>
+    <color name="nearit_ui_coupon_list_expired_text_color">@color/nearit_ui_scarlet_red</color>
+    <color name="nearit_ui_coupon_list_background_color">@color/nearit_ui_white</color>
+    <color name="nearit_ui_coupon_list_redeemed_text_color">@color/nearit_ui_scarlet_red</color>
+
+    <color name="nearit_ui_warning_dialog_text_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_warning_dialog_button_pressed_color">@color/nearit_ui_error_color_50</color>
+    <color name="nearit_ui_warning_dialog_button_color">@color/nearit_ui_error_color</color>
+    <color name="nearit_ui_warning_dialog_button_text_color">@color/nearit_ui_real_white</color>
 
 </resources>
