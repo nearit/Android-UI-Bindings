@@ -89,10 +89,7 @@ public class NearItFeedbackFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        //Save the fragment's state here
-        if (ratingBar != null) {
-            outState.putFloat(SAVED_RATING, ratingBar.getRating());
-        }
+        //  Save fragment state here
         if (sendButton != null) {
             outState.putBoolean(SAVED_IS_BUTTON_CHECKED, sendButton.isChecked());
         }
@@ -106,10 +103,7 @@ public class NearItFeedbackFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (savedInstanceState != null) {
-            //Restore the fragment's state here
-            if (ratingBar != null) {
-                ratingBar.setRating(savedInstanceState.getFloat(SAVED_RATING));
-            }
+            //  Restore fragment state here
             if (sendButton != null) {
                 if (savedInstanceState.getBoolean(SAVED_IS_BUTTON_CHECKED)) {
                     sendButton.setChecked();

@@ -711,7 +711,9 @@ public class NearItUIRatingBar extends View {
     public void onRestoreInstanceState(Parcelable state) {
         SavedState savedState = (SavedState) state;
         super.onRestoreInstanceState(savedState.getSuperState());
-        setRating(savedState.rating);
+        if (savedState.rating != 0) {
+            setRating(savedState.rating);
+        }
     }
 
     private static class SavedState extends BaseSavedState {
