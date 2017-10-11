@@ -133,6 +133,7 @@
             android:gravity="center"
             android:text="@string/nearit_ui_feedback_close_button"
             android:textStyle="italic"
+            android:visibility="gone"
             android:textColor="@drawable/nearit_ui_selector_feedback_close_text_color"
             android:textSize="@dimen/nearit_ui_feedback_close_text_size" />
 
