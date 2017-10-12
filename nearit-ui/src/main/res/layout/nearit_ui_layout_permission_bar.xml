@@ -39,8 +39,7 @@
         android:layout_marginLeft="@dimen/nearit_ui_permission_bar_margin2"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/bt_loc_icons"
-        android:textColor="@color/nearit_ui_permission_bar_alert_text_color"
-        android:textSize="@dimen/nearit_ui_permission_bar_alert_text_size" />
+        android:textAppearance="@style/NearItUIPermissionBarAlertMessageTextAppearance" />
 
     <com.nearit.ui_bindings.permissions.views.PermissionBarButton
         android:id="@+id/ok_button"

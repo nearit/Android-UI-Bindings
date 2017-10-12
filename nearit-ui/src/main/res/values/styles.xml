@@ -30,12 +30,12 @@
 
 
     <!--  Text appearances  -->
-    <style name="NearItUIPermissionsExplanationTextAppearance" parent="TextAppearance.AppCompat.Body1">
+    <style name="NearItUIPermissionsExplanationTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_permissions_text_size</item>
         <item name="android:textColor">@color/nearit_ui_permissions_text_color</item>
     </style>
 
-    <style name="NearItUIPermissionButtonTextAppearance" parent="TextAppearance.AppCompat.Button">
+    <style name="NearItUIPermissionButtonTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_permission_button_text_size</item>
         <item name="android:textColor">@drawable/nearit_ui_selector_permission_button_text_color</item>
         <item name="android:textStyle">bold</item>
@@ -47,10 +47,21 @@
         <item name="android:textStyle">italic</item>
     </style>
 
+    <style name="NearItUIPermissionBarAlertMessageTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_permission_bar_alert_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_permission_bar_alert_text_size</item>
+    </style>
+
+    <style name="NearItUIPermissionBarButtonTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_permission_bar_button_text_size</item>
+        <item name="android:textColor">@drawable/nearit_ui_selector_permission_button_text_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 
     <style name="NearItUIButtonTextAppearance" parent="TextAppearance.AppCompat.Button">
         <item name="android:textSize">@dimen/nearit_ui_permission_button_text_size</item>
     </style>
+
 
 </resources>
