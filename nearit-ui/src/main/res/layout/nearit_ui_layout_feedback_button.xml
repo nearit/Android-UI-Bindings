@@ -15,8 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:textAppearance="@style/NearItUIButtonTextAppearance"
-            android:textColor="@drawable/nearit_ui_selector_feedback_button_text_color" />
+            android:textAppearance="@style/NearItUIFeedbackSendButtonTextAppearance" />
 
     </RelativeLayout>
 

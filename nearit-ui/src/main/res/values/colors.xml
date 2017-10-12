@@ -55,6 +55,7 @@
     <color name="nearit_ui_feedback_error_message_text_color">@color/nearit_ui_error_color</color>
     <color name="nearit_ui_feedback_comment_box_border_color">#e1e1e1</color>
     <color name="nearit_ui_feedback_comment_box_background_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_feedback_success_message_text_color">@color/nearit_ui_warm_grey</color>
 
     <color name="nearit_ui_permission_bar_background_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_permission_bar_alert_text_color">@color/nearit_ui_real_white</color>
@@ -73,6 +74,8 @@
     <color name="nearit_ui_coupon_list_expired_text_color">@color/nearit_ui_scarlet_red</color>
     <color name="nearit_ui_coupon_list_background_color">@color/nearit_ui_white</color>
     <color name="nearit_ui_coupon_list_redeemed_text_color">@color/nearit_ui_scarlet_red</color>
+    <color name="nearit_ui_coupon_list_coupon_title_text_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_coupon_list_coupon_value_text_color">@color/nearit_ui_black</color>
 
     <color name="nearit_ui_warning_dialog_text_color">@color/nearit_ui_warm_grey</color>
     <color name="nearit_ui_warning_dialog_button_pressed_color">@color/nearit_ui_error_color_50</color>

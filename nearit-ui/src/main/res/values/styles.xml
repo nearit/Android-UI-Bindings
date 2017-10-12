@@ -119,14 +119,37 @@
         <item name="android:textStyle">bold|italic</item>
     </style>
 
-
-
-
-    <style name="NearItUIButtonTextAppearance" parent="TextAppearance.AppCompat.Button">
-        <item name="android:textSize">@dimen/nearit_ui_permission_button_text_size</item>
+    <style name="NearItUIFeedbackSuccessMessageTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_feedback_success_message_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_feedback_success_message_text_color</item>
     </style>
 
+    <style name="NearItUIFeedbackQuestionTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_feedback_question_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_feedback_question_text_color</item>
+    </style>
 
-    <color name="nearit_ui_coupon_list_coupon_title_text_color">@color/nearit_ui_black</color>
-    <color name="nearit_ui_coupon_list_coupon_value_text_color">@color/nearit_ui_black</color>
+    <style name="NearItUIFeedbackCommentLabelTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_feedback_leave_a_comment_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_feedback_comment_box_description_text_color</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="NearItUIFeedbackErrorAlertTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_feedback_error_message_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_feedback_error_message_text_size</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="NearItUIFeedbackSendButtonTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_permission_button_text_size</item>
+        <item name="android:textColor">@drawable/nearit_ui_selector_feedback_button_text_color</item>
+    </style>
+
+    <style name="NearItUIFeedbackDismissButtonTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_feedback_close_text_size</item>
+        <item name="android:textColor">@drawable/nearit_ui_selector_feedback_close_text_color</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
 </resources>
