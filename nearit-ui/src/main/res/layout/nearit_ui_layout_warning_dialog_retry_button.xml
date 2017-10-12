@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:textSize="@dimen/nearit_ui_warning_dialog_button_text_size"
-        android:textColor="@color/nearit_ui_warning_dialog_button_text_color" />
+        android:textAppearance="@style/NearItUIWarningDialogRetryButtonTextAppearance" />
 
 </RelativeLayout>
