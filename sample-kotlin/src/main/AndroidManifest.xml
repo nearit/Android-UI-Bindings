@@ -1,0 +1,33 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+    package="com.your_company.ui_bindings_kotlin_sample">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.your_company.ui_bindings_kotlin_sample.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="near_api_key"
+            android:value="@string/near_api_key" />
+
+        <activity android:name="com.your_company.ui_bindings_kotlin_sample.PermissionsActivity" />
+        <activity android:name="com.your_company.ui_bindings_kotlin_sample.CouponsActivity" />
+        <activity android:name="com.your_company.ui_bindings_kotlin_sample.ContentActivity" />
+        <activity android:name="com.your_company.ui_bindings_kotlin_sample.FeedbackActivity" />
+        <activity android:name="com.your_company.ui_bindings_kotlin_sample.CouponPlainActivity" android:label="Coupon detail activity"/>
+        <activity android:name="com.your_company.ui_bindings_kotlin_sample.FeedbackPlainActivity" android:label="Feedback activity"/>
+        <activity android:name="com.your_company.ui_bindings_kotlin_sample.ContentPlainActivity" android:label="Content detail activity"/>
+        <activity android:name="com.your_company.ui_bindings_kotlin_sample.CouponListPlainActivity" android:label="Coupon list activity"/>
+    </application>
+
+</manifest>
