@@ -1,5 +1,6 @@
 package com.nearit.ui_bindings_kotlin_sample
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -7,7 +8,6 @@ import android.widget.Button
 import com.nearit.ui_bindings.NearITUIBindings
 import com.nearit.ui_bindings_kotlin_sample.factories.ContentFactory
 import kotlinx.android.synthetic.main.activity_content.*
-import org.jetbrains.anko.startActivity
 
 /**
  * Created by Federico Boschini on 12/10/17.
@@ -54,7 +54,7 @@ class ContentActivity : AppCompatActivity() {
         plainActivity.setOnClickListener {
             //  start a plain activity that shows the fragment fullscreen
             //  please check it
-            startActivity<ContentPlainActivity>()
+            startActivity(Intent(this@ContentActivity, ContentPlainActivity::class.java))
         }
     }
 

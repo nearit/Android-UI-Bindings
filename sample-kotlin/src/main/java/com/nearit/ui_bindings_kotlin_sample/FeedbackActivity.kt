@@ -1,11 +1,11 @@
 package com.nearit.ui_bindings_kotlin_sample
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.nearit.ui_bindings.NearITUIBindings
 import com.nearit.ui_bindings_kotlin_sample.factories.FeedbackFactory
 import kotlinx.android.synthetic.main.activity_feedback.*
-import org.jetbrains.anko.startActivity
 
 /**
  * Created by Federico Boschini on 12/10/17.
@@ -41,7 +41,7 @@ class FeedbackActivity : AppCompatActivity() {
         }
 
         feedback_in_plain_activity.setOnClickListener {
-            startActivity<FeedbackPlainActivity>()
+            startActivity(Intent(this@FeedbackActivity, FeedbackPlainActivity::class.java))
         }
 
     }

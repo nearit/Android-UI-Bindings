@@ -1,5 +1,6 @@
 package com.nearit.ui_bindings_kotlin_sample
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -7,7 +8,6 @@ import android.widget.Button
 import com.nearit.ui_bindings.NearITUIBindings
 import com.nearit.ui_bindings_kotlin_sample.factories.CouponFactory
 import kotlinx.android.synthetic.main.activity_coupons.*
-import org.jetbrains.anko.startActivity
 
 /**
  * Created by Federico Boschini on 12/10/17.
@@ -67,7 +67,7 @@ class CouponsActivity : AppCompatActivity() {
         plainActivity.setOnClickListener {
             //  start a plain activity that shows the fragment fullscreen
             //  please check it
-            startActivity<CouponPlainActivity>()
+            startActivity(Intent(this@CouponsActivity, CouponPlainActivity::class.java))
         }
 
 
@@ -129,7 +129,7 @@ class CouponsActivity : AppCompatActivity() {
         listInActivity.setOnClickListener {
             //  start a plain activity that shows the fragment fullscreen
             //  please check it
-            startActivity<CouponListPlainActivity>()
+            startActivity(Intent(this@CouponsActivity, CouponListPlainActivity::class.java))
         }
     }
 

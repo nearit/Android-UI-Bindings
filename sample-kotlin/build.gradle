@@ -4,7 +4,6 @@ repositories {
 
 buildscript {
     ext.kotlin_version = '1.1.51'
-    ext.anko_version = '0.10.1'
     repositories {
         maven { url 'https://maven.fabric.io/public' }
         jcenter()
@@ -66,7 +65,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile "org.jetbrains.anko:anko-commons:$anko_version"
 }
 repositories {
     mavenCentral()
