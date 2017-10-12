@@ -62,6 +62,8 @@
     <color name="nearit_ui_permission_bar_button_background_color">@color/nearit_ui_white</color>
     <color name="nearit_ui_permission_bar_button_pressed_background_color">@color/nearit_ui_white_50</color>
 
+    <color name="nearit_ui_content_title_text_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_content_text_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_cta_button_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_cta_button_color_pressed">@color/nearit_ui_black_35</color>
     <color name="nearit_ui_cta_button_text_color">@color/nearit_ui_white</color>

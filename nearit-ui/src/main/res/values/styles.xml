@@ -152,4 +152,24 @@
         <item name="android:textStyle">italic</item>
     </style>
 
+    <style name="NearItUIContentTitleTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_content_title_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_content_title_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="NearItUIContentTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_content_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_content_content_text_size</item>
+    </style>
+
+    <style name="NearItUIContentCTAButtonTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_cta_button_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_content_cta_button_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+
+
 </resources>
