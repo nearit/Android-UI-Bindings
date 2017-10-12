@@ -58,6 +58,46 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="NearItUICouponDetailValidityTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_validity_text_size</item>
+        <item name="android:textStyle">bold|italic</item>
+    </style>
+
+    <style name="NearItUICouponDetailValidityPeriodTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_validity_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_coupon_detail_validity_period_color</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="NearItUICouponDetailValidityLabelTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_not_valid_text_size</item>
+        <item name="android:textStyle">bold|italic</item>
+    </style>
+
+    <style name="NearItUICouponDetailSerialTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_serial_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_coupon_detail_serial</item>
+    </style>
+
+    <style name="NearItUICouponDetailTitleTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_title_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_coupon_detail_title_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="NearItUICouponDetailValueTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_value_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_coupon_detail_value_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="NearItUICouponDetailDescriptionTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_description_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_coupon_detail_description_color</item>
+    </style>
+
+
+
 
     <style name="NearItUIButtonTextAppearance" parent="TextAppearance.AppCompat.Button">
         <item name="android:textSize">@dimen/nearit_ui_permission_button_text_size</item>
