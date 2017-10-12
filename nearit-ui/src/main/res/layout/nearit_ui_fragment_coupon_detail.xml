@@ -77,7 +77,7 @@
                 android:layout_marginTop="@dimen/nearit_ui_coupon_detail_margin4"
                 android:gravity="center_horizontal"
                 android:textAppearance="@style/NearItUICouponDetailDescriptionTextAppearance" />
-            
+
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

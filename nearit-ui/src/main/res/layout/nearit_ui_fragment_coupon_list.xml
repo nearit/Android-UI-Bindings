@@ -9,8 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textColor="@color/nearit_ui_coupon_list_empty_list_text_color"
-        android:textSize="@dimen/nearit_ui_coupon_list_empty_list_text_size"
+        android:textAppearance="@style/NearItUICouponListNoCouponsTextAppearance"
         android:text="@string/nearit_ui_coupon_list_empty_list_text" />
 
     <android.support.v4.widget.SwipeRefreshLayout

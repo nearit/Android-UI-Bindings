@@ -96,6 +96,29 @@
         <item name="android:textColor">@color/nearit_ui_coupon_detail_description_color</item>
     </style>
 
+    <style name="NearItUICouponListNoCouponsTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_coupon_list_empty_list_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_coupon_list_empty_list_text_size</item>
+        <item name="android:textStyle">bold|italic</item>
+    </style>
+
+    <style name="NearItUICouponListTitleTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_coupon_list_coupon_title_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_coupon_list_coupon_title_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="NearItUICouponListValueTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_coupon_list_coupon_value_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_coupon_list_coupon_value_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="NearItUICouponListValidityTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_list_coupon_validity_text_size</item>
+        <item name="android:textStyle">bold|italic</item>
+    </style>
+
 
 
 
@@ -104,4 +127,6 @@
     </style>
 
 
+    <color name="nearit_ui_coupon_list_coupon_title_text_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_coupon_list_coupon_value_text_color">@color/nearit_ui_black</color>
 </resources>
