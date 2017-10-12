@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings_sample;
+package com.nearit.ui_bindings_kotlin_sample;
 
 import org.junit.Test;
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context="com.nearit.ui_bindings_kotlin_sample.MainActivity">
+
+    <Button
+        android:id="@+id/permissions_demo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Permissions" />
+
+    <Button
+        android:id="@+id/coupon_demo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coupon"/>
+
+    <Button
+        android:id="@+id/feedback_demo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feedback" />
+    <Button
+        android:id="@+id/content_demo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Content"/>
+
+</LinearLayout>
