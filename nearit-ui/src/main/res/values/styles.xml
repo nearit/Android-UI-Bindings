@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--  Dialogs style  -->
     <style name="NearItUIPermissionsDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -27,25 +28,29 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="NearItUIPermissionButtonTextAppearance" parent="TextAppearance.AppCompat.Button">
-        <!--    ASAP-MEDIUM  -->
-        <item name="android:textSize">@dimen/nearit_ui_permission_button_text_size</item>
-    </style>
 
-    <style name="NearItUIButtonTextAppearance" parent="TextAppearance.AppCompat.Button">
-        <!--    ASAP-MEDIUM  -->
-        <item name="android:textSize">@dimen/nearit_ui_permission_button_text_size</item>
-    </style>
-    
-    <style name="NearItUIPermissionsTextAppearance" parent="TextAppearance.AppCompat.Body1">
-        <!--    ASAP-REGULAR  -->
+    <!--  Text appearances  -->
+    <style name="NearItUIPermissionsExplanationTextAppearance" parent="TextAppearance.AppCompat.Body1">
         <item name="android:textSize">@dimen/nearit_ui_permissions_text_size</item>
         <item name="android:textColor">@color/nearit_ui_permissions_text_color</item>
     </style>
 
+    <style name="NearItUIPermissionButtonTextAppearance" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">@dimen/nearit_ui_permission_button_text_size</item>
+        <item name="android:textColor">@drawable/nearit_ui_selector_permission_button_text_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="NearItUIPermissionsCloseTextAppearance">
-        <!--    ASAP-ITALIC  -->
         <item name="android:textSize">@dimen/nearit_ui_permissions_text_size</item>
+        <item name="android:textColor">@drawable/nearit_ui_selector_permission_close_text_color</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+
+
+    <style name="NearItUIButtonTextAppearance" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">@dimen/nearit_ui_permission_button_text_size</item>
     </style>
 
 </resources>
