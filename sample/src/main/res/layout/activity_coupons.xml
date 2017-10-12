@@ -2,8 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.your_company.ui_bindings_kotlin_sample.CouponsActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,7 +10,8 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingBottom="20dp"
-        android:paddingTop="20dp">
+        android:paddingTop="20dp"
+        tools:context="com.your_company.ui_bindings_sample.CouponsActivity">
 
         <Button
             android:id="@+id/valid_coupon"

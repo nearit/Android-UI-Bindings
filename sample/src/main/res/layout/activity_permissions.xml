@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context="com.your_company.ui_bindings_kotlin_sample.PermissionsActivity">
+    tools:context="com.your_company.ui_bindings_sample.PermissionsActivity">
 
     <com.nearit.ui_bindings.permissions.views.PermissionBar
         android:id="@+id/permission_bar"

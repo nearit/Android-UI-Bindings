@@ -3,26 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.your_company.ui_bindings_kotlin_sample.FeedbackActivity">
+    android:gravity="center_horizontal"
+    tools:context="com.your_company.ui_bindings_sample.MainActivity">
 
     <Button
-        android:id="@+id/complete"
+        android:id="@+id/permissions_demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="complete feedback" />
+        android:text="Permissions" />
 
     <Button
-        android:id="@+id/no_text_box"
+        android:id="@+id/coupon_demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="no text response feedback" />
+        android:text="Coupon"/>
 
     <Button
-        android:id="@+id/feedback_in_plain_activity"
+        android:id="@+id/feedback_demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="feedback in activity" />
+        android:text="Feedback" />
+    <Button
+        android:id="@+id/content_demo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Content"/>
 
 </LinearLayout>
