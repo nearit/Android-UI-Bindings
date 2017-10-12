@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/permission_main_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context="com.your_company.ui_bindings_sample.PermissionsActivity">
+
+    <com.nearit.ui_bindings.permissions.views.PermissionBar
+        android:id="@+id/permission_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/permissions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Permissions"/>
+
+    <Button
+        android:id="@+id/permissions_no_beacon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Permissions No beacon"/>
+
+    <Button
+        android:id="@+id/permissions_beacon_nonblocking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Permissions beacon non blocking"/>
+
+    <Button
+        android:id="@+id/permissions_invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Permissions Invisible Layout"/>
+
+    <Button
+        android:id="@+id/invisible_no_beacon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="invisible no beacon"/>
+
+    <Button
+        android:id="@+id/invisible_non_blocking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="invisible non blocking"/>
+
+    <Button
+        android:id="@+id/autostart_radar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Autostart radar"/>
+
+    <Button
+        android:id="@+id/custom_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Custom header"/>
+
+</LinearLayout>

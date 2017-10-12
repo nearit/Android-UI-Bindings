@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.your_company.ui_bindings_kotlin_sample.FeedbackActivity">
+
+    <Button
+        android:id="@+id/complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="complete feedback" />
+
+    <Button
+        android:id="@+id/no_text_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="no text response feedback" />
+
+    <Button
+        android:id="@+id/feedback_in_plain_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="feedback in activity" />
+
+</LinearLayout>
