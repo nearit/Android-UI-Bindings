@@ -2,12 +2,22 @@
 #### Basic example
 If you want your app to display a feedback request in a beautiful pop-up dialog, use this simple code:
 
+Java version:
 ```java
  // ...
  startActivity(
          NearITUIBindings.getInstance(YourActivity.this)
             .createFeedbackIntentBuilder(feedback)
             .build());
+```
+
+Kotlin version:
+```kotlin
+ // ...
+ startActivity(
+         NearITUIBindings.getInstance(this@YourActivity)
+            .createFeedbackIntentBuilder(feedback)
+            .build())
 ```
 
 where, `feedback` is an instance of NearIT SDK `Feedback` class. Further information on coupons and other in-app content can be found [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/).
@@ -19,6 +29,7 @@ The Feedback UI also takes care of delivering the user response to the SDK libra
 #### Advanced examples
 If you need to simplify the feedback request you are able to ask the user for the 1 to 5 rating only, without any textual comment (please notice that the text response is optional in every scenerio), you can hide the text box adding one method call:
 
+Java version:
 ```java
   // ...
   startActivity(
@@ -28,17 +39,37 @@ If you need to simplify the feedback request you are able to ask the user for th
              .build());
 ```
 
+Kotlin version:
+```kotlin
+  // ...
+  startActivity(
+          NearITUIBindings.getInstance(this@YourActivity)
+             .createFeedbackIntentBuilder(feedback)
+             .withoutComment()
+             .build())
+```
+
 
 ![NearIT-UI no text response feedback dialog](feedback_no_text.png)
 
 Optionally, you can display the feedback request in your custom Activity by adding a Fragment to it. You can get a Fragment via another builder:
 
+Java version:
 ```java
   // ...
   Fragment feedbackFragment = NearITUIBindings.getInstance(YourActivity.this)
         .createFeedbackFragmentBuilder(feedback)
         //  here you can call other methods of the builder
         .build();
+```
+
+Kotlin version:
+```kotlin
+  // ...
+  val feedbackFragment: Fragment = NearITUIBindings.getInstance(this@YourActivity)
+        .createFeedbackFragmentBuilder(feedback)
+        //  here you can call other methods of the builder
+        .build()
 ```
 
 If you need to tweak the way your dialog looks, you can override some resources (see [UI Customization](#ui-customization)).

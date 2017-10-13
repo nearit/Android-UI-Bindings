@@ -23,7 +23,7 @@ class ContentActivity : AppCompatActivity() {
             val content = ContentFactory.getCompleteContent()
             startActivity(
                     //  Basic example with a complete content
-                    NearITUIBindings.getInstance(applicationContext)
+                    NearITUIBindings.getInstance(this@ContentActivity)
                             .createContentDetailIntentBuilder(content)
                             .build())
         }
@@ -34,7 +34,7 @@ class ContentActivity : AppCompatActivity() {
             startActivity(
                     //  Example with a content without image
                     //  + enable tapping outside the dialog to close it
-                    NearITUIBindings.getInstance(applicationContext)
+                    NearITUIBindings.getInstance(this@ContentActivity)
                             .createContentDetailIntentBuilder(content)
                             .enableTapOutsideToClose()
                             .build())
@@ -45,13 +45,12 @@ class ContentActivity : AppCompatActivity() {
             val content = ContentFactory.getNoCTAContent()
             startActivity(
                     //  Example with a content without image
-                    NearITUIBindings.getInstance(applicationContext)
+                    NearITUIBindings.getInstance(this@ContentActivity)
                             .createContentDetailIntentBuilder(content)
                             .build())
         }
 
-        val plainActivity = findViewById<View>(R.id.plain_content_activity) as Button
-        plainActivity.setOnClickListener {
+        plain_content_activity.setOnClickListener {
             //  start a plain activity that shows the fragment fullscreen
             //  please check it
             startActivity(Intent(this@ContentActivity, ContentPlainActivity::class.java))
