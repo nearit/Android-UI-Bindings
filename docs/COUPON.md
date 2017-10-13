@@ -2,12 +2,22 @@
 #### Basic example
 If you want your app to display a coupon in a beautiful pop-up dialog, use this simple code:
 
+Java version
 ```java
  // ...
  startActivity(
          NearITUIBindings.getInstance(YourActivity.this)
             .createCouponDetailIntentBuilder(coupon)
             .build());
+```
+
+Kotlin version
+```kotlin
+ // ...
+ startActivity(
+         NearITUIBindings.getInstance(this@YourActivity)
+            .createCouponDetailIntentBuilder(coupon)
+            .build())
 ```
 
 where, `coupon` is an instance of NearIT SDK `Coupon` class. Further information on coupons and other in-app content can be found [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/).
@@ -19,6 +29,7 @@ where, `coupon` is an instance of NearIT SDK `Coupon` class. Further information
 #### Advanced examples
 NearIT-UI is shipped with our brand as icon placeholder. If you need to replace it just add one line of code:
 
+Java version
 ```java
   // ...
   startActivity(
@@ -28,18 +39,38 @@ NearIT-UI is shipped with our brand as icon placeholder. If you need to replace 
              .build());
 ```
 
+Kotlin version
+```kotlin
+  // ...
+  startActivity(
+          NearITUIBindings.getInstance(this@YourActivity)
+             .createCouponDetailIntentBuilder(coupon)
+             .setIconPlaceholderResourceId(R.drawable.your_drawable)
+             .build())
+```
+
 Please, keep in mind that the icon should be a square: a different aspect-ratio can potentially break the layout.
 
 ![NearIT-UI custom icon coupon dialog](custom_icon_coupon.png)
 
 Optionally, you can display the coupon in your custom Activity by adding a Fragment to it. You can get a Fragment via another builder:
 
+Java version
 ```java
   // ...
   Fragment couponFragment = NearITUIBindings.getInstance(YourActivity.this)
         .createCouponDetailFragmentBuilder(coupon)
         //  here you can call other methods of the builder
         .build();
+```
+
+Kotlin version
+```kotlin
+  // ...
+  val couponFragment: Fragment = NearITUIBindings.getInstance(this@YourActivity)
+        .createCouponDetailFragmentBuilder(coupon)
+        //  here you can call other methods of the builder
+        .build()
 ```
 
 If you need to tweak the way your dialog looks, you can override some resources (see [UI Customization](#ui-customization)). As the separator is a PNG file you may want to replace it.
