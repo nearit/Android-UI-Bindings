@@ -66,7 +66,7 @@
                 android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin4"
                 android:padding="8dp"
                 android:text="@string/nearit_ui_close_permissions_text"
-                android:textAppearance="@style/NearItUIPermissionsCloseTextAppearance" />
+                android:textAppearance="@style/NearItUIPermissionsDismissButtonTextAppearance" />
 
         </LinearLayout>
 

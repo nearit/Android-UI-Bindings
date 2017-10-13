@@ -1,50 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--  Dialogs style  -->
-    <style name="NearItUIPermissionsDialog" parent="Theme.AppCompat.Light.Dialog">
+    <!--  Dialogs appearance  -->
+    <style name="NearItUIDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="NearItUICouponDetailDialog" parent="Theme.AppCompat.Light.Dialog">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="NearItUIPermissionsDialog" parent="NearItUIDialog" />
+
+    <style name="NearItUIWarningDialog" parent="NearItUIDialog" />
+
+    <style name="NearItUIFeedbackDialog" parent="NearItUIDialog" />
+
+    <style name="NearItUIContentDetailDialog" parent="NearItUIDialog" />
+
+    <style name="NearItUICouponDetailDialog" parent="NearItUIDialog">
         <item name="android:windowBackground">@color/nearit_ui_coupon_detail_activity_container_background_color</item>
     </style>
 
-    <style name="NearItUIWarningDialog" parent="Theme.AppCompat.Light.Dialog">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="NearItUIFeedbackDialog" parent="Theme.AppCompat.Light.Dialog">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="NearItUIContentDetailDialog" parent="Theme.AppCompat.Light.Dialog">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 
 
     <!--  Text appearances  -->
+    <!--  Buttons Text  -->
+    <style name="NearItUIButtonTextAppearance">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/nearit_ui_button_text_size</item>
+    </style>
+
+    <style name="NearItUIPermissionButtonTextAppearance" parent="NearItUIButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_permission_button_text_color</item>
+    </style>
+
+    <style name="NearItUIPermissionBarButtonTextAppearance" parent="NearItUIButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_permission_bar_button_text_color</item>
+    </style>
+
+    <style name="NearItUIFeedbackSendButtonTextAppearance" parent="NearItUIButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_feedback_button_text_color</item>
+    </style>
+
+    <style name="NearItUIContentCTAButtonTextAppearance" parent="NearItUIButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_cta_button_text_color</item>
+    </style>
+
+    <style name="NearItUIWarningDialogRetryButtonTextAppearance" parent="NearItUIButtonTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_warning_dialog_button_text_color</item>
+    </style>
+
+    <!--  Dismiss buttons text -->
+    <style name="NearITUIDismissButtonTextAppearance">
+        <item name="textAllCaps">false</item>
+        <item name="textStyle">italic</item>
+        <item name="android:textSize">@dimen/nearit_ui_dismiss_button_text_size</item>
+    </style>
+
+    <style name="NearItUIFeedbackDismissButtonTextAppearance" parent="NearITUIDismissButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_feedback_close_text_color</item>
+    </style>
+
+    <style name="NearItUIWarningDialogDismissButtonTextAppearance" parent="NearITUIDismissButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_warning_close_text_color</item>
+    </style>
+
+    <style name="NearItUIPermissionsDismissButtonTextAppearance" parent="NearITUIDismissButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_permission_close_text_color</item>
+    </style>
+
+
+
     <style name="NearItUIPermissionsExplanationTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_permissions_text_size</item>
         <item name="android:textColor">@color/nearit_ui_permissions_text_color</item>
-    </style>
-
-    <style name="NearItUIPermissionButtonTextAppearance">
-        <item name="android:textSize">@dimen/nearit_ui_permission_button_text_size</item>
-        <item name="android:textColor">@drawable/nearit_ui_selector_permission_button_text_color</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="NearItUIPermissionsCloseTextAppearance">
-        <item name="android:textSize">@dimen/nearit_ui_permissions_text_size</item>
-        <item name="android:textColor">@drawable/nearit_ui_selector_permission_close_text_color</item>
-        <item name="android:textStyle">italic</item>
     </style>
 
     <style name="NearItUIPermissionBarAlertMessageTextAppearance">
@@ -52,11 +80,6 @@
         <item name="android:textSize">@dimen/nearit_ui_permission_bar_alert_text_size</item>
     </style>
 
-    <style name="NearItUIPermissionBarButtonTextAppearance">
-        <item name="android:textSize">@dimen/nearit_ui_permission_bar_button_text_size</item>
-        <item name="android:textColor">@drawable/nearit_ui_selector_permission_button_text_color</item>
-        <item name="android:textStyle">bold</item>
-    </style>
 
     <style name="NearItUICouponDetailValidityTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_coupon_detail_validity_text_size</item>
@@ -141,17 +164,6 @@
         <item name="android:textStyle">italic</item>
     </style>
 
-    <style name="NearItUIFeedbackSendButtonTextAppearance">
-        <item name="android:textSize">@dimen/nearit_ui_permission_button_text_size</item>
-        <item name="android:textColor">@drawable/nearit_ui_selector_feedback_button_text_color</item>
-    </style>
-
-    <style name="NearItUIFeedbackDismissButtonTextAppearance">
-        <item name="android:textSize">@dimen/nearit_ui_feedback_close_text_size</item>
-        <item name="android:textColor">@drawable/nearit_ui_selector_feedback_close_text_color</item>
-        <item name="android:textStyle">italic</item>
-    </style>
-
     <style name="NearItUIContentTitleTextAppearance">
         <item name="android:textColor">@color/nearit_ui_content_title_text_color</item>
         <item name="android:textSize">@dimen/nearit_ui_content_title_text_size</item>
@@ -163,28 +175,9 @@
         <item name="android:textSize">@dimen/nearit_ui_content_content_text_size</item>
     </style>
 
-    <style name="NearItUIContentCTAButtonTextAppearance">
-        <item name="android:textColor">@color/nearit_ui_cta_button_text_color</item>
-        <item name="android:textSize">@dimen/nearit_ui_content_cta_button_text_size</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
     <style name="NearItUIWarningDialogMessageTextAppearance">
         <item name="android:textColor">@color/nearit_ui_warning_dialog_text_color</item>
         <item name="android:textSize">@dimen/nearit_ui_warning_dialog_text_size</item>
-    </style>
-
-    <style name="NearItUIWarningDialogDismissButtonTextAppearance">
-        <item name="android:textColor">@color/nearit_ui_warning_dialog_text_color</item>
-        <item name="android:textSize">@dimen/nearit_ui_warning_dialog_text_size</item>
-        <item name="android:textStyle">italic</item>
-    </style>
-
-    <style name="NearItUIWarningDialogRetryButtonTextAppearance">
-        <item name="android:textColor">@color/nearit_ui_warning_dialog_button_text_color</item>
-        <item name="android:textSize">@dimen/nearit_ui_warning_dialog_button_text_size</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>
