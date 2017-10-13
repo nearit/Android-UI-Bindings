@@ -51,8 +51,8 @@
 
     <!--  Dismiss buttons text -->
     <style name="NearITUIDismissButtonTextAppearance">
-        <item name="textAllCaps">false</item>
-        <item name="textStyle">italic</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">italic</item>
         <item name="android:textSize">@dimen/nearit_ui_dismiss_button_text_size</item>
     </style>
 
