@@ -26,6 +26,15 @@
             android:launchMode="singleInstance"
             android:theme="@style/NearItUIContentDetailDialog" />
 
+        <activity
+            android:name=".coupon.NearItCouponListActivity"
+            android:launchMode="singleInstance" />
+
+        <activity
+            android:name=".warning.NearItUIWarningDialogActivity"
+            android:launchMode="singleInstance"
+            android:theme="@style/NearItUIWarningDialog"/>
+
         <receiver android:name="com.nearit.ui_bindings.notifications.NearItUIAutoTrackingReceiver"
             android:exported="false" />
 

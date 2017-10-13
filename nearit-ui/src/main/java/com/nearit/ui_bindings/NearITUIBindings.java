@@ -7,6 +7,8 @@ import com.nearit.ui_bindings.content.ContentDetailFragmentBuilder;
 import com.nearit.ui_bindings.content.ContentDetailIntentBuilder;
 import com.nearit.ui_bindings.coupon.CouponDetailFragmentBuilder;
 import com.nearit.ui_bindings.coupon.CouponDetailIntentBuilder;
+import com.nearit.ui_bindings.coupon.CouponListFragmentBuilder;
+import com.nearit.ui_bindings.coupon.CouponListIntentBuilder;
 import com.nearit.ui_bindings.feedback.FeedbackFragmentBuilder;
 import com.nearit.ui_bindings.feedback.FeedbackIntentBuilder;
 import com.nearit.ui_bindings.notifications.NearItUIProximityListener;
@@ -54,6 +56,14 @@ public class NearITUIBindings {
 
     public ContentDetailFragmentBuilder createContentDetailFragmentBuilder(Content content) {
         return new ContentDetailFragmentBuilder(mContext, content);
+    }
+
+    public CouponListIntentBuilder createCouponListIntentBuilder() {
+        return new CouponListIntentBuilder(mContext);
+    }
+
+    public CouponListFragmentBuilder createCouponListFragmentBuilder() {
+        return new CouponListFragmentBuilder();
     }
 
     public static void enableAutomaticForegroundNotifications(Context context) {
