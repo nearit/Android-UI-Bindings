@@ -125,8 +125,7 @@ class CouponsActivity : AppCompatActivity() {
             )
         }
 
-        val listInActivity = findViewById<View>(R.id.coupon_list_in_activity) as Button
-        listInActivity.setOnClickListener {
+        coupon_list_in_activity.setOnClickListener {
             //  start a plain activity that shows the fragment fullscreen
             //  please check it
             startActivity(Intent(this@CouponsActivity, CouponListPlainActivity::class.java))

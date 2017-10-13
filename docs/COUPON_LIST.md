@@ -18,11 +18,20 @@ Please note that the list is implemented as a `RecyclerView`: this means that ad
 #### Basic example 
 With these few lines of code
 
+Java version
 ```java
 startActivity(NearITUIBindings.getInstance(YourActivity.this)
                         .createCouponListIntentBuilder()
                         .build()
                 );
+```
+
+Kotlin version
+```kotlin
+startActivity(NearITUIBindings.getInstance(this@YourActivity)
+                        .createCouponListIntentBuilder()
+                        .build()
+                )
 ```
 
 you are able to show the list of coupons with this sorting rationale:
@@ -36,12 +45,22 @@ each set is ordered by the date the user earned the coupons.
 
 If your app needs to show already redeemed coupons too, just add `.includeRedeemed()` call:
 
+Java version
 ```java
 startActivity(NearITUIBindings.getInstance(YourActivity.this)
                         .createCouponListIntentBuilder()
                         .includeRedeemed()
                         .build()
               );
+```
+
+Kotlin version
+```kotlin
+startActivity(NearITUIBindings.getInstance(this@YourActivity)
+                        .createCouponListIntentBuilder()
+                        .includeRedeemed()
+                        .build()
+              )
 ```
 
 and the coupons already used by the user will be shown at the bottom of the list, with the expired ones.
@@ -53,12 +72,22 @@ If a server or network problem occurs while the coupon list is being downloaded,
 #### Advanced examples
 In your application you may want to show only coupons that are in certain states. With our builder you can request a list of only valid coupons:
 
+Java version
 ```java
 startActivity(NearITUIBindings.getInstance(YourActivity.this)
                         .createCouponListIntentBuilder()
                         .onlyValidCoupons()
                         .build()
                 );
+```
+
+Kotlin version
+```kotlin
+startActivity(NearITUIBindings.getInstance(this@YourActivity)
+                        .createCouponListIntentBuilder()
+                        .onlyValidCoupons()
+                        .build()
+                )
 ```
 
 The same for the other states:
@@ -68,10 +97,18 @@ The same for the other states:
 
 If you want to list the coupons in your activity, place this fragment in your container:
 
+Java version
 ```java
 Fragment couponListFragment = NearITUIBindings.getInstance(this)
                 .createCouponListFragmentBuilder()
                 .build();
+```
+
+Kotlin version
+```kotlin
+val couponListFragment: Fragment = NearITUIBindings.getInstance(this)
+                .createCouponListFragmentBuilder()
+                .build()
 ```
 
 This builder provides the same methods of the previous, so you can show the list you prefer.
@@ -79,8 +116,8 @@ This builder provides the same methods of the previous, so you can show the list
 Additionally, using either of the builders you are able to set the behaviour and look of the coupon detail that it is going to be shown when an user taps on one item of the list.
 The settings that are available are the one that you can set via the coupon detail UI of this library:
 
-- `setIconPlaceholderResourceId(int icon)`
-- `setSeparatorResourceId(int separator)`
+- Java: `setIconPlaceholderResourceId(int icon)`, Kotlin: `setIconPlaceholderResourceId(icon: Int)`
+- Java: `setSeparatorResourceId(int separator)`, Kotlin: `setSeparatorResourceId(separator: Int)`
 - `setNoSeparator()`
 - `setNoIcon()`
 - `enableTapOutsideToClose()`
