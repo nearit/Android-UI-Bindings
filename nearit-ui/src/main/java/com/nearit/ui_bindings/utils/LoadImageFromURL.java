@@ -3,7 +3,9 @@ package com.nearit.ui_bindings.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -21,23 +23,24 @@ public final class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
     private ImageView imageView;
     @Nullable
     private ProgressBar progressBar;
+    private boolean enableReload;
 
     private String url;
-    private boolean enableReload = false;
+    private static final boolean ENABLE_RELOAD_DEFAULT = false;
+    private static final ProgressBar PROGRESS_BAR_DEFAULT = null;
+
+    public LoadImageFromURL(@Nullable ImageView imageView) {
+        this(imageView, PROGRESS_BAR_DEFAULT);
+    }
 
     public LoadImageFromURL(@Nullable ImageView imageView, @Nullable ProgressBar progressBar) {
-        this.imageView = imageView;
-        this.progressBar = progressBar;
+        this(imageView, progressBar, ENABLE_RELOAD_DEFAULT);
     }
 
     public LoadImageFromURL(@Nullable ImageView imageView, @Nullable ProgressBar progressBar, boolean enableReload) {
         this.imageView = imageView;
         this.progressBar = progressBar;
         this.enableReload = enableReload;
-    }
-
-    public LoadImageFromURL(@Nullable ImageView imageView) {
-        this.imageView = imageView;
     }
 
     @Override
@@ -74,7 +77,11 @@ public final class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
                 imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 imageView.setAdjustViewBounds(true);
                 imageView.setMinimumHeight(0);
-                imageView.setBackgroundDrawable(null);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    imageView.setBackground(null);
+                } else {
+                    imageView.setBackgroundDrawable(null);
+                }
                 imageView.setImageBitmap(icon);
             } else {
                 //  show reload
