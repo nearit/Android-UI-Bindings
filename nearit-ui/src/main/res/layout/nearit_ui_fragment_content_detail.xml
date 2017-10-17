@@ -18,6 +18,7 @@
             android:id="@+id/content_image_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:minHeight="@dimen/nearit_ui_content_image_min_height"
             android:paddingTop="@dimen/nearit_ui_content_image_top_padding"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
@@ -28,14 +29,15 @@
                 android:id="@+id/content_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY" />
+                android:minHeight="@dimen/nearit_ui_content_image_min_height"
+                android:background="@color/nearit_ui_content_image_background_color"
+                android:src="@drawable/ic_nearit_ui_content_image_reload" />
 
             <ProgressBar
                 android:id="@+id/content_image_progress_bar"
                 android:layout_width="@dimen/nearit_ui_content_image_progress_bar_dimen"
                 android:layout_height="@dimen/nearit_ui_content_image_progress_bar_dimen"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center" />
 
         </LinearLayout>
 
@@ -47,17 +49,15 @@
             android:layout_gravity="center_horizontal"
             android:paddingTop="@dimen/nearit_ui_content_margin1"
             android:gravity="center_horizontal"
-            android:textColor="@color/nearit_ui_black"
+            android:textColor="@color/nearit_ui_content_title_text_color"
             android:textSize="@dimen/nearit_ui_content_title_text_size"
             android:textStyle="bold"
             android:visibility="gone" />
 
-        <TextView
+        <WebView
             android:id="@+id/content_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/nearit_ui_black"
-            android:textSize="@dimen/nearit_ui_content_content_text_size"
             android:paddingTop="@dimen/nearit_ui_content_margin2"
             android:visibility="gone" />
 

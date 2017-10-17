@@ -37,7 +37,6 @@
     <dimen name="nearit_ui_feedback_button_height_margin">45dp</dimen>
     <dimen name="nearit_ui_feedback_overall_width">300dp</dimen>
     <dimen name="nearit_ui_feedback_overall_padding">25dp</dimen>
-    <dimen name="nearit_ui_feedback_rating_bar_height">35dp</dimen>
     <dimen name="nearit_ui_feedback_send_button_height">45dp</dimen>
     <dimen name="nearit_ui_feedback_close_button_padding">3dp</dimen>
     <dimen name="nearit_ui_feedback_margin1">14dp</dimen>
@@ -56,6 +55,10 @@
     <dimen name="nearit_ui_feedback_error_message_text_size">15sp</dimen>
     <dimen name="nearit_ui_feedback_success_message_text_size">15sp</dimen>
     <dimen name="nearit_ui_feedback_close_text_size">15sp</dimen>
+
+    <dimen name="nearit_ui_feedback_rating_bar_star_size">32dp</dimen>
+    <dimen name="nearit_ui_feedback_rating_bar_star_border_size">2dp</dimen>
+    <dimen name="nearit_ui_feedback_rating_bar_stars_separation">7dp</dimen>
 
     <dimen name="nearit_ui_permission_bar_main_padding">9dp</dimen>
     <dimen name="nearit_ui_permission_bar_margin1">5dp</dimen>
@@ -79,6 +82,7 @@
     <dimen name="nearit_ui_content_cta_button_height">45dp</dimen>
     <dimen name="nearit_ui_content_cta_button_min_width">250dp</dimen>
     <dimen name="nearit_ui_content_cta_button_text_size">15sp</dimen>
+    <dimen name="nearit_ui_content_image_min_height">200dp</dimen>
 
 
     <dimen name="nearit_ui_coupon_list_empty_list_text_size">18sp</dimen>

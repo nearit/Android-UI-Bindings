@@ -97,22 +97,25 @@ these string resources will replace those that are provided by NearIT-UI library
 The same is for colors. Please have a look at this `res/values/colors.xml`
 
 ```xml
+<resources>
     <!-- -->
     <color name="nearit_ui_feedback_background_color">your_background_color</color>
     <color name="nearit_ui_feedback_comment_box_border_color">your_comment_box_border_color</color>
     <color name="nearit_ui_feedback_comment_box_background_color">your_comment_box_background_color</color>
     <!-- -->
+</resources>
 ```
 
-To replace the drawables of the rating bar you have to provide your own `drawable/nearit_ui_feedback_rating_bar.xml` that should have at least this structure:
+To change the rating bar look, you should override the related resources. For example, if you want to have red stars, you should place this entries in your app `res/values/colors.xml`
 
 ```xml
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@android:id/background"
-        android:drawable="@drawable/your_tipically_empty_star" />
-    <item android:id="@android:id/progress"
-        android:drawable="@drawable/your_tipically_full_star_drawable" />
-</layer-list>
+<resources>
+    <!-- -->
+    <color name="nearit_ui_rating_bar_empty_star_background_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_rating_bar_fill_star_background_color">#f8d71c</color>
+    <color name="nearit_ui_rating_bar_star_border_color">#f8d71c</color>
+    <!-- -->
+</resources>
 ```
 
 The confirmation button can be replaced by a custom one that match the style of your application. A custom `nearit_ui_selector_feedback_button.xml` should be something like this:
