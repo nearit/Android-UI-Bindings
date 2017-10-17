@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background"
-        android:left="3.5dp"
-        android:right="3.5dp"
         android:drawable="@drawable/ic_nearit_ui_feedback_star_empty" />
     <!--<item android:id="@android:id/secondaryProgress"-->
         <!--android:left="2dp"-->
         <!--android:right="2dp"-->
         <!--android:drawable="@drawable/ic_nearit_ui_feedback_star_empty" />-->
     <item android:id="@android:id/progress"
-        android:left="3.5dp"
-        android:right="3.5dp"
         android:drawable="@drawable/ic_nearit_ui_feedback_star" />
 </layer-list>

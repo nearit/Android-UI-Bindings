@@ -10,8 +10,10 @@ import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 
 public class FeedbackFragmentBuilder {
     private Context mContext;
-    private boolean mHideTextResponse;
+    private boolean mWithoutComment;
     private boolean mNoSuccessIcon;
+    private boolean mAutoClose;
+    private boolean mShowCloseButton;
     private int mIconResId;
     private Feedback mFeedback;
 
@@ -24,7 +26,7 @@ public class FeedbackFragmentBuilder {
      * Sets no text response
      */
     public FeedbackFragmentBuilder withoutComment() {
-        mHideTextResponse = true;
+        mWithoutComment = true;
         return this;
     }
 
@@ -39,8 +41,24 @@ public class FeedbackFragmentBuilder {
     /**
      * Sets no icon on the success view
      */
-    public FeedbackFragmentBuilder setNoSuccessIcon() {
+    public FeedbackFragmentBuilder noSuccessIcon() {
         mNoSuccessIcon = true;
+        return this;
+    }
+
+    /**
+     * Enables autoclose of the parent activity
+     */
+    public FeedbackFragmentBuilder autoCloseParentActivityOnFinish() {
+        mAutoClose = true;
+        return this;
+    }
+
+    /**
+     * Shows a close/dismiss button (text) at the bottom of the feedback request
+     */
+    public FeedbackFragmentBuilder showCloseButton() {
+        mShowCloseButton = true;
         return this;
     }
 
@@ -49,11 +67,17 @@ public class FeedbackFragmentBuilder {
     }
 
     private FeedbackRequestExtras getParams() {
-        return new FeedbackRequestExtras(
-                mHideTextResponse,
+        FeedbackRequestExtras extras = new FeedbackRequestExtras(
+                mWithoutComment,
                 mIconResId,
-                mNoSuccessIcon,
                 mNoSuccessIcon);
+        if (mAutoClose) {
+            extras.setAutoClose(true);
+        }
+        if (mShowCloseButton) {
+            extras.setShowCloseButton(true);
+        }
+        return extras;
     }
 
 }

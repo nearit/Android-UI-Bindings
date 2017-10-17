@@ -12,23 +12,30 @@ import com.nearit.ui_bindings.ExtraConstants;
  */
 
 class FeedbackRequestExtras implements Parcelable {
-    private final boolean hideTextResponse, enableTapOutsideToClose, noSuccessIcon;
+    private final boolean hideTextResponse;
+    private final boolean noSuccessIcon;
     private final int iconResId;
+    private boolean enableTapOutsideToClose;
+    private boolean autoClose;
+    private boolean showCloseButton;
 
-    FeedbackRequestExtras(boolean hideTextResponse, int iconResId, boolean noSuccessIcon, boolean enableTapOutsideToClose) {
+    private static final boolean SHOW_CLOSE_BUTTON_DEFAULT = false;
+    private static final boolean AUTOCLOSE_DEFAULT = false;
+    private static final boolean TAP_OUTSIDE_TO_CLOSE_DEFAULT = false;
+
+    FeedbackRequestExtras(boolean hideTextResponse, int iconResId, boolean noSuccessIcon, boolean enableTapOutsideToClose, boolean autoClose, boolean showCloseButton) {
         this.hideTextResponse = hideTextResponse;
         this.iconResId = iconResId;
         this.noSuccessIcon = noSuccessIcon;
         this.enableTapOutsideToClose = enableTapOutsideToClose;
+        this.autoClose = autoClose;
+        this.showCloseButton = showCloseButton;
     }
 
     FeedbackRequestExtras(boolean hideTextResponse, int iconResId, boolean noSuccessIcon) {
-        this.hideTextResponse = hideTextResponse;
-        this.iconResId = iconResId;
-        this.noSuccessIcon = noSuccessIcon;
-        this.enableTapOutsideToClose = false;
+       this(hideTextResponse, iconResId, noSuccessIcon, TAP_OUTSIDE_TO_CLOSE_DEFAULT, AUTOCLOSE_DEFAULT, SHOW_CLOSE_BUTTON_DEFAULT);
     }
-
+    
     /**
      * Extract FeedbackRequestExtras from an Intent.
      */
@@ -59,6 +66,8 @@ class FeedbackRequestExtras implements Parcelable {
         dest.writeInt(iconResId);
         dest.writeInt(noSuccessIcon ? 1 : 0);
         dest.writeInt(enableTapOutsideToClose ? 1 : 0);
+        dest.writeInt(autoClose ? 1 : 0);
+        dest.writeInt(showCloseButton ? 1 : 0);
     }
 
     @Override
@@ -73,11 +82,15 @@ class FeedbackRequestExtras implements Parcelable {
             int iconResId = in.readInt();
             boolean noSuccessIcon = in.readInt() != 0;
             boolean enableTapOutsideToClose = in.readInt() != 0;
+            boolean autoClose = in.readInt() != 0;
+            boolean showCloseButton = in.readInt() != 0;
             return new FeedbackRequestExtras(
                     hideTextResponse,
                     iconResId,
                     noSuccessIcon,
-                    enableTapOutsideToClose
+                    enableTapOutsideToClose,
+                    autoClose,
+                    showCloseButton
             );
         }
 
@@ -99,7 +112,23 @@ class FeedbackRequestExtras implements Parcelable {
         return iconResId;
     }
 
-    public boolean isNoSuccessIcon() {
+    boolean isNoSuccessIcon() {
         return noSuccessIcon;
+    }
+
+    boolean isAutoClose() {
+        return autoClose;
+    }
+
+    boolean isShowCloseButton() {
+        return showCloseButton;
+    }
+
+    void setAutoClose(boolean autoClose) {
+        this.autoClose = autoClose;
+    }
+
+    void setShowCloseButton(boolean showCloseButton) {
+        this.showCloseButton = showCloseButton;
     }
 }

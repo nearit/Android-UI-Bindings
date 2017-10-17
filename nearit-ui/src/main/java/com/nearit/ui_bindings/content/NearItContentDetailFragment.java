@@ -1,6 +1,7 @@
 package com.nearit.ui_bindings.content;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -25,7 +27,8 @@ public class NearItContentDetailFragment extends Fragment {
     private static final String ARG_EXTRAS = "extras";
 
     private Content content;
-    private TextView titleTextView, contentTextView;
+    private TextView titleTextView;
+    private WebView contentView;
     private ContentCTAButton ctaButton;
     private ImageView contentImageView;
     private ProgressBar contentImageSpinner;
@@ -60,7 +63,7 @@ public class NearItContentDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_content_detail, container, false);
 
         titleTextView = (TextView) rootView.findViewById(R.id.content_title);
-        contentTextView = (TextView) rootView.findViewById(R.id.content_text);
+        contentView = (WebView) rootView.findViewById(R.id.content_text);
         ctaButton = (ContentCTAButton) rootView.findViewById(R.id.cta_button);
         contentImageView = (ImageView) rootView.findViewById(R.id.content_image);
         contentImageSpinner = (ProgressBar) rootView.findViewById(R.id.content_image_progress_bar);
@@ -72,13 +75,15 @@ public class NearItContentDetailFragment extends Fragment {
         }
 
         if (content.contentString != null) {
-            contentTextView.setVisibility(View.VISIBLE);
-            contentTextView.setText(content.contentString);
+            contentView.setVisibility(View.VISIBLE);
+            contentView.getSettings();
+            contentView.setBackgroundColor(Color.TRANSPARENT);
+            contentView.loadDataWithBaseURL("", content.contentString, "text/html", "UTF-8", "");
         }
 
         if (content.getImageLink() != null) {
             contentImageContainer.setVisibility(View.VISIBLE);
-            new LoadImageFromURL(contentImageView, contentImageSpinner).execute(content.getImageLink().getFullSize());
+            new LoadImageFromURL(contentImageView, contentImageSpinner, true).execute(content.getImageLink().getFullSize());
         }
 
         if (content.getCta() != null) {
