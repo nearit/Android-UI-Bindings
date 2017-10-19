@@ -1,5 +1,5 @@
-# NearIt-UI for notifications
-### Heads-up notifications for in-app content
+# Handle in-app content
+### Heads-up notifications for foreground content
 NearIt-UI can be set to manage and show notifications for foreground content (read more [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/))
 for you. Foreground content will be delivered through an heads-up system notification. If the user clicks on it, the right dialog will appear and the right tracking events will be handled.
 

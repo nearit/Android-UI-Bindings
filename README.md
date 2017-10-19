@@ -16,9 +16,6 @@ Content related:
 - [Content detail](docs/CONTENT.md)
 - [Coupon list](docs/COUPON_LIST.md)
 
-#### Upcoming features
-- Heads up notifications for in-app content
-
 ## Configuration
 Add the NearIT-UI library dependency. If your project uses Gradle build system, add the following dependency to `build.gradle` of your app:
 
