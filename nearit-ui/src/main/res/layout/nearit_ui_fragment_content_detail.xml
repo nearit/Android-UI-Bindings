@@ -8,29 +8,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nearit_ui_content_vertical_padding"
+        android:orientation="vertical"
         android:paddingBottom="@dimen/nearit_ui_content_vertical_padding"
-        android:paddingRight="@dimen/nearit_ui_content_horizontal_padding"
         android:paddingLeft="@dimen/nearit_ui_content_horizontal_padding"
-        android:orientation="vertical">
+        android:paddingRight="@dimen/nearit_ui_content_horizontal_padding"
+        android:paddingTop="@dimen/nearit_ui_content_vertical_padding">
 
         <LinearLayout
             android:id="@+id/content_image_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:minHeight="@dimen/nearit_ui_content_image_min_height"
-            android:paddingTop="@dimen/nearit_ui_content_image_top_padding"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:visibility="gone"
-            android:orientation="vertical">
+            android:minHeight="@dimen/nearit_ui_content_image_min_height"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/nearit_ui_content_image_top_padding"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/content_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="@dimen/nearit_ui_content_image_min_height"
                 android:background="@color/nearit_ui_content_image_background_color"
+                android:minHeight="@dimen/nearit_ui_content_image_min_height"
                 android:src="@drawable/ic_nearit_ui_content_image_reload" />
 
             <ProgressBar
@@ -47,19 +47,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:paddingTop="@dimen/nearit_ui_content_margin1"
             android:gravity="center_horizontal"
+            android:paddingTop="@dimen/nearit_ui_content_margin1"
             android:textColor="@color/nearit_ui_content_title_text_color"
             android:textSize="@dimen/nearit_ui_content_title_text_size"
             android:textStyle="bold"
             android:visibility="gone" />
 
-        <WebView
-            android:id="@+id/content_text"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/nearit_ui_content_margin2"
-            android:visibility="gone" />
+            android:layout_height="match_parent">
+
+            <WebView
+                android:id="@+id/content_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/nearit_ui_content_margin2"
+                android:visibility="gone" />
+
+        </LinearLayout>
 
         <com.nearit.ui_bindings.content.views.ContentCTAButton
             android:id="@+id/cta_button"
