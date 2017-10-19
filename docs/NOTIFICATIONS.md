@@ -10,6 +10,7 @@ for you. Foreground content will be delivered through an heads-up system notific
 To enable this behaviour you have to add one line of code.
 You **MUST** add this in the `onCreate()` method of your `Application`
 
+Java version
 ```java
 public class YourApplication extends Application {
 
@@ -22,16 +23,41 @@ public class YourApplication extends Application {
 }
 ```
 
+Kotlin version
+```kotlin
+class NearItUISample : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+        NearITUIBindings.enableAutomaticForegroundNotifications(this)
+        //  ...
+    }
+
+}
+```
+
 Please note that foreground notifications will auto-dismiss after a small amount of time.
 
 ### Background notifications
 The easiest way to handle NearIT contents in your app that already integrates NearIT SDK is to edit the `onNewIntent` method of your _launcher activity_:
+
+Java version
 ```java
 @Override
 protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
     //  ...
     NearITUIBindings.onNewIntent(this, intent);
+    //  ...
+}
+```
+
+Kotlin version
+```kotlin
+override onNewIntent(intent: Intent) {
+    super.onNewIntent(intent)
+    //  ...
+    NearItUIBindings.onNewIntent(this, intent)
     //  ...
 }
 ```
