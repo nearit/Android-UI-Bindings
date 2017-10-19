@@ -1,21 +1,23 @@
 package com.nearit.ui_bindings.feedback;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.feedback.views.NearItUIFeedbackButton;
+import com.nearit.ui_bindings.feedback.views.NearItUIRatingBar;
 
 import it.near.sdk.NearItManager;
 import it.near.sdk.reactions.feedbackplugin.FeedbackEvent;
@@ -34,14 +36,15 @@ public class NearItFeedbackFragment extends Fragment {
 
     private boolean hideTextResponse = false;
     private boolean noSuccessIcon = false;
+    private boolean autoClose = false;
+    private boolean showCloseButton = false;
     private int successIconResId = 0;
 
-    private String feedbackQuestion;
     private float userRating;
     private String userComment;
 
     @Nullable
-    RatingBar ratingBar;
+    NearItUIRatingBar ratingBar;
     @Nullable
     LinearLayout commentSection, ratingBarContainer;
     @Nullable
@@ -77,6 +80,8 @@ public class NearItFeedbackFragment extends Fragment {
             hideTextResponse = extras.isHideTextResponse();
             successIconResId = extras.getIconResId();
             noSuccessIcon = extras.isNoSuccessIcon();
+            autoClose = extras.isAutoClose();
+            showCloseButton = extras.isShowCloseButton();
         }
 
     }
@@ -84,10 +89,7 @@ public class NearItFeedbackFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        //Save the fragment's state here
-        if (ratingBar != null) {
-            outState.putFloat(SAVED_RATING, ratingBar.getRating());
-        }
+        //  Save fragment state here
         if (sendButton != null) {
             outState.putBoolean(SAVED_IS_BUTTON_CHECKED, sendButton.isChecked());
         }
@@ -101,10 +103,7 @@ public class NearItFeedbackFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (savedInstanceState != null) {
-            //Restore the fragment's state here
-            if (ratingBar != null) {
-                ratingBar.setRating(savedInstanceState.getFloat(SAVED_RATING));
-            }
+            //  Restore fragment state here
             if (sendButton != null) {
                 if (savedInstanceState.getBoolean(SAVED_IS_BUTTON_CHECKED)) {
                     sendButton.setChecked();
@@ -126,19 +125,19 @@ public class NearItFeedbackFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_feedback, container, false);
 
-        feedbackQuestion = feedback.question;
+        String feedbackQuestion = feedback.question;
 
-        ratingBarContainer = (LinearLayout) rootView.findViewById(R.id.feedback_rating_bar_container);
-        ratingBar = (RatingBar) rootView.findViewById(R.id.feedback_rating);
-        commentSection = (LinearLayout) rootView.findViewById(R.id.feedback_comment_section);
-        errorText = (TextView) rootView.findViewById(R.id.feedback_error_alert);
-        sendButton = (NearItUIFeedbackButton) rootView.findViewById(R.id.feedback_send_comment_button);
-        closeButton = (TextView) rootView.findViewById(R.id.feedback_dismiss_text);
-        commentBox = (EditText) rootView.findViewById(R.id.feedback_comment_box);
-        feedbackQuestionTextView = (TextView) rootView.findViewById(R.id.feedback_question);
+        ratingBarContainer = rootView.findViewById(R.id.feedback_rating_bar_container);
+        ratingBar = rootView.findViewById(R.id.feedback_rating);
+        commentSection = rootView.findViewById(R.id.feedback_comment_section);
+        errorText = rootView.findViewById(R.id.feedback_error_alert);
+        sendButton = rootView.findViewById(R.id.feedback_send_comment_button);
+        closeButton = rootView.findViewById(R.id.feedback_dismiss_text);
+        commentBox = rootView.findViewById(R.id.feedback_comment_box);
+        feedbackQuestionTextView = rootView.findViewById(R.id.feedback_question);
 
-        positiveResultMessage = (TextView) rootView.findViewById(R.id.feedback_success_message);
-        positiveResultIcon = (ImageView) rootView.findViewById(R.id.feedback_success_icon);
+        positiveResultMessage = rootView.findViewById(R.id.feedback_success_message);
+        positiveResultIcon = rootView.findViewById(R.id.feedback_success_icon);
 
         if (successIconResId != 0 && positiveResultIcon != null) {
             positiveResultIcon.setImageResource(successIconResId);
@@ -152,22 +151,31 @@ public class NearItFeedbackFragment extends Fragment {
             commentSection.setVisibility(View.GONE);
         }
 
-        if (closeButton != null) {
+        if (showCloseButton && closeButton != null) {
+            closeButton.setVisibility(View.VISIBLE);
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().finish();
+                    if (autoClose && isAdded() && getActivity() != null) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            getActivity().finishAndRemoveTask();
+                        } else {
+                            getActivity().finish();
+                        }
+                    }
                 }
             });
         }
 
         if (ratingBar != null) {
-            ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            ratingBar.setOnRatingBarChangeListener(new NearItUIRatingBar.OnRatingBarChangeListener() {
                 @Override
-                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                public void onRatingChanged(NearItUIRatingBar ratingBar, float rating, boolean fromUser) {
                     if (rating < 1.0f) {
                         ratingBar.setRating(1.0f);
                     }
+
+                    Log.d("RATING", String.valueOf(rating));
 
                     userRating = rating;
 
@@ -228,8 +236,12 @@ public class NearItFeedbackFragment extends Fragment {
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    if (getActivity() != null) {
-                                        getActivity().finish();
+                                    if (autoClose && isAdded() && getActivity() != null) {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                            getActivity().finishAndRemoveTask();
+                                        } else {
+                                            getActivity().finish();
+                                        }
                                     }
                                 }
                             }, NEAR_AUTOCLOSE_DELAY);

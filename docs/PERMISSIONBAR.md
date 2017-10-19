@@ -20,9 +20,12 @@ Add the following xml element where you want to show the bar
 
 and keep a reference in your activity
 
+Java version:
 ```java
 PermissionBar bar = (PermissionBar) findViewById(R.id.permission_bar);
 ```
+
+Kotlin version: if you use the [Kotlin Android Extensions plugin](https://kotlinlang.org/docs/tutorials/android-plugin.html), you do not need to keep a reference. 
 
 It is **important** that you pass an Activity reference to the bar: by doing this, clicking the bar button will cause the launch of the permissions request flow.
 
@@ -30,13 +33,21 @@ It is **important** that you pass an Activity reference to the bar: by doing thi
 
 To set the activity use the following method in your activity `onCreate`:
 
+Java version:
 ```java
 bar.bindToActivity(YourActivity.this, NEAR_PERMISSION_REQUEST);
+```
+
+Kotlin version:
+```kotlin
+//  permission_bar is the id of the PermissionBar view you have placed in your layout
+permission_bar.bindToActivity(this@YourActivity, NEAR_PERMISSION_REQUEST);
 ```
 
 where `NEAR_PERMISSION_REQUEST` is an int value defined by you that will identify the request made by the view.
 Then in your activity you should catch the `result` by referring to the same request code, this way:
 
+Java version:
 ```java
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -51,10 +62,31 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 
+Kotlin version:
+```kotlin
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == NEAR_PERMISSION_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                //  all the necessary prerequirements are ok, in the most common scenarios you should start NearIT radar here
+                NearItManager.getInstance().startRadar()
+            } else {
+                //  some permission is still missing
+            }
+        }
+    }
+```
+
 To unbind the activity call the following method in your activity `onDestroy`
 
+Java version:
 ```java
 bar.unbindFromActivity();
+```
+
+Kotlin version:
+```kotlin
+//  permission_bar is the id of the PermissionBar view you have placed in your layout
+permission_bar.unbindFromActivity()
 ```
 
 Because the permissions request flow launched by the `OK!` button is the same provided [here](PERMISSIONS.md), you can customize its behaviour and look.

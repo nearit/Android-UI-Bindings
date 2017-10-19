@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        tools:context="com.your_company.ui_bindings_sample.CouponsActivity">
+
+        <Button
+            android:id="@+id/valid_coupon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Valid Coupon" />
+
+        <Button
+            android:id="@+id/inactive_coupon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inactive Coupon" />
+
+        <Button
+            android:id="@+id/expired_coupon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expired Coupon" />
+
+        <Button
+            android:id="@+id/custom_icon_coupon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Custom Icon Coupon" />
+
+        <Button
+            android:id="@+id/plain_coupon_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Coupon in activity" />
+
+        <Button
+            android:id="@+id/coupon_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Coupon List" />
+
+        <Button
+            android:id="@+id/valid_coupon_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Valid Coupon List" />
+
+        <Button
+            android:id="@+id/redeemed_coupon_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Redeemed Coupon List" />
+
+        <Button
+            android:id="@+id/inactive_coupon_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inactive Coupon List" />
+
+        <Button
+            android:id="@+id/expired_coupon_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expired Coupon List" />
+
+        <Button
+            android:id="@+id/include_redeemed_coupon_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Complete Coupon List" />
+
+        <Button
+            android:id="@+id/coupon_list_in_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coupon List in activity" />
+
+
+    </LinearLayout>
+</ScrollView>

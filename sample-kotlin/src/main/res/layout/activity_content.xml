@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context="com.your_company.ui_bindings_kotlin_sample.ContentActivity">
+
+    <Button
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Content" />
+
+    <Button
+        android:id="@+id/no_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Content no image" />
+
+    <Button
+        android:id="@+id/no_cta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Content no cta" />
+
+    <Button
+        android:id="@+id/plain_content_activity"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Content in activity"/>
+
+</LinearLayout>
