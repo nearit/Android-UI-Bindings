@@ -21,7 +21,7 @@ Java version:
 Kotlin version:
 ```kotlin
  // You can choose an arbitrary request code
- private val int NEAR_PERMISSION_REQUEST: Int = 1000
+ private val NEAR_PERMISSION_REQUEST: Int = 1000
  
  // ...
  
