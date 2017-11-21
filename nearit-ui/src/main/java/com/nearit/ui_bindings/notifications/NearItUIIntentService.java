@@ -9,7 +9,7 @@ import it.near.sdk.utils.AppVisibilityDetector;
 import it.near.sdk.utils.NearUtils;
 
 /**
- * Created by Federico Boschini on 25/09/17.
+ * @author Federico Boschini
  */
 
 public class NearItUIIntentService extends NearBackgroundJobIntentService {

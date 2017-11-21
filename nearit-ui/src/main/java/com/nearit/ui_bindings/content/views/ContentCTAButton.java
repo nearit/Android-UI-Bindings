@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.nearit.ui_bindings.R;
 
 /**
- * Created by Federico Boschini on 22/09/17.
+ * @author Federico Boschini
  */
 
 public class ContentCTAButton extends RelativeLayout {
@@ -34,7 +34,7 @@ public class ContentCTAButton extends RelativeLayout {
 
     private void init() {
         inflate(getContext(), R.layout.nearit_ui_layout_cta_button, this);
-        buttonTextView = (TextView) findViewById(R.id.button_label);
+        buttonTextView = findViewById(R.id.button_label);
     }
 
     public void setText(String buttonLabel) {

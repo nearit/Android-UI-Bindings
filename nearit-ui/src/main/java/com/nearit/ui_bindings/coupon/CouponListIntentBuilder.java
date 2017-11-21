@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 /**
- * Created by Federico Boschini on 06/09/17.
+ * @author Federico Boschini
  */
 
 public class CouponListIntentBuilder {

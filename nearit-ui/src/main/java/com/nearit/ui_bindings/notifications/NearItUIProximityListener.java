@@ -18,7 +18,7 @@ import it.near.sdk.utils.NearItIntentConstants;
 import it.near.sdk.utils.NearUtils;
 
 /**
- * Created by Federico Boschini on 22/09/17.
+ * @author Federico Boschini
  */
 
 public class NearItUIProximityListener implements ProximityListener, CoreContentsListener {

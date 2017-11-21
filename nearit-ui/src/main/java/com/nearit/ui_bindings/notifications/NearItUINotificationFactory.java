@@ -28,7 +28,7 @@ import it.near.sdk.utils.NearItIntentConstants;
 import it.near.sdk.utils.NearNotification;
 
 /**
- * Created by Federico Boschini on 26/09/17.
+ * @author Federico Boschini
  */
 
 class NearItUINotificationFactory {
