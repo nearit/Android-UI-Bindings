@@ -7,22 +7,41 @@
     android:gravity="center_horizontal"
     tools:context="com.your_company.ui_bindings_kotlin_sample.ContentActivity">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_brand" />
+
     <Button
         android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/button"
+        android:padding="10dp"
+        android:textColor="#fff"
         android:text="Content" />
 
     <Button
         android:id="@+id/no_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/button"
+        android:padding="10dp"
+        android:textColor="#fff"
         android:text="Content no image" />
 
     <Button
         android:id="@+id/no_cta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/button"
+        android:padding="10dp"
+        android:textColor="#fff"
         android:text="Content no cta" />
 
     <Button
@@ -30,6 +49,10 @@
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/button"
+        android:padding="10dp"
+        android:textColor="#fff"
         android:text="Content in activity"/>
 
 </LinearLayout>
