@@ -1,5 +1,6 @@
 package com.nearit.ui_bindings.permissions;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
@@ -323,6 +324,7 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
     /**
      * If everything is fine we set result code to RESULT_OK and we close the activity
      */
+    @SuppressLint("MissingPermission")
     private void onPermissionsReady() {
         if (isAutoStartRadar) {
             NearItManager.getInstance().startRadar();
