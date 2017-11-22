@@ -56,8 +56,7 @@ class NearItUINotificationFactory {
                 imgResFromIntent(intent),
                 title,
                 contentText,
-                getAutoTrackingTargetIntent(intent, context),
-                uniqueNotificationCode()
+                getAutoTrackingTargetIntent(intent, context)
         );
     }
 
@@ -90,7 +89,7 @@ class NearItUINotificationFactory {
     )
     private static void buildChannel(Context context) {
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_MAX);
+        NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_HIGH);
         notificationChannel.setDescription("Channel description");
         notificationChannel.enableLights(true);
         notificationChannel.setLightColor(Color.RED);
