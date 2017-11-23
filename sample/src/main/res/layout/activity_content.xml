@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/ic_brand" />
+        android:background="@drawable/brand" />
 
     <Button
         android:id="@+id/content"
