@@ -9,6 +9,10 @@ import com.your_company.ui_bindings_sample.factories.ContentFactory;
 
 import it.near.sdk.reactions.contentplugin.model.Content;
 
+/**
+ * @author Federico Boschini
+ */
+
 public class ContentPlainActivity extends AppCompatActivity {
 
     @Override

@@ -4,8 +4,9 @@ import android.app.Application
 import com.nearit.ui_bindings.NearITUIBindings
 
 /**
- * Created by Federico Boschini on 13/10/17.
- */
+* @author Federico Boschini
+*/
+
 class NearItUISample : Application() {
 
     override fun onCreate() {

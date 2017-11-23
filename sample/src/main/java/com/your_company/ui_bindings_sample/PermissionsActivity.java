@@ -14,6 +14,10 @@ import com.nearit.ui_bindings.permissions.views.PermissionBar;
 
 import it.near.sdk.NearItManager;
 
+/**
+ * @author Federico Boschini
+ */
+
 public class PermissionsActivity extends AppCompatActivity {
 
     private static final int NEAR_PERMISSION_REQUEST = 1000;

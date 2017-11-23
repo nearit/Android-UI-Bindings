@@ -11,6 +11,10 @@ import com.your_company.ui_bindings_sample.factories.CouponFactory;
 
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
+/**
+ * @author Federico Boschini
+ */
+
 public class CouponsActivity extends AppCompatActivity {
 
     @Override

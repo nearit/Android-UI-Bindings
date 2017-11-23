@@ -1,9 +1,5 @@
 package com.nearit.ui_bindings.coupon;
 
-import android.content.Context;
-
-import it.near.sdk.reactions.couponplugin.model.Coupon;
-
 /**
  * @author Federico Boschini
  */

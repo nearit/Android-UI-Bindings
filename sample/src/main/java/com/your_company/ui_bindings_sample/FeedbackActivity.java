@@ -11,6 +11,10 @@ import com.your_company.ui_bindings_sample.factories.FeedbackFactory;
 
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 
+/**
+ * @author Federico Boschini
+ */
+
 public class FeedbackActivity extends AppCompatActivity {
 
     @Override

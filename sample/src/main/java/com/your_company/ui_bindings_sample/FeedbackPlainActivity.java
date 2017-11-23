@@ -11,7 +11,7 @@ import com.your_company.ui_bindings_sample.factories.FeedbackFactory;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 
 /**
- * Created by Federico Boschini on 13/09/17.
+ * @author Federico Boschini
  */
 
 public class FeedbackPlainActivity extends AppCompatActivity {

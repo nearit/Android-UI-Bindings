@@ -4,8 +4,9 @@ import it.near.sdk.reactions.couponplugin.model.Claim
 import it.near.sdk.reactions.couponplugin.model.Coupon
 
 /**
- * Created by Federico Boschini on 12/10/17.
- */
+* @author Federico Boschini
+*/
+
 object CouponFactory {
 
     private val coupon: Coupon = Coupon()

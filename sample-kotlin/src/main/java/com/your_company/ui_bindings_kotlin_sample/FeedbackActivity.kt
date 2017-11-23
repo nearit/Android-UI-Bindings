@@ -8,8 +8,9 @@ import com.your_company.ui_bindings_kotlin_sample.factories.FeedbackFactory
 import kotlinx.android.synthetic.main.activity_feedback.*
 
 /**
- * Created by Federico Boschini on 12/10/17.
- */
+* @author Federico Boschini
+*/
+
 class FeedbackActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

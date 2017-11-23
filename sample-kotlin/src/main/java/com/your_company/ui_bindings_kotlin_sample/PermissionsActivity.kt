@@ -10,10 +10,10 @@ import com.nearit.ui_bindings.NearITUIBindings
 import it.near.sdk.NearItManager
 import kotlinx.android.synthetic.main.activity_permissions.*
 
-
 /**
- * Created by Federico Boschini on 12/10/17.
- */
+* @author Federico Boschini
+*/
+
 class PermissionsActivity : AppCompatActivity() {
 
     private val NEAR_PERMISSION_REQUEST = 1000
