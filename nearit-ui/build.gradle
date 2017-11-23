@@ -88,6 +88,11 @@ task cleanBuildInstallPublish {
     tasks.findByName('bintrayUpload').mustRunAfter 'install'
 }
 
+configure(cleanBuildInstallPublish) {
+    group = 'Publishing'
+    description = 'Cleans, builds, creates artifact and uploads to bintray'
+}
+
 bintray {
     user = (buildProperties.localProperties['bintray.user'] | buildProperties.env['BINTRAY_USER']).string
     key = (buildProperties.localProperties['bintray.apikey'] | buildProperties.env['BINTRAY_APIKEY']).string
