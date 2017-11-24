@@ -11,50 +11,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/brand"/>
 
     <Button
         android:id="@+id/permissions_demo"
-        android:background="@drawable/button"
-        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textColor="#fff"
-        android:minHeight="0dp"
+        android:layout_marginBottom="5dp"
+        style="@style/ButtonStyle"
         android:text="Permissions" />
 
     <Button
         android:id="@+id/coupon_demo"
-        android:background="@drawable/button"
-        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textColor="#fff"
-        android:minHeight="0dp"
+        android:layout_marginBottom="5dp"
+        style="@style/ButtonStyle"
         android:text="Coupon"/>
 
     <Button
         android:id="@+id/feedback_demo"
-        android:background="@drawable/button"
-        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textColor="#fff"
-        android:minHeight="0dp"
+        android:layout_marginBottom="5dp"
+        style="@style/ButtonStyle"
         android:text="Feedback" />
+
     <Button
         android:id="@+id/content_demo"
-        android:background="@drawable/button"
-        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textColor="#fff"
-        android:minHeight="0dp"
+        android:layout_marginBottom="5dp"
+        style="@style/ButtonStyle"
         android:text="Content"/>
 
 </LinearLayout>

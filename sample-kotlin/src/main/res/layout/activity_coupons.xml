@@ -30,10 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Valid Coupon" />
 
             <Button
@@ -41,10 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Inactive Coupon" />
 
             <Button
@@ -52,10 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Expired Coupon" />
 
             <Button
@@ -63,10 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Custom Icon Coupon" />
 
             <Button
@@ -75,10 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Coupon in activity" />
 
             <Button
@@ -87,10 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Coupon List" />
 
             <Button
@@ -98,10 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Valid Coupon List" />
 
             <Button
@@ -109,10 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Redeemed Coupon List" />
 
             <Button
@@ -120,10 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Inactive Coupon List" />
 
             <Button
@@ -131,10 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Expired Coupon List" />
 
             <Button
@@ -142,10 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Complete Coupon List" />
 
             <Button
@@ -153,10 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Coupon List in activity" />
 
         </LinearLayout>

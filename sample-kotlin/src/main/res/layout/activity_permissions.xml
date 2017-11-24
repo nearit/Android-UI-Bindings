@@ -35,10 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Permissions" />
 
             <Button
@@ -46,10 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Permissions No beacon" />
 
             <Button
@@ -57,10 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Permissions beacon non blocking" />
 
             <Button
@@ -69,10 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Permissions Invisible Layout" />
 
             <Button
@@ -80,10 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="invisible no beacon" />
 
             <Button
@@ -91,10 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="invisible non blocking" />
 
             <Button
@@ -103,10 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Autostart radar" />
 
             <Button
@@ -115,10 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/button"
-                android:padding="10dp"
-                android:textColor="#fff"
-                android:minHeight="0dp"
+                style="@style/ButtonStyle"
                 android:text="Custom header" />
         </LinearLayout>
     </ScrollView>

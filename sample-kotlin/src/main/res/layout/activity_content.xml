@@ -19,10 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/button"
-        android:padding="10dp"
-        android:textColor="#fff"
-        android:minHeight="0dp"
+        style="@style/ButtonStyle"
         android:text="Content" />
 
     <Button
@@ -30,10 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/button"
-        android:padding="10dp"
-        android:textColor="#fff"
-        android:minHeight="0dp"
+        style="@style/ButtonStyle"
         android:text="Content no image" />
 
     <Button
@@ -41,22 +35,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/button"
-        android:padding="10dp"
-        android:textColor="#fff"
-        android:minHeight="0dp"
+        style="@style/ButtonStyle"
         android:text="Content no cta" />
 
     <Button
         android:id="@+id/plain_content_activity"
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/button"
-        android:padding="10dp"
-        android:textColor="#fff"
-        android:minHeight="0dp"
+        style="@style/ButtonStyle"
         android:text="Content in activity"/>
 
 </LinearLayout>
