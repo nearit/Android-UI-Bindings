@@ -10,8 +10,8 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/brand" />
 
     <Button
@@ -22,6 +22,7 @@
         android:background="@drawable/button"
         android:padding="10dp"
         android:textColor="#fff"
+        android:minHeight="0dp"
         android:text="complete feedback" />
 
     <Button
@@ -32,6 +33,7 @@
         android:background="@drawable/button"
         android:padding="10dp"
         android:textColor="#fff"
+        android:minHeight="0dp"
         android:text="no text response feedback" />
 
     <Button
@@ -42,6 +44,7 @@
         android:background="@drawable/button"
         android:padding="10dp"
         android:textColor="#fff"
+        android:minHeight="0dp"
         android:text="feedback in activity" />
 
 </LinearLayout>

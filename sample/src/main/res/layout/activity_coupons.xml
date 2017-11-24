@@ -11,8 +11,8 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/brand" />
 
     <ScrollView
@@ -33,6 +33,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Valid Coupon" />
 
             <Button
@@ -43,6 +44,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Inactive Coupon" />
 
             <Button
@@ -53,6 +55,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Expired Coupon" />
 
             <Button
@@ -63,6 +66,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Custom Icon Coupon" />
 
             <Button
@@ -74,6 +78,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Coupon in activity" />
 
             <Button
@@ -85,6 +90,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Coupon List" />
 
             <Button
@@ -95,6 +101,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Valid Coupon List" />
 
             <Button
@@ -105,6 +112,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Redeemed Coupon List" />
 
             <Button
@@ -115,6 +123,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Inactive Coupon List" />
 
             <Button
@@ -125,6 +134,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Expired Coupon List" />
 
             <Button
@@ -135,6 +145,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Complete Coupon List" />
 
             <Button
@@ -145,6 +156,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Coupon List in activity" />
 
         </LinearLayout>

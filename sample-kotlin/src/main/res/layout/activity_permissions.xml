@@ -16,8 +16,8 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/brand" />
 
     <ScrollView
@@ -38,6 +38,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Permissions" />
 
             <Button
@@ -48,6 +49,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Permissions No beacon" />
 
             <Button
@@ -58,6 +60,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Permissions beacon non blocking" />
 
             <Button
@@ -69,6 +72,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Permissions Invisible Layout" />
 
             <Button
@@ -79,6 +83,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="invisible no beacon" />
 
             <Button
@@ -89,6 +94,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="invisible non blocking" />
 
             <Button
@@ -100,6 +106,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Autostart radar" />
 
             <Button
@@ -111,6 +118,7 @@
                 android:background="@drawable/button"
                 android:padding="10dp"
                 android:textColor="#fff"
+                android:minHeight="0dp"
                 android:text="Custom header" />
         </LinearLayout>
     </ScrollView>

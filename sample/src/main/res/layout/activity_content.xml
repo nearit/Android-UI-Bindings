@@ -10,8 +10,8 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/brand" />
 
     <Button
@@ -21,6 +21,7 @@
         android:layout_marginBottom="5dp"
         android:background="@drawable/button"
         android:padding="10dp"
+        android:minHeight="0dp"
         android:textColor="#fff"
         android:text="Content" />
 
@@ -31,6 +32,7 @@
         android:layout_marginBottom="5dp"
         android:background="@drawable/button"
         android:padding="10dp"
+        android:minHeight="0dp"
         android:textColor="#fff"
         android:text="Content no image" />
 
@@ -41,6 +43,7 @@
         android:layout_marginBottom="5dp"
         android:background="@drawable/button"
         android:padding="10dp"
+        android:minHeight="0dp"
         android:textColor="#fff"
         android:text="Content no cta" />
 
@@ -52,6 +55,7 @@
         android:layout_marginBottom="5dp"
         android:background="@drawable/button"
         android:padding="10dp"
+        android:minHeight="0dp"
         android:textColor="#fff"
         android:text="Content in activity"/>
 
