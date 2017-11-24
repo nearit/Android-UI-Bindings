@@ -5,7 +5,7 @@ import android.app.Application;
 import com.nearit.ui_bindings.NearITUIBindings;
 
 /**
- * Created by Federico Boschini on 22/09/17.
+ * @author Federico Boschini
  */
 
 public class NearItUISample extends Application {

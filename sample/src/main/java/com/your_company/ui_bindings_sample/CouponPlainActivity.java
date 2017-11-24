@@ -11,7 +11,7 @@ import com.your_company.ui_bindings_sample.factories.CouponFactory;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 /**
- * Created by Federico Boschini on 13/09/17.
+ * @author Federico Boschini
  */
 
 public class CouponPlainActivity extends AppCompatActivity {

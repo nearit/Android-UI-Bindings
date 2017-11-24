@@ -13,6 +13,10 @@ import com.nearit.ui_bindings.R;
 
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 
+/**
+ * @author Federico Boschini
+ */
+
 public class NearItFeedbackActivity extends AppCompatActivity {
 
     private FeedbackRequestExtras extras;

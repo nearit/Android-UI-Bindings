@@ -54,7 +54,7 @@ protected void onNewIntent(Intent intent) {
 
 Kotlin version
 ```kotlin
-override onNewIntent(intent: Intent) {
+override fun onNewIntent(intent: Intent) {
     super.onNewIntent(intent)
     //  ...
     NearItUIBindings.onNewIntent(this, intent)

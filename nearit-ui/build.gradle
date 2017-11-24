@@ -74,18 +74,23 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
 }
 
-//task javadoc(type: Javadoc) {
-//    source = android.sourceSets.main.java.srcDirs
-//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-//}
-//
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//    classifier = 'javadoc'
-//    from javadoc.destinationDir
-//}
 artifacts {
-//    archives javadocJar
     archives sourcesJar
+}
+
+task cleanBuildInstallPublish {
+    dependsOn 'clean'
+    dependsOn 'build'
+    dependsOn 'install'
+    dependsOn 'bintrayUpload'
+    tasks.findByName('build').mustRunAfter 'clean'
+    tasks.findByName('install').mustRunAfter 'build'
+    tasks.findByName('bintrayUpload').mustRunAfter 'install'
+}
+
+configure(cleanBuildInstallPublish) {
+    group = 'Publishing'
+    description = 'Cleans, builds, creates artifact and uploads to bintray'
 }
 
 bintray {

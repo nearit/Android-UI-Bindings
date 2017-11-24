@@ -3,10 +3,6 @@ package com.nearit.ui_bindings.coupon;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.support.annotation.Nullable;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import com.nearit.ui_bindings.nearXing.BarcodeFormat;
 import com.nearit.ui_bindings.nearXing.WriterException;
@@ -14,44 +10,18 @@ import com.nearit.ui_bindings.nearXing.common.BitMatrix;
 import com.nearit.ui_bindings.nearXing.qrcode.QRCodeWriter;
 
 /**
- * Created by Federico Boschini on 07/09/17.
+ * @author Federico Boschini
  */
 
 public class QRcodeGenerator extends AsyncTask<String, Void, Bitmap> {
-    @Nullable
-    private ImageView imageView;
-    @Nullable
-    private ProgressBar progressBar;
     private int width;
     private int height;
+    private GeneratorListener listener;
 
-    public QRcodeGenerator(@Nullable ImageView imageView, int width, int height, @Nullable ProgressBar progressBar) {
-        this.imageView = imageView;
+    public QRcodeGenerator(int width, int height, GeneratorListener listener) {
         this.width = width;
         this.height = height;
-        this.progressBar = progressBar;
-    }
-
-    QRcodeGenerator(@Nullable ImageView imageView, int width, int height) {
-        this.imageView = imageView;
-        this.width = width;
-        this.height = height;
-    }
-
-    QRcodeGenerator(@Nullable ImageView imageView) {
-        this.imageView = imageView;
-        this.width = 250;
-        this.height = 250;
-    }
-
-    @Override
-    protected void onPreExecute() {
-        if (imageView != null) {
-            imageView.setVisibility(View.GONE);
-        }
-        if (progressBar != null) {
-            progressBar.setVisibility(View.VISIBLE);
-        }
+        this.listener = listener;
     }
 
     @Override
@@ -65,15 +35,7 @@ public class QRcodeGenerator extends AsyncTask<String, Void, Bitmap> {
 
     @Override
     protected void onPostExecute(Bitmap qrCode) {
-        if (imageView != null) {
-            imageView.setVisibility(View.VISIBLE);
-            if (qrCode != null) {
-                imageView.setImageBitmap(qrCode);
-            }
-        }
-        if (progressBar != null) {
-            progressBar.setVisibility(View.GONE);
-        }
+        listener.onComplete(qrCode);
     }
 
     private Bitmap generateQR(String serial, int width, int height) {
@@ -94,5 +56,9 @@ public class QRcodeGenerator extends AsyncTask<String, Void, Bitmap> {
         }
         return bmp;
 
+    }
+
+    public interface GeneratorListener {
+        void onComplete(Bitmap qrCode);
     }
 }

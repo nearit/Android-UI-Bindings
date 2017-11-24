@@ -24,6 +24,10 @@ import it.near.sdk.reactions.feedbackplugin.FeedbackEvent;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 import it.near.sdk.recipes.NearITEventHandler;
 
+/**
+ * @author Federico Boschini
+ */
+
 public class NearItFeedbackFragment extends Fragment {
     private static final String ARG_FEEDBACK = "feedback";
     private static final String ARG_EXTRAS = "extras";

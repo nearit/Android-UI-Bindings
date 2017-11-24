@@ -15,21 +15,22 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
+import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.permissions.views.PermissionButton;
@@ -38,14 +39,13 @@ import it.near.sdk.NearItManager;
 import it.near.sdk.logging.NearLog;
 
 /**
- * Created by Federico Boschini on 28/08/17.
+ * @author Federico Boschini
  */
 
-public class NearItPermissionsActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class NearItPermissionsActivity extends AppCompatActivity {
 
-    private static final String TAG = "NearItPermissionsActivity";
-
-    private GoogleApiClient mGoogleApiClient;
+    private static final String TAG = "NearItPermissions";
+    
     private static final int NEAR_BLUETOOTH_SETTINGS_CODE = 4000;
     private static final int NEAR_LOCATION_SETTINGS_CODE = 5000;
     private static final int NEAR_PERMISSION_REQUEST_FINE_LOCATION = 6000;
@@ -94,10 +94,10 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
 
         if (!isInvisibleLayoutMode) {
             setContentView(R.layout.nearit_ui_activity_permissions);
-            locationButton = (PermissionButton) findViewById(R.id.location_button);
-            bleButton = (PermissionButton) findViewById(R.id.ble_button);
-            closeButton = (TextView) findViewById(R.id.close_text);
-            headerImageView = (ImageView) findViewById(R.id.header);
+            locationButton = findViewById(R.id.location_button);
+            bleButton = findViewById(R.id.ble_button);
+            closeButton = findViewById(R.id.close_text);
+            headerImageView = findViewById(R.id.header);
         } else {
             if (!allPermissionsGiven) {
                 askPermissions();
@@ -156,8 +156,11 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
     public boolean checkLocation() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        boolean anyLocationProv = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        anyLocationProv |= locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        boolean anyLocationProv = false;
+        if (locationManager != null) {
+            anyLocationProv = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            anyLocationProv |= locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        }
 
         int permissionCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
 
@@ -190,11 +193,42 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
      * Asks to enable location services.
      */
     private void openLocationSettings() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(LocationServices.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this).build();
-        mGoogleApiClient.connect();
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest)
+                .setNeedBle(isInvisibleLayoutMode && !isNoBeacon);
+
+        final Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(this).checkLocationSettings(builder.build());
+
+        result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
+            @Override
+            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
+                try {
+                    task.getResult(ApiException.class);
+                    onLocationSettingsOkResult();
+                } catch (ApiException exception) {
+                    switch (exception.getStatusCode()) {
+                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                            try {
+                                Log.e(TAG, "Resolution required");
+                                ResolvableApiException resolvable = (ResolvableApiException) exception;
+                                resolvable.startResolutionForResult(
+                                        NearItPermissionsActivity.this,
+                                        NEAR_LOCATION_SETTINGS_CODE);
+                            } catch (IntentSender.SendIntentException e) {
+                                // Ignore the error.
+                            } catch (ClassCastException e) {
+                                // Ignore, should be an impossible error.
+                            }
+                            break;
+                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                            finish();
+                            break;
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -330,51 +364,6 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Goog
             NearItManager.getInstance().startRadar();
         }
         setResult(Activity.RESULT_OK);
-        finish();
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        LocationRequest locationRequest = LocationRequest.create();
-        locationRequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest)
-                .setNeedBle(isInvisibleLayoutMode && !isNoBeacon);
-
-        final PendingResult<LocationSettingsResult> result =
-                LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
-        result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
-            @Override
-            public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
-                final Status status = locationSettingsResult.getStatus();
-                switch (status.getStatusCode()) {
-                    case LocationSettingsStatusCodes.SUCCESS:
-                        onLocationSettingsOkResult();
-                        break;
-                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                        try {
-                            status.startResolutionForResult(
-                                    NearItPermissionsActivity.this,
-                                    NEAR_LOCATION_SETTINGS_CODE);
-                        } catch (IntentSender.SendIntentException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                        finish();
-                        break;
-                }
-            }
-        });
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-        finish();
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         finish();
     }
 

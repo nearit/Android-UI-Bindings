@@ -18,6 +18,10 @@ import com.nearit.ui_bindings.utils.LoadImageFromURL;
 
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
+/**
+ * @author Federico Boschini
+ */
+
 public class NearItCouponDetailFragment extends Fragment {
     private static final String ARG_COUPON = "coupon";
     private static final String ARG_EXTRAS = "extras";
@@ -58,7 +62,7 @@ public class NearItCouponDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_coupon_detail, container, false);
 
-        CouponDetailTopSection topSection = (CouponDetailTopSection) rootView.findViewById(R.id.coupon_detail_top_section);
+        CouponDetailTopSection topSection = rootView.findViewById(R.id.coupon_detail_top_section);
 
         topSection.setCouponView(coupon);
 
@@ -72,9 +76,9 @@ public class NearItCouponDetailFragment extends Fragment {
             getActivity().getWindow().setAttributes(layout);
         }
 
-        ProgressBar iconProgressBar = (ProgressBar) rootView.findViewById(R.id.coupon_icon_progress_bar);
-        ImageView couponIcon = (ImageView) rootView.findViewById(R.id.coupon_icon);
-        ImageView separator = (ImageView) rootView.findViewById(R.id.coupon_detail_separator);
+        ProgressBar iconProgressBar = rootView.findViewById(R.id.coupon_icon_progress_bar);
+        ImageView couponIcon = rootView.findViewById(R.id.coupon_icon);
+        ImageView separator = rootView.findViewById(R.id.coupon_detail_separator);
 
         if (noSeparator) {
             separator.setVisibility(View.GONE);
@@ -84,15 +88,15 @@ public class NearItCouponDetailFragment extends Fragment {
             separator.setImageResource(separatorDrawable);
         }
 
-        TextView couponName = (TextView) rootView.findViewById(R.id.coupon_title);
+        TextView couponName = rootView.findViewById(R.id.coupon_title);
         if (coupon.getTitle() != null) {
             couponName.setText(coupon.getTitle());
         }
-        TextView couponValue = (TextView) rootView.findViewById(R.id.coupon_value);
+        TextView couponValue = rootView.findViewById(R.id.coupon_value);
         if (coupon.value != null) {
             couponValue.setText(coupon.value);
         }
-        TextView couponDescription = (TextView) rootView.findViewById(R.id.coupon_description);
+        TextView couponDescription = rootView.findViewById(R.id.coupon_description);
         if (coupon.description != null) {
             couponDescription.setText(coupon.description);
         }

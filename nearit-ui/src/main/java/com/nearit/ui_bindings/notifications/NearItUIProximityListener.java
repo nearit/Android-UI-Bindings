@@ -18,7 +18,7 @@ import it.near.sdk.utils.NearItIntentConstants;
 import it.near.sdk.utils.NearUtils;
 
 /**
- * Created by Federico Boschini on 22/09/17.
+ * @author Federico Boschini
  */
 
 public class NearItUIProximityListener implements ProximityListener, CoreContentsListener {
@@ -91,8 +91,11 @@ public class NearItUIProximityListener implements ProximityListener, CoreContent
     }
 
     private Intent getAutoTrackingTargetIntent(Intent intent) {
-        return new Intent(mContext, NearItUIAutoTrackingReceiver.class)
-                .putExtras(intent.getExtras());
+        Intent target = new Intent(mContext, NearItUIAutoTrackingReceiver.class);
+        if (intent != null && intent.getExtras() != null) {
+            target.putExtras(intent.getExtras());
+        }
+        return target;
     }
 
     private void sendNotifiedTracking(TrackingInfo trackingInfo) {

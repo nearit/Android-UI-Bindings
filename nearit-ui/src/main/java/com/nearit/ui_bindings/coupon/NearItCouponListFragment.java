@@ -24,6 +24,10 @@ import it.near.sdk.NearItManager;
 import it.near.sdk.reactions.couponplugin.CouponListener;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
+/**
+ * @author Federico Boschini
+ */
+
 public class NearItCouponListFragment extends Fragment implements CouponAdapter.Item.CouponListener {
 
     private List<Coupon> couponList;

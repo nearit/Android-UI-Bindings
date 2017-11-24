@@ -8,7 +8,7 @@ import android.os.Parcelable;
 import com.nearit.ui_bindings.ExtraConstants;
 
 /**
- * Created by Federico Boschini on 29/08/17.
+ * @author Federico Boschini
  */
 
 class FeedbackRequestExtras implements Parcelable {

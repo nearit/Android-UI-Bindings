@@ -19,6 +19,10 @@ import it.near.sdk.trackings.TrackingInfo;
 import it.near.sdk.utils.CoreContentsListener;
 import it.near.sdk.utils.NearUtils;
 
+/**
+ * @author Federico Boschini
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";

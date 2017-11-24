@@ -19,7 +19,7 @@ import it.near.sdk.utils.NearItIntentConstants;
 import it.near.sdk.utils.NearUtils;
 
 /**
- * Created by Federico Boschini on 22/09/17.
+ * @author Federico Boschini
  */
 
 public class NearItUIAutoTrackingReceiver extends WakefulBroadcastReceiver implements CoreContentsListener {
@@ -39,9 +39,13 @@ public class NearItUIAutoTrackingReceiver extends WakefulBroadcastReceiver imple
         this.context = context;
 
         launcherIntent = context.getPackageManager()
-                .getLaunchIntentForPackage(context.getPackageName())
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
-                .putExtras(intent.getExtras());
+                .getLaunchIntentForPackage(context.getPackageName());
+
+        if (intent.getExtras() != null) {
+            launcherIntent.putExtras(intent.getExtras());
+        }
+
+        launcherIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
         NearUtils.parseCoreContents(intent, this);
     }

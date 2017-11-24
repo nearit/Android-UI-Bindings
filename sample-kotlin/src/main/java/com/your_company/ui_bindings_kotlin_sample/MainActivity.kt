@@ -15,10 +15,10 @@ import it.near.sdk.utils.CoreContentsListener
 import it.near.sdk.utils.NearUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 /**
- * Created by Federico Boschini on 12/10/17.
- */
+* @author Federico Boschini
+*/
+
 class MainActivity : AppCompatActivity() {
 
     private val TAG = "MainActivity"

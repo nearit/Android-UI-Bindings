@@ -28,7 +28,7 @@ import it.near.sdk.utils.NearItIntentConstants;
 import it.near.sdk.utils.NearNotification;
 
 /**
- * Created by Federico Boschini on 26/09/17.
+ * @author Federico Boschini
  */
 
 class NearItUINotificationFactory {
@@ -95,7 +95,9 @@ class NearItUINotificationFactory {
         notificationChannel.setLightColor(Color.RED);
         notificationChannel.enableVibration(true);
         notificationChannel.setVibrationPattern(VIBRATE_PATTERN);
-        mNotificationManager.createNotificationChannel(notificationChannel);
+        if (mNotificationManager != null) {
+            mNotificationManager.createNotificationChannel(notificationChannel);
+        }
     }
 
     private static NotificationCompat.Builder getBuilder(Context context,
@@ -150,13 +152,17 @@ class NearItUINotificationFactory {
     private static void showNotification(Context context, final int code, Notification notification, boolean autoDismiss) {
         final NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
-        mNotificationManager.notify(code, notification);
+        if (mNotificationManager != null) {
+            mNotificationManager.notify(code, notification);
+        }
 
         if(autoDismiss) {
             Handler h = new Handler();
             h.postDelayed(new Runnable() {
                 public void run() {
-                    mNotificationManager.cancel(code);
+                    if (mNotificationManager != null) {
+                        mNotificationManager.cancel(code);
+                    }
                 }
             }, 5000);
         }
@@ -193,9 +199,12 @@ class NearItUINotificationFactory {
     }
 
     private static Intent getAutoTrackingTargetIntent(Intent intent, Context context) {
-        return new Intent(context, NearItUIAutoTrackingReceiver.class)
-                .putExtras(intent.getExtras())
-                .putExtra(SHOULD_AUTODISMISS_IF_APP_IS_FOREGROUND, true);
+        Intent target = new Intent(context, NearItUIAutoTrackingReceiver.class);
+        if (intent != null && intent.getExtras() != null) {
+            target.putExtras(intent.getExtras());
+        }
+        target.putExtra(SHOULD_AUTODISMISS_IF_APP_IS_FOREGROUND, true);
+        return target;
     }
 
     private static void sendNotifiedTracking(@NonNull Intent intent) {

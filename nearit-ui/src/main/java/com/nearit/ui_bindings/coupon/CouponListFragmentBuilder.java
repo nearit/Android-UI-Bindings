@@ -1,11 +1,7 @@
 package com.nearit.ui_bindings.coupon;
 
-import android.content.Context;
-
-import it.near.sdk.reactions.couponplugin.model.Coupon;
-
 /**
- * Created by Federico Boschini on 06/09/17.
+ * @author Federico Boschini
  */
 
 public class CouponListFragmentBuilder {

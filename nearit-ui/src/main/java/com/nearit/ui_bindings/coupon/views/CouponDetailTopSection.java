@@ -1,9 +1,11 @@
 package com.nearit.ui_bindings.coupon.views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -27,7 +29,7 @@ import static com.nearit.ui_bindings.coupon.CouponConstants.REDEEMED;
 import static com.nearit.ui_bindings.coupon.CouponConstants.VALID;
 
 /**
- * Created by Federico Boschini on 07/09/17.
+ * @author Federico Boschini
  */
 
 public class CouponDetailTopSection extends RelativeLayout {
@@ -49,6 +51,8 @@ public class CouponDetailTopSection extends RelativeLayout {
     @Nullable
     private TextView validityPeriodTextView;
 
+    private QRcodeGenerator qRcodeGenerator;
+
     public CouponDetailTopSection(Context context) {
         super(context);
     }
@@ -65,15 +69,28 @@ public class CouponDetailTopSection extends RelativeLayout {
 
     private void init() {
         inflate(getContext(), R.layout.nearit_ui_layout_coupon_detail_top_section, this);
-        notValidTextView = (TextView) findViewById(R.id.validity_text);
+        notValidTextView = findViewById(R.id.validity_text);
 
-        validityTextView = (TextView) findViewById(R.id.coupon_validity);
-        validityPeriodTextView = (TextView) findViewById(R.id.coupon_validity_period);
+        validityTextView = findViewById(R.id.coupon_validity);
+        validityPeriodTextView = findViewById(R.id.coupon_validity_period);
 
-        qrCodeContainer = (LinearLayout) findViewById(R.id.qr_code_container);
-        qrCodeSpinner = (ProgressBar) findViewById(R.id.qr_code_progress_bar);
-        qrCodeImageView = (ImageView) findViewById(R.id.qr_code);
-        serialTextView = (TextView) findViewById(R.id.coupon_serial);
+        qrCodeContainer = findViewById(R.id.qr_code_container);
+        qrCodeSpinner = findViewById(R.id.qr_code_progress_bar);
+        qrCodeImageView = findViewById(R.id.qr_code);
+        serialTextView = findViewById(R.id.coupon_serial);
+
+        qRcodeGenerator = new QRcodeGenerator(250, 250, new QRcodeGenerator.GeneratorListener() {
+            @Override
+            public void onComplete(Bitmap qrcode) {
+                if (qrCodeImageView != null) {
+                    qrCodeImageView.setVisibility(VISIBLE);
+                    qrCodeImageView.setImageBitmap(qrcode);
+                }
+                if (qrCodeSpinner != null) {
+                    qrCodeSpinner.setVisibility(GONE);
+                }
+            }
+        });
     }
 
     public void setCouponView(Coupon coupon) {
@@ -116,7 +133,11 @@ public class CouponDetailTopSection extends RelativeLayout {
                 }
                 if (qrCodeImageView != null) {
                     if (coupon.getSerial() != null) {
-                        new QRcodeGenerator(qrCodeImageView, 250, 250, qrCodeSpinner).execute(coupon.getSerial());
+                        qrCodeImageView.setVisibility(View.GONE);
+                        if (qrCodeSpinner != null) {
+                            qrCodeSpinner.setVisibility(View.VISIBLE);
+                        }
+                        qRcodeGenerator.execute(coupon.getSerial());
                     }
                 }
                 if (serialTextView != null) {

@@ -23,7 +23,7 @@ import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
 import com.nearit.ui_bindings.utils.PreRequirementsUtil;
 
 /**
- * Created by Federico Boschini on 25/09/17.
+ * @author Federico Boschini
  */
 
 public class PermissionBar extends RelativeLayout {
@@ -105,10 +105,10 @@ public class PermissionBar extends RelativeLayout {
     private void init() {
         inflate(getContext(), R.layout.nearit_ui_layout_permission_bar, this);
 
-        btIcon = (ImageView) findViewById(R.id.bluetooth_icon);
-        locIcon = (ImageView) findViewById(R.id.location_icon);
-        alertMessage = (TextView) findViewById(R.id.alert_message);
-        okButton = (PermissionBarButton) findViewById(R.id.ok_button);
+        btIcon = findViewById(R.id.bluetooth_icon);
+        locIcon = findViewById(R.id.location_icon);
+        alertMessage = findViewById(R.id.alert_message);
+        okButton = findViewById(R.id.ok_button);
         okButton.setClickable(true);
 
         final PermissionsRequestIntentBuilder builder = NearITUIBindings.getInstance(context).createPermissionRequestIntentBuilder();

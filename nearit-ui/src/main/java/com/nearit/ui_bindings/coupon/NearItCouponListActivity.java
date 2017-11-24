@@ -12,7 +12,7 @@ import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
 
 /**
- * Created by Federico Boschini on 28/09/17.
+ * @author Federico Boschini
  */
 
 public class NearItCouponListActivity extends AppCompatActivity {
