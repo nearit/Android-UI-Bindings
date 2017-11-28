@@ -3,7 +3,6 @@ package com.nearit.ui_bindings.permissions;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,10 +27,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -204,9 +201,6 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                 }
                 if(alreadyAsked && !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)){
                     createDialog().show();
-                    if (isInvisibleLayoutMode) {
-                        finalCheck();
-                    }
                 } else {
                     requestFineLocationPermission();
                 }
@@ -348,10 +342,6 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openLocationSettings();
             } else {
-                /*if(!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)){
-                    NEAR_PERMISSION_STATE = -2;
-
-                }*/
                 if (isInvisibleLayoutMode) {
                     finalCheck();
                 }
@@ -448,6 +438,9 @@ public class NearItPermissionsActivity extends AppCompatActivity {
         builder.setNegativeButton(R.string.nearit_ui_cancel_dialog, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
+                if (isInvisibleLayoutMode) {
+                    finalCheck();
+                }
             }
         });
         return builder.create();
