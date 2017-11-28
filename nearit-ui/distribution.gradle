@@ -1,0 +1,93 @@
+buildProperties {
+    localProperties {
+        file project.file("local.properties")
+    }
+}
+
+/*
+ *  Gets the version name from the latest Git tag
+ */
+def getVersionName = {
+    def stdout = new ByteArrayOutputStream()
+    try {
+        exec {
+            commandLine 'git', 'describe', '--tags', '--abbrev=0'
+            standardOutput = stdout
+        }
+        return stdout.toString().trim()
+    }
+    catch (e) {
+        println("Can't get version from git: " + e);
+        return "adhoc"
+    }
+}
+allprojects {
+    version = "${getVersionName()}"
+}
+
+/*
+ *  Inject SDK and Google/Play services versions in docs
+ */
+task injectVersionsInMDs {
+    def versionNumber = version
+    copy {
+        from('../docs/src/README.md') {
+            filter { it.replaceAll('@@versionNumber@@', "$versionNumber") }
+            filter { it.replaceAll('@@nearitVersionNumber@@', "$rootProject.ext.nearitMinVersionNumber") }
+        }
+        into '../'
+    }
+    doLast {
+        println "[INFO] version numbers injected"
+    }
+}
+configure(injectVersionsInMDs) {
+    group = 'Docs'
+    description = 'Add version codes in docs files'
+}
+
+/*
+ *  Performs clean, build, maven install and publish on Bintray
+ */
+task cleanBuildInstallPublish {
+    dependsOn 'clean'
+    dependsOn 'build'
+    dependsOn 'install'
+    dependsOn 'bintrayUpload'
+    tasks.findByName('build').mustRunAfter 'clean'
+    tasks.findByName('install').mustRunAfter 'build'
+    tasks.findByName('bintrayUpload').mustRunAfter 'install'
+}
+configure(cleanBuildInstallPublish) {
+    group = 'Publishing'
+    description = 'Cleans, builds, creates artifact and uploads to bintray'
+}
+
+/*
+ *  Upload to Bintray
+ */
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+artifacts {
+    archives sourcesJar
+}
+
+group = 'it.near.sdk'
+
+bintray {
+    user = (buildProperties.localProperties['bintray.user'] | buildProperties.env['BINTRAY_USER']).string
+    key = (buildProperties.localProperties['bintray.apikey'] | buildProperties.env['BINTRAY_APIKEY']).string
+    configurations = ['archives']
+
+    pkg {
+        repo = 'maven'
+        name = 'it.near.sdk:nearit-ui'
+        vcsUrl = 'https://github.com/nearit/Android-UI-Bindings.git'
+        websiteUrl = 'https://nearit.com'
+
+        licenses = ['MIT']
+        publish = true
+    }
+}
