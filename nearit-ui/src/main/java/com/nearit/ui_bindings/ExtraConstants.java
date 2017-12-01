@@ -1,7 +1,7 @@
 package com.nearit.ui_bindings;
 
 /**
- * Created by Federico Boschini on 29/08/17.
+ * @author Federico Boschini
  */
 
 public class ExtraConstants {
