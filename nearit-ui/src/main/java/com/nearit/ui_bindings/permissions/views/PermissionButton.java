@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.nearit.ui_bindings.R;
 
 /**
- * Created by Federico Boschini on 31/08/17.
+ * @author Federico Boschini
  */
 
 public class PermissionButton extends RelativeLayout {
@@ -58,8 +58,8 @@ public class PermissionButton extends RelativeLayout {
 
     private void init() {
         inflate(getContext(), R.layout.nearit_ui_layout_permission_button, this);
-        icon = (ImageView) findViewById(R.id.permission_button_icon);
-        text = (TextView) findViewById(R.id.permission_button_text);
+        icon = findViewById(R.id.permission_button_icon);
+        text = findViewById(R.id.permission_button_text);
     }
 
     public void setIcon(int iconRes) {

@@ -5,8 +5,9 @@ import android.support.v7.app.AppCompatActivity
 import com.nearit.ui_bindings.NearITUIBindings
 
 /**
- * Created by Federico Boschini on 12/10/17.
- */
+* @author Federico Boschini
+*/
+
 class CouponListPlainActivity : AppCompatActivity() {
 
     public override fun onCreate(savedInstanceState: Bundle?) {

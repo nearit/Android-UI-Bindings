@@ -8,7 +8,7 @@ import it.near.sdk.reactions.contentplugin.model.ContentLink;
 import it.near.sdk.reactions.contentplugin.model.ImageSet;
 
 /**
- * Created by Federico Boschini on 18/09/17.
+ * @author Federico Boschini
  */
 
 public class ContentFactory {

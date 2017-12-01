@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.nearit.ui_bindings.R;
 
 /**
- * Created by Federico Boschini on 26/09/17.
+ * @author Federico Boschini
  */
 
 public class PermissionBarButton extends RelativeLayout {
@@ -44,7 +44,7 @@ public class PermissionBarButton extends RelativeLayout {
 
     private void init() {
         inflate(getContext(), R.layout.nearit_ui_layout_permission_bar_button, this);
-        textView = (TextView) findViewById(R.id.bar_button_text);
+        textView = findViewById(R.id.bar_button_text);
     }
 
     private void obtainAttrs(AttributeSet attrs) {

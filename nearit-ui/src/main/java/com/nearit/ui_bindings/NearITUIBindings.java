@@ -1,6 +1,7 @@
 package com.nearit.ui_bindings;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.nearit.ui_bindings.content.ContentDetailFragmentBuilder;
 import com.nearit.ui_bindings.content.ContentDetailIntentBuilder;
@@ -10,6 +11,7 @@ import com.nearit.ui_bindings.coupon.CouponListFragmentBuilder;
 import com.nearit.ui_bindings.coupon.CouponListIntentBuilder;
 import com.nearit.ui_bindings.feedback.FeedbackFragmentBuilder;
 import com.nearit.ui_bindings.feedback.FeedbackIntentBuilder;
+import com.nearit.ui_bindings.notifications.NearItUIProximityListener;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
 
 import it.near.sdk.reactions.contentplugin.model.Content;
@@ -62,6 +64,14 @@ public class NearITUIBindings {
 
     public CouponListFragmentBuilder createCouponListFragmentBuilder() {
         return new CouponListFragmentBuilder();
+    }
+
+    public static void enableAutomaticForegroundNotifications(Context context) {
+        new NearItUIProximityListener(context);
+    }
+
+    public static boolean onNewIntent(Context context, Intent intent) {
+        return new NearItUIIntentManager(context).manageIntent(intent);
     }
 
 }

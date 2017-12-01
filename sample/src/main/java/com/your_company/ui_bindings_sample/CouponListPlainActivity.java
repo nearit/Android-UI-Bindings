@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.nearit.ui_bindings.NearITUIBindings;
 
 /**
- * Created by Federico Boschini on 13/09/17.
+ * @author Federico Boschini
  */
 
 public class CouponListPlainActivity extends AppCompatActivity {

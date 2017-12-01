@@ -1,5 +1,6 @@
 package com.your_company.ui_bindings_sample;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,10 @@ import com.nearit.ui_bindings.NearITUIBindings;
 import com.nearit.ui_bindings.permissions.views.PermissionBar;
 
 import it.near.sdk.NearItManager;
+
+/**
+ * @author Federico Boschini
+ */
 
 public class PermissionsActivity extends AppCompatActivity {
 
@@ -151,6 +156,7 @@ public class PermissionsActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == NEAR_PERMISSION_REQUEST) {

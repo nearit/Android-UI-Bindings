@@ -15,11 +15,11 @@ import it.near.sdk.utils.CoreContentsListener
 import it.near.sdk.utils.NearUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 /**
- * Created by Federico Boschini on 12/10/17.
- */
-class MainActivity : AppCompatActivity(), CoreContentsListener {
+* @author Federico Boschini
+*/
+
+class MainActivity : AppCompatActivity() {
 
     private val TAG = "MainActivity"
 
@@ -52,39 +52,11 @@ class MainActivity : AppCompatActivity(), CoreContentsListener {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        intent?.let { i ->
-            i.extras?.let {
-                if (NearUtils.carriesNearItContent(i)) {
-                    NearUtils.parseCoreContents(i, this)
-                }
-            }
+
+        val handled: Boolean = NearITUIBindings.onNewIntent(this, intent)
+
+        if(!handled) {
+            //  intent was not carrying an in-app content
         }
-    }
-
-    //  The following methods will manage real NearIT notification
-
-    override fun gotContentNotification(content: Content, trackingInfo: TrackingInfo) {
-        Log.d(TAG, "content notification received")
-        startActivity(NearITUIBindings.getInstance(this).createContentDetailIntentBuilder(content).build())
-    }
-
-    override fun gotCouponNotification(coupon: Coupon, trackingInfo: TrackingInfo) {
-        Log.d(TAG, "coupon notification received")
-        startActivity(NearITUIBindings.getInstance(this).createCouponDetailIntentBuilder(coupon).build())
-    }
-
-    override fun gotCustomJSONNotification(customJSON: CustomJSON, trackingInfo: TrackingInfo) {
-        //  Not yet implemented
-        Log.d(TAG, "customJson notification received")
-    }
-
-    override fun gotSimpleNotification(simpleNotification: SimpleNotification, trackingInfo: TrackingInfo) {
-        //  Not yet implemented
-        Log.d(TAG, "simple notification received")
-    }
-
-    override fun gotFeedbackNotification(feedback: Feedback, trackingInfo: TrackingInfo) {
-        Log.d(TAG, "feedback notification received")
-        startActivity(NearITUIBindings.getInstance(this).createFeedbackIntentBuilder(feedback).build())
     }
 }

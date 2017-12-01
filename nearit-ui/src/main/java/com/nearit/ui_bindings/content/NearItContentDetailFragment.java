@@ -21,6 +21,9 @@ import com.nearit.ui_bindings.utils.LoadImageFromURL;
 
 import it.near.sdk.reactions.contentplugin.model.Content;
 
+/**
+ * @author Federico Boschini
+ */
 
 public class NearItContentDetailFragment extends Fragment {
     private static final String ARG_CONTENT = "content";
@@ -62,12 +65,12 @@ public class NearItContentDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_content_detail, container, false);
 
-        titleTextView = (TextView) rootView.findViewById(R.id.content_title);
-        contentView = (WebView) rootView.findViewById(R.id.content_text);
-        ctaButton = (ContentCTAButton) rootView.findViewById(R.id.cta_button);
-        contentImageView = (ImageView) rootView.findViewById(R.id.content_image);
-        contentImageSpinner = (ProgressBar) rootView.findViewById(R.id.content_image_progress_bar);
-        contentImageContainer = (LinearLayout) rootView.findViewById(R.id.content_image_container);
+        titleTextView = rootView.findViewById(R.id.content_title);
+        contentView = rootView.findViewById(R.id.content_text);
+        ctaButton = rootView.findViewById(R.id.cta_button);
+        contentImageView = rootView.findViewById(R.id.content_image);
+        contentImageSpinner = rootView.findViewById(R.id.content_image_progress_bar);
+        contentImageContainer = rootView.findViewById(R.id.content_image_container);
 
         if (content.title != null) {
             titleTextView.setVisibility(View.VISIBLE);

@@ -8,4 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:minHeight">0dp</item>
+    </style>
+
+    <!--    NEARIT-UI STYLE OVERRIDE EXAMPLE   -->
+    <!--<style name="NearItUIPermissionsTextAppearance">-->
+    <!--<item name="android:textSize">10sp</item>-->
+    <!--</style>-->
+
 </resources>

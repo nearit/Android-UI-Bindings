@@ -7,27 +7,43 @@
     android:gravity="center_horizontal"
     tools:context="com.your_company.ui_bindings_kotlin_sample.MainActivity">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/brand"/>
+
     <Button
         android:id="@+id/permissions_demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        style="@style/ButtonStyle"
         android:text="Permissions" />
 
     <Button
         android:id="@+id/coupon_demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        style="@style/ButtonStyle"
         android:text="Coupon"/>
 
     <Button
         android:id="@+id/feedback_demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        style="@style/ButtonStyle"
         android:text="Feedback" />
+
     <Button
         android:id="@+id/content_demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        style="@style/ButtonStyle"
         android:text="Content"/>
 
 </LinearLayout>

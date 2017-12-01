@@ -6,7 +6,7 @@ import android.content.Intent;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 
 /**
- * Created by Federico Boschini on 29/08/17.
+ * @author Federico Boschini
  */
 
 public class FeedbackIntentBuilder {

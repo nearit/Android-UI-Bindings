@@ -26,7 +26,7 @@ buildProperties {
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    buildToolsVersion "26.0.3"
     defaultConfig {
         applicationId "com.your_company.ui_bindings_sample"
         minSdkVersion 15
@@ -50,10 +50,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-//    compile 'it.near.sdk:nearit-ui:1.0.7'
+//    compile 'it.near.sdk:nearit-ui:1.1.2'
     compile project(':nearit-ui')
     compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'it.near.sdk:nearit:2.2.7'
+    compile 'it.near.sdk:nearit:2.4.1'
 
     testCompile 'junit:junit:4.12'
 

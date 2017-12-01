@@ -3,7 +3,7 @@ package com.your_company.ui_bindings_sample.factories;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 
 /**
- * Created by Federico Boschini on 18/09/17.
+ * @author Federico Boschini
  */
 
 public class FeedbackFactory {

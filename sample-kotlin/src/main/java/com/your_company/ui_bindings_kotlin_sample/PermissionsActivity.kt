@@ -1,5 +1,6 @@
 package com.your_company.ui_bindings_kotlin_sample
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -10,8 +11,9 @@ import it.near.sdk.NearItManager
 import kotlinx.android.synthetic.main.activity_permissions.*
 
 /**
- * Created by Federico Boschini on 12/10/17.
- */
+* @author Federico Boschini
+*/
+
 class PermissionsActivity : AppCompatActivity() {
 
     private val NEAR_PERMISSION_REQUEST = 1000
@@ -113,6 +115,7 @@ class PermissionsActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("MissingPermission")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == NEAR_PERMISSION_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {

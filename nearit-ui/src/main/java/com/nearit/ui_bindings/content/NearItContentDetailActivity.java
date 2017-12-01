@@ -17,7 +17,7 @@ import com.nearit.ui_bindings.R;
 import it.near.sdk.reactions.contentplugin.model.Content;
 
 /**
- * Created by Federico Boschini on 06/09/17.
+ * @author Federico Boschini
  */
 
 public class NearItContentDetailActivity extends AppCompatActivity {
@@ -38,7 +38,7 @@ public class NearItContentDetailActivity extends AppCompatActivity {
 
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        closeButton = (LinearLayout) findViewById(R.id.content_close_icon);
+        closeButton = findViewById(R.id.content_close_icon);
         if (closeButton != null) {
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override

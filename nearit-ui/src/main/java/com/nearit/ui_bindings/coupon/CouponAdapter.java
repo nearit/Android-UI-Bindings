@@ -24,7 +24,7 @@ import java.util.List;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 /**
- * Created by Federico Boschini on 29/09/17.
+ * @author Federico Boschini
  */
 
 class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -248,7 +248,7 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             }
             if (couponTitle != null) {
-                couponTitle.setText(coupon.name);
+                couponTitle.setText(coupon.getTitle());
             }
             if (couponValue != null) {
                 couponValue.setText(coupon.value);
@@ -294,28 +294,28 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
         }
 
-        public void setValid() {
+        void setValid() {
             if (couponValidity != null) {
                 couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_valid_text));
                 couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_valid_text_color));
             }
         }
 
-        public void setInactive() {
+        void setInactive() {
             if (couponValidity != null) {
                 couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_inactive_text));
                 couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_inactive_text_color));
             }
         }
 
-        public void setExpired() {
+        void setExpired() {
             if (couponValidity != null) {
                 couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_expired_text));
                 couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_expired_text_color));
             }
         }
 
-        public void setRedeemed() {
+        void setRedeemed() {
             if (couponValidity != null) {
                 couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_redeemed_text));
                 couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_redeemed_text_color));

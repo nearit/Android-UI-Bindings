@@ -5,8 +5,9 @@ import it.near.sdk.reactions.contentplugin.model.ContentLink
 import it.near.sdk.reactions.contentplugin.model.ImageSet
 
 /**
- * Created by Federico Boschini on 12/10/17.
- */
+* @author Federico Boschini
+*/
+
 object ContentFactory {
 
     fun getCompleteContent(): Content {

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.nearit.ui_bindings.R;
 
 /**
- * Created by Federico Boschini on 14/09/17.
+ * @author Federico Boschini
  */
 
 public class NearItUIFeedbackButton extends RelativeLayout {
@@ -51,9 +51,9 @@ public class NearItUIFeedbackButton extends RelativeLayout {
 
     private void init() {
         inflate(getContext(), R.layout.nearit_ui_layout_feedback_button, this);
-        buttonTextView = (TextView) findViewById(R.id.button_text);
-        button = (RelativeLayout) findViewById(R.id.custom_button);
-        spinner = (RelativeLayout) findViewById(R.id.spinner_container);
+        buttonTextView = findViewById(R.id.button_text);
+        button = findViewById(R.id.custom_button);
+        spinner = findViewById(R.id.spinner_container);
     }
 
     public void setText(String text) {

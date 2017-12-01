@@ -6,7 +6,7 @@ import it.near.sdk.reactions.couponplugin.model.Claim;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 /**
- * Created by Federico Boschini on 18/09/17.
+ * @author Federico Boschini
  */
 
 public class CouponFactory {

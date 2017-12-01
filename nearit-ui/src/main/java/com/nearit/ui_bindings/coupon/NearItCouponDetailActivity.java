@@ -16,7 +16,7 @@ import com.nearit.ui_bindings.R;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 /**
- * Created by Federico Boschini on 06/09/17.
+ * @author Federico Boschini
  */
 
 public class NearItCouponDetailActivity extends AppCompatActivity {
@@ -35,7 +35,7 @@ public class NearItCouponDetailActivity extends AppCompatActivity {
 
         setContentView(R.layout.nearit_ui_activity_coupon_detail);
 
-        closeButton = (LinearLayout) findViewById(R.id.close_icon);
+        closeButton = findViewById(R.id.close_icon);
         if (closeButton != null) {
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
