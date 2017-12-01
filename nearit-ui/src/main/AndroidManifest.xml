@@ -8,7 +8,6 @@
     <application>
         <activity
             android:name=".permissions.NearItPermissionsActivity"
-            android:launchMode="singleInstance"
             android:theme="@style/NearItUIPermissionsDialog" />
 
         <activity
