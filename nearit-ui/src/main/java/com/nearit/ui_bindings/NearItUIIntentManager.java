@@ -15,7 +15,7 @@ import it.near.sdk.utils.CoreContentsListener;
 import it.near.sdk.utils.NearUtils;
 
 /**
- * Created by Federico Boschini on 09/10/17.
+ * @author Federico Boschini
  */
 
 class NearItUIIntentManager implements CoreContentsListener {

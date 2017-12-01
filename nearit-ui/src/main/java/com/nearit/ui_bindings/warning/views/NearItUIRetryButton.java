@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.nearit.ui_bindings.R;
 
 /**
- * Created by Federico Boschini on 03/10/17.
+ * @author Federico Boschini
  */
 
 public class NearItUIRetryButton extends RelativeLayout {

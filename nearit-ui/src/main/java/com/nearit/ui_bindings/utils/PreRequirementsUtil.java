@@ -9,7 +9,7 @@ import android.support.v4.content.ContextCompat;
 import it.near.sdk.logging.NearLog;
 
 /**
- * Created by Federico Boschini on 28/09/17.
+ * @author Federico Boschini
  */
 
 public class PreRequirementsUtil {
@@ -19,7 +19,7 @@ public class PreRequirementsUtil {
     /**
      * Checks the location permission. On devices with API < 23 the permission is granted on app installation,
      * and this method will return always 'true'.
-     * @param context
+     * @param context a valid Context
      * @return 'true' or 'false' depending on whether the user granted the permission or not.
      */
     public static boolean checkLocationPermission(Context context) {
@@ -28,17 +28,17 @@ public class PreRequirementsUtil {
 
     /**
      * This method checks if the location setting is on.
-     * @param context
+     * @param context a valid Context
      * @return 'true' if the location is on, 'false' otherwise.
      */
     public static boolean checkLocation(Context context) {
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) | locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        return (locationManager != null && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) | (locationManager != null && locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
     }
 
     /**
      * This method checks if the Bluetooth adapter is enabled.
-     * @param context
+     * @param context a valid Context
      * @return 'true' if BLE feature is available and API version is 18+ and the adapter is enabled
      *         'false' otherwise.
      */
@@ -49,7 +49,7 @@ public class PreRequirementsUtil {
 
     /**
      * Checks for BLE availability. It depends on API version and on the adapter itself.
-     * @param context
+     * @param context a valid Context
      * @return 'true' if it is available, 'false' otherwise
      */
     public static boolean isBleAvailable(Context context) {

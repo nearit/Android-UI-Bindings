@@ -7,8 +7,9 @@ import com.nearit.ui_bindings.NearITUIBindings
 import com.your_company.ui_bindings_kotlin_sample.factories.FeedbackFactory
 
 /**
- * Created by Federico Boschini on 12/10/17.
- */
+* @author Federico Boschini
+*/
+
 class FeedbackPlainActivity : AppCompatActivity() {
 
     private var feedbackFragment: Fragment? = null
