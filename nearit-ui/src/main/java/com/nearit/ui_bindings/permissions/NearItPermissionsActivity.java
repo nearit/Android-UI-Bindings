@@ -4,25 +4,29 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -34,6 +38,7 @@ import com.google.android.gms.tasks.Task;
 import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.permissions.views.PermissionButton;
+import com.nearit.ui_bindings.utils.PreRequirementsUtil;
 
 import it.near.sdk.NearItManager;
 import it.near.sdk.logging.NearLog;
@@ -45,7 +50,7 @@ import it.near.sdk.logging.NearLog;
 public class NearItPermissionsActivity extends AppCompatActivity {
 
     private static final String TAG = "NearItPermissions";
-    
+
     private static final int NEAR_BLUETOOTH_SETTINGS_CODE = 4000;
     private static final int NEAR_LOCATION_SETTINGS_CODE = 5000;
     private static final int NEAR_PERMISSION_REQUEST_FINE_LOCATION = 6000;
@@ -60,6 +65,8 @@ public class NearItPermissionsActivity extends AppCompatActivity {
     private boolean isAutoStartRadar = false;
     private int headerDrawable = 0;
     private boolean isNoHeader = false;
+
+    private boolean flightModeDialogLaunched = false;
 
     @Nullable
     private PermissionButton locationButton;
@@ -99,11 +106,15 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             closeButton = findViewById(R.id.close_text);
             headerImageView = findViewById(R.id.header);
         } else {
-            if (!allPermissionsGiven) {
-                askPermissions();
+            if (PreRequirementsUtil.isAirplaneModeOn(this)) {
+                createAirplaneDialog().show();
             } else {
-                setResult(Activity.RESULT_OK);
-                finish();
+                if (!allPermissionsGiven) {
+                    askPermissions();
+                } else {
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                }
             }
         }
     }
@@ -150,6 +161,18 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                     finalCheck();
                 }
             });
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (PreRequirementsUtil.isAirplaneModeOn(this)) {
+            createAirplaneDialog().show();
+        } else {
+            if (isInvisibleLayoutMode) {
+                askPermissions();
+            }
         }
     }
 
@@ -311,7 +334,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         setLocationButton();
         setBluetoothButton();
-        
+
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == NEAR_PERMISSION_REQUEST_FINE_LOCATION) {
             if (grantResults.length > 0
@@ -397,6 +420,26 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                 });
             }
         }
+    }
+
+    private AlertDialog createAirplaneDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.nearit_ui_turn_on_location_title).setMessage(R.string.nearit_ui_turn_on_location_message);
+
+        builder.setPositiveButton(R.string.nearit_ui_go_to_settings, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Intent intent = new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
+                flightModeDialogLaunched = true;
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton(R.string.nearit_ui_cancel_dialog, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+                finalCheck();
+            }
+        });
+        return builder.create();
     }
 
 }
