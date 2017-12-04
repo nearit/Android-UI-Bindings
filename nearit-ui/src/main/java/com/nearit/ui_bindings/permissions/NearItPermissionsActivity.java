@@ -129,36 +129,13 @@ public class NearItPermissionsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        boolean allPermissionsGiven = PreRequirementsUtil.checkBluetooth(this) && checkLocation();
-
         if ((!isInvisibleLayoutMode || flightModeDialogLaunched) && PreRequirementsUtil.isAirplaneModeOn(this)) {
             createAirplaneDialog().show();
         }
 
         if (isInvisibleLayoutMode && flightModeDialogLaunched) {
-            if (!allPermissionsGiven) {
-                askPermissions();
-            } else {
-                setResult(Activity.RESULT_OK);
-                finish();
-            }
+            recreate();
         }
-
-        /*if (!flightModeDialogLaunched) {
-            flightModeDialogLaunched = false;
-            if (PreRequirementsUtil.isAirplaneModeOn(this)) {
-                createAirplaneDialog().show();
-            } else {
-                if (isInvisibleLayoutMode) {
-                    if (!allPermissionsGiven) {
-                        askPermissions();
-                    } else {
-                        setResult(Activity.RESULT_OK);
-                        finish();
-                    }
-                }
-            }
-        }*/
     }
 
     public static Intent createIntent(Context context, PermissionsRequestExtraParams params) {
