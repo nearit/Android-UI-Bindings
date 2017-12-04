@@ -300,6 +300,10 @@ public class NearItPermissionsActivity extends AppCompatActivity {
         setLocationButton();
         setBluetoothButton();
 
+        if (PreRequirementsUtil.isAirplaneModeOn(NearItPermissionsActivity.this)) {
+            createAirplaneDialog().show();
+        }
+
         if (requestCode == NEAR_LOCATION_SETTINGS_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 onLocationSettingsOkResult();
