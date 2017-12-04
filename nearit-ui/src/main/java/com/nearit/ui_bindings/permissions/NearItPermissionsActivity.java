@@ -357,6 +357,8 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if(!PreRequirementsUtil.isAirplaneModeOn(this)) {
                     openLocationSettings();
+                } else {
+                    createAirplaneDialog().show();
                 }
             } else {
                 if (isInvisibleLayoutMode) {
