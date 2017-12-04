@@ -27,7 +27,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -44,7 +43,6 @@ import com.nearit.ui_bindings.permissions.views.PermissionButton;
 import com.nearit.ui_bindings.utils.PreRequirementsUtil;
 
 import it.near.sdk.NearItManager;
-import it.near.sdk.logging.NearLog;
 
 /**
  * @author Federico Boschini
@@ -105,13 +103,62 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             isNoBeacon = true;
         }
 
+        boolean allPermissionsGiven = PreRequirementsUtil.checkBluetooth(this) && checkLocation();
+
         if (!isInvisibleLayoutMode) {
             setContentView(R.layout.nearit_ui_activity_permissions);
             locationButton = findViewById(R.id.location_button);
             bleButton = findViewById(R.id.ble_button);
             closeButton = findViewById(R.id.close_text);
             headerImageView = findViewById(R.id.header);
+        } else {
+            if (PreRequirementsUtil.isAirplaneModeOn(this)) {
+                createAirplaneDialog().show();
+            } else {
+                if (!allPermissionsGiven) {
+                    askPermissions();
+                } else {
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                }
+            }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        boolean allPermissionsGiven = PreRequirementsUtil.checkBluetooth(this) && checkLocation();
+
+        if ((!isInvisibleLayoutMode || flightModeDialogLaunched) && PreRequirementsUtil.isAirplaneModeOn(this)) {
+            createAirplaneDialog().show();
+        }
+
+        if (isInvisibleLayoutMode && flightModeDialogLaunched) {
+            if (!allPermissionsGiven) {
+                askPermissions();
+            } else {
+                setResult(Activity.RESULT_OK);
+                finish();
+            }
+        }
+
+        /*if (!flightModeDialogLaunched) {
+            flightModeDialogLaunched = false;
+            if (PreRequirementsUtil.isAirplaneModeOn(this)) {
+                createAirplaneDialog().show();
+            } else {
+                if (isInvisibleLayoutMode) {
+                    if (!allPermissionsGiven) {
+                        askPermissions();
+                    } else {
+                        setResult(Activity.RESULT_OK);
+                        finish();
+                    }
+                }
+            }
+        }*/
     }
 
     public static Intent createIntent(Context context, PermissionsRequestExtraParams params) {
@@ -156,30 +203,6 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                     finalCheck();
                 }
             });
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        boolean allPermissionsGiven = PreRequirementsUtil.checkBluetooth(this) && checkLocation();
-
-        if (!isInvisibleLayoutMode) {
-            if (PreRequirementsUtil.isAirplaneModeOn(this)) {
-                createAirplaneDialog().show();
-            }
-        } else {
-            if (PreRequirementsUtil.isAirplaneModeOn(this)) {
-                createAirplaneDialog().show();
-            } else {
-                if (!allPermissionsGiven) {
-                    askPermissions();
-                } else {
-                    setResult(Activity.RESULT_OK);
-                    finish();
-                }
-            }
         }
     }
 
