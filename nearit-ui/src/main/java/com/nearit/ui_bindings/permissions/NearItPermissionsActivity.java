@@ -368,6 +368,9 @@ public class NearItPermissionsActivity extends AppCompatActivity {
      * Checks one last time that everything is ok
      */
     public void finalCheck() {
+        if (PreRequirementsUtil.isAirplaneModeOn(this)) {
+            finish();
+        }
         if (checkLocation()) {
             if (PreRequirementsUtil.checkBluetooth(this) || isNoBeacon || isNonBlockingBeacon) {
                 onPermissionsReady();
@@ -400,7 +403,11 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                 bleButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        openBluetoothSettings();
+                        if (PreRequirementsUtil.isAirplaneModeOn(NearItPermissionsActivity.this)) {
+                            createAirplaneDialog().show();
+                        } else {
+                            openBluetoothSettings();
+                        }
                     }
                 });
             }
@@ -416,7 +423,11 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                 locationButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        askPermissions();
+                        if (PreRequirementsUtil.isAirplaneModeOn(NearItPermissionsActivity.this)) {
+                            createAirplaneDialog().show();
+                        } else {
+                            askPermissions();
+                        }
                     }
                 });
             }
