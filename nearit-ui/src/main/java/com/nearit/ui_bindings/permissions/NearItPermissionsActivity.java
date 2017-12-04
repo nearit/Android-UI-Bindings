@@ -1,5 +1,6 @@
 package com.nearit.ui_bindings.permissions;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -7,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.location.LocationManager;
@@ -16,6 +18,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -54,6 +57,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
     private static final int NEAR_BLUETOOTH_SETTINGS_CODE = 4000;
     private static final int NEAR_LOCATION_SETTINGS_CODE = 5000;
     private static final int NEAR_PERMISSION_REQUEST_FINE_LOCATION = 6000;
+    private static final String NEAR_PERMISSION_ASKED = "nearit_ui_permission_asked";
 
     /**
      * Flow parameters
@@ -76,10 +80,14 @@ public class NearItPermissionsActivity extends AppCompatActivity {
     private TextView closeButton;
     @Nullable
     private ImageView headerImageView;
+    @Nullable
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sp = getSharedPreferences("nearit_ui", Activity.MODE_PRIVATE);
 
         Intent intent = getIntent();
         if (intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
@@ -196,11 +204,21 @@ public class NearItPermissionsActivity extends AppCompatActivity {
      */
     private void askPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            boolean isPermissionGranted = checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+            int permissionState = checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION);
+
+            boolean isPermissionGranted = permissionState == PackageManager.PERMISSION_GRANTED;
             if (isPermissionGranted) {
                 openLocationSettings();
             } else {
-                requestFineLocationPermission();
+                boolean alreadyAsked = false;
+                if (sp != null) {
+                    alreadyAsked = sp.getBoolean(NEAR_PERMISSION_ASKED, false);
+                }
+                if (alreadyAsked && !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    createDialog().show();
+                } else {
+                    requestFineLocationPermission();
+                }
             }
         } else {
             openLocationSettings();
@@ -268,6 +286,9 @@ public class NearItPermissionsActivity extends AppCompatActivity {
     private void requestFineLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, NEAR_PERMISSION_REQUEST_FINE_LOCATION);
+            if (sp != null) {
+                sp.edit().putBoolean(NEAR_PERMISSION_ASKED, true).apply();
+            }
         }
     }
 
@@ -402,6 +423,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
         }
     }
 
+
     private AlertDialog createAirplaneDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.nearit_ui_turn_on_location_title).setMessage(R.string.nearit_ui_turn_on_location_message);
@@ -417,6 +439,29 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
                 finalCheck();
+            }
+        });
+        return builder.create();
+    }
+
+    private AlertDialog createDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.nearit_ui_permission_message).setTitle(R.string.nearit_ui_permission_title);
+
+        builder.setPositiveButton(R.string.nearit_ui_go_to_settings, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                        Uri.fromParts("package", getPackageName(), null));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton(R.string.nearit_ui_cancel_dialog, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+                if (isInvisibleLayoutMode) {
+                    finalCheck();
+                }
             }
         });
         return builder.create();
