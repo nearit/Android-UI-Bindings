@@ -93,11 +93,9 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             isNoHeader = params.isNoHeader();
         }
 
-        if (!isBleAvailable()) {
+        if (!PreRequirementsUtil.isBleAvailable(this)) {
             isNoBeacon = true;
         }
-
-        boolean allPermissionsGiven = checkBluetooth() && checkLocation();
 
         if (!isInvisibleLayoutMode) {
             setContentView(R.layout.nearit_ui_activity_permissions);
@@ -105,17 +103,6 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             bleButton = findViewById(R.id.ble_button);
             closeButton = findViewById(R.id.close_text);
             headerImageView = findViewById(R.id.header);
-        } else {
-            if (PreRequirementsUtil.isAirplaneModeOn(this)) {
-                createAirplaneDialog().show();
-            } else {
-                if (!allPermissionsGiven) {
-                    askPermissions();
-                } else {
-                    setResult(Activity.RESULT_OK);
-                    finish();
-                }
-            }
         }
     }
 
@@ -167,11 +154,23 @@ public class NearItPermissionsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (PreRequirementsUtil.isAirplaneModeOn(this)) {
-            createAirplaneDialog().show();
+
+        boolean allPermissionsGiven = PreRequirementsUtil.checkBluetooth(this) && checkLocation();
+
+        if (!isInvisibleLayoutMode) {
+            if (PreRequirementsUtil.isAirplaneModeOn(this)) {
+                createAirplaneDialog().show();
+            }
         } else {
-            if (isInvisibleLayoutMode) {
-                askPermissions();
+            if (PreRequirementsUtil.isAirplaneModeOn(this)) {
+                createAirplaneDialog().show();
+            } else {
+                if (!allPermissionsGiven) {
+                    askPermissions();
+                } else {
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                }
             }
         }
     }
@@ -189,10 +188,6 @@ public class NearItPermissionsActivity extends AppCompatActivity {
 
         return anyLocationProv &&
                 permissionCheck == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private boolean checkBluetooth() {
-        return BluetoothAdapter.getDefaultAdapter() != null && BluetoothAdapter.getDefaultAdapter().isEnabled();
     }
 
     /**
@@ -258,7 +253,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
      * Asks to enable bluetooth
      */
     private void openBluetoothSettings() {
-        if (!checkBluetooth()) {
+        if (!PreRequirementsUtil.checkBluetooth(this)) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, NEAR_BLUETOOTH_SETTINGS_CODE);
         } else {
@@ -320,7 +315,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             if (isNoBeacon) {
                 finalCheck();
             } else {
-                if (checkBluetooth()) {
+                if (PreRequirementsUtil.checkBluetooth(this)) {
                     finalCheck();
                 }
             }
@@ -349,26 +344,11 @@ public class NearItPermissionsActivity extends AppCompatActivity {
     }
 
     /**
-     * Checks for BLE availability
-     */
-    private boolean isBleAvailable() {
-        boolean available = false;
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            NearLog.d(TAG, "BLE not supported prior to API 18");
-        } else if (!this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
-            NearLog.d(TAG, "BLE not available on this device");
-        } else {
-            available = true;
-        }
-        return available;
-    }
-
-    /**
      * Checks one last time that everything is ok
      */
     public void finalCheck() {
         if (checkLocation()) {
-            if (checkBluetooth() || isNoBeacon || isNonBlockingBeacon) {
+            if (PreRequirementsUtil.checkBluetooth(this) || isNoBeacon || isNonBlockingBeacon) {
                 onPermissionsReady();
             } else {
                 finish();
@@ -392,7 +372,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
 
     private void setBluetoothButton() {
         if (bleButton != null) {
-            if (checkBluetooth()) {
+            if (PreRequirementsUtil.checkBluetooth(this)) {
                 bleButton.setChecked();
             } else {
                 bleButton.setUnchecked();
