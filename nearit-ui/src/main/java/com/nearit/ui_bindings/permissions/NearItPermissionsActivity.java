@@ -300,10 +300,6 @@ public class NearItPermissionsActivity extends AppCompatActivity {
         setLocationButton();
         setBluetoothButton();
 
-        /*if (PreRequirementsUtil.isAirplaneModeOn(NearItPermissionsActivity.this)) {
-            createAirplaneDialog().show();
-        }*/
-
         if (requestCode == NEAR_LOCATION_SETTINGS_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 onLocationSettingsOkResult();
@@ -359,7 +355,9 @@ public class NearItPermissionsActivity extends AppCompatActivity {
         if (requestCode == NEAR_PERMISSION_REQUEST_FINE_LOCATION) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                openLocationSettings();
+                if(!PreRequirementsUtil.isAirplaneModeOn(this)) {
+                    openLocationSettings();
+                }
             } else {
                 if (isInvisibleLayoutMode) {
                     finalCheck();
