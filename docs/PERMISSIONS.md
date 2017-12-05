@@ -47,8 +47,8 @@ You can define the permissions request behaviour via our builder.
 
 If your app does not use Beacons technology, you should not ask your user to turn Bluetooth on. You can achieve this with the `noBeacon()` method.
 
-Java version:
 ```java
+ JAVA
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
                 .createPermissionRequestIntentBuilder()
@@ -57,8 +57,8 @@ Java version:
         NEAR_PERMISSION_REQUEST);
 ```
 
-Kotlin version:
 ```kotlin
+ KOTLIN
  startActivityForResult(
         NearITUIBindings.getInstance(this@YourActivity)
                 .createPermissionRequestIntentBuilder()
@@ -69,8 +69,8 @@ Kotlin version:
 
 If your app uses Beacons, but you consider the bluetooth a non-blocking requirement, just use `nonBlockingBeacon()` method
 
-Java version:
 ```java
+ JAVA
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
                 .createPermissionRequestIntentBuilder()
@@ -79,8 +79,8 @@ Java version:
         NEAR_PERMISSION_REQUEST);
 ```
 
-Kotlin version:
 ```kotlin
+ KOTLIN
  startActivityForResult(
         NearITUIBindings.getInstance(this@YourActivity)
                 .createPermissionRequestIntentBuilder()
@@ -100,8 +100,8 @@ The whole permisison request flow, can be started without UI.
 
 In order to start the permission flow without UI, you should chain `invisibleLayoutMode()` in the builder.
 
-Java version:
 ```java
+ JAVA
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
                 .createPermissionRequestIntentBuilder()
@@ -111,8 +111,8 @@ Java version:
         NEAR_PERMISSION_REQUEST);
 ```
 
-Kotlin version:
 ```kotlin
+ KOTLIN
  startActivityForResult(
         NearITUIBindings.getInstance(this@YourActivity)
                 .createPermissionRequestIntentBuilder()
@@ -173,8 +173,8 @@ Selector for the text color, `drawable/nearit_ui_selector_permission_button_text
 
 Additionaly, if you wish to replace the header image of the permissions request dialog, you must provide your own image and pass its id to the following method of the builder:
 
-Java version:
 ```java
+ JAVA
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
                 .createPermissionRequestIntentBuilder()
@@ -184,8 +184,8 @@ Java version:
         NEAR_PERMISSION_REQUEST);
 ```
 
-Kotlin version:
 ```kotlin
+ KOTLIN
  startActivityForResult(
         NearITUIBindings.getInstance(this@YourActivity)
                 .createPermissionRequestIntentBuilder()
