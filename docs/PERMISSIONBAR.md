@@ -29,7 +29,7 @@ Kotlin version: if you use the [Kotlin Android Extensions plugin](https://kotlin
 
 It is **important** that you pass an Activity reference to the bar: by doing this, clicking the bar button will cause the launch of the permissions request flow.
 
-![bar](bar.gif)
+![bar](permissions_bar.gif)
 
 To set the activity use the following method in your activity `onCreate`:
 

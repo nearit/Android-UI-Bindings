@@ -1,6 +1,8 @@
 # NearIt-UI for permissions request
 If your app integrates NearIT services, you surely want your user to grant your app location permissions. NearIT supports the use of Beacon technology, so bluetooth could also be a requirement for your app.
 
+__Note__: this UI takes care of a variety of scenarios, such as flight mode on, or "never ask again" for a permission.
+
 #### Basic example
 If you want your app to ask user for both location and bluetooth permissions (and turning both on), use the following code:
 
@@ -34,7 +36,7 @@ Kotlin version:
 
 In this basic example, both location and bluetooth are required to be granted and turned on: you can check if the request succeded or failed in `onActivityResult(...)` by referring to the same request code.
 
-![NearIT-UI permissions request demo on Android](demo_basic.gif)
+![NearIT-UI permissions request demo on Android](permissions_request.gif)
 
 #### Advanced examples
 You can define the permissions request behaviour via our builder.
@@ -88,7 +90,7 @@ Kotlin version:
 #### No-UI request
 The whole permisison request flow, can be started without UI. 
 
-![NearIT-UI permissions request demo on Android](demo_invisible.gif)
+![NearIT-UI permissions request demo on Android](permissions_request_invisible.gif)
 
 In order to start the permission flow without UI, you should chain `invisibleLayoutMode()` in the builder.
 
