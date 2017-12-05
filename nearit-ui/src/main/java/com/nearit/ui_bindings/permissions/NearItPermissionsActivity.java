@@ -40,7 +40,7 @@ import com.google.android.gms.tasks.Task;
 import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.permissions.views.PermissionButton;
-import com.nearit.ui_bindings.utils.PreRequirementsUtil;
+import com.nearit.ui_bindings.utils.PermissionsUtils;
 
 import it.near.sdk.NearItManager;
 
@@ -100,11 +100,11 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             isNoHeader = params.isNoHeader();
         }
 
-        if (!PreRequirementsUtil.isBleAvailable(this)) {
+        if (!PermissionsUtils.isBleAvailable(this)) {
             isNoBeacon = true;
         }
 
-        boolean allPermissionsGiven = PreRequirementsUtil.checkBluetooth(this) && checkLocation();
+        boolean allPermissionsGiven = PermissionsUtils.checkBluetooth(this) && checkLocation();
 
         if (!isInvisibleLayoutMode) {
             setContentView(R.layout.nearit_ui_activity_permissions);
@@ -113,7 +113,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             closeButton = findViewById(R.id.close_text);
             headerImageView = findViewById(R.id.header);
         } else {
-            if (PreRequirementsUtil.isAirplaneModeOn(this)) {
+            if (PermissionsUtils.isAirplaneModeOn(this)) {
                 createAirplaneDialog().show();
             } else {
                 if (!allPermissionsGiven) {
@@ -130,7 +130,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (!isInvisibleLayoutMode && PreRequirementsUtil.isAirplaneModeOn(this)) {
+        if (!isInvisibleLayoutMode && PermissionsUtils.isAirplaneModeOn(this)) {
             createAirplaneDialog().show();
         }
 
@@ -272,7 +272,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
      * Asks to enable bluetooth
      */
     private void openBluetoothSettings() {
-        if (!PreRequirementsUtil.checkBluetooth(this)) {
+        if (!PermissionsUtils.checkBluetooth(this)) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, NEAR_BLUETOOTH_SETTINGS_CODE);
         } else {
@@ -337,7 +337,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             if (isNoBeacon) {
                 finalCheck();
             } else {
-                if (PreRequirementsUtil.checkBluetooth(this)) {
+                if (PermissionsUtils.checkBluetooth(this)) {
                     finalCheck();
                 }
             }
@@ -356,7 +356,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
         if (requestCode == NEAR_PERMISSION_REQUEST_FINE_LOCATION) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if(!PreRequirementsUtil.isAirplaneModeOn(this)) {
+                if(!PermissionsUtils.isAirplaneModeOn(this)) {
                     openLocationSettings();
                 } else {
                     createAirplaneDialog().show();
@@ -373,11 +373,11 @@ public class NearItPermissionsActivity extends AppCompatActivity {
      * Checks one last time that everything is ok
      */
     public void finalCheck() {
-        if (PreRequirementsUtil.isAirplaneModeOn(this)) {
+        if (PermissionsUtils.isAirplaneModeOn(this)) {
             finish();
         }
         if (checkLocation()) {
-            if (PreRequirementsUtil.checkBluetooth(this) || isNoBeacon || isNonBlockingBeacon) {
+            if (PermissionsUtils.checkBluetooth(this) || isNoBeacon || isNonBlockingBeacon) {
                 onPermissionsReady();
             } else {
                 finish();
@@ -401,14 +401,14 @@ public class NearItPermissionsActivity extends AppCompatActivity {
 
     private void setBluetoothButton() {
         if (bleButton != null) {
-            if (PreRequirementsUtil.checkBluetooth(this)) {
+            if (PermissionsUtils.checkBluetooth(this)) {
                 bleButton.setChecked();
             } else {
                 bleButton.setUnchecked();
                 bleButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (PreRequirementsUtil.isAirplaneModeOn(NearItPermissionsActivity.this)) {
+                        if (PermissionsUtils.isAirplaneModeOn(NearItPermissionsActivity.this)) {
                             createAirplaneDialog().show();
                         } else {
                             openBluetoothSettings();
@@ -428,7 +428,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                 locationButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (PreRequirementsUtil.isAirplaneModeOn(NearItPermissionsActivity.this)) {
+                        if (PermissionsUtils.isAirplaneModeOn(NearItPermissionsActivity.this)) {
                             createAirplaneDialog().show();
                         } else {
                             askPermissions();

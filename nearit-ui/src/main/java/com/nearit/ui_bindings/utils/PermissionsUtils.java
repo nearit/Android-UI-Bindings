@@ -14,13 +14,13 @@ import it.near.sdk.logging.NearLog;
  * @author Federico Boschini
  */
 
-public class PreRequirementsUtil {
+public class PermissionsUtils {
 
-    private final static String TAG = "PreRequirementsUtil";
+    private final static String TAG = "PermissionsUtils";
 
     /**
      * Checks the location permission. On devices with API < 23 the permission is granted on app installation,
-     * and this method will return always 'true'.
+     * and this method will always return 'true'.
      *
      * @param context a valid Context
      * @return 'true' or 'false' depending on whether the user granted the permission or not.
@@ -35,7 +35,7 @@ public class PreRequirementsUtil {
      * @param context a valid Context
      * @return 'true' if the location is on, 'false' otherwise.
      */
-    public static boolean checkLocation(Context context) {
+    public static boolean checkLocationServices(Context context) {
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         return (locationManager != null && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) | (locationManager != null && locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
     }
