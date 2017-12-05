@@ -15,7 +15,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 /**
- * Created by Federico Boschini on 07/09/17.
+ * @author Federico Boschini
  */
 
 public final class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {

@@ -12,7 +12,7 @@ import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.warning.views.NearItUIRetryButton;
 
 /**
- * Created by Federico Boschini on 03/10/17.
+ * @author Federico Boschini
  */
 
 public class NearItUIWarningDialogActivity extends AppCompatActivity {

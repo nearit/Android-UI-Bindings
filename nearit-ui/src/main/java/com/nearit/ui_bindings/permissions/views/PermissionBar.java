@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.nearit.ui_bindings.NearITUIBindings;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
-import com.nearit.ui_bindings.utils.PreRequirementsUtil;
+import com.nearit.ui_bindings.utils.PermissionsUtils;
 
 /**
  * @author Federico Boschini
@@ -149,15 +149,15 @@ public class PermissionBar extends RelativeLayout {
         getContext().registerReceiver(mReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
         getContext().registerReceiver(mReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
 
-        if (PreRequirementsUtil.checkLocationPermission(context) && PreRequirementsUtil.checkLocation(context) && PreRequirementsUtil.checkBluetooth(context)) {
+        if (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context) && PermissionsUtils.checkBluetooth(context)) {
             this.setVisibility(GONE);
         } else {
-            if (PreRequirementsUtil.checkLocationPermission(context) && PreRequirementsUtil.checkLocation(context)) {
+            if (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context)) {
                 hideLocationIcon();
             } else {
                 showLocationIcon();
             }
-            if (PreRequirementsUtil.checkBluetooth(context)) {
+            if (PermissionsUtils.checkBluetooth(context)) {
                 hideBluetoothIcon();
             } else {
                 showBluetoothIcon();
@@ -205,16 +205,16 @@ public class PermissionBar extends RelativeLayout {
             PermissionBar.this.setVisibility(VISIBLE);
 
             if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
-                if (!PreRequirementsUtil.checkBluetooth(context)) {
+                if (!PermissionsUtils.checkBluetooth(context)) {
                     showBluetoothIcon();
-                    if (PreRequirementsUtil.checkLocation(context) && PreRequirementsUtil.checkLocationPermission(context)) {
+                    if (PermissionsUtils.checkLocationServices(context) && PermissionsUtils.checkLocationPermission(context)) {
                         hideLocationIcon();
                     } else {
                         showLocationIcon();
                     }
                 } else {
                     hideBluetoothIcon();
-                    if (PreRequirementsUtil.checkLocation(context) && PreRequirementsUtil.checkLocationPermission(context)) {
+                    if (PermissionsUtils.checkLocationServices(context) && PermissionsUtils.checkLocationPermission(context)) {
                         PermissionBar.this.setVisibility(GONE);
                     } else {
                         showLocationIcon();
@@ -223,22 +223,22 @@ public class PermissionBar extends RelativeLayout {
             }
 
             if (LocationManager.PROVIDERS_CHANGED_ACTION.equals(action)) {
-                if (!PreRequirementsUtil.checkLocation(context)) {
+                if (!PermissionsUtils.checkLocationServices(context)) {
                     showLocationIcon();
-                    if (!PreRequirementsUtil.checkBluetooth(context)) {
+                    if (!PermissionsUtils.checkBluetooth(context)) {
                         showBluetoothIcon();
                     }
                 } else {
-                    if (PreRequirementsUtil.checkLocationPermission(context)) {
+                    if (PermissionsUtils.checkLocationPermission(context)) {
                         hideLocationIcon();
-                        if (PreRequirementsUtil.checkBluetooth(context)) {
+                        if (PermissionsUtils.checkBluetooth(context)) {
                             PermissionBar.this.setVisibility(GONE);
                         } else {
                             showBluetoothIcon();
                         }
                     } else {
                         showLocationIcon();
-                        if (PreRequirementsUtil.checkBluetooth(context)) {
+                        if (PermissionsUtils.checkBluetooth(context)) {
                             hideBluetoothIcon();
                         } else {
                             showBluetoothIcon();

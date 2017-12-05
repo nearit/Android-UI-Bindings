@@ -3,8 +3,9 @@ package com.your_company.ui_bindings_kotlin_sample.factories
 import it.near.sdk.reactions.feedbackplugin.model.Feedback
 
 /**
- * Created by Federico Boschini on 12/10/17.
- */
+* @author Federico Boschini
+*/
+
 object FeedbackFactory {
 
     private val feedback = Feedback()

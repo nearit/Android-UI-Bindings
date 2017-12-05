@@ -19,34 +19,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.novoda.build-properties'
-
-/*
- * Gets the version name from the latest Git tag
- */
-def getVersionName = {
-    def stdout = new ByteArrayOutputStream()
-    try {
-        exec {
-            commandLine 'git', 'describe', '--tags', '--abbrev=0'
-            standardOutput = stdout
-        }
-        return stdout.toString().trim()
-    }
-    catch (e) {
-        println("Can't get version from git: " + e);
-        return "adhoc"
-    }
-}
-
-allprojects {
-    version = "${getVersionName()}"
-}
-
-buildProperties {
-    localProperties {
-        file project.file("local.properties")
-    }
-}
+apply from: 'distribution.gradle'
 
 android {
     compileSdkVersion 26
@@ -69,48 +42,6 @@ android {
     }
 }
 
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-artifacts {
-    archives sourcesJar
-}
-
-task cleanBuildInstallPublish {
-    dependsOn 'clean'
-    dependsOn 'build'
-    dependsOn 'install'
-    dependsOn 'bintrayUpload'
-    tasks.findByName('build').mustRunAfter 'clean'
-    tasks.findByName('install').mustRunAfter 'build'
-    tasks.findByName('bintrayUpload').mustRunAfter 'install'
-}
-
-configure(cleanBuildInstallPublish) {
-    group = 'Publishing'
-    description = 'Cleans, builds, creates artifact and uploads to bintray'
-}
-
-bintray {
-    user = (buildProperties.localProperties['bintray.user'] | buildProperties.env['BINTRAY_USER']).string
-    key = (buildProperties.localProperties['bintray.apikey'] | buildProperties.env['BINTRAY_APIKEY']).string
-    configurations = ['archives']
-
-    pkg {
-        repo = 'maven'
-        name = 'it.near.sdk:nearit-ui'
-        vcsUrl = 'https://github.com/nearit/Android-UI-Bindings.git'
-        websiteUrl = 'https://nearit.com'
-
-        licenses = ['MIT']
-        publish = true
-    }
-}
-
-group = 'it.near.sdk'
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -120,5 +51,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.android.support:appcompat-v7:26.1.0'
     testCompile 'junit:junit:4.12'
-    provided 'it.near.sdk:nearit:[2.4.1, 3.0.0)'
+    provided "it.near.sdk:nearit:['${rootProject.ext.nearitMinVersionNumber}', 3.0.0)"
 }

@@ -2,11 +2,11 @@ package com.nearit.ui_bindings.permissions;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 
 /**
- * Created by Federico Boschini on 29/08/17.
+ * @author Federico Boschini
  */
+
 public class PermissionsRequestIntentBuilder {
     private Context mContext;
     private boolean mEnableTapOutsideToClose = false;

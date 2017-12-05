@@ -2,6 +2,12 @@
     <string name="nearit_ui_app_name" translatable="false">ui_bindings</string>
     <string name="nearit_ui_permissions_explanation_text">Do you want to receive personalized contents? Allow us to know your location</string>
     <string name="nearit_ui_close_permissions_text">Close</string>
+    <string name="nearit_ui_go_to_settings">Settings</string>
+    <string name="nearit_ui_cancel_dialog">Cancel</string>
+    <string name="nearit_ui_turn_on_location_title">Flight mode detected</string>
+    <string name="nearit_ui_turn_on_location_message">Please, turn flight mode off</string>
+    <string name="nearit_ui_permission_title">Missing location permission</string>
+    <string name="nearit_ui_permission_message">Please, change your selection under \"Permissions\" section</string>
     <string name="nearit_ui_bluetooth">BLUETOOTH</string>
     <string name="nearit_ui_location">LOCATION</string>
 
@@ -25,7 +31,7 @@
 
     <string name="nearit_ui_permission_bar_alert_text">Provide\nall the missing authorizations</string>
     <string name="nearit_ui_permission_bar_button_text">OK!</string>
-    
+
     <string name="nearit_ui_coupon_list_empty_list_text">No coupons available</string>
     <string name="nearit_ui_warning_dialog_button_text">RETRY</string>
     <string name="nearit_ui_warning_dialog_close_text">Close</string>

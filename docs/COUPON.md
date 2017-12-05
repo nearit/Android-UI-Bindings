@@ -1,9 +1,9 @@
 # NearIt-UI for coupon detail pop-up
-#### Basic example
+## Basic example
 If you want your app to display a coupon in a beautiful pop-up dialog, use this simple code:
 
-Java version
 ```java
+ JAVA
  // ...
  startActivity(
          NearITUIBindings.getInstance(YourActivity.this)
@@ -11,8 +11,8 @@ Java version
             .build());
 ```
 
-Kotlin version
 ```kotlin
+ KOTLIN
  // ...
  startActivity(
          NearITUIBindings.getInstance(this@YourActivity)
@@ -22,15 +22,15 @@ Kotlin version
 
 where, `coupon` is an instance of NearIT SDK `Coupon` class. Further information on coupons and other in-app content can be found [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/).
 
-![NearIT-UI active coupon dialog](valid_coupon.png)
-![NearIT-UI inactive coupon dialog](inactive_coupon.png)
-![NearIT-UI expired coupon dialog](expired_coupon.png)
+![NearIT-UI active coupon dialog](coupon_valid.png)
+![NearIT-UI inactive coupon dialog](coupon_inactive.png)
+![NearIT-UI expired coupon dialog](coupon_expired.png)
 
-#### Advanced examples
+## Advanced examples
 NearIT-UI is shipped with our brand as icon placeholder. If you need to replace it just add one line of code:
 
-Java version
 ```java
+  JAVA
   // ...
   startActivity(
           NearITUIBindings.getInstance(YourActivity.this)
@@ -39,8 +39,8 @@ Java version
              .build());
 ```
 
-Kotlin version
 ```kotlin
+  KOTLIN
   // ...
   startActivity(
           NearITUIBindings.getInstance(this@YourActivity)
@@ -51,12 +51,12 @@ Kotlin version
 
 Please, keep in mind that the icon should be a square: a different aspect-ratio can potentially break the layout.
 
-![NearIT-UI custom icon coupon dialog](custom_icon_coupon.png)
+![NearIT-UI custom icon coupon dialog](coupon_custom_icon.png)
 
 Optionally, you can display the coupon in your custom Activity by adding a Fragment to it. You can get a Fragment via another builder:
 
-Java version
 ```java
+  JAVA
   // ...
   Fragment couponFragment = NearITUIBindings.getInstance(YourActivity.this)
         .createCouponDetailFragmentBuilder(coupon)
@@ -64,8 +64,8 @@ Java version
         .build();
 ```
 
-Kotlin version
 ```kotlin
+  KOTLIN
   // ...
   val couponFragment: Fragment = NearITUIBindings.getInstance(this@YourActivity)
         .createCouponDetailFragmentBuilder(coupon)
@@ -77,6 +77,11 @@ If you need to tweak the way your dialog looks, you can override some resources 
 Methods `setSeparatorResourceId(R.drawable.your_separator_drawable)` and `setNoSeparator()` are available for both of the builders.
 
 In order to provide a better UX in a real scenario, our `Fragment` keeps the screen on and increases its brightness to the max value when the coupon that is shown is valid. If you need to disable this feature, call the following method of the builder: `disableAutoMaxBrightness`.
+
+<br>
+<br>
+<br>
+
 ## UI Customization
 
 If you wish to change some messages, the existing strings can be overridden by name in your application. For example, consider the following `res/values/strings.xml`

@@ -1,11 +1,15 @@
 # NearIt-UI for permissions request
 If your app integrates NearIT services, you surely want your user to grant your app location permissions. NearIT supports the use of Beacon technology, so bluetooth could also be a requirement for your app.
 
-#### Basic example
+__Note__:
+<br>
+this UI takes care of a variety of scenarios, such as flight mode on, or "never ask again" for a permission. See [here](#special-scenarios)
+
+## Basic example
 If you want your app to ask user for both location and bluetooth permissions (and turning both on), use the following code:
 
-Java version:
 ```java
+ JAVA
  // You can choose an arbitrary request code
  private static final int NEAR_PERMISSION_REQUEST = 1000;
  
@@ -18,8 +22,8 @@ Java version:
         NEAR_PERMISSION_REQUEST);
 ```
 
-Kotlin version:
 ```kotlin
+ KOTLIN
  // You can choose an arbitrary request code
  private val NEAR_PERMISSION_REQUEST: Int = 1000
  
@@ -34,15 +38,17 @@ Kotlin version:
 
 In this basic example, both location and bluetooth are required to be granted and turned on: you can check if the request succeded or failed in `onActivityResult(...)` by referring to the same request code.
 
-![NearIT-UI permissions request demo on Android](demo_basic.gif)
+![NearIT-UI permissions request demo on Android](permissions_request.gif)
 
-#### Advanced examples
+<br>
+
+## Advanced examples
 You can define the permissions request behaviour via our builder.
 
 If your app does not use Beacons technology, you should not ask your user to turn Bluetooth on. You can achieve this with the `noBeacon()` method.
 
-Java version:
 ```java
+ JAVA
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
                 .createPermissionRequestIntentBuilder()
@@ -51,8 +57,8 @@ Java version:
         NEAR_PERMISSION_REQUEST);
 ```
 
-Kotlin version:
 ```kotlin
+ KOTLIN
  startActivityForResult(
         NearITUIBindings.getInstance(this@YourActivity)
                 .createPermissionRequestIntentBuilder()
@@ -63,8 +69,8 @@ Kotlin version:
 
 If your app uses Beacons, but you consider the bluetooth a non-blocking requirement, just use `nonBlockingBeacon()` method
 
-Java version:
 ```java
+ JAVA
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
                 .createPermissionRequestIntentBuilder()
@@ -73,8 +79,8 @@ Java version:
         NEAR_PERMISSION_REQUEST);
 ```
 
-Kotlin version:
 ```kotlin
+ KOTLIN
  startActivityForResult(
         NearITUIBindings.getInstance(this@YourActivity)
                 .createPermissionRequestIntentBuilder()
@@ -85,15 +91,17 @@ Kotlin version:
 
 **Note**: Please, keep in mind that calling both `nonBlockingBeacon()` and `noBeacon()` will cause no-beacon behaviour.
 
-#### No-UI request
+<br>
+
+## No-UI request
 The whole permisison request flow, can be started without UI. 
 
-![NearIT-UI permissions request demo on Android](demo_invisible.gif)
+![NearIT-UI permissions request demo on Android](permissions_request_invisible.gif)
 
 In order to start the permission flow without UI, you should chain `invisibleLayoutMode()` in the builder.
 
-Java version:
 ```java
+ JAVA
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
                 .createPermissionRequestIntentBuilder()
@@ -103,8 +111,8 @@ Java version:
         NEAR_PERMISSION_REQUEST);
 ```
 
-Kotlin version:
 ```kotlin
+ KOTLIN
  startActivityForResult(
         NearITUIBindings.getInstance(this@YourActivity)
                 .createPermissionRequestIntentBuilder()
@@ -113,6 +121,29 @@ Kotlin version:
                 .build(),
         NEAR_PERMISSION_REQUEST)
 ```
+
+<br>
+
+## Special scenarios
+
+We provide a dialog that informs the user if flight-mode is ON or if he chose "Never ask again" on permission request. The dialogs send the user to the right settings screen.
+
+![Permissions - Flight mode](flight_mode.gif)
+![Permissions - Don't ask again](dont_ask_again.gif)
+
+On devices pre-Lollipop (API < 18) BLE technology is not available and some of the Lollipop devices do not have a supported hardware. In those particular cases, we don't ask for bluetooth permission and we hide the bluetooth UI. 
+
+<br>
+
+On devices with outdated Play Services, the user is notified of that lack. While Play Services are updating, the UI keep waiting and loading. When the update is done, the UX flow continues normally.
+
+![Permissions - Outdated PS 1](outdated_play_services1.png)
+![Permissions - Outdated PS 3](outdated_play_services3.png)
+![Permissions - Outdated PS 4](outdated_play_services4.png)
+
+<br>
+<br>
+<br>
 
 ## UI Customization
 
@@ -150,8 +181,8 @@ Selector for the text color, `drawable/nearit_ui_selector_permission_button_text
 
 Additionaly, if you wish to replace the header image of the permissions request dialog, you must provide your own image and pass its id to the following method of the builder:
 
-Java version:
 ```java
+ JAVA
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
                 .createPermissionRequestIntentBuilder()
@@ -161,8 +192,8 @@ Java version:
         NEAR_PERMISSION_REQUEST);
 ```
 
-Kotlin version:
 ```kotlin
+ KOTLIN
  startActivityForResult(
         NearITUIBindings.getInstance(this@YourActivity)
                 .createPermissionRequestIntentBuilder()

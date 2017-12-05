@@ -1,9 +1,10 @@
 # NearIt-UI for content notification
-#### Basic example
+
+## Basic example
 If you want your app to display a NearIT content in a pop-up dialog, use this simple code:
 
-Java version
 ```java
+ JAVA
  // ...
  startActivity(
          NearITUIBindings.getInstance(YourActivity.this)
@@ -11,8 +12,8 @@ Java version
             .build());
 ```
 
-Kotlin version
 ```kotlin
+ KOTLIN
  // ...
  startActivity(
          NearITUIBindings.getInstance(this@YourActivity)
@@ -28,27 +29,27 @@ When the user taps on the button, the link will be opened: some types of link wi
 
 Optionally, you can display the content in your custom Activity by adding a Fragment to it. You can get a Fragment via another builder:
 
-Java version
 ```java
+  JAVA
   // ...
   Fragment contentFragment = NearITUIBindings.getInstance(YourActivity.this)
         .createContentDetailFragmentBuilder(content)
         .build();
 ```
 
-Kotlin version
 ```kotlin
+  KOTLIN
   // ...
   val contentFragment: Fragment = NearITUIBindings.getInstance(this@YourActivity)
         .createContentDetailFragmentBuilder(content)
         .build()
 ```
 
-#### Advanced examples
+## Advanced examples
 If you want to enable the tap-outside-to-close functionality, add `.enableTapOutsideToClose()` call on the builder, like the following example:
 
-Java version
 ```java
+ JAVA
  // ...
  startActivity(
          NearITUIBindings.getInstance(YourActivity.this)
@@ -57,8 +58,8 @@ Java version
             .build());
 ```
 
-Kotlin version
 ```kotlin
+ KOTLIN
  // ...
  startActivity(
          NearITUIBindings.getInstance(this@YourActivity)
@@ -66,6 +67,10 @@ Kotlin version
             .enableTapOutsideToClose()
             .build())
 ```
+
+<br>
+<br>
+<br>
 
 ## UI Customization
 If you need to tweak the way your dialog looks, you can override some resources by name in your application.

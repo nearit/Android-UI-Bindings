@@ -1,17 +1,18 @@
 # Handle in-app content
-### Heads-up notifications for foreground content
+
+## Heads-up notifications for foreground content
 NearIt-UI can be set to manage and show notifications for foreground content (read more [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/))
 for you. Foreground content will be delivered through an heads-up system notification. If the user clicks on it, the right dialog will appear and the right tracking events will be handled.
 
 **Note**: the heads-up notification overlay is only available for API level 21+. On older devices the notification will still appear, but with no overlay.
 
-![ranging_notif](notifications.gif)
+![ranging_notif](feedback_request_success.gif)
 
 To enable this behaviour you have to add one line of code.
 You **MUST** add this in the `onCreate()` method of your `Application`
 
-Java version
 ```java
+JAVA
 public class YourApplication extends Application {
 
     @Override
@@ -23,8 +24,8 @@ public class YourApplication extends Application {
 }
 ```
 
-Kotlin version
 ```kotlin
+KOTLIN
 class NearItUISample : Application() {
 
     override fun onCreate() {
@@ -38,11 +39,11 @@ class NearItUISample : Application() {
 
 Please note that foreground notifications will auto-dismiss after a small amount of time.
 
-### Background notifications
+## Background notifications
 The easiest way to handle NearIT contents in your app that already integrates NearIT SDK is to edit the `onNewIntent` method of your _launcher activity_:
 
-Java version
 ```java
+JAVA
 @Override
 protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
@@ -52,8 +53,8 @@ protected void onNewIntent(Intent intent) {
 }
 ```
 
-Kotlin version
 ```kotlin
+KOTLIN
 override fun onNewIntent(intent: Intent) {
     super.onNewIntent(intent)
     //  ...
