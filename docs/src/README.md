@@ -6,15 +6,15 @@ For example, using NearIT-UI, a developer can launch a dialog for requesting the
 
 #### Features
 Permissions related:
-- [Permissions request](../docs/PERMISSIONS.md)
-- [Missing permissions alert bar](../docs/PERMISSIONBAR.md)
+- [Permissions request](docs/PERMISSIONS.md)
+- [Missing permissions alert bar](docs/PERMISSIONBAR.md)
 
 Content related:
-- [Handle in-app content](../docs/NOTIFICATIONS.md)
-- [Coupon detail](../docs/COUPON.md)
-- [Feedback request](../docs/FEEDBACK.md)
-- [Content detail](../docs/CONTENT.md)
-- [Coupon list](../docs/COUPON_LIST.md)
+- [Handle in-app content](docs/NOTIFICATIONS.md)
+- [Coupon detail](docs/COUPON.md)
+- [Feedback request](docs/FEEDBACK.md)
+- [Content detail](docs/CONTENT.md)
+- [Coupon list](docs/COUPON_LIST.md)
 
 ## Configuration
 Add the NearIT-UI library dependency. If your project uses Gradle build system, add the following dependency to `build.gradle` of your app:
