@@ -60,6 +60,7 @@ class CouponsActivity : AppCompatActivity() {
                     //  Change the default icon placeholder
                     NearITUIBindings.getInstance(this@CouponsActivity)
                             .createCouponDetailIntentBuilder(validCoupon)
+                            .setIconPlaceholderResourceId(R.drawable.my_custom_placeholder)
                             .build()
             )
         }
