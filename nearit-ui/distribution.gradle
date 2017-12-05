@@ -82,11 +82,11 @@ bintray {
     configurations = ['archives']
 
     pkg {
-        repo = 'maven'
+        repo = 'NearIT-Android-SDK'
         name = 'it.near.sdk:nearit-ui'
         vcsUrl = 'https://github.com/nearit/Android-UI-Bindings.git'
         websiteUrl = 'https://nearit.com'
-
+        userOrg = 'nearit'
         licenses = ['MIT']
         publish = true
     }
