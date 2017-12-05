@@ -68,6 +68,10 @@ If you want to enable the tap-outside-to-close functionality, add `.enableTapOut
             .build())
 ```
 
+<br>
+<br>
+<br>
+
 ## UI Customization
 If you need to tweak the way your dialog looks, you can override some resources by name in your application.
 Placing an xml file named `nearit_ui_selector_cta_button.xml` in your app `res/drawable` directory will replace the default button at the bottom of the content dialog and make it look the way you prefer. 
