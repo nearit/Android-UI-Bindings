@@ -119,6 +119,7 @@ Kotlin version:
 ## Special scenarios
 
 We provide a dialog that informs the user if flight-mode is ON or if he chose "Never ask again" on permission request. The dialogs send the user to the right settings screen.
+
 ![Permissions - Flight mode](flight_mode.gif)
 ![Permissions - Don't ask again](dont_ask_again.gif)
 
