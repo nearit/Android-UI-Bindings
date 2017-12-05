@@ -8,8 +8,8 @@ See [here](#special-scenarios)
 #### Basic example
 If you want your app to ask user for both location and bluetooth permissions (and turning both on), use the following code:
 
-Java version:
 ```java
+ JAVA
  // You can choose an arbitrary request code
  private static final int NEAR_PERMISSION_REQUEST = 1000;
  
@@ -22,8 +22,8 @@ Java version:
         NEAR_PERMISSION_REQUEST);
 ```
 
-Kotlin version:
 ```kotlin
+ KOTLIN
  // You can choose an arbitrary request code
  private val NEAR_PERMISSION_REQUEST: Int = 1000
  
