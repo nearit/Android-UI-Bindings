@@ -48,8 +48,8 @@ Optionally, you can display the content in your custom Activity by adding a Frag
 #### Advanced examples
 If you want to enable the tap-outside-to-close functionality, add `.enableTapOutsideToClose()` call on the builder, like the following example:
 
-Java version
 ```java
+ JAVA
  // ...
  startActivity(
          NearITUIBindings.getInstance(YourActivity.this)
@@ -58,8 +58,8 @@ Java version
             .build());
 ```
 
-Kotlin version
 ```kotlin
+ KOTLIN
  // ...
  startActivity(
          NearITUIBindings.getInstance(this@YourActivity)
