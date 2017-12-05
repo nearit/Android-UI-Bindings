@@ -1,7 +1,9 @@
 # NearIt-UI for permissions request
 If your app integrates NearIT services, you surely want your user to grant your app location permissions. NearIT supports the use of Beacon technology, so bluetooth could also be a requirement for your app.
 
-__Note__: this UI takes care of a variety of scenarios, such as flight mode on, or "never ask again" for a permission. See [here](#special-scenarios)
+__Note__: this UI takes care of a variety of scenarios, such as flight mode on, or "never ask again" for a permission.
+
+See [here](#special-scenarios)
 
 #### Basic example
 If you want your app to ask user for both location and bluetooth permissions (and turning both on), use the following code:
@@ -122,6 +124,8 @@ We provide a dialog that informs the user if flight-mode is ON or if he chose "N
 
 ![Permissions - Flight mode](flight_mode.gif)
 ![Permissions - Don't ask again](dont_ask_again.gif)
+
+On devices pre-Lollipop (API < 18) BLE technology is not available and some of the Lollipop devices do not have a supported hardware. In those particular cases, we don't ask for bluetooth permission and we hide the bluetooth UI. 
 
 ## UI Customization
 
