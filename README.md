@@ -8,6 +8,7 @@ For example, using NearIT-UI, a developer can launch a dialog for requesting the
 Permissions related:
 - [Permissions request](docs/PERMISSIONS.md)
 - [Missing permissions alert bar](docs/PERMISSIONBAR.md)
+- [Permissions utils](docs/PERMISSIONS_UTILS.md)
 
 Content related:
 - [Handle in-app content](docs/NOTIFICATIONS.md)
