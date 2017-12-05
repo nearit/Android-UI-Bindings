@@ -70,7 +70,12 @@ public class PreRequirementsUtil {
         return available;
     }
 
-
+    /**
+     * Checks if flight mode is ON. Works with every API version
+     *
+     * @param context a valid Context
+     * @return 'true' if flight mode is on, 'false' otherwise
+     */
     public static boolean isAirplaneModeOn(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             return Settings.System.getInt(context.getContentResolver(),
