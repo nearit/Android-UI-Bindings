@@ -5,7 +5,7 @@ __Note__: this UI takes care of a variety of scenarios, such as flight mode on, 
 
 See [here](#special-scenarios)
 
-#### Basic example
+## Basic example
 If you want your app to ask user for both location and bluetooth permissions (and turning both on), use the following code:
 
 ```java
@@ -40,7 +40,7 @@ In this basic example, both location and bluetooth are required to be granted an
 
 ![NearIT-UI permissions request demo on Android](permissions_request.gif)
 
-#### Advanced examples
+## Advanced examples
 You can define the permissions request behaviour via our builder.
 
 If your app does not use Beacons technology, you should not ask your user to turn Bluetooth on. You can achieve this with the `noBeacon()` method.
@@ -89,7 +89,7 @@ Kotlin version:
 
 **Note**: Please, keep in mind that calling both `nonBlockingBeacon()` and `noBeacon()` will cause no-beacon behaviour.
 
-#### No-UI request
+## No-UI request
 The whole permisison request flow, can be started without UI. 
 
 ![NearIT-UI permissions request demo on Android](permissions_request_invisible.gif)
@@ -126,6 +126,11 @@ We provide a dialog that informs the user if flight-mode is ON or if he chose "N
 ![Permissions - Don't ask again](dont_ask_again.gif)
 
 On devices pre-Lollipop (API < 18) BLE technology is not available and some of the Lollipop devices do not have a supported hardware. In those particular cases, we don't ask for bluetooth permission and we hide the bluetooth UI. 
+
+
+
+
+
 
 ## UI Customization
 
