@@ -133,10 +133,11 @@ We provide a dialog that informs the user if flight-mode is ON or if he chose "N
 
 On devices pre-Lollipop (API < 18) BLE technology is not available and some of the Lollipop devices do not have a supported hardware. In those particular cases, we don't ask for bluetooth permission and we hide the bluetooth UI. 
 
+<br>
+
 On devices with outdated Play Services, the user is notified of that lack. While Play Services are updating, the UI keep waiting and loading. When the update is done, the UX flow continues normally.
 
 ![Permissions - Outdated PS 1](outdated_play_services1.png)
-![Permissions - Outdated PS 2](outdated_play_services2.png)
 ![Permissions - Outdated PS 3](outdated_play_services3.png)
 ![Permissions - Outdated PS 4](outdated_play_services4.png)
 
