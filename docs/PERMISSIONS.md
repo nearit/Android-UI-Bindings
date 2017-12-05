@@ -40,6 +40,8 @@ In this basic example, both location and bluetooth are required to be granted an
 
 ![NearIT-UI permissions request demo on Android](permissions_request.gif)
 
+<br>
+
 ## Advanced examples
 You can define the permissions request behaviour via our builder.
 
@@ -89,6 +91,8 @@ Kotlin version:
 
 **Note**: Please, keep in mind that calling both `nonBlockingBeacon()` and `noBeacon()` will cause no-beacon behaviour.
 
+<br>
+
 ## No-UI request
 The whole permisison request flow, can be started without UI. 
 
@@ -118,6 +122,8 @@ Kotlin version:
         NEAR_PERMISSION_REQUEST)
 ```
 
+<br>
+
 ## Special scenarios
 
 We provide a dialog that informs the user if flight-mode is ON or if he chose "Never ask again" on permission request. The dialogs send the user to the right settings screen.
@@ -127,10 +133,9 @@ We provide a dialog that informs the user if flight-mode is ON or if he chose "N
 
 On devices pre-Lollipop (API < 18) BLE technology is not available and some of the Lollipop devices do not have a supported hardware. In those particular cases, we don't ask for bluetooth permission and we hide the bluetooth UI. 
 
-
-
-
-
+<br>
+<br>
+<br>
 
 ## UI Customization
 
