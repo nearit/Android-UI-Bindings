@@ -45,7 +45,7 @@ Optionally, you can display the content in your custom Activity by adding a Frag
         .build()
 ```
 
-#### Advanced examples
+## Advanced examples
 If you want to enable the tap-outside-to-close functionality, add `.enableTapOutsideToClose()` call on the builder, like the following example:
 
 ```java
