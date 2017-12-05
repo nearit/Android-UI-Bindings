@@ -69,6 +69,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
     private boolean isNoHeader = false;
 
     private boolean flightModeDialogLaunched = false;
+    private boolean dontAskAgainDialogLaunched = false;
 
     @Nullable
     private PermissionButton locationButton;
@@ -133,7 +134,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             createAirplaneDialog().show();
         }
 
-        if (isInvisibleLayoutMode && flightModeDialogLaunched) {
+        if (isInvisibleLayoutMode && (flightModeDialogLaunched || dontAskAgainDialogLaunched)) {
             recreate();
         }
     }
@@ -215,7 +216,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                     alreadyAsked = sp.getBoolean(NEAR_PERMISSION_ASKED, false);
                 }
                 if (alreadyAsked && !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                    createDialog().show();
+                    createDontAskAgainDialog().show();
                 } else {
                     requestFineLocationPermission();
                 }
@@ -459,7 +460,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
         return builder.create();
     }
 
-    private AlertDialog createDialog() {
+    private AlertDialog createDontAskAgainDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.nearit_ui_permission_message).setTitle(R.string.nearit_ui_permission_title);
 
@@ -468,6 +469,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                 Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                         Uri.fromParts("package", getPackageName(), null));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                dontAskAgainDialogLaunched = true;
                 startActivity(intent);
             }
         });
