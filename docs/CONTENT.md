@@ -1,9 +1,10 @@
 # NearIt-UI for content notification
-#### Basic example
+
+## Basic example
 If you want your app to display a NearIT content in a pop-up dialog, use this simple code:
 
-Java version
 ```java
+ JAVA
  // ...
  startActivity(
          NearITUIBindings.getInstance(YourActivity.this)
@@ -11,8 +12,8 @@ Java version
             .build());
 ```
 
-Kotlin version
 ```kotlin
+ KOTLIN
  // ...
  startActivity(
          NearITUIBindings.getInstance(this@YourActivity)
@@ -28,16 +29,16 @@ When the user taps on the button, the link will be opened: some types of link wi
 
 Optionally, you can display the content in your custom Activity by adding a Fragment to it. You can get a Fragment via another builder:
 
-Java version
 ```java
+  JAVA
   // ...
   Fragment contentFragment = NearITUIBindings.getInstance(YourActivity.this)
         .createContentDetailFragmentBuilder(content)
         .build();
 ```
 
-Kotlin version
 ```kotlin
+  KOTLIN
   // ...
   val contentFragment: Fragment = NearITUIBindings.getInstance(this@YourActivity)
         .createContentDetailFragmentBuilder(content)
