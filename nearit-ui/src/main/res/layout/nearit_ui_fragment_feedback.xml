@@ -82,8 +82,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/nearit_ui_feedback_leave_a_comment"
-                android:textAppearance="@style/NearItUIFeedbackCommentLabelTextAppearance" />
-                android:layout_marginBottom="@dimen/nearit_ui_feedback_margin9"
+                android:textAppearance="@style/NearItUIFeedbackCommentLabelTextAppearance"
+                android:layout_marginBottom="@dimen/nearit_ui_feedback_margin9" />
 
             <EditText
                 android:id="@+id/feedback_comment_box"
@@ -126,8 +126,8 @@
             android:layout_marginTop="@dimen/nearit_ui_feedback_margin11"
             android:gravity="center"
             android:textAppearance="@style/NearItUIFeedbackDismissButtonTextAppearance"
-            android:text="@string/nearit_ui_feedback_close_button" />
-            android:visibility="gone"
+            android:text="@string/nearit_ui_feedback_close_button"
+            android:visibility="gone" />
 
     </LinearLayout>
 </ScrollView>

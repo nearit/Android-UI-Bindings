@@ -49,9 +49,7 @@
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             android:paddingTop="@dimen/nearit_ui_content_margin1"
-            android:textColor="@color/nearit_ui_content_title_text_color"
-            android:textSize="@dimen/nearit_ui_content_title_text_size"
-            android:textStyle="bold"
+            android:textAppearance="@style/NearItUIContentTitleTextAppearance"
             android:visibility="gone" />
 
         <LinearLayout

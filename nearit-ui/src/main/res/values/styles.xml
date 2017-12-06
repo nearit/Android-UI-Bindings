@@ -25,8 +25,8 @@
     <!--  Buttons Text  -->
     <style name="NearItUIButtonTextAppearance">
         <item name="android:textAllCaps">true</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/nearit_ui_button_text_size</item>
+        <item name="fontFamily">@font/asap_bold</item>
     </style>
 
     <style name="NearItUIPermissionButtonTextAppearance" parent="NearItUIButtonTextAppearance">
@@ -52,8 +52,8 @@
     <!--  Dismiss buttons text -->
     <style name="NearITUIDismissButtonTextAppearance">
         <item name="android:textAllCaps">false</item>
-        <item name="android:textStyle">italic</item>
         <item name="android:textSize">@dimen/nearit_ui_dismiss_button_text_size</item>
+        <item name="fontFamily">@font/asap_italic</item>
     </style>
 
     <style name="NearItUIFeedbackDismissButtonTextAppearance" parent="NearITUIDismissButtonTextAppearance">
@@ -73,111 +73,119 @@
     <style name="NearItUIPermissionsExplanationTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_permissions_text_size</item>
         <item name="android:textColor">@color/nearit_ui_permissions_text_color</item>
+        <item name="fontFamily">@font/regular</item>
     </style>
 
     <style name="NearItUIPermissionBarAlertMessageTextAppearance">
         <item name="android:textColor">@color/nearit_ui_permission_bar_alert_text_color</item>
         <item name="android:textSize">@dimen/nearit_ui_permission_bar_alert_text_size</item>
+        <item name="fontFamily">@font/asap_medium</item>
     </style>
 
 
     <style name="NearItUICouponDetailValidityTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_coupon_detail_validity_text_size</item>
-        <item name="android:textStyle">bold|italic</item>
+        <item name="fontFamily">@font/asap_bolditalic</item>
     </style>
 
     <style name="NearItUICouponDetailValidityPeriodTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_coupon_detail_validity_text_size</item>
         <item name="android:textColor">@color/nearit_ui_coupon_detail_validity_period_color</item>
-        <item name="android:textStyle">italic</item>
+        <item name="fontFamily">@font/asap_italic</item>
     </style>
 
     <style name="NearItUICouponDetailValidityLabelTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_coupon_detail_not_valid_text_size</item>
-        <item name="android:textStyle">bold|italic</item>
+        <item name="fontFamily">@font/asap_bolditalic</item>
     </style>
 
     <style name="NearItUICouponDetailSerialTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_coupon_detail_serial_text_size</item>
         <item name="android:textColor">@color/nearit_ui_coupon_detail_serial</item>
+        <item name="fontFamily">@font/asap_regular</item>
     </style>
 
     <style name="NearItUICouponDetailTitleTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_coupon_detail_title_text_size</item>
         <item name="android:textColor">@color/nearit_ui_coupon_detail_title_color</item>
-        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/asap_bold</item>
     </style>
 
     <style name="NearItUICouponDetailValueTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_coupon_detail_value_text_size</item>
         <item name="android:textColor">@color/nearit_ui_coupon_detail_value_color</item>
-        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/asap_bold</item>
     </style>
 
     <style name="NearItUICouponDetailDescriptionTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_coupon_detail_description_text_size</item>
         <item name="android:textColor">@color/nearit_ui_coupon_detail_description_color</item>
+        <item name="fontFamily">@font/asap_regular</item>
     </style>
 
     <style name="NearItUICouponListNoCouponsTextAppearance">
         <item name="android:textColor">@color/nearit_ui_coupon_list_empty_list_text_color</item>
         <item name="android:textSize">@dimen/nearit_ui_coupon_list_empty_list_text_size</item>
-        <item name="android:textStyle">bold|italic</item>
+        <item name="fontFamily">@font/asap_bolditalic</item>
     </style>
 
     <style name="NearItUICouponListTitleTextAppearance">
         <item name="android:textColor">@color/nearit_ui_coupon_list_coupon_title_text_color</item>
         <item name="android:textSize">@dimen/nearit_ui_coupon_list_coupon_title_text_size</item>
-        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/asap_bold</item>
     </style>
 
     <style name="NearItUICouponListValueTextAppearance">
         <item name="android:textColor">@color/nearit_ui_coupon_list_coupon_value_text_color</item>
         <item name="android:textSize">@dimen/nearit_ui_coupon_list_coupon_value_text_size</item>
-        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/asap_bold</item>
     </style>
 
     <style name="NearItUICouponListValidityTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_coupon_list_coupon_validity_text_size</item>
-        <item name="android:textStyle">bold|italic</item>
+        <item name="fontFamily">@font/asap_bolditalic</item>
     </style>
 
     <style name="NearItUIFeedbackSuccessMessageTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_feedback_success_message_text_size</item>
         <item name="android:textColor">@color/nearit_ui_feedback_success_message_text_color</item>
+        <item name="fontFamily">@font/asap_regular</item>
     </style>
 
     <style name="NearItUIFeedbackQuestionTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_feedback_question_text_size</item>
         <item name="android:textColor">@color/nearit_ui_feedback_question_text_color</item>
+        <item name="fontFamily">@font/asap_regular</item>
     </style>
 
     <style name="NearItUIFeedbackCommentLabelTextAppearance">
         <item name="android:textSize">@dimen/nearit_ui_feedback_leave_a_comment_text_size</item>
         <item name="android:textColor">@color/nearit_ui_feedback_comment_box_description_text_color</item>
-        <item name="android:textStyle">italic</item>
+        <item name="fontFamily">@font/asap_italic</item>
     </style>
 
     <style name="NearItUIFeedbackErrorAlertTextAppearance">
         <item name="android:textColor">@color/nearit_ui_feedback_error_message_text_color</item>
         <item name="android:textSize">@dimen/nearit_ui_feedback_error_message_text_size</item>
-        <item name="android:textStyle">italic</item>
+        <item name="fontFamily">@font/asap_regular</item>
     </style>
 
     <style name="NearItUIContentTitleTextAppearance">
         <item name="android:textColor">@color/nearit_ui_content_title_text_color</item>
         <item name="android:textSize">@dimen/nearit_ui_content_title_text_size</item>
-        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/asap_medium</item>
     </style>
 
     <style name="NearItUIContentTextAppearance">
         <item name="android:textColor">@color/nearit_ui_content_text_color</item>
         <item name="android:textSize">@dimen/nearit_ui_content_content_text_size</item>
+        <item name="fontFamily">@font/asap_regular</item>
     </style>
 
     <style name="NearItUIWarningDialogMessageTextAppearance">
         <item name="android:textColor">@color/nearit_ui_warning_dialog_text_color</item>
         <item name="android:textSize">@dimen/nearit_ui_warning_dialog_text_size</item>
+        <item name="fontFamily">@font/asap_regular</item>
     </style>
 
 </resources>
