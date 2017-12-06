@@ -43,7 +43,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/nearit_ui_permissions_explanation_text"
                     android:textAlignment="center"
-                    android:textAppearance="@style/NearItUIPermissionsTextAppearance" />
+                    android:textAppearance="@style/NearItUIPermissionsExplanationTextAppearance" />
 
                 <com.nearit.ui_bindings.permissions.views.PermissionButton
                     android:id="@+id/location_button"
@@ -72,7 +72,7 @@
                     android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin4"
                     android:text="@string/nearit_ui_close_permissions_text"
                     android:textAlignment="center"
-                    android:textAppearance="@style/NearItUIPermissionsCloseTextAppearance"
+                    android:textAppearance="@style/NearItUIPermissionsDismissButtonTextAppearance"
                     android:textColor="@drawable/nearit_ui_selector_permission_close_text_color"
                     android:textStyle="italic" />
 

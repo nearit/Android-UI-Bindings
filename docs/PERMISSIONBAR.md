@@ -20,8 +20,8 @@ Add the following xml element where you want to show the bar
 
 and keep a reference in your activity
 
-Java version:
 ```java
+JAVA
 PermissionBar bar = (PermissionBar) findViewById(R.id.permission_bar);
 ```
 
@@ -29,17 +29,17 @@ Kotlin version: if you use the [Kotlin Android Extensions plugin](https://kotlin
 
 It is **important** that you pass an Activity reference to the bar: by doing this, clicking the bar button will cause the launch of the permissions request flow.
 
-![bar](bar.gif)
+![bar](permissions_bar.gif)
 
 To set the activity use the following method in your activity `onCreate`:
 
-Java version:
 ```java
+JAVA
 bar.bindToActivity(YourActivity.this, NEAR_PERMISSION_REQUEST);
 ```
 
-Kotlin version:
 ```kotlin
+KOTLIN
 //  permission_bar is the id of the PermissionBar view you have placed in your layout
 permission_bar.bindToActivity(this@YourActivity, NEAR_PERMISSION_REQUEST);
 ```
@@ -47,8 +47,8 @@ permission_bar.bindToActivity(this@YourActivity, NEAR_PERMISSION_REQUEST);
 where `NEAR_PERMISSION_REQUEST` is an int value defined by you that will identify the request made by the view.
 Then in your activity you should catch the `result` by referring to the same request code, this way:
 
-Java version:
 ```java
+JAVA
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == YOUR_REQUEST_CODE) {
@@ -62,8 +62,8 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 
-Kotlin version:
 ```kotlin
+KOTLIN
 override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == NEAR_PERMISSION_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
@@ -78,13 +78,13 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 
 To unbind the activity call the following method in your activity `onDestroy`
 
-Java version:
 ```java
+JAVA
 bar.unbindFromActivity();
 ```
 
-Kotlin version:
 ```kotlin
+KOTLIN
 //  permission_bar is the id of the PermissionBar view you have placed in your layout
 permission_bar.unbindFromActivity()
 ```
@@ -106,6 +106,10 @@ When you add the xml element you can set some attributes:
 
 **Note**: the default flow is in a no-UI style (just a cascade of system dialogs)
 Please read the permission UI [section](PERMISSIONS.md) of these docs to have a complete view on what you can do with the permissions request.
+
+<br>
+<br>
+<br>
 
 ## UI customization
 

@@ -10,7 +10,7 @@ import android.support.annotation.RestrictTo;
 import com.nearit.ui_bindings.ExtraConstants;
 
 /**
- * Created by Federico Boschini on 29/08/17.
+ * @author Federico Boschini
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 class PermissionsRequestExtraParams implements Parcelable {

@@ -1,9 +1,10 @@
 # NearIt-UI for feedback request pop-up
-#### Basic example
+
+## Basic example
 If you want your app to display a feedback request in a beautiful pop-up dialog, use this simple code:
 
-Java version:
 ```java
+ JAVA
  // ...
  startActivity(
          NearITUIBindings.getInstance(YourActivity.this)
@@ -11,8 +12,8 @@ Java version:
             .build());
 ```
 
-Kotlin version:
 ```kotlin
+ KOTLIN
  // ...
  startActivity(
          NearITUIBindings.getInstance(this@YourActivity)
@@ -26,11 +27,11 @@ The Feedback UI also takes care of delivering the user response to the SDK libra
 ![NearIT-UI feedback request dialog, success](feedback_request_success.gif)
 ![NearIT-UI feedback request dialog, fail](feedback_request_fail.gif)
 
-#### Advanced examples
+## Advanced examples
 If you need to simplify the feedback request you are able to ask the user for the 1 to 5 rating only, without any textual comment (please notice that the text response is optional in every scenerio), you can hide the text box adding one method call:
 
-Java version:
 ```java
+  JAVA
   // ...
   startActivity(
           NearITUIBindings.getInstance(YourActivity.this)
@@ -39,8 +40,8 @@ Java version:
              .build());
 ```
 
-Kotlin version:
 ```kotlin
+  KOTLIN
   // ...
   startActivity(
           NearITUIBindings.getInstance(this@YourActivity)
@@ -54,8 +55,8 @@ Kotlin version:
 
 Optionally, you can display the feedback request in your custom Activity by adding a Fragment to it. You can get a Fragment via another builder:
 
-Java version:
 ```java
+  JAVA
   // ...
   Fragment feedbackFragment = NearITUIBindings.getInstance(YourActivity.this)
         .createFeedbackFragmentBuilder(feedback)
@@ -63,8 +64,8 @@ Java version:
         .build();
 ```
 
-Kotlin version:
 ```kotlin
+  KOTLIN
   // ...
   val feedbackFragment: Fragment = NearITUIBindings.getInstance(this@YourActivity)
         .createFeedbackFragmentBuilder(feedback)
@@ -77,6 +78,10 @@ To replace or to hide the success icon you can call these methods
 `setSuccessIconResId(R.drawable.your_custom_drawable)` 
 `setNoSuccessIcon()`
 on both of the builders.
+
+<br>
+<br>
+<br>
 
 ## UI Customization
 
