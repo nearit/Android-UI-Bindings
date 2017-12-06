@@ -17,6 +17,9 @@ Content related:
 - [Content detail](docs/CONTENT.md)
 - [Coupon list](docs/COUPON_LIST.md)
 
+## Customization
+Each feature has its own `UI Customization` section. To customize fonts, please see [here](docs/FONTS.md).
+
 ## Configuration
 Add the NearIT-UI library dependency. If your project uses Gradle build system, add the following dependency to `build.gradle` of your app:
 
