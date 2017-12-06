@@ -15,9 +15,10 @@
         <item name="android:minHeight">0dp</item>
     </style>
 
-    <!--    NEARIT-UI STYLE OVERRIDE EXAMPLE   -->
-    <!--<style name="NearItUIPermissionsTextAppearance">-->
-        <!--<item name="android:textSize">10sp</item>-->
-    <!--</style>-->
+    <!--NEARIT-UI STYLE OVERRIDE EXAMPLE-->
+    <!--<style name="NearItUIPermissionsExplanationTextAppearance">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/montserrat</item>
+    </style>-->
 
 </resources>
