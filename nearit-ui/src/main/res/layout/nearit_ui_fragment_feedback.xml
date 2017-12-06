@@ -21,6 +21,7 @@
             android:layout_marginTop="@dimen/nearit_ui_feedback_margin1"
             android:visibility="gone"
             android:src="@drawable/ic_nearit_ui_feedback_positive_result"/>
+
         <TextView
             android:id="@+id/feedback_success_message"
             android:layout_width="match_parent"
@@ -28,10 +29,8 @@
             android:layout_marginTop="@dimen/nearit_ui_feedback_margin2"
             android:layout_marginBottom="@dimen/nearit_ui_feedback_margin3"
             android:gravity="center"
-            android:textAlignment="center"
-            android:textSize="@dimen/nearit_ui_feedback_success_message_text_size"
-            android:textColor="@color/nearit_ui_warm_grey"
             android:visibility="gone"
+            android:textAppearance="@style/NearItUIFeedbackSuccessMessageTextAppearance"
             android:text="@string/nearit_ui_feedback_send_success_message"/>
 
         <TextView
@@ -40,8 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/nearit_ui_feedback_margin4"
             android:gravity="center"
-            android:textColor="@color/nearit_ui_feedback_question_text_color"
-            android:textSize="@dimen/nearit_ui_feedback_question_text_size" />
+            android:textAppearance="@style/NearItUIFeedbackQuestionTextAppearance" />
 
         <LinearLayout
             android:id="@+id/feedback_rating_bar_container"
@@ -84,10 +82,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/nearit_ui_feedback_leave_a_comment"
-                android:layout_marginBottom="@dimen/nearit_ui_feedback_margin9"
-                android:textStyle="italic"
-                android:textColor="@color/nearit_ui_feedback_comment_box_description_text_color"
-                android:textSize="@dimen/nearit_ui_feedback_leave_a_comment_text_size" />
+                android:textAppearance="@style/NearItUIFeedbackCommentLabelTextAppearance"
+                android:layout_marginBottom="@dimen/nearit_ui_feedback_margin9" />
 
             <EditText
                 android:id="@+id/feedback_comment_box"
@@ -112,9 +108,7 @@
             android:layout_marginBottom="@dimen/nearit_ui_feedback_margin10"
             android:gravity="center"
             android:text="@string/nearit_ui_feedback_error_message"
-            android:textColor="@color/nearit_ui_feedback_error_message_text_color"
-            android:textSize="@dimen/nearit_ui_feedback_error_message_text_size"
-            android:textStyle="italic"
+            android:textAppearance="@style/NearItUIFeedbackErrorAlertTextAppearance"
             android:visibility="gone" />
 
         <com.nearit.ui_bindings.feedback.views.NearItUIFeedbackButton
@@ -131,11 +125,9 @@
             android:padding="@dimen/nearit_ui_feedback_close_button_padding"
             android:layout_marginTop="@dimen/nearit_ui_feedback_margin11"
             android:gravity="center"
+            android:textAppearance="@style/NearItUIFeedbackDismissButtonTextAppearance"
             android:text="@string/nearit_ui_feedback_close_button"
-            android:textStyle="italic"
-            android:visibility="gone"
-            android:textColor="@drawable/nearit_ui_selector_feedback_close_text_color"
-            android:textSize="@dimen/nearit_ui_feedback_close_text_size" />
+            android:visibility="gone" />
 
     </LinearLayout>
 </ScrollView>

@@ -21,10 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/nearit_ui_warning_dialog_margin2"
         android:gravity="center"
-        android:textAlignment="center"
         android:text="@string/nearit_ui_warning_dialog_message"
-        android:textColor="@color/nearit_ui_warning_dialog_text_color"
-        android:textSize="@dimen/nearit_ui_warning_dialog_text_size" />
+        android:textAppearance="@style/NearItUIWarningDialogMessageTextAppearance" />
 
     <com.nearit.ui_bindings.warning.views.NearItUIRetryButton
         android:id="@+id/retry_button"
@@ -40,9 +38,7 @@
         android:layout_marginBottom="@dimen/nearit_ui_warning_dialog_margin5"
         android:layout_marginTop="@dimen/nearit_ui_warning_dialog_margin4"
         android:gravity="center"
-        android:textAlignment="center"
-        android:text="@string/nearit_ui_warning_dialog_close_text"
-        android:textColor="@color/nearit_ui_warning_dialog_text_color"
-        android:textSize="@dimen/nearit_ui_warning_dialog_text_size" />
+        android:textAppearance="@style/NearItUIWarningDialogDismissButtonTextAppearance"
+        android:text="@string/nearit_ui_warning_dialog_close_text" />
 
 </LinearLayout>

@@ -43,9 +43,7 @@
             android:layout_height="@dimen/nearit_ui_coupon_list_coupon_title_height"
             android:gravity="center_vertical"
             android:layout_marginRight="@dimen/nearit_ui_coupon_list_coupon_margin4"
-            android:textStyle="bold"
-            android:textSize="@dimen/nearit_ui_coupon_list_coupon_title_text_size"
-            android:textColor="@color/nearit_ui_black" />
+            android:textAppearance="@style/NearItUICouponListTitleTextAppearance" />
 
         <TextView
             android:id="@+id/coupon_value"
@@ -55,18 +53,15 @@
             android:layout_marginTop="@dimen/nearit_ui_coupon_list_coupon_margin6"
             android:gravity="center_vertical"
             android:maxLines="2"
-            android:textStyle="bold"
-            android:textColor="@color/nearit_ui_black"
-            android:textSize="@dimen/nearit_ui_coupon_list_coupon_value_text_size" />
+            android:textAppearance="@style/NearItUICouponListValueTextAppearance"/>
 
         <TextView
             android:id="@+id/coupon_validity"
             android:layout_width="match_parent"
             android:layout_height="@dimen/nearit_ui_coupon_list_coupon_validity_height"
             android:layout_marginTop="@dimen/nearit_ui_coupon_list_coupon_margin7"
-            android:textStyle="bold"
             android:gravity="end"
-            android:textSize="@dimen/nearit_ui_coupon_list_coupon_validity_text_size" />
+            android:textAppearance="@style/NearItUICouponListValidityTextAppearance" />
 
     </LinearLayout>
 

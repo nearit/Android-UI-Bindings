@@ -12,9 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:textSize="@dimen/nearit_ui_content_cta_button_text_size"
-        android:textStyle="bold"
-        android:textAllCaps="true"
-        android:textColor="@color/nearit_ui_cta_button_text_color" />
+        android:textAppearance="@style/NearItUIContentCTAButtonTextAppearance" />
 
 </RelativeLayout>
