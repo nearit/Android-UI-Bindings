@@ -7,6 +7,7 @@ package com.nearit.ui_bindings.coupon;
 public class CouponListFragmentBuilder {
     private int mIconDrawable;
     private int mSeparatorDrawable;
+    private int mNoCouponsLayout;
     private boolean mNoSeparator;
     private boolean mNoIcon;
     private boolean mValidOnly = false;
@@ -75,6 +76,11 @@ public class CouponListFragmentBuilder {
         return this;
     }
 
+    public CouponListFragmentBuilder setNoCouponsLayout(int layout) {
+        mNoCouponsLayout = layout;
+        return this;
+    }
+
     public NearItCouponListFragment build() {
         return NearItCouponListFragment.newInstance(getParams());
     }
@@ -83,6 +89,7 @@ public class CouponListFragmentBuilder {
         return new CouponListExtraParams(
                 mIconDrawable,
                 mSeparatorDrawable,
+                mNoCouponsLayout,
                 mNoSeparator,
                 mNoIcon,
                 mValidOnly,
