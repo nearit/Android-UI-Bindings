@@ -15,6 +15,7 @@ class CouponListExtraParams implements Parcelable {
 
     private final int iconDrawable;
     private final int separatorDrawable;
+    private final int noCouponLayout;
     private final boolean noSeparator;
     private final boolean noIcon;
     private final boolean enableTapOutsideToClose;
@@ -24,10 +25,11 @@ class CouponListExtraParams implements Parcelable {
     private final boolean redeemedOnly;
     private final boolean includeRedeemed;
 
-    CouponListExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean noIcon, boolean enableTapOutsideToClose,
+    CouponListExtraParams(int iconDrawable, int separatorDrawable, int noCouponLayout, boolean noSeparator, boolean noIcon, boolean enableTapOutsideToClose,
                           boolean validOnly, boolean expiredOnly, boolean inactiveOnly, boolean redeemedOnly, boolean includeRedeemed) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
+        this.noCouponLayout = noCouponLayout;
         this.noSeparator = noSeparator;
         this.noIcon = noIcon;
         this.enableTapOutsideToClose = enableTapOutsideToClose;
@@ -38,10 +40,11 @@ class CouponListExtraParams implements Parcelable {
         this.includeRedeemed = includeRedeemed;
     }
 
-    CouponListExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean noIcon,
+    CouponListExtraParams(int iconDrawable, int separatorDrawable, int noCouponLayout, boolean noSeparator, boolean noIcon,
                           boolean validOnly, boolean expiredOnly, boolean inactiveOnly, boolean redeemedOnly, boolean includeRedeemed) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
+        this.noCouponLayout = noCouponLayout;
         this.noSeparator = noSeparator;
         this.noIcon = noIcon;
         this.enableTapOutsideToClose = false;
@@ -81,6 +84,7 @@ class CouponListExtraParams implements Parcelable {
         public CouponListExtraParams createFromParcel(Parcel in) {
             int iconDrawable = in.readInt();
             int separatorDrawable = in.readInt();
+            int noCouponLayout = in.readInt();
             boolean noSeparator = in.readInt() != 0;
             boolean noIcon = in.readInt() != 0;
             boolean enableTapToClose = in.readInt() != 0;
@@ -92,6 +96,7 @@ class CouponListExtraParams implements Parcelable {
             return new CouponListExtraParams(
                     iconDrawable,
                     separatorDrawable,
+                    noCouponLayout,
                     noSeparator,
                     noIcon,
                     enableTapToClose,
@@ -118,6 +123,7 @@ class CouponListExtraParams implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(iconDrawable);
         dest.writeInt(separatorDrawable);
+        dest.writeInt(noCouponLayout);
         dest.writeInt(noSeparator ? 1 : 0);
         dest.writeInt(noIcon ? 1 : 0);
         dest.writeInt(enableTapOutsideToClose ? 1 : 0);
@@ -134,6 +140,10 @@ class CouponListExtraParams implements Parcelable {
 
     int getSeparatorDrawable() {
         return separatorDrawable;
+    }
+
+    int getNoCouponLayout() {
+        return noCouponLayout;
     }
 
     boolean isEnableTapOutsideToClose() {
@@ -167,4 +177,5 @@ class CouponListExtraParams implements Parcelable {
     boolean isIncludeRedeemed() {
         return includeRedeemed;
     }
+
 }

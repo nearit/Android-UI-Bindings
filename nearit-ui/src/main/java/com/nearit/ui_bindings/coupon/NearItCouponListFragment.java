@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nearit.ui_bindings.NearITUIBindings;
@@ -39,7 +40,9 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
     @Nullable
     private SwipeRefreshLayout refreshLayout;
     private CouponAdapter couponAdapter;
-    private TextView noCouponPlaceholder;
+    private TextView noCouponText;
+    private View customNoCoupon;
+    private int customNoCouponLayoutRef = 0;
 
     private int separatorDrawable = 0, iconDrawable = 0;
     private boolean noSeparator = false, noIcon;
@@ -64,6 +67,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
         if (extras != null) {
             separatorDrawable = extras.getSeparatorDrawable();
             iconDrawable = extras.getIconDrawable();
+            customNoCouponLayoutRef = extras.getNoCouponLayout();
             noSeparator = extras.isNoSeparator();
             noIcon = extras.isNoIcon();
             validOnly = extras.isValidOnly();
@@ -79,7 +83,14 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_coupon_list, container, false);
 
-        noCouponPlaceholder = rootView.findViewById(R.id.no_coupons_text);
+        noCouponText = rootView.findViewById(R.id.no_coupons_text);
+
+        if (customNoCouponLayoutRef != 0) {
+            customNoCoupon = inflater.inflate(customNoCouponLayoutRef, null, false);
+            container.addView(customNoCoupon);
+        } else {
+            noCouponText.setVisibility(View.VISIBLE);
+        }
 
         refreshLayout = rootView.findViewById(R.id.refresh_layout);
 
@@ -134,7 +145,10 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
                 couponAdapter.notifyDataSetChanged();
 
                 if (couponAdapter.getItemCount() > 0) {
-                    noCouponPlaceholder.setVisibility(View.GONE);
+                    if(customNoCoupon != null) {
+                        customNoCoupon.setVisibility(View.GONE);
+                    }
+                    noCouponText.setVisibility(View.GONE);
                 }
                 if (refreshLayout != null) {
                     refreshLayout.setRefreshing(false);
@@ -147,7 +161,11 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
                 couponAdapter.addData(couponList, false);
                 couponAdapter.notifyDataSetChanged();
                 if (couponAdapter.getItemCount() == 0) {
-                    noCouponPlaceholder.setVisibility(View.VISIBLE);
+                    if (customNoCoupon != null) {
+                        customNoCoupon.setVisibility(View.VISIBLE);
+                    } else {
+                        noCouponText.setVisibility(View.VISIBLE);
+                    }
                 }
                 if (refreshLayout != null) {
                     refreshLayout.setRefreshing(false);

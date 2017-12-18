@@ -11,6 +11,7 @@ public class CouponListIntentBuilder {
     private Context mContext;
     private int mIconDrawable;
     private int mSeparatorDrawable;
+    private int mNoCouponLayout;
     private boolean mNoSeparator = false;
     private boolean mNoIcon = false;
     private boolean mEnableTapOutsideToClose = false;
@@ -91,7 +92,10 @@ public class CouponListIntentBuilder {
         return this;
     }
 
-
+    public CouponListIntentBuilder setNoCouponLayout(int layout) {
+        mNoCouponLayout = layout;
+        return this;
+    }
     public Intent build() {
         return NearItCouponListActivity.createIntent(mContext, getParams());
     }
@@ -100,6 +104,7 @@ public class CouponListIntentBuilder {
         return new CouponListExtraParams(
                 mIconDrawable,
                 mSeparatorDrawable,
+                mNoCouponLayout,
                 mNoSeparator,
                 mNoIcon,
                 mEnableTapOutsideToClose,
