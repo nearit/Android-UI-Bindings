@@ -39,6 +39,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
 
     @Nullable
     private SwipeRefreshLayout refreshLayout;
+    private RelativeLayout noCouponContainer;
     private CouponAdapter couponAdapter;
     private TextView noCouponText;
     private View customNoCoupon;
@@ -84,10 +85,11 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_coupon_list, container, false);
 
         noCouponText = rootView.findViewById(R.id.no_coupons_text);
+        noCouponContainer = rootView.findViewById(R.id.empty_layout);
 
         if (customNoCouponLayoutRef != 0) {
-            customNoCoupon = inflater.inflate(customNoCouponLayoutRef, null, false);
-            container.addView(customNoCoupon);
+            customNoCoupon = inflater.inflate(customNoCouponLayoutRef, noCouponContainer, false);
+            noCouponContainer.addView(customNoCoupon);
         } else {
             noCouponText.setVisibility(View.VISIBLE);
         }
@@ -147,6 +149,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
                 if (couponAdapter.getItemCount() > 0) {
                     if(customNoCoupon != null) {
                         customNoCoupon.setVisibility(View.GONE);
+                        noCouponContainer.setVisibility(View.GONE);
                     }
                     noCouponText.setVisibility(View.GONE);
                 }
@@ -163,6 +166,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
                 if (couponAdapter.getItemCount() == 0) {
                     if (customNoCoupon != null) {
                         customNoCoupon.setVisibility(View.VISIBLE);
+                        noCouponContainer.setVisibility(View.VISIBLE);
                     } else {
                         noCouponText.setVisibility(View.VISIBLE);
                     }
