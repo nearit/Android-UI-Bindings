@@ -13,6 +13,11 @@
         android:visibility="gone"
         android:text="@string/nearit_ui_coupon_list_empty_list_text" />
 
+    <RelativeLayout
+        android:id="@+id/empty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
