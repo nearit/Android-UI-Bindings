@@ -47,7 +47,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
 
     private int separatorDrawable = 0, iconDrawable = 0;
     private boolean noSeparator = false, noIcon;
-    private boolean validOnly, expiredOnly, inactiveOnly, redeemedOnly, includeRedeemed;
+    private boolean validOnly, expiredOnly, inactiveOnly, redeemedOnly, includeRedeemed, enableNetErrorDialog;
 
     public NearItCouponListFragment() {
     }
@@ -69,6 +69,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
             separatorDrawable = extras.getSeparatorDrawable();
             iconDrawable = extras.getIconDrawable();
             customNoCouponLayoutRef = extras.getNoCouponLayout();
+            enableNetErrorDialog = extras.isEnableNetErrorDialog();
             noSeparator = extras.isNoSeparator();
             noIcon = extras.isNoIcon();
             validOnly = extras.isValidOnly();
@@ -174,7 +175,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
                 if (refreshLayout != null) {
                     refreshLayout.setRefreshing(false);
                 }
-                if (isAdded() && getActivity() != null){
+                if (enableNetErrorDialog && isAdded() && getActivity() != null){
                     startActivityForResult(NearItUIWarningDialogActivity.createIntent(getActivity()), NEAR_OPEN_WARNING_CODE);
                 }
             }

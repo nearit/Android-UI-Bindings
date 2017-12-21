@@ -8,6 +8,7 @@ public class CouponListFragmentBuilder {
     private int mIconDrawable;
     private int mSeparatorDrawable;
     private int mNoCouponsLayout;
+    private boolean mEnableNetErrorDialog = false;
     private boolean mNoSeparator;
     private boolean mNoIcon;
     private boolean mValidOnly = false;
@@ -76,6 +77,11 @@ public class CouponListFragmentBuilder {
         return this;
     }
 
+    public CouponListFragmentBuilder enableNetErrorDialog() {
+         mEnableNetErrorDialog = true;
+        return this;
+    }
+
     public CouponListFragmentBuilder setNoCouponsLayout(int layout) {
         mNoCouponsLayout = layout;
         return this;
@@ -90,6 +96,7 @@ public class CouponListFragmentBuilder {
                 mIconDrawable,
                 mSeparatorDrawable,
                 mNoCouponsLayout,
+                mEnableNetErrorDialog,
                 mNoSeparator,
                 mNoIcon,
                 mValidOnly,
