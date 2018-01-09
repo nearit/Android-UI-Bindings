@@ -27,7 +27,8 @@
 
         <activity
             android:name=".coupon.NearItCouponListActivity"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.AppCompat"/>
 
         <activity
             android:name=".warning.NearItUIWarningDialogActivity"
