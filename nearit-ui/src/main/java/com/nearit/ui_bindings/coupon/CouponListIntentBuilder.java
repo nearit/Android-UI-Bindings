@@ -12,6 +12,7 @@ public class CouponListIntentBuilder {
     private int mIconDrawable;
     private int mSeparatorDrawable;
     private int mNoCouponLayout;
+    private boolean mEnableNetErrorDialog = false;
     private boolean mJaggedBorders = false;
     private boolean mNoSeparator = false;
     private boolean mNoIcon = false;
@@ -101,6 +102,11 @@ public class CouponListIntentBuilder {
         return this;
     }
 
+    public CouponListIntentBuilder enableNetErrorDialog() {
+        mEnableNetErrorDialog = true;
+        return this;
+    }
+
     public CouponListIntentBuilder setNoCouponLayout(int layout) {
         mNoCouponLayout = layout;
         return this;
@@ -114,6 +120,7 @@ public class CouponListIntentBuilder {
                 mIconDrawable,
                 mSeparatorDrawable,
                 mNoCouponLayout,
+                mEnableNetErrorDialog,
                 mJaggedBorders,
                 mNoSeparator,
                 mNoIcon,
