@@ -14,7 +14,7 @@ import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
 import it.near.sdk.recipes.models.Recipe;
 import it.near.sdk.trackings.TrackingInfo;
-import it.near.sdk.utils.CoreContentsListener;
+import it.near.sdk.utils.ContentsListener;
 import it.near.sdk.utils.NearItIntentConstants;
 import it.near.sdk.utils.NearUtils;
 
@@ -22,7 +22,7 @@ import it.near.sdk.utils.NearUtils;
  * @author Federico Boschini
  */
 
-public class NearItUIAutoTrackingReceiver extends WakefulBroadcastReceiver implements CoreContentsListener {
+public class NearItUIAutoTrackingReceiver extends WakefulBroadcastReceiver implements ContentsListener {
 
     private Context context;
     private static final String SHOULD_AUTODISMISS_IF_APP_IS_FOREGROUND = "should_autodismiss_if_app_is_foreground";
@@ -47,7 +47,7 @@ public class NearItUIAutoTrackingReceiver extends WakefulBroadcastReceiver imple
 
         launcherIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        NearUtils.parseCoreContents(intent, this);
+        NearUtils.parseContents(intent, this);
     }
 
     @Override
