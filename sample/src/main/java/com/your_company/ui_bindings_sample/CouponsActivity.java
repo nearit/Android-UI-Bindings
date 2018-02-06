@@ -99,9 +99,10 @@ public class CouponsActivity extends AppCompatActivity {
         couponList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  start an activity that shows a list of REAL coupons
+                //  start an activity that shows a list of REAL coupons, with jagged borders
                 startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
                         .createCouponListIntentBuilder()
+                        .jaggedBorders()
                         .build()
                 );
             }
