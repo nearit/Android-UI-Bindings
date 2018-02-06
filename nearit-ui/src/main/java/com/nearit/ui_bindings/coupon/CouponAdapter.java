@@ -34,18 +34,23 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private Item.CouponListener couponListener;
     private int iconPlaceholderResId = 0;
-    private boolean noIcon;
+    private boolean noIcon, jaggedBorders;
 
-    CouponAdapter(Context context, Item.CouponListener couponListener, int iconPlaceholderResId, boolean noIcon) {
+    CouponAdapter(Context context, Item.CouponListener couponListener, int iconPlaceholderResId, boolean noIcon, boolean jaggedBorders) {
         this.context = context;
         this.couponListener = couponListener;
         this.iconPlaceholderResId = iconPlaceholderResId;
         this.noIcon = noIcon;
+        this.jaggedBorders = jaggedBorders;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new Item(LayoutInflater.from(context).inflate(R.layout.nearit_ui_layout_coupon_preview, parent, false), couponListener, context, iconPlaceholderResId, noIcon);
+        if (jaggedBorders) {
+            return new Item(LayoutInflater.from(context).inflate(R.layout.nearit_ui_layout_jagged_coupon_preview, parent, false), couponListener, context, iconPlaceholderResId, noIcon);
+        } else {
+            return new Item(LayoutInflater.from(context).inflate(R.layout.nearit_ui_layout_coupon_preview, parent, false), couponListener, context, iconPlaceholderResId, noIcon);
+        }
     }
 
     @Override

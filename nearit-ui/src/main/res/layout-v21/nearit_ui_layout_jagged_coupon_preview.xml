@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nearit_ui_coupon_list_coupon_height"
+    android:layout_marginTop="@dimen/nearit_ui_coupon_list_coupon_margin1"
+    android:background="@drawable/nearit_ui_selector_coupon_list_jagged_coupon_background"
+    android:elevation="@dimen/nearit_ui_coupon_list_coupon_elevation"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/nearit_ui_coupon_list_coupon_padding_bottom"
+    android:paddingLeft="@dimen/nearit_ui_coupon_list_coupon_padding_left_right"
+    android:paddingRight="@dimen/nearit_ui_coupon_list_coupon_padding_left_right"
+    android:paddingTop="@dimen/nearit_ui_coupon_list_coupon_padding_top">
+
+    <LinearLayout
+        android:id="@+id/coupon_icon_container"
+        android:layout_width="@dimen/nearit_ui_coupon_list_coupon_icon_width_height"
+        android:layout_height="@dimen/nearit_ui_coupon_list_coupon_icon_width_height"
+        android:layout_marginRight="@dimen/nearit_ui_coupon_list_coupon_margin3"
+        android:layout_marginTop="@dimen/nearit_ui_coupon_list_coupon_margin2">
+
+        <ImageView
+            android:id="@+id/coupon_icon"
+            android:layout_width="@dimen/nearit_ui_coupon_list_coupon_icon_width_height"
+            android:layout_height="@dimen/nearit_ui_coupon_list_coupon_icon_width_height"
+            android:src="@drawable/ic_nearit_ui_brand_nearit_black" />
+
+        <ProgressBar
+            android:id="@+id/coupon_icon_progress_bar"
+            android:layout_width="@dimen/nearit_ui_coupon_list_coupon_icon_width_height"
+            android:layout_height="@dimen/nearit_ui_coupon_list_coupon_icon_width_height" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/coupon_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/coupon_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nearit_ui_coupon_list_coupon_title_height"
+            android:layout_marginRight="@dimen/nearit_ui_coupon_list_coupon_margin4"
+            android:gravity="center_vertical"
+            android:textAppearance="@style/NearItUICouponListTitleTextAppearance" />
+
+        <TextView
+            android:id="@+id/coupon_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/nearit_ui_coupon_list_coupon_margin5"
+            android:layout_marginTop="@dimen/nearit_ui_coupon_list_coupon_margin6"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:textAppearance="@style/NearItUICouponListValueTextAppearance" />
+
+        <TextView
+            android:id="@+id/coupon_validity"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nearit_ui_coupon_list_coupon_validity_height"
+            android:layout_marginTop="@dimen/nearit_ui_coupon_list_coupon_margin7"
+            android:gravity="end"
+            android:textAppearance="@style/NearItUICouponListValidityTextAppearance" />
+
+    </LinearLayout>
+
+</LinearLayout>
