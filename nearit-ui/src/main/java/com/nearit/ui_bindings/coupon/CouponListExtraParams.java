@@ -162,7 +162,7 @@ class CouponListExtraParams implements Parcelable {
         return enableNetErrorDialog;
     }
 
-    public boolean isJaggedBorders() {
+    boolean isJaggedBorders() {
         return jaggedBorders;
     }
 
