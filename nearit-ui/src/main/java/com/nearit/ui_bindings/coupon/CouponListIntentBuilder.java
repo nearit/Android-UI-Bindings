@@ -12,6 +12,7 @@ public class CouponListIntentBuilder {
     private int mIconDrawable;
     private int mSeparatorDrawable;
     private int mNoCouponLayout;
+    private boolean mJaggedBorders = false;
     private boolean mNoSeparator = false;
     private boolean mNoIcon = false;
     private boolean mEnableTapOutsideToClose = false;
@@ -54,6 +55,14 @@ public class CouponListIntentBuilder {
      */
     public CouponListIntentBuilder setNoIcon() {
         mNoIcon = true;
+        return this;
+    }
+
+    /**
+     * Enable jagged (vintage movie ticket style) coupon preview layout
+     */
+    public CouponListIntentBuilder jaggedBorders() {
+        mJaggedBorders = true;
         return this;
     }
 
@@ -105,6 +114,7 @@ public class CouponListIntentBuilder {
                 mIconDrawable,
                 mSeparatorDrawable,
                 mNoCouponLayout,
+                mJaggedBorders,
                 mNoSeparator,
                 mNoIcon,
                 mEnableTapOutsideToClose,

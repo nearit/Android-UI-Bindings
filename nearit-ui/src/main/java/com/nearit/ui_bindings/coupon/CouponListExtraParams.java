@@ -16,6 +16,7 @@ class CouponListExtraParams implements Parcelable {
     private final int iconDrawable;
     private final int separatorDrawable;
     private final int noCouponLayout;
+    private final boolean jaggedBorders;
     private final boolean enableNetErrorDialog;
     private final boolean noSeparator;
     private final boolean noIcon;
@@ -26,12 +27,13 @@ class CouponListExtraParams implements Parcelable {
     private final boolean redeemedOnly;
     private final boolean includeRedeemed;
 
-    CouponListExtraParams(int iconDrawable, int separatorDrawable, int noCouponLayout, boolean enableNetErrorDialog, boolean noSeparator, boolean noIcon, boolean enableTapOutsideToClose,
+    CouponListExtraParams(int iconDrawable, int separatorDrawable, int noCouponLayout, boolean enableNetErrorDialog, boolean jaggedBorders, boolean noSeparator, boolean noIcon, boolean enableTapOutsideToClose,
                           boolean validOnly, boolean expiredOnly, boolean inactiveOnly, boolean redeemedOnly, boolean includeRedeemed) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
         this.noCouponLayout = noCouponLayout;
         this.enableNetErrorDialog = enableNetErrorDialog;
+        this.jaggedBorders = jaggedBorders;
         this.noSeparator = noSeparator;
         this.noIcon = noIcon;
         this.enableTapOutsideToClose = enableTapOutsideToClose;
@@ -42,12 +44,13 @@ class CouponListExtraParams implements Parcelable {
         this.includeRedeemed = includeRedeemed;
     }
 
-    CouponListExtraParams(int iconDrawable, int separatorDrawable, int noCouponLayout, boolean enableNetErrorDialog, boolean noSeparator, boolean noIcon,
+    CouponListExtraParams(int iconDrawable, int separatorDrawable, int noCouponLayout, boolean enableNetErrorDialog, boolean jaggedBorders, boolean noSeparator, boolean noIcon,
                           boolean validOnly, boolean expiredOnly, boolean inactiveOnly, boolean redeemedOnly, boolean includeRedeemed) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
         this.noCouponLayout = noCouponLayout;
         this.enableNetErrorDialog = enableNetErrorDialog;
+        this.jaggedBorders = jaggedBorders;
         this.noSeparator = noSeparator;
         this.noIcon = noIcon;
         this.enableTapOutsideToClose = false;
@@ -89,6 +92,7 @@ class CouponListExtraParams implements Parcelable {
             int separatorDrawable = in.readInt();
             int noCouponLayout = in.readInt();
             boolean enableNetErrorDialog = in.readInt() != 0;
+            boolean jaggedBorders = in.readInt() != 0;
             boolean noSeparator = in.readInt() != 0;
             boolean noIcon = in.readInt() != 0;
             boolean enableTapToClose = in.readInt() != 0;
@@ -102,6 +106,7 @@ class CouponListExtraParams implements Parcelable {
                     separatorDrawable,
                     noCouponLayout,
                     enableNetErrorDialog,
+                    jaggedBorders,
                     noSeparator,
                     noIcon,
                     enableTapToClose,
@@ -130,6 +135,7 @@ class CouponListExtraParams implements Parcelable {
         dest.writeInt(separatorDrawable);
         dest.writeInt(noCouponLayout);
         dest.writeInt(enableNetErrorDialog ? 1 : 0);
+        dest.writeInt(jaggedBorders ? 1 : 0);
         dest.writeInt(noSeparator ? 1 : 0);
         dest.writeInt(noIcon ? 1 : 0);
         dest.writeInt(enableTapOutsideToClose ? 1 : 0);
@@ -154,6 +160,10 @@ class CouponListExtraParams implements Parcelable {
 
     boolean isEnableNetErrorDialog() {
         return enableNetErrorDialog;
+    }
+
+    public boolean isJaggedBorders() {
+        return jaggedBorders;
     }
 
     boolean isEnableTapOutsideToClose() {
