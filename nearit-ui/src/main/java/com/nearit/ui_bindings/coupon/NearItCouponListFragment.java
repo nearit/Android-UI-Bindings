@@ -3,6 +3,7 @@ package com.nearit.ui_bindings.coupon;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -46,7 +47,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
     private int customNoCouponLayoutRef = 0;
 
     private int separatorDrawable = 0, iconDrawable = 0;
-    private boolean noSeparator = false, noIcon;
+    private boolean noSeparator = false, noIcon, jaggedBorders;
     private boolean validOnly, expiredOnly, inactiveOnly, redeemedOnly, includeRedeemed, enableNetErrorDialog;
 
     public NearItCouponListFragment() {
@@ -61,28 +62,32 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        CouponListExtraParams extras = getArguments().getParcelable(ARG_EXTRAS);
-        if (extras != null) {
-            separatorDrawable = extras.getSeparatorDrawable();
-            iconDrawable = extras.getIconDrawable();
-            customNoCouponLayoutRef = extras.getNoCouponLayout();
-            enableNetErrorDialog = extras.isEnableNetErrorDialog();
-            noSeparator = extras.isNoSeparator();
-            noIcon = extras.isNoIcon();
-            validOnly = extras.isValidOnly();
-            expiredOnly = extras.isExpiredOnly();
-            inactiveOnly = extras.isInactiveOnly();
-            redeemedOnly = extras.isRedeemedOnly();
-            includeRedeemed = extras.isIncludeRedeemed();
+        if (getArguments() != null) {
+            CouponListExtraParams extras = getArguments().getParcelable(ARG_EXTRAS);
+            if (extras != null) {
+                separatorDrawable = extras.getSeparatorDrawable();
+                iconDrawable = extras.getIconDrawable();
+                customNoCouponLayoutRef = extras.getNoCouponLayout();
+                enableNetErrorDialog = extras.isEnableNetErrorDialog();
+                jaggedBorders = extras.isJaggedBorders();
+                noSeparator = extras.isNoSeparator();
+                noIcon = extras.isNoIcon();
+                validOnly = extras.isValidOnly();
+                expiredOnly = extras.isExpiredOnly();
+                inactiveOnly = extras.isInactiveOnly();
+                redeemedOnly = extras.isRedeemedOnly();
+                includeRedeemed = extras.isIncludeRedeemed();
+            }
         }
 
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_coupon_list, container, false);
 
         noCouponText = rootView.findViewById(R.id.no_coupons_text);
@@ -99,7 +104,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
 
         triggerRefresh();
 
-        couponAdapter = new CouponAdapter(getContext(), this, iconDrawable, noIcon);
+        couponAdapter = new CouponAdapter(getContext(), this, iconDrawable, noIcon, jaggedBorders);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         RecyclerView couponsRecyclerView = rootView.findViewById(R.id.coupons_list);
         couponsRecyclerView.setLayoutManager(layoutManager);

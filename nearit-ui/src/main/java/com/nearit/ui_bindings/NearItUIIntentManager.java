@@ -11,14 +11,14 @@ import it.near.sdk.reactions.customjsonplugin.model.CustomJSON;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
 import it.near.sdk.trackings.TrackingInfo;
-import it.near.sdk.utils.CoreContentsListener;
+import it.near.sdk.utils.ContentsListener;
 import it.near.sdk.utils.NearUtils;
 
 /**
  * @author Federico Boschini
  */
 
-class NearItUIIntentManager implements CoreContentsListener {
+class NearItUIIntentManager implements ContentsListener {
 
     private static final String TAG = "NearITUIIntentManager";
 
@@ -31,7 +31,7 @@ class NearItUIIntentManager implements CoreContentsListener {
 
     boolean manageIntent(@Nullable Intent intent) {
         if (intent != null && intent.getExtras() != null && NearUtils.carriesNearItContent(intent)) {
-            NearUtils.parseCoreContents(intent, this);
+            NearUtils.parseContents(intent, this);
         }
         return intentManaged;
     }

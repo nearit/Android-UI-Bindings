@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--  Fullscreen activity appearance    -->
+    <style name="NearITUIFullScreenActivityAppearance" parent="Theme.AppCompat" />
+
+    <style name="NearITUICouponListActivityAppearance" parent="NearITUIFullScreenActivityAppearance" />
+
     <!--  Dialogs appearance  -->
     <style name="NearItUIDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowActionBar">false</item>
