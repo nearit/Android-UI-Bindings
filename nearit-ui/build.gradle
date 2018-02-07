@@ -22,8 +22,8 @@ apply plugin: 'com.novoda.build-properties'
 apply from: 'distribution.gradle'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.2"
 
     defaultConfig {
         minSdkVersion 15
@@ -48,9 +48,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:support-v4:26.1.0'
+    compile 'com.android.support:recyclerview-v7:27.0.2'
+    compile 'com.android.support:appcompat-v7:27.0.2'
+    compile 'com.android.support:support-v4:27.0.2'
     testCompile 'junit:junit:4.12'
     provided "it.near.sdk:nearit:['${rootProject.ext.nearitMinVersionNumber}', 3.0.0)"
 }
