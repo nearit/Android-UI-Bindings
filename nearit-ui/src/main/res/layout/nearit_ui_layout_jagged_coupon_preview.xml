@@ -58,9 +58,9 @@
         <TextView
             android:id="@+id/coupon_validity"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/nearit_ui_coupon_list_coupon_validity_height"
+            android:layout_height="match_parent"
             android:layout_marginTop="@dimen/nearit_ui_coupon_list_coupon_margin7"
-            android:gravity="end"
+            android:gravity="end|bottom"
             android:textAppearance="@style/NearItUICouponListValidityTextAppearance" />
 
     </LinearLayout>
