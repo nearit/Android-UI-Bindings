@@ -9,6 +9,7 @@ public class CouponListFragmentBuilder {
     private int mSeparatorDrawable;
     private int mNoCouponsLayout;
     private boolean mEnableNetErrorDialog = false;
+    private boolean mJaggedBorders = false;
     private boolean mNoSeparator;
     private boolean mNoIcon;
     private boolean mValidOnly = false;
@@ -49,6 +50,11 @@ public class CouponListFragmentBuilder {
      */
     public CouponListFragmentBuilder setNoIcon() {
         mNoIcon = true;
+        return this;
+    }
+
+    public CouponListFragmentBuilder jaggedBorders() {
+        mJaggedBorders = true;
         return this;
     }
 
@@ -97,6 +103,7 @@ public class CouponListFragmentBuilder {
                 mSeparatorDrawable,
                 mNoCouponsLayout,
                 mEnableNetErrorDialog,
+                mJaggedBorders,
                 mNoSeparator,
                 mNoIcon,
                 mValidOnly,

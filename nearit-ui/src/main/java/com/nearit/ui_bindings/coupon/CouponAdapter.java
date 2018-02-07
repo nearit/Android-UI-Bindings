@@ -14,12 +14,14 @@ import android.widget.TextView;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.utils.LoadImageFromURL;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
@@ -34,18 +36,23 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private Item.CouponListener couponListener;
     private int iconPlaceholderResId = 0;
-    private boolean noIcon;
+    private boolean noIcon, jaggedBorders;
 
-    CouponAdapter(Context context, Item.CouponListener couponListener, int iconPlaceholderResId, boolean noIcon) {
+    CouponAdapter(Context context, Item.CouponListener couponListener, int iconPlaceholderResId, boolean noIcon, boolean jaggedBorders) {
         this.context = context;
         this.couponListener = couponListener;
         this.iconPlaceholderResId = iconPlaceholderResId;
         this.noIcon = noIcon;
+        this.jaggedBorders = jaggedBorders;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new Item(LayoutInflater.from(context).inflate(R.layout.nearit_ui_layout_coupon_preview, parent, false), couponListener, context, iconPlaceholderResId, noIcon);
+        if (jaggedBorders) {
+            return new Item(LayoutInflater.from(context).inflate(R.layout.nearit_ui_layout_jagged_coupon_preview, parent, false), couponListener, context, iconPlaceholderResId, noIcon);
+        } else {
+            return new Item(LayoutInflater.from(context).inflate(R.layout.nearit_ui_layout_coupon_preview, parent, false), couponListener, context, iconPlaceholderResId, noIcon);
+        }
     }
 
     @Override
@@ -210,9 +217,11 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ProgressBar iconProgressBar;
         @Nullable
         TextView couponTitle, couponValue, couponValidity;
+        private SimpleDateFormat formatDate;
 
         Item(View itemView, CouponListener couponListener, Context context, int iconPlaceholderResId, boolean noIcon) {
             super(itemView);
+            this.formatDate = new SimpleDateFormat(context.getResources().getString(R.string.nearit_ui_coupon_date_pretty_format), Locale.US);
             this.itemView = itemView;
             this.couponListener = couponListener;
             this.context = context;
@@ -272,7 +281,7 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             if (System.currentTimeMillis() > redeemableFrom.getTime()) {
                                 setValid();
                             } else {
-                                setInactive();
+                                setInactive(redeemableFrom);
                             }
                         } else {
                             setValid();
@@ -285,7 +294,7 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         if (System.currentTimeMillis() > redeemableFrom.getTime()) {
                             setValid();
                         } else {
-                            setInactive();
+                            setInactive(redeemableFrom);
                         }
                     } else {
                         setValid();
@@ -301,9 +310,11 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
         }
 
-        void setInactive() {
+        void setInactive(Date redeemableFromDate) {
             if (couponValidity != null) {
-                couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_inactive_text));
+                String formattedRedeem;
+                formattedRedeem = formatDate.format(redeemableFromDate);
+                couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_list_inactive_text).concat(" "+formattedRedeem));
                 couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_inactive_text_color));
             }
         }

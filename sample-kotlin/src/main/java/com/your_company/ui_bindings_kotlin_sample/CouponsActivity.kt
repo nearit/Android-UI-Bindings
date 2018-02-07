@@ -75,9 +75,10 @@ class CouponsActivity : AppCompatActivity() {
 
 
         coupon_list.setOnClickListener {
-            //  start an activity that shows a list of REAL coupons
+            //  start an activity that shows a list of REAL coupons, with jagged borders
             startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
                     .createCouponListIntentBuilder()
+                    .jaggedBorders()
                     .build()
             )
         }

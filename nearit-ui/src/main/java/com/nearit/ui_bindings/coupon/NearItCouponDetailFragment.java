@@ -2,6 +2,7 @@ package com.nearit.ui_bindings.coupon;
 
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -47,19 +48,21 @@ public class NearItCouponDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        coupon = getArguments().getParcelable(ARG_COUPON);
-        CouponDetailExtraParams extras = getArguments().getParcelable(ARG_EXTRAS);
-        if (extras != null) {
-            separatorDrawable = extras.getSeparatorDrawable();
-            iconDrawable = extras.getIconDrawable();
-            noSeparator = extras.isNoSeparator();
-            noWakeLock = extras.isNoWakeLock();
+        if (getArguments() != null) {
+            coupon = getArguments().getParcelable(ARG_COUPON);
+            CouponDetailExtraParams extras = getArguments().getParcelable(ARG_EXTRAS);
+            if (extras != null) {
+                separatorDrawable = extras.getSeparatorDrawable();
+                iconDrawable = extras.getIconDrawable();
+                noSeparator = extras.isNoSeparator();
+                noWakeLock = extras.isNoWakeLock();
+            }
         }
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_coupon_detail, container, false);
 
         CouponDetailTopSection topSection = rootView.findViewById(R.id.coupon_detail_top_section);
@@ -71,9 +74,11 @@ public class NearItCouponDetailFragment extends Fragment {
                 (coupon.getRedeemableFromDate()!= null && coupon.getRedeemableFromDate().getTime() < System.currentTimeMillis()) &&
                 (coupon.getExpiresAtDate() != null && coupon.getExpiresAtDate().getTime() > System.currentTimeMillis())) {
 
-            WindowManager.LayoutParams layout = getActivity().getWindow().getAttributes();
-            layout.screenBrightness = 1F;
-            getActivity().getWindow().setAttributes(layout);
+            if (getActivity() != null) {
+                WindowManager.LayoutParams layout = getActivity().getWindow().getAttributes();
+                layout.screenBrightness = 1F;
+                getActivity().getWindow().setAttributes(layout);
+            }
         }
 
         ProgressBar iconProgressBar = rootView.findViewById(R.id.coupon_icon_progress_bar);
@@ -102,9 +107,11 @@ public class NearItCouponDetailFragment extends Fragment {
         }
 
         if ((coupon.getRedeemableFromDate() != null) && (coupon.getRedeemableFromDate().getTime() > System.currentTimeMillis()) || coupon.getRedeemedAtDate() != null) {
-            couponName.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_disabled_text_color));
-            couponValue.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_disabled_text_color));
-            couponDescription.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_disabled_text_color));
+            if (getContext() != null) {
+                couponName.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_disabled_text_color));
+                couponValue.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_disabled_text_color));
+                couponDescription.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_disabled_text_color));
+            }
         }
 
         if (iconDrawable != 0 && couponIcon != null) {
