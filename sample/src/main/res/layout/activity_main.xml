@@ -15,35 +15,43 @@
         android:background="@drawable/brand"/>
 
     <Button
-        android:id="@+id/permissions_demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         style="@style/ButtonStyle"
-        android:text="Permissions" />
+        android:text="Permissions"
+        android:onClick="openPermissions"/>
 
     <Button
-        android:id="@+id/coupon_demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         style="@style/ButtonStyle"
-        android:text="Coupon"/>
+        android:text="Coupon"
+        android:onClick="openCoupon"/>
 
     <Button
-        android:id="@+id/feedback_demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         style="@style/ButtonStyle"
-        android:text="Feedback" />
+        android:text="Feedback"
+        android:onClick="openFeedbacks"/>
 
     <Button
-        android:id="@+id/content_demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         style="@style/ButtonStyle"
-        android:text="Content"/>
+        android:text="Content"
+        android:onClick="openContent"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        style="@style/ButtonStyle"
+        android:text="Inbox"
+        android:onClick="openInbox"/>
 
 </LinearLayout>

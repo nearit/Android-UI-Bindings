@@ -24,6 +24,7 @@
         <activity android:name="com.your_company.ui_bindings_sample.CouponsActivity" />
         <activity android:name="com.your_company.ui_bindings_sample.PermissionsActivity" />
         <activity android:name="com.your_company.ui_bindings_sample.ContentActivity" />
+        <activity android:name="com.your_company.ui_bindings_sample.InboxActivity" />
         <activity android:name="com.your_company.ui_bindings_sample.CouponPlainActivity" android:label="Coupon detail activity"/>
         <activity android:name="com.your_company.ui_bindings_sample.FeedbackPlainActivity" android:label="Feedback activity"/>
         <activity android:name="com.your_company.ui_bindings_sample.ContentPlainActivity" android:label="Content detail activity"/>
