@@ -11,6 +11,7 @@ import com.nearit.ui_bindings.coupon.CouponListFragmentBuilder;
 import com.nearit.ui_bindings.coupon.CouponListIntentBuilder;
 import com.nearit.ui_bindings.feedback.FeedbackFragmentBuilder;
 import com.nearit.ui_bindings.feedback.FeedbackIntentBuilder;
+import com.nearit.ui_bindings.inbox.InboxListIntentBuilder;
 import com.nearit.ui_bindings.notifications.NearItUIProximityListener;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
 
@@ -66,6 +67,10 @@ public class NearITUIBindings {
         return new CouponListFragmentBuilder();
     }
 
+    public InboxListIntentBuilder createInxoxListIntentBuilder() {
+        return new InboxListIntentBuilder(mContext);
+    }
+
     public static void enableAutomaticForegroundNotifications(Context context) {
         new NearItUIProximityListener(context);
     }
@@ -73,5 +78,4 @@ public class NearITUIBindings {
     public static boolean onNewIntent(Context context, Intent intent) {
         return new NearItUIIntentManager(context).manageIntent(intent);
     }
-
 }
