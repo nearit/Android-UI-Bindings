@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.nearit.ui_bindings.inbox.NearITInboxFragment">
+    
+    <TextView
+        android:id="@+id/no_inbox_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textAppearance="@style/NearITUIInboxListNoInboxTextAppearance"
+        android:visibility="gone"
+        android:text="@string/nearit_ui_inbox_empty_list_text"/>
+
+    <RelativeLayout
+        android:id="@+id/empty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/inbox_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/nearit_ui_inbox_padding_left_right"
+            android:paddingRight="@dimen/nearit_ui_inbox_padding_left_right"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</RelativeLayout>

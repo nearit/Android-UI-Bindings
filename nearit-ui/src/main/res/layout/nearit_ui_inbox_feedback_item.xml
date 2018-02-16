@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.nearit.ui_bindings.inbox.customviews.InboxCardLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bg_layout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nearit_ui_feedback_notification_item_height"
+    android:layout_marginTop="@dimen/nearit_ui_inbox_list_top_margin1"
+    android:background="@drawable/nearit_ui_inbox_feedback_item_bgselector"
+    android:paddingBottom="@dimen/nearit_ui_feedback_notification_item_padding_bottom"
+    android:paddingLeft="@dimen/nearit_ui_feedback_notification_item_padding_left_right"
+    android:paddingRight="@dimen/nearit_ui_feedback_notification_item_padding_left_right"
+    android:paddingTop="@dimen/nearit_ui_feedback_notification_item_padding_top">
+
+    <TextView
+        android:id="@+id/timestampTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+
+        android:text="il mio orario"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/notificationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/timestampTextView"
+
+        android:layout_marginTop="@dimen/nearit_ui_feedback_notification_label_top_margin"
+        android:text="La mia notifica del feedback, è un testo abbastanza lungo"
+        android:textColor="@android:color/white"
+
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/detail_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:minHeight="0dp"
+
+        android:text="Vai al dettaglio"
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
+
+</com.nearit.ui_bindings.inbox.customviews.InboxCardLayout>

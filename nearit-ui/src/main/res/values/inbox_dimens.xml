@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="nearit_ui_inbox_padding_left_right">10dp</dimen>
+    <!-- base dimensions -->
+    <dimen name="nearit_ui_inbox_item_height">150dp</dimen>
+    <dimen name="nearit_ui_inbox_item_padding_bottom">17dp</dimen>
+    <dimen name="nearit_ui_inbox_item_padding_left_right">20dp</dimen>
+    <dimen name="nearit_ui_inbox_item_padding_top">10dp</dimen>
+    <dimen name="nearit_ui_inbox_timestamp_top_margin">15dp</dimen>
+    <dimen name="nearit_ui_inbox_label_top_margin">8dp</dimen>
+    <dimen name="nearit_ui_inbox_list_top_margin1">10dp</dimen>
+    <!-- simple notification -->
+    <dimen name="nearit_ui_simple_notification_item_height">@dimen/nearit_ui_inbox_item_height</dimen>
+    <dimen name="nearit_ui_simple_notification_item_padding_bottom">@dimen/nearit_ui_inbox_item_padding_bottom</dimen>
+    <dimen name="nearit_ui_simple_notification_item_padding_left_right">@dimen/nearit_ui_inbox_item_padding_left_right</dimen>
+    <dimen name="nearit_ui_simple_notification_item_padding_top">@dimen/nearit_ui_inbox_item_padding_top</dimen>
+    <dimen name="nearit_ui_simple_notification_timestamp_top_margin">@dimen/nearit_ui_inbox_timestamp_top_margin</dimen>
+    <dimen name="nearit_ui_simple_notification_label_top_margin">@dimen/nearit_ui_inbox_label_top_margin</dimen>
+    <!-- content notification -->
+    <dimen name="nearit_ui_content_notification_item_height">@dimen/nearit_ui_inbox_item_height</dimen>
+    <dimen name="nearit_ui_content_notification_item_padding_bottom">@dimen/nearit_ui_inbox_item_padding_bottom</dimen>
+    <dimen name="nearit_ui_content_notification_item_padding_left_right">@dimen/nearit_ui_inbox_item_padding_left_right</dimen>
+    <dimen name="nearit_ui_content_notification_item_padding_top">@dimen/nearit_ui_inbox_item_padding_top</dimen>
+    <dimen name="nearit_ui_content_notification_timestamp_top_margin">@dimen/nearit_ui_inbox_timestamp_top_margin</dimen>
+    <dimen name="nearit_ui_content_notification_label_top_margin">@dimen/nearit_ui_inbox_label_top_margin</dimen>
+    <!-- feedback notification -->
+    <dimen name="nearit_ui_feedback_notification_item_height">@dimen/nearit_ui_inbox_item_height</dimen>
+    <dimen name="nearit_ui_feedback_notification_item_padding_bottom">@dimen/nearit_ui_inbox_item_padding_bottom</dimen>
+    <dimen name="nearit_ui_feedback_notification_item_padding_left_right">@dimen/nearit_ui_inbox_item_padding_left_right</dimen>
+    <dimen name="nearit_ui_feedback_notification_item_padding_top">@dimen/nearit_ui_inbox_item_padding_top</dimen>
+    <dimen name="nearit_ui_feedback_notification_timestamp_top_margin">@dimen/nearit_ui_inbox_timestamp_top_margin</dimen>
+    <dimen name="nearit_ui_feedback_notification_label_top_margin">@dimen/nearit_ui_inbox_label_top_margin</dimen>
+
+</resources>

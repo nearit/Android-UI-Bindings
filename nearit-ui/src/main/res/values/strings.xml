@@ -37,4 +37,6 @@
     <string name="nearit_ui_warning_dialog_button_text">Retry</string>
     <string name="nearit_ui_warning_dialog_close_text">Close</string>
     <string name="nearit_ui_warning_dialog_message">Network problem</string>
+
+    <string name="nearit_ui_inbox_empty_list_text">No messages available</string>
 </resources>
