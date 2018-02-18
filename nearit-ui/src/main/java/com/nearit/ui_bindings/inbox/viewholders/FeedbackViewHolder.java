@@ -25,6 +25,8 @@ public class FeedbackViewHolder extends BaseViewHolder<Feedback> {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                item.read = true;
+                layout.setMessageUnread(false);
                 listener.onInboxItemTap(item);
             }
         });
