@@ -105,4 +105,6 @@
     <color name="nearit_ui_warning_dialog_close_pressed_text_color">@color/nearit_ui_warm_grey_50</color>
     <color name="nearit_ui_warning_dialog_close_text_color">@color/nearit_ui_warm_grey</color>
 
+    <color name="nearit_inbox_card_background">@color/nearit_ui_real_white</color>
+
 </resources>

@@ -1,5 +1,6 @@
 package com.nearit.ui_bindings.inbox.viewholders;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,9 @@ public class FeedbackViewHolder extends BaseViewHolder<Feedback> {
     }
 
     private void setReadBackground(boolean read) {
-        layout.setMessageUnread(!read);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            layout.setElevation(read ? 4F : 30F);
+            layout.refreshDrawableState();
+        }
     }
 }
