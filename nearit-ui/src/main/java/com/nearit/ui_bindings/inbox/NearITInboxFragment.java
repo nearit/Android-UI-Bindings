@@ -136,5 +136,6 @@ public class NearITInboxFragment extends Fragment implements InboxAdapter.InboxA
     @Override
     public void onInboxItemTap(InboxItem itemList) {
 
+        presenter.sendClickedTracking(itemList);
     }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import it.near.sdk.NearItManager;
 import it.near.sdk.recipes.inbox.InboxManager;
 import it.near.sdk.recipes.inbox.model.InboxItem;
+import it.near.sdk.recipes.models.Recipe;
 
 class InboxPresenter {
 
@@ -49,5 +50,9 @@ class InboxPresenter {
                 view.showRefreshError(error);
             }
         });
+    }
+
+    public void sendClickedTracking(InboxItem itemList) {
+        nearItManager.sendTracking(itemList.trackingInfo, Recipe.ENGAGED_STATUS);
     }
 }
