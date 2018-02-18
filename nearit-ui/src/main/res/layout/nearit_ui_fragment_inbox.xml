@@ -27,7 +27,9 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/inbox_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:paddingBottom="10dp"
+            android:clipToPadding="false"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>
