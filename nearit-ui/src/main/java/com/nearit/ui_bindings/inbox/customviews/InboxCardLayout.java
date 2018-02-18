@@ -2,28 +2,44 @@ package com.nearit.ui_bindings.inbox.customviews;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.nearit.ui_bindings.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class InboxCardLayout extends RelativeLayout {
 
     private static final int[] STATE_MESSAGE_UNREAD = {R.attr.state_message_unread};
 
     private boolean messageUnread;
+    private TextView timestampTV, notificationTV;
 
     public InboxCardLayout(Context context) {
         super(context);
+        init();
     }
 
     public InboxCardLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public InboxCardLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    private void init() {
+        inflate(getContext(), R.layout.nearit_ui_inbox_card_layout, this);
+        timestampTV = findViewById(R.id.timestampTextView);
+        notificationTV = findViewById(R.id.notificationTextView);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -52,7 +68,30 @@ public class InboxCardLayout extends RelativeLayout {
 
             // Refresh the drawable state so that it includes the message unread
             // state if required.
-            refreshDrawableState();
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setElevation(messageUnread ? 30F : 4F);
+        }
+
+        timestampTV.setTypeface(timestampTV.getTypeface(),
+                messageUnread ? Typeface.BOLD_ITALIC : Typeface.ITALIC);
+        notificationTV.setTypeface(notificationTV.getTypeface(),
+                messageUnread ? Typeface.BOLD : Typeface.NORMAL);
+
+        refreshDrawableState();
+    }
+
+    public void setTimestamp(long timestamp) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM YYYY", Locale.getDefault());
+        Date date = new Date(timestamp * 1000);
+        String timestampString = sdf.format(date);
+        if (timestampString != null) {
+            timestampTV.setText(timestampString);
+        }
+    }
+
+    public void setNotification(String notif) {
+        notificationTV.setText(notif);
     }
 }

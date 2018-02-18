@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.nearit.ui_bindings.inbox.customviews.InboxCardLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nearit_ui_simple_notification_item_height"
     android:layout_marginLeft="@dimen/nearit_ui_simple_notification_item_margin_left_right"
@@ -11,28 +12,4 @@
     android:paddingRight="@dimen/nearit_ui_simple_notification_item_padding_rl"
     android:paddingTop="@dimen/nearit_ui_simple_notification_item_padding_top">
 
-    <TextView
-        android:id="@+id/timestampTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-
-        android:text="il mio orario"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="12sp" />
-
-    <TextView
-        android:id="@+id/notificationTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/timestampTextView"
-
-        android:layout_marginTop="@dimen/nearit_ui_simple_notification_label_top_margin"
-        android:text="La mia simple notifica, è un testo abbastanza lungo"
-        android:textColor="@android:color/white"
-
-        android:textSize="20sp" />
-
-</RelativeLayout>
+</com.nearit.ui_bindings.inbox.customviews.InboxCardLayout>

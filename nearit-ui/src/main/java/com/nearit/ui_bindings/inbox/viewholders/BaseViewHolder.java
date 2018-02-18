@@ -5,10 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import it.near.sdk.recipes.inbox.model.InboxItem;
 import it.near.sdk.recipes.models.ReactionBundle;
 
@@ -30,10 +26,4 @@ public abstract class BaseViewHolder<T extends ReactionBundle> extends RecyclerV
     }
 
     public abstract void bindToView(T item);
-
-    protected String getTimestampLabel(long timestamp) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM YYYY", Locale.getDefault());
-        Date date = new Date(timestamp * 1000);
-        return sdf.format(date);
-    }
 }
