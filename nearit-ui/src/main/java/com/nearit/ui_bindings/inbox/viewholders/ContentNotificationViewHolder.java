@@ -1,5 +1,6 @@
 package com.nearit.ui_bindings.inbox.viewholders;
 
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,5 +38,7 @@ public class ContentNotificationViewHolder extends BaseViewHolder<Content> {
         layout.setTimestamp(item.timestamp);
         layout.setNotification(content.notificationMessage);
         layout.setMessageUnread(!item.read);
+        button.setTypeface(null,
+                item.read ? Typeface.NORMAL : Typeface.BOLD);
     }
 }

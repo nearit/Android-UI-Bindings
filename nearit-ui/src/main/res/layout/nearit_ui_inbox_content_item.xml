@@ -20,9 +20,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:minHeight="0dp"
+        android:background="@null"
+        android:textAllCaps="false"
 
-        android:text="Vai al dettaglio"
-        android:textColor="@android:color/white"
+        android:text="Scopri di più "
+        android:textColor="@color/nearit_ui_inbox_item_button_color"
         android:textSize="12sp" />
 
 </com.nearit.ui_bindings.inbox.customviews.InboxCardLayout>
