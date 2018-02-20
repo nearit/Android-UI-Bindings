@@ -7,21 +7,25 @@ public class InboxListExtraParams implements Parcelable {
 
     private final int noInboxCustomLayout;
     private final boolean includeCustomJSON;
+    private final boolean includeFeedbacks;
 
-    public InboxListExtraParams(int noInboxCustomLayout, boolean includeCustomJSON) {
+    InboxListExtraParams(int noInboxCustomLayout, boolean includeCustomJSON, boolean includeFeedbacks) {
         this.noInboxCustomLayout = noInboxCustomLayout;
         this.includeCustomJSON = includeCustomJSON;
+        this.includeFeedbacks = includeFeedbacks;
     }
 
-    protected InboxListExtraParams(Parcel in) {
+    private InboxListExtraParams(Parcel in) {
         noInboxCustomLayout = in.readInt();
         includeCustomJSON = in.readByte() != 0;
+        includeFeedbacks = in.readByte() != 0;
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(noInboxCustomLayout);
         dest.writeByte((byte) (includeCustomJSON ? 1 : 0));
+        dest.writeByte((byte) (includeFeedbacks ? 1 : 0));
     }
 
     @Override
@@ -41,11 +45,15 @@ public class InboxListExtraParams implements Parcelable {
         }
     };
 
-    public int getNoInboxCustomLayout() {
+    int getNoInboxCustomLayout() {
         return noInboxCustomLayout;
     }
 
-    public boolean shouldIncludeCustomJSON() {
+    boolean shouldIncludeCustomJSON() {
         return includeCustomJSON;
+    }
+
+    public boolean shouldIncludeFeedbacks() {
+        return includeFeedbacks;
     }
 }

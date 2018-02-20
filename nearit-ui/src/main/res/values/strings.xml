@@ -39,4 +39,6 @@
     <string name="nearit_ui_warning_dialog_message">Network problem</string>
 
     <string name="nearit_ui_inbox_empty_list_text">No messages available</string>
+    <string name="nearit_ui_inbox_content_button_label">See more</string>
+    <string name="nearit_ui_inbox_feedback_button_label">Open</string>
 </resources>

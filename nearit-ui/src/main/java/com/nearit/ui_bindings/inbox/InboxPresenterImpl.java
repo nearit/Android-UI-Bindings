@@ -65,7 +65,7 @@ class InboxPresenterImpl implements InboxContract.InboxPresenter{
                         public boolean apply(InboxItem item) {
                             return item.reaction instanceof SimpleNotification ||
                                     item.reaction instanceof Content ||
-                                    item.reaction instanceof Feedback;
+                                    (params.shouldIncludeFeedbacks() && item.reaction instanceof Feedback);
                         }
                     });
                 }

@@ -8,6 +8,7 @@ public class InboxListIntentBuilder {
     private Context context;
     private int mNoInboxLayout = 0;
     private boolean includeCustomJSON = false;
+    private boolean includeFeedbacks = true;
 
     public InboxListIntentBuilder(Context context) {
         this.context = context;
@@ -23,13 +24,18 @@ public class InboxListIntentBuilder {
         return this;
     }
 
+    public InboxListIntentBuilder noFeedbacks() {
+        this.includeFeedbacks = false;
+        return this;
+    }
+
     public Intent build() {
         return NearITInboxActivity.createIntent(context, getParams());
     }
 
     @NonNull
     private InboxListExtraParams getParams() {
-        return new InboxListExtraParams(mNoInboxLayout, includeCustomJSON);
+        return new InboxListExtraParams(mNoInboxLayout, includeCustomJSON, includeFeedbacks);
     }
 
 

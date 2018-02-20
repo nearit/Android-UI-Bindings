@@ -19,12 +19,14 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:minHeight="0dp"
         android:background="@null"
-        android:textAllCaps="false"
         android:drawableRight="@drawable/nearit_ui_button_arrow"
+        android:minHeight="0dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/nearit_ui_inbox_content_button_label"
 
-        android:text="@string/nearit_ui_inbox_button_label"
+        android:textAllCaps="false"
         android:textColor="@color/nearit_ui_inbox_item_button_color"
         android:textSize="12sp" />
 
