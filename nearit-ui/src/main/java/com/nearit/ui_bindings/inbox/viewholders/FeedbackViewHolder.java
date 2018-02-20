@@ -28,6 +28,7 @@ public class FeedbackViewHolder extends BaseViewHolder<Feedback> {
             public void onClick(View view) {
                 item.read = true;
                 layout.setMessageUnread(false);
+                button.setTypeface(null, Typeface.NORMAL);
                 listener.onInboxItemTap(item);
             }
         });
@@ -38,7 +39,9 @@ public class FeedbackViewHolder extends BaseViewHolder<Feedback> {
         layout.setTimestamp(item.timestamp);
         layout.setNotification(feedback.notificationMessage);
         layout.setMessageUnread(!item.read);
-        button.setTypeface(button.getTypeface(),
+        button.setTypeface(null,
                 item.read ? Typeface.NORMAL : Typeface.BOLD);
     }
+
+
 }

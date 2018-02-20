@@ -12,6 +12,7 @@ import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
 import it.near.sdk.recipes.inbox.InboxManager;
 import it.near.sdk.recipes.inbox.model.InboxItem;
 import it.near.sdk.recipes.models.Recipe;
+import it.near.sdk.trackings.TrackingInfo;
 
 import static com.nearit.ui_bindings.utils.CollectionsUtils.filter;
 
@@ -47,6 +48,11 @@ class InboxPresenterImpl implements InboxContract.InboxPresenter{
     public void itemClicked(InboxItem inboxItem) {
         nearItManager.sendTracking(inboxItem.trackingInfo, Recipe.ENGAGED_STATUS);
         view.openDetail(inboxItem);
+    }
+
+    @Override
+    public void onNotificationRead(TrackingInfo trackingInfo) {
+        nearItManager.sendTracking(trackingInfo, Recipe.ENGAGED_STATUS);
     }
 
     private void loadInbox() {

@@ -21,9 +21,11 @@ import java.util.Collections;
 import java.util.List;
 
 import it.near.sdk.NearItManager;
+import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
 import it.near.sdk.recipes.inbox.model.InboxItem;
+import it.near.sdk.trackings.TrackingInfo;
 
-public class NearITInboxFragment extends Fragment implements InboxContract.InboxView, InboxAdapter.InboxAdapterListener {
+public class NearITInboxFragment extends Fragment implements InboxContract.InboxView, InboxAdapter.InboxAdapterListener, InboxAdapter.SimpleNotificationReadListener {
 
     private static final String EXTRAS = "extras";
     private InboxPresenterImpl presenter;
@@ -73,7 +75,7 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
         recyclerView = rootView.findViewById(R.id.inbox_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        inboxAdapter = new InboxAdapter(getActivity().getLayoutInflater(), this);
+        inboxAdapter = new InboxAdapter(getActivity().getLayoutInflater(), this, this);
         recyclerView.setAdapter(inboxAdapter);
 
         swipeToRefreshLayout = rootView.findViewById(R.id.refresh_layout);
@@ -145,5 +147,10 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
     @Override
     public void openDetail(InboxItem inboxItem) {
         NearITUIBindings.onNewContent(getActivity(), inboxItem.reaction, inboxItem.trackingInfo);
+    }
+
+    @Override
+    public void notificationRead(SimpleNotification simpleNotification, TrackingInfo trackingInfo) {
+        presenter.onNotificationRead(trackingInfo);
     }
 }

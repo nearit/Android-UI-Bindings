@@ -28,6 +28,7 @@ public class ContentNotificationViewHolder extends BaseViewHolder<Content> {
             public void onClick(View view) {
                 item.read = true;
                 layout.setMessageUnread(false);
+                button.setTypeface(null, Typeface.NORMAL);
                 listener.onInboxItemTap(item);
             }
         });
@@ -38,7 +39,7 @@ public class ContentNotificationViewHolder extends BaseViewHolder<Content> {
         layout.setTimestamp(item.timestamp);
         layout.setNotification(content.notificationMessage);
         layout.setMessageUnread(!item.read);
-        button.setTypeface(button.getTypeface(),
+        button.setTypeface(null,
                 item.read ? Typeface.NORMAL : Typeface.BOLD);
     }
 }

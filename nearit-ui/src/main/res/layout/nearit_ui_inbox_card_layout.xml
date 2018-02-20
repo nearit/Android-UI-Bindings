@@ -25,6 +25,7 @@
         android:layout_marginTop="@dimen/nearit_ui_feedback_notification_label_top_margin"
         android:text="La mia notifica del feedback, è un testo abbastanza lungo"
         android:textColor="@android:color/black"
+        android:textStyle="normal"
 
         android:textSize="20sp" />
 

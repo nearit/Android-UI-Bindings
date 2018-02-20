@@ -18,17 +18,20 @@ import it.near.sdk.reactions.customjsonplugin.model.CustomJSON;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
 import it.near.sdk.recipes.inbox.model.InboxItem;
+import it.near.sdk.trackings.TrackingInfo;
 
 public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
+    private final SimpleNotificationReadListener readListener;
     private LayoutInflater inflater;
     private InboxAdapterListener inboxAdapterListener;
 
     private List<InboxItem> items = Collections.emptyList();
 
-    public InboxAdapter(LayoutInflater inflater, InboxAdapterListener inboxAdapterListener) {
+    public InboxAdapter(LayoutInflater inflater, InboxAdapterListener inboxAdapterListener, SimpleNotificationReadListener readListener) {
         this.inflater = inflater;
         this.inboxAdapterListener = inboxAdapterListener;
+        this.readListener = readListener;
     }
 
     public void updateItems(List<InboxItem> items) {
@@ -56,7 +59,7 @@ public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case SimpleNotificationViewHolder.VIEWTYPE:
-                return new SimpleNotificationViewHolder(inflater, parent);
+                return new SimpleNotificationViewHolder(inflater, parent, readListener);
             case ContentNotificationViewHolder.VIEWTYPE:
                 return new ContentNotificationViewHolder(inflater, parent, inboxAdapterListener);
             case FeedbackViewHolder.VIEWTYPE:
@@ -80,5 +83,9 @@ public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public interface InboxAdapterListener {
         void onInboxItemTap(InboxItem itemList);
+    }
+
+    public interface SimpleNotificationReadListener {
+        void notificationRead(SimpleNotification simpleNotification , TrackingInfo trackingInfo);
     }
 }
