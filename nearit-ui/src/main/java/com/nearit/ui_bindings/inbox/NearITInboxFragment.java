@@ -1,7 +1,6 @@
 package com.nearit.ui_bindings.inbox;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -37,12 +36,12 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
     private int customNoInboxLayoutRef = 0;
     private View customNoInbox;
 
-    public static Fragment newInstance(@Nullable Parcelable extras,
+    public static Fragment newInstance(@Nullable InboxListExtraParams extras,
                                        NearItManager nearItManager) {
         NearITInboxFragment fragment = new NearITInboxFragment();
         Bundle bundle =  new Bundle();
         bundle.putParcelable(EXTRAS, extras);
-        InboxPresenterImpl presenter = new InboxPresenterImpl(nearItManager, fragment);
+        InboxPresenterImpl presenter = new InboxPresenterImpl(nearItManager, fragment, extras);
         fragment.setArguments(bundle);
         fragment.setPresenter(presenter);
         return fragment;

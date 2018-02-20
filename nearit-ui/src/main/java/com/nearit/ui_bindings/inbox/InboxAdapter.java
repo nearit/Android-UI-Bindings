@@ -2,12 +2,11 @@ package com.nearit.ui_bindings.inbox;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.inbox.viewholders.BaseViewHolder;
 import com.nearit.ui_bindings.inbox.viewholders.ContentNotificationViewHolder;
+import com.nearit.ui_bindings.inbox.viewholders.CustomJSONViewHolder;
 import com.nearit.ui_bindings.inbox.viewholders.FeedbackViewHolder;
 import com.nearit.ui_bindings.inbox.viewholders.SimpleNotificationViewHolder;
 
@@ -15,7 +14,6 @@ import java.util.Collections;
 import java.util.List;
 
 import it.near.sdk.reactions.contentplugin.model.Content;
-import it.near.sdk.reactions.couponplugin.model.Coupon;
 import it.near.sdk.reactions.customjsonplugin.model.CustomJSON;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
@@ -47,10 +45,8 @@ public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             return ContentNotificationViewHolder.VIEWTYPE;
         } else if (item.reaction instanceof Feedback) {
             return FeedbackViewHolder.VIEWTYPE;
-        } else if (item.reaction instanceof Coupon) {
-            return SimpleNotificationViewHolder.VIEWTYPE;
         } else if (item.reaction instanceof CustomJSON) {
-            return SimpleNotificationViewHolder.VIEWTYPE;
+            return CustomJSONViewHolder.VIEWTYPE;
         } else {
             return super.getItemViewType(position);
         }
@@ -65,6 +61,8 @@ public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 return new ContentNotificationViewHolder(inflater, parent, inboxAdapterListener);
             case FeedbackViewHolder.VIEWTYPE:
                 return new FeedbackViewHolder(inflater, parent, inboxAdapterListener);
+            case CustomJSONViewHolder.VIEWTYPE:
+                return new CustomJSONViewHolder(inflater, parent, inboxAdapterListener);
             default:
                 return null;
         }

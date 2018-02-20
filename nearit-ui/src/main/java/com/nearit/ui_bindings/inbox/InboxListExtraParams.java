@@ -6,22 +6,22 @@ import android.os.Parcelable;
 public class InboxListExtraParams implements Parcelable {
 
     private final int noInboxCustomLayout;
+    private final boolean includeCustomJSON;
 
-    public InboxListExtraParams(int noInboxCustomLayout) {
+    public InboxListExtraParams(int noInboxCustomLayout, boolean includeCustomJSON) {
         this.noInboxCustomLayout = noInboxCustomLayout;
-    }
-
-    public int getNoInboxCustomLayout() {
-        return noInboxCustomLayout;
+        this.includeCustomJSON = includeCustomJSON;
     }
 
     protected InboxListExtraParams(Parcel in) {
         noInboxCustomLayout = in.readInt();
+        includeCustomJSON = in.readByte() != 0;
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(noInboxCustomLayout);
+        dest.writeByte((byte) (includeCustomJSON ? 1 : 0));
     }
 
     @Override
@@ -40,4 +40,12 @@ public class InboxListExtraParams implements Parcelable {
             return new InboxListExtraParams[size];
         }
     };
+
+    public int getNoInboxCustomLayout() {
+        return noInboxCustomLayout;
+    }
+
+    public boolean shouldIncludeCustomJSON() {
+        return includeCustomJSON;
+    }
 }
