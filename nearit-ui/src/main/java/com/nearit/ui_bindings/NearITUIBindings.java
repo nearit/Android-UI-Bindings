@@ -18,6 +18,8 @@ import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
 import it.near.sdk.reactions.contentplugin.model.Content;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
+import it.near.sdk.recipes.models.ReactionBundle;
+import it.near.sdk.trackings.TrackingInfo;
 
 public class NearITUIBindings {
 
@@ -77,5 +79,9 @@ public class NearITUIBindings {
 
     public static boolean onNewIntent(Context context, Intent intent) {
         return new NearItUIIntentManager(context).manageIntent(intent);
+    }
+
+    public static boolean onNewContent(Context context, ReactionBundle reactionBundle, TrackingInfo trackingInfo) {
+        return new NearItUIIntentManager(context).manageContent(reactionBundle, trackingInfo);
     }
 }

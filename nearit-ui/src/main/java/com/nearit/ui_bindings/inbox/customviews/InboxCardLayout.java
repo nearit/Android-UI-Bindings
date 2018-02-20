@@ -76,7 +76,7 @@ public class InboxCardLayout extends RelativeLayout {
 
         timestampTV.setTypeface(timestampTV.getTypeface(),
                 messageUnread ? Typeface.BOLD_ITALIC : Typeface.ITALIC);
-        notificationTV.setTypeface(null,
+        notificationTV.setTypeface(notificationTV.getTypeface(),
                 messageUnread ? Typeface.BOLD : Typeface.NORMAL);
 
         refreshDrawableState();

@@ -38,7 +38,7 @@ public class ContentNotificationViewHolder extends BaseViewHolder<Content> {
         layout.setTimestamp(item.timestamp);
         layout.setNotification(content.notificationMessage);
         layout.setMessageUnread(!item.read);
-        button.setTypeface(null,
+        button.setTypeface(button.getTypeface(),
                 item.read ? Typeface.NORMAL : Typeface.BOLD);
     }
 }

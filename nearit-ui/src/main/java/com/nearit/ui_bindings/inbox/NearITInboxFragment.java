@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nearit.ui_bindings.NearITUIBindings;
 import com.nearit.ui_bindings.R;
 
 import java.util.Collections;
@@ -23,10 +24,10 @@ import java.util.List;
 import it.near.sdk.NearItManager;
 import it.near.sdk.recipes.inbox.model.InboxItem;
 
-public class NearITInboxFragment extends Fragment implements InboxAdapter.InboxAdapterListener {
+public class NearITInboxFragment extends Fragment implements InboxContract.InboxView, InboxAdapter.InboxAdapterListener {
 
     private static final String EXTRAS = "extras";
-    private InboxPresenter presenter;
+    private InboxPresenterImpl presenter;
     private TextView noInboxText;
     private RelativeLayout noInboxContainer;
     private InboxAdapter inboxAdapter;
@@ -41,13 +42,13 @@ public class NearITInboxFragment extends Fragment implements InboxAdapter.InboxA
         NearITInboxFragment fragment = new NearITInboxFragment();
         Bundle bundle =  new Bundle();
         bundle.putParcelable(EXTRAS, extras);
-        InboxPresenter presenter = new InboxPresenter(nearItManager, fragment);
+        InboxPresenterImpl presenter = new InboxPresenterImpl(nearItManager, fragment);
         fragment.setArguments(bundle);
         fragment.setPresenter(presenter);
         return fragment;
     }
 
-    private void setPresenter(InboxPresenter presenter) {
+    private void setPresenter(InboxPresenterImpl presenter) {
         this.presenter = presenter;
     }
 
@@ -106,11 +107,13 @@ public class NearITInboxFragment extends Fragment implements InboxAdapter.InboxA
         presenter.stop();
     }
 
+    @Override
     public void showInboxItems(List<InboxItem> itemList) {
         swipeToRefreshLayout.setRefreshing(false);
         inboxAdapter.updateItems(itemList);
     }
 
+    @Override
     public void showEmptyLayout() {
         if (customNoInbox != null) {
             customNoInbox.setVisibility(View.VISIBLE);
@@ -119,6 +122,7 @@ public class NearITInboxFragment extends Fragment implements InboxAdapter.InboxA
         noInboxText.setVisibility(View.VISIBLE);
     }
 
+    @Override
     public void hideEmptyLayout() {
         if (customNoInbox != null) {
             customNoInbox.setVisibility(View.GONE);
@@ -127,6 +131,7 @@ public class NearITInboxFragment extends Fragment implements InboxAdapter.InboxA
         noInboxText.setVisibility(View.GONE);
     }
 
+    @Override
     public void showRefreshError(String error) {
         swipeToRefreshLayout.setRefreshing(false);
         inboxAdapter.updateItems(Collections.<InboxItem>emptyList());
@@ -135,7 +140,11 @@ public class NearITInboxFragment extends Fragment implements InboxAdapter.InboxA
 
     @Override
     public void onInboxItemTap(InboxItem itemList) {
+        presenter.itemClicked(itemList);
+    }
 
-        presenter.sendClickedTracking(itemList);
+    @Override
+    public void openDetail(InboxItem inboxItem) {
+        NearITUIBindings.onNewContent(getActivity(), inboxItem.reaction, inboxItem.trackingInfo);
     }
 }

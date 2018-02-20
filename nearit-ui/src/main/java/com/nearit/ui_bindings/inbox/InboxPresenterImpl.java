@@ -8,27 +8,36 @@ import it.near.sdk.recipes.inbox.InboxManager;
 import it.near.sdk.recipes.inbox.model.InboxItem;
 import it.near.sdk.recipes.models.Recipe;
 
-class InboxPresenter {
+class InboxPresenterImpl implements InboxContract.InboxPresenter{
 
     private final NearItManager nearItManager;
-    private final NearITInboxFragment view;
+    private final InboxContract.InboxView view;
 
-    InboxPresenter(NearItManager nearItManager, NearITInboxFragment view) {
+    InboxPresenterImpl(NearItManager nearItManager, InboxContract.InboxView view) {
         this.nearItManager = nearItManager;
         this.view = view;
     }
 
+    @Override
     public void start() {
         view.showEmptyLayout();
         loadInbox();
     }
 
+    @Override
     public void stop() {
 
     }
 
+    @Override
     public void requestRefresh() {
         loadInbox();
+    }
+
+    @Override
+    public void itemClicked(InboxItem inboxItem) {
+        nearItManager.sendTracking(inboxItem.trackingInfo, Recipe.ENGAGED_STATUS);
+        view.openDetail(inboxItem);
     }
 
     private void loadInbox() {
@@ -50,9 +59,5 @@ class InboxPresenter {
                 view.showRefreshError(error);
             }
         });
-    }
-
-    public void sendClickedTracking(InboxItem itemList) {
-        nearItManager.sendTracking(itemList.trackingInfo, Recipe.ENGAGED_STATUS);
     }
 }

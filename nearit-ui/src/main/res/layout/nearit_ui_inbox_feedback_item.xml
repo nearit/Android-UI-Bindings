@@ -22,7 +22,7 @@
         android:minHeight="0dp"
         android:background="@null"
         android:textAllCaps="false"
-
+        android:drawableRight="@drawable/nearit_ui_button_arrow"
         android:text="Scopri di più "
         android:textColor="@color/nearit_ui_inbox_item_button_color"
         android:textSize="12sp" />
