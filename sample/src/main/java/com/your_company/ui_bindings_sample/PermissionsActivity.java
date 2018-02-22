@@ -159,6 +159,7 @@ public class PermissionsActivity extends AppCompatActivity {
     @SuppressLint("MissingPermission")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        bar.onActivityResult(requestCode, resultCode);
         if (requestCode == NEAR_PERMISSION_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Toast.makeText(this, "Result OK", Toast.LENGTH_SHORT).show();
