@@ -223,35 +223,49 @@ public class PermissionBar extends RelativeLayout {
             }
 
             if (LocationManager.PROVIDERS_CHANGED_ACTION.equals(action)) {
-                if (!PermissionsUtils.checkLocationServices(context)) {
-                    showLocationIcon();
-                    if (!PermissionsUtils.checkBluetooth(context)) {
-                        showBluetoothIcon();
-                    }
-                } else {
-                    if (PermissionsUtils.checkLocationPermission(context)) {
-                        hideLocationIcon();
-                        if (PermissionsUtils.checkBluetooth(context)) {
-                            PermissionBar.this.setVisibility(GONE);
-                        } else {
-                            showBluetoothIcon();
-                        }
-                    } else {
-                        showLocationIcon();
-                        if (PermissionsUtils.checkBluetooth(context)) {
-                            hideBluetoothIcon();
-                        } else {
-                            showBluetoothIcon();
-                        }
-                    }
-                }
+                checkLocationAndUpdateUI();
             }
         }
     };
+
+    private void checkLocationAndUpdateUI() {
+        if (!PermissionsUtils.checkLocationServices(context)) {
+            showLocationIcon();
+            if (!PermissionsUtils.checkBluetooth(context)) {
+                showBluetoothIcon();
+            }
+        } else {
+            if (PermissionsUtils.checkLocationPermission(context)) {
+                hideLocationIcon();
+                if (PermissionsUtils.checkBluetooth(context)) {
+                    PermissionBar.this.setVisibility(GONE);
+                } else {
+                    showBluetoothIcon();
+                }
+            } else {
+                showLocationIcon();
+                if (PermissionsUtils.checkBluetooth(context)) {
+                    hideBluetoothIcon();
+                } else {
+                    showBluetoothIcon();
+                }
+            }
+        }
+    }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         getContext().unregisterReceiver(mReceiver);
+    }
+
+    public boolean onActivityResult(int requestCode, int resultCode) {
+        if (requestCode == this.requestCode) {
+            if (resultCode == Activity.RESULT_OK) {
+                checkLocationAndUpdateUI();
+            }
+            return true;
+        }
+        return false;
     }
 }

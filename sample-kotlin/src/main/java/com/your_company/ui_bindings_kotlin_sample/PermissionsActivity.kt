@@ -117,6 +117,7 @@ class PermissionsActivity : AppCompatActivity() {
 
     @SuppressLint("MissingPermission")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        permission_bar.onActivityResult(requestCode, resultCode)
         if (requestCode == NEAR_PERMISSION_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Toast.makeText(this, "Result OK", Toast.LENGTH_SHORT).show()
