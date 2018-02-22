@@ -51,6 +51,8 @@ Then in your activity you should catch the `result` by referring to the same req
 JAVA
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    //  call this method to inform the bar that a result occured so it can hide itself
+    bar.onActivityResult(requestCode, resultCode);
     if (requestCode == YOUR_REQUEST_CODE) {
         if (resultCode == Activity.RESULT_OK) {
             //  all the necessary prerequirements are ok, in the most common scenarios you should start NearIT radar here
@@ -65,14 +67,16 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 ```kotlin
 KOTLIN
 override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == NEAR_PERMISSION_REQUEST) {
-            if (resultCode == Activity.RESULT_OK) {
-                //  all the necessary prerequirements are ok, in the most common scenarios you should start NearIT radar here
-                NearItManager.getInstance().startRadar()
-            } else {
-                //  some permission is still missing
-            }
+    //  call this method to inform the bar that a result occured so it can hide itself
+    permission_bar.onActivityResult(requestCode, resultCode)
+    if (requestCode == NEAR_PERMISSION_REQUEST) {
+        if (resultCode == Activity.RESULT_OK) {
+            //  all the necessary prerequirements are ok, in the most common scenarios you should start NearIT radar here
+            NearItManager.getInstance().startRadar()
+        } else {
+            //  some permission is still missing
         }
+    }
     }
 ```
 
