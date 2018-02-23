@@ -38,7 +38,7 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
     private int customNoInboxLayoutRef = 0;
     private View customNoInbox;
 
-    public static Fragment newInstance(@Nullable InboxListExtraParams extras,
+    public static NearITInboxFragment newInstance(@Nullable InboxListExtraParams extras,
                                        NearItManager nearItManager) {
         NearITInboxFragment fragment = new NearITInboxFragment();
         Bundle bundle =  new Bundle();
