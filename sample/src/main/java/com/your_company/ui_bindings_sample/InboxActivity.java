@@ -1,5 +1,6 @@
 package com.your_company.ui_bindings_sample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,8 +18,12 @@ public class InboxActivity extends AppCompatActivity {
 
     public void openInbox(View view) {
         startActivity(NearITUIBindings.getInstance(this)
-                .createInxoxListIntentBuilder()
+                .createInboxListIntentBuilder()
                 .build()
         );
+    }
+
+    public void openInboxInActivity(View view) {
+        startActivity(new Intent(this, InboxPlainActivity.class));
     }
 }

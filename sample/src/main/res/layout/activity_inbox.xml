@@ -33,6 +33,14 @@
                 android:text="Inbox List"
                 android:onClick="openInbox"/>
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                style="@style/ButtonStyle"
+                android:text="Inbox List in Activity"
+                android:onClick="openInboxInActivity"/>
+
 
         </LinearLayout>
     </ScrollView>
