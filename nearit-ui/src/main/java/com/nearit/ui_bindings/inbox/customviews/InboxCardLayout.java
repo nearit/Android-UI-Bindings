@@ -81,7 +81,7 @@ public class InboxCardLayout extends RelativeLayout {
     }
 
     public void setTimestamp(long timestamp) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM YYYY", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
         Date date = new Date(timestamp * 1000);
         String timestampString = sdf.format(date);
         if (timestampString != null) {
