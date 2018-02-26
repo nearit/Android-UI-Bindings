@@ -28,7 +28,7 @@ import it.near.sdk.trackings.TrackingInfo;
 public class NearITInboxFragment extends Fragment implements InboxContract.InboxView, InboxAdapter.InboxAdapterListener, InboxAdapter.SimpleNotificationReadListener {
 
     private static final String EXTRAS = "extras";
-    private InboxPresenterImpl presenter;
+    private InboxContract.InboxPresenter presenter;
     private TextView noInboxText;
     private RelativeLayout noInboxContainer;
     private InboxAdapter inboxAdapter;
@@ -43,13 +43,13 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
         NearITInboxFragment fragment = new NearITInboxFragment();
         Bundle bundle =  new Bundle();
         bundle.putParcelable(EXTRAS, extras);
-        InboxPresenterImpl presenter = new InboxPresenterImpl(nearItManager, fragment, extras);
+        InboxContract.InboxPresenter presenter = new InboxPresenterImpl(nearItManager, fragment, extras);
         fragment.setArguments(bundle);
         fragment.setPresenter(presenter);
         return fragment;
     }
 
-    private void setPresenter(InboxPresenterImpl presenter) {
+    private void setPresenter(InboxContract.InboxPresenter presenter) {
         this.presenter = presenter;
     }
 
