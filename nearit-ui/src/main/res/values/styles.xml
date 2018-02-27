@@ -6,6 +6,8 @@
 
     <style name="NearITUICouponListActivityAppearance" parent="NearITUIFullScreenActivityAppearance" />
 
+    <style name="NearITUIInboxActivityAppearance" parent="NearITUIFullScreenActivityAppearance" />
+
     <!--  Dialogs appearance  -->
     <style name="NearItUIDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowActionBar">false</item>
@@ -128,10 +130,15 @@
         <item name="fontFamily">@raw/asap_regular</item>
     </style>
 
-    <style name="NearItUICouponListNoCouponsTextAppearance">
+    <style name="NearItUIEmptyListTextAppearance">
         <item name="android:textColor">@color/nearit_ui_coupon_list_empty_list_text_color</item>
         <item name="android:textSize">@dimen/nearit_ui_coupon_list_empty_list_text_size</item>
         <item name="fontFamily">@raw/asap_bolditalic</item>
+    </style>
+    <style name="NearItUICouponListNoCouponsTextAppearance" parent="NearItUIEmptyListTextAppearance">
+    </style>
+
+    <style name="NearITUIInboxListNoInboxTextAppearance" parent="NearItUIEmptyListTextAppearance">
     </style>
 
     <style name="NearItUICouponListTitleTextAppearance">

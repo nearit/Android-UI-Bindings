@@ -20,14 +20,16 @@
             android:name="near_api_key"
             android:value="@string/near_api_key" />
 
-        <activity android:name="com.your_company.ui_bindings_sample.FeedbackActivity" />
-        <activity android:name="com.your_company.ui_bindings_sample.CouponsActivity" />
-        <activity android:name="com.your_company.ui_bindings_sample.PermissionsActivity" />
-        <activity android:name="com.your_company.ui_bindings_sample.ContentActivity" />
-        <activity android:name="com.your_company.ui_bindings_sample.CouponPlainActivity" android:label="Coupon detail activity"/>
-        <activity android:name="com.your_company.ui_bindings_sample.FeedbackPlainActivity" android:label="Feedback activity"/>
-        <activity android:name="com.your_company.ui_bindings_sample.ContentPlainActivity" android:label="Content detail activity"/>
-        <activity android:name="com.your_company.ui_bindings_sample.CouponListPlainActivity" android:label="Coupon list activity"/>
+        <activity android:name=".FeedbackActivity" />
+        <activity android:name=".CouponsActivity" />
+        <activity android:name=".PermissionsActivity" />
+        <activity android:name=".ContentActivity" />
+        <activity android:name=".InboxActivity" />
+        <activity android:name=".CouponPlainActivity" android:label="Coupon detail activity"/>
+        <activity android:name=".FeedbackPlainActivity" android:label="Feedback activity"/>
+        <activity android:name=".ContentPlainActivity" android:label="Content detail activity"/>
+        <activity android:name=".CouponListPlainActivity" android:label="Coupon list activity"/>
+        <activity android:name=".InboxPlainActivity" android:label="Inbox activity"/>
 
         <!--
         NearIT-UI Intent service, un-comment to enable this feature or replace it with your own if you want to handle notifications

@@ -11,8 +11,9 @@ import com.nearit.ui_bindings.ExtraConstants;
  * @author Federico Boschini
  */
 
-class CouponListExtraParams implements Parcelable {
+public class CouponListExtraParams implements Parcelable {
 
+    private static final boolean DEFAULT_ENABLE_TAP_OUTSIDE_TO_CLOSE = false;
     private final int iconDrawable;
     private final int separatorDrawable;
     private final int noCouponLayout;
@@ -27,8 +28,8 @@ class CouponListExtraParams implements Parcelable {
     private final boolean redeemedOnly;
     private final boolean includeRedeemed;
 
-    CouponListExtraParams(int iconDrawable, int separatorDrawable, int noCouponLayout, boolean enableNetErrorDialog, boolean jaggedBorders, boolean noSeparator, boolean noIcon, boolean enableTapOutsideToClose,
-                          boolean validOnly, boolean expiredOnly, boolean inactiveOnly, boolean redeemedOnly, boolean includeRedeemed) {
+    CouponListExtraParams(int iconDrawable, int separatorDrawable, int noCouponLayout, boolean enableNetErrorDialog, boolean jaggedBorders, boolean noSeparator, boolean noIcon,
+                          boolean validOnly, boolean expiredOnly, boolean inactiveOnly, boolean redeemedOnly, boolean includeRedeemed, boolean enableTapOutsideToClose) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
         this.noCouponLayout = noCouponLayout;
@@ -46,19 +47,7 @@ class CouponListExtraParams implements Parcelable {
 
     CouponListExtraParams(int iconDrawable, int separatorDrawable, int noCouponLayout, boolean enableNetErrorDialog, boolean jaggedBorders, boolean noSeparator, boolean noIcon,
                           boolean validOnly, boolean expiredOnly, boolean inactiveOnly, boolean redeemedOnly, boolean includeRedeemed) {
-        this.iconDrawable = iconDrawable;
-        this.separatorDrawable = separatorDrawable;
-        this.noCouponLayout = noCouponLayout;
-        this.enableNetErrorDialog = enableNetErrorDialog;
-        this.jaggedBorders = jaggedBorders;
-        this.noSeparator = noSeparator;
-        this.noIcon = noIcon;
-        this.enableTapOutsideToClose = false;
-        this.validOnly = validOnly;
-        this.expiredOnly = expiredOnly;
-        this.inactiveOnly = inactiveOnly;
-        this.redeemedOnly = redeemedOnly;
-        this.includeRedeemed = includeRedeemed;
+        this(iconDrawable, separatorDrawable, noCouponLayout, enableNetErrorDialog, jaggedBorders, noSeparator, noIcon, validOnly, expiredOnly,inactiveOnly, redeemedOnly, includeRedeemed, DEFAULT_ENABLE_TAP_OUTSIDE_TO_CLOSE);
     }
 
     /**
@@ -109,12 +98,12 @@ class CouponListExtraParams implements Parcelable {
                     jaggedBorders,
                     noSeparator,
                     noIcon,
-                    enableTapToClose,
                     validOnly,
                     expiredOnly,
                     inactiveOnly,
                     redeemedOnly,
-                    includeRedeemed
+                    includeRedeemed,
+                    enableTapToClose
             );
         }
 
