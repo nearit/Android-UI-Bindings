@@ -45,4 +45,9 @@
             <enum name="right" value="1"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="MessageState">
+        <attr name="state_message_unread" format="boolean"/>
+    </declare-styleable>
+
 </resources>

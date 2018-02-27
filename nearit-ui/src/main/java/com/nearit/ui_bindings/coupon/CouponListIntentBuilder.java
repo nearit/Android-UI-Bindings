@@ -11,7 +11,7 @@ public class CouponListIntentBuilder {
     private Context mContext;
     private int mIconDrawable;
     private int mSeparatorDrawable;
-    private int mNoCouponLayout;
+    private int mNoCouponLayout = 0;
     private boolean mEnableNetErrorDialog = false;
     private boolean mJaggedBorders = false;
     private boolean mNoSeparator = false;
@@ -124,12 +124,12 @@ public class CouponListIntentBuilder {
                 mJaggedBorders,
                 mNoSeparator,
                 mNoIcon,
-                mEnableTapOutsideToClose,
                 mValidOnly,
                 mExpiredOnly,
                 mInactiveOnly,
                 mRedeemedOnly,
-                mIncludeRedeemed);
+                mIncludeRedeemed,
+                mEnableTapOutsideToClose);
     }
 
 }

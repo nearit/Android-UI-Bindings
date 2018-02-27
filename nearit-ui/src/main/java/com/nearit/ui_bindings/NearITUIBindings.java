@@ -11,12 +11,16 @@ import com.nearit.ui_bindings.coupon.CouponListFragmentBuilder;
 import com.nearit.ui_bindings.coupon.CouponListIntentBuilder;
 import com.nearit.ui_bindings.feedback.FeedbackFragmentBuilder;
 import com.nearit.ui_bindings.feedback.FeedbackIntentBuilder;
+import com.nearit.ui_bindings.inbox.InboxListFragmentBuilder;
+import com.nearit.ui_bindings.inbox.InboxListIntentBuilder;
 import com.nearit.ui_bindings.notifications.NearItUIProximityListener;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
 
 import it.near.sdk.reactions.contentplugin.model.Content;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
+import it.near.sdk.recipes.models.ReactionBundle;
+import it.near.sdk.trackings.TrackingInfo;
 
 public class NearITUIBindings {
 
@@ -66,6 +70,14 @@ public class NearITUIBindings {
         return new CouponListFragmentBuilder();
     }
 
+    public InboxListIntentBuilder createInboxListIntentBuilder() {
+        return new InboxListIntentBuilder(mContext);
+    }
+
+    public InboxListFragmentBuilder createInboxListFragmentBuilder() {
+        return new InboxListFragmentBuilder();
+    }
+
     public static void enableAutomaticForegroundNotifications(Context context) {
         new NearItUIProximityListener(context);
     }
@@ -74,4 +86,7 @@ public class NearITUIBindings {
         return new NearItUIIntentManager(context).manageIntent(intent);
     }
 
+    public static boolean onNewContent(Context context, ReactionBundle reactionBundle, TrackingInfo trackingInfo) {
+        return new NearItUIIntentManager(context).manageContent(reactionBundle, trackingInfo);
+    }
 }

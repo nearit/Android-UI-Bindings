@@ -10,6 +10,7 @@ import it.near.sdk.reactions.couponplugin.model.Coupon;
 import it.near.sdk.reactions.customjsonplugin.model.CustomJSON;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
+import it.near.sdk.recipes.models.ReactionBundle;
 import it.near.sdk.trackings.TrackingInfo;
 import it.near.sdk.utils.ContentsListener;
 import it.near.sdk.utils.NearUtils;
@@ -34,6 +35,13 @@ class NearItUIIntentManager implements ContentsListener {
             NearUtils.parseContents(intent, this);
         }
         return intentManaged;
+    }
+
+    boolean manageContent(@Nullable ReactionBundle reaction, TrackingInfo trackingInfo) {
+        if (reaction != null) {
+            NearUtils.parseContents(reaction, trackingInfo, this);
+        }
+        return false;
     }
 
     @Override

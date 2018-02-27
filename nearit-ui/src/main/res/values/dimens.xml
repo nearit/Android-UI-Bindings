@@ -102,6 +102,7 @@
     <dimen name="nearit_ui_coupon_list_coupon_margin7">18dp</dimen>
     <dimen name="nearit_ui_coupon_list_coupon_validity_height">17dp</dimen>
 
+
     <dimen name="nearit_ui_warning_dialog_overall_width">300dp</dimen>
     <dimen name="nearit_ui_warning_dialog_overall_padding">25dp</dimen>
     <dimen name="nearit_ui_warning_dialog_margin1">14dp</dimen>

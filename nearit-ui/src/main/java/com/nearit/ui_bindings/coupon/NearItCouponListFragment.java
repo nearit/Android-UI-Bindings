@@ -53,7 +53,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
     public NearItCouponListFragment() {
     }
 
-    public static NearItCouponListFragment newInstance(Parcelable extras) {
+    public static NearItCouponListFragment newInstance(@Nullable Parcelable extras) {
         NearItCouponListFragment fragment = new NearItCouponListFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(ARG_EXTRAS, extras);
