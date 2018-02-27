@@ -37,15 +37,13 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
 
     private int customNoInboxLayoutRef = 0;
     private View customNoInbox;
+    private InboxListExtraParams extras;
 
-    public static NearITInboxFragment newInstance(@Nullable InboxListExtraParams extras,
-                                       NearItManager nearItManager) {
+    public static NearITInboxFragment newInstance(@Nullable InboxListExtraParams extras) {
         NearITInboxFragment fragment = new NearITInboxFragment();
         Bundle bundle =  new Bundle();
         bundle.putParcelable(EXTRAS, extras);
-        InboxContract.InboxPresenter presenter = new InboxPresenterImpl(nearItManager, fragment, extras);
         fragment.setArguments(bundle);
-        fragment.setPresenter(presenter);
         return fragment;
     }
 
@@ -58,11 +56,17 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            InboxListExtraParams extras = getArguments().getParcelable(EXTRAS);
+            extras = getArguments().getParcelable(EXTRAS);
             if (extras != null) {
                 customNoInboxLayoutRef = extras.getNoInboxCustomLayout();
             }
         }
+        loadPresenter();
+    }
+
+    private void loadPresenter() {
+        InboxContract.InboxPresenter presenter = new InboxPresenterImpl(NearItManager.getInstance(), this, extras);
+        setPresenter(presenter);
     }
 
     @Nullable
@@ -94,6 +98,12 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
         }
 
         return rootView;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(EXTRAS, extras);
     }
 
     @Override

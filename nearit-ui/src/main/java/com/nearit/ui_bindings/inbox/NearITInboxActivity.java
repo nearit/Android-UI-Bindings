@@ -30,7 +30,7 @@ public class NearITInboxActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.inbox_fragment_container,
-                        NearITInboxFragment.newInstance(extras, NearItManager.getInstance()))
+                        NearITInboxFragment.newInstance(extras))
                 .commit();
     }
 

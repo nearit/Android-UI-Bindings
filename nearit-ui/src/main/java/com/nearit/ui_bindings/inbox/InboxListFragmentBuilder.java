@@ -32,7 +32,7 @@ public class InboxListFragmentBuilder {
     }
 
     public NearITInboxFragment build() {
-        return NearITInboxFragment.newInstance(getParams(), NearItManager.getInstance());
+        return NearITInboxFragment.newInstance(getParams());
     }
 
     @NonNull
