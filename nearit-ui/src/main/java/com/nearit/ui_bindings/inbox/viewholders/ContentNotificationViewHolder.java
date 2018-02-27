@@ -23,7 +23,7 @@ public class ContentNotificationViewHolder extends BaseViewHolder<Content> {
         super(inflater.inflate(R.layout.nearit_ui_inbox_content_item, parent, false));
         layout = itemView.findViewById(R.id.layout);
         button = itemView.findViewById(R.id.detail_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 item.read = true;
