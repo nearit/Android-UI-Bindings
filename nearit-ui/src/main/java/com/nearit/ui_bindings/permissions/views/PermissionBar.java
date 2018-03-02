@@ -114,6 +114,7 @@ public class PermissionBar extends RelativeLayout {
         final PermissionsRequestIntentBuilder builder = NearITUIBindings.getInstance(context).createPermissionRequestIntentBuilder();
 
         if (noBeacon) {
+            hideBluetoothIcon();
             builder.noBeacon();
         }
         if (nonBlockingBeacon) {
@@ -149,7 +150,7 @@ public class PermissionBar extends RelativeLayout {
         getContext().registerReceiver(mReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
         getContext().registerReceiver(mReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
 
-        if (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context) && PermissionsUtils.checkBluetooth(context)) {
+        if (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context) && (PermissionsUtils.checkBluetooth(context) || noBeacon)) {
             this.setVisibility(GONE);
         } else {
             if (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context)) {
@@ -157,7 +158,7 @@ public class PermissionBar extends RelativeLayout {
             } else {
                 showLocationIcon();
             }
-            if (PermissionsUtils.checkBluetooth(context)) {
+            if (PermissionsUtils.checkBluetooth(context) || noBeacon) {
                 hideBluetoothIcon();
             } else {
                 showBluetoothIcon();
@@ -205,7 +206,7 @@ public class PermissionBar extends RelativeLayout {
             PermissionBar.this.setVisibility(VISIBLE);
 
             if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
-                if (!PermissionsUtils.checkBluetooth(context)) {
+                if (!(PermissionsUtils.checkBluetooth(context) || noBeacon)) {
                     showBluetoothIcon();
                     if (PermissionsUtils.checkLocationServices(context) && PermissionsUtils.checkLocationPermission(context)) {
                         hideLocationIcon();
@@ -231,20 +232,20 @@ public class PermissionBar extends RelativeLayout {
     private void checkLocationAndUpdateUI() {
         if (!PermissionsUtils.checkLocationServices(context)) {
             showLocationIcon();
-            if (!PermissionsUtils.checkBluetooth(context)) {
+            if (!(PermissionsUtils.checkBluetooth(context) || noBeacon)) {
                 showBluetoothIcon();
             }
         } else {
             if (PermissionsUtils.checkLocationPermission(context)) {
                 hideLocationIcon();
-                if (PermissionsUtils.checkBluetooth(context)) {
+                if (PermissionsUtils.checkBluetooth(context) || noBeacon) {
                     PermissionBar.this.setVisibility(GONE);
                 } else {
                     showBluetoothIcon();
                 }
             } else {
                 showLocationIcon();
-                if (PermissionsUtils.checkBluetooth(context)) {
+                if (PermissionsUtils.checkBluetooth(context) || noBeacon) {
                     hideBluetoothIcon();
                 } else {
                     showBluetoothIcon();
