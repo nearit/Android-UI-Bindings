@@ -26,8 +26,8 @@ Add the NearIT-UI library dependency. If your project uses Gradle build system, 
 ```groovy
  dependencies {
     //  ...
-    compile 'it.near.sdk:nearit-ui:1.1.12'
+    compile 'it.near.sdk:nearit-ui:1.1.13-rc2'
  }
 ```
 
-**Important**: NearIT-UI will only work with NearIT SDK version 2.5.3 or higher.
+**Important**: NearIT-UI will only work with NearIT SDK version 2.7.0-rc1 or higher.
