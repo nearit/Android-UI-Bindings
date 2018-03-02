@@ -150,7 +150,7 @@ public class PermissionBar extends RelativeLayout {
         getContext().registerReceiver(mReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
         getContext().registerReceiver(mReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
 
-        if (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context) && PermissionsUtils.checkBluetooth(context)) {
+        if (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context) && (PermissionsUtils.checkBluetooth(context) || noBeacon)) {
             this.setVisibility(GONE);
         } else {
             if (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context)) {
