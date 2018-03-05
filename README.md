@@ -30,4 +30,4 @@ Add the NearIT-UI library dependency. If your project uses Gradle build system, 
  }
 ```
 
-**Important**: NearIT-UI will only work with NearIT SDK version 2.7.0-rc1 or higher.
+**Important**: NearIT-UI will only work with NearIT SDK version 2.7.0-rc2 or higher.

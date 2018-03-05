@@ -76,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/nearit_ui_coupon_detail_margin4"
                 android:gravity="center_horizontal"
+                android:autoLink="web"
                 android:textAppearance="@style/NearItUICouponDetailDescriptionTextAppearance" />
 
         </LinearLayout>
