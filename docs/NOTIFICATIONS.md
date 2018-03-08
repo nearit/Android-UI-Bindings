@@ -58,7 +58,7 @@ KOTLIN
 override fun onNewIntent(intent: Intent) {
     super.onNewIntent(intent)
     //  ...
-    NearItUIBindings.onNewIntent(this, intent)
+    NearITUIBindings.onNewIntent(this, intent)
     //  ...
 }
 ```
