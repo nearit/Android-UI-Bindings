@@ -2,7 +2,7 @@
 <resources>
     <dimen name="nearit_ui_inbox_padding_left_right">10dp</dimen>
     <!-- base dimensions -->
-    <dimen name="nearit_ui_inbox_item_height">150dp</dimen>
+    <dimen name="nearit_ui_inbox_item_height">200dp</dimen>
     <dimen name="nearit_ui_inbox_item_padding_bottom">10dp</dimen>
     <dimen name="nearit_ui_inbox_item_margin_left_right">12dp</dimen>
     <dimen name="nearit_ui_inbox_item_padding_top">15dp</dimen>

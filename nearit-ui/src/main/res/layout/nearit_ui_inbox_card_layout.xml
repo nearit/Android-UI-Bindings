@@ -11,10 +11,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
 
-        android:text="il mio orario"
         android:textColor="@color/nearit_ui_inbox_item_timestamp_color"
-        android:textSize="12sp"
-        android:textStyle="italic"/>
+        android:textSize="@dimen/nearit_ui_inbox_timestamp_size"
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/notificationTextView"
@@ -23,10 +22,8 @@
         android:layout_below="@id/timestampTextView"
 
         android:layout_marginTop="@dimen/nearit_ui_feedback_notification_label_top_margin"
-        android:text="La mia notifica del feedback, è un testo abbastanza lungo"
-        android:textColor="@android:color/black"
-        android:textStyle="normal"
-
-        android:textSize="20sp" />
+        android:textColor="@color/nearit_ui_inbox_item_notif_text_color"
+        android:textSize="@dimen/nearit_ui_inbox_notification_size"
+        android:textStyle="normal" />
 
 </RelativeLayout>
