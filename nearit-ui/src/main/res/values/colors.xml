@@ -4,7 +4,7 @@
     <color name="nearit_ui_error_color">#E54D4C</color>
     <color name="nearit_ui_error_color_50">#80E54D4C</color>
     <color name="nearit_ui_black">#333333</color>
-    <color name="nearit_ui_white">#F2F2F2</color>
+    <color name="nearit_ui_white">#E1E1E1</color>
     <color name="nearit_ui_white_two">#E1E1E1</color>
     <color name="nearit_ui_white_50">#80F2F2F2</color>
     <color name="nearit_ui_real_white">#FFFFFF</color>
@@ -99,8 +99,9 @@
 
     <!-- INBOX COLORS -->
     <color name="nearit_ui_inbox_item_notif_text_color">@android:color/black</color>
-    <color name="nearit_inbox_card_background">@color/nearit_ui_real_white</color>
-    <color name="nearit_ui_inbox_item_timestamp_color">#777777</color>
+    <color name="nearit_ui_inbox_item_background_unread">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_inbox_card_background_read">#efefef</color>
+    <color name="nearit_ui_inbox_item_timestamp_color">#519fd0</color>
     <color name="nearit_ui_inbox_item_button_color">#519fd0</color>
 
     <!--    WARNING DIALOG COLORS  -->
@@ -110,7 +111,6 @@
     <color name="nearit_ui_warning_dialog_button_text_color">@color/nearit_ui_real_white</color>
     <color name="nearit_ui_warning_dialog_close_pressed_text_color">@color/nearit_ui_warm_grey_50</color>
     <color name="nearit_ui_warning_dialog_close_text_color">@color/nearit_ui_warm_grey</color>
-
 
 
 </resources>

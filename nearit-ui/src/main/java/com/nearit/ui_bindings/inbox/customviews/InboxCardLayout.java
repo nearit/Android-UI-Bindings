@@ -68,12 +68,9 @@ public class InboxCardLayout extends RelativeLayout {
 
             // Refresh the drawable state so that it includes the message unread
             // state if required.
+            refreshDrawableState();
         }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            setElevation(messageUnread ? 30F : 4F);
-        }
-
+        
         timestampTV.setTypeface(timestampTV.getTypeface(),
                 messageUnread ? Typeface.BOLD_ITALIC : Typeface.ITALIC);
         notificationTV.setTypeface(null,
