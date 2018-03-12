@@ -97,6 +97,12 @@
     <color name="nearit_ui_coupon_list_coupon_title_text_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_coupon_list_coupon_value_text_color">@color/nearit_ui_black</color>
 
+    <!-- INBOX COLORS -->
+    <color name="nearit_ui_inbox_item_notif_text_color">@android:color/black</color>
+    <color name="nearit_inbox_card_background">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_inbox_item_timestamp_color">#777777</color>
+    <color name="nearit_ui_inbox_item_button_color">#519fd0</color>
+
     <!--    WARNING DIALOG COLORS  -->
     <color name="nearit_ui_warning_dialog_text_color">@color/nearit_ui_warm_grey</color>
     <color name="nearit_ui_warning_dialog_button_pressed_color">@color/nearit_ui_error_color_50</color>
@@ -105,8 +111,6 @@
     <color name="nearit_ui_warning_dialog_close_pressed_text_color">@color/nearit_ui_warm_grey_50</color>
     <color name="nearit_ui_warning_dialog_close_text_color">@color/nearit_ui_warm_grey</color>
 
-    <color name="nearit_inbox_card_background">@color/nearit_ui_real_white</color>
-    <color name="nearit_ui_inbox_item_timestamp_color">#777777</color>
-    <color name="nearit_ui_inbox_item_button_color">#519fd0</color>
+
 
 </resources>
