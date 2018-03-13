@@ -19,6 +19,8 @@
     <color name="nearit_ui_transparent">#00000000</color>
     <color name="nearit_ui_star_yellow">#F8D71C</color>
 
+    <color name="nearit_ui_background_color">@color/nearit_ui_white_two</color>
+
     <!--    BUTTONS COLORS  -->
     <color name="nearit_ui_selected_button_background_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_selected_button_text_color">@color/nearit_ui_real_white</color>
@@ -91,8 +93,8 @@
     <color name="nearit_ui_coupon_list_valid_text_color">@color/nearit_ui_valid_green</color>
     <color name="nearit_ui_coupon_list_inactive_text_color">@color/nearit_ui_grey</color>
     <color name="nearit_ui_coupon_list_expired_text_color">@color/nearit_ui_scarlet_red</color>
-    <color name="nearit_ui_coupon_list_background_color">@color/nearit_ui_white</color>
-    <color name="nearit_ui_inbox_background_color">@color/nearit_ui_white</color>
+    <color name="nearit_ui_coupon_list_background_color">@color/nearit_ui_background_color</color>
+    <color name="nearit_ui_inbox_background_color">@color/nearit_ui_background_color</color>
     <color name="nearit_ui_coupon_list_redeemed_text_color">@color/nearit_ui_scarlet_red</color>
     <color name="nearit_ui_coupon_list_coupon_title_text_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_coupon_list_coupon_value_text_color">@color/nearit_ui_black</color>
