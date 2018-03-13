@@ -1,5 +1,6 @@
 package com.nearit.ui_bindings.inbox.viewholders;
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,5 +42,10 @@ public class CustomJSONViewHolder extends BaseViewHolder<CustomJSON> {
         layout.setMessageUnread(!item.read);
         button.setTypeface(null,
                 item.read ? Typeface.NORMAL : Typeface.BOLD);
+        Context context = itemView.getContext();
+        button.setTextColor(context.getResources().getColor(item.read ?
+                R.color.nearit_ui_inbox_card_text_read_color :
+                R.color.nearit_ui_inbox_card_text_unread_color)
+        );
     }
 }
