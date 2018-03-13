@@ -10,20 +10,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-
-        android:textColor="@color/nearit_ui_inbox_card_text_read_color"
-        android:textSize="@dimen/nearit_ui_inbox_timestamp_size"
-        android:textStyle="italic" />
+        android:textAppearance="@style/NearItUIInboxCardTimestampTextAppearance" />
 
     <TextView
         android:id="@+id/notificationTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/timestampTextView"
-
         android:layout_marginTop="@dimen/nearit_ui_feedback_notification_label_top_margin"
-        android:textColor="@color/nearit_ui_inbox_item_notif_text_color"
-        android:textSize="@dimen/nearit_ui_inbox_notification_size"
-        android:textStyle="normal" />
+        android:textAppearance="@style/NearItUIInboxCardNotificationTextAppearance" />
 
 </RelativeLayout>
