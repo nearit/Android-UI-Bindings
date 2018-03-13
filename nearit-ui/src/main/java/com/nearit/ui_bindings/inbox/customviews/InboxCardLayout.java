@@ -70,11 +70,18 @@ public class InboxCardLayout extends RelativeLayout {
             // state if required.
             refreshDrawableState();
         }
-        
+
         timestampTV.setTypeface(timestampTV.getTypeface(),
                 messageUnread ? Typeface.BOLD_ITALIC : Typeface.ITALIC);
         notificationTV.setTypeface(null,
                 messageUnread ? Typeface.BOLD : Typeface.NORMAL);
+        timestampTV.setTextColor(
+                getResources().getColor(
+                        messageUnread ?
+                                R.color.nearit_ui_inbox_card_text_unread_color :
+                                R.color.nearit_ui_inbox_card_text_read_color
+                )
+        );
     }
 
     public void setTimestamp(long timestamp) {

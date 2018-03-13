@@ -10,24 +10,13 @@
     android:paddingBottom="@dimen/nearit_ui_feedback_notification_item_padding_bottom"
     android:paddingLeft="@dimen/nearit_ui_feedback_notification_item_padding_rl"
     android:paddingRight="@dimen/nearit_ui_feedback_notification_item_padding_rl"
-    android:paddingTop="@dimen/nearit_ui_feedback_notification_item_padding_top">
+    android:paddingTop="@dimen/nearit_ui_feedback_notification_item_padding_top"
+    android:elevation="@dimen/nearit_ui_inbox_card_elevation">
 
     <Button
         android:id="@+id/detail_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:background="@null"
-        android:drawableRight="@drawable/nearit_ui_button_arrow"
-        android:minHeight="0dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:text="@string/nearit_ui_inbox_feedback_button_label"
-        android:textAllCaps="false"
-        android:textColor="@color/nearit_ui_inbox_item_button_color"
-        android:textSize="12sp"
-        android:textStyle="normal" />
+        android:text="@string/nearit_ui_inbox_content_button_label"
+
+        style="@style/nearit_ui_inbox_card_button_style" />
 
 </com.nearit.ui_bindings.inbox.customviews.InboxCardLayout>

@@ -11,7 +11,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
 
-        android:textColor="@color/nearit_ui_inbox_item_timestamp_color"
+        android:textColor="@color/nearit_ui_inbox_card_text_read_color"
         android:textSize="@dimen/nearit_ui_inbox_timestamp_size"
         android:textStyle="italic" />
 

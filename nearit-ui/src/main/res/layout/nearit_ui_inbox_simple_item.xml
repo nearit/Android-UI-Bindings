@@ -10,6 +10,7 @@
     android:paddingBottom="@dimen/nearit_ui_simple_notification_item_padding_bottom"
     android:paddingLeft="@dimen/nearit_ui_simple_notification_item_padding_rl"
     android:paddingRight="@dimen/nearit_ui_simple_notification_item_padding_rl"
-    android:paddingTop="@dimen/nearit_ui_simple_notification_item_padding_top">
+    android:paddingTop="@dimen/nearit_ui_simple_notification_item_padding_top"
+    android:elevation="@dimen/nearit_ui_inbox_card_elevation">
 
 </com.nearit.ui_bindings.inbox.customviews.InboxCardLayout>
