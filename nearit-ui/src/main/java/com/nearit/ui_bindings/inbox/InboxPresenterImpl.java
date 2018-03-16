@@ -1,5 +1,7 @@
 package com.nearit.ui_bindings.inbox;
 
+import android.support.annotation.NonNull;
+
 import com.nearit.ui_bindings.utils.CollectionsUtils;
 
 import java.util.Collections;
@@ -58,7 +60,7 @@ class InboxPresenterImpl implements InboxContract.InboxPresenter{
     private void loadInbox() {
         nearItManager.getInbox(new InboxManager.OnInboxMessages() {
             @Override
-            public void onMessages(List<InboxItem> inboxItemList) {
+            public void onMessages(@NonNull List<InboxItem> inboxItemList) {
                 if (!params.shouldIncludeCustomJSON()) {
                     inboxItemList = filter(inboxItemList, new CollectionsUtils.Predicate<InboxItem>() {
                         @Override
@@ -70,10 +72,10 @@ class InboxPresenterImpl implements InboxContract.InboxPresenter{
                     });
                 }
 
-                view.showInboxItems(inboxItemList);
-                if (inboxItemList.size() == 0) {
+                if (inboxItemList.isEmpty()) {
                     view.showEmptyLayout();
                 } else {
+                    view.showInboxItems(inboxItemList);
                     view.hideEmptyLayout();
                 }
             }

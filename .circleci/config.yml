@@ -1,0 +1,44 @@
+# Java Gradle CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
+version: 2
+
+references:
+  container_config: &container_config
+    docker:
+      # specify the version you desire here
+      - image: circleci/android:api-26-alpha
+    working_directory: ~/repo
+    environment:
+      # Customize the JVM maximum heap limit
+      JVM_OPTS: -Xmx3200m
+      TERM: dumb
+
+jobs:
+  build:
+    <<: *container_config
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}
+
+      - run:
+          name: Download Dependencies
+          command: ./gradlew nearit-ui:androidDependencies
+
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}
+
+      - run:
+          name: Mock play services
+          command: |
+                chmod 777 .circleci/mock-google-services-setup.sh
+                .circleci/mock-google-services-setup.sh
+
+      - run:
+          name: Run tests
+          command: ./gradlew nearit-ui:check
