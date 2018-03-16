@@ -30,7 +30,6 @@ import static org.mockito.Mockito.when;
 public class InboxPresenterImplTest {
 
     private InboxPresenter inboxPresenter;
-
     @Mock
     private NearItManager nearit;
     @Mock
