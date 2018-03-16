@@ -18,17 +18,16 @@ import it.near.sdk.reactions.customjsonplugin.model.CustomJSON;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
 import it.near.sdk.recipes.inbox.model.InboxItem;
-import it.near.sdk.trackings.TrackingInfo;
 
 public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
-    private final SimpleNotificationReadListener readListener;
+    private final NotificationReadListener readListener;
     private LayoutInflater inflater;
     private InboxAdapterListener inboxAdapterListener;
 
     private List<InboxItem> items = Collections.emptyList();
 
-    public InboxAdapter(LayoutInflater inflater, InboxAdapterListener inboxAdapterListener, SimpleNotificationReadListener readListener) {
+    public InboxAdapter(LayoutInflater inflater, InboxAdapterListener inboxAdapterListener, NotificationReadListener readListener) {
         this.inflater = inflater;
         this.inboxAdapterListener = inboxAdapterListener;
         this.readListener = readListener;
@@ -61,11 +60,11 @@ public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             case SimpleNotificationViewHolder.VIEWTYPE:
                 return new SimpleNotificationViewHolder(inflater, parent, readListener);
             case ContentNotificationViewHolder.VIEWTYPE:
-                return new ContentNotificationViewHolder(inflater, parent, inboxAdapterListener);
+                return new ContentNotificationViewHolder(inflater, parent, inboxAdapterListener, readListener);
             case FeedbackViewHolder.VIEWTYPE:
-                return new FeedbackViewHolder(inflater, parent, inboxAdapterListener);
+                return new FeedbackViewHolder(inflater, parent, inboxAdapterListener, readListener);
             case CustomJSONViewHolder.VIEWTYPE:
-                return new CustomJSONViewHolder(inflater, parent, inboxAdapterListener);
+                return new CustomJSONViewHolder(inflater, parent, inboxAdapterListener, readListener);
             default:
                 return null;
         }
@@ -85,7 +84,7 @@ public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         void onInboxItemTap(InboxItem itemList);
     }
 
-    public interface SimpleNotificationReadListener {
-        void notificationRead(SimpleNotification simpleNotification , TrackingInfo trackingInfo);
+    public interface NotificationReadListener {
+        void notificationRead(InboxItem item);
     }
 }

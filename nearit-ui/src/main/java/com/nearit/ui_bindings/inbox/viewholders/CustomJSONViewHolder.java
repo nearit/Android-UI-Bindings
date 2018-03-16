@@ -20,8 +20,8 @@ public class CustomJSONViewHolder extends BaseViewHolder<CustomJSON> {
     Button button;
     InboxCardLayout layout;
 
-    public CustomJSONViewHolder(LayoutInflater inflater, ViewGroup parent, final InboxAdapter.InboxAdapterListener listener) {
-        super(inflater.inflate(R.layout.nearit_ui_inbox_customjson_item, parent, false));
+    public CustomJSONViewHolder(LayoutInflater inflater, ViewGroup parent, final InboxAdapter.InboxAdapterListener listener, InboxAdapter.NotificationReadListener readListener) {
+        super(inflater.inflate(R.layout.nearit_ui_inbox_customjson_item, parent, false), readListener);
         layout = itemView.findViewById(R.id.layout);
         button = itemView.findViewById(R.id.detail_button);
         layout.setOnClickListener(new View.OnClickListener() {

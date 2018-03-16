@@ -3,7 +3,6 @@ package com.nearit.ui_bindings.inbox;
 import java.util.List;
 
 import it.near.sdk.recipes.inbox.model.InboxItem;
-import it.near.sdk.trackings.TrackingInfo;
 
 public class InboxContract {
     interface InboxView {
@@ -19,6 +18,6 @@ public class InboxContract {
         void stop();
         void requestRefresh();
         void itemClicked(InboxItem inboxItem);
-        void onNotificationRead(TrackingInfo trackingInfo);
+        void onNotificationRead(InboxItem item);
     }
 }
