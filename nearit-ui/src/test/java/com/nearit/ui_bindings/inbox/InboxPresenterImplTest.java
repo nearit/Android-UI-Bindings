@@ -1,12 +1,17 @@
 package com.nearit.ui_bindings.inbox;
 
+import android.support.annotation.NonNull;
+
+import com.google.common.collect.Lists;
 import com.nearit.ui_bindings.inbox.InboxContract.InboxPresenter;
 import com.nearit.ui_bindings.inbox.InboxContract.InboxView;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatchers;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
@@ -26,6 +31,9 @@ import it.near.sdk.recipes.inbox.model.InboxItem;
 import it.near.sdk.recipes.models.Recipe;
 import it.near.sdk.trackings.TrackingInfo;
 
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.atLeastOnce;
@@ -45,6 +53,12 @@ public class InboxPresenterImplTest {
     @Mock
     private InboxListExtraParams params;
     private List<InboxItem> items;
+    private InboxItem simpleNotifItem;
+    private InboxItem contentItem;
+    private InboxItem customJsonItem;
+    private InboxItem feedbackItem;
+    @Captor
+    private ArgumentCaptor<List<InboxItem>> itemsCaptor;
 
     @Before
     public void setUp() throws Exception {
@@ -60,6 +74,59 @@ public class InboxPresenterImplTest {
         verify(view, atLeastOnce()).showEmptyLayout();
         verify(view, never()).hideEmptyLayout();
         verify(view, never()).showInboxItems(ArgumentMatchers.<InboxItem>anyList());
+    }
+
+    @Test
+    public void start_onInboxError() {
+        mockInboxError("error");
+        inboxPresenter.start();
+        verify(view, atLeastOnce()).showEmptyLayout();
+        verify(view).showRefreshError("error");
+    }
+
+    @Test
+    public void startWithNoFilter_shouldNotFilterElements() {
+        items = buildFullList();
+        mockInboxFromNear(items);
+        inboxPresenter.start();
+        verify(view).showInboxItems(items);
+    }
+
+    @Test
+    public void refreshNoFilter_shouldRefresh() {
+        items = buildFullList();
+        mockInboxFromNear(items);
+        inboxPresenter.requestRefresh();
+        verify(view).showInboxItems(items);
+    }
+
+    @Test
+    public void refresh_canFail() {
+        mockInboxError("error");
+        inboxPresenter.requestRefresh();
+        verify(view).showRefreshError("error");
+    }
+
+    @Test
+    public void startWithFeedBackFilter_shouldNotShowFeedback() {
+        items = buildFullList();
+        when(params.shouldIncludeFeedbacks()).thenReturn(false);
+        mockInboxFromNear(items);
+        inboxPresenter.start();
+        verify(view).showInboxItems(itemsCaptor.capture());
+        List<InboxItem> captured = itemsCaptor.getValue();
+        assertThat(captured, not(hasItem(feedbackItem)));
+    }
+
+    @Test
+    public void startWithCustomJsonFilter_shouldNotShowCustomJson() {
+        items = buildFullList();
+        when(params.shouldIncludeCustomJSON()).thenReturn(false);
+        mockInboxFromNear(items);
+        inboxPresenter.start();
+        verify(view).showInboxItems(itemsCaptor.capture());
+        List<InboxItem> captured = itemsCaptor.getValue();
+        assertThat(captured, not(hasItem(customJsonItem)));
     }
 
     @Test
@@ -100,14 +167,6 @@ public class InboxPresenterImplTest {
         verify(nearit, never()).sendTracking(any(TrackingInfo.class), anyString());
     }
 
-    @Test
-    public void start_onInboxError() {
-        mockInboxError("error");
-        inboxPresenter.start();
-        verify(view, atLeastOnce()).showEmptyLayout();
-        verify(view).showRefreshError("error");
-    }
-
     private void mockInboxFromNear(final List<InboxItem> items) {
         doAnswer(new Answer() {
                      @Override
@@ -128,5 +187,21 @@ public class InboxPresenterImplTest {
                      }
                  }
         ).when(nearit).getInbox(any(InboxManager.OnInboxMessages.class));
+    }
+
+    /**
+     * builds a list with one item for each inbox near content type (no coupons)
+     */
+    @NonNull
+    private List<InboxItem> buildFullList() {
+        simpleNotifItem = new InboxItem();
+        simpleNotifItem.reaction = Mockito.mock(SimpleNotification.class);
+        contentItem = new InboxItem();
+        contentItem.reaction = Mockito.mock(Content.class);
+        customJsonItem = new InboxItem();
+        customJsonItem.reaction = Mockito.mock(CustomJSON.class);
+        feedbackItem = new InboxItem();
+        feedbackItem.reaction = Mockito.mock(Feedback.class);
+        return Lists.newArrayList(simpleNotifItem, contentItem, customJsonItem, feedbackItem);
     }
 }
