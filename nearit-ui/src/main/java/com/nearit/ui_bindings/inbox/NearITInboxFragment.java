@@ -22,8 +22,6 @@ import java.util.List;
 
 import it.near.sdk.NearItManager;
 import it.near.sdk.recipes.inbox.model.InboxItem;
-import it.near.sdk.recipes.models.ReactionBundle;
-import it.near.sdk.trackings.TrackingInfo;
 
 public class NearITInboxFragment extends Fragment implements InboxContract.InboxView, InboxAdapter.InboxAdapterListener, InboxAdapter.NotificationReadListener {
 
@@ -126,6 +124,7 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
 
     @Override
     public void showEmptyLayout() {
+        showInboxItems(Collections.<InboxItem>emptyList());
         if (customNoInbox != null) {
             customNoInbox.setVisibility(View.VISIBLE);
             noInboxContainer.setVisibility(View.VISIBLE);
