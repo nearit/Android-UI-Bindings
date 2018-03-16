@@ -20,8 +20,8 @@ public class FeedbackViewHolder extends BaseViewHolder<Feedback> {
     Button button;
     InboxCardLayout layout;
 
-    public FeedbackViewHolder(LayoutInflater inflater, ViewGroup parent, final InboxAdapter.InboxAdapterListener listener) {
-        super(inflater.inflate(R.layout.nearit_ui_inbox_feedback_item, parent, false));
+    public FeedbackViewHolder(LayoutInflater inflater, ViewGroup parent, final InboxAdapter.InboxAdapterListener listener, InboxAdapter.NotificationReadListener readListener) {
+        super(inflater.inflate(R.layout.nearit_ui_inbox_feedback_item, parent, false), readListener);
         layout = itemView.findViewById(R.id.bg_layout);
         button = itemView.findViewById(R.id.detail_button);
         layout.setOnClickListener(new View.OnClickListener() {

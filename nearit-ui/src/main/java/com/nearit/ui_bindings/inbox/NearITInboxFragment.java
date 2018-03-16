@@ -21,11 +21,11 @@ import java.util.Collections;
 import java.util.List;
 
 import it.near.sdk.NearItManager;
-import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
 import it.near.sdk.recipes.inbox.model.InboxItem;
+import it.near.sdk.recipes.models.ReactionBundle;
 import it.near.sdk.trackings.TrackingInfo;
 
-public class NearITInboxFragment extends Fragment implements InboxContract.InboxView, InboxAdapter.InboxAdapterListener, InboxAdapter.SimpleNotificationReadListener {
+public class NearITInboxFragment extends Fragment implements InboxContract.InboxView, InboxAdapter.InboxAdapterListener, InboxAdapter.NotificationReadListener {
 
     private static final String EXTRAS = "extras";
     private InboxContract.InboxPresenter presenter;
@@ -160,7 +160,7 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
     }
 
     @Override
-    public void notificationRead(SimpleNotification simpleNotification, TrackingInfo trackingInfo) {
-        presenter.onNotificationRead(trackingInfo);
+    public void notificationRead(InboxItem item) {
+        presenter.onNotificationRead(item);
     }
 }
