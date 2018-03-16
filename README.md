@@ -15,6 +15,7 @@ Content related:
 - [Coupon detail](docs/COUPON.md)
 - [Feedback request](docs/FEEDBACK.md)
 - [Content detail](docs/CONTENT.md)
+- [Content inbox](docs/INBOX.md)
 - [Coupon list](docs/COUPON_LIST.md)
 
 ## Customization
@@ -26,7 +27,7 @@ Add the NearIT-UI library dependency. If your project uses Gradle build system, 
 ```groovy
  dependencies {
     //  ...
-    compile 'it.near.sdk:nearit-ui:1.1.13-rc3'
+    compile 'it.near.sdk:nearit-ui:1.1.13-rc5'
  }
 ```
 
