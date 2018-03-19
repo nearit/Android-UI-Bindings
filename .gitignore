@@ -12,3 +12,9 @@ local.properties
 
 \.idea/
 app/google-services\.json
+
+\.project
+
+\.settings/
+.classpath
+

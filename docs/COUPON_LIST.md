@@ -65,11 +65,35 @@ startActivity(NearITUIBindings.getInstance(this@YourActivity)
 
 and the coupons already used by the user will be shown at the bottom of the list, with the expired ones.
 
-If a server or network problem occurs while the coupon list is being downloaded, an alert dialog will pop-up and the user will be able to simply close it or to retry the download, triggering a refresh of the coupon list and dismissing the dialog.
- 
+## Advanced examples
+### Network error
+
+You can show a dialog when the request for coupons fails for a network, adding `enableNetErrorDialog()` to the builder.
+
+```java
+JAVA
+startActivity(NearITUIBindings.getInstance(YourActivity.this)
+                        .createCouponListIntentBuilder()
+                        .enableNetErrorDialog()
+                        .build()
+              );
+```
+
+```kotlin
+KOTLIN
+startActivity(NearITUIBindings.getInstance(this@YourActivity)
+                        .createCouponListIntentBuilder()
+                        .enableNetErrorDialog()
+                        .build()
+              )
+```
+
 ![network problem](net_problem.gif)
 
-## Advanced examples
+The user will be able to simply close the dialog or retry the download, triggering a refresh of the coupon list and dismissing the dialog.
+
+### Advanced filter
+
 In your application you may want to show only coupons that are in certain states. With our builder you can request a list of only valid coupons:
 
 ```java
@@ -95,6 +119,8 @@ The same for the other states:
 - `onlyInactiveCoupons()`
 - `onlyRedeemedCoupons()`
 
+### Fragment mode
+
 If you want to list the coupons in your activity, place this fragment in your container:
 
 ```java
@@ -112,6 +138,8 @@ val couponListFragment: Fragment = NearITUIBindings.getInstance(this)
 ```
 
 This builder provides the same methods of the previous, so you can show the list you prefer.
+
+### Detail customization
 
 Additionally, using either of the builders you are able to set the behaviour and look of the coupon detail that it is going to be shown when an user taps on one item of the list.
 The settings that are available are the one that you can set via the coupon detail UI of this library:
