@@ -69,3 +69,20 @@ val inboxFragment = NearITUIBindings.getInstance(this)
 ```
 
 This builder provides the same methods of the previous, so you can show the list you prefer.
+
+<br>
+<br>
+<br>
+
+## UI Customization
+Like any other UI component provided by this library, you can change the look overriding colors, dimensions and strings resources.
+
+For example, if you need to change the colors for the 'see more' button text and for the time and date of the notifications, you can place these colors in your `res/values/colors.xml`:
+```xml
+<!--    ...     -->
+<color name="nearit_ui_inbox_card_text_unread_color">@color/my_color_for_unread</color>
+<color name="nearit_ui_inbox_card_text_read_color">@color/my_color_for_read</color>
+<!--    ...     -->
+```
+
+The same for strings and dimensions. For the complete list of resources have a look in [this directory](../nearit-ui/src/main/res/values).
