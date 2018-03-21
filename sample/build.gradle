@@ -55,5 +55,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'it.near.sdk:nearit:2.6.3'
 
+    testImplementation 'junit:junit:4.12'
+
 }
 apply plugin: 'com.google.gms.google-services'
