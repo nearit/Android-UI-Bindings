@@ -58,6 +58,7 @@
     <dimen name="nearit_ui_feedback_rating_bar_star_border_size">2dp</dimen>
     <dimen name="nearit_ui_feedback_rating_bar_stars_separation">7dp</dimen>
 
+    <dimen name="nearit_ui_permission_bar_height">50dp</dimen>
     <dimen name="nearit_ui_permission_bar_main_padding">9dp</dimen>
     <dimen name="nearit_ui_permission_bar_margin1">5dp</dimen>
     <dimen name="nearit_ui_permission_bar_margin2">31dp</dimen>
