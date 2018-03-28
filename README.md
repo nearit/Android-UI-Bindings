@@ -16,6 +16,7 @@ Content related:
 - [Feedback request](docs/FEEDBACK.md)
 - [Content detail](docs/CONTENT.md)
 - [Coupon list](docs/COUPON_LIST.md)
+- [Inbox](docs/INBOX.md)
 
 ## Customization
 Each feature has its own `UI Customization` section. To customize fonts, please see [here](docs/FONTS.md).
