@@ -27,5 +27,5 @@ task clean(type: Delete) {
 }
 
 ext {
-    nearitMinVersionNumber = '2.7.0-rc2'
+    nearitMinVersionNumber = '2.8.0'
 }
