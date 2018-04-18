@@ -32,7 +32,6 @@ class InboxPresenterImpl implements InboxContract.InboxPresenter {
 
     @Override
     public void start() {
-        view.showEmptyLayout();
         loadInbox();
     }
 
