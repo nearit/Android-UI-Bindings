@@ -457,7 +457,17 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                 finalCheck();
             }
         });
-        return builder.create();
+        AlertDialog dialog = builder.create();
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                dialog.cancel();
+                if (isInvisibleLayoutMode) {
+                    finalCheck();
+                }
+            }
+        });
+        return dialog;
     }
 
     private AlertDialog createDontAskAgainDialog() {
@@ -481,7 +491,17 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                 }
             }
         });
-        return builder.create();
+        AlertDialog dialog = builder.create();
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                dialog.cancel();
+                if (isInvisibleLayoutMode) {
+                    finalCheck();
+                }
+            }
+        });
+        return dialog;
     }
 
 }
