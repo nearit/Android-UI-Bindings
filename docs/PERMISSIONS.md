@@ -17,7 +17,7 @@ If you want your app to ask user for both location and bluetooth permissions (an
  
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
-                .createPermissionRequestIntentBuilder()
+                .permissionsIntentBuilder()
                 .build(),
         NEAR_PERMISSION_REQUEST);
 ```
@@ -31,7 +31,7 @@ If you want your app to ask user for both location and bluetooth permissions (an
  
  startActivityForResult(
         NearITUIBindings.getInstance(this@YourActivity)
-                .createPermissionRequestIntentBuilder()
+                .permissionsIntentBuilder()
                 .build(),
         NEAR_PERMISSION_REQUEST)
 ```
@@ -51,7 +51,7 @@ If your app does not use Beacons technology, you should not ask your user to tur
  JAVA
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
-                .createPermissionRequestIntentBuilder()
+                .permissionsIntentBuilder()
                 .noBeacon()
                 .build(),
         NEAR_PERMISSION_REQUEST);
@@ -61,7 +61,7 @@ If your app does not use Beacons technology, you should not ask your user to tur
  KOTLIN
  startActivityForResult(
         NearITUIBindings.getInstance(this@YourActivity)
-                .createPermissionRequestIntentBuilder()
+                .permissionsIntentBuilder()
                 .noBeacon()
                 .build(),
         NEAR_PERMISSION_REQUEST)
@@ -73,7 +73,7 @@ If your app uses Beacons, but you consider the bluetooth a non-blocking requirem
  JAVA
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
-                .createPermissionRequestIntentBuilder()
+                .permissionsIntentBuilder()
                 .nonBlockingBeacon()
                 .build(),
         NEAR_PERMISSION_REQUEST);
@@ -83,7 +83,7 @@ If your app uses Beacons, but you consider the bluetooth a non-blocking requirem
  KOTLIN
  startActivityForResult(
         NearITUIBindings.getInstance(this@YourActivity)
-                .createPermissionRequestIntentBuilder()
+                .permissionsIntentBuilder()
                 .nonBlockingBeacon()
                 .build(),
         NEAR_PERMISSION_REQUEST)
@@ -104,7 +104,7 @@ In order to start the permission flow without UI, you should chain `invisibleLay
  JAVA
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
-                .createPermissionRequestIntentBuilder()
+                .permissionsIntentBuilder()
                 .invisibleLayoutMode()
                 // ...
                 .build(),
@@ -115,7 +115,7 @@ In order to start the permission flow without UI, you should chain `invisibleLay
  KOTLIN
  startActivityForResult(
         NearITUIBindings.getInstance(this@YourActivity)
-                .createPermissionRequestIntentBuilder()
+                .permissionsIntentBuilder()
                 .invisibleLayoutMode()
                 // ...
                 .build(),
@@ -185,7 +185,7 @@ Additionaly, if you wish to replace the header image of the permissions request 
  JAVA
  startActivityForResult(
         NearITUIBindings.getInstance(YourActivity.this)
-                .createPermissionRequestIntentBuilder()
+                .permissionsIntentBuilder()
                 // ...
                 .setHeaderResourceId(R.drawable.your_image) 
                 .build(),
@@ -196,7 +196,7 @@ Additionaly, if you wish to replace the header image of the permissions request 
  KOTLIN
  startActivityForResult(
         NearITUIBindings.getInstance(this@YourActivity)
-                .createPermissionRequestIntentBuilder()
+                .permissionsIntentBuilder()
                 // ...
                 .setHeaderResourceId(R.drawable.your_image) 
                 .build(),
