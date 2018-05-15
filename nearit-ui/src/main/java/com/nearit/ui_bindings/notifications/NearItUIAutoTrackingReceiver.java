@@ -52,17 +52,17 @@ public class NearItUIAutoTrackingReceiver extends WakefulBroadcastReceiver imple
 
     @Override
     public void gotCouponNotification(Coupon coupon, TrackingInfo trackingInfo) {
-        context.startActivity(NearITUIBindings.getInstance(context).createCouponDetailIntentBuilder(coupon).build().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
+        context.startActivity(NearITUIBindings.getInstance(context).couponIntentBuilder(coupon).build().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
     }
 
     @Override
     public void gotFeedbackNotification(Feedback feedback, TrackingInfo trackingInfo) {
-        context.startActivity(NearITUIBindings.getInstance(context).createFeedbackIntentBuilder(feedback).build().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
+        context.startActivity(NearITUIBindings.getInstance(context).feedbackIntentBuilder(feedback).build().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
     }
 
     @Override
     public void gotContentNotification(Content content, TrackingInfo trackingInfo) {
-        context.startActivity(NearITUIBindings.getInstance(context).createContentDetailIntentBuilder(content, trackingInfo).build().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
+        context.startActivity(NearITUIBindings.getInstance(context).contentIntentBuilder(content, trackingInfo).build().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
     }
 
     @Override

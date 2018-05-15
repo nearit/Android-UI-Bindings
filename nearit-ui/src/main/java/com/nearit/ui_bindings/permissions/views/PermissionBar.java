@@ -111,7 +111,7 @@ public class PermissionBar extends RelativeLayout {
         okButton = findViewById(R.id.ok_button);
         okButton.setClickable(true);
 
-        final PermissionsRequestIntentBuilder builder = NearITUIBindings.getInstance(context).createPermissionRequestIntentBuilder();
+        final PermissionsRequestIntentBuilder builder = NearITUIBindings.getInstance(context).permissionsIntentBuilder();
 
         if (noBeacon) {
             hideBluetoothIcon();
