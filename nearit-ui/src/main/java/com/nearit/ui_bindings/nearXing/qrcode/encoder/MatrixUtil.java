@@ -124,7 +124,7 @@ final class MatrixUtil {
   //
   // JAVAPORT: We shouldn't need to do this at all. The code should be rewritten to begin encoding
   // with the ByteMatrix initialized all to zero.
-  static void clearMatrix(ByteMatrix matrix) {
+  private static void clearMatrix(ByteMatrix matrix) {
     matrix.clear((byte) -1);
   }
 
@@ -151,7 +151,7 @@ final class MatrixUtil {
   // - Timing patterns
   // - Dark dot at the left bottom corner
   // - Position adjustment patterns, if need be
-  static void embedBasicPatterns(Version version, ByteMatrix matrix) throws WriterException {
+  private static void embedBasicPatterns(Version version, ByteMatrix matrix) throws WriterException {
     // Let's get started with embedding big squares at corners.
     embedPositionDetectionPatternsAndSeparators(matrix);
     // Then, embed the dark dot at the left bottom corner.
@@ -164,7 +164,7 @@ final class MatrixUtil {
   }
 
   // Embed type information. On success, modify the matrix.
-  static void embedTypeInfo(ErrorCorrectionLevel ecLevel, int maskPattern, ByteMatrix matrix)
+  private static void embedTypeInfo(ErrorCorrectionLevel ecLevel, int maskPattern, ByteMatrix matrix)
       throws WriterException {
     BitArray typeInfoBits = new BitArray();
     makeTypeInfoBits(ecLevel, maskPattern, typeInfoBits);
@@ -196,7 +196,7 @@ final class MatrixUtil {
 
   // Embed version information if need be. On success, modify the matrix and return true.
   // See 8.10 of JISX0510:2004 (p.47) for how to embed version information.
-  static void maybeEmbedVersionInfo(Version version, ByteMatrix matrix) throws WriterException {
+  private static void maybeEmbedVersionInfo(Version version, ByteMatrix matrix) throws WriterException {
     if (version.getVersionNumber() < 7) {  // Version info is necessary if version >= 7.
       return;  // Don't need version info.
     }
@@ -220,7 +220,7 @@ final class MatrixUtil {
   // Embed "dataBits" using "getMaskPattern". On success, modify the matrix and return true.
   // For debugging purposes, it skips masking process if "getMaskPattern" is -1.
   // See 8.7 of JISX0510:2004 (p.38) for how to embed data bits.
-  static void embedDataBits(BitArray dataBits, int maskPattern, ByteMatrix matrix)
+  private static void embedDataBits(BitArray dataBits, int maskPattern, ByteMatrix matrix)
       throws WriterException {
     int bitIndex = 0;
     int direction = -1;
@@ -272,7 +272,7 @@ final class MatrixUtil {
   // - findMSBSet(0) => 0
   // - findMSBSet(1) => 1
   // - findMSBSet(255) => 8
-  static int findMSBSet(int value) {
+  private static int findMSBSet(int value) {
     return 32 - Integer.numberOfLeadingZeros(value);
   }
 
@@ -301,7 +301,7 @@ final class MatrixUtil {
   //
   // Since all coefficients in the polynomials are 1 or 0, we can do the calculation by bit
   // operations. We don't care if coefficients are positive or negative.
-  static int calculateBCHCode(int value, int poly) {
+  private static int calculateBCHCode(int value, int poly) {
     if (poly == 0) {
       throw new IllegalArgumentException("0 polynomial");
     }
@@ -320,7 +320,7 @@ final class MatrixUtil {
   // Make bit vector of type information. On success, store the result in "bits" and return true.
   // Encode error correction level and mask pattern. See 8.9 of
   // JISX0510:2004 (p.45) for details.
-  static void makeTypeInfoBits(ErrorCorrectionLevel ecLevel, int maskPattern, BitArray bits)
+  private static void makeTypeInfoBits(ErrorCorrectionLevel ecLevel, int maskPattern, BitArray bits)
       throws WriterException {
     if (!QRCode.isValidMaskPattern(maskPattern)) {
       throw new WriterException("Invalid mask pattern");
@@ -342,7 +342,7 @@ final class MatrixUtil {
 
   // Make bit vector of version information. On success, store the result in "bits" and return true.
   // See 8.10 of JISX0510:2004 (p.45) for details.
-  static void makeVersionInfoBits(Version version, BitArray bits) throws WriterException {
+  private static void makeVersionInfoBits(Version version, BitArray bits) throws WriterException {
     bits.appendBits(version.getVersionNumber(), 6);
     int bchCode = calculateBCHCode(version.getVersionNumber(), VERSION_INFO_POLY);
     bits.appendBits(bchCode, 12);

@@ -23,12 +23,12 @@ package com.nearit.ui_bindings.nearXing;
  *
  * @author Sean Owen
  */
-public abstract class ReaderException extends Exception {
+abstract class ReaderException extends Exception {
 
   // disable stack traces when not running inside test units
-  protected static final boolean isStackTrace =
+  static final boolean isStackTrace =
       System.getProperty("surefire.test.class.path") != null;
-  protected static final StackTraceElement[] NO_TRACE = new StackTraceElement[0];
+  static final StackTraceElement[] NO_TRACE = new StackTraceElement[0];
 
   ReaderException() {
     // do nothing

@@ -28,9 +28,6 @@ public class NearItContentDetailActivity extends AppCompatActivity {
     private ContentDetailExtraParams extras;
     private boolean isEnableTapToClose = false;
 
-    @Nullable
-    LinearLayout closeButton;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +36,7 @@ public class NearItContentDetailActivity extends AppCompatActivity {
 
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        closeButton = findViewById(R.id.content_close_icon);
+        LinearLayout closeButton = findViewById(R.id.content_close_icon);
         if (closeButton != null) {
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override

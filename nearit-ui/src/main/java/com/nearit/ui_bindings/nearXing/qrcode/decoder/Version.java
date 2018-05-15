@@ -191,7 +191,7 @@ public final class Version {
       this.ecBlocks = ecBlocks;
     }
 
-    public int getECCodewordsPerBlock() {
+    int getECCodewordsPerBlock() {
       return ecCodewordsPerBlock;
     }
 
@@ -207,7 +207,7 @@ public final class Version {
       return ecCodewordsPerBlock * getNumBlocks();
     }
 
-    public ECB[] getECBlocks() {
+    ECB[] getECBlocks() {
       return ecBlocks;
     }
   }
@@ -226,11 +226,11 @@ public final class Version {
       this.dataCodewords = dataCodewords;
     }
 
-    public int getCount() {
+    int getCount() {
       return count;
     }
 
-    public int getDataCodewords() {
+    int getDataCodewords() {
       return dataCodewords;
     }
   }

@@ -20,8 +20,8 @@ public class NearItUIWarningDialogActivity extends AppCompatActivity {
     private static final int NEAR_RETRY_CODE = 1111;
     private static final int NEAR_CLOSE_CODE = 2222;
 
-    NearItUIRetryButton retryButton;
-    TextView closeButton;
+    private NearItUIRetryButton retryButton;
+    private TextView closeButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

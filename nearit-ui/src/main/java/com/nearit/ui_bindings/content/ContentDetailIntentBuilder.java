@@ -18,7 +18,7 @@ public class ContentDetailIntentBuilder {
     @Nullable
     private final TrackingInfo mTrackingInfo;
 
-    private boolean mSingleInstance;
+    private final boolean mSingleInstance;
 
     public ContentDetailIntentBuilder(Context context, Content content, @Nullable TrackingInfo trackingInfo, boolean singleInstance) {
         mContext = context;

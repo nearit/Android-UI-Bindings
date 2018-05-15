@@ -19,7 +19,7 @@ public class FeedbackIntentBuilder {
     private int mIconResId;
     private boolean mEnableTapOutside;
 
-    private boolean mSingleInstance;
+    private final boolean mSingleInstance;
 
     public FeedbackIntentBuilder(Context context, Feedback feedback, boolean singleInstance) {
         mContext = context;

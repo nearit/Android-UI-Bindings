@@ -21,7 +21,7 @@ public class NearItFeedbackActivity extends AppCompatActivity {
 
     private FeedbackRequestExtras extras;
     private boolean isEnableTapToClose = false;
-    NearItFeedbackFragment mFragment;
+    private NearItFeedbackFragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

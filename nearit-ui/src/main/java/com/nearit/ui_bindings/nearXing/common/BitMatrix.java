@@ -201,7 +201,7 @@ public final class BitMatrix implements Cloneable {
    * @param unsetString representation of an unset bit
    * @return string representation of entire matrix utilizing given strings
    */
-  public String toString(String setString, String unsetString) {
+  private String toString(String setString, String unsetString) {
     return buildToString(setString, unsetString, "\n");
   }
 

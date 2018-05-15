@@ -184,7 +184,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
         }
     }
 
-    public boolean checkLocation() {
+    private boolean checkLocation() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         boolean anyLocationProv = false;
@@ -372,7 +372,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
     /**
      * Checks one last time that everything is ok
      */
-    public void finalCheck() {
+    private void finalCheck() {
         if (PermissionsUtils.isAirplaneModeOn(this)) {
             finish();
         }

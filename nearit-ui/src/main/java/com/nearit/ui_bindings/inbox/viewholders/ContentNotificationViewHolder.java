@@ -17,8 +17,8 @@ public class ContentNotificationViewHolder extends BaseViewHolder<Content> {
 
     public static final int VIEWTYPE = 2;
 
-    final Button button;
-    final InboxCardLayout layout;
+    private final Button button;
+    private final InboxCardLayout layout;
 
     public ContentNotificationViewHolder(LayoutInflater inflater, ViewGroup parent, final InboxAdapter.InboxAdapterListener listener, InboxAdapter.NotificationReadListener readListener) {
         super(inflater.inflate(R.layout.nearit_ui_inbox_content_item, parent, false), readListener);

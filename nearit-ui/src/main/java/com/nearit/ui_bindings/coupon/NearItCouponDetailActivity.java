@@ -26,16 +26,13 @@ public class NearItCouponDetailActivity extends AppCompatActivity {
     private CouponDetailExtraParams extras;
     private boolean isEnableTapToClose = false;
 
-    @Nullable
-    LinearLayout closeButton;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.nearit_ui_activity_coupon_detail);
 
-        closeButton = findViewById(R.id.close_icon);
+        LinearLayout closeButton = findViewById(R.id.close_icon);
         if (closeButton != null) {
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override

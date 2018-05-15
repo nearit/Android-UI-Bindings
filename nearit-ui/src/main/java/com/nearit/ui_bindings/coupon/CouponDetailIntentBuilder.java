@@ -19,7 +19,7 @@ public class CouponDetailIntentBuilder {
     private boolean mEnableTapOutsideToClose = false;
     private final Coupon mCoupon;
 
-    private boolean mSingleInstance;
+    private final boolean mSingleInstance;
 
     public CouponDetailIntentBuilder(Context context, Coupon coupon, boolean singleInstance) {
         mContext = context;

@@ -19,7 +19,7 @@ package com.nearit.ui_bindings.nearXing;
 /**
  * Simply encapsulates a width and height.
  */
-public final class Dimension {
+final class Dimension {
 
   private final int width;
   private final int height;
