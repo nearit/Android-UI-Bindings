@@ -22,7 +22,7 @@ class FeedbackActivity : AppCompatActivity() {
             val feedback = FeedbackFactory.getFeedback()
             startActivity(
                     NearITUIBindings.getInstance(this@FeedbackActivity)
-                            .createFeedbackIntentBuilder(feedback)
+                            .feedbackIntentBuilder(feedback)
                             .build()
             )
         }
@@ -34,7 +34,7 @@ class FeedbackActivity : AppCompatActivity() {
                     //  The text response is disabled
                     //  + tap outside to close is enabled
                     NearITUIBindings.getInstance(this@FeedbackActivity)
-                            .createFeedbackIntentBuilder(feedback)
+                            .feedbackIntentBuilder(feedback)
                             .withoutComment()
                             .enableTapOutsideToClose()
                             .build()

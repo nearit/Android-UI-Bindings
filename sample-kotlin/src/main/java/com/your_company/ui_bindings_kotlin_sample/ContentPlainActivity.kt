@@ -20,7 +20,7 @@ class ContentPlainActivity : AppCompatActivity() {
         val trackingInfo = TrackingInfo.fromRecipeId("my-fake-recipe-id")
 
         val contentFragment = NearITUIBindings.getInstance(this@ContentPlainActivity)
-                .createContentDetailFragmentBuilder(content, trackingInfo)
+                .contentFragmentBuilder(content, trackingInfo)
                 .build()
 
         supportFragmentManager

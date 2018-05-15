@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, CouponsActivity.class));
     }
 
-    public void openFeedbacks(View view) {
+    public void openFeedback(View view) {
         startActivity(new Intent(this, FeedbackActivity.class));
     }
 

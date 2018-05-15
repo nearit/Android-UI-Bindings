@@ -18,7 +18,7 @@ class CouponPlainActivity : AppCompatActivity() {
         val coupon = CouponFactory.getValidCoupon()
 
         val couponFragment = NearITUIBindings.getInstance(this)
-                .createCouponDetailFragmentBuilder(coupon)
+                .couponFragmentBuilder(coupon)
                 .build()
 
         supportFragmentManager

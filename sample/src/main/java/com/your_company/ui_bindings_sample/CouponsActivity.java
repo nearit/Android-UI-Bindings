@@ -30,42 +30,42 @@ public class CouponsActivity extends AppCompatActivity {
     public void onDefaultClicked(View view) {
         //  start an activity that shows a list of REAL coupons, with jagged borders
         startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
-                .createCouponListIntentBuilder()
+                .couponListIntentBuilder()
                 .jaggedBorders()
                 .build());
     }
 
     public void onValidClicked(View view) {
         startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
-                .createCouponListIntentBuilder()
+                .couponListIntentBuilder()
                 .validCoupons()
                 .build());
     }
 
     public void onInactiveClicked(View view) {
         startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
-                .createCouponListIntentBuilder()
+                .couponListIntentBuilder()
                 .inactiveCoupons()
                 .build());
     }
 
     public void onExpiredClicked(View view) {
         startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
-                .createCouponListIntentBuilder()
+                .couponListIntentBuilder()
                 .expiredCoupons()
                 .build());
     }
 
     public void onRedeemedClicked(View view) {
         startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
-                .createCouponListIntentBuilder()
+                .couponListIntentBuilder()
                 .redeemedCoupons()
                 .build());
     }
 
     public void onValidAndInactiveClicked(View view) {
         startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
-                .createCouponListIntentBuilder()
+                .couponListIntentBuilder()
                 .validCoupons()
                 .inactiveCoupons()
                 .build());
@@ -73,7 +73,7 @@ public class CouponsActivity extends AppCompatActivity {
 
     public void onValidAndExpiredClicked(View view) {
         startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
-                .createCouponListIntentBuilder()
+                .couponListIntentBuilder()
                 .validCoupons()
                 .expiredCoupons()
                 .build());
@@ -81,7 +81,7 @@ public class CouponsActivity extends AppCompatActivity {
 
     public void onValidAndRedeemedClicked(View view) {
         startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
-                .createCouponListIntentBuilder()
+                .couponListIntentBuilder()
                 .validCoupons()
                 .redeemedCoupons()
                 .build());
@@ -89,7 +89,7 @@ public class CouponsActivity extends AppCompatActivity {
 
     public void onInactiveAndExpiredClicked(View view) {
         startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
-                .createCouponListIntentBuilder()
+                .couponListIntentBuilder()
                 .inactiveCoupons()
                 .expiredCoupons()
                 .build());
@@ -97,7 +97,7 @@ public class CouponsActivity extends AppCompatActivity {
 
     public void onInactiveAndRedeemedClicked(View view) {
         startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
-                .createCouponListIntentBuilder()
+                .couponListIntentBuilder()
                 .inactiveCoupons()
                 .redeemedCoupons()
                 .build());
@@ -105,7 +105,7 @@ public class CouponsActivity extends AppCompatActivity {
 
     public void onExpiredAndRedeemedClicked(View view) {
         startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
-                .createCouponListIntentBuilder()
+                .couponListIntentBuilder()
                 .expiredCoupons()
                 .redeemedCoupons()
                 .build());
@@ -119,7 +119,7 @@ public class CouponsActivity extends AppCompatActivity {
         startActivity(
                 //  Basic example with a valid coupon
                 NearITUIBindings.getInstance(CouponsActivity.this)
-                        .createCouponDetailIntentBuilder(validCoupon)
+                        .couponIntentBuilder(validCoupon)
                         .build());
     }
 
@@ -129,7 +129,7 @@ public class CouponsActivity extends AppCompatActivity {
         startActivity(
                 //  Basic example with a not yet valid coupon
                 NearITUIBindings.getInstance(CouponsActivity.this)
-                        .createCouponDetailIntentBuilder(validCoupon)
+                        .couponIntentBuilder(validCoupon)
                         .build());
     }
 
@@ -139,7 +139,7 @@ public class CouponsActivity extends AppCompatActivity {
                 //  Basic example with an expired coupon
                 //  + enable tap outside the dialog to close it
                 NearITUIBindings.getInstance(CouponsActivity.this)
-                        .createCouponDetailIntentBuilder(expiredCoupon)
+                        .couponIntentBuilder(expiredCoupon)
                         .enableTapOutsideToClose()
                         .build());
     }
@@ -150,7 +150,7 @@ public class CouponsActivity extends AppCompatActivity {
         startActivity(
                 //  Change the default icon placeholder
                 NearITUIBindings.getInstance(CouponsActivity.this)
-                        .createCouponDetailIntentBuilder(validCoupon)
+                        .couponIntentBuilder(validCoupon)
                         .setIconPlaceholderResourceId(R.drawable.my_custom_placeholder)
                         .build());
     }

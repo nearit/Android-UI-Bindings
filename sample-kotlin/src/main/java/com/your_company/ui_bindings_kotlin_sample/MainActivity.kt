@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this@MainActivity, CouponsActivity::class.java))
     }
 
-    fun openFeedbacks(view: View) {
+    fun openFeedback(view: View) {
         startActivity(Intent(this@MainActivity, FeedbackActivity::class.java))
     }
 
