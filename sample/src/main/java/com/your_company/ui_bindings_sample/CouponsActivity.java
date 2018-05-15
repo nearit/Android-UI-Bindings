@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.nearit.ui_bindings.NearITUIBindings;
-import com.nearit.ui_bindings.coupon.CouponDetailIntentBuilder;
 import com.your_company.ui_bindings_sample.factories.CouponFactory;
 
 import it.near.sdk.reactions.couponplugin.model.Coupon;
@@ -23,31 +22,13 @@ public class CouponsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coupons);
-
         couponFactory = new CouponFactory();
-
-        CouponDetailIntentBuilder builder = new CouponDetailIntentBuilder(this, null, true);
-
-        /*
-
-        Button couponList = findViewById(R.id.coupon_list);
-        couponList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //  start an activity that shows a list of REAL coupons, with jagged borders
-                startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
-                        .createCouponListIntentBuilder()
-                        .jaggedBorders()
-                        .build()
-                );
-            }
-        }); */
-
     }
 
 
 
     public void onDefaultClicked(View view) {
+        //  start an activity that shows a list of REAL coupons, with jagged borders
         startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
                 .createCouponListIntentBuilder()
                 .jaggedBorders()
