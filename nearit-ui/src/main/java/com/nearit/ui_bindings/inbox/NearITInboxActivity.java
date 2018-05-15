@@ -10,8 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
 
-import it.near.sdk.NearItManager;
-
 public class NearITInboxActivity extends AppCompatActivity {
 
     @Override

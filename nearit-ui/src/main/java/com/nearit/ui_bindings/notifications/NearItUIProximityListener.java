@@ -13,7 +13,7 @@ import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
 import it.near.sdk.recipes.foreground.ProximityListener;
 import it.near.sdk.recipes.models.Recipe;
 import it.near.sdk.trackings.TrackingInfo;
-import it.near.sdk.utils.CoreContentsListener;
+import it.near.sdk.utils.ContentsListener;
 import it.near.sdk.utils.NearItIntentConstants;
 import it.near.sdk.utils.NearUtils;
 
@@ -21,11 +21,11 @@ import it.near.sdk.utils.NearUtils;
  * @author Federico Boschini
  */
 
-public class NearItUIProximityListener implements ProximityListener, CoreContentsListener {
+public class NearItUIProximityListener implements ProximityListener, ContentsListener {
 
 //    private int customIcon = 0;
 
-    private Context mContext;
+    private final Context mContext;
 
     public NearItUIProximityListener(Context context) {
         mContext = context;
@@ -38,7 +38,7 @@ public class NearItUIProximityListener implements ProximityListener, CoreContent
 
     @Override
     public void foregroundEvent(Parcelable content, TrackingInfo trackingInfo) {
-        NearUtils.parseCoreContents(content, trackingInfo, this);
+        NearUtils.parseContents(content, trackingInfo, this);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class NearItUIProximityListener implements ProximityListener, CoreContent
     }
 
     private void sendNotifiedTracking(TrackingInfo trackingInfo) {
-        NearItManager.getInstance().sendTracking(trackingInfo, Recipe.NOTIFIED_STATUS);
+        NearItManager.getInstance().sendTracking(trackingInfo, Recipe.RECEIVED);
     }
 
 }

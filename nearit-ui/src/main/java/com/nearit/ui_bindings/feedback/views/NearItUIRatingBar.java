@@ -67,7 +67,7 @@ public class NearItUIRatingBar extends View {
          */
         Right(1);
 
-        int id;
+        final int id;
 
         Gravity(int id) {
             this.id = id;

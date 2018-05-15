@@ -10,17 +10,23 @@ import it.near.sdk.reactions.couponplugin.model.Coupon;
  */
 
 public class CouponDetailIntentBuilder {
-    private Context mContext;
+
+    public final static boolean DEFAULT_LAUNCH_MODE = false;
+
+    private final Context mContext;
     private int mIconDrawable;
     private int mSeparatorDrawable;
     private boolean mNoSeparator = false;
     private boolean mNoWakeLock = false;
     private boolean mEnableTapOutsideToClose = false;
-    private Coupon mCoupon;
+    private final Coupon mCoupon;
 
-    public CouponDetailIntentBuilder(Context context, Coupon coupon) {
+    private boolean mSingleInstance = false;
+
+    public CouponDetailIntentBuilder(Context context, Coupon coupon, boolean singleInstance) {
         mContext = context;
         mCoupon = coupon;
+        mSingleInstance = singleInstance;
     }
 
     /**
@@ -58,7 +64,7 @@ public class CouponDetailIntentBuilder {
     }
 
     /**
-     *  Disable wake-lock and max brightness
+     * Disable wake-lock and max brightness
      */
     public CouponDetailIntentBuilder disableAutoMaxBrightness() {
         mNoWakeLock = true;
@@ -66,7 +72,11 @@ public class CouponDetailIntentBuilder {
     }
 
     public Intent build() {
-        return NearItCouponDetailActivity.createIntent(mContext, mCoupon, getParams());
+        if (mSingleInstance) {
+            return NearItCouponDetailActivitySingleInstance.createIntent(mContext, mCoupon, getParams());
+        } else {
+            return NearItCouponDetailActivity.createIntent(mContext, mCoupon, getParams());
+        }
     }
 
     private CouponDetailExtraParams getParams() {

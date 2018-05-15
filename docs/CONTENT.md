@@ -8,7 +8,7 @@ If you want your app to display a NearIT content in a pop-up dialog, use this si
  // ...
  startActivity(
          NearITUIBindings.getInstance(YourActivity.this)
-            .createContentDetailIntentBuilder(content)
+            .createContentDetailIntentBuilder(content, trackingInfo)
             .build());
 ```
 
@@ -17,11 +17,12 @@ If you want your app to display a NearIT content in a pop-up dialog, use this si
  // ...
  startActivity(
          NearITUIBindings.getInstance(this@YourActivity)
-            .createContentDetailIntentBuilder(content)
+            .createContentDetailIntentBuilder(content, trackingInfo)
             .build())
 ```
 
-where, `content` is an instance of NearIT SDK `Content` class. Further information on contents and other in-app content can be found [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/).
+where, `content` is an instance of NearIT SDK `Content` class and `trackingInfo` is an instance of `TrackingInfo`. The Content detail window will automatically track user tap on the content CTA Button.
+Both instances get usually delivered together. If you don't have access to the `trackingInfo` instance you can call the builder with a `null` `trackingInfo`. Further information on contents and other in-app content can be found [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/).
 
 ![NearIT-UI content dialog](content.png)
 
@@ -33,7 +34,7 @@ Optionally, you can display the content in your custom Activity by adding a Frag
   JAVA
   // ...
   Fragment contentFragment = NearITUIBindings.getInstance(YourActivity.this)
-        .createContentDetailFragmentBuilder(content)
+        .createContentDetailFragmentBuilder(content, trackingInfo /*can be null*/)
         .build();
 ```
 
@@ -41,7 +42,7 @@ Optionally, you can display the content in your custom Activity by adding a Frag
   KOTLIN
   // ...
   val contentFragment: Fragment = NearITUIBindings.getInstance(this@YourActivity)
-        .createContentDetailFragmentBuilder(content)
+        .createContentDetailFragmentBuilder(content, trackingInfo /*can be null*/)
         .build()
 ```
 

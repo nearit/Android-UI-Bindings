@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 
 public class InboxListIntentBuilder {
-    private Context context;
+    private final Context context;
     private int mNoInboxLayout = 0;
     private boolean includeCustomJSON = false;
     private boolean includeFeedbacks = true;

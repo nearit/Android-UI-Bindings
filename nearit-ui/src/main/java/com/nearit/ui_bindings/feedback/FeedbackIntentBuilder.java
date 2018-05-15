@@ -10,12 +10,12 @@ import it.near.sdk.reactions.feedbackplugin.model.Feedback;
  */
 
 public class FeedbackIntentBuilder {
-    private Context mContext;
-    private Feedback mFeedback;
+    private final Context mContext;
+    private final Feedback mFeedback;
     private boolean mHideTextResponse;
     private boolean mNoSuccessIcon;
-    private boolean mAutoCloseParentActivity;
-    private boolean mShowCloseButton;
+    private final boolean mAutoCloseParentActivity;
+    private final boolean mShowCloseButton;
     private int mIconResId;
     private boolean mEnableTapOutside;
 

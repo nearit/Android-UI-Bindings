@@ -17,8 +17,8 @@ public class FeedbackViewHolder extends BaseViewHolder<Feedback> {
 
     public static final int VIEWTYPE = 3;
 
-    Button button;
-    InboxCardLayout layout;
+    private final Button button;
+    private final InboxCardLayout layout;
 
     public FeedbackViewHolder(LayoutInflater inflater, ViewGroup parent, final InboxAdapter.InboxAdapterListener listener, InboxAdapter.NotificationReadListener readListener) {
         super(inflater.inflate(R.layout.nearit_ui_inbox_feedback_item, parent, false), readListener);

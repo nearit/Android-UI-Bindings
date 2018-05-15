@@ -23,7 +23,7 @@ class NearItUIIntentManager implements ContentsListener {
 
     private static final String TAG = "NearITUIIntentManager";
 
-    private Context context;
+    private final Context context;
     private boolean intentManaged = false;
 
     NearItUIIntentManager(Context context) {
@@ -47,7 +47,7 @@ class NearItUIIntentManager implements ContentsListener {
     @Override
     public void gotContentNotification(Content content, TrackingInfo trackingInfo) {
         Log.d(TAG, "content notification received");
-        context.startActivity(NearITUIBindings.getInstance(context).createContentDetailIntentBuilder(content).build());
+        context.startActivity(NearITUIBindings.getInstance(context).createContentDetailIntentBuilder(content, trackingInfo).build());
         intentManaged = true;
     }
 

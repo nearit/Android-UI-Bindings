@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +21,11 @@ import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.content.views.ContentCTAButton;
 import com.nearit.ui_bindings.utils.LoadImageFromURL;
 
+import it.near.sdk.NearItManager;
 import it.near.sdk.reactions.contentplugin.model.Content;
+import it.near.sdk.trackings.TrackingInfo;
+
+import static it.near.sdk.recipes.models.Recipe.CTA_TAPPED;
 
 /**
  * @author Federico Boschini
@@ -27,23 +33,21 @@ import it.near.sdk.reactions.contentplugin.model.Content;
 
 public class NearItContentDetailFragment extends Fragment {
     private static final String ARG_CONTENT = "content";
+    private static final String ARG_TRACKING_INFO = "tracking_info";
     private static final String ARG_EXTRAS = "extras";
 
     private Content content;
-    private TextView titleTextView;
-    private WebView contentView;
-    private ContentCTAButton ctaButton;
-    private ImageView contentImageView;
-    private ProgressBar contentImageSpinner;
-    private LinearLayout contentImageContainer;
+    @Nullable
+    private TrackingInfo trackingInfo;
 
     public NearItContentDetailFragment() {
     }
 
-    public static NearItContentDetailFragment newInstance(Content content, Parcelable extras) {
+    public static NearItContentDetailFragment newInstance(Content content, @Nullable TrackingInfo trackingInfo, Parcelable extras) {
         NearItContentDetailFragment fragment = new NearItContentDetailFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(ARG_EXTRAS, extras);
+        bundle.putParcelable(ARG_TRACKING_INFO, trackingInfo);
         bundle.putParcelable(ARG_CONTENT, content);
         fragment.setArguments(bundle);
         return fragment;
@@ -53,8 +57,17 @@ public class NearItContentDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        content = getArguments().getParcelable(ARG_CONTENT);
-        ContentDetailExtraParams extras = getArguments().getParcelable(ARG_EXTRAS);
+        Bundle args = getArguments();
+        if (args != null) {
+            content = args.getParcelable(ARG_CONTENT);
+            trackingInfo = args.getParcelable(ARG_TRACKING_INFO);
+        }
+
+        ContentDetailExtraParams extras = null;
+        if (getArguments() != null) {
+            extras = getArguments().getParcelable(ARG_EXTRAS);
+        }
+
         if (extras != null) {
 
         }
@@ -62,15 +75,15 @@ public class NearItContentDetailFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_content_detail, container, false);
 
-        titleTextView = rootView.findViewById(R.id.content_title);
-        contentView = rootView.findViewById(R.id.content_text);
-        ctaButton = rootView.findViewById(R.id.cta_button);
-        contentImageView = rootView.findViewById(R.id.content_image);
-        contentImageSpinner = rootView.findViewById(R.id.content_image_progress_bar);
-        contentImageContainer = rootView.findViewById(R.id.content_image_container);
+        TextView titleTextView = rootView.findViewById(R.id.content_title);
+        WebView contentView = rootView.findViewById(R.id.content_text);
+        ContentCTAButton ctaButton = rootView.findViewById(R.id.cta_button);
+        ImageView contentImageView = rootView.findViewById(R.id.content_image);
+        ProgressBar contentImageSpinner = rootView.findViewById(R.id.content_image_progress_bar);
+        LinearLayout contentImageContainer = rootView.findViewById(R.id.content_image_container);
 
         if (content.title != null) {
             titleTextView.setVisibility(View.VISIBLE);
@@ -95,6 +108,7 @@ public class NearItContentDetailFragment extends Fragment {
             ctaButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    NearItManager.getInstance().sendTracking(trackingInfo, CTA_TAPPED);
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(content.getCta().url)));
                 }
             });

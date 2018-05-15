@@ -11,7 +11,7 @@ import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 public class CouponFactory {
 
-    private Coupon coupon = new Coupon();
+    private final Coupon coupon = new Coupon();
 
     public CouponFactory() {
         Claim claim = new Claim();

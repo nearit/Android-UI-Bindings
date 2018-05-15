@@ -2,21 +2,30 @@ package com.nearit.ui_bindings.content;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 
 import it.near.sdk.reactions.contentplugin.model.Content;
+import it.near.sdk.trackings.TrackingInfo;
 
 /**
  * @author Federico Boschini
  */
 
 public class ContentDetailIntentBuilder {
-    private Context mContext;
+    private final Context mContext;
     private boolean mEnableTapOutsideToClose = false;
-    private Content mContent;
+    private final Content mContent;
+    @Nullable
+    private final TrackingInfo mTrackingInfo;
 
-    public ContentDetailIntentBuilder(Context context, Content content) {
+    public ContentDetailIntentBuilder(Context context, Content content,@Nullable TrackingInfo trackingInfo) {
         mContext = context;
         mContent = content;
+        mTrackingInfo = trackingInfo;
+    }
+
+    public ContentDetailIntentBuilder(Context context, Content content) {
+        this(context, content, null);
     }
 
     /**
@@ -30,7 +39,7 @@ public class ContentDetailIntentBuilder {
     }
 
     public Intent build() {
-        return NearItContentDetailActivity.createIntent(mContext, mContent, getParams());
+        return NearItContentDetailActivity.createIntent(mContext, mTrackingInfo, mContent, getParams());
     }
 
     private ContentDetailExtraParams getParams() {

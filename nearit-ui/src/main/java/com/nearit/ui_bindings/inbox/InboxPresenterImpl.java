@@ -47,14 +47,14 @@ class InboxPresenterImpl implements InboxContract.InboxPresenter {
 
     @Override
     public void itemClicked(InboxItem inboxItem) {
-        nearItManager.sendTracking(inboxItem.trackingInfo, Recipe.ENGAGED_STATUS);
+        nearItManager.sendTracking(inboxItem.trackingInfo, Recipe.OPENED);
         view.openDetail(inboxItem);
     }
 
     @Override
     public void onNotificationRead(InboxItem item) {
         if (item.reaction instanceof SimpleNotification)
-            nearItManager.sendTracking(item.trackingInfo, Recipe.ENGAGED_STATUS);
+            nearItManager.sendTracking(item.trackingInfo, Recipe.OPENED);
     }
 
     private void loadInbox() {

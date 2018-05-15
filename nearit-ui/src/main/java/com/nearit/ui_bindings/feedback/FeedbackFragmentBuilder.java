@@ -1,7 +1,5 @@
 package com.nearit.ui_bindings.feedback;
 
-import android.content.Context;
-
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 
 /**
@@ -9,16 +7,14 @@ import it.near.sdk.reactions.feedbackplugin.model.Feedback;
  */
 
 public class FeedbackFragmentBuilder {
-    private Context mContext;
     private boolean mWithoutComment;
     private boolean mNoSuccessIcon;
     private boolean mAutoClose;
     private boolean mShowCloseButton;
     private int mIconResId;
-    private Feedback mFeedback;
+    private final Feedback mFeedback;
 
-    public FeedbackFragmentBuilder(Context context, Feedback feedback) {
-        mContext = context;
+    public FeedbackFragmentBuilder(Feedback feedback) {
         mFeedback = feedback;
     }
 
