@@ -25,7 +25,7 @@ public class CouponsActivity extends AppCompatActivity {
         couponFactory = new CouponFactory();
     }
 
-
+    /*  COUPON LIST EXAMPLES    */
 
     public void onDefaultClicked(View view) {
         //  start an activity that shows a list of REAL coupons, with jagged borders
@@ -110,6 +110,8 @@ public class CouponsActivity extends AppCompatActivity {
                 .redeemedCoupons()
                 .build());
     }
+
+    /*  COUPON DETAIL EXAMPLES    */
 
     public void onValidDetailClicked(View view) {
         //  In a real scenario the coupon is provided by the NearIT SDK
