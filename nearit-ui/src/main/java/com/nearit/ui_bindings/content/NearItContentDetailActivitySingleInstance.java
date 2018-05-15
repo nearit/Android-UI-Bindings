@@ -11,10 +11,10 @@ import it.near.sdk.trackings.TrackingInfo;
  * @author Federico Boschini
  */
 
-public class NearItContentDetailActivity extends BaseContentDetailActivity {
+public class NearItContentDetailActivitySingleInstance extends BaseContentDetailActivity {
 
     public static Intent createIntent(Context context, @Nullable TrackingInfo trackingInfo, Content content, ContentDetailExtraParams params) {
-        Intent intent = new Intent(context, NearItContentDetailActivity.class);
+        Intent intent = new Intent(context, NearItContentDetailActivitySingleInstance.class);
         return BaseContentDetailActivity.addExtras(intent, content, trackingInfo, params);
     }
 }

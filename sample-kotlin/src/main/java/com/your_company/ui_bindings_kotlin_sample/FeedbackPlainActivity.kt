@@ -26,7 +26,7 @@ class FeedbackPlainActivity : AppCompatActivity() {
             supportFragmentManager.getFragment(savedInstanceState, "feedbackFragment")
         } ?:    //  Create a new fragment instance
                 NearITUIBindings.getInstance(this@FeedbackPlainActivity)
-                .createFeedbackFragmentBuilder(feedback)
+                .feedbackFragmentBuilder(feedback)
                 .build()
 
 

@@ -28,16 +28,24 @@ import com.nearit.ui_bindings.utils.PermissionsUtils;
 
 public class PermissionBar extends RelativeLayout {
 
-    public static final int NO_ICON = 0;
-    final Context context;
+    private static final int NO_ICON = 0;
+    private final Context context;
 
-    ImageView btIcon, locIcon;
-    TextView alertMessage;
-    PermissionBarButton okButton;
+    private ImageView btIcon;
+    private ImageView locIcon;
+    private TextView alertMessage;
+    private PermissionBarButton okButton;
 
-    boolean noBeacon, nonBlockingBeacon, invisibleMode, noDialogHeader, autostartRadar;
-    String buttonText, alertMessageText;
-    int btIconResId, locIconResId, dialogHeaderResId;
+    private boolean noBeacon;
+    private boolean nonBlockingBeacon;
+    private boolean invisibleMode;
+    private boolean noDialogHeader;
+    private boolean autostartRadar;
+    private String buttonText;
+    private String alertMessageText;
+    private int btIconResId;
+    private int locIconResId;
+    private int dialogHeaderResId;
 
     @Nullable
     private Activity activity;
@@ -111,7 +119,7 @@ public class PermissionBar extends RelativeLayout {
         okButton = findViewById(R.id.ok_button);
         okButton.setClickable(true);
 
-        final PermissionsRequestIntentBuilder builder = NearITUIBindings.getInstance(context).createPermissionRequestIntentBuilder();
+        final PermissionsRequestIntentBuilder builder = NearITUIBindings.getInstance(context).permissionsIntentBuilder();
 
         if (noBeacon) {
             hideBluetoothIcon();
@@ -166,19 +174,19 @@ public class PermissionBar extends RelativeLayout {
         }
     }
 
-    public void hideBluetoothIcon() {
+    private void hideBluetoothIcon() {
         btIcon.setVisibility(GONE);
     }
 
-    public void showBluetoothIcon() {
+    private void showBluetoothIcon() {
         btIcon.setVisibility(VISIBLE);
     }
 
-    public void hideLocationIcon() {
+    private void hideLocationIcon() {
         locIcon.setVisibility(GONE);
     }
 
-    public void showLocationIcon() {
+    private void showLocationIcon() {
         locIcon.setVisibility(VISIBLE);
     }
 

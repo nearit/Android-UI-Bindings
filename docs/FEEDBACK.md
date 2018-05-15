@@ -8,7 +8,7 @@ If you want your app to display a feedback request in a beautiful pop-up dialog,
  // ...
  startActivity(
          NearITUIBindings.getInstance(YourActivity.this)
-            .createFeedbackIntentBuilder(feedback)
+            .feedbackIntentBuilder(feedback)
             .build());
 ```
 
@@ -17,7 +17,7 @@ If you want your app to display a feedback request in a beautiful pop-up dialog,
  // ...
  startActivity(
          NearITUIBindings.getInstance(this@YourActivity)
-            .createFeedbackIntentBuilder(feedback)
+            .feedbackIntentBuilder(feedback)
             .build())
 ```
 
@@ -35,7 +35,7 @@ If you need to simplify the feedback request you are able to ask the user for th
   // ...
   startActivity(
           NearITUIBindings.getInstance(YourActivity.this)
-             .createFeedbackIntentBuilder(feedback)
+             .feedbackIntentBuilder(feedback)
              .withoutComment()
              .build());
 ```
@@ -45,7 +45,7 @@ If you need to simplify the feedback request you are able to ask the user for th
   // ...
   startActivity(
           NearITUIBindings.getInstance(this@YourActivity)
-             .createFeedbackIntentBuilder(feedback)
+             .feedbackIntentBuilder(feedback)
              .withoutComment()
              .build())
 ```
@@ -59,7 +59,7 @@ Optionally, you can display the feedback request in your custom Activity by addi
   JAVA
   // ...
   Fragment feedbackFragment = NearITUIBindings.getInstance(YourActivity.this)
-        .createFeedbackFragmentBuilder(feedback)
+        .feedbackFragmentBuilder(feedback)
         //  here you can call other methods of the builder
         .build();
 ```
@@ -68,7 +68,7 @@ Optionally, you can display the feedback request in your custom Activity by addi
   KOTLIN
   // ...
   val feedbackFragment: Fragment = NearITUIBindings.getInstance(this@YourActivity)
-        .createFeedbackFragmentBuilder(feedback)
+        .feedbackFragmentBuilder(feedback)
         //  here you can call other methods of the builder
         .build()
 ```

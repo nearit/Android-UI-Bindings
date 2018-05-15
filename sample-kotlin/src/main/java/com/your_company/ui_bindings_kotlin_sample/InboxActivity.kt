@@ -15,7 +15,7 @@ class InboxActivity : AppCompatActivity() {
 
     fun openInbox(view: View) {
         startActivity(NearITUIBindings.getInstance(this@InboxActivity)
-                .createInboxListIntentBuilder()
+                .inboxIntentBuilder()
                 .build())
     }
 

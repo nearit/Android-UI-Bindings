@@ -56,7 +56,7 @@ public class NearItUIFeedbackButton extends RelativeLayout {
         spinner = findViewById(R.id.spinner_container);
     }
 
-    public void setText(String text) {
+    private void setText(String text) {
         this.text = text;
         invalidate();
         requestLayout();

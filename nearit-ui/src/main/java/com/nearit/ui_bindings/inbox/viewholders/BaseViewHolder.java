@@ -31,5 +31,5 @@ public abstract class BaseViewHolder<T extends ReactionBundle> extends RecyclerV
         bindToView((T) item.reaction);
     }
 
-    public abstract void bindToView(T element);
+    protected abstract void bindToView(T element);
 }

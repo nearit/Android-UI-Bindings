@@ -11,8 +11,6 @@ import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 public class CouponDetailIntentBuilder {
 
-    public final static boolean DEFAULT_LAUNCH_MODE = false;
-
     private final Context mContext;
     private int mIconDrawable;
     private int mSeparatorDrawable;
@@ -21,7 +19,7 @@ public class CouponDetailIntentBuilder {
     private boolean mEnableTapOutsideToClose = false;
     private final Coupon mCoupon;
 
-    private boolean mSingleInstance = false;
+    private final boolean mSingleInstance;
 
     public CouponDetailIntentBuilder(Context context, Coupon coupon, boolean singleInstance) {
         mContext = context;
@@ -72,11 +70,8 @@ public class CouponDetailIntentBuilder {
     }
 
     public Intent build() {
-        if (mSingleInstance) {
-            return NearItCouponDetailActivitySingleInstance.createIntent(mContext, mCoupon, getParams());
-        } else {
-            return NearItCouponDetailActivity.createIntent(mContext, mCoupon, getParams());
-        }
+        if (mSingleInstance) return NearItCouponDetailActivitySingleInstance.createIntent(mContext, mCoupon, getParams());
+        else return NearItCouponDetailActivity.createIntent(mContext, mCoupon, getParams());
     }
 
     private CouponDetailExtraParams getParams() {

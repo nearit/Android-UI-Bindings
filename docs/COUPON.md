@@ -7,7 +7,7 @@ If you want your app to display a coupon in a beautiful pop-up dialog, use this 
  // ...
  startActivity(
          NearITUIBindings.getInstance(YourActivity.this)
-            .createCouponDetailIntentBuilder(coupon)
+            .couponIntentBuilder(coupon)
             .build());
 ```
 
@@ -16,7 +16,7 @@ If you want your app to display a coupon in a beautiful pop-up dialog, use this 
  // ...
  startActivity(
          NearITUIBindings.getInstance(this@YourActivity)
-            .createCouponDetailIntentBuilder(coupon)
+            .couponIntentBuilder(coupon)
             .build())
 ```
 
@@ -34,7 +34,7 @@ NearIT-UI is shipped with our brand as icon placeholder. If you need to replace 
   // ...
   startActivity(
           NearITUIBindings.getInstance(YourActivity.this)
-             .createCouponDetailIntentBuilder(coupon)
+             .couponIntentBuilder(coupon)
              .setIconPlaceholderResourceId(R.drawable.your_drawable)
              .build());
 ```
@@ -44,7 +44,7 @@ NearIT-UI is shipped with our brand as icon placeholder. If you need to replace 
   // ...
   startActivity(
           NearITUIBindings.getInstance(this@YourActivity)
-             .createCouponDetailIntentBuilder(coupon)
+             .couponIntentBuilder(coupon)
              .setIconPlaceholderResourceId(R.drawable.your_drawable)
              .build())
 ```
@@ -59,7 +59,7 @@ Optionally, you can display the coupon in your custom Activity by adding a Fragm
   JAVA
   // ...
   Fragment couponFragment = NearITUIBindings.getInstance(YourActivity.this)
-        .createCouponDetailFragmentBuilder(coupon)
+        .couponFragmentBuilder(coupon)
         //  here you can call other methods of the builder
         .build();
 ```
@@ -68,7 +68,7 @@ Optionally, you can display the coupon in your custom Activity by adding a Fragm
   KOTLIN
   // ...
   val couponFragment: Fragment = NearITUIBindings.getInstance(this@YourActivity)
-        .createCouponDetailFragmentBuilder(coupon)
+        .couponFragmentBuilder(coupon)
         //  here you can call other methods of the builder
         .build()
 ```

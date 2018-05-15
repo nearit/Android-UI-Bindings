@@ -50,7 +50,7 @@ public class PermissionsActivity extends AppCompatActivity {
                         //  Basic config: location and bluetooth required
                         //  + enable tap outside to close
                         NearITUIBindings.getInstance(PermissionsActivity.this)
-                                .createPermissionRequestIntentBuilder()
+                                .permissionsIntentBuilder()
                                 .enableTapOutsideToClose()
                                 .build(),
                         NEAR_PERMISSION_REQUEST);
@@ -64,7 +64,7 @@ public class PermissionsActivity extends AppCompatActivity {
                         //  Asks only for location
                         //  + tap outside to close enabled
                         NearITUIBindings.getInstance(PermissionsActivity.this)
-                                .createPermissionRequestIntentBuilder()
+                                .permissionsIntentBuilder()
                                 .noBeacon()
                                 .enableTapOutsideToClose()
                                 .build(),
@@ -79,7 +79,7 @@ public class PermissionsActivity extends AppCompatActivity {
                         //  Asks for location and bluetooth
                         //  but the latter is not a blocking requirement
                         NearITUIBindings.getInstance(PermissionsActivity.this)
-                                .createPermissionRequestIntentBuilder()
+                                .permissionsIntentBuilder()
                                 .nonBlockingBeacon()
                                 .build(),
                         NEAR_PERMISSION_REQUEST);
@@ -92,7 +92,7 @@ public class PermissionsActivity extends AppCompatActivity {
                 startActivityForResult(
                         //  Invisible layout: asks for location and bluetooth via system dialogs
                         NearITUIBindings.getInstance(PermissionsActivity.this)
-                                .createPermissionRequestIntentBuilder()
+                                .permissionsIntentBuilder()
                                 .invisibleLayoutMode()
                                 .build(),
                         NEAR_PERMISSION_REQUEST);
@@ -105,7 +105,7 @@ public class PermissionsActivity extends AppCompatActivity {
                 startActivityForResult(
                         //  Invisible layout: asks only for location
                         NearITUIBindings.getInstance(PermissionsActivity.this)
-                                .createPermissionRequestIntentBuilder()
+                                .permissionsIntentBuilder()
                                 .invisibleLayoutMode()
                                 .noBeacon()
                                 .build(),
@@ -120,7 +120,7 @@ public class PermissionsActivity extends AppCompatActivity {
                         //  Invisible layout: asks for location and bluetooth
                         //  but the latter is not a blocking requiremen
                         NearITUIBindings.getInstance(PermissionsActivity.this)
-                                .createPermissionRequestIntentBuilder()
+                                .permissionsIntentBuilder()
                                 .invisibleLayoutMode()
                                 .nonBlockingBeacon()
                                 .build(),
@@ -135,7 +135,7 @@ public class PermissionsActivity extends AppCompatActivity {
                         //  Asks for permissions (basic config) and if user grants all
                         //  NearIT-UI will automatically start the NearIT radar
                         NearITUIBindings.getInstance(PermissionsActivity.this)
-                                .createPermissionRequestIntentBuilder()
+                                .permissionsIntentBuilder()
                                 .automaticRadarStart()
                                 .build(),
                         NEAR_PERMISSION_REQUEST);
@@ -148,7 +148,7 @@ public class PermissionsActivity extends AppCompatActivity {
                 startActivityForResult(
                         //  Basic config + custom header
                         NearITUIBindings.getInstance(PermissionsActivity.this)
-                                .createPermissionRequestIntentBuilder()
+                                .permissionsIntentBuilder()
                                 .setHeaderResourceId(R.drawable.logo)
                                 .build(),
                         NEAR_PERMISSION_REQUEST);

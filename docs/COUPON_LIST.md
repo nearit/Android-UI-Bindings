@@ -21,7 +21,7 @@ With these few lines of code
 ```java
 JAVA
 startActivity(NearITUIBindings.getInstance(YourActivity.this)
-                        .createCouponListIntentBuilder()
+                        .couponListIntentBuilder()
                         .build()
                 );
 ```
@@ -29,7 +29,7 @@ startActivity(NearITUIBindings.getInstance(YourActivity.this)
 ```kotlin
 KOTLIN
 startActivity(NearITUIBindings.getInstance(this@YourActivity)
-                        .createCouponListIntentBuilder()
+                        .couponListIntentBuilder()
                         .build()
                 )
 ```
@@ -50,7 +50,7 @@ You can show a dialog when the request for coupons fails for a network, adding `
 ```java
 JAVA
 startActivity(NearITUIBindings.getInstance(YourActivity.this)
-                        .createCouponListIntentBuilder()
+                        .couponListIntentBuilder()
                         .enableNetErrorDialog()
                         .build()
               );
@@ -59,7 +59,7 @@ startActivity(NearITUIBindings.getInstance(YourActivity.this)
 ```kotlin
 KOTLIN
 startActivity(NearITUIBindings.getInstance(this@YourActivity)
-                        .createCouponListIntentBuilder()
+                        .couponListIntentBuilder()
                         .enableNetErrorDialog()
                         .build()
               )
@@ -76,7 +76,7 @@ In your application you may want to show only coupons that are in certain states
 ```java
 JAVA
 startActivity(NearITUIBindings.getInstance(YourActivity.this)
-                        .createCouponListIntentBuilder()
+                        .couponListIntentBuilder()
                         .validCoupons()
                         .build()
                 );
@@ -85,7 +85,7 @@ startActivity(NearITUIBindings.getInstance(YourActivity.this)
 ```kotlin
 KOTLIN
 startActivity(NearITUIBindings.getInstance(this@YourActivity)
-                        .createCouponListIntentBuilder()
+                        .couponListIntentBuilder()
                         .validCoupons()
                         .build()
                 )
@@ -101,7 +101,7 @@ By combining these methods calls you can build the coupon list you prefer
 ```java
 JAVA
 startActivity(NearITUIBindings.getInstance(YourActivity.this)
-                        .createCouponListIntentBuilder()
+                        .couponListIntentBuilder()
                         .validCoupons()
                         .expiredCoupons()
                         .build()
@@ -111,7 +111,7 @@ startActivity(NearITUIBindings.getInstance(YourActivity.this)
 ```kotlin
 KOTLIN
 startActivity(NearITUIBindings.getInstance(this@YourActivity)
-                        .createCouponListIntentBuilder()
+                        .couponListIntentBuilder()
                         .validCoupons()
                         .expiredCoupons()
                         .build()
@@ -125,14 +125,14 @@ If you want to list the coupons in your activity, place this fragment in your co
 ```java
 JAVA
 Fragment couponListFragment = NearITUIBindings.getInstance(this)
-                .createCouponListFragmentBuilder()
+                .couponListFragmentBuilder()
                 .build();
 ```
 
 ```kotlin
 KOTLIN
 val couponListFragment: Fragment = NearITUIBindings.getInstance(this)
-                .createCouponListFragmentBuilder()
+                .couponListFragmentBuilder()
                 .build()
 ```
 

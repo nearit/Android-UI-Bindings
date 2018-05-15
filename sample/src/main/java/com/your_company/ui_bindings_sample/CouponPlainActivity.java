@@ -27,7 +27,7 @@ public class CouponPlainActivity extends AppCompatActivity {
         Coupon validCoupon = couponFactory.getValidCoupon();
 
         Fragment couponFragment = NearITUIBindings.getInstance(this)
-                .createCouponDetailFragmentBuilder(validCoupon)
+                .couponFragmentBuilder(validCoupon)
                 .disableAutoMaxBrightness()
                 .build();
 

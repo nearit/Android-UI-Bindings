@@ -23,9 +23,9 @@ import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 import it.near.sdk.recipes.models.ReactionBundle;
 import it.near.sdk.trackings.TrackingInfo;
 
-import static com.nearit.ui_bindings.coupon.CouponDetailIntentBuilder.DEFAULT_LAUNCH_MODE;
-
 public class NearITUIBindings {
+
+    private final static boolean SINGLE_INSTANCE_DEFAULT = false;
 
     private final Context mContext;
 
@@ -33,73 +33,184 @@ public class NearITUIBindings {
         mContext = context;
     }
 
-    public static NearITUIBindings getInstance(Context context) {
-        return new NearITUIBindings(context);
+
+    /*      PERMISSIONS     */
+
+    /**
+     * @deprecated use {@link #permissionsIntentBuilder()} instead.
+     */
+    @Deprecated
+    public PermissionsRequestIntentBuilder createPermissionRequestIntentBuilder() {
+        return this.permissionsIntentBuilder();
     }
 
-    public PermissionsRequestIntentBuilder createPermissionRequestIntentBuilder() {
+    public PermissionsRequestIntentBuilder permissionsIntentBuilder() {
         return new PermissionsRequestIntentBuilder(mContext);
     }
 
+
+
+    /*      COUPON     */
+
+    /**
+     * @deprecated use {@link #couponIntentBuilder(Coupon)} instead
+     */
+    @Deprecated
     public CouponDetailIntentBuilder createCouponDetailIntentBuilder(Coupon coupon) {
-        return new CouponDetailIntentBuilder(mContext, coupon, DEFAULT_LAUNCH_MODE);
+        return this.couponIntentBuilder(coupon);
     }
 
-    public CouponDetailIntentBuilder createCouponDetailIntentBuilder(Coupon coupon, boolean singleInstance) {
+    public CouponDetailIntentBuilder couponIntentBuilder(Coupon coupon) {
+        return this.couponIntentBuilder(coupon, SINGLE_INSTANCE_DEFAULT);
+    }
+
+    public CouponDetailIntentBuilder couponIntentBuilder(Coupon coupon, boolean singleInstance) {
         return new CouponDetailIntentBuilder(mContext, coupon, singleInstance);
     }
 
+    /**
+     * @deprecated use {@link #couponFragmentBuilder(Coupon)} instead
+     */
+    @Deprecated
     public CouponDetailFragmentBuilder createCouponDetailFragmentBuilder(Coupon coupon) {
+        return this.couponFragmentBuilder(coupon);
+    }
+
+    public CouponDetailFragmentBuilder couponFragmentBuilder(Coupon coupon) {
         return new CouponDetailFragmentBuilder(coupon);
     }
 
-    public FeedbackIntentBuilder createFeedbackIntentBuilder(Feedback feedback) {
-        return new FeedbackIntentBuilder(mContext, feedback);
-    }
-
-    public FeedbackFragmentBuilder createFeedbackFragmentBuilder(Feedback feedback) {
-        return new FeedbackFragmentBuilder(feedback);
-    }
-
     /**
-     * @deprecated use {@link #createContentDetailFragmentBuilder(Content, TrackingInfo)} instead to get extra trackings.
+     * @deprecated use {@link #couponListIntentBuilder()} instead
      */
     @Deprecated
-    public ContentDetailIntentBuilder createContentDetailIntentBuilder(Content content) {
-        return this.createContentDetailIntentBuilder(content, null);
-    }
-
-    public ContentDetailIntentBuilder createContentDetailIntentBuilder(Content content, @Nullable TrackingInfo trackingInfo) {
-        return new ContentDetailIntentBuilder(mContext, content, trackingInfo);
-    }
-
-    /**
-     * @deprecated use {{@link #createContentDetailFragmentBuilder(Content, TrackingInfo)}} instead, to get extra trackings
-     */
-    @Deprecated
-    public ContentDetailFragmentBuilder createContentDetailFragmentBuilder(Content content) {
-        return this.createContentDetailFragmentBuilder(content, null);
-    }
-
-    public ContentDetailFragmentBuilder createContentDetailFragmentBuilder(Content content, @Nullable TrackingInfo trackingInfo) {
-        return new ContentDetailFragmentBuilder(content, trackingInfo);
-    }
-
     public CouponListIntentBuilder createCouponListIntentBuilder() {
+        return this.couponListIntentBuilder();
+    }
+
+    public CouponListIntentBuilder couponListIntentBuilder() {
         return new CouponListIntentBuilder(mContext);
     }
 
+    /**
+     * @deprecated use {@link #couponListFragmentBuilder()} instead
+     */
+    @Deprecated
     public CouponListFragmentBuilder createCouponListFragmentBuilder() {
+        return this.couponListFragmentBuilder();
+    }
+
+    public CouponListFragmentBuilder couponListFragmentBuilder() {
         return new CouponListFragmentBuilder();
     }
 
+
+    /*      FEEDBACK    */
+
+    /**
+     * @deprecated use {@link #feedbackIntentBuilder(Feedback)} instead
+     */
+    @Deprecated
+    public FeedbackIntentBuilder createFeedbackIntentBuilder(Feedback feedback) {
+        return this.feedbackIntentBuilder(feedback);
+    }
+
+    public FeedbackIntentBuilder feedbackIntentBuilder(Feedback feedback) {
+        return this.feedbackIntentBuilder(feedback, SINGLE_INSTANCE_DEFAULT);
+    }
+
+    public FeedbackIntentBuilder feedbackIntentBuilder(Feedback feedback, boolean singleInstance) {
+        return new FeedbackIntentBuilder(mContext, feedback, singleInstance);
+    }
+
+    /**
+     * @deprecated use {@link #feedbackFragmentBuilder(Feedback)} instead
+     */
+    @Deprecated
+    public FeedbackFragmentBuilder createFeedbackFragmentBuilder(Feedback feedback) {
+        return this.feedbackFragmentBuilder(feedback);
+    }
+
+    public FeedbackFragmentBuilder feedbackFragmentBuilder(Feedback feedback) {
+        return new FeedbackFragmentBuilder(feedback);
+    }
+
+
+
+    /*      CONTENT     */
+
+    /**
+     * @deprecated use {@link #contentIntentBuilder(Content, TrackingInfo)} instead to get extra trackings.
+     */
+    @Deprecated
+    public ContentDetailIntentBuilder createContentDetailIntentBuilder(Content content) {
+        return this.contentIntentBuilder(content, null);
+    }
+
+    /**
+     * @deprecated use {@link #contentIntentBuilder(Content, TrackingInfo)} instead
+     */
+    @Deprecated
+    public ContentDetailIntentBuilder createContentDetailIntentBuilder(Content content, @Nullable TrackingInfo trackingInfo) {
+        return this.contentIntentBuilder(content, trackingInfo, SINGLE_INSTANCE_DEFAULT);
+    }
+
+    public ContentDetailIntentBuilder contentIntentBuilder(Content content, @Nullable TrackingInfo trackingInfo) {
+        return this.contentIntentBuilder(content, trackingInfo, SINGLE_INSTANCE_DEFAULT);
+    }
+
+    public ContentDetailIntentBuilder contentIntentBuilder(Content content, @Nullable TrackingInfo trackingInfo, boolean singleInstance) {
+        return new ContentDetailIntentBuilder(mContext, content, trackingInfo, singleInstance);
+    }
+
+    /**
+     * @deprecated use {@link #contentFragmentBuilder(Content, TrackingInfo)} instead, to get extra trackings
+     */
+    @Deprecated
+    public ContentDetailFragmentBuilder createContentDetailFragmentBuilder(Content content) {
+        return this.contentFragmentBuilder(content, null);
+    }
+
+    /**
+     * @deprecated use {@link #contentFragmentBuilder(Content, TrackingInfo)} instead
+     */
+    @Deprecated
+    public ContentDetailFragmentBuilder createContentDetailFragmentBuilder(Content content, @Nullable TrackingInfo trackingInfo) {
+        return this.contentFragmentBuilder(content, trackingInfo);
+    }
+
+    public ContentDetailFragmentBuilder contentFragmentBuilder(Content content, @Nullable TrackingInfo trackingInfo) {
+        return new ContentDetailFragmentBuilder(content, trackingInfo);
+    }
+
+
+    /*      INBOX       */
+
+    /**
+     * @deprecated use {@link #inboxIntentBuilder()} instead
+     */
+    @Deprecated
     public InboxListIntentBuilder createInboxListIntentBuilder() {
+        return this.inboxIntentBuilder();
+    }
+
+    public InboxListIntentBuilder inboxIntentBuilder() {
         return new InboxListIntentBuilder(mContext);
     }
 
+    /**
+     *  @deprecated use {@link #inboxFragmentBuilder()} instead
+     */
+    @Deprecated
     public InboxListFragmentBuilder createInboxListFragmentBuilder() {
+        return this.inboxFragmentBuilder();
+    }
+
+    public InboxListFragmentBuilder inboxFragmentBuilder() {
         return new InboxListFragmentBuilder();
     }
+
+
 
     public static void enableAutomaticForegroundNotifications(Context context) {
         new NearItUIProximityListener(context);
@@ -111,5 +222,10 @@ public class NearITUIBindings {
 
     public static boolean onNewContent(Context context, ReactionBundle reactionBundle, TrackingInfo trackingInfo) {
         return new NearItUIIntentManager(context).manageContent(reactionBundle, trackingInfo);
+    }
+
+
+    public static NearITUIBindings getInstance(Context context) {
+        return new NearITUIBindings(context);
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import it.near.sdk.recipes.inbox.model.InboxItem;
 
-public class InboxContract {
+class InboxContract {
     interface InboxView {
         void showInboxItems(List<InboxItem> itemList);
         void showEmptyLayout();

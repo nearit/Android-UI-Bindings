@@ -17,7 +17,7 @@ def getVersionName = {
         return stdout.toString().trim()
     }
     catch (e) {
-        println("Can't get version from git: " + e);
+        println("Can't get version from git: " + e)
         return "adhoc"
     }
 }

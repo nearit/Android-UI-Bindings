@@ -25,7 +25,7 @@ class ContentActivity : AppCompatActivity() {
             startActivity(
                     //  Basic example with a complete content
                     NearITUIBindings.getInstance(this@ContentActivity)
-                            .createContentDetailIntentBuilder(content, trackingInfo)
+                            .contentIntentBuilder(content, trackingInfo)
                             .build())
         }
 
@@ -36,7 +36,7 @@ class ContentActivity : AppCompatActivity() {
                     //  Example with a content without image
                     //  + enable tapping outside the dialog to close it
                     NearITUIBindings.getInstance(this@ContentActivity)
-                            .createContentDetailIntentBuilder(content, trackingInfo)
+                            .contentIntentBuilder(content, trackingInfo)
                             .enableTapOutsideToClose()
                             .build())
         }
@@ -47,7 +47,7 @@ class ContentActivity : AppCompatActivity() {
             startActivity(
                     //  Example with a content without image
                     NearITUIBindings.getInstance(this@ContentActivity)
-                            .createContentDetailIntentBuilder(content, trackingInfo)
+                            .contentIntentBuilder(content, trackingInfo)
                             .build())
         }
 

@@ -28,7 +28,7 @@ public class ContentPlainActivity extends AppCompatActivity {
         TrackingInfo trackingInfo = TrackingInfo.fromRecipeId("my_fake_recipe");
 
         Fragment contentFragment = NearITUIBindings.getInstance(this)
-                .createContentDetailFragmentBuilder(content, trackingInfo)
+                .contentFragmentBuilder(content, trackingInfo)
                 .build();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_container, contentFragment).commit();

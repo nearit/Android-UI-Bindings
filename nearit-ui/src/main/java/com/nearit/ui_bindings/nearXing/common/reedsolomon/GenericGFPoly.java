@@ -73,21 +73,21 @@ final class GenericGFPoly {
   /**
    * @return degree of this polynomial
    */
-  int getDegree() {
+  private int getDegree() {
     return coefficients.length - 1;
   }
 
   /**
    * @return true iff this polynomial is the monomial "0"
    */
-  boolean isZero() {
+  private boolean isZero() {
     return coefficients[0] == 0;
   }
 
   /**
    * @return coefficient of x^degree term in this polynomial
    */
-  int getCoefficient(int degree) {
+  private int getCoefficient(int degree) {
     return coefficients[coefficients.length - 1 - degree];
   }
 
@@ -115,7 +115,7 @@ final class GenericGFPoly {
     return result;
   }
 
-  GenericGFPoly addOrSubtract(GenericGFPoly other) {
+  private GenericGFPoly addOrSubtract(GenericGFPoly other) {
     if (!field.equals(other.field)) {
       throw new IllegalArgumentException("GenericGFPolys do not have same GenericGF field");
     }

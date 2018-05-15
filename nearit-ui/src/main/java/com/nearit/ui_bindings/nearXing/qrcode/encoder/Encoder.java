@@ -48,7 +48,7 @@ public final class Encoder {
       25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, -1, -1, -1, -1, -1,  // 0x50-0x5f
   };
 
-  static final String DEFAULT_BYTE_MODE_ENCODING = "ISO-8859-1";
+  private static final String DEFAULT_BYTE_MODE_ENCODING = "ISO-8859-1";
 
   private Encoder() {
   }
@@ -190,7 +190,7 @@ public final class Encoder {
    * @return the code point of the table used in alphanumeric mode or
    *  -1 if there is no corresponding code in the table.
    */
-  static int getAlphanumericCode(int code) {
+  private static int getAlphanumericCode(int code) {
     if (code < ALPHANUMERIC_TABLE.length) {
       return ALPHANUMERIC_TABLE[code];
     }
@@ -300,7 +300,7 @@ public final class Encoder {
   /**
    * Terminate bits as described in 8.4.8 and 8.4.9 of JISX0510:2004 (p.24).
    */
-  static void terminateBits(int numDataBytes, BitArray bits) throws WriterException {
+  private static void terminateBits(int numDataBytes, BitArray bits) throws WriterException {
     int capacity = numDataBytes * 8;
     if (bits.getSize() > capacity) {
       throw new WriterException("data bits cannot fit in the QR Code" + bits.getSize() + " > " +
@@ -332,12 +332,12 @@ public final class Encoder {
    * the result in "numDataBytesInBlock", and "numECBytesInBlock". See table 12 in 8.5.1 of
    * JISX0510:2004 (p.30)
    */
-  static void getNumDataBytesAndNumECBytesForBlockID(int numTotalBytes,
-                                                     int numDataBytes,
-                                                     int numRSBlocks,
-                                                     int blockID,
-                                                     int[] numDataBytesInBlock,
-                                                     int[] numECBytesInBlock) throws WriterException {
+  private static void getNumDataBytesAndNumECBytesForBlockID(int numTotalBytes,
+                                                             int numDataBytes,
+                                                             int numRSBlocks,
+                                                             int blockID,
+                                                             int[] numDataBytesInBlock,
+                                                             int[] numECBytesInBlock) throws WriterException {
     if (blockID >= numRSBlocks) {
       throw new WriterException("Block ID too large");
     }
@@ -388,10 +388,10 @@ public final class Encoder {
    * Interleave "bits" with corresponding error correction bytes. On success, store the result in
    * "result". The interleave rule is complicated. See 8.6 of JISX0510:2004 (p.37) for details.
    */
-  static BitArray interleaveWithECBytes(BitArray bits,
-                                        int numTotalBytes,
-                                        int numDataBytes,
-                                        int numRSBlocks) throws WriterException {
+  private static BitArray interleaveWithECBytes(BitArray bits,
+                                                int numTotalBytes,
+                                                int numDataBytes,
+                                                int numRSBlocks) throws WriterException {
 
     // "bits" must have "getNumDataBytes" bytes of data.
     if (bits.getSizeInBytes() != numDataBytes) {
@@ -456,7 +456,7 @@ public final class Encoder {
     return result;
   }
 
-  static byte[] generateECBytes(byte[] dataBytes, int numEcBytesInBlock) {
+  private static byte[] generateECBytes(byte[] dataBytes, int numEcBytesInBlock) {
     int numDataBytes = dataBytes.length;
     int[] toEncode = new int[numDataBytes + numEcBytesInBlock];
     for (int i = 0; i < numDataBytes; i++) {
@@ -474,7 +474,7 @@ public final class Encoder {
   /**
    * Append mode info. On success, store the result in "bits".
    */
-  static void appendModeInfo(Mode mode, BitArray bits) {
+  private static void appendModeInfo(Mode mode, BitArray bits) {
     bits.appendBits(mode.getBits(), 4);
   }
 
@@ -482,7 +482,7 @@ public final class Encoder {
   /**
    * Append length info. On success, store the result in "bits".
    */
-  static void appendLengthInfo(int numLetters, Version version, Mode mode, BitArray bits) throws WriterException {
+  private static void appendLengthInfo(int numLetters, Version version, Mode mode, BitArray bits) throws WriterException {
     int numBits = mode.getCharacterCountBits(version);
     if (numLetters >= (1 << numBits)) {
       throw new WriterException(numLetters + " is bigger than " + ((1 << numBits) - 1));
@@ -493,10 +493,10 @@ public final class Encoder {
   /**
    * Append "bytes" in "mode" mode (encoding) into "bits". On success, store the result in "bits".
    */
-  static void appendBytes(String content,
-                          Mode mode,
-                          BitArray bits,
-                          String encoding) throws WriterException {
+  private static void appendBytes(String content,
+                                  Mode mode,
+                                  BitArray bits,
+                                  String encoding) throws WriterException {
     switch (mode) {
       case NUMERIC:
         appendNumericBytes(content, bits);
@@ -515,7 +515,7 @@ public final class Encoder {
     }
   }
 
-  static void appendNumericBytes(CharSequence content, BitArray bits) {
+  private static void appendNumericBytes(CharSequence content, BitArray bits) {
     int length = content.length();
     int i = 0;
     while (i < length) {
@@ -539,7 +539,7 @@ public final class Encoder {
     }
   }
 
-  static void appendAlphanumericBytes(CharSequence content, BitArray bits) throws WriterException {
+  private static void appendAlphanumericBytes(CharSequence content, BitArray bits) throws WriterException {
     int length = content.length();
     int i = 0;
     while (i < length) {
@@ -563,7 +563,7 @@ public final class Encoder {
     }
   }
 
-  static void append8BitBytes(String content, BitArray bits, String encoding)
+  private static void append8BitBytes(String content, BitArray bits, String encoding)
       throws WriterException {
     byte[] bytes;
     try {
@@ -576,7 +576,7 @@ public final class Encoder {
     }
   }
 
-  static void appendKanjiBytes(String content, BitArray bits) throws WriterException {
+  private static void appendKanjiBytes(String content, BitArray bits) throws WriterException {
     byte[] bytes;
     try {
       bytes = content.getBytes("Shift_JIS");

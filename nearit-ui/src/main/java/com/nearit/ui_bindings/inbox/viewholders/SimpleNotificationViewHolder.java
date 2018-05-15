@@ -15,12 +15,10 @@ public class SimpleNotificationViewHolder extends BaseViewHolder<SimpleNotificat
     public static final int VIEWTYPE = 1;
 
     private final InboxCardLayout layout;
-    private final InboxAdapter.NotificationReadListener readListener;
 
     public SimpleNotificationViewHolder(LayoutInflater inflater, ViewGroup parent, InboxAdapter.NotificationReadListener readListener) {
         super(inflater, R.layout.nearit_ui_inbox_simple_item, parent, readListener);
         layout = itemView.findViewById(R.id.layout);
-        this.readListener = readListener;
     }
 
     @Override

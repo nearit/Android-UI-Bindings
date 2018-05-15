@@ -29,7 +29,7 @@ class PermissionsActivity : AppCompatActivity() {
                     //  Basic config: location and bluetooth required
                     //  + enable tap outside to close
                     NearITUIBindings.getInstance(this@PermissionsActivity)
-                            .createPermissionRequestIntentBuilder()
+                            .permissionsIntentBuilder()
                             .enableTapOutsideToClose()
                             .build(),
                     NEAR_PERMISSION_REQUEST
@@ -41,7 +41,7 @@ class PermissionsActivity : AppCompatActivity() {
                     //  Asks only for location
                     //  + tap outside to close enabled
                     NearITUIBindings.getInstance(this@PermissionsActivity)
-                            .createPermissionRequestIntentBuilder()
+                            .permissionsIntentBuilder()
                             .noBeacon()
                             .enableTapOutsideToClose()
                             .build(),
@@ -53,7 +53,7 @@ class PermissionsActivity : AppCompatActivity() {
                     //  Asks for location and bluetooth
                     //  but the latter is not a blocking requirement
                     NearITUIBindings.getInstance(this@PermissionsActivity)
-                            .createPermissionRequestIntentBuilder()
+                            .permissionsIntentBuilder()
                             .nonBlockingBeacon()
                             .build(),
                     NEAR_PERMISSION_REQUEST)
@@ -63,7 +63,7 @@ class PermissionsActivity : AppCompatActivity() {
             startActivityForResult(
                     //  Invisible layout: asks for location and bluetooth via system dialogs
                     NearITUIBindings.getInstance(this@PermissionsActivity)
-                            .createPermissionRequestIntentBuilder()
+                            .permissionsIntentBuilder()
                             .invisibleLayoutMode()
                             .build(),
                     NEAR_PERMISSION_REQUEST)
@@ -73,7 +73,7 @@ class PermissionsActivity : AppCompatActivity() {
             startActivityForResult(
                     //  Invisible layout: asks only for location
                     NearITUIBindings.getInstance(this@PermissionsActivity)
-                            .createPermissionRequestIntentBuilder()
+                            .permissionsIntentBuilder()
                             .invisibleLayoutMode()
                             .noBeacon()
                             .build(),
@@ -85,7 +85,7 @@ class PermissionsActivity : AppCompatActivity() {
                     //  Invisible layout: asks for location and bluetooth
                     //  but the latter is not a blocking requiremen
                     NearITUIBindings.getInstance(this@PermissionsActivity)
-                            .createPermissionRequestIntentBuilder()
+                            .permissionsIntentBuilder()
                             .invisibleLayoutMode()
                             .nonBlockingBeacon()
                             .build(),
@@ -97,7 +97,7 @@ class PermissionsActivity : AppCompatActivity() {
                     //  Asks for permissions (basic config) and if user grants all
                     //  NearIT-UI will automatically start the NearIT radar
                     NearITUIBindings.getInstance(this@PermissionsActivity)
-                            .createPermissionRequestIntentBuilder()
+                            .permissionsIntentBuilder()
                             .automaticRadarStart()
                             .build(),
                     NEAR_PERMISSION_REQUEST)
@@ -107,7 +107,7 @@ class PermissionsActivity : AppCompatActivity() {
             startActivityForResult(
                     //  Basic config + custom header
                     NearITUIBindings.getInstance(this@PermissionsActivity)
-                            .createPermissionRequestIntentBuilder()
+                            .permissionsIntentBuilder()
                             .setHeaderResourceId(R.drawable.logo)
                             .build(),
                     NEAR_PERMISSION_REQUEST)

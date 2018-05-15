@@ -31,10 +31,10 @@ public final class GenericGF {
 
   public static final GenericGF AZTEC_DATA_12 = new GenericGF(0x1069, 4096, 1); // x^12 + x^6 + x^5 + x^3 + 1
   public static final GenericGF AZTEC_DATA_10 = new GenericGF(0x409, 1024, 1); // x^10 + x^3 + 1
-  public static final GenericGF AZTEC_DATA_6 = new GenericGF(0x43, 64, 1); // x^6 + x + 1
+  private static final GenericGF AZTEC_DATA_6 = new GenericGF(0x43, 64, 1); // x^6 + x + 1
   public static final GenericGF AZTEC_PARAM = new GenericGF(0x13, 16, 1); // x^4 + x + 1
   public static final GenericGF QR_CODE_FIELD_256 = new GenericGF(0x011D, 256, 0); // x^8 + x^4 + x^3 + x^2 + 1
-  public static final GenericGF DATA_MATRIX_FIELD_256 = new GenericGF(0x012D, 256, 1); // x^8 + x^5 + x^3 + x^2 + 1
+  private static final GenericGF DATA_MATRIX_FIELD_256 = new GenericGF(0x012D, 256, 1); // x^8 + x^5 + x^3 + x^2 + 1
   public static final GenericGF AZTEC_DATA_8 = DATA_MATRIX_FIELD_256;
   public static final GenericGF MAXICODE_FIELD_64 = AZTEC_DATA_6;
 
@@ -57,7 +57,7 @@ public final class GenericGF {
    *  (g(x) = (x+a^b)(x+a^(b+1))...(x+a^(b+2t-1))).
    *  In most cases it should be 1, but for QR code it is 0.
    */
-  public GenericGF(int primitive, int size, int b) {
+  private GenericGF(int primitive, int size, int b) {
     this.primitive = primitive;
     this.size = size;
     this.generatorBase = b;

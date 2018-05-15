@@ -17,7 +17,7 @@ import com.nearit.ui_bindings.R;
 
 public class PermissionButton extends RelativeLayout {
 
-    public static final int NO_ICON = 0;
+    private static final int NO_ICON = 0;
     private ImageView icon;
     private TextView text;
 
@@ -62,19 +62,19 @@ public class PermissionButton extends RelativeLayout {
         text = findViewById(R.id.permission_button_text);
     }
 
-    public void setIcon(int iconRes) {
+    private void setIcon(int iconRes) {
         this.iconRes = iconRes;
         invalidate();
         requestLayout();
     }
 
-    public void resetIcon() {
+    private void resetIcon() {
         iconRes = originalIconRes;
         invalidate();
         requestLayout();
     }
 
-    public void setText(String buttonText) {
+    private void setText(String buttonText) {
         this.buttonText = buttonText;
         invalidate();
         requestLayout();

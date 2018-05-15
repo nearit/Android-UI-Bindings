@@ -19,7 +19,7 @@ public class InboxPlainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plain_inbox);
 
         Fragment inboxFragment = NearITUIBindings.getInstance(this)
-                .createInboxListFragmentBuilder()
+                .inboxFragmentBuilder()
                 .build();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.inbox_fragment_container, inboxFragment).commit();
