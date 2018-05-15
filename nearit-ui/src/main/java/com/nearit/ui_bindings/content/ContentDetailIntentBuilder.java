@@ -18,14 +18,13 @@ public class ContentDetailIntentBuilder {
     @Nullable
     private final TrackingInfo mTrackingInfo;
 
-    public ContentDetailIntentBuilder(Context context, Content content,@Nullable TrackingInfo trackingInfo) {
+    private boolean mSingleInstance;
+
+    public ContentDetailIntentBuilder(Context context, Content content, @Nullable TrackingInfo trackingInfo, boolean singleInstance) {
         mContext = context;
         mContent = content;
         mTrackingInfo = trackingInfo;
-    }
-
-    public ContentDetailIntentBuilder(Context context, Content content) {
-        this(context, content, null);
+        mSingleInstance = singleInstance;
     }
 
     /**
@@ -39,7 +38,8 @@ public class ContentDetailIntentBuilder {
     }
 
     public Intent build() {
-        return NearItContentDetailActivity.createIntent(mContext, mTrackingInfo, mContent, getParams());
+        if (mSingleInstance) return NearItContentDetailActivitySingleInstance.createIntent(mContext, mTrackingInfo, mContent, getParams());
+        else return NearItContentDetailActivity.createIntent(mContext, mTrackingInfo, mContent, getParams());
     }
 
     private ContentDetailExtraParams getParams() {

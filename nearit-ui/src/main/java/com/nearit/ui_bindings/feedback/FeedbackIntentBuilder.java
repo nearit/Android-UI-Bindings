@@ -19,11 +19,14 @@ public class FeedbackIntentBuilder {
     private int mIconResId;
     private boolean mEnableTapOutside;
 
-    public FeedbackIntentBuilder(Context context, Feedback feedback) {
+    private boolean mSingleInstance;
+
+    public FeedbackIntentBuilder(Context context, Feedback feedback, boolean singleInstance) {
         mContext = context;
         mFeedback = feedback;
         mAutoCloseParentActivity = true;
         mShowCloseButton = true;
+        mSingleInstance = singleInstance;
     }
 
     /**
@@ -59,7 +62,8 @@ public class FeedbackIntentBuilder {
     }
 
     public Intent build() {
-        return NearItFeedbackActivity.createIntent(mContext, mFeedback, getParams());
+        if (mSingleInstance) return NearItFeedbackActivitySingleInstance.createIntent(mContext, mFeedback, getParams());
+        else return NearItFeedbackActivity.createIntent(mContext, mFeedback, getParams());
     }
 
     private FeedbackRequestExtras getParams() {
