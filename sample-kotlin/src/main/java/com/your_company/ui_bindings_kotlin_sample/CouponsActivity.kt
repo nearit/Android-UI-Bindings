@@ -19,7 +19,7 @@ class CouponsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coupons)
 
-        valid_coupon.setOnClickListener {
+        /*valid_coupon.setOnClickListener {
             //  In a real scenario the coupon is provided by the NearIT SDK
             val validCoupon = CouponFactory.getValidCoupon()
             startActivity(
@@ -87,7 +87,7 @@ class CouponsActivity : AppCompatActivity() {
             //  start an activity that shows a list of REAL valid coupons ONLY
             startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
                     .createCouponListIntentBuilder()
-                    .onlyValidCoupons()
+                    .validCoupons()
                     .build()
             )
         }
@@ -96,7 +96,7 @@ class CouponsActivity : AppCompatActivity() {
             //  start an activity that shows a list of REAL expired coupons ONLY
             startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
                     .createCouponListIntentBuilder()
-                    .onlyExpiredCoupons()
+                    .expiredCoupons()
                     .build()
             )
         }
@@ -105,7 +105,7 @@ class CouponsActivity : AppCompatActivity() {
             //  start an activity that shows a list of REAL inactive coupons ONLY
             startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
                     .createCouponListIntentBuilder()
-                    .onlyInactiveCoupons()
+                    .inactiveCoupons()
                     .build()
             )
         }
@@ -114,7 +114,7 @@ class CouponsActivity : AppCompatActivity() {
             //  start an activity that shows a list of REAL already redeemed coupons ONLY
             startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
                     .createCouponListIntentBuilder()
-                    .onlyRedeemedCoupons()
+                    .redeemedCoupons()
                     .build()
             )
         }
@@ -132,7 +132,7 @@ class CouponsActivity : AppCompatActivity() {
             //  start a plain activity that shows the fragment fullscreen
             //  please check it
             startActivity(Intent(this@CouponsActivity, CouponListPlainActivity::class.java))
-        }
+        }*/
     }
 
 }
