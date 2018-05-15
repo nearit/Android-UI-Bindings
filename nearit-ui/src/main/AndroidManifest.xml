@@ -17,6 +17,11 @@
             android:theme="@style/NearItUICouponDetailDialog" />
 
         <activity
+            android:name=".coupon.NearItCouponDetailActivitySingleInstance"
+            android:launchMode="singleInstance"
+            android:theme="@style/NearItUICouponDetailDialog" />
+
+        <activity
             android:name=".feedback.NearItFeedbackActivity"
             android:launchMode="singleTask"
             android:excludeFromRecents="true"

@@ -22,6 +22,8 @@ import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 import it.near.sdk.recipes.models.ReactionBundle;
 import it.near.sdk.trackings.TrackingInfo;
 
+import static com.nearit.ui_bindings.coupon.CouponDetailIntentBuilder.DEFAULT_LAUNCH_MODE;
+
 public class NearITUIBindings {
 
     private Context mContext;
@@ -39,7 +41,11 @@ public class NearITUIBindings {
     }
 
     public CouponDetailIntentBuilder createCouponDetailIntentBuilder(Coupon coupon) {
-        return new CouponDetailIntentBuilder(mContext, coupon);
+        return new CouponDetailIntentBuilder(mContext, coupon, DEFAULT_LAUNCH_MODE);
+    }
+
+    public CouponDetailIntentBuilder createCouponDetailIntentBuilder(Coupon coupon, boolean singleInstance) {
+        return new CouponDetailIntentBuilder(mContext, coupon, singleInstance);
     }
 
     public CouponDetailFragmentBuilder createCouponDetailFragmentBuilder(Coupon coupon) {
