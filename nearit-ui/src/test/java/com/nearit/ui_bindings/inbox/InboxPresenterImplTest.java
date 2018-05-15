@@ -53,8 +53,6 @@ public class InboxPresenterImplTest {
     @Mock
     private InboxListExtraParams params;
     private List<InboxItem> items;
-    private InboxItem simpleNotifItem;
-    private InboxItem contentItem;
     private InboxItem customJsonItem;
     private InboxItem feedbackItem;
     @Captor
@@ -194,9 +192,9 @@ public class InboxPresenterImplTest {
      */
     @NonNull
     private List<InboxItem> buildFullList() {
-        simpleNotifItem = new InboxItem();
+        InboxItem simpleNotifItem = new InboxItem();
         simpleNotifItem.reaction = Mockito.mock(SimpleNotification.class);
-        contentItem = new InboxItem();
+        InboxItem contentItem = new InboxItem();
         contentItem.reaction = Mockito.mock(Content.class);
         customJsonItem = new InboxItem();
         customJsonItem.reaction = Mockito.mock(CustomJSON.class);

@@ -13,13 +13,13 @@ public class CouponDetailIntentBuilder {
 
     public final static boolean DEFAULT_LAUNCH_MODE = false;
 
-    private Context mContext;
+    private final Context mContext;
     private int mIconDrawable;
     private int mSeparatorDrawable;
     private boolean mNoSeparator = false;
     private boolean mNoWakeLock = false;
     private boolean mEnableTapOutsideToClose = false;
-    private Coupon mCoupon;
+    private final Coupon mCoupon;
 
     private boolean mSingleInstance = false;
 

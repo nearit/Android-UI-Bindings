@@ -12,7 +12,7 @@ object CouponFactory {
     private val coupon: Coupon = Coupon()
 
     init {
-        val claim: Claim = Claim()
+        val claim = Claim()
         claim.serial_number = "0123456789"
         coupon.name = "Long name for a coupon"
         coupon.description = "Long coupon description, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali."

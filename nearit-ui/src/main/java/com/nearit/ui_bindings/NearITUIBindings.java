@@ -27,7 +27,7 @@ import static com.nearit.ui_bindings.coupon.CouponDetailIntentBuilder.DEFAULT_LA
 
 public class NearITUIBindings {
 
-    private Context mContext;
+    private final Context mContext;
 
     private NearITUIBindings(Context context) {
         mContext = context;

@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -20,10 +19,10 @@ import java.net.URL;
 
 public final class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
     @Nullable
-    private ImageView imageView;
+    private final ImageView imageView;
     @Nullable
-    private ProgressBar progressBar;
-    private boolean enableReload;
+    private final ProgressBar progressBar;
+    private final boolean enableReload;
 
     private String url;
     private static final boolean ENABLE_RELOAD_DEFAULT = false;

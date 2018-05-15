@@ -2,8 +2,6 @@ package com.nearit.ui_bindings.inbox;
 
 import android.support.annotation.NonNull;
 
-import it.near.sdk.NearItManager;
-
 /**
  * @author Federico Boschini
  */

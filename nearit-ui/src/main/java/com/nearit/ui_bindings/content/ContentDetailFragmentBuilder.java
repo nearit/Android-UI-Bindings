@@ -10,9 +10,9 @@ import it.near.sdk.trackings.TrackingInfo;
  */
 
 public class ContentDetailFragmentBuilder {
-    private Content mContent;
+    private final Content mContent;
     @Nullable
-    private TrackingInfo mTrackingInfo;
+    private final TrackingInfo mTrackingInfo;
 
     public ContentDetailFragmentBuilder(Content mContent, @Nullable TrackingInfo mTrackingInfo) {
         this.mContent = mContent;

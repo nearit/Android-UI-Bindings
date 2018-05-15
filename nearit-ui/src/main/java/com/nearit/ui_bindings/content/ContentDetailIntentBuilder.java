@@ -12,11 +12,11 @@ import it.near.sdk.trackings.TrackingInfo;
  */
 
 public class ContentDetailIntentBuilder {
-    private Context mContext;
+    private final Context mContext;
     private boolean mEnableTapOutsideToClose = false;
-    private Content mContent;
+    private final Content mContent;
     @Nullable
-    private TrackingInfo mTrackingInfo;
+    private final TrackingInfo mTrackingInfo;
 
     public ContentDetailIntentBuilder(Context context, Content content,@Nullable TrackingInfo trackingInfo) {
         mContext = context;

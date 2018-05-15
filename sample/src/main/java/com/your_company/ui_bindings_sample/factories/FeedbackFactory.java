@@ -8,7 +8,7 @@ import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 
 public class FeedbackFactory {
 
-    private Feedback feedback = new Feedback();
+    private final Feedback feedback = new Feedback();
 
     public FeedbackFactory() {
         feedback.question = "This is an example question: how do you rate your recent experience?";

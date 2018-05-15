@@ -8,7 +8,7 @@ import android.content.Intent;
  */
 
 public class CouponListIntentBuilder {
-    private Context mContext;
+    private final Context mContext;
     private int mIconDrawable;
     private int mSeparatorDrawable;
     private int mNoCouponLayout = 0;

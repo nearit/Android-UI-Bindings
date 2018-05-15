@@ -38,10 +38,11 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Nullable
     private List<Coupon> couponList;
-    private Context context;
-    private Item.CouponListener couponListener;
+    private final Context context;
+    private final Item.CouponListener couponListener;
     private int iconPlaceholderResId = 0;
-    private boolean noIcon, jaggedBorders;
+    private final boolean noIcon;
+    private final boolean jaggedBorders;
 
     CouponAdapter(Context context, Item.CouponListener couponListener, int iconPlaceholderResId, boolean noIcon, boolean jaggedBorders) {
         this.context = context;
@@ -97,18 +98,25 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     static class Item extends RecyclerView.ViewHolder {
-        CouponListener couponListener;
-        Context context;
-        View itemView;
-        int iconPlaceholderResId;
-        boolean noIcon;
+        final CouponListener couponListener;
+        final Context context;
+        final View itemView;
+        final int iconPlaceholderResId;
+        final boolean noIcon;
         @Nullable
+        final
         ImageView couponIcon;
         @Nullable
+        final
         ProgressBar iconProgressBar;
         @Nullable
-        TextView couponTitle, couponValue, couponValidity;
-        private SimpleDateFormat formatDate;
+        final
+        TextView couponTitle;
+        @Nullable
+        final TextView couponValue;
+        @Nullable
+        final TextView couponValidity;
+        private final SimpleDateFormat formatDate;
 
         Item(View itemView, CouponListener couponListener, Context context, int iconPlaceholderResId, boolean noIcon) {
             super(itemView);

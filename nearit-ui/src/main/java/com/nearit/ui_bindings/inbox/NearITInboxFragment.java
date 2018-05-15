@@ -30,7 +30,6 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
     private TextView noInboxText;
     private RelativeLayout noInboxContainer;
     private InboxAdapter inboxAdapter;
-    private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeToRefreshLayout;
 
     private int customNoInboxLayoutRef = 0;
@@ -74,10 +73,10 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
 
         noInboxText = rootView.findViewById(R.id.no_inbox_text);
         noInboxContainer = rootView.findViewById(R.id.empty_layout);
-        recyclerView = rootView.findViewById(R.id.inbox_list);
+        RecyclerView recyclerView = rootView.findViewById(R.id.inbox_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        inboxAdapter = new InboxAdapter(getActivity().getLayoutInflater(), this, this);
+        inboxAdapter = new InboxAdapter(inflater, this, this);
         recyclerView.setAdapter(inboxAdapter);
 
         swipeToRefreshLayout = rootView.findViewById(R.id.refresh_layout);

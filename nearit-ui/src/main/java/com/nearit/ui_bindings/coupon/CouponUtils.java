@@ -2,7 +2,6 @@ package com.nearit.ui_bindings.coupon;
 
 import com.nearit.ui_bindings.utils.CollectionsUtils;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;

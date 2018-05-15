@@ -15,7 +15,7 @@ class FeedbackRequestExtras implements Parcelable {
     private final boolean hideTextResponse;
     private final boolean noSuccessIcon;
     private final int iconResId;
-    private boolean enableTapOutsideToClose;
+    private final boolean enableTapOutsideToClose;
     private boolean autoClose;
     private boolean showCloseButton;
 
