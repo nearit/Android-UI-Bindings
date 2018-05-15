@@ -2,6 +2,7 @@ package com.nearit.ui_bindings;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 
 import com.nearit.ui_bindings.content.ContentDetailFragmentBuilder;
 import com.nearit.ui_bindings.content.ContentDetailIntentBuilder;
@@ -43,7 +44,7 @@ public class NearITUIBindings {
     }
 
     public CouponDetailFragmentBuilder createCouponDetailFragmentBuilder(Coupon coupon) {
-        return new CouponDetailFragmentBuilder(mContext, coupon);
+        return new CouponDetailFragmentBuilder(coupon);
     }
 
     public FeedbackIntentBuilder createFeedbackIntentBuilder(Feedback feedback) {
@@ -54,12 +55,28 @@ public class NearITUIBindings {
         return new FeedbackFragmentBuilder(mContext, feedback);
     }
 
+    /**
+     * @deprecated use {@link #createContentDetailFragmentBuilder(Content, TrackingInfo)} instead to get extra trackings.
+     */
+    @Deprecated
     public ContentDetailIntentBuilder createContentDetailIntentBuilder(Content content) {
-        return new ContentDetailIntentBuilder(mContext, content);
+        return this.createContentDetailIntentBuilder(content, null);
     }
 
+    public ContentDetailIntentBuilder createContentDetailIntentBuilder(Content content, @Nullable TrackingInfo trackingInfo) {
+        return new ContentDetailIntentBuilder(mContext, content, trackingInfo);
+    }
+
+    /**
+     * @deprecated use {{@link #createContentDetailFragmentBuilder(Content, TrackingInfo)}} instead, to get extra trackings
+     */
+    @Deprecated
     public ContentDetailFragmentBuilder createContentDetailFragmentBuilder(Content content) {
-        return new ContentDetailFragmentBuilder(mContext, content);
+        return this.createContentDetailFragmentBuilder(content, null);
+    }
+
+    public ContentDetailFragmentBuilder createContentDetailFragmentBuilder(Content content, @Nullable TrackingInfo trackingInfo) {
+        return new ContentDetailFragmentBuilder(content, trackingInfo);
     }
 
     public CouponListIntentBuilder createCouponListIntentBuilder() {

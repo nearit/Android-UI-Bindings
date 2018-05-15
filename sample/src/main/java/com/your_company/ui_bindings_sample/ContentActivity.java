@@ -10,6 +10,7 @@ import com.nearit.ui_bindings.NearITUIBindings;
 import com.your_company.ui_bindings_sample.factories.ContentFactory;
 
 import it.near.sdk.reactions.contentplugin.model.Content;
+import it.near.sdk.trackings.TrackingInfo;
 
 /**
  * @author Federico Boschini
@@ -23,6 +24,7 @@ public class ContentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_content);
 
         final ContentFactory contentFactory = new ContentFactory();
+        final TrackingInfo trackingInfo = TrackingInfo.fromRecipeId("my_fake_recipe_id");
 
         Button complete = findViewById(R.id.content);
         complete.setOnClickListener(new View.OnClickListener() {
@@ -33,7 +35,7 @@ public class ContentActivity extends AppCompatActivity {
                 startActivity(
                         //  Basic example with a complete content
                         NearITUIBindings.getInstance(getApplicationContext())
-                                .createContentDetailIntentBuilder(content)
+                                .createContentDetailIntentBuilder(content, trackingInfo)
                                 .build());
             }
         });
@@ -48,7 +50,7 @@ public class ContentActivity extends AppCompatActivity {
                         //  Example with a content without image
                         //  + enable tapping outside the dialog to close it
                         NearITUIBindings.getInstance(getApplicationContext())
-                                .createContentDetailIntentBuilder(content)
+                                .createContentDetailIntentBuilder(content, trackingInfo)
                                 .enableTapOutsideToClose()
                                 .build());
             }
@@ -63,7 +65,7 @@ public class ContentActivity extends AppCompatActivity {
                 startActivity(
                         //  Example with a content without image
                         NearITUIBindings.getInstance(getApplicationContext())
-                                .createContentDetailIntentBuilder(content)
+                                .createContentDetailIntentBuilder(content, trackingInfo)
                                 .build());
             }
         });

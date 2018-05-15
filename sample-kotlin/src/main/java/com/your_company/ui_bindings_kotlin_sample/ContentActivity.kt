@@ -3,10 +3,9 @@ package com.your_company.ui_bindings_kotlin_sample
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
-import android.widget.Button
 import com.nearit.ui_bindings.NearITUIBindings
 import com.your_company.ui_bindings_kotlin_sample.factories.ContentFactory
+import it.near.sdk.trackings.TrackingInfo
 import kotlinx.android.synthetic.main.activity_content.*
 
 /**
@@ -18,6 +17,7 @@ class ContentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_content)
+        val trackingInfo = TrackingInfo.fromRecipeId("my_fake_recipe_id")
 
         content.setOnClickListener {
             //  In a real scenario the content is provided by the NearIT SDK
@@ -25,7 +25,7 @@ class ContentActivity : AppCompatActivity() {
             startActivity(
                     //  Basic example with a complete content
                     NearITUIBindings.getInstance(this@ContentActivity)
-                            .createContentDetailIntentBuilder(content)
+                            .createContentDetailIntentBuilder(content, trackingInfo)
                             .build())
         }
 
@@ -36,7 +36,7 @@ class ContentActivity : AppCompatActivity() {
                     //  Example with a content without image
                     //  + enable tapping outside the dialog to close it
                     NearITUIBindings.getInstance(this@ContentActivity)
-                            .createContentDetailIntentBuilder(content)
+                            .createContentDetailIntentBuilder(content, trackingInfo)
                             .enableTapOutsideToClose()
                             .build())
         }
@@ -47,7 +47,7 @@ class ContentActivity : AppCompatActivity() {
             startActivity(
                     //  Example with a content without image
                     NearITUIBindings.getInstance(this@ContentActivity)
-                            .createContentDetailIntentBuilder(content)
+                            .createContentDetailIntentBuilder(content, trackingInfo)
                             .build())
         }
 

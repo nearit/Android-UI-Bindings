@@ -209,7 +209,7 @@ class NearItUINotificationFactory {
 
     private static void sendNotifiedTracking(@NonNull Intent intent) {
         TrackingInfo trackingInfo = intent.getParcelableExtra(NearItIntentConstants.TRACKING_INFO);
-        NearItManager.getInstance().sendTracking(trackingInfo, Recipe.NOTIFIED_STATUS);
+        NearItManager.getInstance().sendTracking(trackingInfo, Recipe.RECEIVED);
     }
 
     private static int uniqueNotificationCode() {
