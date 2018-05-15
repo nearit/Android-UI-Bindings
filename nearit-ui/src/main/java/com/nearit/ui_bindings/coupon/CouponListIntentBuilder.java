@@ -17,11 +17,11 @@ public class CouponListIntentBuilder {
     private boolean mNoSeparator = false;
     private boolean mNoIcon = false;
     private boolean mEnableTapOutsideToClose = false;
-    private boolean mValidOnly = false;
-    private boolean mExpiredOnly = false;
-    private boolean mInactiveOnly = false;
-    private boolean mRedeemedOnly = false;
-    private boolean mIncludeRedeemed = false;
+    private boolean mDefaultList = true;
+    private boolean mValid = false;
+    private boolean mExpired = false;
+    private boolean mInactive = false;
+    private boolean mRedeemed = false;
 
     public CouponListIntentBuilder(Context context) {
         mContext = context;
@@ -77,28 +77,27 @@ public class CouponListIntentBuilder {
         return this;
     }
 
-    public CouponListIntentBuilder onlyValidCoupons() {
-        mValidOnly = true;
+    public CouponListIntentBuilder validCoupons() {
+        mDefaultList = false;
+        mValid = true;
         return this;
     }
 
-    public CouponListIntentBuilder onlyExpiredCoupons() {
-        mExpiredOnly = true;
+    public CouponListIntentBuilder expiredCoupons() {
+        mDefaultList = false;
+        mExpired = true;
         return this;
     }
 
-    public CouponListIntentBuilder onlyInactiveCoupons() {
-        mInactiveOnly = true;
+    public CouponListIntentBuilder inactiveCoupons() {
+        mDefaultList = false;
+        mInactive = true;
         return this;
     }
 
-    public CouponListIntentBuilder onlyRedeemedCoupons() {
-        mRedeemedOnly = true;
-        return this;
-    }
-
-    public CouponListIntentBuilder includeRedeemed() {
-        mIncludeRedeemed = true;
+    public CouponListIntentBuilder redeemedCoupons() {
+        mDefaultList = false;
+        mRedeemed = true;
         return this;
     }
 
@@ -124,11 +123,11 @@ public class CouponListIntentBuilder {
                 mJaggedBorders,
                 mNoSeparator,
                 mNoIcon,
-                mValidOnly,
-                mExpiredOnly,
-                mInactiveOnly,
-                mRedeemedOnly,
-                mIncludeRedeemed,
+                mDefaultList,
+                mValid,
+                mExpired,
+                mInactive,
+                mRedeemed,
                 mEnableTapOutsideToClose);
     }
 

@@ -22,14 +22,14 @@ public class CouponListExtraParams implements Parcelable {
     private final boolean noSeparator;
     private final boolean noIcon;
     private final boolean enableTapOutsideToClose;
-    private final boolean validOnly;
-    private final boolean expiredOnly;
-    private final boolean inactiveOnly;
-    private final boolean redeemedOnly;
-    private final boolean includeRedeemed;
+    private final boolean defaultList;
+    private final boolean valid;
+    private final boolean expired;
+    private final boolean inactive;
+    private final boolean redeemed;
 
     CouponListExtraParams(int iconDrawable, int separatorDrawable, int noCouponLayout, boolean enableNetErrorDialog, boolean jaggedBorders, boolean noSeparator, boolean noIcon,
-                          boolean validOnly, boolean expiredOnly, boolean inactiveOnly, boolean redeemedOnly, boolean includeRedeemed, boolean enableTapOutsideToClose) {
+                          boolean defaultList, boolean valid, boolean expired, boolean inactive, boolean redeemed, boolean enableTapOutsideToClose) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
         this.noCouponLayout = noCouponLayout;
@@ -38,16 +38,16 @@ public class CouponListExtraParams implements Parcelable {
         this.noSeparator = noSeparator;
         this.noIcon = noIcon;
         this.enableTapOutsideToClose = enableTapOutsideToClose;
-        this.validOnly = validOnly;
-        this.expiredOnly = expiredOnly;
-        this.inactiveOnly = inactiveOnly;
-        this.redeemedOnly = redeemedOnly;
-        this.includeRedeemed = includeRedeemed;
+        this.defaultList = defaultList;
+        this.valid = valid;
+        this.expired = expired;
+        this.inactive = inactive;
+        this.redeemed = redeemed;
     }
 
     CouponListExtraParams(int iconDrawable, int separatorDrawable, int noCouponLayout, boolean enableNetErrorDialog, boolean jaggedBorders, boolean noSeparator, boolean noIcon,
-                          boolean validOnly, boolean expiredOnly, boolean inactiveOnly, boolean redeemedOnly, boolean includeRedeemed) {
-        this(iconDrawable, separatorDrawable, noCouponLayout, enableNetErrorDialog, jaggedBorders, noSeparator, noIcon, validOnly, expiredOnly,inactiveOnly, redeemedOnly, includeRedeemed, DEFAULT_ENABLE_TAP_OUTSIDE_TO_CLOSE);
+                          boolean defaultList, boolean valid, boolean expired, boolean inactive, boolean redeemed) {
+        this(iconDrawable, separatorDrawable, noCouponLayout, enableNetErrorDialog, jaggedBorders, noSeparator, noIcon, defaultList, valid, expired, inactive, redeemed, DEFAULT_ENABLE_TAP_OUTSIDE_TO_CLOSE);
     }
 
     /**
@@ -85,11 +85,11 @@ public class CouponListExtraParams implements Parcelable {
             boolean noSeparator = in.readInt() != 0;
             boolean noIcon = in.readInt() != 0;
             boolean enableTapToClose = in.readInt() != 0;
-            boolean validOnly = in.readInt() != 0;
-            boolean expiredOnly = in.readInt() != 0;
-            boolean inactiveOnly = in.readInt() != 0;
-            boolean redeemedOnly = in.readInt() != 0;
-            boolean includeRedeemed = in.readInt() != 0;
+            boolean defaultList = in.readInt() != 0;
+            boolean valid = in.readInt() != 0;
+            boolean expired = in.readInt() != 0;
+            boolean inactive = in.readInt() != 0;
+            boolean redeemed = in.readInt() != 0;
             return new CouponListExtraParams(
                     iconDrawable,
                     separatorDrawable,
@@ -98,11 +98,11 @@ public class CouponListExtraParams implements Parcelable {
                     jaggedBorders,
                     noSeparator,
                     noIcon,
-                    validOnly,
-                    expiredOnly,
-                    inactiveOnly,
-                    redeemedOnly,
-                    includeRedeemed,
+                    defaultList,
+                    valid,
+                    expired,
+                    inactive,
+                    redeemed,
                     enableTapToClose
             );
         }
@@ -128,11 +128,11 @@ public class CouponListExtraParams implements Parcelable {
         dest.writeInt(noSeparator ? 1 : 0);
         dest.writeInt(noIcon ? 1 : 0);
         dest.writeInt(enableTapOutsideToClose ? 1 : 0);
-        dest.writeInt(validOnly ? 1 : 0);
-        dest.writeInt(expiredOnly ? 1 : 0);
-        dest.writeInt(inactiveOnly ? 1 : 0);
-        dest.writeInt(redeemedOnly ? 1 : 0);
-        dest.writeInt(includeRedeemed ? 1 : 0);
+        dest.writeInt(defaultList ? 1 : 0);
+        dest.writeInt(valid ? 1 : 0);
+        dest.writeInt(expired ? 1 : 0);
+        dest.writeInt(inactive ? 1 : 0);
+        dest.writeInt(redeemed ? 1 : 0);
     }
 
     int getIconDrawable() {
@@ -167,24 +167,24 @@ public class CouponListExtraParams implements Parcelable {
         return noIcon;
     }
 
-    boolean isValidOnly() {
-        return validOnly;
+    boolean isDefaultList() {
+        return defaultList;
     }
 
-    boolean isExpiredOnly() {
-        return expiredOnly;
+    boolean isValid() {
+        return valid;
     }
 
-    boolean isInactiveOnly() {
-        return inactiveOnly;
+    boolean isExpired() {
+        return expired;
     }
 
-    boolean isRedeemedOnly() {
-        return redeemedOnly;
+    boolean isInactive() {
+        return inactive;
     }
 
-    boolean isIncludeRedeemed() {
-        return includeRedeemed;
+    boolean isRedeemed() {
+        return redeemed;
     }
 
 }

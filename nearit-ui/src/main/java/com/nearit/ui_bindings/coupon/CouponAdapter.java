@@ -1,6 +1,7 @@
 package com.nearit.ui_bindings.coupon;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -16,14 +17,18 @@ import com.nearit.ui_bindings.utils.LoadImageFromURL;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
 import it.near.sdk.reactions.couponplugin.model.Coupon;
+
+import static com.nearit.ui_bindings.coupon.CouponUtils.excludeRedeemed;
+import static com.nearit.ui_bindings.coupon.CouponUtils.getExpired;
+import static com.nearit.ui_bindings.coupon.CouponUtils.getInactive;
+import static com.nearit.ui_bindings.coupon.CouponUtils.getRedeemed;
+import static com.nearit.ui_bindings.coupon.CouponUtils.getValid;
+import static com.nearit.ui_bindings.coupon.CouponUtils.sortByClaimedAtDate;
 
 /**
  * @author Federico Boschini
@@ -46,8 +51,9 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.jaggedBorders = jaggedBorders;
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (jaggedBorders) {
             return new Item(LayoutInflater.from(context).inflate(R.layout.nearit_ui_layout_jagged_coupon_preview, parent, false), couponListener, context, iconPlaceholderResId, noIcon);
         } else {
@@ -56,148 +62,33 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Item iHolder = (Item) holder;
         if (couponList != null) {
             iHolder.bindData(couponList.get(position));
         }
     }
 
-    void addValidOnly(List<Coupon> couponList, boolean includeRedeemed) {
+    void addData(List<Coupon> couponList) {
         sortByClaimedAtDate(couponList);
-        List<Coupon> redeemedList = getRedeemedOnly(couponList);
-        excludeRedeemed(couponList);
-        List<Coupon> validList = getValidOnly(couponList);
-        if(includeRedeemed) {
-            validList.addAll(getValidOnly(redeemedList));
-        }
-        this.couponList = validList;
-        notifyDataSetChanged();
-    }
 
-    void addExpiredOnly(List<Coupon> couponList, boolean includeRedeemed) {
-        sortByClaimedAtDate(couponList);
-        List<Coupon> redeemedList = getRedeemedOnly(couponList);
+        //  filter out redeemed
+        List<Coupon> redeemedList = getRedeemed(couponList);
         excludeRedeemed(couponList);
-        List<Coupon> expiredList = getExpiredOnly(couponList);
-        if(includeRedeemed) {
-            expiredList.addAll(getExpiredOnly(redeemedList));
-        }
-        this.couponList = expiredList;
-        notifyDataSetChanged();
-    }
 
-    void addRedeemedOnly(List<Coupon> couponList) {
-        sortByClaimedAtDate(couponList);
-        this.couponList = getRedeemedOnly(couponList);
-        notifyDataSetChanged();
-    }
+        List<Coupon> validList = getValid(couponList);
+        List<Coupon> inactiveList = getInactive(couponList);
+        List<Coupon> expiredList = getExpired(couponList);
 
-    void addInactiveOnly(List<Coupon> couponList) {
-        sortByClaimedAtDate(couponList);
-        excludeRedeemed(couponList);
-        this.couponList = getInactiveOnly(couponList);
-        notifyDataSetChanged();
-    }
-
-    void addData(List<Coupon> couponList, boolean includeRedeemed) {
-        sortByClaimedAtDate(couponList);
-        List<Coupon> redeemedList = getRedeemedOnly(couponList);
-        excludeRedeemed(couponList);
-        List<Coupon> validList = getValidOnly(couponList);
-        List<Coupon> inactiveList = getInactiveOnly(couponList);
-        List<Coupon> expiredAndRedeemedList = getExpiredOnly(couponList);
-        if (includeRedeemed) {
-            expiredAndRedeemedList.addAll(redeemedList);
-            sortByClaimedAtDate(expiredAndRedeemedList);
-        }
+        //  compose final list
         List<Coupon> finalList = new ArrayList<>();
         finalList.addAll(validList);
         finalList.addAll(inactiveList);
-        finalList.addAll(expiredAndRedeemedList);
+        finalList.addAll(expiredList);
+        finalList.addAll(redeemedList);
+
         this.couponList = finalList;
         notifyDataSetChanged();
-    }
-
-    private void sortByClaimedAtDate(List<Coupon> list) {
-        Collections.sort(list, new Comparator<Coupon>() {
-            @Override
-            public int compare(Coupon c1, Coupon c2) {
-                if(c1.getClaimedAtDate() == null || c2.getClaimedAt() == null) {
-                    return 0;
-                }
-                Date c1Date = c1.getClaimedAtDate();
-                return c2.getClaimedAtDate() != null ? c2.getClaimedAtDate().compareTo(c1Date) : 0;
-            }
-        });
-    }
-
-    private void excludeRedeemed(List<Coupon> couponList) {
-        Iterator<Coupon> iterator = couponList.iterator();
-        while (iterator.hasNext()) {
-            Coupon c = iterator.next();
-            if (c.getRedeemedAtDate() != null) {
-                iterator.remove();
-            }
-        }
-    }
-
-    private List<Coupon> getValidOnly(List<Coupon> couponList) {
-        List<Coupon> list = new ArrayList<>(couponList);
-        Iterator<Coupon> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            Coupon c = iterator.next();
-            if (c.getExpiresAtDate() != null && c.getExpiresAtDate().getTime() < System.currentTimeMillis()) {
-                iterator.remove();
-            }
-            if (c.getRedeemableFromDate() != null && c.getRedeemableFromDate().getTime() > System.currentTimeMillis()) {
-                iterator.remove();
-            }
-        }
-        return list;
-    }
-
-    private List<Coupon> getExpiredOnly(List<Coupon> couponList) {
-        List<Coupon> list = new ArrayList<>(couponList);
-        Iterator<Coupon> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            Coupon c = iterator.next();
-            if (c.getExpiresAtDate() == null) {
-                iterator.remove();
-            } else {
-                if (c.getExpiresAtDate() != null && !(c.getExpiresAtDate().getTime() < System.currentTimeMillis())) {
-                    iterator.remove();
-                }
-            }
-        }
-        return list;
-    }
-
-    private List<Coupon> getInactiveOnly(List<Coupon> couponList) {
-        List<Coupon> list = new ArrayList<>(couponList);
-        Iterator<Coupon> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            Coupon c = iterator.next();
-            if (c.getRedeemableFromDate() == null) {
-                iterator.remove();
-            }
-            if (c.getRedeemableFromDate() != null && !(c.getRedeemableFromDate().getTime() > System.currentTimeMillis())) {
-                iterator.remove();
-            }
-        }
-        return list;
-    }
-
-    private List<Coupon> getRedeemedOnly(List<Coupon> couponList) {
-        List<Coupon> list = new ArrayList<>(couponList);
-        Iterator<Coupon> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            Coupon c = iterator.next();
-            if (c.getRedeemedAtDate() == null) {
-                iterator.remove();
-            }
-        }
-        return list;
     }
 
     @Override
