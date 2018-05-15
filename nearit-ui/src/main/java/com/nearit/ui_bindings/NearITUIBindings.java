@@ -52,7 +52,7 @@ public class NearITUIBindings {
     }
 
     public FeedbackFragmentBuilder createFeedbackFragmentBuilder(Feedback feedback) {
-        return new FeedbackFragmentBuilder(mContext, feedback);
+        return new FeedbackFragmentBuilder(feedback);
     }
 
     /**
