@@ -32,7 +32,7 @@ public class NearItUIAutoTrackingReceiver extends WakefulBroadcastReceiver imple
     @Override
     public void onReceive(Context context, Intent intent) {
         TrackingInfo trackingInfo = intent.getParcelableExtra(NearItIntentConstants.TRACKING_INFO);
-        NearItManager.getInstance().sendTracking(trackingInfo, Recipe.ENGAGED_STATUS);
+        NearItManager.getInstance().sendTracking(trackingInfo, Recipe.OPENED);
 
         shouldAutoDismiss = intent.getBooleanExtra(SHOULD_AUTODISMISS_IF_APP_IS_FOREGROUND, false);
 
@@ -62,7 +62,7 @@ public class NearItUIAutoTrackingReceiver extends WakefulBroadcastReceiver imple
 
     @Override
     public void gotContentNotification(Content content, TrackingInfo trackingInfo) {
-        context.startActivity(NearITUIBindings.getInstance(context).createContentDetailIntentBuilder(content).build().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
+        context.startActivity(NearITUIBindings.getInstance(context).createContentDetailIntentBuilder(content, trackingInfo).build().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
     }
 
     @Override
