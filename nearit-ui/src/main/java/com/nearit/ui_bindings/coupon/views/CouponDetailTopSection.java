@@ -34,7 +34,7 @@ import static com.nearit.ui_bindings.coupon.CouponConstants.VALID;
 
 public class CouponDetailTopSection extends RelativeLayout {
 
-    final SimpleDateFormat formatDate = new SimpleDateFormat(getResources().getString(R.string.nearit_ui_coupon_date_pretty_format), Locale.US);
+    private final SimpleDateFormat formatDate = new SimpleDateFormat(getResources().getString(R.string.nearit_ui_coupon_date_pretty_format), Locale.US);
 
     @Nullable
     private TextView notValidTextView;

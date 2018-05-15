@@ -191,7 +191,7 @@ public final class Version {
       this.ecBlocks = ecBlocks;
     }
 
-    public int getECCodewordsPerBlock() {
+    int getECCodewordsPerBlock() {
       return ecCodewordsPerBlock;
     }
 
@@ -207,7 +207,7 @@ public final class Version {
       return ecCodewordsPerBlock * getNumBlocks();
     }
 
-    public ECB[] getECBlocks() {
+    ECB[] getECBlocks() {
       return ecBlocks;
     }
   }
@@ -217,7 +217,7 @@ public final class Version {
    * This includes the number of data codewords, and the number of times a block with these
    * parameters is used consecutively in the QR code version's format.</p>
    */
-  public static final class ECB {
+  static final class ECB {
     private final int count;
     private final int dataCodewords;
 
@@ -226,11 +226,11 @@ public final class Version {
       this.dataCodewords = dataCodewords;
     }
 
-    public int getCount() {
+    int getCount() {
       return count;
     }
 
-    public int getDataCodewords() {
+    int getDataCodewords() {
       return dataCodewords;
     }
   }

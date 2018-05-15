@@ -33,7 +33,7 @@ public class FeedbackPlainActivity extends AppCompatActivity {
         } else {
             //  Create a new fragment instance
             feedbackFragment = NearITUIBindings.getInstance(this)
-                    .createFeedbackFragmentBuilder(feedback)
+                    .feedbackFragmentBuilder(feedback)
                     .build();
         }
 

@@ -28,9 +28,19 @@
             android:theme="@style/NearItUIFeedbackDialog" />
 
         <activity
+            android:name=".feedback.NearItFeedbackActivitySingleInstance"
+            android:launchMode="singleInstance"
+            android:theme="@style/NearItUIFeedbackDialog" />
+
+        <activity
             android:name=".content.NearItContentDetailActivity"
             android:launchMode="singleTask"
             android:excludeFromRecents="true"
+            android:theme="@style/NearItUIContentDetailDialog" />
+
+        <activity
+            android:name=".content.NearItContentDetailActivitySingleInstance"
+            android:launchMode="singleInstance"
             android:theme="@style/NearItUIContentDetailDialog" />
 
         <activity

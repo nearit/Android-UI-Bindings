@@ -1,8 +1,8 @@
 package com.your_company.ui_bindings_sample;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -35,7 +35,7 @@ public class ContentActivity extends AppCompatActivity {
                 startActivity(
                         //  Basic example with a complete content
                         NearITUIBindings.getInstance(getApplicationContext())
-                                .createContentDetailIntentBuilder(content, trackingInfo)
+                                .contentIntentBuilder(content, trackingInfo)
                                 .build());
             }
         });
@@ -50,7 +50,7 @@ public class ContentActivity extends AppCompatActivity {
                         //  Example with a content without image
                         //  + enable tapping outside the dialog to close it
                         NearITUIBindings.getInstance(getApplicationContext())
-                                .createContentDetailIntentBuilder(content, trackingInfo)
+                                .contentIntentBuilder(content, trackingInfo)
                                 .enableTapOutsideToClose()
                                 .build());
             }
@@ -65,7 +65,7 @@ public class ContentActivity extends AppCompatActivity {
                 startActivity(
                         //  Example with a content without image
                         NearITUIBindings.getInstance(getApplicationContext())
-                                .createContentDetailIntentBuilder(content, trackingInfo)
+                                .contentIntentBuilder(content, trackingInfo)
                                 .build());
             }
         });

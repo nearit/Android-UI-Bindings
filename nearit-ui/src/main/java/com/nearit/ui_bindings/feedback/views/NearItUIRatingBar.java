@@ -748,7 +748,7 @@ public class NearItUIRatingBar extends View {
 
   /* ----------- GETTERS AND SETTERS ----------- */
 
-    public float getRating() {
+    private float getRating() {
         return rating;
     }
 

@@ -11,7 +11,7 @@ class InboxPlainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_plain_inbox)
 
         val inboxFragment = NearITUIBindings.getInstance(this)
-                .createInboxListFragmentBuilder()
+                .inboxFragmentBuilder()
                 .build()
 
         supportFragmentManager

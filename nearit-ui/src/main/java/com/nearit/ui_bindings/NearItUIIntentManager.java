@@ -47,21 +47,24 @@ class NearItUIIntentManager implements ContentsListener {
     @Override
     public void gotContentNotification(Content content, TrackingInfo trackingInfo) {
         Log.d(TAG, "content notification received");
-        context.startActivity(NearITUIBindings.getInstance(context).createContentDetailIntentBuilder(content, trackingInfo).build());
+        context.startActivity(NearITUIBindings.getInstance(context)
+                        .contentIntentBuilder(content, trackingInfo, true).build());
         intentManaged = true;
     }
 
     @Override
     public void gotCouponNotification(Coupon coupon, TrackingInfo trackingInfo) {
         Log.d(TAG, "coupon notification received");
-        context.startActivity(NearITUIBindings.getInstance(context).createCouponDetailIntentBuilder(coupon).build());
+        context.startActivity(NearITUIBindings.getInstance(context)
+                .couponIntentBuilder(coupon, true).build());
         intentManaged = true;
     }
 
     @Override
     public void gotFeedbackNotification(Feedback feedback, TrackingInfo trackingInfo) {
         Log.d(TAG, "feedback notification received");
-        context.startActivity(NearITUIBindings.getInstance(context).createFeedbackIntentBuilder(feedback).build());
+        context.startActivity(NearITUIBindings.getInstance(context)
+                .feedbackIntentBuilder(feedback, true).build());
         intentManaged = true;
     }
 

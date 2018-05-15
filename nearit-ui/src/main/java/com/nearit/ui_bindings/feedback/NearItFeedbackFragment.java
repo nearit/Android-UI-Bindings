@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class NearItFeedbackFragment extends Fragment {
     private static final String SAVED_IS_ALERT_VISIBLE = "alert_state";
     private static final int NEAR_AUTOCLOSE_DELAY = 2000;
 
+    @Nullable
     private Feedback feedback;
 
     private boolean hideTextResponse = false;
@@ -48,19 +50,23 @@ public class NearItFeedbackFragment extends Fragment {
     private String userComment;
 
     @Nullable
-    NearItUIRatingBar ratingBar;
+    private LinearLayout commentSection;
     @Nullable
-    LinearLayout commentSection, ratingBarContainer;
+    private LinearLayout ratingBarContainer;
     @Nullable
-    NearItUIFeedbackButton sendButton;
+    private NearItUIFeedbackButton sendButton;
     @Nullable
-    TextView closeButton, errorText, feedbackQuestionTextView;
+    private TextView closeButton;
     @Nullable
-    EditText commentBox;
+    private TextView errorText;
     @Nullable
-    ImageView positiveResultIcon;
+    private TextView feedbackQuestionTextView;
     @Nullable
-    TextView positiveResultMessage;
+    private EditText commentBox;
+    @Nullable
+    private ImageView positiveResultIcon;
+    @Nullable
+    private TextView positiveResultMessage;
 
     public NearItFeedbackFragment() {
     }
@@ -78,7 +84,9 @@ public class NearItFeedbackFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        feedback = getArguments().getParcelable(ARG_FEEDBACK);
+        if (getArguments() != null) {
+            feedback = getArguments().getParcelable(ARG_FEEDBACK);
+        }
         FeedbackRequestExtras extras = getArguments().getParcelable(ARG_EXTRAS);
         if (extras != null) {
             hideTextResponse = extras.isHideTextResponse();
@@ -91,7 +99,7 @@ public class NearItFeedbackFragment extends Fragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         //  Save fragment state here
         if (sendButton != null) {
@@ -104,7 +112,7 @@ public class NearItFeedbackFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (savedInstanceState != null) {
             //  Restore fragment state here
@@ -126,13 +134,16 @@ public class NearItFeedbackFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_feedback, container, false);
 
-        String feedbackQuestion = feedback.question;
+        String feedbackQuestion = null;
+        if (feedback != null) {
+            feedbackQuestion = feedback.question;
+        }
 
         ratingBarContainer = rootView.findViewById(R.id.feedback_rating_bar_container);
-        ratingBar = rootView.findViewById(R.id.feedback_rating);
+        NearItUIRatingBar ratingBar = rootView.findViewById(R.id.feedback_rating);
         commentSection = rootView.findViewById(R.id.feedback_comment_section);
         errorText = rootView.findViewById(R.id.feedback_error_alert);
         sendButton = rootView.findViewById(R.id.feedback_send_comment_button);

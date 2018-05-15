@@ -19,7 +19,7 @@ public class CouponListPlainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plain_coupon_list);
 
         Fragment couponListFragment = NearITUIBindings.getInstance(this)
-                .createCouponListFragmentBuilder()
+                .couponListFragmentBuilder()
                 .build();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.coupon_list_fragment_container, couponListFragment).commit();

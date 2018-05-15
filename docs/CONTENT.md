@@ -8,7 +8,7 @@ If you want your app to display a NearIT content in a pop-up dialog, use this si
  // ...
  startActivity(
          NearITUIBindings.getInstance(YourActivity.this)
-            .createContentDetailIntentBuilder(content, trackingInfo)
+            .contentIntentBuilder(content, trackingInfo)
             .build());
 ```
 
@@ -17,7 +17,7 @@ If you want your app to display a NearIT content in a pop-up dialog, use this si
  // ...
  startActivity(
          NearITUIBindings.getInstance(this@YourActivity)
-            .createContentDetailIntentBuilder(content, trackingInfo)
+            .contentIntentBuilder(content, trackingInfo)
             .build())
 ```
 
@@ -34,7 +34,7 @@ Optionally, you can display the content in your custom Activity by adding a Frag
   JAVA
   // ...
   Fragment contentFragment = NearITUIBindings.getInstance(YourActivity.this)
-        .createContentDetailFragmentBuilder(content, trackingInfo /*can be null*/)
+        .contentFragmentBuilder(content, trackingInfo /*can be null*/)
         .build();
 ```
 
@@ -42,7 +42,7 @@ Optionally, you can display the content in your custom Activity by adding a Frag
   KOTLIN
   // ...
   val contentFragment: Fragment = NearITUIBindings.getInstance(this@YourActivity)
-        .createContentDetailFragmentBuilder(content, trackingInfo /*can be null*/)
+        .contentFragmentBuilder(content, trackingInfo /*can be null*/)
         .build()
 ```
 
@@ -54,7 +54,7 @@ If you want to enable the tap-outside-to-close functionality, add `.enableTapOut
  // ...
  startActivity(
          NearITUIBindings.getInstance(YourActivity.this)
-            .createContentDetailIntentBuilder(content)
+            .contentIntentBuilder(content)
             .enableTapOutsideToClose()
             .build());
 ```
@@ -64,7 +64,7 @@ If you want to enable the tap-outside-to-close functionality, add `.enableTapOut
  // ...
  startActivity(
          NearITUIBindings.getInstance(this@YourActivity)
-            .createContentDetailIntentBuilder(content)
+            .contentIntentBuilder(content)
             .enableTapOutsideToClose()
             .build())
 ```

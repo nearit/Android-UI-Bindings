@@ -20,7 +20,7 @@ public class PermissionBarButton extends RelativeLayout {
 
     private TextView textView;
 
-    final Context context;
+    private final Context context;
 
     public PermissionBarButton(Context context) {
         super(context);

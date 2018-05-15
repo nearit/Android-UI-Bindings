@@ -39,7 +39,7 @@ public final class BitArray implements Cloneable {
   }
 
   // For testing only
-  BitArray(int[] bits, int size) {
+  private BitArray(int[] bits, int size) {
     this.bits = bits;
     this.size = size;
   }

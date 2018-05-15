@@ -15,7 +15,7 @@ class CouponListPlainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_plain_coupon_list)
 
         val couponListFragment = NearITUIBindings.getInstance(this)
-                .createCouponListFragmentBuilder()
+                .couponListFragmentBuilder()
                 .build()
 
         supportFragmentManager

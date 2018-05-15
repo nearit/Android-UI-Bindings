@@ -49,7 +49,7 @@ public class NearItUIRetryButton extends RelativeLayout {
 
     private void init() {
         inflate(getContext(), R.layout.nearit_ui_layout_warning_dialog_retry_button, this);
-        buttonTextView = (TextView) findViewById(R.id.warning_retry_button_text);
+        buttonTextView = findViewById(R.id.warning_retry_button_text);
     }
 
     private void setText(String text) {

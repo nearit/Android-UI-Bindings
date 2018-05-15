@@ -9,14 +9,14 @@ With these few lines of code
 ```java
 JAVA
 startActivity(NearITUIBindings.getInstance(this)
-                .createInboxListIntentBuilder()
+                .inboxIntentBuilder()
                 .build());
 ```
 
 ```kotlin
 KOTLIN
 startActivity(NearITUIBindings.getInstance(this@YourActivity)
-                .createInboxListIntentBuilder()
+                .inboxIntentBuilder()
                 .build())
 ```
 
@@ -37,7 +37,7 @@ If you want to exclude feedbacks from the inbox list, just add `noFeedbacks()` t
 ```java
 JAVA
 startActivity(NearITUIBindings.getInstance(this)
-                .createInboxListIntentBuilder()
+                .inboxIntentBuilder()
                 .noFeedbacks()
                 .build());
 ```
@@ -45,7 +45,7 @@ startActivity(NearITUIBindings.getInstance(this)
 ```kotlin
 KOTLIN
 startActivity(NearITUIBindings.getInstance(this@InboxActivity)
-                .createInboxListIntentBuilder()
+                .inboxIntentBuilder()
                 .noFeedbacks()
                 .build())
 ```
@@ -57,14 +57,14 @@ If you want to list the inbox in your activity, place this fragment in your cont
 ```java
 JAVA
 Fragment inboxFragment = NearITUIBindings.getInstance(this)
-                .createInboxListFragmentBuilder()
+                .inboxFragmentBuilder()
                 .build();
 ```
 
 ```kotlin
 KOTLIN
 val inboxFragment = NearITUIBindings.getInstance(this)
-                .createInboxListFragmentBuilder()
+                .inboxFragmentBuilder()
                 .build()
 ```
 

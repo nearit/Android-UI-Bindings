@@ -19,65 +19,10 @@ import it.near.sdk.reactions.couponplugin.model.Coupon;
  * @author Federico Boschini
  */
 
-public class NearItCouponDetailActivity extends AppCompatActivity {
-
-    private final static String TAG = "NearItCouponDetailActiv";
-
-    private CouponDetailExtraParams extras;
-    private boolean isEnableTapToClose = false;
-
-    @Nullable
-    LinearLayout closeButton;
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.nearit_ui_activity_coupon_detail);
-
-        closeButton = findViewById(R.id.close_icon);
-        if (closeButton != null) {
-            closeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    finish();
-                }
-            });
-        }
-
-        Intent intent = getIntent();
-        if (intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
-            extras = CouponDetailExtraParams.fromIntent(intent);
-            isEnableTapToClose = extras.isEnableTapOutsideToClose();
-        }
-
-        Coupon coupon = getIntent().getParcelableExtra(ExtraConstants.COUPON_EXTRA);
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, NearItCouponDetailFragment.newInstance(coupon, extras))
-                .commit();
-
-    }
+public class NearItCouponDetailActivity extends BaseCouponDetailActivity {
 
     public static Intent createIntent(Context context, Coupon coupon, CouponDetailExtraParams params) {
-        return new Intent(context, NearItCouponDetailActivity.class)
-                .putExtra(ExtraConstants.COUPON_EXTRA, coupon)
-                .putExtra(ExtraConstants.EXTRA_FLOW_PARAMS, params);
+        Intent intent = new Intent(context, NearItCouponDetailActivity.class);
+        return BaseCouponDetailActivity.addExtras(intent, coupon, params);
     }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        Rect dialogBounds = new Rect();
-        getWindow().getDecorView().getHitRect(dialogBounds);
-
-        if (!dialogBounds.contains((int) ev.getX(), (int) ev.getY())) {
-            if (!isEnableTapToClose) {
-                return true;
-            }
-            finish();
-        }
-        return super.dispatchTouchEvent(ev);
-    }
-
 }
