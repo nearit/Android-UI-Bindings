@@ -217,7 +217,7 @@ public final class Version {
    * This includes the number of data codewords, and the number of times a block with these
    * parameters is used consecutively in the QR code version's format.</p>
    */
-  public static final class ECB {
+  static final class ECB {
     private final int count;
     private final int dataCodewords;
 

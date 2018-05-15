@@ -20,14 +20,11 @@ public class NearItUIWarningDialogActivity extends AppCompatActivity {
     private static final int NEAR_RETRY_CODE = 1111;
     private static final int NEAR_CLOSE_CODE = 2222;
 
-    private NearItUIRetryButton retryButton;
-    private TextView closeButton;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nearit_ui_layout_network_warning);
-        retryButton = (NearItUIRetryButton) findViewById(R.id.retry_button);
+        NearItUIRetryButton retryButton = findViewById(R.id.retry_button);
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,7 +33,7 @@ public class NearItUIWarningDialogActivity extends AppCompatActivity {
             }
         });
 
-        closeButton = (TextView) findViewById(R.id.close_dialog_text);
+        TextView closeButton = findViewById(R.id.close_dialog_text);
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
