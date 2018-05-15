@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -39,13 +40,6 @@ public class NearItContentDetailFragment extends Fragment {
     @Nullable
     private TrackingInfo trackingInfo;
 
-    private TextView titleTextView;
-    private WebView contentView;
-    private ContentCTAButton ctaButton;
-    private ImageView contentImageView;
-    private ProgressBar contentImageSpinner;
-    private LinearLayout contentImageContainer;
-
     public NearItContentDetailFragment() {
     }
 
@@ -69,7 +63,11 @@ public class NearItContentDetailFragment extends Fragment {
             trackingInfo = args.getParcelable(ARG_TRACKING_INFO);
         }
 
-        ContentDetailExtraParams extras = getArguments().getParcelable(ARG_EXTRAS);
+        ContentDetailExtraParams extras = null;
+        if (getArguments() != null) {
+            extras = getArguments().getParcelable(ARG_EXTRAS);
+        }
+
         if (extras != null) {
 
         }
@@ -77,15 +75,15 @@ public class NearItContentDetailFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_content_detail, container, false);
 
-        titleTextView = rootView.findViewById(R.id.content_title);
-        contentView = rootView.findViewById(R.id.content_text);
-        ctaButton = rootView.findViewById(R.id.cta_button);
-        contentImageView = rootView.findViewById(R.id.content_image);
-        contentImageSpinner = rootView.findViewById(R.id.content_image_progress_bar);
-        contentImageContainer = rootView.findViewById(R.id.content_image_container);
+        TextView titleTextView = rootView.findViewById(R.id.content_title);
+        WebView contentView = rootView.findViewById(R.id.content_text);
+        ContentCTAButton ctaButton = rootView.findViewById(R.id.cta_button);
+        ImageView contentImageView = rootView.findViewById(R.id.content_image);
+        ProgressBar contentImageSpinner = rootView.findViewById(R.id.content_image_progress_bar);
+        LinearLayout contentImageContainer = rootView.findViewById(R.id.content_image_container);
 
         if (content.title != null) {
             titleTextView.setVisibility(View.VISIBLE);
