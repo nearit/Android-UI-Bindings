@@ -1,7 +1,5 @@
 package com.nearit.ui_bindings.coupon;
 
-import android.content.Context;
-
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 /**
@@ -9,15 +7,13 @@ import it.near.sdk.reactions.couponplugin.model.Coupon;
  */
 
 public class CouponDetailFragmentBuilder {
-    private Context mContext;
     private int mIconDrawable;
     private int mSeparatorDrawable;
     private boolean mNoSeparator;
     private boolean mNoWakeLock;
     private Coupon mCoupon;
 
-    public CouponDetailFragmentBuilder(Context context, Coupon coupon) {
-        mContext = context;
+    public CouponDetailFragmentBuilder(Coupon coupon) {
         mCoupon = coupon;
     }
 

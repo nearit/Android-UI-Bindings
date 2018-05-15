@@ -135,7 +135,7 @@ public class InboxPresenterImplTest {
         TrackingInfo ti = new TrackingInfo();
         item.trackingInfo = ti;
         inboxPresenter.itemClicked(item);
-        verify(nearit).sendTracking(ti, Recipe.ENGAGED_STATUS);
+        verify(nearit).sendTracking(ti, Recipe.OPENED);
         verify(view).openDetail(item);
     }
 
@@ -147,7 +147,7 @@ public class InboxPresenterImplTest {
         item.reaction = simpleNotification;
         item.trackingInfo = ti;
         inboxPresenter.onNotificationRead(item);
-        verify(nearit).sendTracking(ti, Recipe.ENGAGED_STATUS);
+        verify(nearit).sendTracking(ti, Recipe.OPENED);
     }
 
     @Test

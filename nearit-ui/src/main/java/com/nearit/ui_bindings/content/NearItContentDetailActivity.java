@@ -15,6 +15,7 @@ import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
 
 import it.near.sdk.reactions.contentplugin.model.Content;
+import it.near.sdk.trackings.TrackingInfo;
 
 /**
  * @author Federico Boschini
@@ -55,18 +56,20 @@ public class NearItContentDetailActivity extends AppCompatActivity {
         }
 
         Content content = getIntent().getParcelableExtra(ExtraConstants.CONTENT_EXTRA);
+        TrackingInfo trackingInfo = getIntent().getParcelableExtra(ExtraConstants.TRACKING_INFO_EXTRA);
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.content_fragment_container, NearItContentDetailFragment.newInstance(content, extras))
+                .replace(R.id.content_fragment_container, NearItContentDetailFragment.newInstance(content, trackingInfo, extras))
                 .commit();
 
     }
 
-    public static Intent createIntent(Context context, Content content, ContentDetailExtraParams params) {
+    public static Intent createIntent(Context context, @Nullable TrackingInfo trackingInfo, Content content, ContentDetailExtraParams params) {
         return new Intent(context, NearItContentDetailActivity.class)
                 .putExtra(ExtraConstants.CONTENT_EXTRA, content)
-                .putExtra(ExtraConstants.EXTRA_FLOW_PARAMS, params);
+                .putExtra(ExtraConstants.EXTRA_FLOW_PARAMS, params)
+                .putExtra(ExtraConstants.TRACKING_INFO_EXTRA, trackingInfo);
     }
 
     @Override

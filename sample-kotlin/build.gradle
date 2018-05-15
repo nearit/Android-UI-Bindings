@@ -60,7 +60,7 @@ dependencies {
 //    compile 'it.near.sdk:nearit-ui:1.1.15'
     compile project(':nearit-ui')
     compile 'com.android.support:appcompat-v7:27.1.0'
-    compile 'it.near.sdk:nearit:2.8.0'
+    compile 'it.near.sdk:nearit:2.9.0'
 
     testCompile 'junit:junit:4.12'
 
