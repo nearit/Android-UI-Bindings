@@ -13,14 +13,14 @@ import it.near.sdk.recipes.models.ReactionBundle;
 public abstract class BaseViewHolder<T extends ReactionBundle> extends RecyclerView.ViewHolder {
 
     InboxItem item;
-    InboxAdapter.NotificationReadListener readListener;
+    private final InboxAdapter.NotificationReadListener readListener;
 
-    public BaseViewHolder(final View itemView, InboxAdapter.NotificationReadListener readListener) {
+    BaseViewHolder(final View itemView, InboxAdapter.NotificationReadListener readListener) {
         super(itemView);
         this.readListener = readListener;
     }
 
-    public BaseViewHolder(LayoutInflater inflater, int res, ViewGroup parent, InboxAdapter.NotificationReadListener readListener) {
+    BaseViewHolder(LayoutInflater inflater, int res, ViewGroup parent, InboxAdapter.NotificationReadListener readListener) {
         super(inflater.inflate(res, parent, false));
         this.readListener = readListener;
     }

@@ -11,7 +11,7 @@ public class CouponDetailFragmentBuilder {
     private int mSeparatorDrawable;
     private boolean mNoSeparator;
     private boolean mNoWakeLock;
-    private Coupon mCoupon;
+    private final Coupon mCoupon;
 
     public CouponDetailFragmentBuilder(Coupon coupon) {
         mCoupon = coupon;

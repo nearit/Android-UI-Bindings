@@ -8,7 +8,7 @@ import android.content.Intent;
  */
 
 public class PermissionsRequestIntentBuilder {
-    private Context mContext;
+    private final Context mContext;
     private boolean mEnableTapOutsideToClose = false;
     private boolean mRadarAutoStart = false;
     private boolean mInvisibleLayoutMode = false;

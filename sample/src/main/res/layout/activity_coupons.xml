@@ -25,12 +25,15 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <!--    DETAILS     -->
+
             <Button
                 android:id="@+id/valid_coupon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 style="@style/ButtonStyle"
+                android:onClick="onValidDetailClicked"
                 android:text="Valid Coupon" />
 
             <Button
@@ -39,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 style="@style/ButtonStyle"
+                android:onClick="onInactiveDetailClicked"
                 android:text="Inactive Coupon" />
 
             <Button
@@ -47,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 style="@style/ButtonStyle"
+                android:onClick="onExpiredDetailClicked"
                 android:text="Expired Coupon" />
 
             <Button
@@ -55,73 +60,120 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 style="@style/ButtonStyle"
+                android:onClick="onCustomIconDetailClicked"
                 android:text="Custom Icon Coupon" />
 
             <Button
                 android:id="@+id/plain_coupon_activity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
                 style="@style/ButtonStyle"
+                android:onClick="onPlainCouponClicked"
                 android:text="Coupon in activity" />
 
+
+            <!--    LISTS   -->
+
             <Button
-                android:id="@+id/coupon_list"
+                android:id="@+id/default_coupon_list"
+                style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
-                style="@style/ButtonStyle"
-                android:text="Coupon List" />
+                android:onClick="onDefaultClicked"
+                android:text="Default Coupon List" />
 
             <Button
                 android:id="@+id/valid_coupon_list"
+                style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                style="@style/ButtonStyle"
-                android:text="Valid Coupon List" />
-
-            <Button
-                android:id="@+id/redeemed_coupon_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                style="@style/ButtonStyle"
-                android:text="Redeemed Coupon List" />
+                android:onClick="onValidClicked"
+                android:text="Valid Only Coupon List" />
 
             <Button
                 android:id="@+id/inactive_coupon_list"
+                style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                style="@style/ButtonStyle"
-                android:text="Inactive Coupon List" />
+                android:onClick="onInactiveClicked"
+                android:text="Inactive Only Coupon List" />
 
             <Button
                 android:id="@+id/expired_coupon_list"
+                style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                style="@style/ButtonStyle"
-                android:text="Expired Coupon List" />
+                android:onClick="onExpiredClicked"
+                android:text="Expired Only Coupon List" />
 
             <Button
-                android:id="@+id/include_redeemed_coupon_list"
+                android:id="@+id/redeemed_coupon_list"
+                style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                style="@style/ButtonStyle"
-                android:text="Complete Coupon List" />
+                android:onClick="onRedeemedClicked"
+                android:text="Redeemed Only Coupon List" />
 
             <Button
-                android:id="@+id/coupon_list_in_activity"
+                android:id="@+id/valid_inactive_coupon_list"
+                style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="5dp"
+                android:onClick="onValidAndInactiveClicked"
+                android:text="Valid and Inactive Coupon List" />
+
+            <Button
+                android:id="@+id/valid_expired_coupon_list"
                 style="@style/ButtonStyle"
-                android:text="Coupon List in activity" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:onClick="onValidAndExpiredClicked"
+                android:text="Valid and Expired Coupon List" />
+
+            <Button
+                android:id="@+id/valid_redeemed_coupon_list"
+                style="@style/ButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:onClick="onValidAndRedeemedClicked"
+                android:text="Valid and Redeemed Coupon List" />
+
+            <Button
+                android:id="@+id/inactive_expired_coupon_list"
+                style="@style/ButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:onClick="onInactiveAndExpiredClicked"
+                android:text="Inactive and Expired Coupon List" />
+
+            <Button
+                android:id="@+id/inactive_redeemed_coupon_list"
+                style="@style/ButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:onClick="onInactiveAndRedeemedClicked"
+                android:text="Inactive and Redeemed Coupon List" />
+
+            <Button
+                android:id="@+id/expired_redeemed_coupon_list"
+                style="@style/ButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:onClick="onExpiredAndRedeemedClicked"
+                android:text="Expired and Redeemed Coupon List" />
 
         </LinearLayout>
     </ScrollView>

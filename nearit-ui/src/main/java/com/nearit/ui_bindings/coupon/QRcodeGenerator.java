@@ -14,9 +14,9 @@ import com.nearit.ui_bindings.nearXing.qrcode.QRCodeWriter;
  */
 
 public class QRcodeGenerator extends AsyncTask<String, Void, Bitmap> {
-    private int width;
-    private int height;
-    private GeneratorListener listener;
+    private final int width;
+    private final int height;
+    private final GeneratorListener listener;
 
     public QRcodeGenerator(int width, int height, GeneratorListener listener) {
         this.width = width;

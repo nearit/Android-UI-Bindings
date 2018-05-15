@@ -23,7 +23,7 @@ class NearItUIIntentManager implements ContentsListener {
 
     private static final String TAG = "NearITUIIntentManager";
 
-    private Context context;
+    private final Context context;
     private boolean intentManaged = false;
 
     NearItUIIntentManager(Context context) {

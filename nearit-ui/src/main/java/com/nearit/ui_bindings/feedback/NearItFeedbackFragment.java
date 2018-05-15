@@ -34,7 +34,7 @@ public class NearItFeedbackFragment extends Fragment {
     private static final String SAVED_RATING = "rating";
     private static final String SAVED_IS_BUTTON_CHECKED = "button_state";
     private static final String SAVED_IS_ALERT_VISIBLE = "alert_state";
-    private static int NEAR_AUTOCLOSE_DELAY = 2000;
+    private static final int NEAR_AUTOCLOSE_DELAY = 2000;
 
     private Feedback feedback;
 

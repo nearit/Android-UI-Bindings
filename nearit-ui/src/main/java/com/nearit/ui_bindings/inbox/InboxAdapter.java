@@ -1,5 +1,6 @@
 package com.nearit.ui_bindings.inbox;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -22,12 +23,12 @@ import it.near.sdk.recipes.inbox.model.InboxItem;
 public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private final NotificationReadListener readListener;
-    private LayoutInflater inflater;
-    private InboxAdapterListener inboxAdapterListener;
+    private final LayoutInflater inflater;
+    private final InboxAdapterListener inboxAdapterListener;
 
     private List<InboxItem> items = Collections.emptyList();
 
-    public InboxAdapter(LayoutInflater inflater, InboxAdapterListener inboxAdapterListener, NotificationReadListener readListener) {
+    InboxAdapter(LayoutInflater inflater, InboxAdapterListener inboxAdapterListener, NotificationReadListener readListener) {
         this.inflater = inflater;
         this.inboxAdapterListener = inboxAdapterListener;
         this.readListener = readListener;
@@ -54,8 +55,9 @@ public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
     }
 
+    @NonNull
     @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
             case SimpleNotificationViewHolder.VIEWTYPE:
                 return new SimpleNotificationViewHolder(inflater, parent, readListener);
@@ -66,12 +68,12 @@ public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             case CustomJSONViewHolder.VIEWTYPE:
                 return new CustomJSONViewHolder(inflater, parent, inboxAdapterListener, readListener);
             default:
-                return null;
+                return new SimpleNotificationViewHolder(inflater, parent, readListener);
         }
     }
 
     @Override
-    public void onBindViewHolder(BaseViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
         holder.setItem(items.get(position));
     }
 

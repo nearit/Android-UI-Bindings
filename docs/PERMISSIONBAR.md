@@ -41,7 +41,7 @@ bar.bindToActivity(YourActivity.this, NEAR_PERMISSION_REQUEST);
 ```kotlin
 KOTLIN
 //  permission_bar is the id of the PermissionBar view you have placed in your layout
-permission_bar.bindToActivity(this@YourActivity, NEAR_PERMISSION_REQUEST);
+permission_bar.bindToActivity(this@YourActivity, NEAR_PERMISSION_REQUEST)
 ```
 
 where `NEAR_PERMISSION_REQUEST` is an int value defined by you that will identify the request made by the view.

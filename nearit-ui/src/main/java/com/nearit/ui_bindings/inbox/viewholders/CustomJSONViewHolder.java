@@ -17,8 +17,8 @@ public class CustomJSONViewHolder extends BaseViewHolder<CustomJSON> {
 
     public static final int VIEWTYPE = 4;
 
-    Button button;
-    InboxCardLayout layout;
+    private final Button button;
+    private final InboxCardLayout layout;
 
     public CustomJSONViewHolder(LayoutInflater inflater, ViewGroup parent, final InboxAdapter.InboxAdapterListener listener, InboxAdapter.NotificationReadListener readListener) {
         super(inflater.inflate(R.layout.nearit_ui_inbox_customjson_item, parent, false), readListener);

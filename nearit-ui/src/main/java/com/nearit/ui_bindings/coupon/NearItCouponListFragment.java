@@ -26,6 +26,11 @@ import it.near.sdk.NearItManager;
 import it.near.sdk.reactions.couponplugin.CouponListener;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
+import static com.nearit.ui_bindings.coupon.CouponUtils.getExpired;
+import static com.nearit.ui_bindings.coupon.CouponUtils.getInactive;
+import static com.nearit.ui_bindings.coupon.CouponUtils.getRedeemed;
+import static com.nearit.ui_bindings.coupon.CouponUtils.getValid;
+
 /**
  * @author Federico Boschini
  */
@@ -48,7 +53,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
 
     private int separatorDrawable = 0, iconDrawable = 0;
     private boolean noSeparator = false, noIcon, jaggedBorders;
-    private boolean validOnly, expiredOnly, inactiveOnly, redeemedOnly, includeRedeemed, enableNetErrorDialog;
+    private boolean defaultList, valid, expired, inactive, redeemed, enableNetErrorDialog;
 
     public NearItCouponListFragment() {
     }
@@ -75,11 +80,11 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
                 jaggedBorders = extras.isJaggedBorders();
                 noSeparator = extras.isNoSeparator();
                 noIcon = extras.isNoIcon();
-                validOnly = extras.isValidOnly();
-                expiredOnly = extras.isExpiredOnly();
-                inactiveOnly = extras.isInactiveOnly();
-                redeemedOnly = extras.isRedeemedOnly();
-                includeRedeemed = extras.isIncludeRedeemed();
+                defaultList = extras.isDefaultList();
+                valid = extras.isValid();
+                expired = extras.isExpired();
+                inactive = extras.isInactive();
+                redeemed = extras.isRedeemed();
             }
         }
 
@@ -137,18 +142,29 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
             @Override
             public void onCouponsDownloaded(List<Coupon> list) {
                 couponList = list;
-
-                if (validOnly) {
-                    couponAdapter.addValidOnly(couponList, includeRedeemed);
-                } else if (inactiveOnly) {
-                    couponAdapter.addInactiveOnly(couponList);
-                } else if (expiredOnly) {
-                    couponAdapter.addExpiredOnly(couponList, includeRedeemed);
-                } else if (redeemedOnly) {
-                    couponAdapter.addRedeemedOnly(couponList);
+                List<Coupon> filtered = new ArrayList<>();
+                if (defaultList) {
+                    filtered.addAll(getValid(couponList));
+                    filtered.addAll(getInactive(couponList));
                 } else {
-                    couponAdapter.addData(couponList, includeRedeemed);
+                    if (valid) {
+                        filtered.addAll(getValid(couponList));
+                    }
+
+                    if (inactive) {
+                        filtered.addAll(getInactive(couponList));
+                    }
+
+                    if (expired) {
+                        filtered.addAll(getExpired(couponList));
+                    }
+
+                    if (redeemed) {
+                        filtered.addAll(getRedeemed(couponList));
+                    }
                 }
+
+                couponAdapter.addData(filtered);
 
                 couponAdapter.notifyDataSetChanged();
 
@@ -167,7 +183,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
             @Override
             public void onCouponDownloadError(String s) {
                 couponList = new ArrayList<>();
-                couponAdapter.addData(couponList, false);
+                couponAdapter.addData(couponList);
                 couponAdapter.notifyDataSetChanged();
                 if (couponAdapter.getItemCount() == 0) {
                     if (customNoCoupon != null) {
@@ -189,7 +205,7 @@ public class NearItCouponListFragment extends Fragment implements CouponAdapter.
 
     @Override
     public void onCouponClicked(Coupon coupon) {
-        CouponDetailIntentBuilder builder = NearITUIBindings.getInstance(getContext()).createCouponDetailIntentBuilder(coupon);
+        CouponDetailIntentBuilder builder = NearITUIBindings.getInstance(getContext()).createCouponDetailIntentBuilder(coupon, true);
         if (noSeparator) {
             builder.setNoSeparator();
         }

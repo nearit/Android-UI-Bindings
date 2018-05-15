@@ -25,7 +25,7 @@ public class NearItUIProximityListener implements ProximityListener, ContentsLis
 
 //    private int customIcon = 0;
 
-    private Context mContext;
+    private final Context mContext;
 
     public NearItUIProximityListener(Context context) {
         mContext = context;

@@ -12,7 +12,7 @@ public class FeedbackFragmentBuilder {
     private boolean mAutoClose;
     private boolean mShowCloseButton;
     private int mIconResId;
-    private Feedback mFeedback;
+    private final Feedback mFeedback;
 
     public FeedbackFragmentBuilder(Feedback feedback) {
         mFeedback = feedback;

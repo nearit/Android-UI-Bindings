@@ -37,33 +37,10 @@ startActivity(NearITUIBindings.getInstance(this@YourActivity)
 you are able to show the list of coupons with this sorting rationale:
 - valid coupons
 - not yet active coupons
-- expired coupons
 
 each set is ordered by the date the user earned the coupons.
 
 ![coupon list](coupon_list.png)
-
-If your app needs to show already redeemed coupons too, just add `.includeRedeemed()` call:
-
-```java
-JAVA
-startActivity(NearITUIBindings.getInstance(YourActivity.this)
-                        .createCouponListIntentBuilder()
-                        .includeRedeemed()
-                        .build()
-              );
-```
-
-```kotlin
-KOTLIN
-startActivity(NearITUIBindings.getInstance(this@YourActivity)
-                        .createCouponListIntentBuilder()
-                        .includeRedeemed()
-                        .build()
-              )
-```
-
-and the coupons already used by the user will be shown at the bottom of the list, with the expired ones.
 
 ## Advanced examples
 ### Network error
@@ -100,7 +77,7 @@ In your application you may want to show only coupons that are in certain states
 JAVA
 startActivity(NearITUIBindings.getInstance(YourActivity.this)
                         .createCouponListIntentBuilder()
-                        .onlyValidCoupons()
+                        .validCoupons()
                         .build()
                 );
 ```
@@ -109,15 +86,37 @@ startActivity(NearITUIBindings.getInstance(YourActivity.this)
 KOTLIN
 startActivity(NearITUIBindings.getInstance(this@YourActivity)
                         .createCouponListIntentBuilder()
-                        .onlyValidCoupons()
+                        .validCoupons()
                         .build()
                 )
 ```
 
 The same for the other states:
-- `onlyExpiredCoupons()`
-- `onlyInactiveCoupons()`
-- `onlyRedeemedCoupons()`
+- `expiredCoupons()`
+- `inactiveCoupons()`
+- `redeemedCoupons()`
+
+By combining these methods calls you can build the coupon list you prefer
+
+```java
+JAVA
+startActivity(NearITUIBindings.getInstance(YourActivity.this)
+                        .createCouponListIntentBuilder()
+                        .validCoupons()
+                        .expiredCoupons()
+                        .build()
+                );
+```
+
+```kotlin
+KOTLIN
+startActivity(NearITUIBindings.getInstance(this@YourActivity)
+                        .createCouponListIntentBuilder()
+                        .validCoupons()
+                        .expiredCoupons()
+                        .build()
+                )
+```
 
 ### Fragment mode
 
