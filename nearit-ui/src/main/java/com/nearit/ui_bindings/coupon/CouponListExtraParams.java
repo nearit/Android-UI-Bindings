@@ -28,8 +28,20 @@ public class CouponListExtraParams implements Parcelable {
     private final boolean inactive;
     private final boolean redeemed;
 
-    CouponListExtraParams(int iconDrawable, int separatorDrawable, int noCouponLayout, boolean enableNetErrorDialog, boolean jaggedBorders, boolean noSeparator, boolean noIcon,
-                          boolean defaultList, boolean valid, boolean expired, boolean inactive, boolean redeemed, boolean enableTapOutsideToClose) {
+    CouponListExtraParams(
+            int iconDrawable,
+            int separatorDrawable,
+            int noCouponLayout,
+            boolean enableNetErrorDialog,
+            boolean jaggedBorders,
+            boolean noSeparator,
+            boolean noIcon,
+            boolean defaultList,
+            boolean valid,
+            boolean expired,
+            boolean inactive,
+            boolean redeemed,
+            boolean enableTapOutsideToClose) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
         this.noCouponLayout = noCouponLayout;
@@ -45,9 +57,33 @@ public class CouponListExtraParams implements Parcelable {
         this.redeemed = redeemed;
     }
 
-    CouponListExtraParams(int iconDrawable, int separatorDrawable, int noCouponLayout, boolean enableNetErrorDialog, boolean jaggedBorders, boolean noSeparator, boolean noIcon,
-                          boolean defaultList, boolean valid, boolean expired, boolean inactive, boolean redeemed) {
-        this(iconDrawable, separatorDrawable, noCouponLayout, enableNetErrorDialog, jaggedBorders, noSeparator, noIcon, defaultList, valid, expired, inactive, redeemed, DEFAULT_ENABLE_TAP_OUTSIDE_TO_CLOSE);
+    CouponListExtraParams(
+            int iconDrawable,
+            int separatorDrawable,
+            int noCouponLayout,
+            boolean enableNetErrorDialog,
+            boolean jaggedBorders,
+            boolean noSeparator,
+            boolean noIcon,
+            boolean defaultList,
+            boolean valid,
+            boolean expired,
+            boolean inactive,
+            boolean redeemed) {
+        this(
+                iconDrawable,
+                separatorDrawable,
+                noCouponLayout,
+                enableNetErrorDialog,
+                jaggedBorders,
+                noSeparator,
+                noIcon,
+                defaultList,
+                valid,
+                expired,
+                inactive,
+                redeemed,
+                DEFAULT_ENABLE_TAP_OUTSIDE_TO_CLOSE);
     }
 
     /**

@@ -111,6 +111,13 @@ public class CouponsActivity extends AppCompatActivity {
                 .build());
     }
 
+    public void onPlainCouponListClicked(View view) {
+        //  start a plain activity that shows the fragment fullscreen
+        //  please check it
+        startActivity(new Intent(CouponsActivity.this, CouponListPlainActivity.class));
+    }
+
+
     /*  COUPON DETAIL EXAMPLES    */
 
     public void onValidDetailClicked(View view) {
