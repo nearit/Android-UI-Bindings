@@ -12,11 +12,11 @@ public class CouponListFragmentBuilder {
     private boolean mJaggedBorders = false;
     private boolean mNoSeparator;
     private boolean mNoIcon;
+    private boolean mDefaultList = true;
     private boolean mValid = false;
     private boolean mExpired = false;
     private boolean mInactive = false;
     private boolean mRedeemed = false;
-    private boolean mIncludeRedeemed = false;
 
     public CouponListFragmentBuilder() {
     }
@@ -59,27 +59,26 @@ public class CouponListFragmentBuilder {
     }
 
     public CouponListFragmentBuilder validCoupons() {
+        mDefaultList = false;
         mValid = true;
         return this;
     }
 
     public CouponListFragmentBuilder expiredCoupons() {
+        mDefaultList = false;
         mExpired = true;
         return this;
     }
 
     public CouponListFragmentBuilder inactiveCoupons() {
+        mDefaultList = false;
         mInactive = true;
         return this;
     }
 
     public CouponListFragmentBuilder redeemedCoupons() {
+        mDefaultList = false;
         mRedeemed = true;
-        return this;
-    }
-
-    public CouponListFragmentBuilder includeRedeemed() {
-        mIncludeRedeemed = true;
         return this;
     }
 
@@ -106,11 +105,11 @@ public class CouponListFragmentBuilder {
                 mJaggedBorders,
                 mNoSeparator,
                 mNoIcon,
+                mDefaultList,
                 mValid,
                 mExpired,
                 mInactive,
-                mRedeemed,
-                mIncludeRedeemed);
+                mRedeemed);
     }
 
 }
