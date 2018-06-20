@@ -64,7 +64,7 @@ class CouponUtils {
         return filter(couponList, new CollectionsUtils.Predicate<Coupon>() {
             @Override
             public boolean apply(Coupon item) {
-                return item.getRedeemableFromDate() != null && item.getRedeemableFromDate().getTime() < System.currentTimeMillis();
+                return item.getRedeemableFromDate() != null && item.getRedeemableFromDate().getTime() > System.currentTimeMillis();
             }
         });
     }
