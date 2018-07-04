@@ -76,11 +76,11 @@ public final class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
                 imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 imageView.setAdjustViewBounds(true);
                 imageView.setMinimumHeight(0);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     imageView.setBackground(null);
                 } else {
                     imageView.setBackgroundDrawable(null);
-                }
+                }*/
                 imageView.setImageBitmap(icon);
             } else {
                 //  show reload
