@@ -22,7 +22,8 @@
             android:id="@+id/coupon_icon"
             android:layout_width="@dimen/nearit_ui_coupon_list_coupon_icon_width_height"
             android:layout_height="@dimen/nearit_ui_coupon_list_coupon_icon_width_height"
-            android:src="@drawable/ic_nearit_ui_brand_nearit_black" />
+            android:background="@drawable/nearit_ui_coupon_icon_border"
+            android:src="@drawable/ic_nearit_ui_coupon_icon_placeholder" />
 
         <ProgressBar
             android:id="@+id/coupon_icon_progress_bar"
