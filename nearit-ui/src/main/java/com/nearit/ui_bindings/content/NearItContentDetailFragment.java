@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -97,7 +98,8 @@ public class NearItContentDetailFragment extends Fragment {
 
         if (content.contentString != null) {
             contentView.setVisibility(View.VISIBLE);
-            contentView.getSettings();
+            final WebSettings webSettings = contentView.getSettings();
+            webSettings.setDefaultFontSize(13);
             contentView.setBackgroundColor(Color.TRANSPARENT);
             contentView.loadDataWithBaseURL("", content.contentString, "text/html", "UTF-8", "");
         }
