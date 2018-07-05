@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="nearit_ui_content_vertical_padding">20dp</dimen>
+    <dimen name="nearit_ui_content_horizontal_padding">25dp</dimen>
+    <dimen name="nearit_ui_content_image_top_padding">15dp</dimen>
+    <dimen name="nearit_ui_content_image_progress_bar_dimen">60dp</dimen>
+    <dimen name="nearit_ui_content_margin1">19dp</dimen>
+    <dimen name="nearit_ui_content_margin2">15dp</dimen>
+    <dimen name="nearit_ui_content_margin3">33dp</dimen>
+    <dimen name="nearit_ui_content_cta_button_height">45dp</dimen>
+    <dimen name="nearit_ui_content_cta_button_min_width">250dp</dimen>
+    <dimen name="nearit_ui_content_image_min_height">200dp</dimen>
+    <!--    TEXT SIZE     -->
+    <dimen name="nearit_ui_content_title_text_size">18sp</dimen>
+    <dimen name="nearit_ui_content_content_text_size">15sp</dimen>
+    <dimen name="nearit_ui_content_cta_button_text_size">15sp</dimen>
+</resources>
