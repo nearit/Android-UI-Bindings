@@ -14,4 +14,7 @@
     <dimen name="nearit_ui_content_title_text_size">18sp</dimen>
     <dimen name="nearit_ui_content_content_text_size">15sp</dimen>
     <dimen name="nearit_ui_content_cta_button_text_size">15sp</dimen>
+    <dimen name="nearit_ui_content_container_margin_bottom">20dp</dimen>
+    <dimen name="nearit_ui_content_container_margin_horizontal">5dp</dimen>
+    <dimen name="nearit_ui_content_container_close_padding">10dp</dimen>
 </resources>
