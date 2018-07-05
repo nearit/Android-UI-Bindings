@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.nearit.ui_bindings.R;
@@ -66,6 +67,10 @@ public class NearItCouponDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_coupon_detail, container, false);
 
         CouponDetailTopSection topSection = rootView.findViewById(R.id.coupon_detail_top_section);
+
+        ScrollView scrollView = rootView.findViewById(R.id.coupon_detail_scrollview);
+        scrollView.setVerticalScrollBarEnabled(false);
+        scrollView.setHorizontalScrollBarEnabled(false);
 
         topSection.setCouponView(coupon);
 
