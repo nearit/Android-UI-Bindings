@@ -3,7 +3,6 @@ package com.nearit.ui_bindings.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;

@@ -11,10 +11,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.nearit.ui_bindings.R;
@@ -78,12 +80,16 @@ public class NearItContentDetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_content_detail, container, false);
 
+        ScrollView scrollView = rootView.findViewById(R.id.content_scrollview);
         TextView titleTextView = rootView.findViewById(R.id.content_title);
         WebView contentView = rootView.findViewById(R.id.content_text);
         ContentCTAButton ctaButton = rootView.findViewById(R.id.cta_button);
         ImageView contentImageView = rootView.findViewById(R.id.content_image);
         ProgressBar contentImageSpinner = rootView.findViewById(R.id.content_image_progress_bar);
         LinearLayout contentImageContainer = rootView.findViewById(R.id.content_image_container);
+
+        scrollView.setHorizontalScrollBarEnabled(false);
+        scrollView.setVerticalScrollBarEnabled(false);
 
         if (content.title != null) {
             titleTextView.setVisibility(View.VISIBLE);
@@ -92,7 +98,8 @@ public class NearItContentDetailFragment extends Fragment {
 
         if (content.contentString != null) {
             contentView.setVisibility(View.VISIBLE);
-            contentView.getSettings();
+            final WebSettings webSettings = contentView.getSettings();
+            webSettings.setDefaultFontSize(13);
             contentView.setBackgroundColor(Color.TRANSPARENT);
             contentView.loadDataWithBaseURL("", content.contentString, "text/html", "UTF-8", "");
         }
