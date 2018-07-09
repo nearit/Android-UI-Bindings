@@ -19,8 +19,8 @@
     <string name="nearit_ui_coupon_validity_label_valid">Validity: </string>
     <string name="nearit_ui_coupon_validity_label_valid_no_period">Valid</string>
     <string name="nearit_ui_coupon_validity_label_redeemed">Redeemed at: </string>
-    <string name="nearit_ui_coupon_validity_period_from">from %1$s</string>
-    <string name="nearit_ui_coupon_validity_period_until">until %2$s</string>
+    <string name="nearit_ui_coupon_validity_period_from">from %s</string>
+    <string name="nearit_ui_coupon_validity_period_until">until %s</string>
     <string name="nearit_ui_coupon_validity_period_from_to">from %1$s to %2$s</string>
     <string name="nearit_ui_coupon_date_pretty_format">MM-dd-yyyy</string>
 

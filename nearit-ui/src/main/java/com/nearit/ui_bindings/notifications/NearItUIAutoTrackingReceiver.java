@@ -1,8 +1,8 @@
 package com.nearit.ui_bindings.notifications;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.WakefulBroadcastReceiver;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 
@@ -22,7 +22,7 @@ import it.near.sdk.utils.NearUtils;
  * @author Federico Boschini
  */
 
-public class NearItUIAutoTrackingReceiver extends WakefulBroadcastReceiver implements ContentsListener {
+public class NearItUIAutoTrackingReceiver extends BroadcastReceiver implements ContentsListener {
 
     private Context context;
     private static final String SHOULD_AUTODISMISS_IF_APP_IS_FOREGROUND = "should_autodismiss_if_app_is_foreground";

@@ -6,18 +6,21 @@
     <FrameLayout
         android:id="@+id/content_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/nearit_ui_content_container_margin_bottom"
+        android:layout_marginStart="@dimen/nearit_ui_content_container_margin_horizontal"
+        android:layout_marginEnd="@dimen/nearit_ui_content_container_margin_horizontal" />
 
     <LinearLayout
         android:id="@+id/content_close_icon"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:gravity="center"
         android:clickable="true"
         android:focusable="true"
         android:background="?attr/selectableItemBackground"
-        android:paddingLeft="2.5dp">
+        android:padding="@dimen/nearit_ui_content_container_close_padding">
 
         <ImageView
             android:layout_width="wrap_content"

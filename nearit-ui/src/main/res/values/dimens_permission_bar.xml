@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="nearit_ui_permission_bar_height">50dp</dimen>
+    <dimen name="nearit_ui_permission_bar_main_padding">9dp</dimen>
+    <dimen name="nearit_ui_permission_bar_margin1">5dp</dimen>
+    <dimen name="nearit_ui_permission_bar_margin2">31dp</dimen>
+    <dimen name="nearit_ui_permission_bar_button_height">30dp</dimen>
+    <dimen name="nearit_ui_permission_bar_button_width">50dp</dimen>
+    <dimen name="nearit_ui_permission_bar_button_left_right_padding">5dp</dimen>
+    <dimen name="nearit_ui_permission_bar_button_top_bottom_padding">4dp</dimen>
+    <!--    TEXT SIZE     -->
+    <dimen name="nearit_ui_permission_bar_alert_text_size">13sp</dimen>
+</resources>
