@@ -15,7 +15,6 @@ Content related:
 - [Coupon detail](docs/COUPON.md)
 - [Feedback request](docs/FEEDBACK.md)
 - [Content detail](docs/CONTENT.md)
-- [Content inbox](docs/INBOX.md)
 - [Coupon list](docs/COUPON_LIST.md)
 
 ## Customization
