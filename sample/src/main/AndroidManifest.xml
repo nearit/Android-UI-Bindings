@@ -3,12 +3,12 @@
     package="com.your_company.ui_bindings_sample">
 
     <application
-        android:name="NearItUISample"
+        android:name=".NearItUISample"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name="com.your_company.ui_bindings_sample.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,34 +20,48 @@
             android:name="near_api_key"
             android:value="@string/near_api_key" />
 
+        <activity
+            android:name=".CoordLayoutActivity"
+            android:label="@string/title_activity_coord_layout"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".FeedbackActivity" />
         <activity android:name=".CouponsActivity" />
         <activity android:name=".PermissionsActivity" />
         <activity android:name=".ContentActivity" />
         <activity android:name=".InboxActivity" />
-        <activity android:name=".CouponPlainActivity" android:label="Coupon detail activity"/>
-        <activity android:name=".FeedbackPlainActivity" android:label="Feedback activity"/>
-        <activity android:name=".ContentPlainActivity" android:label="Content detail activity"/>
-        <activity android:name=".CouponListPlainActivity" android:label="Coupon list activity"/>
-        <activity android:name=".InboxPlainActivity" android:label="Inbox activity"/>
+        <activity
+            android:name=".CouponPlainActivity"
+            android:label="Coupon detail activity" />
+        <activity
+            android:name=".FeedbackPlainActivity"
+            android:label="Feedback activity" />
+        <activity
+            android:name=".ContentPlainActivity"
+            android:label="Content detail activity" />
+        <activity
+            android:name=".CouponListPlainActivity"
+            android:label="Coupon list activity" />
+        <activity
+            android:name=".InboxPlainActivity"
+            android:label="Inbox activity" />
 
         <!--
         NearIT-UI Intent service, un-comment to enable this feature or replace it with your own if you want to handle notifications
         For info, read the documentation section about background notifications in the "NearIT-UI for notification" chapter
         -->
-        <!--<service-->
-            <!--android:name="com.nearit.ui_bindings.notifications.NearItUIIntentService"-->
-            <!--android:exported="false"-->
-            <!--android:permission="android.permission.BIND_JOB_SERVICE">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="it.near.sdk.permission.PUSH_MESSAGE" />-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--</intent-filter>-->
-            <!--<intent-filter>-->
-                <!--<action android:name="it.near.sdk.permission.GEO_MESSAGE" />-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--</intent-filter>-->
-        <!--</service>-->
+        <!-- <service -->
+        <!-- android:name="com.nearit.ui_bindings.notifications.NearItUIIntentService" -->
+        <!-- android:exported="false" -->
+        <!-- android:permission="android.permission.BIND_JOB_SERVICE"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="it.near.sdk.permission.PUSH_MESSAGE" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="it.near.sdk.permission.GEO_MESSAGE" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
 
     </application>
 

@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.nearit.ui_bindings.NearITUIBindings;
+import com.nearit.ui_bindings.permissions.views.PermissionSnackBar;
 
 /**
  * @author Federico Boschini
@@ -15,11 +17,22 @@ import com.nearit.ui_bindings.NearITUIBindings;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    private PermissionSnackBar snackBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*LinearLayout mainContainer = findViewById(R.id.main_activity_container);
+        snackBar = PermissionSnackBar.make(mainContainer, "Ciao", -2);
+        snackBar.setAction("OKasas!").show();
+        snackBar.bindToActivity(this, 6);*/
+
+    }
+
+    public void openCoordLayout(View view) {
+        startActivity(new Intent(this, CoordLayoutActivity.class));
     }
 
     public void openPermissions(View view) {

@@ -60,6 +60,7 @@ public class PermissionBarButton extends RelativeLayout {
     }
 
     public void setButtonText(String text) {
+        buttonText = text;
         textView.setText(text);
     }
 
