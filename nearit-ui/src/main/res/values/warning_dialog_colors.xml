@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="nearit_ui_warning_dialog_text_color">@color/nearit_ui_warm_grey</color>
-    <color name="nearit_ui_warning_dialog_button_pressed_color">@color/nearit_ui_error_color_50</color>
-    <color name="nearit_ui_warning_dialog_button_color">@color/nearit_ui_error_color</color>
-    <color name="nearit_ui_warning_dialog_button_text_color">@color/nearit_ui_real_white</color>
-    <color name="nearit_ui_warning_dialog_close_pressed_text_color">@color/nearit_ui_warm_grey_50</color>
-    <color name="nearit_ui_warning_dialog_close_text_color">@color/nearit_ui_warm_grey</color>
-</resources>

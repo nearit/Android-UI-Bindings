@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="nearit_ui_coupon_list_valid_text">Valid coupon</string>
-    <string name="nearit_ui_coupon_list_expired_text">Expired coupon</string>
-    <string name="nearit_ui_coupon_list_inactive_text">Valid from </string>
-    <string name="nearit_ui_coupon_list_redeemed_text">Already used coupon</string>
-    <string name="nearit_ui_coupon_list_empty_list_text">No coupons available</string>
-</resources>

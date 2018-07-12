@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="nearit_ui_inbox_item_notif_text_color">@android:color/black</color>
-    <color name="nearit_ui_inbox_item_background_unread">@color/nearit_ui_real_white</color>
-    <color name="nearit_ui_inbox_card_background_read">#efefef</color>
-    <color name="nearit_ui_inbox_card_text_unread_color">@color/nearit_ui_inbox_blue</color>
-    <color name="nearit_ui_inbox_card_text_read_color">@color/nearit_ui_warm_grey</color>
-    <color name="nearit_ui_inbox_background_color">@color/nearit_ui_background_color</color>
-</resources>

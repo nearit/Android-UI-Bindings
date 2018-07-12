@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  COLORS  -->
+    <color name="nearit_ui_permissions_activity_background_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_permission_not_given_button_background_color">@color/nearit_ui_white</color>
+    <color name="nearit_ui_permission_not_given_button_text_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_permissions_text_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_permissions_close_text_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_permissions_close_pressed_text_color">@color/nearit_ui_warm_grey_50</color>
+
+
+    <!--  DIMENSIONS  -->
+    <dimen name="nearit_ui_permissions_activity_margin1">36dp</dimen>
+    <dimen name="nearit_ui_permissions_activity_margin2">34dp</dimen>
+    <dimen name="nearit_ui_permissions_activity_margin3">10dp</dimen>
+    <dimen name="nearit_ui_permissions_activity_margin4">16dp</dimen>
+    <dimen name="nearit_ui_permissions_activity_margin5">22dp</dimen>
+    <dimen name="nearit_ui_permissions_activity_padding">25dp</dimen>
+    <dimen name="nearit_ui_permissions_activity_icon_margin">17dp</dimen>
+    <!--  Text sizes  -->
+    <dimen name="nearit_ui_permissions_text_size">15sp</dimen>
+
+
+    <!--  STRINGS  -->
+    <string name="nearit_ui_permissions_explanation_text">Do you want to receive personalized contents? Allow us to know your location</string>
+    <string name="nearit_ui_close_permissions_text">Close</string>
+    <string name="nearit_ui_bluetooth">Bluetooth</string>
+    <string name="nearit_ui_location">Location</string>
+    <string name="nearit_ui_go_to_settings">Settings</string>
+    <string name="nearit_ui_cancel_dialog">Cancel</string>
+    <string name="nearit_ui_turn_on_location_title">Flight mode detected</string>
+    <string name="nearit_ui_turn_on_location_message">Please, turn flight mode off</string>
+    <string name="nearit_ui_permission_title">Missing location permission</string>
+    <string name="nearit_ui_permission_message">Please, change your selection under \"Permissions\" section</string>
+
+
+    <!--  STYLES  -->
+    <style name="NearItUIPermissionsDialog" parent="NearItUIDialog" />
+    <style name="NearItUIPermissionButtonTextAppearance" parent="NearItUIButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_permission_button_text_color</item>
+    </style>
+    <style name="NearItUIPermissionBarButtonTextAppearance" parent="NearItUIButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_permission_bar_button_text_color</item>
+    </style>
+    <style name="NearItUIPermissionsDismissButtonTextAppearance" parent="NearITUIDismissButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_permission_close_text_color</item>
+    </style>
+    <style name="NearItUIPermissionsExplanationTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_permissions_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_permissions_text_color</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+</resources>

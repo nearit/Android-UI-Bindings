@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- base dimensions -->
+    <!--  COLORS  -->
+    <color name="nearit_ui_inbox_item_notif_text_color">@android:color/black</color>
+    <color name="nearit_ui_inbox_item_background_unread">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_inbox_card_background_read">#efefef</color>
+    <color name="nearit_ui_inbox_card_text_unread_color">@color/nearit_ui_inbox_blue</color>
+    <color name="nearit_ui_inbox_card_text_read_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_inbox_background_color">@color/nearit_ui_background_color</color>
+
+
+    <!--  DIMENSIONS  -->
     <dimen name="nearit_ui_inbox_padding_left_right">10dp</dimen>
     <dimen name="nearit_ui_inbox_item_height">200dp</dimen>
     <dimen name="nearit_ui_inbox_item_padding_bottom">10dp</dimen>
@@ -11,7 +20,7 @@
     <dimen name="nearit_ui_inbox_list_top_margin1">10dp</dimen>
     <dimen name="nearit_ui_inbox_padding_rl">20dp</dimen>
     <dimen name="nearit_ui_inbox_card_elevation">5dp</dimen>
-    <!-- simple notification -->
+    <!-- Simple notification -->
     <dimen name="nearit_ui_simple_notification_item_height">@dimen/nearit_ui_inbox_item_height</dimen>
     <dimen name="nearit_ui_simple_notification_item_padding_bottom">@dimen/nearit_ui_inbox_item_padding_bottom</dimen>
     <dimen name="nearit_ui_simple_notification_item_margin_left_right">@dimen/nearit_ui_inbox_item_margin_left_right</dimen>
@@ -19,7 +28,7 @@
     <dimen name="nearit_ui_simple_notification_timestamp_top_margin">@dimen/nearit_ui_inbox_timestamp_top_margin</dimen>
     <dimen name="nearit_ui_simple_notification_label_top_margin">@dimen/nearit_ui_inbox_label_top_margin</dimen>
     <dimen name="nearit_ui_simple_notification_item_padding_rl">@dimen/nearit_ui_inbox_padding_rl</dimen>
-    <!-- content notification -->
+    <!-- Content notification -->
     <dimen name="nearit_ui_content_notification_item_height">@dimen/nearit_ui_inbox_item_height</dimen>
     <dimen name="nearit_ui_content_notification_item_padding_bottom">@dimen/nearit_ui_inbox_item_padding_bottom</dimen>
     <dimen name="nearit_ui_content_notification_item_margin_left_right">@dimen/nearit_ui_inbox_item_margin_left_right</dimen>
@@ -27,7 +36,7 @@
     <dimen name="nearit_ui_content_notification_timestamp_top_margin">@dimen/nearit_ui_inbox_timestamp_top_margin</dimen>
     <dimen name="nearit_ui_content_notification_label_top_margin">@dimen/nearit_ui_inbox_label_top_margin</dimen>
     <dimen name="nearit_ui_content_notification_item_padding_rl">@dimen/nearit_ui_inbox_padding_rl</dimen>
-    <!-- feedback notification -->
+    <!-- Feedback notification -->
     <dimen name="nearit_ui_feedback_notification_item_height">@dimen/nearit_ui_inbox_item_height</dimen>
     <dimen name="nearit_ui_feedback_notification_item_padding_bottom">@dimen/nearit_ui_inbox_item_padding_bottom</dimen>
     <dimen name="nearit_ui_feedback_notification_item_margin_left_right">@dimen/nearit_ui_inbox_item_margin_left_right</dimen>
@@ -35,7 +44,7 @@
     <dimen name="nearit_ui_feedback_notification_timestamp_top_margin">@dimen/nearit_ui_inbox_timestamp_top_margin</dimen>
     <dimen name="nearit_ui_feedback_notification_label_top_margin">@dimen/nearit_ui_inbox_label_top_margin</dimen>
     <dimen name="nearit_ui_feedback_notification_item_padding_rl">@dimen/nearit_ui_inbox_padding_rl</dimen>
-    <!-- customjson -->
+    <!-- CustomJson -->
     <dimen name="nearit_ui_customjson_item_height">@dimen/nearit_ui_inbox_item_height</dimen>
     <dimen name="nearit_ui_customjson_item_padding_bottom">@dimen/nearit_ui_inbox_item_padding_bottom</dimen>
     <dimen name="nearit_ui_customjson_item_margin_left_right">@dimen/nearit_ui_inbox_item_margin_left_right</dimen>
@@ -43,7 +52,52 @@
     <dimen name="nearit_ui_customjson_timestamp_top_margin">@dimen/nearit_ui_inbox_timestamp_top_margin</dimen>
     <dimen name="nearit_ui_customjson_label_top_margin">@dimen/nearit_ui_inbox_label_top_margin</dimen>
     <dimen name="nearit_ui_customjson_item_padding_rl">@dimen/nearit_ui_inbox_padding_rl</dimen>
-    <!--    TEXT SIZE     -->
+    <!--  Text sizes  -->
     <dimen name="nearit_ui_inbox_notification_size">16sp</dimen>
     <dimen name="nearit_ui_inbox_timestamp_size">12sp</dimen>
+
+
+    <!--  STRINGS  -->
+    <string name="nearit_ui_inbox_empty_list_text">No messages available</string>
+    <string name="nearit_ui_inbox_content_button_label">See more</string>
+    <string name="nearit_ui_inbox_feedback_button_label">Open</string>
+
+
+    <!--  STYLES  -->
+    <style name="NearITUIInboxActivityAppearance" parent="NearITUIFullScreenActivityAppearance" />
+    <style name="NearITUIInboxListNoInboxTextAppearance" parent="NearItUIEmptyListTextAppearance" />
+    <style name="NearItUIInboxCardTimestampTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_inbox_card_text_read_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_inbox_timestamp_size</item>
+        <item name="fontFamily">@raw/asap_italic</item>
+    </style>
+    <style name="NearItUIInboxCardNotificationTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_inbox_item_notif_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_inbox_notification_size</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+    <style name="NearItUIInboxCardButtonTextAppearance">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/nearit_ui_inbox_card_background_read</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="nearit_ui_inbox_card_button_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:background">@null</item>
+        <item name="android:drawableRight">@drawable/nearit_ui_button_arrow</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:clickable">false</item>
+        <item name="android:textAppearance">@style/NearItUIInboxCardButtonTextAppearance</item>
+    </style>
+
+
+    <!--  STYLEABLES  -->
+    <declare-styleable name="MessageState">
+        <attr name="state_message_unread" format="boolean"/>
+    </declare-styleable>
 </resources>

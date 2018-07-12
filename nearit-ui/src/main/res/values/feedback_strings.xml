@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="nearit_ui_feedback_leave_a_comment">Leave a comment (optional)</string>
-    <string name="nearit_ui_feedback_error_message">Ops, something went wrong!</string>
-    <string name="nearit_ui_feedback_close_button">No, thank you</string>
-    <string name="nearit_ui_feedback_send_success_message">Thanks for your feedback!</string>
-    <string name="nearit_ui_feedback_send_button_default_text">Send</string>
-</resources>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  COLORS  -->
+    <color name="nearit_ui_feedback_background_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_feedback_close_text_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_feedback_close_pressed_text_color">@color/nearit_ui_warm_grey_50</color>
+    <color name="nearit_ui_feedback_send_button_text_color">@color/nearit_ui_white</color>
+    <color name="nearit_ui_feedback_send_button_pressed_text_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_feedback_send_button_error_text_color">@color/nearit_ui_white</color>
+    <color name="nearit_ui_feedback_send_button_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_feedback_send_button_pressed_color">@color/nearit_ui_black_35</color>
+    <color name="nearit_ui_feedback_send_button_error_color">@color/nearit_ui_error_color</color>
+    <color name="nearit_ui_feedback_send_button_error_pressed_color">@color/nearit_ui_error_color_50</color>
+    <color name="nearit_ui_feedback_send_button_error_pressed_text_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_feedback_question_text_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_feedback_comment_box_description_text_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_feedback_error_message_text_color">@color/nearit_ui_error_color</color>
+    <color name="nearit_ui_feedback_comment_box_border_color">@color/nearit_ui_white_two</color>
+    <color name="nearit_ui_feedback_comment_box_background_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_feedback_success_message_text_color">@color/nearit_ui_warm_grey</color>
+    <!--    Rating bar  -->
+    <color name="nearit_ui_rating_bar_empty_star_background_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_rating_bar_fill_star_background_color">@color/nearit_ui_star_yellow</color>
+    <color name="nearit_ui_rating_bar_star_border_color">@color/nearit_ui_star_yellow</color>
+
+
+    <!--  DIMENSIONS  -->
+    <dimen name="nearit_ui_feedback_overall_padding">25dp</dimen>
+    <dimen name="nearit_ui_feedback_send_button_height">45dp</dimen>
+    <dimen name="nearit_ui_feedback_close_button_padding">3dp</dimen>
+    <dimen name="nearit_ui_feedback_margin1">14dp</dimen>
+    <dimen name="nearit_ui_feedback_margin2">22dp</dimen>
+    <dimen name="nearit_ui_feedback_margin3">16dp</dimen>
+    <dimen name="nearit_ui_feedback_margin4">16dp</dimen>
+    <dimen name="nearit_ui_feedback_margin5">30dp</dimen>
+    <dimen name="nearit_ui_feedback_margin6">8dp</dimen>
+    <dimen name="nearit_ui_feedback_margin7">22dp</dimen>
+    <dimen name="nearit_ui_feedback_margin8">23dp</dimen>
+    <dimen name="nearit_ui_feedback_margin9">5dp</dimen>
+    <dimen name="nearit_ui_feedback_margin10">13dp</dimen>
+    <dimen name="nearit_ui_feedback_margin11">20dp</dimen>
+    <!--  Rating bar  -->
+    <dimen name="nearit_ui_feedback_rating_bar_star_size">32dp</dimen>
+    <dimen name="nearit_ui_feedback_rating_bar_star_border_size">2dp</dimen>
+    <dimen name="nearit_ui_feedback_rating_bar_stars_separation">7dp</dimen>
+    <!--  Text sizes  -->
+    <dimen name="nearit_ui_feedback_question_text_size">15sp</dimen>
+    <dimen name="nearit_ui_feedback_leave_a_comment_text_size">13sp</dimen>
+    <dimen name="nearit_ui_feedback_error_message_text_size">15sp</dimen>
+    <dimen name="nearit_ui_feedback_success_message_text_size">15sp</dimen>
+
+
+    <!--  STRINGS  -->
+    <string name="nearit_ui_feedback_leave_a_comment">Leave a comment (optional)</string>
+    <string name="nearit_ui_feedback_error_message">Ops, something went wrong!</string>
+    <string name="nearit_ui_feedback_close_button">No, thank you</string>
+    <string name="nearit_ui_feedback_send_success_message">Thanks for your feedback!</string>
+    <string name="nearit_ui_feedback_send_button_default_text">Send</string>
+
+
+    <!--  STYLES  -->
+    <style name="NearItUIFeedbackDialog" parent="NearItUIDialog" />
+    <style name="NearItUIFeedbackSendButtonTextAppearance" parent="NearItUIButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_feedback_button_text_color</item>
+    </style>
+    <style name="NearItUIFeedbackDismissButtonTextAppearance" parent="NearITUIDismissButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_feedback_close_text_color</item>
+    </style>
+    <style name="NearItUIFeedbackSuccessMessageTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_feedback_success_message_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_feedback_success_message_text_color</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+    <style name="NearItUIFeedbackQuestionTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_feedback_question_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_feedback_question_text_color</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+    <style name="NearItUIFeedbackCommentLabelTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_feedback_leave_a_comment_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_feedback_comment_box_description_text_color</item>
+        <item name="fontFamily">@raw/asap_italic</item>
+    </style>
+    <style name="NearItUIFeedbackErrorAlertTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_feedback_error_message_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_feedback_error_message_text_size</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+
+
+    <!--  STYLEABLES  -->
+    <declare-styleable name="NearItUIRatingBar">
+        <attr name="srb_borderColor" format="color" />
+        <attr name="srb_fillColor" format="color" />
+        <attr name="srb_backgroundColor" format="color" />
+        <attr name="srb_starBackgroundColor" format="color" />
+        <attr name="srb_pressedBorderColor" format="color" />
+        <attr name="srb_pressedFillColor" format="color" />
+        <attr name="srb_pressedBackgroundColor" format="color" />
+        <attr name="srb_pressedStarBackgroundColor" format="color" />
+        <attr name="srb_numberOfStars" format="integer" />
+        <attr name="srb_starSize" format="dimension" />
+        <attr name="srb_maxStarSize" format="dimension" />
+        <attr name="srb_starsSeparation" format="dimension" />
+        <attr name="srb_starBorderWidth" format="dimension" />
+        <attr name="srb_starCornerRadius" format="float" />
+        <attr name="srb_isIndicator" format="boolean" />
+        <attr name="srb_rating" format="float" />
+        <attr name="srb_stepSize" format="float" />
+        <attr name="srb_drawBorderEnabled" format="boolean" />
+        <attr name="srb_gravity" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>

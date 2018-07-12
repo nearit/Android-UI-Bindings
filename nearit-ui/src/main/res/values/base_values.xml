@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <integer name="nearit_ui_feedback_comment_box_min_lines">3</integer>
-    <integer name="nearit_ui_feedback_comment_box_lines">3</integer>
-</resources>
