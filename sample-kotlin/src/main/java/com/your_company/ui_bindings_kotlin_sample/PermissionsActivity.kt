@@ -36,7 +36,7 @@ class PermissionsActivity : AppCompatActivity() {
             )
         }
 
-        permissions_no_beacon.setOnClickListener({
+        permissions_no_beacon.setOnClickListener {
             startActivityForResult(
                     //  Asks only for location
                     //  + tap outside to close enabled
@@ -46,9 +46,9 @@ class PermissionsActivity : AppCompatActivity() {
                             .enableTapOutsideToClose()
                             .build(),
                     NEAR_PERMISSION_REQUEST)
-        })
+        }
 
-        permissions_beacon_nonblocking.setOnClickListener({
+        permissions_beacon_nonblocking.setOnClickListener {
             startActivityForResult(
                     //  Asks for location and bluetooth
                     //  but the latter is not a blocking requirement
@@ -57,9 +57,9 @@ class PermissionsActivity : AppCompatActivity() {
                             .nonBlockingBeacon()
                             .build(),
                     NEAR_PERMISSION_REQUEST)
-        })
+        }
 
-        permissions_invisible.setOnClickListener({
+        permissions_invisible.setOnClickListener {
             startActivityForResult(
                     //  Invisible layout: asks for location and bluetooth via system dialogs
                     NearITUIBindings.getInstance(this@PermissionsActivity)
@@ -67,9 +67,9 @@ class PermissionsActivity : AppCompatActivity() {
                             .invisibleLayoutMode()
                             .build(),
                     NEAR_PERMISSION_REQUEST)
-        })
+        }
 
-        invisible_no_beacon.setOnClickListener({
+        invisible_no_beacon.setOnClickListener {
             startActivityForResult(
                     //  Invisible layout: asks only for location
                     NearITUIBindings.getInstance(this@PermissionsActivity)
@@ -78,9 +78,9 @@ class PermissionsActivity : AppCompatActivity() {
                             .noBeacon()
                             .build(),
                     NEAR_PERMISSION_REQUEST)
-        })
+        }
 
-        invisible_non_blocking.setOnClickListener({
+        invisible_non_blocking.setOnClickListener {
             startActivityForResult(
                     //  Invisible layout: asks for location and bluetooth
                     //  but the latter is not a blocking requiremen
@@ -90,9 +90,9 @@ class PermissionsActivity : AppCompatActivity() {
                             .nonBlockingBeacon()
                             .build(),
                     NEAR_PERMISSION_REQUEST)
-        })
+        }
 
-        autostart_radar.setOnClickListener({
+        autostart_radar.setOnClickListener {
             startActivityForResult(
                     //  Asks for permissions (basic config) and if user grants all
                     //  NearIT-UI will automatically start the NearIT radar
@@ -101,9 +101,9 @@ class PermissionsActivity : AppCompatActivity() {
                             .automaticRadarStart()
                             .build(),
                     NEAR_PERMISSION_REQUEST)
-        })
+        }
 
-        custom_header.setOnClickListener({
+        custom_header.setOnClickListener {
             startActivityForResult(
                     //  Basic config + custom header
                     NearITUIBindings.getInstance(this@PermissionsActivity)
@@ -111,7 +111,7 @@ class PermissionsActivity : AppCompatActivity() {
                             .setHeaderResourceId(R.drawable.logo)
                             .build(),
                     NEAR_PERMISSION_REQUEST)
-        })
+        }
 
     }
 
