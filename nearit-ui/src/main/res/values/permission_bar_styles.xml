@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NearItUIPermissionBarAlertMessageTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_permission_bar_alert_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_permission_bar_alert_text_size</item>
+        <item name="fontFamily">@raw/asap_medium</item>
+    </style>
+</resources>

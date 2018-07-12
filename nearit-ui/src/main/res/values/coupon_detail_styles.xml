@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NearItUICouponDetailDialog" parent="NearItUIDialog">
+        <item name="android:windowBackground">@color/nearit_ui_coupon_detail_activity_container_background_color</item>
+    </style>
+
+    <style name="NearItUICouponDetailValidityTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_validity_text_size</item>
+        <item name="fontFamily">@raw/asap_bolditalic</item>
+    </style>
+
+    <style name="NearItUICouponDetailValidityPeriodTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_validity_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_coupon_detail_validity_period_color</item>
+        <item name="fontFamily">@raw/asap_italic</item>
+    </style>
+
+    <style name="NearItUICouponDetailValidityLabelTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_not_valid_text_size</item>
+        <item name="fontFamily">@raw/asap_bolditalic</item>
+    </style>
+
+    <style name="NearItUICouponDetailSerialTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_serial_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_coupon_detail_serial</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+
+    <style name="NearItUICouponDetailTitleTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_title_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_coupon_detail_title_color</item>
+        <item name="fontFamily">@raw/asap_bold</item>
+    </style>
+
+    <style name="NearItUICouponDetailValueTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_value_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_coupon_detail_value_color</item>
+        <item name="fontFamily">@raw/asap_bold</item>
+    </style>
+
+    <style name="NearItUICouponDetailDescriptionTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_description_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_coupon_detail_description_color</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+</resources>

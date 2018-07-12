@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NearItUIContentDetailDialog" parent="NearItUIDialog" />
+
+    <style name="NearItUIContentCTAButtonTextAppearance" parent="NearItUIButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_cta_button_text_color</item>
+    </style>
+
+    <style name="NearItUIContentTitleTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_content_title_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_content_title_text_size</item>
+        <item name="fontFamily">@raw/asap_medium</item>
+    </style>
+
+    <style name="NearItUIContentTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_content_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_content_content_text_size</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+</resources>

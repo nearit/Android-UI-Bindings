@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NearITUIInboxActivityAppearance" parent="NearITUIFullScreenActivityAppearance" />
+
+    <style name="NearITUIInboxListNoInboxTextAppearance" parent="NearItUIEmptyListTextAppearance" />
+
+    <style name="NearItUIInboxCardTimestampTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_inbox_card_text_read_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_inbox_timestamp_size</item>
+        <item name="fontFamily">@raw/asap_italic</item>
+    </style>
+
+    <style name="NearItUIInboxCardNotificationTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_inbox_item_notif_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_inbox_notification_size</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+
+    <style name="NearItUIInboxCardButtonTextAppearance">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/nearit_ui_inbox_card_background_read</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="nearit_ui_inbox_card_button_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:background">@null</item>
+        <item name="android:drawableRight">@drawable/nearit_ui_button_arrow</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:clickable">false</item>
+        <item name="android:textAppearance">@style/NearItUIInboxCardButtonTextAppearance</item>
+    </style>
+</resources>

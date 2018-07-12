@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NearItUIWarningDialog" parent="NearItUIDialog" />
+
+    <style name="NearItUIWarningDialogDismissButtonTextAppearance" parent="NearITUIDismissButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_warning_close_text_color</item>
+    </style>
+
+    <style name="NearItUIWarningDialogMessageTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_warning_dialog_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_warning_dialog_text_size</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+
+    <style name="NearItUIWarningDialogRetryButtonTextAppearance" parent="NearItUIButtonTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_warning_dialog_button_text_color</item>
+    </style>
+</resources>

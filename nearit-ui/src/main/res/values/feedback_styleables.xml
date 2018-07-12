@@ -1,26 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="NearItUIPermissionButtonView">
-        <attr name="buttonText" format="string" />
-        <attr name="iconRes" format="reference" />
-    </declare-styleable>
-    <declare-styleable name="NearItUIButtonView">
-        <attr name="genericButtonText" format="string" />
-    </declare-styleable>
-    <declare-styleable name="NearItUIBar">
-        <attr name="barButtonText" format="string" />
-        <attr name="barAlertText" format="string" />
-        <attr name="barBluetoothIcon" format="reference" />
-        <attr name="barLocationIcon" format="reference" />
-
-        <attr name="noBeacon" format="boolean" />
-        <attr name="nonBlockingBeacon" format="boolean" />
-        <attr name="invisibleMode" format="boolean" />
-        <attr name="dialogHeader" format="reference" />
-        <attr name="noDialogHeader" format="boolean" />
-        <attr name="autostartRadar" format="boolean" />
-    </declare-styleable>
-
     <declare-styleable name="NearItUIRatingBar">
         <attr name="srb_borderColor" format="color" />
         <attr name="srb_fillColor" format="color" />
@@ -45,9 +24,4 @@
             <enum name="right" value="1"/>
         </attr>
     </declare-styleable>
-
-    <declare-styleable name="MessageState">
-        <attr name="state_message_unread" format="boolean"/>
-    </declare-styleable>
-
 </resources>

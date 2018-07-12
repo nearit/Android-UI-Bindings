@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nearit_ui_warning_dialog_button_text">Retry</string>
+    <string name="nearit_ui_warning_dialog_close_text">Close</string>
+    <string name="nearit_ui_warning_dialog_message">Network problem</string>
+</resources>

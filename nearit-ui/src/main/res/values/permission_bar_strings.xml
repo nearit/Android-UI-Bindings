@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nearit_ui_permission_bar_alert_text">Provide\nall the missing authorizations</string>
+    <string name="nearit_ui_permission_bar_button_text">OK!</string>
+</resources>

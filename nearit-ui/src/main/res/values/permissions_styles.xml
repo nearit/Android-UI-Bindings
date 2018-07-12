@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NearItUIPermissionsDialog" parent="NearItUIDialog" />
+
+    <style name="NearItUIPermissionButtonTextAppearance" parent="NearItUIButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_permission_button_text_color</item>
+    </style>
+
+    <style name="NearItUIPermissionBarButtonTextAppearance" parent="NearItUIButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_permission_bar_button_text_color</item>
+    </style>
+
+    <style name="NearItUIPermissionsDismissButtonTextAppearance" parent="NearITUIDismissButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_permission_close_text_color</item>
+    </style>
+
+    <style name="NearItUIPermissionsExplanationTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_permissions_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_permissions_text_color</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+</resources>

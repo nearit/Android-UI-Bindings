@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NearItUIFeedbackDialog" parent="NearItUIDialog" />
+
+    <style name="NearItUIFeedbackSendButtonTextAppearance" parent="NearItUIButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_feedback_button_text_color</item>
+    </style>
+
+    <style name="NearItUIFeedbackDismissButtonTextAppearance" parent="NearITUIDismissButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_feedback_close_text_color</item>
+    </style>
+
+    <style name="NearItUIFeedbackSuccessMessageTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_feedback_success_message_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_feedback_success_message_text_color</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+
+    <style name="NearItUIFeedbackQuestionTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_feedback_question_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_feedback_question_text_color</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+
+    <style name="NearItUIFeedbackCommentLabelTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_feedback_leave_a_comment_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_feedback_comment_box_description_text_color</item>
+        <item name="fontFamily">@raw/asap_italic</item>
+    </style>
+
+    <style name="NearItUIFeedbackErrorAlertTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_feedback_error_message_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_feedback_error_message_text_size</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+</resources>
