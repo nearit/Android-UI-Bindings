@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  COLORS  -->
+    <color name="nearit_ui_warning_dialog_text_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_warning_dialog_button_pressed_color">@color/nearit_ui_error_color_50</color>
+    <color name="nearit_ui_warning_dialog_button_color">@color/nearit_ui_error_color</color>
+    <color name="nearit_ui_warning_dialog_button_text_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_warning_dialog_close_pressed_text_color">@color/nearit_ui_warm_grey_50</color>
+    <color name="nearit_ui_warning_dialog_close_text_color">@color/nearit_ui_warm_grey</color>
+
+
+    <!--  DIMENSIONS  -->
+    <dimen name="nearit_ui_warning_dialog_overall_width">300dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_overall_padding">25dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_margin1">14dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_margin2">24dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_margin3">39dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_margin4">20dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_margin5">10dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_button_width">250dp</dimen>
+    <dimen name="nearit_ui_warning_dialog_button_height">45dp</dimen>
+    <!--  Text sizes  -->
+    <dimen name="nearit_ui_warning_dialog_text_size">15sp</dimen>
+
+
+    <!--  STRINGS  -->
+    <string name="nearit_ui_warning_dialog_button_text">Retry</string>
+    <string name="nearit_ui_warning_dialog_close_text">Close</string>
+    <string name="nearit_ui_warning_dialog_message">Network problem</string>
+
+
+    <!--  STYLES  -->
+    <style name="NearItUIWarningDialog" parent="NearItUIDialog" />
+    <style name="NearItUIWarningDialogDismissButtonTextAppearance" parent="NearITUIDismissButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_warning_close_text_color</item>
+    </style>
+    <style name="NearItUIWarningDialogMessageTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_warning_dialog_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_warning_dialog_text_size</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+    <style name="NearItUIWarningDialogRetryButtonTextAppearance" parent="NearItUIButtonTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_warning_dialog_button_text_color</item>
+    </style>
+</resources>

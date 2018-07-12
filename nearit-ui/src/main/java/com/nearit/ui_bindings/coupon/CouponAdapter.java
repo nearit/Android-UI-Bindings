@@ -204,7 +204,7 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         void setValid() {
             if (couponValidity != null) {
-                couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_valid_text));
+                couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_list_valid_text));
                 couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_valid_text_color));
             }
         }
@@ -220,14 +220,14 @@ class CouponAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         void setExpired() {
             if (couponValidity != null) {
-                couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_expired_text));
+                couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_list_expired_text));
                 couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_expired_text_color));
             }
         }
 
         void setRedeemed() {
             if (couponValidity != null) {
-                couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_redeemed_text));
+                couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_list_redeemed_text));
                 couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_redeemed_text_color));
             }
         }

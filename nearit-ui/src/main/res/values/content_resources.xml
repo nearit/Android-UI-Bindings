@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  COLORS  -->
+    <color name="nearit_ui_content_title_text_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_content_text_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_cta_button_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_cta_button_color_pressed">@color/nearit_ui_black_35</color>
+    <color name="nearit_ui_cta_button_text_color">@color/nearit_ui_white</color>
+    <color name="nearit_ui_cta_button_pressed_text_color">@color/nearit_ui_white</color>
+    <color name="nearit_ui_content_image_background_color">@color/nearit_ui_white</color>
+
+
+    <!--  DIMENSIONS  -->
+    <dimen name="nearit_ui_content_vertical_padding">20dp</dimen>
+    <dimen name="nearit_ui_content_horizontal_padding">25dp</dimen>
+    <dimen name="nearit_ui_content_image_top_padding">15dp</dimen>
+    <dimen name="nearit_ui_content_image_progress_bar_dimen">60dp</dimen>
+    <dimen name="nearit_ui_content_margin1">19dp</dimen>
+    <dimen name="nearit_ui_content_margin2">15dp</dimen>
+    <dimen name="nearit_ui_content_margin3">33dp</dimen>
+    <dimen name="nearit_ui_content_cta_button_height">45dp</dimen>
+    <dimen name="nearit_ui_content_cta_button_min_width">250dp</dimen>
+    <dimen name="nearit_ui_content_image_min_height">200dp</dimen>
+    <!--    Text sizes     -->
+    <dimen name="nearit_ui_content_title_text_size">18sp</dimen>
+    <dimen name="nearit_ui_content_content_text_size">15sp</dimen>
+    <dimen name="nearit_ui_content_cta_button_text_size">15sp</dimen>
+    <dimen name="nearit_ui_content_container_margin_bottom">20dp</dimen>
+    <dimen name="nearit_ui_content_container_margin_horizontal">5dp</dimen>
+    <dimen name="nearit_ui_content_container_close_padding">10dp</dimen>
+
+
+    <!--  STYLES  -->
+    <style name="NearItUIContentDetailDialog" parent="NearItUIDialog" />
+    <style name="NearItUIContentCTAButtonTextAppearance" parent="NearItUIButtonTextAppearance">
+        <item name="android:textColor">@drawable/nearit_ui_selector_cta_button_text_color</item>
+    </style>
+    <style name="NearItUIContentTitleTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_content_title_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_content_title_text_size</item>
+        <item name="fontFamily">@raw/asap_medium</item>
+    </style>
+    <style name="NearItUIContentTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_content_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_content_content_text_size</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+</resources>

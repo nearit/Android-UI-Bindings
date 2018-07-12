@@ -1,6 +1,5 @@
 buildscript {
     repositories {
-//        maven { url 'https://maven.fabric.io/public' }
         jcenter()
         flatDir {
             dirs 'libs'
@@ -50,7 +49,7 @@ dependencies {
 
     implementation "com.android.support:recyclerview-v7:$supportLibraryVersion"
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
-    implementation 'com.android.support:support-v4:27.1.1'
+    implementation "com.android.support:support-v4:$supportLibraryVersion"
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.19.0'
@@ -58,7 +57,5 @@ dependencies {
     testImplementation 'org.hamcrest:hamcrest-library:1.3'
     testImplementation "it.near.sdk:nearit:[${rootProject.ext.nearitMinVersionNumber}, 3.0.0)"
 
-    compileOnly("it.near.sdk:nearit:['${rootProject.ext.nearitMinVersionNumber}', 3.0.0)", {
-        exclude group: 'com.android.support', module: 'support-v4'
-    })
+    compileOnly "it.near.sdk:nearit:['${rootProject.ext.nearitMinVersionNumber}', 3.0.0)"
 }
