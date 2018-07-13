@@ -35,17 +35,18 @@ public class MainActivity extends AppCompatActivity {
         snackBar = PermissionSnackBar.make(mainContainer, "Fornisci tutte le autorizzazioni necessarie", -2)
                 .setAction("OK!")
                 .autoStartRadar()
-                .noBeacon()
+                .placeOnTop()
+                //.noBeacon()
                 .bindToActivity(this, 6)
                 .addCallback(new BaseTransientBottomBar.BaseCallback<PermissionSnackBar>() {
                     @Override
                     public void onDismissed(PermissionSnackBar transientBottomBar, int event) {
-                        Toast.makeText(MainActivity.this, "Dismissed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Main:Dismissed", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onShown(PermissionSnackBar transientBottomBar) {
-                        Toast.makeText(MainActivity.this, "Shown", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Main:Shown", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .show();
