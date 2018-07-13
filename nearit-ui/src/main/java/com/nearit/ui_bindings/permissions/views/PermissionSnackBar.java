@@ -1,5 +1,6 @@
 package com.nearit.ui_bindings.permissions.views;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -9,15 +10,10 @@ import android.content.IntentFilter;
 import android.location.LocationManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nearit.ui_bindings.NearITUIBindings;
@@ -35,7 +31,6 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
 
     private View parentView;
     private String alertText;
-    private int duration;
     private String actionText;
 
     private Snackbar snackbar;
@@ -52,34 +47,27 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
     @Nullable
     private BaseTransientBottomBar.BaseCallback<PermissionSnackBar> callback;
 
-    private boolean placeOnTop = false;
-
     private boolean noBeacon = false;
     private boolean nonBlockingBeacon = false;
     private boolean autoStartRadar = false;
 
-    private boolean isDismissed = true;
     private boolean swiped = false;
 
-    private PermissionSnackBar(View parentView, String alertText, int duration) {
+    private PermissionSnackBar(View parentView, String alertText) {
         this.parentView = parentView;
         this.alertText = alertText;
-        this.duration = duration;
         init();
     }
 
     private void init() {
-        snackbar = Snackbar.make(parentView, alertText, duration);
+        snackbar = Snackbar.make(parentView, alertText, Snackbar.LENGTH_INDEFINITE);
         snackbar.addCallback(this);
         this.context = snackbar.getContext();
-        if (placeOnTop) {
-            moveToTheTop();
-        }
         setupUI();
     }
 
-    public static PermissionSnackBar make(View view, String text, int length) {
-        return new PermissionSnackBar(view, text, length);
+    public static PermissionSnackBar make(View view, String text) {
+        return new PermissionSnackBar(view, text);
     }
 
     public PermissionSnackBar addCallback(BaseTransientBottomBar.BaseCallback<PermissionSnackBar> callback) {
@@ -95,12 +83,6 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
         if (!allPermissionsGranted()) {
             snackbar.show();
         }
-        return this;
-    }
-
-    public PermissionSnackBar placeOnTop() {
-        this.placeOnTop = true;
-        moveToTheTop();
         return this;
     }
 
@@ -128,6 +110,7 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
         return this;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void dismiss() {
         snackbar.dismiss();
     }
@@ -136,13 +119,11 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
         return snackbar.getView();
     }
 
+    @SuppressLint("InflateParams")
     private void setupUI() {
         Snackbar.SnackbarLayout layout = (Snackbar.SnackbarLayout) snackbar.getView();
 
-        ViewGroup.LayoutParams params = parentView.getLayoutParams();
-
         // Hide the text
-
         TextView textView = layout.findViewById(android.support.design.R.id.snackbar_text);
         textView.setVisibility(View.INVISIBLE);
 
@@ -164,22 +145,6 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
         context.registerReceiver(mReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
 
         checkPermissionsAndUpdateUI();
-    }
-
-    private void moveToTheTop() {
-        if (snackbar.getView().getLayoutParams() instanceof FrameLayout.LayoutParams) {
-            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackbar.getView().getLayoutParams();
-            params.gravity = Gravity.TOP;
-            snackbar.getView().setLayoutParams(params);
-        } else if (snackbar.getView().getLayoutParams() instanceof CoordinatorLayout.LayoutParams) {
-            CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) snackbar.getView().getLayoutParams();
-            params.gravity = Gravity.TOP;
-            snackbar.getView().setLayoutParams(params);
-        } else if (snackbar.getView().getLayoutParams() instanceof LinearLayout.LayoutParams) {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) snackbar.getView().getLayoutParams();
-            params.gravity = Gravity.TOP;
-            snackbar.getView().setLayoutParams(params);
-        }
     }
 
     private void hideBluetoothIcon() {
@@ -291,7 +256,6 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
         if (callback != null) {
             callback.onDismissed(this, event);
         }
-        isDismissed = true;
     }
 
     @Override
@@ -300,6 +264,5 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
         if (callback != null) {
             callback.onShown(this);
         }
-        isDismissed = false;
     }
 }

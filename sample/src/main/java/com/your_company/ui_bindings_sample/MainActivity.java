@@ -1,20 +1,13 @@
 package com.your_company.ui_bindings_sample;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BaseTransientBottomBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.nearit.ui_bindings.NearITUIBindings;
-import com.nearit.ui_bindings.permissions.views.PermissionSnackBar;
 
-import it.near.sdk.NearItManager;
 
 /**
  * @author Federico Boschini
@@ -23,33 +16,11 @@ import it.near.sdk.NearItManager;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private PermissionSnackBar snackBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        LinearLayout mainContainer = findViewById(R.id.main_activity_container);
-
-        snackBar = PermissionSnackBar.make(mainContainer, "Fornisci tutte le autorizzazioni necessarie", -2)
-                .setAction("OK!")
-                .autoStartRadar()
-                .placeOnTop()
-                //.noBeacon()
-                .bindToActivity(this, 6)
-                .addCallback(new BaseTransientBottomBar.BaseCallback<PermissionSnackBar>() {
-                    @Override
-                    public void onDismissed(PermissionSnackBar transientBottomBar, int event) {
-                        Toast.makeText(MainActivity.this, "Main:Dismissed", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onShown(PermissionSnackBar transientBottomBar) {
-                        Toast.makeText(MainActivity.this, "Main:Shown", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .show();
     }
 
     public void openCoordLayout(View view) {
@@ -91,24 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (!handled) {
             //  intent was not carrying an in-app content
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        snackBar.unbindFromActivity();
-    }
-
-    @SuppressLint("MissingPermission")
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        snackBar.onActivityResult(requestCode, resultCode);
-        if (requestCode == 6) {
-            if (resultCode == Activity.RESULT_OK) {
-                Toast.makeText(this, "Result OK", Toast.LENGTH_SHORT).show();
-                NearItManager.getInstance().startRadar();
-            } else Toast.makeText(this, "Result KO", Toast.LENGTH_SHORT).show();
         }
     }
 }

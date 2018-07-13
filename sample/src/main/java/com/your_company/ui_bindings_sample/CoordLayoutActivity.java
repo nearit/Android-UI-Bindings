@@ -5,14 +5,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BaseTransientBottomBar;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.nearit.ui_bindings.permissions.views.PermissionSnackBar;
@@ -23,16 +20,15 @@ public class CoordLayoutActivity extends AppCompatActivity {
 
     private PermissionSnackBar snackBar;
     private static final int NEAR_PERMISSION_REQUEST = 1000;
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coord_layout);
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        snackBar = PermissionSnackBar.make(toolbar, "Fornisci tutte le autorizzazioni necessarie", -2)
+        snackBar = PermissionSnackBar.make(findViewById(R.id.content_constr_layout), "Fornisci tutte le autorizzazioni necessarie")
                 .setAction("OK!")
                 .autoStartRadar()
                 .noBeacon()
