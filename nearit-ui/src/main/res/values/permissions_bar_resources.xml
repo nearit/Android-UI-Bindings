@@ -45,6 +45,7 @@
         <attr name="barAlertText" format="string" />
         <attr name="barBluetoothIcon" format="reference" />
         <attr name="barLocationIcon" format="reference" />
+        <attr name="barNotificationsIcon" format="reference" />
         <attr name="noBeacon" format="boolean" />
         <attr name="nonBlockingBeacon" format="boolean" />
         <attr name="invisibleMode" format="boolean" />

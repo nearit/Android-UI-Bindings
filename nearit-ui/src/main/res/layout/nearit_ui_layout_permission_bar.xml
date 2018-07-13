@@ -31,6 +31,14 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/nearit_ui_permission_bar_margin1"
             android:src="@drawable/ic_nearit_ui_location_white" />
+
+        <ImageView
+            android:id="@+id/notifications_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/nearit_ui_permission_bar_margin1"
+            android:src="@drawable/ic_nearit_ui_notifications" />
     </LinearLayout>
 
 

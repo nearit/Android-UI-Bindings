@@ -70,6 +70,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
 
     private boolean flightModeDialogLaunched = false;
     private boolean dontAskAgainDialogLaunched = false;
+    private boolean notificationsDialogLaunched = false;
 
     @Nullable
     private PermissionButton locationButton;
@@ -104,7 +105,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             isNoBeacon = true;
         }
 
-        boolean allPermissionsGiven = PermissionsUtils.checkBluetooth(this) && checkLocation();
+        boolean allPermissionsGiven = PermissionsUtils.checkBluetooth(this) && checkLocation() && PermissionsUtils.areNotificationsEnabled(this);
 
         if (!isInvisibleLayoutMode) {
             setContentView(R.layout.nearit_ui_activity_permissions);
@@ -134,7 +135,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             createAirplaneDialog().show();
         }
 
-        if (isInvisibleLayoutMode && (flightModeDialogLaunched || dontAskAgainDialogLaunched)) {
+        if (isInvisibleLayoutMode && (flightModeDialogLaunched || dontAskAgainDialogLaunched || notificationsDialogLaunched)) {
             recreate();
         }
     }
@@ -276,8 +277,11 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, NEAR_BLUETOOTH_SETTINGS_CODE);
         } else {
-            // bt on
-            finalCheck();
+            if (!PermissionsUtils.areNotificationsEnabled(this)) {
+                createNotificationsDialog().show();
+            } else {
+                finalCheck();
+            }
         }
     }
 
@@ -331,7 +335,11 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             if (!isNoBeacon) {
                 openBluetoothSettings();
             } else {
-                finalCheck();
+                if (!PermissionsUtils.areNotificationsEnabled(this)) {
+                    createNotificationsDialog().show();
+                } else {
+                    finalCheck();
+                }
             }
         } else {
             if (isNoBeacon) {
@@ -442,7 +450,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
 
     private AlertDialog createAirplaneDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.nearit_ui_turn_on_location_title).setMessage(R.string.nearit_ui_turn_on_location_message);
+        builder.setTitle(R.string.nearit_ui_flight_mode_detected_title).setMessage(R.string.nearit_ui_flight_mode_detected_message);
 
         builder.setPositiveButton(R.string.nearit_ui_go_to_settings, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -472,7 +480,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
 
     private AlertDialog createDontAskAgainDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.nearit_ui_permission_message).setTitle(R.string.nearit_ui_permission_title);
+        builder.setMessage(R.string.nearit_ui_go_to_settings_location_message).setTitle(R.string.nearit_ui_go_to_settings_location_title);
 
         builder.setPositiveButton(R.string.nearit_ui_go_to_settings, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -481,6 +489,54 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 dontAskAgainDialogLaunched = true;
                 startActivity(intent);
+            }
+        });
+        builder.setNegativeButton(R.string.nearit_ui_cancel_dialog, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+                if (isInvisibleLayoutMode) {
+                    finalCheck();
+                }
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                dialog.cancel();
+                if (isInvisibleLayoutMode) {
+                    finalCheck();
+                }
+            }
+        });
+        return dialog;
+    }
+
+
+    private AlertDialog createNotificationsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.nearit_ui_go_to_settings_notification_message).setTitle(R.string.nearit_ui_go_to_settings_notification_title);
+
+        builder.setPositiveButton(R.string.nearit_ui_go_to_settings, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Intent intent = new Intent();
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+                //for Android 5-7
+                intent.putExtra("app_package", getPackageName());
+                intent.putExtra("app_uid", getApplicationInfo().uid);
+                // for Android O
+                intent.putExtra("android.provider.extra.APP_PACKAGE", getPackageName());
+                if (intent.resolveActivity(NearItPermissionsActivity.this.getPackageManager()) != null) {
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                            Uri.fromParts("package", getPackageName(), null));
+                    startActivity(intent);
+                }
+
+                notificationsDialogLaunched = true;
+
             }
         });
         builder.setNegativeButton(R.string.nearit_ui_cancel_dialog, new DialogInterface.OnClickListener() {
