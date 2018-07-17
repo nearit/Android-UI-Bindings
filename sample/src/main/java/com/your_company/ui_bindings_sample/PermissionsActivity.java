@@ -137,6 +137,7 @@ public class PermissionsActivity extends AppCompatActivity {
                         NearITUIBindings.getInstance(PermissionsActivity.this)
                                 .permissionsIntentBuilder()
                                 .automaticRadarStart()
+                                .setNoHeader()
                                 .build(),
                         NEAR_PERMISSION_REQUEST);
             }

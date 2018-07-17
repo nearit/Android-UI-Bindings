@@ -9,10 +9,22 @@ import com.nearit.ui_bindings.base.BaseView;
 /**
  * @author Federico Boschini
  */
-public interface InvisiblePermissionsContract {
+interface PermissionsContract {
 
-    interface InvisiblePermissionsView extends BaseView<InvisiblePermissionsPresenter> {
+    interface PermissionsView extends BaseView<PermissionsPresenter> {
+
         void recreate();
+
+        void hideHeader();
+        void setHeader(int resId);
+
+        void hideBluetoothButton();
+        void setBluetoothButtonChecked();
+        void setBluetoothButtonUnchecked();
+        void setLocationButtonChecked();
+        void setLocationButtonUnchecked();
+        void setNotificationsButtonChecked();
+        void setNotificationsButtonUnchecked();
 
         void showAirplaneDialog();
         void showDontAskAgainDialog();
@@ -28,12 +40,18 @@ public interface InvisiblePermissionsContract {
         boolean shouldShowRequestPermissionRationale();
     }
 
-    interface InvisiblePermissionsPresenter extends BasePresenter {
-        void onDialogClosed();
-        void onLocationServicesOn();
+    interface PermissionsPresenter extends BasePresenter {
 
+        void checkPermissions();
+
+        void onLocationTapped();
+        void onBluetoothTapped();
+        void onNotificationsTapped();
+
+        void finalCheck();
+
+        void onLocationServicesOn();
         void handlePermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults);
         void handleActivityResult(int requestCode, int resultCode, Intent data);
     }
-
 }

@@ -65,8 +65,8 @@ public class NearItPermissionsActivity extends AppCompatActivity {
     private boolean isNoBeacon = false;
     private boolean isNonBlockingBeacon = false;
     private boolean isAutoStartRadar = false;
-    private int headerDrawable = 0;
     private boolean isNoHeader = false;
+    private int headerDrawable = 0;
 
     private boolean flightModeDialogLaunched = false;
     private boolean dontAskAgainDialogLaunched = false;
@@ -89,9 +89,10 @@ public class NearItPermissionsActivity extends AppCompatActivity {
 
         sp = getSharedPreferences("nearit_ui", Activity.MODE_PRIVATE);
 
+        PermissionsRequestExtraParams params;
         Intent intent = getIntent();
         if (intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
-            PermissionsRequestExtraParams params = PermissionsRequestExtraParams.fromIntent(intent);
+            params = PermissionsRequestExtraParams.fromIntent(intent);
             isEnableTapToClose = params.isEnableTapToClose();
             isInvisibleLayoutMode = params.isInvisibleLayoutMode();
             isNoBeacon = params.isNoBeacon();
@@ -161,7 +162,6 @@ public class NearItPermissionsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        locationPermissionGranted = Build.VERSION.SDK_INT < Build.VERSION_CODES.M || checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
 
         if (isNoHeader && headerImageView != null) {
             headerImageView.setVisibility(View.GONE);
@@ -316,14 +316,26 @@ public class NearItPermissionsActivity extends AppCompatActivity {
         } else if (requestCode == NEAR_BLUETOOTH_SETTINGS_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 if (checkLocation()) {
-                    finalCheck();
+                    if (PermissionsUtils.areNotificationsEnabled(this)) {
+                        finalCheck();
+                    } else {
+                        createNotificationsDialog().show();
+                    }
                 }
             } else {
                 if (isInvisibleLayoutMode) {
-                    finalCheck();
+                    if (PermissionsUtils.areNotificationsEnabled(this)) {
+                        finalCheck();
+                    } else {
+                        createNotificationsDialog().show();
+                    }
                 } else {
                     if (isNonBlockingBeacon && checkLocation()) {
-                        finalCheck();
+                        if (PermissionsUtils.areNotificationsEnabled(this)) {
+                            finalCheck();
+                        } else {
+                            createNotificationsDialog().show();
+                        }
                     }
                 }
             }
@@ -511,7 +523,6 @@ public class NearItPermissionsActivity extends AppCompatActivity {
         });
         return dialog;
     }
-
 
     private AlertDialog createNotificationsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

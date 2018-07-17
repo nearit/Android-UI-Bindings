@@ -17,7 +17,7 @@ class PermissionsRequestExtraParams implements Parcelable {
     private final boolean enableTapToClose;
     private final boolean autoStartRadar;
     private final boolean invisibleLayoutMode;
-    private final boolean noBeacon;
+    private boolean noBeacon;
     private final boolean nonBlockingBeacon;
     private final int headerDrawable;
     private final boolean noHeader;
@@ -132,5 +132,9 @@ class PermissionsRequestExtraParams implements Parcelable {
 
     boolean isNoHeader() {
         return noHeader;
+    }
+
+    void setNoBeacon(boolean noBeacon) {
+        this.noBeacon = noBeacon;
     }
 }

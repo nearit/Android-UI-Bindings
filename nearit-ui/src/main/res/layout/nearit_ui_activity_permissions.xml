@@ -70,6 +70,16 @@
                     app:buttonText="@string/nearit_ui_bluetooth"
                     app:iconRes="@drawable/ic_nearit_ui_bluetooth" />
 
+                <com.nearit.ui_bindings.permissions.views.PermissionButton
+                    android:id="@+id/notification_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin3"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:buttonText="@string/nearit_ui_notification"
+                    app:iconRes="@drawable/ic_nearit_ui_notifications" />
+
                 <TextView
                     android:id="@+id/close_text"
                     android:layout_width="wrap_content"

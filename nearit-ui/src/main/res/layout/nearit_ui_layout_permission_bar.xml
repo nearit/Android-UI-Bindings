@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:id="@+id/bt_loc_icons"
-        android:layout_width="31dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:orientation="horizontal"

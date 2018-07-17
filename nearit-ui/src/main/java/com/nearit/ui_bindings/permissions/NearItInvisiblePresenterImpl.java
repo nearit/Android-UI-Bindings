@@ -32,7 +32,7 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
     private boolean dontAskAgainDialogLaunched = false;
     private boolean notificationsDialogLaunched = false;
 
-    private NearItInvisiblePresenterImpl(
+    NearItInvisiblePresenterImpl(
             InvisiblePermissionsContract.InvisiblePermissionsView view,
             PermissionsRequestExtraParams params,
             PermissionsManager permissionsManager,
@@ -55,19 +55,28 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
 
     @Override
     public void start() {
+        if (flightModeDialogLaunched || dontAskAgainDialogLaunched || notificationsDialogLaunched) {
+            view.recreate();
+        }
+
         if (!permissionsManager.isBleAvailable()) {
             params.setNoBeacon(true);
         }
 
-        boolean allPermissionsGiven =
-                permissionsManager.isBluetoothOn()
-                        && checkLocation()
-                        && permissionsManager.areNotificationsEnabled();
-
-        if (allPermissionsGiven) {
-            view.finishWithOkResult();
+        if (permissionsManager.isFlightModeOn()) {
+            view.showAirplaneDialog();
+            flightModeDialogLaunched = true;
         } else {
-            askLocationPermission();
+            boolean allPermissionsGiven =
+                    permissionsManager.isBluetoothOn()
+                            && checkLocation()
+                            && permissionsManager.areNotificationsEnabled();
+
+            if (allPermissionsGiven) {
+                view.finishWithOkResult();
+            } else {
+                askLocationPermission();
+            }
         }
     }
 
@@ -76,7 +85,11 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
         if (!params.isNoBeacon() && permissionsManager.isBleAvailable() && !permissionsManager.isBluetoothOn()) {
             view.turnOnBluetooth();
         } else {
-            finalCheck();
+            if (!permissionsManager.areNotificationsEnabled()) {
+                view.showNotificationsDialog();
+            } else {
+                finalCheck();
+            }
         }
     }
 
@@ -102,7 +115,7 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
     public void handleActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == NEAR_LOCATION_SETTINGS_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                // ???
+                // handled by onLocationServicesOn launched by the activity
             } else {
                 //  CANCELED
                 finalCheck();
@@ -118,6 +131,8 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
                         notificationsDialogLaunched = true;
                         view.showNotificationsDialog();
                     }
+                } else {
+                    askLocationPermission();
                 }
             } else {
                 //  CANCELED
@@ -140,9 +155,6 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
      * Checks one last time that everything is ok
      */
     private void finalCheck() {
-        if (permissionsManager.isFlightModeOn()) {
-            view.finishWithKoResult();
-        }
         if (checkLocation()) {
             if (permissionsManager.isBluetoothOn() || params.isNoBeacon() || params.isNonBlockingBeacon() || !permissionsManager.isBleAvailable()) {
                 onPermissionsReady();

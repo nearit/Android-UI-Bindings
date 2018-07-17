@@ -88,7 +88,11 @@ public class PermissionsRequestIntentBuilder {
     }
 
     public Intent build() {
-        return NearItPermissionsActivity.createIntent(mContext, getParams());
+        if (mInvisibleLayoutMode) {
+            return NearItInvisiblePermissionsActivity.createIntent(mContext, getParams());
+        } else {
+            return PermissionsActivity.createIntent(mContext, getParams());
+        }
     }
 
     private PermissionsRequestExtraParams getParams() {

@@ -38,6 +38,7 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
     private PermissionBarButton actionButton;
     private ImageView btIcon;
     private ImageView locIcon;
+    private ImageView notifIcon;
 
     @Nullable
     private Activity activity;
@@ -137,6 +138,7 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
 
         btIcon = permissionView.findViewById(R.id.bluetooth_icon);
         locIcon = permissionView.findViewById(R.id.location_icon);
+        notifIcon = permissionView.findViewById(R.id.notifications_icon);
 
         layout.setPadding(0, 0, 0, 0);
         layout.addView(permissionView, 0);
@@ -165,16 +167,34 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
         locIcon.setVisibility(VISIBLE);
     }
 
+    private void hideNotificationsIcon() {
+        notifIcon.setVisibility(GONE);
+    }
+
+    private void showNotificationsIcon() {
+        notifIcon.setVisibility(VISIBLE);
+    }
+
     private void checkPermissionsAndUpdateUI() {
-        if (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context) && (PermissionsUtils.checkBluetooth(context) || noBeacon)) {
+        if (PermissionsUtils.areNotificationsEnabled(context)
+                && (PermissionsUtils.checkBluetooth(context) || noBeacon || !PermissionsUtils.isBleAvailable(context))
+                && (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context))) {
             dismiss();
         } else {
-            if (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context)) {
-                hideLocationIcon();
+
+            show();
+
+            if (!PermissionsUtils.areNotificationsEnabled(context)) {
+                showNotificationsIcon();
             } else {
-                showLocationIcon();
+                hideNotificationsIcon();
             }
-            if (PermissionsUtils.checkBluetooth(context) || noBeacon) {
+            if (!PermissionsUtils.checkLocationServices(context) || !PermissionsUtils.checkLocationPermission(context)) {
+                showLocationIcon();
+            } else {
+                hideLocationIcon();
+            }
+            if (PermissionsUtils.checkBluetooth(context) || noBeacon || !PermissionsUtils.isBleAvailable(context)) {
                 hideBluetoothIcon();
             } else {
                 showBluetoothIcon();
@@ -183,7 +203,7 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
     }
 
     private boolean allPermissionsGranted() {
-        return PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context) && (PermissionsUtils.checkBluetooth(context) || noBeacon);
+        return PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context) && (PermissionsUtils.checkBluetooth(context) || noBeacon) && PermissionsUtils.areNotificationsEnabled(context);
     }
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -218,7 +238,6 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
         builder.invisibleLayoutMode();
 
         if (noBeacon) {
-            hideBluetoothIcon();
             builder.noBeacon();
         }
         if (nonBlockingBeacon) {

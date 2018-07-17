@@ -215,15 +215,7 @@ public class PermissionBar extends RelativeLayout {
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-
-            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
-                checkPermissionsAndUpdateUI();
-            }
-
-            if (LocationManager.PROVIDERS_CHANGED_ACTION.equals(action)) {
-                checkPermissionsAndUpdateUI();
-            }
+            checkPermissionsAndUpdateUI();
         }
     };
 

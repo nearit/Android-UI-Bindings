@@ -31,7 +31,7 @@ public class CoordLayoutActivity extends AppCompatActivity {
         snackBar = PermissionSnackBar.make(findViewById(R.id.content_constr_layout), "Fornisci tutte le autorizzazioni necessarie")
                 .setAction("OK!")
                 .autoStartRadar()
-                .noBeacon()
+                /*.noBeacon()*/
                 .bindToActivity(this, NEAR_PERMISSION_REQUEST)
                 .addCallback(new BaseTransientBottomBar.BaseCallback<PermissionSnackBar>() {
                     @Override
