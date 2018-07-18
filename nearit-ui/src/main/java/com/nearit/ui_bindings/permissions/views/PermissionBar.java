@@ -8,7 +8,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -30,6 +33,9 @@ public class PermissionBar extends RelativeLayout {
 
     private static final int NO_ICON = 0;
     private final Context context;
+
+    @Nullable
+    private OnBarStateChangeListener listener;
 
     private ImageView face;
     private TextView alertMessage;
@@ -124,6 +130,10 @@ public class PermissionBar extends RelativeLayout {
     public void unbindFromActivity() {
         getContext().unregisterReceiver(mReceiver);
         this.activity = null;
+    }
+
+    public void setOnBarStateChangeListener(OnBarStateChangeListener listener) {
+        this.listener = listener;
     }
 
     private void obtainAttrs(AttributeSet attrs) {
@@ -254,6 +264,15 @@ public class PermissionBar extends RelativeLayout {
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
 
+        ColorDrawable colorDrawable = (ColorDrawable) this.getBackground();
+        if (colorDrawable != null && listener != null) {
+            if (this.getVisibility() != GONE) {
+                listener.onColorChanged(colorDrawable.getColor());
+            } else {
+                listener.onViewGone();
+            }
+        }
+
         alertMessage.setText(alertMessageText);
         if (btIconResId != NO_ICON) {
             okButton.setBluetoothIcon(btIconResId);
@@ -277,10 +296,13 @@ public class PermissionBar extends RelativeLayout {
                 && (PermissionsUtils.checkBluetooth(context) || noBeacon || !PermissionsUtils.isBleAvailable(context))
                 && (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context))) {
             this.setVisibility(GONE);
+            if (listener != null) {
+                listener.onViewGone();
+            }
         } else {
 
-            setSad();
             PermissionBar.this.setVisibility(VISIBLE);
+            setSad();
 
             if (!PermissionsUtils.areNotificationsEnabled(context)) {
                 showNotificationsIcon();
@@ -316,5 +338,10 @@ public class PermissionBar extends RelativeLayout {
             return true;
         }
         return false;
+    }
+
+    public interface OnBarStateChangeListener {
+        void onColorChanged(int color);
+        void onViewGone();
     }
 }
