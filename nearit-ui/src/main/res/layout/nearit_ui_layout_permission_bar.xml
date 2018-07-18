@@ -1,62 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bar_relative_layout"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/nearit_ui_permission_bar_height"
-    android:background="@color/nearit_ui_permission_bar_background_color"
     android:gravity="bottom"
     android:padding="@dimen/nearit_ui_permission_bar_main_padding">
 
-    <LinearLayout
-        android:id="@+id/bt_loc_icons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/face"
         android:layout_alignParentLeft="true"
-        android:orientation="horizontal"
-        android:layout_centerVertical="true">
-
-        <ImageView
-            android:id="@+id/bluetooth_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_nearit_ui_bluetooth_white" />
-
-        <ImageView
-            android:id="@+id/location_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/nearit_ui_permission_bar_margin1"
-            android:src="@drawable/ic_nearit_ui_location_white" />
-
-        <ImageView
-            android:id="@+id/notifications_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/nearit_ui_permission_bar_margin1"
-            android:src="@drawable/ic_nearit_ui_notifications" />
-    </LinearLayout>
-
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/ic_nearit_ui_sad_white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/alert_message"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="2"
-        android:layout_marginLeft="@dimen/nearit_ui_permission_bar_margin2"
+        android:ellipsize="end"
+        android:layout_marginLeft="@dimen/nearit_ui_permission_bar_text_left_right_margin"
+        android:layout_marginRight="@dimen/nearit_ui_permission_bar_text_left_right_margin"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/bt_loc_icons"
+        android:layout_toRightOf="@id/face"
+        android:layout_toLeftOf="@id/ok_button"
         android:textAppearance="@style/NearItUIPermissionBarAlertMessageTextAppearance" />
 
     <com.nearit.ui_bindings.permissions.views.PermissionBarButton
         android:id="@+id/ok_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="6dp"
         android:layout_centerVertical="true"/>
 
 </RelativeLayout>

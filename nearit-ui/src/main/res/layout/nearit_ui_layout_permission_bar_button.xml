@@ -1,18 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/nearit_ui_permission_bar_button_width"
     android:layout_height="@dimen/nearit_ui_permission_bar_button_height"
     android:paddingLeft="@dimen/nearit_ui_permission_bar_button_left_right_padding"
     android:paddingRight="@dimen/nearit_ui_permission_bar_button_left_right_padding"
-    android:paddingTop="@dimen/nearit_ui_permission_bar_button_top_bottom_padding"
-    android:paddingBottom="@dimen/nearit_ui_permission_bar_button_top_bottom_padding"
     android:gravity="center"
+    android:orientation="horizontal"
     android:background="@drawable/nearit_ui_selector_permission_bar_button">
 
-    <TextView
-        android:id="@+id/bar_button_text"
+    <ImageView
+        android:id="@+id/notificationsIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/NearItUIPermissionBarButtonTextAppearance"/>
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/ic_nearit_ui_notifications"/>
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/bluetoothIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/ic_nearit_ui_bluetooth_white"/>
+
+    <ImageView
+        android:id="@+id/locationIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/ic_nearit_ui_location_white"/>
+
+</LinearLayout>

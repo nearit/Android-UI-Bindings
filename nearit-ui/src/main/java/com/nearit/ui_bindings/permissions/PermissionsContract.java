@@ -13,18 +13,24 @@ interface PermissionsContract {
 
     interface PermissionsView extends BaseView<PermissionsPresenter> {
 
-        void recreate();
+        void refreshCloseText();
 
         void hideHeader();
         void setHeader(int resId);
 
         void hideBluetoothButton();
-        void setBluetoothButtonChecked();
-        void setBluetoothButtonUnchecked();
-        void setLocationButtonChecked();
-        void setLocationButtonUnchecked();
-        void setNotificationsButtonChecked();
-        void setNotificationsButtonUnchecked();
+        void setBluetoothButtonHappy();
+        void setBluetoothButtonSad();
+        void resetBluetoothButton();
+
+        void setLocationButtonHappy();
+        void setLocationButtonWorried();
+        void setLocationButtonSad();
+        void resetLocationButton();
+
+        void setNotificationsButtonHappy();
+        void setNotificationsButtonSad();
+        void resetNotificationsButton();
 
         void showAirplaneDialog();
         void showDontAskAgainDialog();
@@ -41,6 +47,8 @@ interface PermissionsContract {
     }
 
     interface PermissionsPresenter extends BasePresenter {
+
+        void onDialogCanceled();
 
         void checkPermissions();
 

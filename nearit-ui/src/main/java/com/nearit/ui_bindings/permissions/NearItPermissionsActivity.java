@@ -424,7 +424,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             if (PermissionsUtils.checkBluetooth(this)) {
                 bleButton.setChecked();
             } else {
-                bleButton.setUnchecked();
+                bleButton.resetState();
                 bleButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -444,7 +444,7 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             if (checkLocation()) {
                 locationButton.setChecked();
             } else {
-                locationButton.setUnchecked();
+                locationButton.resetState();
                 locationButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

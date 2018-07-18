@@ -37,23 +37,27 @@ import com.google.android.gms.tasks.Task;
 import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.permissions.views.PermissionButton;
-import com.nearit.ui_bindings.utils.SpManager;
 import com.nearit.ui_bindings.utils.VersionManager;
+
+import it.near.sdk.NearItManager;
+
+import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_BLUETOOTH_SETTINGS_CODE;
+import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_LOCATION_SETTINGS_CODE;
+import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_PERMISSION_REQUEST_FINE_LOCATION;
 
 /**
  * @author Federico Boschini
  */
 public class PermissionsActivity extends AppCompatActivity implements PermissionsContract.PermissionsView {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "NearItPermissions";
-
-    private static final int NEAR_BLUETOOTH_SETTINGS_CODE = 4000;
-    private static final int NEAR_LOCATION_SETTINGS_CODE = 5000;
-    private static final int NEAR_PERMISSION_REQUEST_FINE_LOCATION = 6000;
 
     private PermissionButton locationButton;
     private PermissionButton bleButton;
     private PermissionButton notificationsButton;
+    private TextView closeButton;
+
     @Nullable
     private ImageView headerImageView;
 
@@ -79,9 +83,16 @@ public class PermissionsActivity extends AppCompatActivity implements Permission
             isEnableTapToClose = params.isEnableTapToClose();
         }
 
-        presenter = new PermissionsPresenterImpl(this, params, PermissionsManager.obtain(this), SpManager.obtain(this), VersionManager.obtain(this));
+        presenter = new PermissionsPresenterImpl(
+                this,
+                params,
+                PermissionsManager.obtain(this),
+                State.obtain(this),
+                VersionManager.obtain(this),
+                NearItManager.getInstance()
+        );
 
-        TextView closeButton = findViewById(R.id.close_text);
+        closeButton = findViewById(R.id.close_text);
         if (closeButton != null) {
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -156,13 +167,15 @@ public class PermissionsActivity extends AppCompatActivity implements Permission
     }
 
     @Override
-    public void setBluetoothButtonChecked() {
-        bleButton.setChecked();
+    public void setBluetoothButtonHappy() {
+        bleButton.setHappy();
+        bleButton.setText(getResources().getString(R.string.nearit_ui_bluetooth_button_on_text));
     }
 
     @Override
-    public void setBluetoothButtonUnchecked() {
-        bleButton.setUnchecked();
+    public void setBluetoothButtonSad() {
+        bleButton.setSad();
+        bleButton.setText(getResources().getString(R.string.nearit_ui_bluetooth_button_off_text));
         bleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,13 +185,28 @@ public class PermissionsActivity extends AppCompatActivity implements Permission
     }
 
     @Override
-    public void setLocationButtonChecked() {
-        locationButton.setChecked();
+    public void resetBluetoothButton() {
+        bleButton.resetState();
+        bleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onBluetoothTapped();
+            }
+        });
     }
 
     @Override
-    public void setLocationButtonUnchecked() {
-        locationButton.setUnchecked();
+    public void setLocationButtonHappy() {
+        locationButton.setHappy();
+        locationButton.setText(getResources().getString(R.string.nearit_ui_location_button_on_text));
+        locationButton.hideLabel();
+    }
+
+    @Override
+    public void setLocationButtonWorried() {
+        locationButton.setWorried();
+        locationButton.setText(getResources().getString(R.string.nearit_ui_location_button_text));
+        locationButton.setWorriedLabel(getResources().getString(R.string.nearit_ui_location_button_worried_text));
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,19 +216,61 @@ public class PermissionsActivity extends AppCompatActivity implements Permission
     }
 
     @Override
-    public void setNotificationsButtonChecked() {
-        notificationsButton.setChecked();
+    public void setLocationButtonSad() {
+        locationButton.setSad();
+        locationButton.setText(getResources().getString(R.string.nearit_ui_location_button_text));
+        locationButton.setSadLabel(getResources().getString(R.string.nearit_ui_location_button_sad_text));
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onLocationTapped();
+            }
+        });
     }
 
     @Override
-    public void setNotificationsButtonUnchecked() {
-        notificationsButton.setUnchecked();
+    public void resetLocationButton() {
+        locationButton.resetState();
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onLocationTapped();
+            }
+        });
+    }
+
+    @Override
+    public void setNotificationsButtonHappy() {
+        notificationsButton.setHappy();
+        notificationsButton.setText("Notifications on");
+    }
+
+    @Override
+    public void setNotificationsButtonSad() {
+        notificationsButton.setSad();
+        notificationsButton.setText("Notifications off");
         notificationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.onNotificationsTapped();
             }
         });
+    }
+
+    @Override
+    public void resetNotificationsButton() {
+        notificationsButton.resetState();
+        notificationsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onNotificationsTapped();
+            }
+        });
+    }
+
+    @Override
+    public void refreshCloseText() {
+        closeButton.setText(getResources().getString(R.string.nearit_ui_close_permissions_text));
     }
 
     @Override
@@ -284,6 +354,7 @@ public class PermissionsActivity extends AppCompatActivity implements Permission
         builder.setNegativeButton(R.string.nearit_ui_cancel_dialog, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
+                presenter.onDialogCanceled();
             }
         });
         AlertDialog dialog = builder.create();
@@ -291,6 +362,7 @@ public class PermissionsActivity extends AppCompatActivity implements Permission
             @Override
             public void onCancel(DialogInterface dialog) {
                 dialog.cancel();
+                presenter.onDialogCanceled();
             }
         });
         dialog.show();
@@ -312,6 +384,7 @@ public class PermissionsActivity extends AppCompatActivity implements Permission
         builder.setNegativeButton(R.string.nearit_ui_cancel_dialog, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
+                presenter.onDialogCanceled();
             }
         });
         AlertDialog dialog = builder.create();
@@ -319,6 +392,7 @@ public class PermissionsActivity extends AppCompatActivity implements Permission
             @Override
             public void onCancel(DialogInterface dialog) {
                 dialog.cancel();
+                presenter.onDialogCanceled();
             }
         });
         dialog.show();
@@ -352,6 +426,7 @@ public class PermissionsActivity extends AppCompatActivity implements Permission
         builder.setNegativeButton(R.string.nearit_ui_cancel_dialog, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
+                presenter.onDialogCanceled();
             }
         });
         AlertDialog dialog = builder.create();
@@ -359,6 +434,7 @@ public class PermissionsActivity extends AppCompatActivity implements Permission
             @Override
             public void onCancel(DialogInterface dialog) {
                 dialog.cancel();
+                presenter.onDialogCanceled();
             }
         });
         dialog.show();

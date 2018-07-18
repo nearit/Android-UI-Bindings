@@ -1,12 +1,13 @@
 package com.nearit.ui_bindings.permissions;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 
-import com.nearit.ui_bindings.utils.SpManager;
 import com.nearit.ui_bindings.utils.VersionManager;
+
+import it.near.sdk.NearItManager;
 
 /**
  * @author Federico Boschini
@@ -20,15 +21,17 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
     private PermissionsManager permissionsManager;
     private PermissionsRequestExtraParams params;
     private PermissionsContract.PermissionsView view;
-    private SpManager spManager;
+    private State state;
     private VersionManager versionManager;
+    private NearItManager nearItManager;
 
-    PermissionsPresenterImpl(PermissionsContract.PermissionsView view, PermissionsRequestExtraParams params, PermissionsManager permissionsManager, SpManager spManager, VersionManager versionManager) {
+    PermissionsPresenterImpl(PermissionsContract.PermissionsView view, PermissionsRequestExtraParams params, PermissionsManager permissionsManager, State state, VersionManager versionManager, NearItManager nearItManager) {
         this.view = view;
         this.params = params;
         this.permissionsManager = permissionsManager;
-        this.spManager = spManager;
+        this.state = state;
         this.versionManager = versionManager;
+        this.nearItManager = nearItManager;
         init();
     }
 
@@ -59,16 +62,21 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
     @Override
     public void onLocationTapped() {
         askLocationPermission();
+        state.setLocationAsked();
     }
 
     @Override
     public void onBluetoothTapped() {
         view.turnOnBluetooth();
+        state.setBluetoothAsked();
     }
 
     @Override
     public void onNotificationsTapped() {
-        if (!permissionsManager.areNotificationsEnabled()) view.showNotificationsDialog();
+        if (!permissionsManager.areNotificationsEnabled()) {
+            view.showNotificationsDialog();
+            state.setNotificationsAsked();
+        }
     }
 
     private void askLocationPermission() {
@@ -80,11 +88,11 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
                 view.turnOnLocationServices(params.isInvisibleLayoutMode() && !params.isNoBeacon());
             } else {
                 boolean alreadyAsked;
-                alreadyAsked = spManager.locationPermissionAlreadyAsked();
+                alreadyAsked = state.getLocationPermissionAsked();
                 if (alreadyAsked && !view.shouldShowRequestPermissionRationale()) {
                     view.showDontAskAgainDialog();
                 } else {
-                    spManager.setLocationPermissionAsked();
+                    state.setLocationPermissionAsked();
                     view.requestLocationPermission();
                 }
             }
@@ -98,9 +106,13 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
         checkPermissions();
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void finalCheck() {
         if (checkLocation()) {
+            if (params.isAutoStartRadar()) {
+                nearItManager.startRadar();
+            }
             if ((permissionsManager.isBluetoothOn()
                     || params.isNoBeacon()
                     || params.isNonBlockingBeacon()
@@ -122,6 +134,8 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
                 } else {
                     view.showAirplaneDialog();
                 }
+            } else {
+                checkPermissions();
             }
         }
     }
@@ -129,17 +143,11 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
     @Override
     public void handleActivityResult(int requestCode, int resultCode, Intent data) {
         checkPermissions();
-        if (requestCode == NEAR_LOCATION_SETTINGS_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
+    }
 
-            }
-        }
-
-        if (requestCode == NEAR_BLUETOOTH_SETTINGS_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-
-            }
-        }
+    @Override
+    public void onDialogCanceled() {
+        checkPermissions();
     }
 
     @Override
@@ -149,22 +157,43 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
 
     @Override
     public void checkPermissions() {
+        if (state.getBluetoothAsked() || state.getLocationAsked() || state.getNotificationsAsked()) {
+            view.refreshCloseText();
+        }
         if (permissionsManager.isBluetoothOn()) {
-            view.setBluetoothButtonChecked();
+            view.setBluetoothButtonHappy();
         } else {
-            view.setBluetoothButtonUnchecked();
+            if (state.getBluetoothAsked()) {
+                view.setBluetoothButtonSad();
+            } else {
+                view.resetBluetoothButton();
+            }
         }
 
-        if (checkLocation()) {
-            view.setLocationButtonChecked();
+        if (permissionsManager.isLocationPermissionGranted() && permissionsManager.areLocationServicesOn()) {
+            view.setLocationButtonHappy();
         } else {
-            view.setLocationButtonUnchecked();
+            if (state.getLocationAsked()) {
+                if (permissionsManager.isLocationPermissionGranted()) {
+                    if (!permissionsManager.areLocationServicesOn()) {
+                        view.setLocationButtonWorried();
+                    }
+                } else {
+                    view.setLocationButtonSad();
+                }
+            } else {
+                view.resetLocationButton();
+            }
         }
 
         if (permissionsManager.areNotificationsEnabled()) {
-            view.setNotificationsButtonChecked();
+            view.setNotificationsButtonHappy();
         } else {
-            view.setNotificationsButtonUnchecked();
+            if (state.getNotificationsAsked()) {
+                view.setNotificationsButtonSad();
+            } else {
+                view.resetNotificationsButton();
+            }
         }
     }
 

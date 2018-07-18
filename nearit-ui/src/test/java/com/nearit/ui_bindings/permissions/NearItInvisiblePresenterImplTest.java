@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import com.nearit.ui_bindings.NearItManagerStub;
-import com.nearit.ui_bindings.utils.SpManager;
 import com.nearit.ui_bindings.utils.VersionManager;
 
 import org.junit.Before;
@@ -41,7 +40,7 @@ public class NearItInvisiblePresenterImplTest {
     @Mock
     private PermissionsManager permissionsManager;
     @Mock
-    private SpManager spManager;
+    private State state;
     @Mock
     private VersionManager versionManager;
 
@@ -51,7 +50,7 @@ public class NearItInvisiblePresenterImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         nearItManager = Mockito.mock(NearItManagerStub.class);
-        presenter = new NearItInvisiblePresenterImpl(view, params, permissionsManager, spManager, versionManager, nearItManager);
+        presenter = new NearItInvisiblePresenterImpl(view, params, permissionsManager, state, versionManager, nearItManager);
     }
 
     @Test
@@ -111,7 +110,7 @@ public class NearItInvisiblePresenterImplTest {
         presenter.start();
 
         verify(view).requestLocationPermission();
-        verify(spManager).setLocationPermissionAsked();
+        verify(state).setLocationPermissionAsked();
     }
 
     @Test
@@ -124,7 +123,7 @@ public class NearItInvisiblePresenterImplTest {
         presenter.start();
 
         verify(view, never()).requestLocationPermission();
-        verify(spManager, never()).setLocationPermissionAsked();
+        verify(state, never()).setLocationPermissionAsked();
         verify(view).showDontAskAgainDialog();
     }
 
@@ -138,7 +137,7 @@ public class NearItInvisiblePresenterImplTest {
         presenter.start();
 
         verify(view).requestLocationPermission();
-        verify(spManager).setLocationPermissionAsked();
+        verify(state).setLocationPermissionAsked();
         verify(view, never()).showDontAskAgainDialog();
     }
 
@@ -178,7 +177,7 @@ public class NearItInvisiblePresenterImplTest {
         presenter.start();
 
         verify(view, never()).requestLocationPermission();
-        verify(spManager, never()).setLocationPermissionAsked();
+        verify(state, never()).setLocationPermissionAsked();
 
         verify(view).turnOnLocationServices(anyBoolean());
     }
@@ -483,11 +482,11 @@ public class NearItInvisiblePresenterImplTest {
     }
 
     private void whenPermissionAlreadyAsked() {
-        when(spManager.locationPermissionAlreadyAsked()).thenReturn(true);
+        when(state.getLocationPermissionAsked()).thenReturn(true);
     }
 
     private void whenPermissionNeverAsked() {
-        when(spManager.locationPermissionAlreadyAsked()).thenReturn(false);
+        when(state.getLocationPermissionAsked()).thenReturn(false);
     }
 
     private void whenSDKAtLeastMarshmallow() {

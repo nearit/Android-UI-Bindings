@@ -3,19 +3,20 @@ package com.nearit.ui_bindings.permissions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
-import com.nearit.ui_bindings.utils.SpManager;
+import com.nearit.ui_bindings.NearItManagerStub;
 import com.nearit.ui_bindings.utils.VersionManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
+import it.near.sdk.NearItManager;
 
 import static android.app.Activity.RESULT_OK;
 import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_BLUETOOTH_SETTINGS_CODE;
-import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_LOCATION_SETTINGS_CODE;
 import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_PERMISSION_REQUEST_FINE_LOCATION;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -40,14 +41,17 @@ public class PermissionsPresenterImplTest {
     @Mock
     private PermissionsManager permissionsManager;
     @Mock
-    private SpManager spManager;
+    private State state;
     @Mock
     private VersionManager versionManager;
+
+    private NearItManager nearItManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        presenter = new PermissionsPresenterImpl(view, params, permissionsManager, spManager, versionManager);
+        nearItManager = Mockito.mock(NearItManagerStub.class);
+        presenter = new PermissionsPresenterImpl(view, params, permissionsManager, state, versionManager, nearItManager);
     }
 
     @Test
@@ -93,6 +97,76 @@ public class PermissionsPresenterImplTest {
     }
 
     @Test
+    public void onStart_ifNotificationsNeverAskedAndOff_resetNotifications() {
+        whenNotificationsNeverAsked();
+        whenNotificationsAreOff();
+
+        presenter.start();
+
+        verify(view).resetNotificationsButton();
+    }
+
+    @Test
+    public void onStart_ifBluetoothNeverAskedAndOff_resetBluetooth() {
+        whenBluetoothNeverAsked();
+        whenBluetoothIsOff();
+
+        presenter.start();
+
+        verify(view).resetBluetoothButton();
+    }
+
+    @Test
+    public void onStart_ifBluetoothAskedAndOff_bluetoothSad() {
+        whenBluetoothIsOff();
+        whenBluetoothAsked();
+
+        presenter.start();
+
+        verify(view).setBluetoothButtonSad();
+    }
+
+    @Test
+    public void onStart_ifLocationAskedAndOff_locationSad() {
+        whenLocationIsOff();
+        whenLocationAsked();
+
+        presenter.start();
+
+        verify(view).setLocationButtonSad();
+    }
+
+    @Test
+    public void onStart_ifLocationPermissionAskedAndOff_locationSad() {
+        whenLocationPermissionIsNotGranted();
+        whenLocationAsked();
+
+        presenter.start();
+
+        verify(view).setLocationButtonSad();
+    }
+
+    @Test
+    public void onStart_ifLocationPermissionNeverAsked_resetLocation() {
+        whenLocationPermissionIsNotGranted();
+        whenLocationNeverAsked();
+
+        presenter.start();
+
+        verify(view).resetLocationButton();
+    }
+
+    @Test
+    public void onStart_ifLocationNeverAskedAndOff_resetLocation() {
+        whenLocationIsOff();
+        whenLocationNeverAsked();
+
+        presenter.start();
+
+        verify(view).resetLocationButton();
+    }
+
+    @Test
     public void onPermissionResult_ifGrantedAndFlightModeOff_turnOnLocation() {
         whenFlightModeIsOff();
         String[] permissions = {};
@@ -116,53 +190,69 @@ public class PermissionsPresenterImplTest {
     }
 
     @Test
+    public void onPermissionResult_ifNotGranted_checkPermissionsAndRefreshUI() {
+        whenNotificationsAsked();
+        whenNotificationsAreOff();
+        String[] permissions = {};
+        int[] results = {PackageManager.PERMISSION_DENIED};
+
+        presenter.handlePermissionResult(NEAR_PERMISSION_REQUEST_FINE_LOCATION, permissions, results);
+
+        verify(view).setNotificationsButtonSad();
+    }
+
+    @Test
     public void onLocationServicesOn_checkPermissionsAndUpdateUI() {
         //  checkPermissions tested in deep next
         whenNotificationsAreOff();
+        whenNotificationsAsked();
 
         presenter.onLocationServicesOn();
 
-        verify(view).setNotificationsButtonUnchecked();
+        verify(view).setNotificationsButtonSad();
     }
 
     @Test
-    public void onActivityResult_ifLocationOnAndGranted_checkPermissionsAndUpdateUI() {
+    public void onActivityResult_ifLocationOnAndGranted_locationHappy() {
         whenLocationPermissionIsGranted();
         whenLocationIsOn();
 
         presenter.handleActivityResult(1, 2, intent);
 
-        verify(view).setLocationButtonChecked();
+        verify(view).setLocationButtonHappy();
     }
 
     @Test
-    public void onActivityResult_ifLocationOnAndNotGranted_checkPermissionsAndUpdateUI() {
+    public void onActivityResult_ifLocationAskedOnAndNotGranted_locationSad() {
+        whenLocationAsked();
         whenLocationIsOn();
         whenLocationPermissionIsNotGranted();
 
         presenter.handleActivityResult(1, 2, intent);
 
-        verify(view).setLocationButtonUnchecked();
+        verify(view).setLocationButtonSad();
     }
 
     @Test
-    public void onActivityResult_ifLocationOffAndGranted_checkPermissionsAndUpdateUI() {
+    public void onActivityResult_ifLocationAskedOffAndGranted_locationWorried() {
+        whenLocationAsked();
         whenLocationIsOff();
         whenLocationPermissionIsGranted();
 
         presenter.handleActivityResult(1, 2, intent);
 
-        verify(view).setLocationButtonUnchecked();
+        verify(view).setLocationButtonWorried();
     }
 
     @Test
-    public void onActivityResult_ifLocationOffAndNotGranted_checkPermissionsAndUpdateUI() {
+    public void onActivityResult_ifLocationAskedOffAndNotGranted_locationSad() {
+        whenLocationAsked();
         whenLocationIsOff();
         whenLocationPermissionIsNotGranted();
 
         presenter.handleActivityResult(1, 2, intent);
 
-        verify(view).setLocationButtonUnchecked();
+        verify(view).setLocationButtonSad();
     }
 
     @Test
@@ -171,7 +261,7 @@ public class PermissionsPresenterImplTest {
 
         presenter.handleActivityResult(1, 2, intent);
 
-        verify(view).setBluetoothButtonUnchecked();
+        verify(view).resetBluetoothButton();
     }
 
     @Test
@@ -180,26 +270,35 @@ public class PermissionsPresenterImplTest {
 
         presenter.handleActivityResult(1, 2, intent);
 
-        verify(view).setBluetoothButtonChecked();
+        verify(view).setBluetoothButtonHappy();
     }
 
-
     @Test
-    public void onActivityResult_ifNotificationsOff_checkPermissionsAndUpdateUI() {
+    public void onActivityResult_ifNotificationsAskedAndOff_notificationsSad() {
+        whenNotificationsAsked();
         whenNotificationsAreOff();
 
         presenter.handleActivityResult(1, 2, intent);
 
-        verify(view).setNotificationsButtonUnchecked();
+        verify(view).setNotificationsButtonSad();
     }
 
     @Test
-    public void onActivityResult_ifNotificationsOn_checkPermissionsAndUpdateUI() {
+    public void onActivityResult_ifNotificationsOn_notificationsHappy() {
         whenNotificationsAreOn();
 
         presenter.handleActivityResult(NEAR_BLUETOOTH_SETTINGS_CODE, RESULT_OK, intent);
 
-        verify(view).setNotificationsButtonChecked();
+        verify(view).setNotificationsButtonHappy();
+    }
+
+    @Test
+    public void onDialogCanceled_checkPermissionsAndRefreshUI() {
+        whenLocationPermissionIsNotGranted();
+
+        presenter.onDialogCanceled();
+
+        verify(view).resetLocationButton();
     }
 
     @Test
@@ -254,7 +353,7 @@ public class PermissionsPresenterImplTest {
 
         presenter.onLocationTapped();
 
-        verify(spManager).setLocationPermissionAsked();
+        verify(state).setLocationPermissionAsked();
         verify(view).requestLocationPermission();
     }
 
@@ -279,8 +378,19 @@ public class PermissionsPresenterImplTest {
 
         presenter.onLocationTapped();
 
-        verify(spManager).setLocationPermissionAsked();
+        verify(state).setLocationPermissionAsked();
         verify(view).requestLocationPermission();
+    }
+
+    @Test
+    public void onFinalCheck_ifLocationOKAndAutoStartRadar_startRadarAndFinish() {
+        whenLocationPermissionIsGranted();
+        whenLocationIsOn();
+        whenAutoStart();
+
+        presenter.finalCheck();
+
+        verify(nearItManager).startRadar();
     }
 
     @Test
@@ -379,6 +489,9 @@ public class PermissionsPresenterImplTest {
         verify(view).finishWithKoResult();
     }
 
+    private void whenAutoStart() {
+        when(params.isAutoStartRadar()).thenReturn(true);
+    }
 
     private void whenNoBeacon() {
         when(params.isNoBeacon()).thenReturn(true);
@@ -445,11 +558,11 @@ public class PermissionsPresenterImplTest {
     }
 
     private void whenPermissionAlreadyAsked() {
-        when(spManager.locationPermissionAlreadyAsked()).thenReturn(true);
+        when(state.getLocationPermissionAsked()).thenReturn(true);
     }
 
     private void whenPermissionNeverAsked() {
-        when(spManager.locationPermissionAlreadyAsked()).thenReturn(false);
+        when(state.getLocationPermissionAsked()).thenReturn(false);
     }
 
     private void whenShouldNotAskAgain() {
@@ -466,6 +579,30 @@ public class PermissionsPresenterImplTest {
 
     private void whenSDKPreMarshmallow() {
         when(versionManager.atLeastMarshmallow()).thenReturn(false);
+    }
+
+    private void whenNotificationsAsked() {
+        when(state.getNotificationsAsked()).thenReturn(true);
+    }
+
+    private void whenNotificationsNeverAsked() {
+        when(state.getNotificationsAsked()).thenReturn(false);
+    }
+
+    private void whenLocationAsked() {
+        when(state.getLocationAsked()).thenReturn(true);
+    }
+
+    private void whenLocationNeverAsked() {
+        when(state.getLocationAsked()).thenReturn(false);
+    }
+
+    private void whenBluetoothAsked() {
+        when(state.getBluetoothAsked()).thenReturn(true);
+    }
+
+    private void whenBluetoothNeverAsked() {
+        when(state.getBluetoothAsked()).thenReturn(false);
     }
 
 }

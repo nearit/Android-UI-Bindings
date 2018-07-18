@@ -3,6 +3,7 @@ package com.nearit.ui_bindings.permissions.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.widget.ImageView;
@@ -20,10 +21,14 @@ public class PermissionButton extends RelativeLayout {
     private static final int NO_ICON = 0;
     private ImageView icon;
     private TextView text;
+    private TextView label;
+    private ImageView face;
 
     private String buttonText;
+    private String labelText;
     private int originalIconRes;
     private int iconRes;
+    private int faceRes;
 
     public PermissionButton(Context context) {
         super(context);
@@ -51,6 +56,7 @@ public class PermissionButton extends RelativeLayout {
             buttonText = a.getString(R.styleable.NearItUIPermissionButtonView_buttonText);
             originalIconRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_iconRes, NO_ICON);
             iconRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_iconRes, NO_ICON);
+            faceRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_faceRes, NO_ICON);
         } finally {
             a.recycle();
         }
@@ -60,6 +66,17 @@ public class PermissionButton extends RelativeLayout {
         inflate(getContext(), R.layout.nearit_ui_layout_permission_button, this);
         icon = findViewById(R.id.permission_button_icon);
         text = findViewById(R.id.permission_button_text);
+        label = findViewById(R.id.permission_button_label);
+        face = findViewById(R.id.permission_button_face);
+    }
+
+    private void setFace(int iconRes) {
+        this.faceRes = iconRes;
+        face.setImageDrawable(
+                ResourcesCompat.getDrawable(getResources(), iconRes, null)
+        );
+        invalidate();
+        requestLayout();
     }
 
     private void setIcon(int iconRes) {
@@ -74,10 +91,54 @@ public class PermissionButton extends RelativeLayout {
         requestLayout();
     }
 
-    private void setText(String buttonText) {
+    public void setText(String buttonText) {
         this.buttonText = buttonText;
         invalidate();
         requestLayout();
+    }
+
+    public void setWorriedLabel(String labelText) {
+        this.labelText = labelText;
+        this.label.setText(labelText);
+        this.label.setVisibility(VISIBLE);
+        this.label.setTextColor(getResources().getColor(R.color.nearit_ui_worried_color));
+        invalidate();
+        requestLayout();
+    }
+
+    public void setSadLabel(String labelText) {
+        this.labelText = labelText;
+        this.label.setText(labelText);
+        this.label.setVisibility(VISIBLE);
+        this.label.setTextColor(getResources().getColor(R.color.nearit_ui_sad_color));
+        invalidate();
+        requestLayout();
+    }
+
+    public void hideLabel() {
+        this.label.setVisibility(GONE);
+    }
+
+    public void setHappy() {
+        this.setIcon(R.drawable.ic_nearit_ui_check_black);
+        this.setFace(R.drawable.ic_nearit_ui_happy_green);
+        this.setOnClickListener(null);
+        this.setEnabled(false);
+        this.setActivated(true);
+    }
+
+    public void setWorried() {
+        this.resetIcon();
+        this.setFace(R.drawable.ic_nearit_ui_worried_yellow);
+        this.setEnabled(true);
+        this.setActivated(false);
+    }
+
+    public void setSad() {
+        this.resetIcon();
+        this.setFace(R.drawable.ic_nearit_ui_sad_red);
+        this.setEnabled(true);
+        this.setActivated(false);
     }
 
     public void setChecked() {
@@ -87,7 +148,7 @@ public class PermissionButton extends RelativeLayout {
         this.setActivated(true);
     }
 
-    public void setUnchecked() {
+    public void resetState() {
         this.resetIcon();
         this.setText(buttonText);
         this.setEnabled(true);

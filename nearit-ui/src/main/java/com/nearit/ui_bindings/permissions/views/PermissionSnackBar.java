@@ -13,16 +13,12 @@ import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
 import com.nearit.ui_bindings.utils.PermissionsUtils;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
 /**
  * @author Federico Boschini
@@ -31,14 +27,9 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
 
     private View parentView;
     private String alertText;
-    private String actionText;
 
     private Snackbar snackbar;
-    @Nullable
-    private PermissionBarButton actionButton;
-    private ImageView btIcon;
-    private ImageView locIcon;
-    private ImageView notifIcon;
+    private PermissionBar permissionBar;
 
     @Nullable
     private Activity activity;
@@ -87,17 +78,8 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
         return this;
     }
 
-    public PermissionSnackBar setAction(String actionText) {
-        this.actionText = actionText;
-        if (actionButton != null) {
-            actionButton.setButtonText(actionText);
-        }
-        return this;
-    }
-
     public PermissionSnackBar noBeacon() {
         this.noBeacon = true;
-        hideBluetoothIcon();
         return this;
     }
 
@@ -128,51 +110,23 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
         TextView textView = layout.findViewById(android.support.design.R.id.snackbar_text);
         textView.setVisibility(View.INVISIBLE);
 
-        View permissionView = LayoutInflater.from(context).inflate(R.layout.nearit_ui_layout_permission_bar, null);
-        TextView alertText = permissionView.findViewById(R.id.alert_message);
-        alertText.setText(textView.getText());
+        View permissionView = LayoutInflater.from(context).inflate(R.layout.nearit_ui_layout_snackbar_container, null);
 
-        actionButton = permissionView.findViewById(R.id.ok_button);
-        actionButton.setButtonText(actionText);
-        actionButton.setOnClickListener(this);
-
-        btIcon = permissionView.findViewById(R.id.bluetooth_icon);
-        locIcon = permissionView.findViewById(R.id.location_icon);
-        notifIcon = permissionView.findViewById(R.id.notifications_icon);
+        permissionBar = permissionView.findViewById(R.id.snackbar_permission_bar);
+        permissionBar.setAlertMessage("fdgfdg");
+        permissionBar.setNoBeacon(noBeacon);
+        permissionBar.setNonBlockingBeacon(nonBlockingBeacon);
+        permissionBar.setAutostartRadar(autoStartRadar);
 
         layout.setPadding(0, 0, 0, 0);
         layout.addView(permissionView, 0);
+
+        //permissionBar.setLayoutGravity();
 
         context.registerReceiver(mReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
         context.registerReceiver(mReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
 
         checkPermissionsAndUpdateUI();
-    }
-
-    private void hideBluetoothIcon() {
-        btIcon.setVisibility(GONE);
-    }
-
-    private void showBluetoothIcon() {
-        show();
-        btIcon.setVisibility(VISIBLE);
-    }
-
-    private void hideLocationIcon() {
-        locIcon.setVisibility(GONE);
-    }
-
-    private void showLocationIcon() {
-        show();
-        locIcon.setVisibility(VISIBLE);
-    }
-
-    private void hideNotificationsIcon() {
-        notifIcon.setVisibility(GONE);
-    }
-
-    private void showNotificationsIcon() {
-        notifIcon.setVisibility(VISIBLE);
     }
 
     private void checkPermissionsAndUpdateUI() {
@@ -181,24 +135,7 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
                 && (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context))) {
             dismiss();
         } else {
-
             show();
-
-            if (!PermissionsUtils.areNotificationsEnabled(context)) {
-                showNotificationsIcon();
-            } else {
-                hideNotificationsIcon();
-            }
-            if (!PermissionsUtils.checkLocationServices(context) || !PermissionsUtils.checkLocationPermission(context)) {
-                showLocationIcon();
-            } else {
-                hideLocationIcon();
-            }
-            if (PermissionsUtils.checkBluetooth(context) || noBeacon || !PermissionsUtils.isBleAvailable(context)) {
-                hideBluetoothIcon();
-            } else {
-                showBluetoothIcon();
-            }
         }
     }
 
@@ -223,10 +160,12 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
     public PermissionSnackBar bindToActivity(@Nullable Activity activity, int requestCode) {
         this.activity = activity;
         this.requestCode = requestCode;
+        permissionBar.bindToActivity(activity, requestCode);
         return this;
     }
 
     public void unbindFromActivity() {
+        permissionBar.unbindFromActivity();
         this.activity = null;
         context.unregisterReceiver(mReceiver);
     }
@@ -258,6 +197,7 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
     }
 
     public boolean onActivityResult(int requestCode, int resultCode) {
+        permissionBar.onActivityResult(requestCode, resultCode);
         if (requestCode == this.requestCode) {
             if (resultCode == Activity.RESULT_OK) {
                 checkPermissionsAndUpdateUI();

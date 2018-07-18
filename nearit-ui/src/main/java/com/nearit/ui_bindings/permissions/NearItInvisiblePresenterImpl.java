@@ -7,24 +7,23 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 
-import com.nearit.ui_bindings.utils.SpManager;
 import com.nearit.ui_bindings.utils.VersionManager;
 
 import it.near.sdk.NearItManager;
+
+import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_BLUETOOTH_SETTINGS_CODE;
+import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_LOCATION_SETTINGS_CODE;
+import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_PERMISSION_REQUEST_FINE_LOCATION;
 
 /**
  * @author Federico Boschini
  */
 public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContract.InvisiblePermissionsPresenter {
 
-    static final int NEAR_BLUETOOTH_SETTINGS_CODE = 4000;
-    static final int NEAR_LOCATION_SETTINGS_CODE = 5000;
-    static final int NEAR_PERMISSION_REQUEST_FINE_LOCATION = 6000;
-
     private InvisiblePermissionsContract.InvisiblePermissionsView view;
     private PermissionsRequestExtraParams params;
     private PermissionsManager permissionsManager;
-    private SpManager spManager;
+    private State state;
     private VersionManager versionManager;
     private NearItManager nearItManager;
 
@@ -36,14 +35,14 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
             InvisiblePermissionsContract.InvisiblePermissionsView view,
             PermissionsRequestExtraParams params,
             PermissionsManager permissionsManager,
-            SpManager spManager,
+            State state,
             VersionManager versionManager,
             NearItManager nearItManager
     ) {
         this.view = view;
         this.params = params;
         this.permissionsManager = permissionsManager;
-        this.spManager = spManager;
+        this.state = state;
         this.versionManager = versionManager;
         this.nearItManager = nearItManager;
         init();
@@ -114,9 +113,7 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
     @Override
     public void handleActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == NEAR_LOCATION_SETTINGS_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                // handled by onLocationServicesOn launched by the activity
-            } else {
+            if (resultCode != Activity.RESULT_OK) {
                 //  CANCELED
                 finalCheck();
             }
@@ -179,40 +176,37 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
             boolean isPermissionGranted = permissionsManager.isLocationPermissionGranted();
 
             if (isPermissionGranted) {
-                if (!permissionsManager.areLocationServicesOn()) {
-                    view.turnOnLocationServices(permissionsManager.isBleAvailable() && !params.isNoBeacon());
-                } else {
-                    if (!permissionsManager.isBluetoothOn() && !params.isNoBeacon() && permissionsManager.isBleAvailable()) {
-                        onLocationServicesOn();
-                    } else {
-                        if (!permissionsManager.areNotificationsEnabled()) {
-                            view.showNotificationsDialog();
-                        } else {
-                            finalCheck();
-                        }
-                    }
-                }
+                askLocationServices();
             } else {
                 boolean alreadyAsked;
-                alreadyAsked = spManager.locationPermissionAlreadyAsked();
+                alreadyAsked = state.getLocationPermissionAsked();
                 if (alreadyAsked && !view.shouldShowRequestPermissionRationale()) {
                     view.showDontAskAgainDialog();
                     dontAskAgainDialogLaunched = true;
                 } else {
-                    spManager.setLocationPermissionAsked();
+                    state.setLocationPermissionAsked();
+                    state.setLocationAsked();
                     view.requestLocationPermission();
                 }
             }
         } else {
-            if (!permissionsManager.areLocationServicesOn()) {
-                view.turnOnLocationServices(permissionsManager.isBleAvailable() && !params.isNoBeacon());
+            askLocationServices();
+        }
+    }
+
+    private void askLocationServices() {
+        if (!permissionsManager.areLocationServicesOn()) {
+            state.setLocationAsked();
+            view.turnOnLocationServices(permissionsManager.isBleAvailable() && !params.isNoBeacon());
+        } else {
+            if (permissionsManager.isBleAvailable() && !params.isNoBeacon() && !permissionsManager.isBluetoothOn()) {
+                onLocationServicesOn();
             } else {
-                if (permissionsManager.isBleAvailable() && !params.isNoBeacon() && !permissionsManager.isBluetoothOn()) {
-                    onLocationServicesOn();
+                if (!permissionsManager.areNotificationsEnabled()) {
+                    state.setNotificationsAsked();
+                    view.showNotificationsDialog();
                 } else {
-                    if (!permissionsManager.areNotificationsEnabled()) {
-                        view.showNotificationsDialog();
-                    }
+                    finalCheck();
                 }
             }
         }
@@ -224,6 +218,6 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
     }
 
     public static NearItInvisiblePresenterImpl obtain(InvisiblePermissionsContract.InvisiblePermissionsView view, PermissionsRequestExtraParams params, Context context) {
-        return new NearItInvisiblePresenterImpl(view, params, PermissionsManager.obtain(context), SpManager.obtain(context), VersionManager.obtain(context), NearItManager.getInstance());
+        return new NearItInvisiblePresenterImpl(view, params, PermissionsManager.obtain(context), State.obtain(context), VersionManager.obtain(context), NearItManager.getInstance());
     }
 }

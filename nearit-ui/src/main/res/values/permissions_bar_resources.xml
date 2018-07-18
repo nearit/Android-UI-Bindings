@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--  COLORS  -->
+    <color name="nearit_ui_permission_bar_sad_color">@color/nearit_ui_sad_color</color>
+    <color name="nearit_ui_permission_bar_worried_color">@color/nearit_ui_worried_color</color>
     <color name="nearit_ui_permission_bar_background_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_permission_bar_alert_text_color">@color/nearit_ui_real_white</color>
-    <color name="nearit_ui_permission_bar_button_background_color">@color/nearit_ui_white</color>
-    <color name="nearit_ui_permission_bar_button_pressed_background_color">@color/nearit_ui_white_50</color>
-    <color name="nearit_ui_permission_bar_button_text_color">@color/nearit_ui_black</color>
-    <color name="nearit_ui_permission_bar_button_pressed_text_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_permission_bar_button_background_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_permission_bar_button_pressed_background_color">@color/nearit_ui_black_50</color>
 
 
     <!--  DIMENSIONS  -->
     <dimen name="nearit_ui_permission_bar_height">50dp</dimen>
     <dimen name="nearit_ui_permission_bar_main_padding">9dp</dimen>
     <dimen name="nearit_ui_permission_bar_margin1">5dp</dimen>
-    <dimen name="nearit_ui_permission_bar_margin2">31dp</dimen>
+    <dimen name="nearit_ui_permission_bar_text_left_right_margin">11dp</dimen>
     <dimen name="nearit_ui_permission_bar_button_height">30dp</dimen>
-    <dimen name="nearit_ui_permission_bar_button_width">50dp</dimen>
-    <dimen name="nearit_ui_permission_bar_button_left_right_padding">5dp</dimen>
-    <dimen name="nearit_ui_permission_bar_button_top_bottom_padding">4dp</dimen>
+    <dimen name="nearit_ui_permission_bar_button_width">100dp</dimen>
+    <dimen name="nearit_ui_permission_bar_button_left_right_padding">10dp</dimen>
     <!--    Text sizes     -->
     <dimen name="nearit_ui_permission_bar_alert_text_size">13sp</dimen>
 
 
     <!--  STRINGS  -->
-    <string name="nearit_ui_permission_bar_alert_text">Provide\nall the missing authorizations</string>
+    <string name="nearit_ui_permission_bar_alert_text">Provide all the missing authorizations</string>
     <string name="nearit_ui_permission_bar_button_text">OK!</string>
 
 
@@ -39,6 +38,7 @@
     <declare-styleable name="NearItUIPermissionButtonView">
         <attr name="buttonText" format="string" />
         <attr name="iconRes" format="reference" />
+        <attr name="faceRes" format="reference" />
     </declare-styleable>
     <declare-styleable name="NearItUIBar">
         <attr name="barButtonText" format="string" />

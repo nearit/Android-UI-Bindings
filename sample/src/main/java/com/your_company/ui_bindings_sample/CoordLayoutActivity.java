@@ -28,10 +28,9 @@ public class CoordLayoutActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        snackBar = PermissionSnackBar.make(findViewById(R.id.content_constr_layout), "Fornisci tutte le autorizzazioni necessarie")
-                .setAction("OK!")
+        snackBar = PermissionSnackBar.make(findViewById(R.id.content_constr_layout), "Provide all the missing authorizationsssssss fdfdf dd")
                 .autoStartRadar()
-                /*.noBeacon()*/
+                .noBeacon()
                 .bindToActivity(this, NEAR_PERMISSION_REQUEST)
                 .addCallback(new BaseTransientBottomBar.BaseCallback<PermissionSnackBar>() {
                     @Override
@@ -49,7 +48,7 @@ public class CoordLayoutActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Replace with your own actionnnnnnnnnnnnnnnnnofgfgffg", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

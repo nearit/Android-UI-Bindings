@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/nearit_ui_permission_bar_button_pressed_text_color" android:state_pressed="true"/>
-    <item android:color="@color/nearit_ui_permission_bar_button_text_color"/>
-</selector>

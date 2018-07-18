@@ -12,12 +12,39 @@
         android:layout_marginLeft="@dimen/nearit_ui_permissions_activity_icon_margin"
         android:scaleType="centerInside" />
 
-    <TextView
-        android:id="@+id/permission_button_text"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/NearItUIPermissionButtonTextAppearance"
         android:gravity="center"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/permission_button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/NearItUIPermissionButtonTextAppearance"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/permission_button_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@id/permission_button_text"
+            android:textColor="@color/nearit_ui_worried_color"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/permission_button_face"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:scaleType="centerInside" />
 
 </RelativeLayout>

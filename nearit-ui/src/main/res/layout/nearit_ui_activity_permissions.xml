@@ -58,7 +58,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     app:buttonText="@string/nearit_ui_location"
-                    app:iconRes="@drawable/ic_nearit_ui_location" />
+                    app:iconRes="@drawable/ic_nearit_ui_location_white" />
 
                 <com.nearit.ui_bindings.permissions.views.PermissionButton
                     android:id="@+id/ble_button"
@@ -68,7 +68,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     app:buttonText="@string/nearit_ui_bluetooth"
-                    app:iconRes="@drawable/ic_nearit_ui_bluetooth" />
+                    app:iconRes="@drawable/ic_nearit_ui_bluetooth_white" />
 
                 <com.nearit.ui_bindings.permissions.views.PermissionButton
                     android:id="@+id/notification_button"
@@ -87,7 +87,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="@dimen/nearit_ui_permissions_activity_margin5"
                     android:layout_marginTop="@dimen/nearit_ui_permissions_activity_margin4"
-                    android:text="@string/nearit_ui_close_permissions_text"
+                    android:text="@string/nearit_ui_close_permissions_text_default"
                     android:textAlignment="center"
                     android:textAppearance="@style/NearItUIPermissionsDismissButtonTextAppearance"
                     android:textColor="@drawable/nearit_ui_selector_permission_close_text_color"
