@@ -15,27 +15,27 @@ public class PermissionsManager {
         this.context = context;
     }
 
-    boolean isBleAvailable() {
+    public boolean isBleAvailable() {
         return PermissionsUtils.isBleAvailable(context);
     }
 
-    boolean areNotificationsEnabled() {
+    public boolean areNotificationsEnabled() {
         return PermissionsUtils.areNotificationsEnabled(context);
     }
 
-    boolean isLocationPermissionGranted() {
+    public boolean isLocationPermissionGranted() {
         return PermissionsUtils.checkLocationPermission(context);
     }
 
-    boolean areLocationServicesOn() {
+    public boolean areLocationServicesOn() {
         return PermissionsUtils.checkLocationServices(context);
     }
 
-    boolean isBluetoothOn() {
+    public boolean isBluetoothOn() {
         return PermissionsUtils.checkBluetooth(context);
     }
 
-    boolean isFlightModeOn() {
+    public boolean isFlightModeOn() {
         return PermissionsUtils.isAirplaneModeOn(context);
     }
 

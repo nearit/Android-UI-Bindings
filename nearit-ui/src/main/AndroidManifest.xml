@@ -6,16 +6,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application>
-        <!--<activity
-            android:name=".permissions.NearItPermissionsActivity"
-            android:theme="@style/NearItUIPermissionsDialog" />-->
-
         <activity
-            android:name=".permissions.PermissionsActivity"
+            android:name=".permissions.NearItPermissionsActivity"
             android:theme="@style/NearItUIPermissionsDialog" />
 
         <activity
-            android:name=".permissions.NearItInvisiblePermissionsActivity"
+            android:name=".permissions.invisible.NearItInvisiblePermissionsActivity"
             android:theme="@style/NearItUIPermissionsDialog" />
 
         <activity

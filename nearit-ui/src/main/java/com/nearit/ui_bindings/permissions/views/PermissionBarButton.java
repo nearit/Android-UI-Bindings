@@ -1,5 +1,6 @@
 package com.nearit.ui_bindings.permissions.views;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -17,8 +18,6 @@ import com.nearit.ui_bindings.R;
 
 public class PermissionBarButton extends RelativeLayout {
 
-    private static int NO_ICON = 0;
-
     private int notificationIconResId;
     private int bluetoothIconResId;
     private int locationIconResId;
@@ -27,24 +26,19 @@ public class PermissionBarButton extends RelativeLayout {
     private ImageView bluetoothIcon;
     private ImageView locationIcon;
 
-    private final Context context;
-
     public PermissionBarButton(Context context) {
         super(context);
-        this.context = context;
         init();
     }
 
     public PermissionBarButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.context = context;
         obtainAttrs(attrs);
         init();
     }
 
     public PermissionBarButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context = context;
         obtainAttrs(attrs);
         init();
     }
@@ -62,6 +56,7 @@ public class PermissionBarButton extends RelativeLayout {
                 R.styleable.NearItUIBar,
                 0, 0);
         try {
+            int NO_ICON = 0;
             notificationIconResId = a.getResourceId(R.styleable.NearItUIBar_barNotificationsIcon, NO_ICON);
             bluetoothIconResId = a.getResourceId(R.styleable.NearItUIBar_barBluetoothIcon, NO_ICON);
             locationIconResId = a.getResourceId(R.styleable.NearItUIBar_barLocationIcon, NO_ICON);
@@ -126,6 +121,7 @@ public class PermissionBarButton extends RelativeLayout {
         );
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return super.onTouchEvent(event);

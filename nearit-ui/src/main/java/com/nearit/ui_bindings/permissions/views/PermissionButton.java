@@ -3,7 +3,6 @@ package com.nearit.ui_bindings.permissions.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.widget.ImageView;
@@ -25,10 +24,11 @@ public class PermissionButton extends RelativeLayout {
     private ImageView face;
 
     private String buttonText;
-    private String labelText;
     private int originalIconRes;
     private int iconRes;
-    private int faceRes;
+    private int sadFaceRes;
+    private int happyFaceRes;
+    private int worriedFaceRes;
 
     public PermissionButton(Context context) {
         super(context);
@@ -56,7 +56,9 @@ public class PermissionButton extends RelativeLayout {
             buttonText = a.getString(R.styleable.NearItUIPermissionButtonView_buttonText);
             originalIconRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_iconRes, NO_ICON);
             iconRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_iconRes, NO_ICON);
-            faceRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_faceRes, NO_ICON);
+            sadFaceRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_sadFaceRes, NO_ICON);
+            worriedFaceRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_worriedFaceRes, NO_ICON);
+            happyFaceRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_happyFaceRes, NO_ICON);
         } finally {
             a.recycle();
         }
@@ -71,7 +73,6 @@ public class PermissionButton extends RelativeLayout {
     }
 
     private void setFace(int iconRes) {
-        this.faceRes = iconRes;
         face.setImageDrawable(
                 ResourcesCompat.getDrawable(getResources(), iconRes, null)
         );
@@ -98,7 +99,6 @@ public class PermissionButton extends RelativeLayout {
     }
 
     public void setWorriedLabel(String labelText) {
-        this.labelText = labelText;
         this.label.setText(labelText);
         this.label.setVisibility(VISIBLE);
         this.label.setTextColor(getResources().getColor(R.color.nearit_ui_worried_color));
@@ -107,7 +107,6 @@ public class PermissionButton extends RelativeLayout {
     }
 
     public void setSadLabel(String labelText) {
-        this.labelText = labelText;
         this.label.setText(labelText);
         this.label.setVisibility(VISIBLE);
         this.label.setTextColor(getResources().getColor(R.color.nearit_ui_sad_color));
@@ -121,7 +120,11 @@ public class PermissionButton extends RelativeLayout {
 
     public void setHappy() {
         this.setIcon(R.drawable.ic_nearit_ui_check_black);
-        this.setFace(R.drawable.ic_nearit_ui_happy_green);
+        if (happyFaceRes != NO_ICON) {
+            this.setFace(happyFaceRes);
+        } else {
+            this.setFace(R.drawable.ic_nearit_ui_happy_green);
+        }
         this.setOnClickListener(null);
         this.setEnabled(false);
         this.setActivated(true);
@@ -129,23 +132,24 @@ public class PermissionButton extends RelativeLayout {
 
     public void setWorried() {
         this.resetIcon();
-        this.setFace(R.drawable.ic_nearit_ui_worried_yellow);
+        if (worriedFaceRes != NO_ICON) {
+            this.setFace(worriedFaceRes);
+        } else {
+            this.setFace(R.drawable.ic_nearit_ui_worried_yellow);
+        }
         this.setEnabled(true);
         this.setActivated(false);
     }
 
     public void setSad() {
         this.resetIcon();
-        this.setFace(R.drawable.ic_nearit_ui_sad_red);
+        if (sadFaceRes != NO_ICON) {
+            this.setFace(sadFaceRes);
+        } else {
+            this.setFace(R.drawable.ic_nearit_ui_sad_red);
+        }
         this.setEnabled(true);
         this.setActivated(false);
-    }
-
-    public void setChecked() {
-        this.setIcon(R.drawable.ic_nearit_ui_check);
-        this.setOnClickListener(null);
-        this.setEnabled(false);
-        this.setActivated(true);
     }
 
     public void resetState() {

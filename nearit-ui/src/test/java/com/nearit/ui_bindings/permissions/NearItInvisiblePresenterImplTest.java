@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import com.nearit.ui_bindings.NearItManagerStub;
+import com.nearit.ui_bindings.permissions.invisible.InvisiblePermissionsContract;
+import com.nearit.ui_bindings.permissions.invisible.NearItInvisiblePresenterImpl;
 import com.nearit.ui_bindings.utils.VersionManager;
 
 import org.junit.Before;

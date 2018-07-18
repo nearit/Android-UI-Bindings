@@ -1,15 +1,14 @@
 package com.nearit.ui_bindings.permissions;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.IntentSender;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -19,10 +18,8 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -40,109 +37,85 @@ import com.google.android.gms.tasks.Task;
 import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.permissions.views.PermissionButton;
-import com.nearit.ui_bindings.utils.PermissionsUtils;
+import com.nearit.ui_bindings.utils.VersionManager;
 
 import it.near.sdk.NearItManager;
+
+import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_BLUETOOTH_SETTINGS_CODE;
+import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_LOCATION_SETTINGS_CODE;
+import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_PERMISSION_REQUEST_FINE_LOCATION;
 
 /**
  * @author Federico Boschini
  */
+public class NearItPermissionsActivity extends AppCompatActivity implements PermissionsContract.PermissionsView {
 
-public class NearItPermissionsActivity extends AppCompatActivity {
-
+    @SuppressWarnings("unused")
     private static final String TAG = "NearItPermissions";
 
-    private static final int NEAR_BLUETOOTH_SETTINGS_CODE = 4000;
-    private static final int NEAR_LOCATION_SETTINGS_CODE = 5000;
-    private static final int NEAR_PERMISSION_REQUEST_FINE_LOCATION = 6000;
-    private static final String NEAR_PERMISSION_ASKED = "nearit_ui_permission_asked";
-
-    /**
-     * Flow parameters
-     */
-    private boolean isEnableTapToClose = false;
-    private boolean isInvisibleLayoutMode = false;
-    private boolean isNoBeacon = false;
-    private boolean isNonBlockingBeacon = false;
-    private boolean isAutoStartRadar = false;
-    private boolean isNoHeader = false;
-    private int headerDrawable = 0;
-
-    private boolean flightModeDialogLaunched = false;
-    private boolean dontAskAgainDialogLaunched = false;
-    private boolean notificationsDialogLaunched = false;
-
-    @Nullable
     private PermissionButton locationButton;
-    @Nullable
     private PermissionButton bleButton;
-    @Nullable
+    private PermissionButton notificationsButton;
     private TextView closeButton;
+
     @Nullable
     private ImageView headerImageView;
-    @Nullable
-    private SharedPreferences sp;
+
+    private PermissionsRequestExtraParams params;
+    private boolean isEnableTapToClose = false;
+
+    private PermissionsContract.PermissionsPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.nearit_ui_activity_permissions);
 
-        sp = getSharedPreferences("nearit_ui", Activity.MODE_PRIVATE);
+        locationButton = findViewById(R.id.location_button);
+        bleButton = findViewById(R.id.ble_button);
+        notificationsButton = findViewById(R.id.notification_button);
+        headerImageView = findViewById(R.id.header);
 
-        PermissionsRequestExtraParams params;
+
         Intent intent = getIntent();
         if (intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
             params = PermissionsRequestExtraParams.fromIntent(intent);
             isEnableTapToClose = params.isEnableTapToClose();
-            isInvisibleLayoutMode = params.isInvisibleLayoutMode();
-            isNoBeacon = params.isNoBeacon();
-            isNonBlockingBeacon = params.isNonBlockingBeacon();
-            isAutoStartRadar = params.isAutoStartRadar();
-            headerDrawable = params.getHeaderDrawable();
-            isNoHeader = params.isNoHeader();
         }
 
-        if (!PermissionsUtils.isBleAvailable(this)) {
-            isNoBeacon = true;
-        }
+        presenter = new PermissionsPresenterImpl(
+                this,
+                params,
+                PermissionsManager.obtain(this),
+                State.obtain(this),
+                VersionManager.obtain(this),
+                NearItManager.getInstance()
+        );
 
-        boolean allPermissionsGiven = PermissionsUtils.checkBluetooth(this) && checkLocation() && PermissionsUtils.areNotificationsEnabled(this);
-
-        if (!isInvisibleLayoutMode) {
-            setContentView(R.layout.nearit_ui_activity_permissions);
-            locationButton = findViewById(R.id.location_button);
-            bleButton = findViewById(R.id.ble_button);
-            closeButton = findViewById(R.id.close_text);
-            headerImageView = findViewById(R.id.header);
-        } else {
-            if (PermissionsUtils.isAirplaneModeOn(this)) {
-                createAirplaneDialog().show();
-            } else {
-                if (!allPermissionsGiven) {
-                    askPermissions();
-                } else {
-                    setResult(Activity.RESULT_OK);
-                    finish();
+        closeButton = findViewById(R.id.close_text);
+        if (closeButton != null) {
+            closeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    presenter.finalCheck();
                 }
-            }
+            });
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        if (!isInvisibleLayoutMode && PermissionsUtils.isAirplaneModeOn(this)) {
-            createAirplaneDialog().show();
-        }
-
-        if (isInvisibleLayoutMode && (flightModeDialogLaunched || dontAskAgainDialogLaunched || notificationsDialogLaunched)) {
-            recreate();
-        }
+        presenter.start();
+        registerReceiver(mReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
+        registerReceiver(mReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
     }
 
-    public static Intent createIntent(Context context, PermissionsRequestExtraParams params) {
-        return new Intent(context, NearItPermissionsActivity.class).putExtra(ExtraConstants.EXTRA_FLOW_PARAMS, params);
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.stop();
+        unregisterReceiver(mReceiver);
     }
 
     @Override
@@ -154,88 +127,187 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             if (!isEnableTapToClose) {
                 return true;
             }
-            finalCheck();
+            presenter.finalCheck();
         }
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        presenter.handlePermissionResult(requestCode, permissions, grantResults);
+    }
 
-        if (isNoHeader && headerImageView != null) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        presenter.handleActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void injectPresenter(@NonNull PermissionsContract.PermissionsPresenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void hideHeader() {
+        if (headerImageView != null) {
             headerImageView.setVisibility(View.GONE);
-        } else if (headerImageView != null && headerDrawable != 0) {
-            headerImageView.setBackgroundResource(headerDrawable);
-        }
-
-        if (isNoBeacon && bleButton != null) {
-            bleButton.setVisibility(View.GONE);
-        }
-        setBluetoothButton();
-        setLocationButton();
-
-        if (closeButton != null) {
-            closeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    finalCheck();
-                }
-            });
         }
     }
 
-    private boolean checkLocation() {
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        boolean anyLocationProv = false;
-        if (locationManager != null) {
-            anyLocationProv = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-            anyLocationProv |= locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    @Override
+    public void setHeader(int resId) {
+        if (headerImageView != null) {
+            headerImageView.setImageResource(resId);
         }
-
-        int permissionCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
-
-        return anyLocationProv &&
-                permissionCheck == PackageManager.PERMISSION_GRANTED;
     }
 
-    /**
-     * Checks and asks for missing permissions for Android 23+ devices.
-     * Otherwise request for enabling system wise location services.
-     */
-    private void askPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            int permissionState = checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION);
+    @Override
+    public void hideBluetoothButton() {
+        bleButton.setVisibility(View.GONE);
+    }
 
-            boolean isPermissionGranted = permissionState == PackageManager.PERMISSION_GRANTED;
-            if (isPermissionGranted) {
-                openLocationSettings();
-            } else {
-                boolean alreadyAsked = false;
-                if (sp != null) {
-                    alreadyAsked = sp.getBoolean(NEAR_PERMISSION_ASKED, false);
-                }
-                if (alreadyAsked && !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                    createDontAskAgainDialog().show();
-                } else {
-                    requestFineLocationPermission();
-                }
+    @Override
+    public void setBluetoothButtonHappy() {
+        bleButton.setHappy();
+        bleButton.setText(getResources().getString(R.string.nearit_ui_bluetooth_button_on_text));
+    }
+
+    @Override
+    public void setBluetoothButtonSad() {
+        bleButton.setSad();
+        bleButton.setText(getResources().getString(R.string.nearit_ui_bluetooth_button_off_text));
+        bleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onBluetoothTapped();
             }
-        } else {
-            openLocationSettings();
+        });
+    }
+
+    @Override
+    public void resetBluetoothButton() {
+        bleButton.resetState();
+        bleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onBluetoothTapped();
+            }
+        });
+    }
+
+    @Override
+    public void setLocationButtonHappy() {
+        locationButton.setHappy();
+        locationButton.setText(getResources().getString(R.string.nearit_ui_location_button_on_text));
+        locationButton.hideLabel();
+    }
+
+    @Override
+    public void setLocationButtonWorried() {
+        locationButton.setWorried();
+        locationButton.setText(getResources().getString(R.string.nearit_ui_location_button_text));
+        locationButton.setWorriedLabel(getResources().getString(R.string.nearit_ui_location_button_worried_text));
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onLocationTapped();
+            }
+        });
+    }
+
+    @Override
+    public void setLocationButtonSad() {
+        locationButton.setSad();
+        locationButton.setText(getResources().getString(R.string.nearit_ui_location_button_text));
+        locationButton.setSadLabel(getResources().getString(R.string.nearit_ui_location_button_sad_text));
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onLocationTapped();
+            }
+        });
+    }
+
+    @Override
+    public void resetLocationButton() {
+        locationButton.resetState();
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onLocationTapped();
+            }
+        });
+    }
+
+    @Override
+    public void hideNotificationsButton() {
+        notificationsButton.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showNotificationsButton() {
+        notificationsButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void setNotificationsButtonHappy() {
+        notificationsButton.setHappy();
+        notificationsButton.setText("Notifications on");
+    }
+
+    @Override
+    public void setNotificationsButtonSad() {
+        notificationsButton.setSad();
+        notificationsButton.setText("Notifications off");
+        notificationsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onNotificationsTapped();
+            }
+        });
+    }
+
+    @Override
+    public void resetNotificationsButton() {
+        notificationsButton.resetState();
+        notificationsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onNotificationsTapped();
+            }
+        });
+    }
+
+    @Override
+    public void refreshCloseText() {
+        closeButton.setText(getResources().getString(R.string.nearit_ui_close_permissions_text));
+    }
+
+    @Override
+    public void finishWithOkResult() {
+        setResult(Activity.RESULT_OK);
+        finish();
+    }
+
+    @Override
+    public void finishWithKoResult() {
+        finish();
+    }
+
+    @Override
+    public void requestLocationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, NEAR_PERMISSION_REQUEST_FINE_LOCATION);
         }
     }
 
-    /**
-     * Asks to enable location services.
-     */
-    private void openLocationSettings() {
+    @Override
+    public void turnOnLocationServices(boolean needBle) {
         LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(locationRequest)
-                .setNeedBle(isInvisibleLayoutMode && !isNoBeacon);
+                .setNeedBle(needBle);
 
         final Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(this).checkLocationSettings(builder.build());
 
@@ -244,16 +316,14 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
                 try {
                     task.getResult(ApiException.class);
-                    onLocationSettingsOkResult();
+                    presenter.onLocationServicesOn();
                 } catch (ApiException exception) {
                     switch (exception.getStatusCode()) {
                         case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                             try {
-                                Log.e(TAG, "Resolution required");
                                 ResolvableApiException resolvable = (ResolvableApiException) exception;
                                 resolvable.startResolutionForResult(
-                                        NearItPermissionsActivity.this,
-                                        NEAR_LOCATION_SETTINGS_CODE);
+                                        NearItPermissionsActivity.this, NEAR_LOCATION_SETTINGS_CODE);
                             } catch (IntentSender.SendIntentException e) {
                                 // Ignore the error.
                             } catch (ClassCastException e) {
@@ -269,212 +339,32 @@ public class NearItPermissionsActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Asks to enable bluetooth
-     */
-    private void openBluetoothSettings() {
-        if (!PermissionsUtils.checkBluetooth(this)) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, NEAR_BLUETOOTH_SETTINGS_CODE);
-        } else {
-            if (!PermissionsUtils.areNotificationsEnabled(this)) {
-                createNotificationsDialog().show();
-            } else {
-                finalCheck();
-            }
-        }
-    }
-
-    /**
-     * Asks for location permissions.
-     */
-    private void requestFineLocationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, NEAR_PERMISSION_REQUEST_FINE_LOCATION);
-            if (sp != null) {
-                sp.edit().putBoolean(NEAR_PERMISSION_ASKED, true).apply();
-            }
-        }
-    }
-
-    /**
-     * Manages location and bluetooth callbacks
-     */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        setLocationButton();
-        setBluetoothButton();
-
-        if (requestCode == NEAR_LOCATION_SETTINGS_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                onLocationSettingsOkResult();
-            } else {
-                if (isInvisibleLayoutMode) {
-                    finalCheck();
-                }
-            }
-        } else if (requestCode == NEAR_BLUETOOTH_SETTINGS_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                if (checkLocation()) {
-                    if (PermissionsUtils.areNotificationsEnabled(this)) {
-                        finalCheck();
-                    } else {
-                        createNotificationsDialog().show();
-                    }
-                }
-            } else {
-                if (isInvisibleLayoutMode) {
-                    if (PermissionsUtils.areNotificationsEnabled(this)) {
-                        finalCheck();
-                    } else {
-                        createNotificationsDialog().show();
-                    }
-                } else {
-                    if (isNonBlockingBeacon && checkLocation()) {
-                        if (PermissionsUtils.areNotificationsEnabled(this)) {
-                            finalCheck();
-                        } else {
-                            createNotificationsDialog().show();
-                        }
-                    }
-                }
-            }
-        }
+    public void turnOnBluetooth() {
+        Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+        startActivityForResult(enableBtIntent, NEAR_BLUETOOTH_SETTINGS_CODE);
     }
 
-    private void onLocationSettingsOkResult() {
-        if (isInvisibleLayoutMode) {
-            if (!isNoBeacon) {
-                openBluetoothSettings();
-            } else {
-                if (!PermissionsUtils.areNotificationsEnabled(this)) {
-                    createNotificationsDialog().show();
-                } else {
-                    finalCheck();
-                }
-            }
-        } else {
-            if (isNoBeacon) {
-                finalCheck();
-            } else {
-                if (PermissionsUtils.checkBluetooth(this)) {
-                    finalCheck();
-                }
-            }
-        }
-    }
-
-    /**
-     * Manages permissions request callbacks
-     */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        setLocationButton();
-        setBluetoothButton();
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == NEAR_PERMISSION_REQUEST_FINE_LOCATION) {
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if(!PermissionsUtils.isAirplaneModeOn(this)) {
-                    openLocationSettings();
-                } else {
-                    createAirplaneDialog().show();
-                }
-            } else {
-                if (isInvisibleLayoutMode) {
-                    finalCheck();
-                }
-            }
-        }
+    public boolean shouldShowRequestPermissionRationale() {
+        return ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION);
     }
 
-    /**
-     * Checks one last time that everything is ok
-     */
-    private void finalCheck() {
-        if (PermissionsUtils.isAirplaneModeOn(this)) {
-            finish();
-        }
-        if (checkLocation()) {
-            if (PermissionsUtils.checkBluetooth(this) || isNoBeacon || isNonBlockingBeacon) {
-                onPermissionsReady();
-            } else {
-                finish();
-            }
-        } else {
-            finish();
-        }
-    }
-
-    /**
-     * If everything is fine we set result code to RESULT_OK and we close the activity
-     */
-    @SuppressLint("MissingPermission")
-    private void onPermissionsReady() {
-        if (isAutoStartRadar) {
-            NearItManager.getInstance().startRadar();
-        }
-        setResult(Activity.RESULT_OK);
-        finish();
-    }
-
-    private void setBluetoothButton() {
-        if (bleButton != null) {
-            if (PermissionsUtils.checkBluetooth(this)) {
-                bleButton.setChecked();
-            } else {
-                bleButton.resetState();
-                bleButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (PermissionsUtils.isAirplaneModeOn(NearItPermissionsActivity.this)) {
-                            createAirplaneDialog().show();
-                        } else {
-                            openBluetoothSettings();
-                        }
-                    }
-                });
-            }
-        }
-    }
-
-    private void setLocationButton() {
-        if (locationButton != null) {
-            if (checkLocation()) {
-                locationButton.setChecked();
-            } else {
-                locationButton.resetState();
-                locationButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (PermissionsUtils.isAirplaneModeOn(NearItPermissionsActivity.this)) {
-                            createAirplaneDialog().show();
-                        } else {
-                            askPermissions();
-                        }
-                    }
-                });
-            }
-        }
-    }
-
-
-    private AlertDialog createAirplaneDialog() {
+    @Override
+    public void showAirplaneDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.nearit_ui_flight_mode_detected_title).setMessage(R.string.nearit_ui_flight_mode_detected_message);
 
         builder.setPositiveButton(R.string.nearit_ui_go_to_settings, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 Intent intent = new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
-                flightModeDialogLaunched = true;
                 startActivity(intent);
             }
         });
         builder.setNegativeButton(R.string.nearit_ui_cancel_dialog, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
-                finalCheck();
+                presenter.onDialogCanceled();
             }
         });
         AlertDialog dialog = builder.create();
@@ -482,15 +372,14 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             @Override
             public void onCancel(DialogInterface dialog) {
                 dialog.cancel();
-                if (isInvisibleLayoutMode) {
-                    finalCheck();
-                }
+                presenter.onDialogCanceled();
             }
         });
-        return dialog;
+        dialog.show();
     }
 
-    private AlertDialog createDontAskAgainDialog() {
+    @Override
+    public void showDontAskAgainDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.nearit_ui_go_to_settings_location_message).setTitle(R.string.nearit_ui_go_to_settings_location_title);
 
@@ -499,16 +388,13 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                 Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                         Uri.fromParts("package", getPackageName(), null));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                dontAskAgainDialogLaunched = true;
                 startActivity(intent);
             }
         });
         builder.setNegativeButton(R.string.nearit_ui_cancel_dialog, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
-                if (isInvisibleLayoutMode) {
-                    finalCheck();
-                }
+                presenter.onDialogCanceled();
             }
         });
         AlertDialog dialog = builder.create();
@@ -516,15 +402,14 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             @Override
             public void onCancel(DialogInterface dialog) {
                 dialog.cancel();
-                if (isInvisibleLayoutMode) {
-                    finalCheck();
-                }
+                presenter.onDialogCanceled();
             }
         });
-        return dialog;
+        dialog.show();
     }
 
-    private AlertDialog createNotificationsDialog() {
+    @Override
+    public void showNotificationsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.nearit_ui_go_to_settings_notification_message).setTitle(R.string.nearit_ui_go_to_settings_notification_title);
 
@@ -546,16 +431,12 @@ public class NearItPermissionsActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
 
-                notificationsDialogLaunched = true;
-
             }
         });
         builder.setNegativeButton(R.string.nearit_ui_cancel_dialog, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
-                if (isInvisibleLayoutMode) {
-                    finalCheck();
-                }
+                presenter.onDialogCanceled();
             }
         });
         AlertDialog dialog = builder.create();
@@ -563,12 +444,27 @@ public class NearItPermissionsActivity extends AppCompatActivity {
             @Override
             public void onCancel(DialogInterface dialog) {
                 dialog.cancel();
-                if (isInvisibleLayoutMode) {
-                    finalCheck();
-                }
+                presenter.onDialogCanceled();
             }
         });
-        return dialog;
+        dialog.show();
     }
 
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
+                presenter.checkPermissions();
+            }
+
+            if (LocationManager.PROVIDERS_CHANGED_ACTION.equals(action)) {
+                presenter.checkPermissions();
+            }
+        }
+    };
+
+    public static Intent createIntent(Context context, PermissionsRequestExtraParams params) {
+        return new Intent(context, NearItPermissionsActivity.class).putExtra(ExtraConstants.EXTRA_FLOW_PARAMS, params);
+    }
 }

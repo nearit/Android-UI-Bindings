@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings.permissions;
+package com.nearit.ui_bindings.permissions.invisible;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -7,13 +7,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 
+import com.nearit.ui_bindings.permissions.PermissionsManager;
+import com.nearit.ui_bindings.permissions.PermissionsRequestExtraParams;
+import com.nearit.ui_bindings.permissions.State;
 import com.nearit.ui_bindings.utils.VersionManager;
 
 import it.near.sdk.NearItManager;
-
-import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_BLUETOOTH_SETTINGS_CODE;
-import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_LOCATION_SETTINGS_CODE;
-import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_PERMISSION_REQUEST_FINE_LOCATION;
 
 /**
  * @author Federico Boschini
@@ -22,6 +21,10 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
 
     @SuppressWarnings("unused")
     private static final String TAG = "InvisiblePresenter";
+
+    static final int NEAR_BLUETOOTH_SETTINGS_CODE = 4000;
+    static final int NEAR_LOCATION_SETTINGS_CODE = 5000;
+    static final int NEAR_PERMISSION_REQUEST_FINE_LOCATION = 6000;
 
     private InvisiblePermissionsContract.InvisiblePermissionsView view;
     private PermissionsRequestExtraParams params;
@@ -34,7 +37,7 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
     private boolean dontAskAgainDialogLaunched = false;
     private boolean notificationsDialogLaunched = false;
 
-    NearItInvisiblePresenterImpl(
+    public NearItInvisiblePresenterImpl(
             InvisiblePermissionsContract.InvisiblePermissionsView view,
             PermissionsRequestExtraParams params,
             PermissionsManager permissionsManager,

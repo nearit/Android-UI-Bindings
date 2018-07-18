@@ -3,6 +3,8 @@ package com.nearit.ui_bindings.permissions;
 import android.content.Context;
 import android.content.Intent;
 
+import com.nearit.ui_bindings.permissions.invisible.NearItInvisiblePermissionsActivity;
+
 /**
  * @author Federico Boschini
  */
@@ -92,6 +94,7 @@ public class PermissionsRequestIntentBuilder {
      *  Enables the notifications "permission".
      *  If this is not called, notifications button will show only if "permission" is missing
      */
+    @SuppressWarnings("unused")
     public PermissionsRequestIntentBuilder showNotificationsButton() {
         mShowNotificationsButton = true;
         return this;
@@ -101,7 +104,7 @@ public class PermissionsRequestIntentBuilder {
         if (mInvisibleLayoutMode) {
             return NearItInvisiblePermissionsActivity.createIntent(mContext, getParams());
         } else {
-            return PermissionsActivity.createIntent(mContext, getParams());
+            return NearItPermissionsActivity.createIntent(mContext, getParams());
         }
     }
 

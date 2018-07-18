@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings.permissions;
+package com.nearit.ui_bindings.permissions.invisible;
 
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
@@ -27,15 +27,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
+import com.nearit.ui_bindings.permissions.PermissionsRequestExtraParams;
+
+import static com.nearit.ui_bindings.permissions.invisible.NearItInvisiblePresenterImpl.NEAR_BLUETOOTH_SETTINGS_CODE;
+import static com.nearit.ui_bindings.permissions.invisible.NearItInvisiblePresenterImpl.NEAR_LOCATION_SETTINGS_CODE;
+import static com.nearit.ui_bindings.permissions.invisible.NearItInvisiblePresenterImpl.NEAR_PERMISSION_REQUEST_FINE_LOCATION;
 
 /**
  * @author Federico Boschini
  */
 public class NearItInvisiblePermissionsActivity extends AppCompatActivity implements InvisiblePermissionsContract.InvisiblePermissionsView{
-
-    private static final int NEAR_BLUETOOTH_SETTINGS_CODE = 4000;
-    private static final int NEAR_LOCATION_SETTINGS_CODE = 5000;
-    private static final int NEAR_PERMISSION_REQUEST_FINE_LOCATION = 6000;
 
     private InvisiblePermissionsContract.InvisiblePermissionsPresenter presenter;
 

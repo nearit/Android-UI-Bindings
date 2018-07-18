@@ -9,9 +9,7 @@ import android.content.IntentFilter;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -332,6 +330,7 @@ public class PermissionBar extends RelativeLayout {
         }
     }
 
+    @SuppressWarnings("unused")
     public boolean onActivityResult(int requestCode, int resultCode) {
         if (requestCode == this.requestCode) {
             checkPermissionsAndUpdateUI();

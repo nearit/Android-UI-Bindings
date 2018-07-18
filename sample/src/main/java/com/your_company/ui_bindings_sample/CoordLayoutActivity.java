@@ -63,12 +63,16 @@ public class CoordLayoutActivity extends AppCompatActivity {
     @SuppressLint("MissingPermission")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        snackBar.onActivityResult(requestCode, resultCode);
+        boolean handled = snackBar.onActivityResult(requestCode, resultCode);
         if (requestCode == NEAR_PERMISSION_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Toast.makeText(this, "Result OK", Toast.LENGTH_SHORT).show();
                 NearItManager.getInstance().startRadar();
             } else Toast.makeText(this, "Result KO", Toast.LENGTH_SHORT).show();
+        }
+
+        if (!handled) {
+            // do something
         }
     }
 }

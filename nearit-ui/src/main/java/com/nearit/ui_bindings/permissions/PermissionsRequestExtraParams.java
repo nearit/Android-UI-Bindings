@@ -12,7 +12,7 @@ import com.nearit.ui_bindings.ExtraConstants;
  * @author Federico Boschini
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-class PermissionsRequestExtraParams implements Parcelable {
+public class PermissionsRequestExtraParams implements Parcelable {
 
     private final boolean enableTapToClose;
     private final boolean autoStartRadar;
@@ -45,13 +45,14 @@ class PermissionsRequestExtraParams implements Parcelable {
     /**
      * Extract PermissionsRequestExtraParams from an Intent.
      */
-    static PermissionsRequestExtraParams fromIntent(Intent intent) {
+    public static PermissionsRequestExtraParams fromIntent(Intent intent) {
         return intent.getParcelableExtra(ExtraConstants.EXTRA_FLOW_PARAMS);
     }
 
     /**
      * Extract PermissionsRequestExtraParams from a Bundle.
      */
+    @SuppressWarnings("unused")
     public static PermissionsRequestExtraParams fromBundle(Bundle bundle) {
         return bundle.getParcelable(ExtraConstants.EXTRA_FLOW_PARAMS);
     }
@@ -60,6 +61,7 @@ class PermissionsRequestExtraParams implements Parcelable {
      * Create a bundle containing this PermissionsRequestExtraParams object as {@link
      * ExtraConstants#EXTRA_FLOW_PARAMS}.
      */
+    @SuppressWarnings("unused")
     public Bundle toBundle() {
         Bundle bundle = new Bundle();
         bundle.putParcelable(ExtraConstants.EXTRA_FLOW_PARAMS, this);
@@ -116,7 +118,7 @@ class PermissionsRequestExtraParams implements Parcelable {
         return enableTapToClose;
     }
 
-    boolean isAutoStartRadar() {
+    public boolean isAutoStartRadar() {
         return autoStartRadar;
     }
 
@@ -124,11 +126,11 @@ class PermissionsRequestExtraParams implements Parcelable {
         return invisibleLayoutMode;
     }
 
-    boolean isNoBeacon() {
+    public boolean isNoBeacon() {
         return noBeacon;
     }
 
-    boolean isNonBlockingBeacon() {
+    public boolean isNonBlockingBeacon() {
         return nonBlockingBeacon;
     }
 
@@ -144,7 +146,7 @@ class PermissionsRequestExtraParams implements Parcelable {
         return showNotificationsButton;
     }
 
-    void setNoBeacon(boolean noBeacon) {
+    public void setNoBeacon(boolean noBeacon) {
         this.noBeacon = noBeacon;
     }
 }

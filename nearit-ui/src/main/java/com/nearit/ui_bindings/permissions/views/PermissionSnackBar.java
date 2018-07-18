@@ -199,9 +199,7 @@ public class PermissionSnackBar extends BaseTransientBottomBar.BaseCallback<Snac
     public boolean onActivityResult(int requestCode, int resultCode) {
         permissionBar.onActivityResult(requestCode, resultCode);
         if (requestCode == this.requestCode) {
-            if (resultCode == Activity.RESULT_OK) {
-                checkPermissionsAndUpdateUI();
-            }
+            checkPermissionsAndUpdateUI();
             return true;
         }
         return false;
