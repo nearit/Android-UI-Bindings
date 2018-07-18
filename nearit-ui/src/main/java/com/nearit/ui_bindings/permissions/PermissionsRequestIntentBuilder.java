@@ -16,6 +16,7 @@ public class PermissionsRequestIntentBuilder {
     private boolean mNonBlockingBeacon = false;
     private int mHeaderDrawable;
     private boolean mNoHeader = false;
+    private boolean mShowNotificationsButton = false;
 
     public PermissionsRequestIntentBuilder(Context context) {
         mContext = context;
@@ -87,6 +88,15 @@ public class PermissionsRequestIntentBuilder {
         return this;
     }
 
+    /**
+     *  Enables the notifications "permission".
+     *  If this is not called, notifications button will show only if "permission" is missing
+     */
+    public PermissionsRequestIntentBuilder showNotificationsButton() {
+        mShowNotificationsButton = true;
+        return this;
+    }
+
     public Intent build() {
         if (mInvisibleLayoutMode) {
             return NearItInvisiblePermissionsActivity.createIntent(mContext, getParams());
@@ -103,7 +113,8 @@ public class PermissionsRequestIntentBuilder {
                 mNoBeacon,
                 mNonBlockingBeacon,
                 mHeaderDrawable,
-                mNoHeader);
+                mNoHeader,
+                mShowNotificationsButton);
     }
 
 }
