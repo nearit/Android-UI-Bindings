@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.nearit.ui_bindings.utils.VersionManager;
 
@@ -15,6 +14,7 @@ import it.near.sdk.NearItManager;
  */
 public class PermissionsPresenterImpl implements PermissionsContract.PermissionsPresenter {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "PermissionsPresenter";
 
     static final int NEAR_BLUETOOTH_SETTINGS_CODE = 4000;
@@ -127,7 +127,6 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
     public void finalCheck() {
         if (checkLocation()) {
             if (params.isAutoStartRadar()) {
-                Log.d(TAG, "auto started radar");
                 nearItManager.startRadar();
             }
             if ((permissionsManager.isBluetoothOn()
