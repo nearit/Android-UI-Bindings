@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.nearit.ui_bindings.utils.VersionManager;
 
@@ -19,6 +20,8 @@ import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_P
  * @author Federico Boschini
  */
 public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContract.InvisiblePermissionsPresenter {
+
+    private static final String TAG = "InvisiblePresenter";
 
     private InvisiblePermissionsContract.InvisiblePermissionsView view;
     private PermissionsRequestExtraParams params;
@@ -166,6 +169,7 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
     @SuppressLint("MissingPermission")
     private void onPermissionsReady() {
         if (params.isAutoStartRadar()) {
+            Log.d(TAG, "auto started radar");
             nearItManager.startRadar();
         }
         view.finishWithOkResult();
