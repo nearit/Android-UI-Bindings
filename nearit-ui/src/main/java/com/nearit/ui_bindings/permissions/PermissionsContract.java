@@ -28,6 +28,8 @@ interface PermissionsContract {
         void setLocationButtonSad();
         void resetLocationButton();
 
+        void showNotificationsButton();
+        void hideNotificationsButton();
         void setNotificationsButtonHappy();
         void setNotificationsButtonSad();
         void resetNotificationsButton();

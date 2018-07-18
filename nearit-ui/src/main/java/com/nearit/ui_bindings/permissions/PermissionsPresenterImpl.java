@@ -60,25 +60,32 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
         if (params.isNoBeacon()) {
             view.hideBluetoothButton();
         }
+
+        if (params.isShowNotificationsButton() || !permissionsManager.areNotificationsEnabled()) {
+            view.showNotificationsButton();
+        } else {
+            view.hideNotificationsButton();
+        }
+
     }
 
     @Override
     public void onLocationTapped() {
-        askLocationPermission();
         state.setLocationAsked();
+        askLocationPermission();
     }
 
     @Override
     public void onBluetoothTapped() {
-        view.turnOnBluetooth();
         state.setBluetoothAsked();
+        view.turnOnBluetooth();
     }
 
     @Override
     public void onNotificationsTapped() {
         if (!permissionsManager.areNotificationsEnabled()) {
-            view.showNotificationsDialog();
             state.setNotificationsAsked();
+            view.showNotificationsDialog();
         }
     }
 
@@ -88,7 +95,12 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
             boolean isPermissionGranted = permissionsManager.isLocationPermissionGranted();
 
             if (isPermissionGranted) {
-                view.turnOnLocationServices(params.isInvisibleLayoutMode() && !params.isNoBeacon());
+                if (!permissionsManager.isFlightModeOn()) {
+                    state.setLocationAsked();
+                    view.turnOnLocationServices(params.isInvisibleLayoutMode() && !params.isNoBeacon());
+                } else {
+                    view.showAirplaneDialog();
+                }
             } else {
                 boolean alreadyAsked;
                 alreadyAsked = state.getLocationPermissionAsked();
@@ -100,6 +112,7 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
                 }
             }
         } else {
+            state.setLocationAsked();
             view.turnOnLocationServices(params.isInvisibleLayoutMode() && !params.isNoBeacon());
         }
     }
@@ -134,6 +147,7 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (!permissionsManager.isFlightModeOn()) {
+                    state.setLocationAsked();
                     view.turnOnLocationServices(params.isInvisibleLayoutMode() && !params.isNoBeacon());
                 } else {
                     view.showAirplaneDialog();
@@ -193,6 +207,7 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
         if (permissionsManager.areNotificationsEnabled()) {
             view.setNotificationsButtonHappy();
         } else {
+            view.showNotificationsButton();
             if (state.getNotificationsAsked()) {
                 view.setNotificationsButtonSad();
             } else {

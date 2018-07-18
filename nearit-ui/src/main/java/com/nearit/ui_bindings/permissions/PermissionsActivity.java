@@ -157,7 +157,7 @@ public class PermissionsActivity extends AppCompatActivity implements Permission
     @Override
     public void setHeader(int resId) {
         if (headerImageView != null) {
-            headerImageView.setBackgroundResource(resId);
+            headerImageView.setImageResource(resId);
         }
     }
 
@@ -237,6 +237,16 @@ public class PermissionsActivity extends AppCompatActivity implements Permission
                 presenter.onLocationTapped();
             }
         });
+    }
+
+    @Override
+    public void hideNotificationsButton() {
+        notificationsButton.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showNotificationsButton() {
+        notificationsButton.setVisibility(View.VISIBLE);
     }
 
     @Override
