@@ -316,18 +316,6 @@ public class NearItInvisiblePresenterImplTest {
     }
 
     @Test
-    public void onPermissionResult_ifGrantedAndFlightOff_turnOnLocation() {
-        whenFlightModeIsOff();
-
-        String[] permissions = {};
-        int[] results = {PackageManager.PERMISSION_GRANTED};
-
-        presenter.handlePermissionResult(NEAR_PERMISSION_REQUEST_FINE_LOCATION, permissions, results);
-
-        verify(view).turnOnLocationServices(anyBoolean());
-    }
-
-    @Test
     public void onPermissionResult_ifGrantedAndFlightOn_showDialog() {
         whenFlightModeIsOn();
 
