@@ -2,6 +2,8 @@
  * Copyright (C) 2013 Dominik Schürmann <dominik@dominikschuermann.de>
  * Copyright (C) 2012 Pierre-Yves Ricau <py.ricau@gmail.com>
  *
+ * EDIT by Federico Boschini <federico@nearit.com> (use AppCompatTextView instead of TextView)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
