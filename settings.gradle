@@ -1,1 +1,1 @@
-include ':sample', ':nearit-ui', ':sample-kotlin'
+include ':sample', ':nearit-ui', ':sample-kotlin', ':htmltextview'
