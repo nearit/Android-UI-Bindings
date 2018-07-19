@@ -37,7 +37,6 @@ import com.google.android.gms.tasks.Task;
 import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.permissions.views.PermissionButton;
-import com.nearit.ui_bindings.utils.VersionManager;
 
 import it.near.sdk.NearItManager;
 
@@ -88,7 +87,6 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Perm
                 params,
                 PermissionsManager.obtain(this),
                 State.obtain(this),
-                VersionManager.obtain(this),
                 NearItManager.getInstance()
         );
 

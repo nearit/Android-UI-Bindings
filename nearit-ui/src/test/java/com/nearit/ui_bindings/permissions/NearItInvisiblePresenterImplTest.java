@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import com.nearit.ui_bindings.NearItManagerStub;
 import com.nearit.ui_bindings.permissions.invisible.InvisiblePermissionsContract;
 import com.nearit.ui_bindings.permissions.invisible.NearItInvisiblePresenterImpl;
-import com.nearit.ui_bindings.utils.VersionManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,8 +42,6 @@ public class NearItInvisiblePresenterImplTest {
     private PermissionsManager permissionsManager;
     @Mock
     private State state;
-    @Mock
-    private VersionManager versionManager;
 
     private NearItManager nearItManager;
 
@@ -52,7 +49,7 @@ public class NearItInvisiblePresenterImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         nearItManager = Mockito.mock(NearItManagerStub.class);
-        presenter = new NearItInvisiblePresenterImpl(view, params, permissionsManager, state, versionManager, nearItManager);
+        presenter = new NearItInvisiblePresenterImpl(view, params, permissionsManager, state, nearItManager);
     }
 
     @Test
@@ -94,9 +91,8 @@ public class NearItInvisiblePresenterImplTest {
     }
 
     @Test
-    public void onStart_ifLocationGrantedPostMarshmallow_turnOnLocation() {
+    public void onStart_ifLocationGranted_turnOnLocation() {
         whenLocationPermissionIsGranted();
-        whenSDKAtLeastMarshmallow();
 
         presenter.start();
 
@@ -104,8 +100,7 @@ public class NearItInvisiblePresenterImplTest {
     }
 
     @Test
-    public void onStart_ifLocationNotGrantedNeverAskedPostMarshmallow_askItAndRemember() {
-        whenSDKAtLeastMarshmallow();
+    public void onStart_ifLocationNotGrantedNeverAsked_askItAndRemember() {
         whenLocationPermissionIsNotGranted();
         whenPermissionNeverAsked();
 
@@ -116,8 +111,7 @@ public class NearItInvisiblePresenterImplTest {
     }
 
     @Test
-    public void onStart_ifLocationNotGrantedAskedAndDeniedPostMarshmallow_showDontAskAgainDialog() {
-        whenSDKAtLeastMarshmallow();
+    public void onStart_ifLocationNotGrantedAskedAndDenied_showDontAskAgainDialog() {
         whenLocationPermissionIsNotGranted();
         whenPermissionAlreadyAsked();
         when(view.shouldShowRequestPermissionRationale()).thenReturn(false);
@@ -130,8 +124,7 @@ public class NearItInvisiblePresenterImplTest {
     }
 
     @Test
-    public void onStart_ifLocationNotGrantedAskedNotDeniedPostMarshmallow_askItAndRemember() {
-        whenSDKAtLeastMarshmallow();
+    public void onStart_ifLocationNotGrantedAskedNotDenied_askItAndRemember() {
         whenLocationPermissionIsNotGranted();
         whenPermissionAlreadyAsked();
         when(view.shouldShowRequestPermissionRationale()).thenReturn(true);
@@ -144,8 +137,7 @@ public class NearItInvisiblePresenterImplTest {
     }
 
     @Test
-    public void onStart_ifLocationGrantedLocationOnAndBluetoothAvailbleButOff_turnItOn() {
-        whenSDKAtLeastMarshmallow();
+    public void onStart_ifLocationGrantedLocationOnAndBluetoothAvailableButOff_turnItOn() {
         whenLocationPermissionIsGranted();
         whenLocationIsOn();
         whenBluetoothIsOff();
@@ -158,47 +150,7 @@ public class NearItInvisiblePresenterImplTest {
 
     @Test
     public void onStart_ifLocationGrantedONBluetoothAvailableAndONNotificationsOff_showDialog() {
-        whenSDKAtLeastMarshmallow();
         whenLocationPermissionIsGranted();
-        whenLocationIsOn();
-        whenBleIsAvailable();
-        whenBluetoothIsOn();
-        whenNotificationsAreOff();
-
-        presenter.start();
-
-        verify(view).showNotificationsDialog();
-    }
-
-    @Test
-    public void onStart_ifLocationNotGrantedNeverAskedPreMarshmallow_skipPermissionTurnOnLocation() {
-        whenSDKPreMarshmallow();
-        whenLocationPermissionIsNotGranted();
-        whenPermissionNeverAsked();
-
-        presenter.start();
-
-        verify(view, never()).requestLocationPermission();
-        verify(state, never()).setLocationPermissionAsked();
-
-        verify(view).turnOnLocationServices(anyBoolean());
-    }
-
-    @Test
-    public void onStart_ifPreMarshmallowLocationOnBluetoothAvailableButOff_turnItOn() {
-        whenSDKPreMarshmallow();
-        whenLocationIsOn();
-        whenBleIsAvailable();
-        whenBluetoothIsOff();
-
-        presenter.start();
-
-        verify(view).turnOnBluetooth();
-    }
-
-    @Test
-    public void onStart_ifPreMarshmallowLocationOnBluetoothAvailbleAndOnNotificationsOff_showDialog() {
-        whenSDKPreMarshmallow();
         whenLocationIsOn();
         whenBleIsAvailable();
         whenBluetoothIsOn();
@@ -257,7 +209,6 @@ public class NearItInvisiblePresenterImplTest {
 
     @Test
     public void onBluetoothResultOK_ifLocationOnButNotGranted_requestPermission() {
-        whenSDKAtLeastMarshmallow();
         whenLocationPermissionIsNotGranted();
         whenLocationIsOn();
 
@@ -402,41 +353,12 @@ public class NearItInvisiblePresenterImplTest {
     }
 
 
-
-    /*@Test
-    public void onActivityResult_ifLocationResultOKNoBeaconAndNotificationsOn_justCheckforFinalResult() {
-        whenNoBeacon();
-        whenNotificationsAreOn();
-
-        presenter.handleActivityResult(NEAR_LOCATION_SETTINGS_CODE, RESULT_OK, new Intent());
-
-        verify(view, never()).turnOnBluetooth();
-        verify(view, never()).showNotificationsDialog();
-        //  ...
-    }*/
-
-    /*@Test
-    public void onActivityResult_ifBleResultKO_justCheckForFinalResult() {
-        presenter.handleActivityResult(NEAR_BLUETOOTH_SETTINGS_CODE, 6, new Intent());
-
-        // ...
-    }*/
-
-
     private void whenAutoStartRadar() {
         when(params.isAutoStartRadar()).thenReturn(true);
     }
 
     private void whenNoBeacon() {
         when(params.isNoBeacon()).thenReturn(true);
-    }
-
-    private void whenNoHeader() {
-        when(params.isNoHeader()).thenReturn(true);
-    }
-
-    private void whenBleIsNotAvailable() {
-        when(permissionsManager.isBleAvailable()).thenReturn(false);
     }
 
     private void whenBleIsAvailable() {
@@ -489,14 +411,6 @@ public class NearItInvisiblePresenterImplTest {
 
     private void whenPermissionNeverAsked() {
         when(state.getLocationPermissionAsked()).thenReturn(false);
-    }
-
-    private void whenSDKAtLeastMarshmallow() {
-        when(versionManager.atLeastMarshmallow()).thenReturn(true);
-    }
-
-    private void whenSDKPreMarshmallow() {
-        when(versionManager.atLeastMarshmallow()).thenReturn(false);
     }
 
 }

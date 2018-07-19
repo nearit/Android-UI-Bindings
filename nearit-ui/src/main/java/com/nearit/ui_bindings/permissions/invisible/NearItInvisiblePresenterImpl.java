@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import com.nearit.ui_bindings.permissions.PermissionsManager;
 import com.nearit.ui_bindings.permissions.PermissionsRequestExtraParams;
 import com.nearit.ui_bindings.permissions.State;
-import com.nearit.ui_bindings.utils.VersionManager;
 
 import it.near.sdk.NearItManager;
 
@@ -30,7 +29,6 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
     private PermissionsRequestExtraParams params;
     private PermissionsManager permissionsManager;
     private State state;
-    private VersionManager versionManager;
     private NearItManager nearItManager;
 
     private boolean flightModeDialogLaunched = false;
@@ -42,14 +40,12 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
             PermissionsRequestExtraParams params,
             PermissionsManager permissionsManager,
             State state,
-            VersionManager versionManager,
             NearItManager nearItManager
     ) {
         this.view = view;
         this.params = params;
         this.permissionsManager = permissionsManager;
         this.state = state;
-        this.versionManager = versionManager;
         this.nearItManager = nearItManager;
         init();
     }
@@ -178,25 +174,22 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
     }
 
     private void askLocationPermission() {
-        if (versionManager.atLeastMarshmallow()) {
-            boolean isPermissionGranted = permissionsManager.isLocationPermissionGranted();
 
-            if (isPermissionGranted) {
-                askLocationServices();
-            } else {
-                boolean alreadyAsked;
-                alreadyAsked = state.getLocationPermissionAsked();
-                if (alreadyAsked && !view.shouldShowRequestPermissionRationale()) {
-                    view.showDontAskAgainDialog();
-                    dontAskAgainDialogLaunched = true;
-                } else {
-                    state.setLocationPermissionAsked();
-                    state.setLocationAsked();
-                    view.requestLocationPermission();
-                }
-            }
-        } else {
+        boolean isPermissionGranted = permissionsManager.isLocationPermissionGranted();
+
+        if (isPermissionGranted) {
             askLocationServices();
+        } else {
+            boolean alreadyAsked;
+            alreadyAsked = state.getLocationPermissionAsked();
+            if (alreadyAsked && !view.shouldShowRequestPermissionRationale()) {
+                view.showDontAskAgainDialog();
+                dontAskAgainDialogLaunched = true;
+            } else {
+                state.setLocationPermissionAsked();
+                state.setLocationAsked();
+                view.requestLocationPermission();
+            }
         }
     }
 
@@ -224,6 +217,6 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
     }
 
     public static NearItInvisiblePresenterImpl obtain(InvisiblePermissionsContract.InvisiblePermissionsView view, PermissionsRequestExtraParams params, Context context) {
-        return new NearItInvisiblePresenterImpl(view, params, PermissionsManager.obtain(context), State.obtain(context), VersionManager.obtain(context), NearItManager.getInstance());
+        return new NearItInvisiblePresenterImpl(view, params, PermissionsManager.obtain(context), State.obtain(context), NearItManager.getInstance());
     }
 }

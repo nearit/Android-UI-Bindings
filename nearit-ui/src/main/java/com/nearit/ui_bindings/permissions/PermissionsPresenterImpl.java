@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 
-import com.nearit.ui_bindings.utils.VersionManager;
-
 import it.near.sdk.NearItManager;
 
 /**
@@ -25,15 +23,13 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
     private PermissionsRequestExtraParams params;
     private PermissionsContract.PermissionsView view;
     private State state;
-    private VersionManager versionManager;
     private NearItManager nearItManager;
 
-    PermissionsPresenterImpl(PermissionsContract.PermissionsView view, PermissionsRequestExtraParams params, PermissionsManager permissionsManager, State state, VersionManager versionManager, NearItManager nearItManager) {
+    PermissionsPresenterImpl(PermissionsContract.PermissionsView view, PermissionsRequestExtraParams params, PermissionsManager permissionsManager, State state, NearItManager nearItManager) {
         this.view = view;
         this.params = params;
         this.permissionsManager = permissionsManager;
         this.state = state;
-        this.versionManager = versionManager;
         this.nearItManager = nearItManager;
         init();
     }
@@ -90,30 +86,25 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
     }
 
     private void askLocationPermission() {
-        if (versionManager.atLeastMarshmallow()) {
 
-            boolean isPermissionGranted = permissionsManager.isLocationPermissionGranted();
+        boolean isPermissionGranted = permissionsManager.isLocationPermissionGranted();
 
-            if (isPermissionGranted) {
-                if (!permissionsManager.isFlightModeOn()) {
-                    state.setLocationAsked();
-                    view.turnOnLocationServices(params.isInvisibleLayoutMode() && !params.isNoBeacon());
-                } else {
-                    view.showAirplaneDialog();
-                }
+        if (isPermissionGranted) {
+            if (!permissionsManager.isFlightModeOn()) {
+                state.setLocationAsked();
+                view.turnOnLocationServices(params.isInvisibleLayoutMode() && !params.isNoBeacon());
             } else {
-                boolean alreadyAsked;
-                alreadyAsked = state.getLocationPermissionAsked();
-                if (alreadyAsked && !view.shouldShowRequestPermissionRationale()) {
-                    view.showDontAskAgainDialog();
-                } else {
-                    state.setLocationPermissionAsked();
-                    view.requestLocationPermission();
-                }
+                view.showAirplaneDialog();
             }
         } else {
-            state.setLocationAsked();
-            view.turnOnLocationServices(params.isInvisibleLayoutMode() && !params.isNoBeacon());
+            boolean alreadyAsked;
+            alreadyAsked = state.getLocationPermissionAsked();
+            if (alreadyAsked && !view.shouldShowRequestPermissionRationale()) {
+                view.showDontAskAgainDialog();
+            } else {
+                state.setLocationPermissionAsked();
+                view.requestLocationPermission();
+            }
         }
     }
 

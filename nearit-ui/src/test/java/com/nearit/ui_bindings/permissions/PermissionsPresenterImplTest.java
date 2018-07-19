@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import com.nearit.ui_bindings.NearItManagerStub;
-import com.nearit.ui_bindings.utils.VersionManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,8 +41,6 @@ public class PermissionsPresenterImplTest {
     private PermissionsManager permissionsManager;
     @Mock
     private State state;
-    @Mock
-    private VersionManager versionManager;
 
     private NearItManager nearItManager;
 
@@ -51,7 +48,7 @@ public class PermissionsPresenterImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         nearItManager = Mockito.mock(NearItManagerStub.class);
-        presenter = new PermissionsPresenterImpl(view, params, permissionsManager, state, versionManager, nearItManager);
+        presenter = new PermissionsPresenterImpl(view, params, permissionsManager, state, nearItManager);
     }
 
     @Test
@@ -164,6 +161,15 @@ public class PermissionsPresenterImplTest {
         presenter.start();
 
         verify(view).resetLocationButton();
+    }
+
+    @Test
+    public void onStart_ifNotificationsButtonNotExplicitlyEnabled_hideIt() {
+        whenNotificationsAreOn();
+
+        presenter.start();
+
+        verify(view).hideNotificationsButton();
     }
 
     @Test
@@ -327,17 +333,17 @@ public class PermissionsPresenterImplTest {
     }
 
     @Test
-    public void onLocationTapped_ifPreMarshmallow_skipPermissionAndTurnOnLocation() {
-        whenSDKPreMarshmallow();
+    public void onLocationTapped_ifPermissionGrantedAndFlightModeOn_showDialog() {
+        whenLocationPermissionIsGranted();
+        whenFlightModeIsOn();
 
         presenter.onLocationTapped();
 
-        verify(view).turnOnLocationServices(anyBoolean());
+        verify(view).showAirplaneDialog();
     }
 
     @Test
-    public void onLocationTapped_ifPostMarshmallowAndGranted_turnOnLocation() {
-        whenSDKAtLeastMarshmallow();
+    public void onLocationTapped_ifAndGranted_turnOnLocation() {
         whenLocationPermissionIsGranted();
 
         presenter.onLocationTapped();
@@ -346,8 +352,7 @@ public class PermissionsPresenterImplTest {
     }
 
     @Test
-    public void onLocationTapped_ifPostMarshmallowNotGrantedNeverAsked_askItAndRemember() {
-        whenSDKAtLeastMarshmallow();
+    public void onLocationTapped_ifNotGrantedNeverAsked_askItAndRemember() {
         whenLocationPermissionIsNotGranted();
         whenPermissionNeverAsked();
 
@@ -358,8 +363,7 @@ public class PermissionsPresenterImplTest {
     }
 
     @Test
-    public void onLocationTapped_ifPostMarshmallowDeniedAndNeverAsk_showDialog() {
-        whenSDKAtLeastMarshmallow();
+    public void onLocationTapped_ifDeniedAndNeverAsk_showDialog() {
         whenLocationPermissionIsNotGranted();
         whenPermissionAlreadyAsked();
         whenShouldNotAskAgain();
@@ -370,8 +374,7 @@ public class PermissionsPresenterImplTest {
     }
 
     @Test
-    public void onLocationTapped_ifPostMarshmallowDeniedCanAskAgain_askItAndRemember() {
-        whenSDKAtLeastMarshmallow();
+    public void onLocationTapped_ifDeniedCanAskAgain_askItAndRemember() {
         whenLocationPermissionIsNotGranted();
         whenPermissionAlreadyAsked();
         whenCanAskAgain();
@@ -489,6 +492,10 @@ public class PermissionsPresenterImplTest {
         verify(view).finishWithKoResult();
     }
 
+    private void whenNotificationsButtonEnabled() {
+        when(params.isShowNotificationsButton()).thenReturn(true);
+    }
+
     private void whenAutoStart() {
         when(params.isAutoStartRadar()).thenReturn(true);
     }
@@ -571,14 +578,6 @@ public class PermissionsPresenterImplTest {
 
     private void whenCanAskAgain() {
         when(view.shouldShowRequestPermissionRationale()).thenReturn(true);
-    }
-
-    private void whenSDKAtLeastMarshmallow() {
-        when(versionManager.atLeastMarshmallow()).thenReturn(true);
-    }
-
-    private void whenSDKPreMarshmallow() {
-        when(versionManager.atLeastMarshmallow()).thenReturn(false);
     }
 
     private void whenNotificationsAsked() {
