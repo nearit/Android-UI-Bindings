@@ -35,7 +35,7 @@ import static com.nearit.ui_bindings.coupon.CouponUtils.getValid;
  * @author Federico Boschini
  */
 
-public class NearItCouponListFragment extends Fragment implements CouponAdapter.Item.CouponListener {
+public class NearItCouponListFragment extends Fragment implements CouponViewHolder.CouponListener {
 
     private List<Coupon> couponList;
     private static final String ARG_EXTRAS = "extras";
