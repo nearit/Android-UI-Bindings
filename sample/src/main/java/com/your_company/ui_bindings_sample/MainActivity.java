@@ -8,12 +8,14 @@ import android.view.View;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 
+
 /**
  * @author Federico Boschini
  */
 
 public class MainActivity extends AppCompatActivity {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "MainActivity";
 
     @Override

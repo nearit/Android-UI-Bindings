@@ -12,15 +12,16 @@ import com.nearit.ui_bindings.ExtraConstants;
  * @author Federico Boschini
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-class PermissionsRequestExtraParams implements Parcelable {
+public class PermissionsRequestExtraParams implements Parcelable {
 
     private final boolean enableTapToClose;
     private final boolean autoStartRadar;
     private final boolean invisibleLayoutMode;
-    private final boolean noBeacon;
+    private boolean noBeacon;
     private final boolean nonBlockingBeacon;
     private final int headerDrawable;
     private final boolean noHeader;
+    private final boolean showNotificationsButton;
 
     PermissionsRequestExtraParams(
             boolean enableTapToClose,
@@ -29,7 +30,8 @@ class PermissionsRequestExtraParams implements Parcelable {
             boolean noBeacon,
             boolean nonBlockingBeacon,
             int headerDrawable,
-            boolean noHeader) {
+            boolean noHeader,
+            boolean showNotificationsButton) {
         this.enableTapToClose = enableTapToClose;
         this.autoStartRadar = autoStartRadar;
         this.invisibleLayoutMode = invisibleLayoutMode;
@@ -37,18 +39,20 @@ class PermissionsRequestExtraParams implements Parcelable {
         this.nonBlockingBeacon = nonBlockingBeacon;
         this.headerDrawable = headerDrawable;
         this.noHeader = noHeader;
+        this.showNotificationsButton = showNotificationsButton;
     }
 
     /**
      * Extract PermissionsRequestExtraParams from an Intent.
      */
-    static PermissionsRequestExtraParams fromIntent(Intent intent) {
+    public static PermissionsRequestExtraParams fromIntent(Intent intent) {
         return intent.getParcelableExtra(ExtraConstants.EXTRA_FLOW_PARAMS);
     }
 
     /**
      * Extract PermissionsRequestExtraParams from a Bundle.
      */
+    @SuppressWarnings("unused")
     public static PermissionsRequestExtraParams fromBundle(Bundle bundle) {
         return bundle.getParcelable(ExtraConstants.EXTRA_FLOW_PARAMS);
     }
@@ -57,6 +61,7 @@ class PermissionsRequestExtraParams implements Parcelable {
      * Create a bundle containing this PermissionsRequestExtraParams object as {@link
      * ExtraConstants#EXTRA_FLOW_PARAMS}.
      */
+    @SuppressWarnings("unused")
     public Bundle toBundle() {
         Bundle bundle = new Bundle();
         bundle.putParcelable(ExtraConstants.EXTRA_FLOW_PARAMS, this);
@@ -72,6 +77,7 @@ class PermissionsRequestExtraParams implements Parcelable {
         dest.writeInt(nonBlockingBeacon ? 1 : 0);
         dest.writeInt(headerDrawable);
         dest.writeInt(noHeader ? 1 : 0);
+        dest.writeInt(showNotificationsButton ? 1 : 0);
     }
 
     @Override
@@ -89,6 +95,7 @@ class PermissionsRequestExtraParams implements Parcelable {
             boolean nonBlockingBeacon = in.readInt() != 0;
             int headerDrawable = in.readInt();
             boolean noHeader = in.readInt() != 0;
+            boolean showNotificationsButton = in.readInt() != 0;
 
             return new PermissionsRequestExtraParams(
                     enableTapToClose,
@@ -97,7 +104,8 @@ class PermissionsRequestExtraParams implements Parcelable {
                     noBeacon,
                     nonBlockingBeacon,
                     headerDrawable,
-                    noHeader);
+                    noHeader,
+                    showNotificationsButton);
         }
 
         @Override
@@ -110,7 +118,7 @@ class PermissionsRequestExtraParams implements Parcelable {
         return enableTapToClose;
     }
 
-    boolean isAutoStartRadar() {
+    public boolean isAutoStartRadar() {
         return autoStartRadar;
     }
 
@@ -118,11 +126,11 @@ class PermissionsRequestExtraParams implements Parcelable {
         return invisibleLayoutMode;
     }
 
-    boolean isNoBeacon() {
+    public boolean isNoBeacon() {
         return noBeacon;
     }
 
-    boolean isNonBlockingBeacon() {
+    public boolean isNonBlockingBeacon() {
         return nonBlockingBeacon;
     }
 
@@ -132,5 +140,13 @@ class PermissionsRequestExtraParams implements Parcelable {
 
     boolean isNoHeader() {
         return noHeader;
+    }
+
+    public boolean isShowNotificationsButton() {
+        return showNotificationsButton;
+    }
+
+    public void setNoBeacon(boolean noBeacon) {
+        this.noBeacon = noBeacon;
     }
 }
