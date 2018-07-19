@@ -1,7 +1,6 @@
 package com.nearit.ui_bindings.content;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -11,14 +10,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.nearit.htmltextview.HtmlTextView;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.content.views.ContentCTAButton;
 import com.nearit.ui_bindings.utils.LoadImageFromURL;
@@ -82,7 +80,7 @@ public class NearItContentDetailFragment extends Fragment {
 
         ScrollView scrollView = rootView.findViewById(R.id.content_scrollview);
         TextView titleTextView = rootView.findViewById(R.id.content_title);
-        WebView contentView = rootView.findViewById(R.id.content_text);
+        HtmlTextView contentView = rootView.findViewById(R.id.content_html);
         ContentCTAButton ctaButton = rootView.findViewById(R.id.cta_button);
         ImageView contentImageView = rootView.findViewById(R.id.content_image);
         ProgressBar contentImageSpinner = rootView.findViewById(R.id.content_image_progress_bar);
@@ -98,10 +96,7 @@ public class NearItContentDetailFragment extends Fragment {
 
         if (content.contentString != null) {
             contentView.setVisibility(View.VISIBLE);
-            final WebSettings webSettings = contentView.getSettings();
-            webSettings.setDefaultFontSize(13);
-            contentView.setBackgroundColor(Color.TRANSPARENT);
-            contentView.loadDataWithBaseURL("", content.contentString, "text/html", "UTF-8", "");
+            contentView.setHtml(content.contentString);
         }
 
         if (content.getImageLink() != null) {
