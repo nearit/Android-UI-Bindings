@@ -22,7 +22,7 @@
 
 
     <!--  STRINGS  -->
-    <string name="nearit_ui_permission_bar_alert_text">Provide all the missing authorizations</string>
+    <string name="nearit_ui_permission_bar_alert_text">Check all missing permissions</string>
     <string name="nearit_ui_permission_bar_button_text">OK!</string>
 
 
