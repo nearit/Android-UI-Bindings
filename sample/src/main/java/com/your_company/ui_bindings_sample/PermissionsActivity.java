@@ -23,7 +23,6 @@ public class PermissionsActivity extends AppCompatActivity {
 
     private static final int NEAR_PERMISSION_REQUEST = 1000;
     PermissionBar bar;
-    int defaultStatusBarColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +31,22 @@ public class PermissionsActivity extends AppCompatActivity {
 
         bar = findViewById(R.id.permission_bar);
         bar.bindToActivity(this, NEAR_PERMISSION_REQUEST);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            defaultStatusBarColor = getWindow().getStatusBarColor();
-        }
-
+        
         bar.setOnBarStateChangeListener(new PermissionBar.OnBarStateChangeListener() {
             @Override
-            public void onColorChanged(int colorRes) {
-                setStatusBarColor(colorRes);
+            public void onColorChanged(int color) {
+                /*  PermissionBar changed color:
+                 *  you can use the color to update some other component of your UI
+                 *
+                 *  WARNING: the int returned is the actual color, NOT the resourceId
+                 */
             }
 
             @Override
             public void onViewGone() {
-                setStatusBarColor(defaultStatusBarColor);
+                /*
+                 *  PermissionBar is gone
+                 */
             }
         });
 
@@ -173,12 +174,6 @@ public class PermissionsActivity extends AppCompatActivity {
                         NEAR_PERMISSION_REQUEST);
             }
         });
-    }
-
-    private void setStatusBarColor(int color) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(color);
-        }
     }
 
     @SuppressLint("MissingPermission")

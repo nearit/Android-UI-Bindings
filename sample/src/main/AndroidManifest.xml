@@ -20,10 +20,6 @@
             android:name="near_api_key"
             android:value="@string/near_api_key" />
 
-        <activity
-            android:name=".CoordLayoutActivity"
-            android:label="@string/title_activity_coord_layout"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".FeedbackActivity" />
         <activity android:name=".CouponsActivity" />
         <activity android:name=".PermissionsActivity" />

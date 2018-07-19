@@ -20,14 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         style="@style/ButtonStyle"
-        android:text="CoordLayout example"
-        android:onClick="openCoordLayout"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        style="@style/ButtonStyle"
         android:text="Permissions"
         android:onClick="openPermissions"/>
 

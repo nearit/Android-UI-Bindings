@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 import com.nearit.ui_bindings.NearITUIBindings;
-import com.nearit.ui_bindings.utils.PermissionsUtils;
 
 
 /**
@@ -17,18 +15,13 @@ import com.nearit.ui_bindings.utils.PermissionsUtils;
 
 public class MainActivity extends AppCompatActivity {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Log.e(TAG, String.valueOf(PermissionsUtils.areNotificationsEnabled(this)));
-    }
-
-    public void openCoordLayout(View view) {
-        startActivity(new Intent(this, CoordLayoutActivity.class));
     }
 
     public void openPermissions(View view) {
