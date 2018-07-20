@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, ContentActivity.class));
     }
 
-    public void openInbox(View view) {
+    /*public void openInbox(View view) {
         startActivity(new Intent(this, InboxActivity.class));
-    }
+    }*/
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {

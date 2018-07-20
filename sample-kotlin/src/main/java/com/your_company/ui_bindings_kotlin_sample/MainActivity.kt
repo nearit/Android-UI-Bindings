@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this@MainActivity, ContentActivity::class.java))
     }
 
-    fun openInbox(view: View) {
+    /*fun openInbox(view: View) {
         startActivity(Intent(this@MainActivity, InboxActivity::class.java))
-    }
+    }*/
 }
