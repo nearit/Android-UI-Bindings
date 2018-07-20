@@ -48,6 +48,9 @@ public class PermissionBar extends RelativeLayout {
     private int btIconResId;
     private int locIconResId;
     private int notifIconResId;
+    private int worriedIconResId;
+    private int sadIconResId;
+    private int happyIconResId;
     private int dialogHeaderResId;
 
     @Nullable
@@ -140,14 +143,18 @@ public class PermissionBar extends RelativeLayout {
                 R.styleable.NearItUIBar,
                 0, 0);
         try {
-            if (a.getString(R.styleable.NearItUIBar_barButtonText) != null) {
+            if (a.getString(R.styleable.NearItUIBar_barAlertText) != null) {
                 alertMessageText = a.getString(R.styleable.NearItUIBar_barAlertText);
             } else {
                 alertMessageText = getContext().getResources().getString(R.string.nearit_ui_permission_bar_alert_text);
             }
-            btIconResId = a.getResourceId(R.styleable.NearItUIBar_barBluetoothIcon, NO_ICON);
-            locIconResId = a.getResourceId(R.styleable.NearItUIBar_barLocationIcon, NO_ICON);
-            notifIconResId = a.getResourceId(R.styleable.NearItUIBar_barNotificationsIcon, NO_ICON);
+            btIconResId = a.getResourceId(R.styleable.NearItUIBar_bluetoothIcon, NO_ICON);
+            locIconResId = a.getResourceId(R.styleable.NearItUIBar_locationIcon, NO_ICON);
+            notifIconResId = a.getResourceId(R.styleable.NearItUIBar_notificationsIcon, NO_ICON);
+
+            sadIconResId = a.getResourceId(R.styleable.NearItUIBar_sadFaceIcon, NO_ICON);
+            worriedIconResId = a.getResourceId(R.styleable.NearItUIBar_worriedFaceIcon, NO_ICON);
+            happyIconResId = a.getResourceId(R.styleable.NearItUIBar_happyFaceIcon, NO_ICON);
 
             noBeacon = a.getBoolean(R.styleable.NearItUIBar_noBeacon, false);
             nonBlockingBeacon = a.getBoolean(R.styleable.NearItUIBar_nonBlockingBeacon, false);
@@ -189,6 +196,25 @@ public class PermissionBar extends RelativeLayout {
         if (dialogHeaderResId != NO_ICON) {
             builder.setHeaderResourceId(dialogHeaderResId);
         }
+        if (btIconResId != NO_ICON) {
+            builder.setBluetoothResourceId(btIconResId);
+        }
+        if (locIconResId != NO_ICON) {
+            builder.setLocationResourceId(locIconResId);
+        }
+        if (notifIconResId != NO_ICON) {
+            builder.setNotificationsResourceId(notifIconResId);
+        }
+        if (sadIconResId != NO_ICON) {
+            builder.setSadFaceResourceId(sadIconResId);
+        }
+        if (worriedIconResId != NO_ICON) {
+            builder.setWorriedFaceResourceId(worriedIconResId);
+        }
+        if (happyIconResId != NO_ICON) {
+            builder.setWorriedFaceResourceId(happyIconResId);
+        }
+
 
         this.setOnClickListener(new OnClickListener() {
             @Override
@@ -250,12 +276,20 @@ public class PermissionBar extends RelativeLayout {
 
     public void setSad() {
         this.setBackgroundColor(ContextCompat.getColor(context, R.color.nearit_ui_permission_bar_sad_color));
-        face.setImageResource(R.drawable.ic_nearit_ui_sad_white);
+        if (sadIconResId != NO_ICON) {
+            face.setImageResource(sadIconResId);
+        } else {
+            face.setImageResource(R.drawable.ic_nearit_ui_sad_white);
+        }
     }
 
     public void setWorried() {
         this.setBackgroundColor(ContextCompat.getColor(context, R.color.nearit_ui_permission_bar_worried_color));
-        face.setImageResource(R.drawable.ic_nearit_ui_worried_white);
+        if (worriedIconResId != NO_ICON) {
+            face.setImageResource(worriedIconResId);
+        } else {
+            face.setImageResource(R.drawable.ic_nearit_ui_worried_white);
+        }
     }
 
     @Override

@@ -6,7 +6,7 @@ for you. Foreground content will be delivered through an heads-up system notific
 
 **Note**: the heads-up notification overlay is only available for API level 21+. On older devices the notification will still appear, but with no overlay.
 
-![ranging_notif](feedback_request_success.gif)
+![ranging_notif](images/feedback_request_success.gif)
 
 To enable this behaviour you have to add one line of code.
 You **MUST** add this in the `onCreate()` method of your `Application`

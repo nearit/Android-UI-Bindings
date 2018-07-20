@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 
 import it.near.sdk.NearItManager;
 
+import static com.nearit.ui_bindings.permissions.views.PermissionButton.NO_ICON;
+
 /**
  * @author Federico Boschini
  */
@@ -40,8 +42,6 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
 
     @Override
     public void start() {
-        checkPermissions();
-
         if (!permissionsManager.isBleAvailable()) {
             params.setNoBeacon(true);
             view.hideBluetoothButton();
@@ -49,8 +49,27 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
 
         if (params.isNoHeader()) {
             view.hideHeader();
-        } else if (params.getHeaderDrawable() != 0) {
-            view.setHeader(params.getHeaderDrawable());
+        } else if (params.getHeaderResourceId() != NO_ICON) {
+            view.setHeader(params.getHeaderResourceId());
+        }
+
+        if (params.getBluetoothResourceId() != NO_ICON) {
+            view.setBluetoothIcon(params.getBluetoothResourceId());
+        }
+        if (params.getLocationResourceId() != NO_ICON) {
+            view.setLocationIcon(params.getLocationResourceId());
+        }
+        if (params.getNotificationsResourceId() != NO_ICON) {
+            view.setNotificationsIcon(params.getNotificationsResourceId());
+        }
+        if (params.getSadFaceResourceId() != NO_ICON) {
+            view.setSadFaceIcon(params.getSadFaceResourceId());
+        }
+        if (params.getWorriedFaceResourceId() != NO_ICON) {
+            view.setWorriedFaceIcon(params.getWorriedFaceResourceId());
+        }
+        if (params.getHappyFaceResourceId() != NO_ICON) {
+            view.setHappyIcon(params.getHappyFaceResourceId());
         }
 
         if (params.isNoBeacon()) {
@@ -62,6 +81,8 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
         } else {
             view.hideNotificationsButton();
         }
+
+        checkPermissions();
 
     }
 

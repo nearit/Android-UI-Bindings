@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.nearit.ui_bindings.NearITUIBindings
+import com.nearit.ui_bindings.permissions.views.PermissionBar
 import it.near.sdk.NearItManager
 import kotlinx.android.synthetic.main.activity_permissions.*
 
@@ -24,6 +25,21 @@ class PermissionsActivity : AppCompatActivity() {
 
         permission_bar.bindToActivity(this@PermissionsActivity, NEAR_PERMISSION_REQUEST)
 
+        permission_bar.setOnBarStateChangeListener(object : PermissionBar.OnBarStateChangeListener {
+            override fun onColorChanged(color: Int) {
+                /*  PermissionBar changed color:
+                 *  you can use the color to update some other component of your UI
+                 *
+                 *  WARNING: the int returned is the actual color, NOT the resourceId
+                 */
+            }
+
+            override fun onViewGone() {
+                /*
+                 *  PermissionBar is gone
+                 */
+            }
+        })
         permissions.setOnClickListener {
             startActivityForResult(
                     //  Basic config: location and bluetooth required

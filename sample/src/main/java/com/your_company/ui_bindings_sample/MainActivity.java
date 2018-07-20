@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 
+import it.near.sdk.NearItManager;
+
 
 /**
  * @author Federico Boschini
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        NearItManager.getInstance().triggerInAppEvent("coupon");
     }
 
     public void openPermissions(View view) {
@@ -40,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, ContentActivity.class));
     }
 
-    public void openInbox(View view) {
+    /*public void openInbox(View view) {
         startActivity(new Intent(this, InboxActivity.class));
-    }
+    }*/
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {

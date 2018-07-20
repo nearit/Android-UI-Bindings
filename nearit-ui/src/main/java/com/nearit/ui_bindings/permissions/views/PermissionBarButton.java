@@ -57,9 +57,9 @@ public class PermissionBarButton extends RelativeLayout {
                 0, 0);
         try {
             int NO_ICON = 0;
-            notificationIconResId = a.getResourceId(R.styleable.NearItUIBar_barNotificationsIcon, NO_ICON);
-            bluetoothIconResId = a.getResourceId(R.styleable.NearItUIBar_barBluetoothIcon, NO_ICON);
-            locationIconResId = a.getResourceId(R.styleable.NearItUIBar_barLocationIcon, NO_ICON);
+            notificationIconResId = a.getResourceId(R.styleable.NearItUIBar_notificationsIcon, NO_ICON);
+            bluetoothIconResId = a.getResourceId(R.styleable.NearItUIBar_bluetoothIcon, NO_ICON);
+            locationIconResId = a.getResourceId(R.styleable.NearItUIBar_locationIcon, NO_ICON);
         } finally {
             a.recycle();
         }

@@ -16,7 +16,9 @@ import it.near.sdk.NearItManager;
 import static android.app.Activity.RESULT_OK;
 import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_BLUETOOTH_SETTINGS_CODE;
 import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_PERMISSION_REQUEST_FINE_LOCATION;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -57,7 +59,7 @@ public class PermissionsPresenterImplTest {
     }
 
     @Test
-    public void onStart_ifUIModeAndNoHeader_hideIt() {
+    public void onStart_ifNoHeader_hideIt() {
         whenNoHeader();
 
         presenter.start();
@@ -66,12 +68,79 @@ public class PermissionsPresenterImplTest {
     }
 
     @Test
-    public void onStart_ifUIModeAndCustomHeader_showIt() {
+    public void onStart_ifCustomHeader_showIt() {
         whenCustomHeader();
 
         presenter.start();
 
         verify(view).setHeader(customHeaderResId);
+    }
+
+    @Test
+    public void onStart_ifNoCustomIcons_showIt() {
+        presenter.start();
+
+        verify(view,never()).setHeader(anyInt());
+        verify(view,never()).setBluetoothIcon(anyInt());
+        verify(view,never()).setLocationIcon(anyInt());
+        verify(view,never()).setNotificationsIcon(anyInt());
+        verify(view,never()).setSadFaceIcon(anyInt());
+        verify(view,never()).setWorriedFaceIcon(anyInt());
+        verify(view,never()).setHappyIcon(anyInt());
+    }
+
+    @Test
+    public void onStart_ifBluetoothCustomIcon_replaceIt() {
+        when(params.getBluetoothResourceId()).thenReturn(6);
+
+        presenter.start();
+
+        verify(view).setBluetoothIcon(6);
+    }
+
+    @Test
+    public void onStart_ifLocationCustomIcon_replaceIt() {
+        when(params.getLocationResourceId()).thenReturn(6);
+
+        presenter.start();
+
+        verify(view).setLocationIcon(6);
+    }
+
+    @Test
+    public void onStart_ifNotificationsCustomIcon_replaceIt() {
+        when(params.getNotificationsResourceId()).thenReturn(6);
+
+        presenter.start();
+
+        verify(view).setNotificationsIcon(6);
+    }
+
+    @Test
+    public void onStart_ifSadFaceCustomIcon_replaceIt() {
+        when(params.getSadFaceResourceId()).thenReturn(6);
+
+        presenter.start();
+
+        verify(view).setSadFaceIcon(6);
+    }
+
+    @Test
+    public void onStart_ifWorriedFaceCustomIcon_replaceIt() {
+        when(params.getWorriedFaceResourceId()).thenReturn(6);
+
+        presenter.start();
+
+        verify(view).setWorriedFaceIcon(6);
+    }
+
+    @Test
+    public void onStart_ifHappyFaceCustomIcon_replaceIt() {
+        when(params.getHappyFaceResourceId()).thenReturn(6);
+
+        presenter.start();
+
+        verify(view).setHappyIcon(6);
     }
 
     @Test
@@ -513,7 +582,7 @@ public class PermissionsPresenterImplTest {
     }
 
     private void whenCustomHeader() {
-        when(params.getHeaderDrawable()).thenReturn(customHeaderResId);
+        when(params.getHeaderResourceId()).thenReturn(customHeaderResId);
     }
 
     private void whenBleIsNotAvailable() {

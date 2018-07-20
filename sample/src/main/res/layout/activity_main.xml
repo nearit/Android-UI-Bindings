@@ -47,12 +47,12 @@
         android:text="Content"
         android:onClick="openContent"/>
 
-    <Button
+    <!--<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         style="@style/ButtonStyle"
         android:text="Inbox"
-        android:onClick="openInbox"/>
+        android:onClick="openInbox"/>-->
 
 </LinearLayout>

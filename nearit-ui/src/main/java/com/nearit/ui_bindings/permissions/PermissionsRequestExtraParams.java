@@ -19,7 +19,13 @@ public class PermissionsRequestExtraParams implements Parcelable {
     private final boolean invisibleLayoutMode;
     private boolean noBeacon;
     private final boolean nonBlockingBeacon;
-    private final int headerDrawable;
+    private int headerResourceId;
+    private int bluetoothResourceId;
+    private int locationResourceId;
+    private int notificationsResourceId;
+    private int sadFaceResourceId;
+    private int worriedFaceResourceId;
+    private int happyFaceResourceId;
     private final boolean noHeader;
     private final boolean showNotificationsButton;
 
@@ -29,7 +35,13 @@ public class PermissionsRequestExtraParams implements Parcelable {
             boolean invisibleLayoutMode,
             boolean noBeacon,
             boolean nonBlockingBeacon,
-            int headerDrawable,
+            int headerResourceId,
+            int bluetoothResourceId,
+            int locationResourceId,
+            int notificationsResourceId,
+            int sadFaceResourceId,
+            int worriedFaceResourceId,
+            int happyFaceResourceId,
             boolean noHeader,
             boolean showNotificationsButton) {
         this.enableTapToClose = enableTapToClose;
@@ -37,7 +49,13 @@ public class PermissionsRequestExtraParams implements Parcelable {
         this.invisibleLayoutMode = invisibleLayoutMode;
         this.noBeacon = noBeacon;
         this.nonBlockingBeacon = nonBlockingBeacon;
-        this.headerDrawable = headerDrawable;
+        this.headerResourceId = headerResourceId;
+        this.bluetoothResourceId = bluetoothResourceId;
+        this.locationResourceId = locationResourceId;
+        this.notificationsResourceId = notificationsResourceId;
+        this.sadFaceResourceId = sadFaceResourceId;
+        this.worriedFaceResourceId = worriedFaceResourceId;
+        this.happyFaceResourceId = happyFaceResourceId;
         this.noHeader = noHeader;
         this.showNotificationsButton = showNotificationsButton;
     }
@@ -75,7 +93,13 @@ public class PermissionsRequestExtraParams implements Parcelable {
         dest.writeInt(invisibleLayoutMode ? 1 : 0);
         dest.writeInt(noBeacon ? 1 : 0);
         dest.writeInt(nonBlockingBeacon ? 1 : 0);
-        dest.writeInt(headerDrawable);
+        dest.writeInt(headerResourceId);
+        dest.writeInt(bluetoothResourceId);
+        dest.writeInt(locationResourceId);
+        dest.writeInt(notificationsResourceId);
+        dest.writeInt(sadFaceResourceId);
+        dest.writeInt(worriedFaceResourceId);
+        dest.writeInt(happyFaceResourceId);
         dest.writeInt(noHeader ? 1 : 0);
         dest.writeInt(showNotificationsButton ? 1 : 0);
     }
@@ -93,7 +117,13 @@ public class PermissionsRequestExtraParams implements Parcelable {
             boolean invisibleLayoutMode = in.readInt() != 0;
             boolean noBeacon = in.readInt() != 0;
             boolean nonBlockingBeacon = in.readInt() != 0;
-            int headerDrawable = in.readInt();
+            int headerResourceId = in.readInt();
+            int bluetoothResourceId = in.readInt();
+            int locationResourceId = in.readInt();
+            int notificationsResourceId = in.readInt();
+            int sadFaceResourceId = in.readInt();
+            int worriedResourceId = in.readInt();
+            int happyResourceId = in.readInt();
             boolean noHeader = in.readInt() != 0;
             boolean showNotificationsButton = in.readInt() != 0;
 
@@ -103,7 +133,13 @@ public class PermissionsRequestExtraParams implements Parcelable {
                     invisibleLayoutMode,
                     noBeacon,
                     nonBlockingBeacon,
-                    headerDrawable,
+                    headerResourceId,
+                    bluetoothResourceId,
+                    locationResourceId,
+                    notificationsResourceId,
+                    sadFaceResourceId,
+                    worriedResourceId,
+                    happyResourceId,
                     noHeader,
                     showNotificationsButton);
         }
@@ -134,8 +170,8 @@ public class PermissionsRequestExtraParams implements Parcelable {
         return nonBlockingBeacon;
     }
 
-    int getHeaderDrawable() {
-        return headerDrawable;
+    int getHeaderResourceId() {
+        return headerResourceId;
     }
 
     boolean isNoHeader() {
@@ -144,6 +180,30 @@ public class PermissionsRequestExtraParams implements Parcelable {
 
     public boolean isShowNotificationsButton() {
         return showNotificationsButton;
+    }
+
+    public int getBluetoothResourceId() {
+        return bluetoothResourceId;
+    }
+
+    public int getLocationResourceId() {
+        return locationResourceId;
+    }
+
+    public int getNotificationsResourceId() {
+        return notificationsResourceId;
+    }
+
+    public int getSadFaceResourceId() {
+        return sadFaceResourceId;
+    }
+
+    public int getWorriedFaceResourceId() {
+        return worriedFaceResourceId;
+    }
+
+    public int getHappyFaceResourceId() {
+        return happyFaceResourceId;
     }
 
     public void setNoBeacon(boolean noBeacon) {

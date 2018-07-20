@@ -17,7 +17,7 @@ import com.nearit.ui_bindings.R;
 
 public class PermissionButton extends RelativeLayout {
 
-    private static final int NO_ICON = 0;
+    public static final int NO_ICON = 0;
     private ImageView icon;
     private TextView text;
     private TextView label;
@@ -54,8 +54,8 @@ public class PermissionButton extends RelativeLayout {
                 0, 0);
         try {
             buttonText = a.getString(R.styleable.NearItUIPermissionButtonView_buttonText);
-            originalIconRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_iconRes, NO_ICON);
-            iconRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_iconRes, NO_ICON);
+            originalIconRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_permissionIcon, NO_ICON);
+            iconRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_permissionIcon, NO_ICON);
             sadFaceRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_sadFaceRes, NO_ICON);
             worriedFaceRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_worriedFaceRes, NO_ICON);
             happyFaceRes = a.getResourceId(R.styleable.NearItUIPermissionButtonView_happyFaceRes, NO_ICON);
@@ -80,8 +80,31 @@ public class PermissionButton extends RelativeLayout {
         requestLayout();
     }
 
-    private void setIcon(int iconRes) {
+    private void setChecked() {
+        this.iconRes = R.drawable.ic_nearit_ui_check_black;
+    }
+
+    public void setIcon(int iconRes) {
         this.iconRes = iconRes;
+        this.originalIconRes = iconRes;
+        invalidate();
+        requestLayout();
+    }
+
+    public void setSadFaceRes(int sadFaceRes) {
+        this.sadFaceRes = sadFaceRes;
+        invalidate();
+        requestLayout();
+    }
+
+    public void setHappyFaceRes(int happyFaceRes) {
+        this.happyFaceRes = happyFaceRes;
+        invalidate();
+        requestLayout();
+    }
+
+    public void setWorriedFaceRes(int worriedFaceRes) {
+        this.worriedFaceRes = worriedFaceRes;
         invalidate();
         requestLayout();
     }
@@ -119,7 +142,7 @@ public class PermissionButton extends RelativeLayout {
     }
 
     public void setHappy() {
-        this.setIcon(R.drawable.ic_nearit_ui_check_black);
+        this.setChecked();
         if (happyFaceRes != NO_ICON) {
             this.setFace(happyFaceRes);
         } else {
