@@ -99,11 +99,10 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
         if (requestCode == NEAR_PERMISSION_REQUEST_FINE_LOCATION) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if (!permissionsManager.isFlightModeOn()) {
-                    view.turnOnLocationServices(!params.isNoBeacon() && permissionsManager.isBleAvailable());
-                } else {
+                if (permissionsManager.isFlightModeOn()) {
                     view.showAirplaneDialog();
                     flightModeDialogLaunched = true;
+                } else {
                 }
             } else {
                 //  DENIED
@@ -131,7 +130,11 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
                         view.showNotificationsDialog();
                     }
                 } else {
-                    askLocationPermission();
+                    if (!permissionsManager.isLocationPermissionGranted()) {
+                        askLocationPermission();
+                    } else {
+                        askLocationServices();
+                    }
                 }
             } else {
                 //  CANCELED
