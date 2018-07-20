@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.nearit.ui_bindings.NearITUIBindings
+import com.nearit.ui_bindings.permissions.views.PermissionBar
 import it.near.sdk.NearItManager
 import kotlinx.android.synthetic.main.activity_permissions.*
 
@@ -24,6 +25,21 @@ class PermissionsActivity : AppCompatActivity() {
 
         permission_bar.bindToActivity(this@PermissionsActivity, NEAR_PERMISSION_REQUEST)
 
+        permission_bar.setOnBarStateChangeListener(object : PermissionBar.OnBarStateChangeListener {
+            override fun onColorChanged(color: Int) {
+                /*  PermissionBar changed color:
+                 *  you can use the color to update some other component of your UI
+                 *
+                 *  WARNING: the int returned is the actual color, NOT the resourceId
+                 */
+            }
+
+            override fun onViewGone() {
+                /*
+                 *  PermissionBar is gone
+                 */
+            }
+        })
         permissions.setOnClickListener {
             startActivityForResult(
                     //  Basic config: location and bluetooth required
@@ -36,7 +52,7 @@ class PermissionsActivity : AppCompatActivity() {
             )
         }
 
-        permissions_no_beacon.setOnClickListener({
+        permissions_no_beacon.setOnClickListener {
             startActivityForResult(
                     //  Asks only for location
                     //  + tap outside to close enabled
@@ -46,9 +62,9 @@ class PermissionsActivity : AppCompatActivity() {
                             .enableTapOutsideToClose()
                             .build(),
                     NEAR_PERMISSION_REQUEST)
-        })
+        }
 
-        permissions_beacon_nonblocking.setOnClickListener({
+        permissions_beacon_nonblocking.setOnClickListener {
             startActivityForResult(
                     //  Asks for location and bluetooth
                     //  but the latter is not a blocking requirement
@@ -57,9 +73,9 @@ class PermissionsActivity : AppCompatActivity() {
                             .nonBlockingBeacon()
                             .build(),
                     NEAR_PERMISSION_REQUEST)
-        })
+        }
 
-        permissions_invisible.setOnClickListener({
+        permissions_invisible.setOnClickListener {
             startActivityForResult(
                     //  Invisible layout: asks for location and bluetooth via system dialogs
                     NearITUIBindings.getInstance(this@PermissionsActivity)
@@ -67,9 +83,9 @@ class PermissionsActivity : AppCompatActivity() {
                             .invisibleLayoutMode()
                             .build(),
                     NEAR_PERMISSION_REQUEST)
-        })
+        }
 
-        invisible_no_beacon.setOnClickListener({
+        invisible_no_beacon.setOnClickListener {
             startActivityForResult(
                     //  Invisible layout: asks only for location
                     NearITUIBindings.getInstance(this@PermissionsActivity)
@@ -78,9 +94,9 @@ class PermissionsActivity : AppCompatActivity() {
                             .noBeacon()
                             .build(),
                     NEAR_PERMISSION_REQUEST)
-        })
+        }
 
-        invisible_non_blocking.setOnClickListener({
+        invisible_non_blocking.setOnClickListener {
             startActivityForResult(
                     //  Invisible layout: asks for location and bluetooth
                     //  but the latter is not a blocking requiremen
@@ -90,9 +106,9 @@ class PermissionsActivity : AppCompatActivity() {
                             .nonBlockingBeacon()
                             .build(),
                     NEAR_PERMISSION_REQUEST)
-        })
+        }
 
-        autostart_radar.setOnClickListener({
+        autostart_radar.setOnClickListener {
             startActivityForResult(
                     //  Asks for permissions (basic config) and if user grants all
                     //  NearIT-UI will automatically start the NearIT radar
@@ -101,9 +117,9 @@ class PermissionsActivity : AppCompatActivity() {
                             .automaticRadarStart()
                             .build(),
                     NEAR_PERMISSION_REQUEST)
-        })
+        }
 
-        custom_header.setOnClickListener({
+        custom_header.setOnClickListener {
             startActivityForResult(
                     //  Basic config + custom header
                     NearITUIBindings.getInstance(this@PermissionsActivity)
@@ -111,7 +127,7 @@ class PermissionsActivity : AppCompatActivity() {
                             .setHeaderResourceId(R.drawable.logo)
                             .build(),
                     NEAR_PERMISSION_REQUEST)
-        })
+        }
 
     }
 

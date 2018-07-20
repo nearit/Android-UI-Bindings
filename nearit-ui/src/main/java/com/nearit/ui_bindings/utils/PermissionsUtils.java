@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.provider.Settings;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 
 import it.near.sdk.logging.NearLog;
@@ -78,6 +79,28 @@ public class PermissionsUtils {
     public static boolean isAirplaneModeOn(Context context) {
         return Settings.System.getInt(context.getContentResolver(),
                 Settings.System.AIRPLANE_MODE_ON, 0) != 0;
+    }
+
+    /**
+     * Checks if notifications are enabled. Works with every API version
+     *
+     * Please, check {@link NotificationManagerCompat#areNotificationsEnabled()} for implementation
+     *
+     * @param context a valid Context
+     * @return 'true' if notifications are enabled, 'false' otherwise
+     */
+    public static boolean areNotificationsEnabled(Context context) {
+        return NotificationManagerCompat.from(context).areNotificationsEnabled();
+    }
+
+    /**
+     * Returns the user specified importance for notifications from the calling package.
+     *
+     * @param context a valid Context
+     * @return An importance level, such as {@link NotificationManagerCompat#IMPORTANCE_DEFAULT}.
+     */
+    public static int getNotificationsImportanceLevel(Context context) {
+        return NotificationManagerCompat.from(context).getImportance();
     }
 
 }

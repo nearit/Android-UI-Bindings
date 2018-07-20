@@ -38,7 +38,7 @@ If you want your app to ask user for both location and bluetooth permissions (an
 
 In this basic example, both location and bluetooth are required to be granted and turned on: you can check if the request succeded or failed in `onActivityResult(...)` by referring to the same request code.
 
-![NearIT-UI permissions request demo on Android](permissions_request.gif)
+![NearIT-UI permissions request demo on Android](images/permissions_dialog.gif)
 
 <br>
 
@@ -96,7 +96,7 @@ If your app uses Beacons, but you consider the bluetooth a non-blocking requirem
 ## No-UI request
 The whole permisison request flow, can be started without UI. 
 
-![NearIT-UI permissions request demo on Android](permissions_request_invisible.gif)
+![NearIT-UI permissions request demo on Android](images/permissions_invisible.gif)
 
 In order to start the permission flow without UI, you should chain `invisibleLayoutMode()` in the builder.
 
@@ -128,8 +128,8 @@ In order to start the permission flow without UI, you should chain `invisibleLay
 
 We provide a dialog that informs the user if flight-mode is ON or if he chose "Never ask again" on permission request. The dialogs send the user to the right settings screen.
 
-![Permissions - Flight mode](flight_mode.gif)
-![Permissions - Don't ask again](dont_ask_again.gif)
+![Permissions - Flight mode](images/flight_mode.gif)
+![Permissions - Don't ask again](images/dont_ask_again.gif)
 
 On devices pre-Lollipop (API < 18) BLE technology is not available and some of the Lollipop devices do not have a supported hardware. In those particular cases, we don't ask for bluetooth permission and we hide the bluetooth UI. 
 
@@ -137,9 +137,9 @@ On devices pre-Lollipop (API < 18) BLE technology is not available and some of t
 
 On devices with outdated Play Services, the user is notified of that lack. While Play Services are updating, the UI keep waiting and loading. When the update is done, the UX flow continues normally.
 
-![Permissions - Outdated PS 1](outdated_play_services1.png)
-![Permissions - Outdated PS 3](outdated_play_services3.png)
-![Permissions - Outdated PS 4](outdated_play_services4.png)
+![Permissions - Outdated PS 1](images/outdated_play_services1.png)
+![Permissions - Outdated PS 3](images/outdated_play_services3.png)
+![Permissions - Outdated PS 4](images/outdated_play_services4.png)
 
 <br>
 <br>
@@ -147,7 +147,13 @@ On devices with outdated Play Services, the user is notified of that lack. While
 
 ## UI Customization
 
-If you wish to change the message in the permissions dialog, the existing strings can be overridden by name in your application. See the module's strings.xml file and simply redefine a string to change it:
+f you wish to change the message in the permissions dialog, the existing strings can be overridden by name in your application. Please, refer to this file to have a complete list of overridable resources
+
+[Permissions dialog resources](https://github.com/nearit/Android-UI-Bindings/tree/master/nearit-ui/src/main/res/values/permissions_dialog_resources.xml)
+
+### Examples
+
+See the module's strings.xml file and simply redefine a string to change it:
 
 ```xml
 <resources>
@@ -179,7 +185,7 @@ Selector for the text color, `drawable/nearit_ui_selector_permission_button_text
 </selector>
 ```
 
-Additionaly, if you wish to replace the header image of the permissions request dialog, you must provide your own image and pass its id to the following method of the builder:
+Additionaly, if you wish to replace the images or the icons of the permissions request dialog, you must provide your own images and pass their ids to the right method of the builder:
 
 ```java
  JAVA
@@ -187,7 +193,13 @@ Additionaly, if you wish to replace the header image of the permissions request 
         NearITUIBindings.getInstance(YourActivity.this)
                 .permissionsIntentBuilder()
                 // ...
-                .setHeaderResourceId(R.drawable.your_image) 
+                .setHeaderResourceId(R.drawable.your_image)
+                .setBluetoothResourceId(R.drawable.your_image)
+                .setLocationResourceId(R.drawable.your_image)
+                .setNotificationsResourceId(R.drawable.your_image)
+                .setSadFaceResourceId(R.drawable.your_image)
+                .setWorriedFaceResourceId(R.drawable.your_image)
+                .setHappyFaceResourceId(R.drawable.your_image)
                 .build(),
         NEAR_PERMISSION_REQUEST);
 ```
@@ -198,7 +210,13 @@ Additionaly, if you wish to replace the header image of the permissions request 
         NearITUIBindings.getInstance(this@YourActivity)
                 .permissionsIntentBuilder()
                 // ...
-                .setHeaderResourceId(R.drawable.your_image) 
+                .setHeaderResourceId(R.drawable.your_image)
+                .setBluetoothResourceId(R.drawable.your_image)
+                .setLocationResourceId(R.drawable.your_image)
+                .setNotificationsResourceId(R.drawable.your_image)
+                .setSadFaceResourceId(R.drawable.your_image)
+                .setWorriedFaceResourceId(R.drawable.your_image)
+                .setHappyFaceResourceId(R.drawable.your_image)
                 .build(),
         NEAR_PERMISSION_REQUEST)
 ```

@@ -22,9 +22,9 @@ If you want your app to display a coupon in a beautiful pop-up dialog, use this 
 
 where, `coupon` is an instance of NearIT SDK `Coupon` class. Further information on coupons and other in-app content can be found [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/).
 
-![NearIT-UI active coupon dialog](coupon_valid.png)
-![NearIT-UI inactive coupon dialog](coupon_inactive.png)
-![NearIT-UI expired coupon dialog](coupon_expired.png)
+![NearIT-UI active coupon dialog](images/coupon_valid.png)
+![NearIT-UI inactive coupon dialog](images/coupon_inactive.png)
+![NearIT-UI expired coupon dialog](images/coupon_expired.png)
 
 ## Advanced examples
 NearIT-UI is shipped with our brand as icon placeholder. If you need to replace it just add one line of code:
@@ -51,7 +51,9 @@ NearIT-UI is shipped with our brand as icon placeholder. If you need to replace 
 
 Please, keep in mind that the icon should be a square: a different aspect-ratio can potentially break the layout.
 
-![NearIT-UI custom icon coupon dialog](coupon_custom_icon.png)
+![NearIT-UI custom icon coupon dialog](images/coupon_custom_icon.png)
+
+### Fragment mode
 
 Optionally, you can display the coupon in your custom Activity by adding a Fragment to it. You can get a Fragment via another builder:
 
@@ -84,7 +86,12 @@ In order to provide a better UX in a real scenario, our `Fragment` keeps the scr
 
 ## UI Customization
 
-If you wish to change some messages, the existing strings can be overridden by name in your application. For example, consider the following `res/values/strings.xml`
+If you wish to change some messages, the existing strings can be overridden by name in your application. At the following link you have the complete list of resources you can override
+
+[Coupon resources](https://github.com/nearit/Android-UI-Bindings/tree/master/nearit-ui/src/main/res/values/coupon_detail_resources.xml)
+
+
+For example, consider the following `res/values/strings.xml`
 
 ```xml
 <resources>

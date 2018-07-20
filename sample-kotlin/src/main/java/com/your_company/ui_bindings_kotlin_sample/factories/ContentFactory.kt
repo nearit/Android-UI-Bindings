@@ -27,7 +27,6 @@ object ContentFactory {
         content.title = "Title example"
         val image = ImageSet()
         image.fullSize = "https://www.nearit.com/wp-content/uploads/2017/06/comefunzionanearit_710x500.png"
-
         content.images_links = listOf(image)
         return content
     }

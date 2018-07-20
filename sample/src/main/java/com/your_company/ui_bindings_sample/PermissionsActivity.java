@@ -3,6 +3,7 @@ package com.your_company.ui_bindings_sample;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -30,6 +31,24 @@ public class PermissionsActivity extends AppCompatActivity {
 
         bar = findViewById(R.id.permission_bar);
         bar.bindToActivity(this, NEAR_PERMISSION_REQUEST);
+        
+        bar.setOnBarStateChangeListener(new PermissionBar.OnBarStateChangeListener() {
+            @Override
+            public void onColorChanged(int color) {
+                /*  PermissionBar changed color:
+                 *  you can use the color to update some other component of your UI
+                 *
+                 *  WARNING: the int returned is the actual color, NOT the resourceId
+                 */
+            }
+
+            @Override
+            public void onViewGone() {
+                /*
+                 *  PermissionBar is gone
+                 */
+            }
+        });
 
         Button permissions = findViewById(R.id.permissions);
         Button permissionsNoBeacon = findViewById(R.id.permissions_no_beacon);
@@ -137,6 +156,7 @@ public class PermissionsActivity extends AppCompatActivity {
                         NearITUIBindings.getInstance(PermissionsActivity.this)
                                 .permissionsIntentBuilder()
                                 .automaticRadarStart()
+                                .setNoHeader()
                                 .build(),
                         NEAR_PERMISSION_REQUEST);
             }

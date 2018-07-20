@@ -32,6 +32,7 @@ public class CouponsActivity extends AppCompatActivity {
         startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
                 .couponListIntentBuilder()
                 .jaggedBorders()
+                .enableNetErrorDialog()
                 .build());
     }
 

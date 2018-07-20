@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  COLORS  -->
+    <color name="nearit_ui_coupon_detail_title_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_coupon_detail_value_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_coupon_detail_description_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_coupon_detail_validity_period_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_coupon_detail_serial">@color/nearit_ui_black</color>
+    <color name="nearit_ui_coupon_detail_disabled_text_color">@color/nearit_ui_black_35</color>
+    <color name="nearit_ui_coupon_detail_valid_color">@color/nearit_ui_valid_green</color>
+    <color name="nearit_ui_coupon_detail_expired_color">@color/nearit_ui_expired_red</color>
+    <color name="nearit_ui_coupon_detail_inactive_color">@color/nearit_ui_inactive_orange</color>
+    <color name="nearit_ui_coupon_detail_activity_container_background_color">@color/nearit_ui_transparent</color>
+    <color name="nearit_ui_coupon_background_color">@color/nearit_ui_real_white</color>
+
+
+    <!--  DIMENSION  -->
+    <dimen name="nearit_ui_coupon_detail_overall_width">300dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_horizontal_padding">25dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_bottom_padding">45dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_margin1">19dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_margin2">15dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_margin3">9dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_margin4">15dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_margin5">23dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_margin6">2dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_margin7">55dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_margin8">25dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_margin9">33dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_margin10">19dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_margin11">16dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_icon_dimensions">60dp</dimen>
+    <dimen name="nearit_ui_coupon_detail_qrcode_dimensions">100dp</dimen>
+    <!--    Text sizes     -->
+    <dimen name="nearit_ui_coupon_detail_title_text_size">16sp</dimen>
+    <dimen name="nearit_ui_coupon_detail_serial_text_size">20sp</dimen>
+    <dimen name="nearit_ui_coupon_detail_value_text_size">20sp</dimen>
+    <dimen name="nearit_ui_coupon_detail_description_text_size">13sp</dimen>
+    <dimen name="nearit_ui_coupon_detail_validity_text_size">12sp</dimen>
+    <dimen name="nearit_ui_coupon_detail_not_valid_text_size">20sp</dimen>
+
+
+    <!--  STRINGS  -->
+    <string name="nearit_ui_coupon_expired_text">Expired coupon</string>
+    <string name="nearit_ui_coupon_inactive_text">Inactive coupon</string>
+    <string name="nearit_ui_coupon_redeemed_text">Already used coupon</string>
+    <string name="nearit_ui_coupon_validity_label_valid">Validity: </string>
+    <string name="nearit_ui_coupon_validity_label_valid_no_period">Valid</string>
+    <string name="nearit_ui_coupon_validity_label_redeemed">Redeemed at: </string>
+    <string name="nearit_ui_coupon_validity_period_from">from %s</string>
+    <string name="nearit_ui_coupon_validity_period_until">until %s</string>
+    <string name="nearit_ui_coupon_validity_period_from_to">from %1$s to %2$s</string>
+
+
+    <!--  STYLES  -->
+    <style name="NearItUICouponDetailDialog" parent="NearItUIDialog">
+        <item name="android:windowBackground">@color/nearit_ui_coupon_detail_activity_container_background_color</item>
+    </style>
+    <style name="NearItUICouponDetailValidityTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_validity_text_size</item>
+        <item name="fontFamily">@raw/asap_bolditalic</item>
+    </style>
+    <style name="NearItUICouponDetailValidityPeriodTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_validity_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_coupon_detail_validity_period_color</item>
+        <item name="fontFamily">@raw/asap_italic</item>
+    </style>
+    <style name="NearItUICouponDetailValidityLabelTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_not_valid_text_size</item>
+        <item name="fontFamily">@raw/asap_bolditalic</item>
+    </style>
+    <style name="NearItUICouponDetailSerialTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_serial_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_coupon_detail_serial</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+    <style name="NearItUICouponDetailTitleTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_title_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_coupon_detail_title_color</item>
+        <item name="fontFamily">@raw/asap_bold</item>
+    </style>
+    <style name="NearItUICouponDetailValueTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_value_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_coupon_detail_value_color</item>
+        <item name="fontFamily">@raw/asap_bold</item>
+    </style>
+    <style name="NearItUICouponDetailDescriptionTextAppearance">
+        <item name="android:textSize">@dimen/nearit_ui_coupon_detail_description_text_size</item>
+        <item name="android:textColor">@color/nearit_ui_coupon_detail_description_color</item>
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+</resources>

@@ -11,6 +11,10 @@
             android:theme="@style/NearItUIPermissionsDialog" />
 
         <activity
+            android:name=".permissions.invisible.NearItInvisiblePermissionsActivity"
+            android:theme="@style/NearItUIPermissionsDialog" />
+
+        <activity
             android:name=".coupon.NearItCouponDetailActivity"
             android:launchMode="singleTask"
             android:excludeFromRecents="true"

@@ -53,18 +53,18 @@
             android:textAppearance="@style/NearItUIContentTitleTextAppearance"
             android:visibility="gone" />
 
-        <LinearLayout
+
+        <com.nearit.htmltextview.HtmlTextView
+            android:id="@+id/content_html"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="@dimen/nearit_ui_content_margin2">
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:textAppearance="@style/NearItUIContentTextAppearance"
+            android:visibility="gone"
+            android:paddingTop="@dimen/nearit_ui_content_margin2" />
 
-            <WebView
-                android:id="@+id/content_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
-
-        </LinearLayout>
 
         <com.nearit.ui_bindings.content.views.ContentCTAButton
             android:id="@+id/cta_button"

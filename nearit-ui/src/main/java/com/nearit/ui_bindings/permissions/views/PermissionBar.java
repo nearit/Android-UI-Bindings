@@ -8,9 +8,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.support.annotation.Nullable;
-import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,8 +32,10 @@ public class PermissionBar extends RelativeLayout {
     private static final int NO_ICON = 0;
     private final Context context;
 
-    private ImageView btIcon;
-    private ImageView locIcon;
+    @Nullable
+    private OnBarStateChangeListener listener;
+
+    private ImageView face;
     private TextView alertMessage;
     private PermissionBarButton okButton;
 
@@ -41,10 +44,13 @@ public class PermissionBar extends RelativeLayout {
     private boolean invisibleMode;
     private boolean noDialogHeader;
     private boolean autostartRadar;
-    private String buttonText;
     private String alertMessageText;
     private int btIconResId;
     private int locIconResId;
+    private int notifIconResId;
+    private int worriedIconResId;
+    private int sadIconResId;
+    private int happyIconResId;
     private int dialogHeaderResId;
 
     @Nullable
@@ -71,13 +77,64 @@ public class PermissionBar extends RelativeLayout {
         init();
     }
 
+    public void setAlertMessage(String alertText) {
+        alertMessageText = alertText;
+        alertMessage.setText(alertMessageText);
+        init();
+    }
+
+    public boolean isNoBeacon() {
+        return noBeacon;
+    }
+
+    public void setNoBeacon(boolean noBeacon) {
+        this.noBeacon = noBeacon;
+    }
+
+    public boolean isNonBlockingBeacon() {
+        return nonBlockingBeacon;
+    }
+
+    public void setNonBlockingBeacon(boolean nonBlockingBeacon) {
+        this.nonBlockingBeacon = nonBlockingBeacon;
+    }
+
+    public boolean isInvisibleMode() {
+        return invisibleMode;
+    }
+
+    public void setInvisibleMode(boolean invisibleMode) {
+        this.invisibleMode = invisibleMode;
+    }
+
+    public boolean isNoDialogHeader() {
+        return noDialogHeader;
+    }
+
+    public void setNoDialogHeader(boolean noDialogHeader) {
+        this.noDialogHeader = noDialogHeader;
+    }
+
+    public boolean isAutostartRadar() {
+        return autostartRadar;
+    }
+
+    public void setAutostartRadar(boolean autostartRadar) {
+        this.autostartRadar = autostartRadar;
+    }
+
     public void bindToActivity(@Nullable Activity activity, int requestCode) {
         this.activity = activity;
         this.requestCode = requestCode;
     }
 
     public void unbindFromActivity() {
+        getContext().unregisterReceiver(mReceiver);
         this.activity = null;
+    }
+
+    public void setOnBarStateChangeListener(OnBarStateChangeListener listener) {
+        this.listener = listener;
     }
 
     private void obtainAttrs(AttributeSet attrs) {
@@ -86,18 +143,18 @@ public class PermissionBar extends RelativeLayout {
                 R.styleable.NearItUIBar,
                 0, 0);
         try {
-            if (a.getString(R.styleable.NearItUIBar_barButtonText) != null) {
-                buttonText = a.getString(R.styleable.NearItUIBar_barButtonText);
-            } else {
-                buttonText = getContext().getResources().getString(R.string.nearit_ui_permission_bar_button_text);
-            }
-            if (a.getString(R.styleable.NearItUIBar_barButtonText) != null) {
+            if (a.getString(R.styleable.NearItUIBar_barAlertText) != null) {
                 alertMessageText = a.getString(R.styleable.NearItUIBar_barAlertText);
             } else {
                 alertMessageText = getContext().getResources().getString(R.string.nearit_ui_permission_bar_alert_text);
             }
-            btIconResId = a.getResourceId(R.styleable.NearItUIBar_barBluetoothIcon, NO_ICON);
-            locIconResId = a.getResourceId(R.styleable.NearItUIBar_barLocationIcon, NO_ICON);
+            btIconResId = a.getResourceId(R.styleable.NearItUIBar_bluetoothIcon, NO_ICON);
+            locIconResId = a.getResourceId(R.styleable.NearItUIBar_locationIcon, NO_ICON);
+            notifIconResId = a.getResourceId(R.styleable.NearItUIBar_notificationsIcon, NO_ICON);
+
+            sadIconResId = a.getResourceId(R.styleable.NearItUIBar_sadFaceIcon, NO_ICON);
+            worriedIconResId = a.getResourceId(R.styleable.NearItUIBar_worriedFaceIcon, NO_ICON);
+            happyIconResId = a.getResourceId(R.styleable.NearItUIBar_happyFaceIcon, NO_ICON);
 
             noBeacon = a.getBoolean(R.styleable.NearItUIBar_noBeacon, false);
             nonBlockingBeacon = a.getBoolean(R.styleable.NearItUIBar_nonBlockingBeacon, false);
@@ -113,8 +170,7 @@ public class PermissionBar extends RelativeLayout {
     private void init() {
         inflate(getContext(), R.layout.nearit_ui_layout_permission_bar, this);
 
-        btIcon = findViewById(R.id.bluetooth_icon);
-        locIcon = findViewById(R.id.location_icon);
+        face = findViewById(R.id.face);
         alertMessage = findViewById(R.id.alert_message);
         okButton = findViewById(R.id.ok_button);
         okButton.setClickable(true);
@@ -140,6 +196,39 @@ public class PermissionBar extends RelativeLayout {
         if (dialogHeaderResId != NO_ICON) {
             builder.setHeaderResourceId(dialogHeaderResId);
         }
+        if (btIconResId != NO_ICON) {
+            builder.setBluetoothResourceId(btIconResId);
+        }
+        if (locIconResId != NO_ICON) {
+            builder.setLocationResourceId(locIconResId);
+        }
+        if (notifIconResId != NO_ICON) {
+            builder.setNotificationsResourceId(notifIconResId);
+        }
+        if (sadIconResId != NO_ICON) {
+            builder.setSadFaceResourceId(sadIconResId);
+        }
+        if (worriedIconResId != NO_ICON) {
+            builder.setWorriedFaceResourceId(worriedIconResId);
+        }
+        if (happyIconResId != NO_ICON) {
+            builder.setWorriedFaceResourceId(happyIconResId);
+        }
+
+
+        this.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (activity != null) {
+                    activity.startActivityForResult(
+                            builder
+                                    .build()
+                                    .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT),
+                            requestCode
+                    );
+                }
+            }
+        });
 
         okButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -158,123 +247,134 @@ public class PermissionBar extends RelativeLayout {
         getContext().registerReceiver(mReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
         getContext().registerReceiver(mReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
 
-        if (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context) && (PermissionsUtils.checkBluetooth(context) || noBeacon)) {
-            this.setVisibility(GONE);
-        } else {
-            if (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context)) {
-                hideLocationIcon();
-            } else {
-                showLocationIcon();
-            }
-            if (PermissionsUtils.checkBluetooth(context) || noBeacon) {
-                hideBluetoothIcon();
-            } else {
-                showBluetoothIcon();
-            }
-        }
+        checkPermissionsAndUpdateUI();
     }
 
     private void hideBluetoothIcon() {
-        btIcon.setVisibility(GONE);
+        okButton.hideBluetoothIcon();
     }
 
     private void showBluetoothIcon() {
-        btIcon.setVisibility(VISIBLE);
+        okButton.showBluetoothIcon();
+    }
+
+    private void hideNotificationsIcon() {
+        okButton.hideNotificationsIcon();
+    }
+
+    private void showNotificationsIcon() {
+        okButton.showNotificationsIcon();
     }
 
     private void hideLocationIcon() {
-        locIcon.setVisibility(GONE);
+        okButton.hideLocationIcon();
     }
 
     private void showLocationIcon() {
-        locIcon.setVisibility(VISIBLE);
+        okButton.showLocationIcon();
+    }
+
+    public void setSad() {
+        this.setBackgroundColor(ContextCompat.getColor(context, R.color.nearit_ui_permission_bar_sad_color));
+        if (sadIconResId != NO_ICON) {
+            face.setImageResource(sadIconResId);
+        } else {
+            face.setImageResource(R.drawable.ic_nearit_ui_sad_white);
+        }
+    }
+
+    public void setWorried() {
+        this.setBackgroundColor(ContextCompat.getColor(context, R.color.nearit_ui_permission_bar_worried_color));
+        if (worriedIconResId != NO_ICON) {
+            face.setImageResource(worriedIconResId);
+        } else {
+            face.setImageResource(R.drawable.ic_nearit_ui_worried_white);
+        }
     }
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
+
+        ColorDrawable colorDrawable = (ColorDrawable) this.getBackground();
+        if (colorDrawable != null && listener != null) {
+            if (this.getVisibility() != GONE) {
+                listener.onColorChanged(colorDrawable.getColor());
+            } else {
+                listener.onViewGone();
+            }
+        }
+
         alertMessage.setText(alertMessageText);
-        okButton.setButtonText(buttonText);
         if (btIconResId != NO_ICON) {
-            btIcon.setImageDrawable(
-                    ResourcesCompat.getDrawable(getResources(), btIconResId, null)
-            );
+            okButton.setBluetoothIcon(btIconResId);
         }
         if (locIconResId != NO_ICON) {
-            locIcon.setImageDrawable(
-                    ResourcesCompat.getDrawable(getResources(), locIconResId, null)
-            );
+            okButton.setLocationIcon(locIconResId);
+        }
+        if (notifIconResId != NO_ICON) {
+            okButton.setNotificationIcon(notifIconResId);
         }
     }
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-
-            PermissionBar.this.setVisibility(VISIBLE);
-
-            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
-                if (!(PermissionsUtils.checkBluetooth(context) || noBeacon)) {
-                    showBluetoothIcon();
-                    if (PermissionsUtils.checkLocationServices(context) && PermissionsUtils.checkLocationPermission(context)) {
-                        hideLocationIcon();
-                    } else {
-                        showLocationIcon();
-                    }
-                } else {
-                    hideBluetoothIcon();
-                    if (PermissionsUtils.checkLocationServices(context) && PermissionsUtils.checkLocationPermission(context)) {
-                        PermissionBar.this.setVisibility(GONE);
-                    } else {
-                        showLocationIcon();
-                    }
-                }
-            }
-
-            if (LocationManager.PROVIDERS_CHANGED_ACTION.equals(action)) {
-                checkLocationAndUpdateUI();
-            }
+            checkPermissionsAndUpdateUI();
         }
     };
 
-    private void checkLocationAndUpdateUI() {
-        if (!PermissionsUtils.checkLocationServices(context)) {
-            showLocationIcon();
-            if (!(PermissionsUtils.checkBluetooth(context) || noBeacon)) {
-                showBluetoothIcon();
+    private void checkPermissionsAndUpdateUI() {
+        if (PermissionsUtils.areNotificationsEnabled(context)
+                && (PermissionsUtils.checkBluetooth(context) || noBeacon || !PermissionsUtils.isBleAvailable(context))
+                && (PermissionsUtils.checkLocationPermission(context) && PermissionsUtils.checkLocationServices(context))) {
+            this.setVisibility(GONE);
+            if (listener != null) {
+                listener.onViewGone();
             }
         } else {
-            if (PermissionsUtils.checkLocationPermission(context)) {
-                hideLocationIcon();
-                if (PermissionsUtils.checkBluetooth(context) || noBeacon) {
-                    PermissionBar.this.setVisibility(GONE);
-                } else {
-                    showBluetoothIcon();
-                }
+
+            PermissionBar.this.setVisibility(VISIBLE);
+            setSad();
+
+            if (!PermissionsUtils.areNotificationsEnabled(context)) {
+                showNotificationsIcon();
+                setWorried();
             } else {
+                hideNotificationsIcon();
+            }
+
+            if (!PermissionsUtils.checkBluetooth(context) && !noBeacon && PermissionsUtils.isBleAvailable(context)) {
+                showBluetoothIcon();
+                setWorried();
+            } else {
+                hideBluetoothIcon();
+            }
+
+            if (!PermissionsUtils.checkLocationPermission(context)) {
                 showLocationIcon();
-                if (PermissionsUtils.checkBluetooth(context) || noBeacon) {
-                    hideBluetoothIcon();
-                } else {
-                    showBluetoothIcon();
+                setSad();
+            } else {
+                hideLocationIcon();
+                if (!PermissionsUtils.checkLocationServices(context)) {
+                    showLocationIcon();
+                    setWorried();
                 }
             }
+
         }
     }
 
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        getContext().unregisterReceiver(mReceiver);
-    }
-
+    @SuppressWarnings("unused")
     public boolean onActivityResult(int requestCode, int resultCode) {
         if (requestCode == this.requestCode) {
-            if (resultCode == Activity.RESULT_OK) {
-                checkLocationAndUpdateUI();
-            }
+            checkPermissionsAndUpdateUI();
             return true;
         }
         return false;
+    }
+
+    public interface OnBarStateChangeListener {
+        void onColorChanged(int color);
+        void onViewGone();
     }
 }

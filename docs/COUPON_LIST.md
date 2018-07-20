@@ -40,35 +40,9 @@ you are able to show the list of coupons with this sorting rationale:
 
 each set is ordered by the date the user earned the coupons.
 
-![coupon list](coupon_list.png)
+![coupon list](images/coupon_list.png)
 
 ## Advanced examples
-### Network error
-
-You can show a dialog when the request for coupons fails for a network, adding `enableNetErrorDialog()` to the builder.
-
-```java
-JAVA
-startActivity(NearITUIBindings.getInstance(YourActivity.this)
-                        .couponListIntentBuilder()
-                        .enableNetErrorDialog()
-                        .build()
-              );
-```
-
-```kotlin
-KOTLIN
-startActivity(NearITUIBindings.getInstance(this@YourActivity)
-                        .couponListIntentBuilder()
-                        .enableNetErrorDialog()
-                        .build()
-              )
-```
-
-![network problem](net_problem.gif)
-
-The user will be able to simply close the dialog or retry the download, triggering a refresh of the coupon list and dismissing the dialog.
-
 ### Advanced filter
 
 In your application you may want to show only coupons that are in certain states. With our builder you can request a list of only valid coupons:
@@ -168,6 +142,9 @@ For example, if you need to change the validity text colors, you can place these
 <!--    ...     -->
 ```
 
-The same for strings and dimensions. For the complete list of resources have a look in [this directory](../nearit-ui/src/main/res/values).
+The same for strings, dimensions and styles. The following file contains the resources you can override to customize the coupon list appearance:
+
+**TODO: release UI library and fix this link**
+[Coupon list resources](https://github.com/nearit/Android-UI-Bindings/tree/master/nearit-ui/src/main/res/values/coupon_list_resources.xml)
 
 Just keep in mind that changing dimensions can cause unpredictable distortion problems to our layouts.

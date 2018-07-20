@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  COLORS  -->
+    <color name="nearit_ui_permission_bar_sad_color">@color/nearit_ui_sad_color</color>
+    <color name="nearit_ui_permission_bar_worried_color">@color/nearit_ui_worried_color</color>
+    <color name="nearit_ui_permission_bar_background_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_permission_bar_alert_text_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_permission_bar_button_background_color">@color/nearit_ui_black</color>
+    <color name="nearit_ui_permission_bar_button_pressed_background_color">@color/nearit_ui_black_50</color>
+
+
+    <!--  DIMENSIONS  -->
+    <dimen name="nearit_ui_permission_bar_height">50dp</dimen>
+    <dimen name="nearit_ui_permission_bar_main_padding">9dp</dimen>
+    <dimen name="nearit_ui_permission_bar_margin1">5dp</dimen>
+    <dimen name="nearit_ui_permission_bar_text_left_right_margin">11dp</dimen>
+    <dimen name="nearit_ui_permission_bar_button_height">30dp</dimen>
+    <dimen name="nearit_ui_permission_bar_button_width">100dp</dimen>
+    <dimen name="nearit_ui_permission_bar_button_left_right_padding">10dp</dimen>
+    <!--    Text sizes     -->
+    <dimen name="nearit_ui_permission_bar_alert_text_size">13sp</dimen>
+
+
+    <!--  STRINGS  -->
+    <string name="nearit_ui_permission_bar_alert_text">Check all missing permissions</string>
+    <string name="nearit_ui_permission_bar_button_text">OK!</string>
+
+
+    <!--  STYLES  -->
+    <style name="NearItUIPermissionBarAlertMessageTextAppearance">
+        <item name="android:textColor">@color/nearit_ui_permission_bar_alert_text_color</item>
+        <item name="android:textSize">@dimen/nearit_ui_permission_bar_alert_text_size</item>
+        <item name="fontFamily">@raw/asap_medium</item>
+    </style>
+
+
+    <!--  STYLEABLES  -->
+    <declare-styleable name="NearItUIBar">
+        <attr name="barAlertText" format="string" />
+        <attr name="bluetoothIcon" format="reference" />
+        <attr name="locationIcon" format="reference" />
+        <attr name="notificationsIcon" format="reference" />
+        <attr name="worriedFaceIcon" format="reference" />
+        <attr name="sadFaceIcon" format="reference" />
+        <attr name="happyFaceIcon" format="reference" />
+        <attr name="noBeacon" format="boolean" />
+        <attr name="nonBlockingBeacon" format="boolean" />
+        <attr name="invisibleMode" format="boolean" />
+        <attr name="dialogHeader" format="reference" />
+        <attr name="noDialogHeader" format="boolean" />
+        <attr name="autostartRadar" format="boolean" />
+    </declare-styleable>
+</resources>
