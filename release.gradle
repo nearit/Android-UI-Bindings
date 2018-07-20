@@ -1,0 +1,24 @@
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = POM_BINTRAY_NAME
+
+    publishedGroupId = 'it.nearit.sdk'
+    libraryName = 'NearIT Android UI'
+    artifact = POM_ARTIFACT_ID
+    packagingType = 'aar'
+
+    libraryDescription = POM_DESCRIPTION
+
+    siteUrl = 'https://nearit.com'
+    gitUrl = 'https://github.com/nearit/Android-UI-Bindings.git'
+
+    licenseName = 'MIT'
+    licenseUrl = 'https://github.com/nearit/Android-UI-Bindings/blob/master/LICENSE'
+    allLicenses = ["MIT"]
+}
+
+// Set up the Android Maven publication.
+apply from: rootProject.file('jcenter/maven-install.gradle')
+
+// Publish on Bintray.
+apply from: rootProject.file('jcenter/distribution.gradle')

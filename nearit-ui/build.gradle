@@ -18,7 +18,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.novoda.build-properties'
-apply from: 'distribution.gradle'
+apply from: rootProject.file('release.gradle')
 
 android {
     compileSdkVersion 27
