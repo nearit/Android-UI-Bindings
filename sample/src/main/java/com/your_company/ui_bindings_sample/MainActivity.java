@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 
+import it.near.sdk.NearItManager;
+
 
 /**
  * @author Federico Boschini
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        NearItManager.getInstance().triggerInAppEvent("coupon");
     }
 
     public void openPermissions(View view) {
