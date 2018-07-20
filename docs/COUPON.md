@@ -53,6 +53,8 @@ Please, keep in mind that the icon should be a square: a different aspect-ratio 
 
 ![NearIT-UI custom icon coupon dialog](images/coupon_custom_icon.png)
 
+### Fragment mode
+
 Optionally, you can display the coupon in your custom Activity by adding a Fragment to it. You can get a Fragment via another builder:
 
 ```java
@@ -84,7 +86,12 @@ In order to provide a better UX in a real scenario, our `Fragment` keeps the scr
 
 ## UI Customization
 
-If you wish to change some messages, the existing strings can be overridden by name in your application. For example, consider the following `res/values/strings.xml`
+If you wish to change some messages, the existing strings can be overridden by name in your application. At the following link you have the complete list of resources you can override
+
+[Coupon resources](https://github.com/nearit/Android-UI-Bindings/tree/master/nearit-ui/src/main/res/values/coupon_detail_resources.xml)
+
+
+For example, consider the following `res/values/strings.xml`
 
 ```xml
 <resources>

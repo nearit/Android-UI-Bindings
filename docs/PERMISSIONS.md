@@ -137,9 +137,9 @@ On devices pre-Lollipop (API < 18) BLE technology is not available and some of t
 
 On devices with outdated Play Services, the user is notified of that lack. While Play Services are updating, the UI keep waiting and loading. When the update is done, the UX flow continues normally.
 
-![Permissions - Outdated PS 1](outdated_play_services1.png)
-![Permissions - Outdated PS 3](outdated_play_services3.png)
-![Permissions - Outdated PS 4](outdated_play_services4.png)
+![Permissions - Outdated PS 1](images/outdated_play_services1.png)
+![Permissions - Outdated PS 3](images/outdated_play_services3.png)
+![Permissions - Outdated PS 4](images/outdated_play_services4.png)
 
 <br>
 <br>
@@ -147,7 +147,13 @@ On devices with outdated Play Services, the user is notified of that lack. While
 
 ## UI Customization
 
-If you wish to change the message in the permissions dialog, the existing strings can be overridden by name in your application. See the module's strings.xml file and simply redefine a string to change it:
+f you wish to change the message in the permissions dialog, the existing strings can be overridden by name in your application. Please, refer to this file to have a complete list of overridable resources
+
+[Permissions dialog resources](https://github.com/nearit/Android-UI-Bindings/tree/master/nearit-ui/src/main/res/values/permissions_dialog_resources.xml)
+
+### Examples
+
+See the module's strings.xml file and simply redefine a string to change it:
 
 ```xml
 <resources>

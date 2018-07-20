@@ -15,3 +15,5 @@ For example, before invoking our permissions UIs, you should check for permissio
 - `isBleAvailable(Context context)`: returns true if BLE hardware/software is available on the device
 
 - `isAirplaneModeOn(Context context)`: returns true if airplane/flight mode has been turned ON
+
+- `areNotificationsEnabled(Context context)`: true if notifications are enabled, false otherwise

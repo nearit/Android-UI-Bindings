@@ -142,6 +142,9 @@ For example, if you need to change the validity text colors, you can place these
 <!--    ...     -->
 ```
 
-The same for strings and dimensions. For the complete list of resources have a look in [this directory](../nearit-ui/src/main/res/values).
+The same for strings, dimensions and styles. The following file contains the resources you can override to customize the coupon list appearance:
+
+**TODO: release UI library and fix this link**
+[Coupon list resources](https://github.com/nearit/Android-UI-Bindings/tree/master/nearit-ui/src/main/res/values/coupon_list_resources.xml)
 
 Just keep in mind that changing dimensions can cause unpredictable distortion problems to our layouts.

@@ -24,8 +24,8 @@ If you want your app to display a feedback request in a beautiful pop-up dialog,
 where, `feedback` is an instance of NearIT SDK `Feedback` class. Further information on coupons and other in-app content can be found [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/).
 The Feedback UI also takes care of delivering the user response to the SDK library and showing the proper success or failure status of the user action.
 
-![NearIT-UI feedback request dialog, success](feedback_request_success.gif)
-![NearIT-UI feedback request dialog, fail](feedback_request_fail.gif)
+![NearIT-UI feedback request dialog, success](images/feedback_request_success.gif)
+![NearIT-UI feedback request dialog, fail](images/feedback_request_fail.gif)
 
 ## Advanced examples
 If you need to simplify the feedback request you are able to ask the user for the 1 to 5 rating only, without any textual comment (please notice that the text response is optional in every scenerio), you can hide the text box adding one method call:
@@ -51,7 +51,7 @@ If you need to simplify the feedback request you are able to ask the user for th
 ```
 
 
-![NearIT-UI no text response feedback dialog](feedback_no_text.png)
+![NearIT-UI no text response feedback dialog](images/feedback_no_text.png)
 
 Optionally, you can display the feedback request in your custom Activity by adding a Fragment to it. You can get a Fragment via another builder:
 
@@ -85,7 +85,9 @@ on both of the builders.
 
 ## UI Customization
 
-If you wish to change some messages, the existing strings can be overridden by name in your application. For example, consider the following `res/values/strings.xml`
+If you wish to change some messages, the existing strings can be overridden by name in your application. At the following link you have the complete list of resources you can override
+
+[Feedback resources](https://github.com/nearit/Android-UI-Bindings/tree/master/nearit-ui/src/main/res/values/feedback_resources.xml)
 
 ```xml
 <resources>

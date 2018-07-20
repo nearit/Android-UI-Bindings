@@ -199,3 +199,7 @@ As usual, you can override our string/color/dimen resources by name. Just as a s
 <color name="nearit_ui_permission_bar_button_background_color">your_color</color>
 <!--    ...     -->
 ```
+
+These are the overridable resources:
+
+[Permissions bar resources](https://github.com/nearit/Android-UI-Bindings/tree/master/nearit-ui/src/main/res/values/permissions_bar_resources.xml)
