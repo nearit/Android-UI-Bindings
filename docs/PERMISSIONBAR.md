@@ -6,11 +6,7 @@ If you want to show a persistent bar that alert the user if any permission is mi
 This bar visually specifies what is missing (by showing/hiding the two icons) and will automatically hide itself when every permission has been granted.
 
 ![missing_both](images/permissions_bar_missing_all.png)
-![missing_both](images/permissions_bar_missing_many.png)
-![missing_both](images/permissions_bar_missing_permission.png)
 ![missing_bt](images/permissions_bar_missing_bt.png)
-![missing_loc](images/permissions_bar_missing_loc.png)
-![missing_notif](images/permissions_bar_missing_notif.png)
 
 Add the following xml element where you want to show the bar
 
