@@ -10,18 +10,24 @@ import com.nearit.ui_bindings.permissions.invisible.NearItInvisiblePermissionsAc
  */
 
 public class PermissionsRequestIntentBuilder {
-    private final Context mContext;
-    private boolean mEnableTapOutsideToClose = false;
-    private boolean mRadarAutoStart = false;
-    private boolean mInvisibleLayoutMode = false;
-    private boolean mNoBeacon = false;
-    private boolean mNonBlockingBeacon = false;
-    private int mHeaderDrawable;
-    private boolean mNoHeader = false;
-    private boolean mShowNotificationsButton = false;
+    private final Context context;
+    private boolean enableTapOutsideToClose = false;
+    private boolean radarAutoStart = false;
+    private boolean invisibleLayoutMode = false;
+    private boolean noBeacon = false;
+    private boolean nonBlockingBeacon = false;
+    private int headerResourceId;
+    private int bluetoothResourceId;
+    private int locationResourceId;
+    private int notificationsResourceId;
+    private int sadFaceResourceId;
+    private int worriedFaceResourceId;
+    private int happyFaceResourceId;
+    private boolean noHeader = false;
+    private boolean showNotificationsButton = false;
 
     public PermissionsRequestIntentBuilder(Context context) {
-        mContext = context;
+        this.context = context;
     }
 
     /**
@@ -30,7 +36,7 @@ public class PermissionsRequestIntentBuilder {
      * <p> default is false
      */
     public PermissionsRequestIntentBuilder enableTapOutsideToClose() {
-        mEnableTapOutsideToClose = true;
+        enableTapOutsideToClose = true;
         return this;
     }
 
@@ -40,7 +46,7 @@ public class PermissionsRequestIntentBuilder {
      * <p> Automatic radar start default is false
      */
     public PermissionsRequestIntentBuilder automaticRadarStart() {
-        mRadarAutoStart = true;
+        radarAutoStart = true;
         return this;
     }
 
@@ -50,7 +56,7 @@ public class PermissionsRequestIntentBuilder {
      * <p> Default: false
      */
     public PermissionsRequestIntentBuilder invisibleLayoutMode() {
-        mInvisibleLayoutMode = true;
+        invisibleLayoutMode = true;
         return this;
     }
 
@@ -60,7 +66,7 @@ public class PermissionsRequestIntentBuilder {
      * <p> Default: false = bluetooth is required
      */
     public PermissionsRequestIntentBuilder noBeacon() {
-        mNoBeacon = true;
+        noBeacon = true;
         return this;
     }
 
@@ -70,15 +76,63 @@ public class PermissionsRequestIntentBuilder {
      * <p> Default: false = bluetooth is required and blocking
      */
     public PermissionsRequestIntentBuilder nonBlockingBeacon() {
-        mNonBlockingBeacon = true;
+        nonBlockingBeacon = true;
         return this;
     }
 
     /**
      *  Sets a custom header
      */
-    public PermissionsRequestIntentBuilder setHeaderResourceId(int header) {
-        mHeaderDrawable = header;
+    public PermissionsRequestIntentBuilder setHeaderResourceId(int headerResourceId) {
+        this.headerResourceId = headerResourceId;
+        return this;
+    }
+
+    /**
+     *  Sets a custom bluetoothIcon
+     */
+    public PermissionsRequestIntentBuilder setBluetoothResourceId(int bluetoothResourceId) {
+        this.bluetoothResourceId = bluetoothResourceId;
+        return this;
+    }
+
+    /**
+     *  Sets a custom locationIcon
+     */
+    public PermissionsRequestIntentBuilder setLocationResourceId(int locationResourceId) {
+        this.locationResourceId = locationResourceId;
+        return this;
+    }
+
+    /**
+     *  Sets a custom notificationsIcon
+     */
+    public PermissionsRequestIntentBuilder setNotificationsResourceId(int notificationsResourceId) {
+        this.notificationsResourceId = notificationsResourceId;
+        return this;
+    }
+
+    /**
+     *  Sets a custom sadFaceResourceId
+     */
+    public PermissionsRequestIntentBuilder setSadFaceResourceId(int sadFaceResourceId) {
+        this.sadFaceResourceId = sadFaceResourceId;
+        return this;
+    }
+
+    /**
+     *  Sets a custom happyFaceResourceId
+     */
+    public PermissionsRequestIntentBuilder setHappyFaceResourceId(int happyFaceResourceId) {
+        this.happyFaceResourceId = happyFaceResourceId;
+        return this;
+    }
+
+    /**
+     *  Sets a custom worriedFaceResourceId
+     */
+    public PermissionsRequestIntentBuilder setWorriedFaceResourceId(int worriedFaceResourceId) {
+        this.worriedFaceResourceId = worriedFaceResourceId;
         return this;
     }
 
@@ -86,7 +140,7 @@ public class PermissionsRequestIntentBuilder {
      *  Sets no header
      */
     public PermissionsRequestIntentBuilder setNoHeader() {
-        mNoHeader = true;
+        this.noHeader = true;
         return this;
     }
 
@@ -96,28 +150,34 @@ public class PermissionsRequestIntentBuilder {
      */
     @SuppressWarnings("unused")
     public PermissionsRequestIntentBuilder showNotificationsButton() {
-        mShowNotificationsButton = true;
+        showNotificationsButton = true;
         return this;
     }
 
     public Intent build() {
-        if (mInvisibleLayoutMode) {
-            return NearItInvisiblePermissionsActivity.createIntent(mContext, getParams());
+        if (invisibleLayoutMode) {
+            return NearItInvisiblePermissionsActivity.createIntent(context, getParams());
         } else {
-            return NearItPermissionsActivity.createIntent(mContext, getParams());
+            return NearItPermissionsActivity.createIntent(context, getParams());
         }
     }
 
     private PermissionsRequestExtraParams getParams() {
         return new PermissionsRequestExtraParams(
-                mEnableTapOutsideToClose,
-                mRadarAutoStart,
-                mInvisibleLayoutMode,
-                mNoBeacon,
-                mNonBlockingBeacon,
-                mHeaderDrawable,
-                mNoHeader,
-                mShowNotificationsButton);
+                enableTapOutsideToClose,
+                radarAutoStart,
+                invisibleLayoutMode,
+                noBeacon,
+                nonBlockingBeacon,
+                headerResourceId,
+                bluetoothResourceId,
+                locationResourceId,
+                notificationsResourceId,
+                sadFaceResourceId,
+                worriedFaceResourceId,
+                happyFaceResourceId,
+                noHeader,
+                showNotificationsButton);
     }
 
 }

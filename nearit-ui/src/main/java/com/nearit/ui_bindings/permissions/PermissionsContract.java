@@ -18,6 +18,13 @@ interface PermissionsContract {
         void hideHeader();
         void setHeader(int resId);
 
+        void setBluetoothIcon(int resId);
+        void setLocationIcon(int resId);
+        void setNotificationsIcon(int resId);
+        void setSadFaceIcon(int resId);
+        void setWorriedFaceIcon(int resId);
+        void setHappyIcon(int resId);
+
         void hideBluetoothButton();
         void setBluetoothButtonHappy();
         void setBluetoothButtonSad();

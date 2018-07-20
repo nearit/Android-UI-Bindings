@@ -37,7 +37,7 @@
     <!--  STYLEABLES  -->
     <declare-styleable name="NearItUIPermissionButtonView">
         <attr name="buttonText" format="string" />
-        <attr name="iconRes" format="reference" />
+        <attr name="permissionIcon" format="reference" />
         <attr name="sadFaceRes" format="reference" />
         <attr name="worriedFaceRes" format="reference" />
         <attr name="happyFaceRes" format="reference" />
@@ -45,9 +45,11 @@
     <declare-styleable name="NearItUIBar">
         <attr name="barButtonText" format="string" />
         <attr name="barAlertText" format="string" />
-        <attr name="barBluetoothIcon" format="reference" />
-        <attr name="barLocationIcon" format="reference" />
-        <attr name="barNotificationsIcon" format="reference" />
+        <attr name="bluetoothIcon" format="reference" />
+        <attr name="locationIcon" format="reference" />
+        <attr name="notificationsIcon" format="reference" />
+        <attr name="worriedFaceIcon" format="reference" />
+        <attr name="sadFaceIcon" format="reference" />
         <attr name="noBeacon" format="boolean" />
         <attr name="nonBlockingBeacon" format="boolean" />
         <attr name="invisibleMode" format="boolean" />

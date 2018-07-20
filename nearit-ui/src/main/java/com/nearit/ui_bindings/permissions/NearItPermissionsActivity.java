@@ -160,6 +160,42 @@ public class NearItPermissionsActivity extends AppCompatActivity implements Perm
     }
 
     @Override
+    public void setBluetoothIcon(int resId) {
+        bleButton.setIcon(resId);
+    }
+
+    @Override
+    public void setLocationIcon(int resId) {
+        locationButton.setIcon(resId);
+    }
+
+    @Override
+    public void setNotificationsIcon(int resId) {
+        notificationsButton.setIcon(resId);
+    }
+
+    @Override
+    public void setSadFaceIcon(int resId) {
+        bleButton.setSadFaceRes(resId);
+        locationButton.setSadFaceRes(resId);
+        notificationsButton.setSadFaceRes(resId);
+    }
+
+    @Override
+    public void setWorriedFaceIcon(int resId) {
+        bleButton.setWorriedFaceRes(resId);
+        locationButton.setWorriedFaceRes(resId);
+        notificationsButton.setWorriedFaceRes(resId);
+    }
+
+    @Override
+    public void setHappyIcon(int resId) {
+        bleButton.setHappyFaceRes(resId);
+        locationButton.setHappyFaceRes(resId);
+        notificationsButton.setHappyFaceRes(resId);
+    }
+
+    @Override
     public void hideBluetoothButton() {
         bleButton.setVisibility(View.GONE);
     }

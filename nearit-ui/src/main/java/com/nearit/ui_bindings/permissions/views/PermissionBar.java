@@ -48,6 +48,8 @@ public class PermissionBar extends RelativeLayout {
     private int btIconResId;
     private int locIconResId;
     private int notifIconResId;
+    private int worriedIconResId;
+    private int sadIconResId;
     private int dialogHeaderResId;
 
     @Nullable
@@ -145,9 +147,12 @@ public class PermissionBar extends RelativeLayout {
             } else {
                 alertMessageText = getContext().getResources().getString(R.string.nearit_ui_permission_bar_alert_text);
             }
-            btIconResId = a.getResourceId(R.styleable.NearItUIBar_barBluetoothIcon, NO_ICON);
-            locIconResId = a.getResourceId(R.styleable.NearItUIBar_barLocationIcon, NO_ICON);
-            notifIconResId = a.getResourceId(R.styleable.NearItUIBar_barNotificationsIcon, NO_ICON);
+            btIconResId = a.getResourceId(R.styleable.NearItUIBar_bluetoothIcon, NO_ICON);
+            locIconResId = a.getResourceId(R.styleable.NearItUIBar_locationIcon, NO_ICON);
+            notifIconResId = a.getResourceId(R.styleable.NearItUIBar_notificationsIcon, NO_ICON);
+
+            sadIconResId = a.getResourceId(R.styleable.NearItUIBar_sadFaceIcon, NO_ICON);
+            worriedIconResId = a.getResourceId(R.styleable.NearItUIBar_worriedFaceIcon, NO_ICON);
 
             noBeacon = a.getBoolean(R.styleable.NearItUIBar_noBeacon, false);
             nonBlockingBeacon = a.getBoolean(R.styleable.NearItUIBar_nonBlockingBeacon, false);
@@ -250,12 +255,20 @@ public class PermissionBar extends RelativeLayout {
 
     public void setSad() {
         this.setBackgroundColor(ContextCompat.getColor(context, R.color.nearit_ui_permission_bar_sad_color));
-        face.setImageResource(R.drawable.ic_nearit_ui_sad_white);
+        if (sadIconResId != NO_ICON) {
+            face.setImageResource(sadIconResId);
+        } else {
+            face.setImageResource(R.drawable.ic_nearit_ui_sad_white);
+        }
     }
 
     public void setWorried() {
         this.setBackgroundColor(ContextCompat.getColor(context, R.color.nearit_ui_permission_bar_worried_color));
-        face.setImageResource(R.drawable.ic_nearit_ui_worried_white);
+        if (worriedIconResId != NO_ICON) {
+            face.setImageResource(worriedIconResId);
+        } else {
+            face.setImageResource(R.drawable.ic_nearit_ui_worried_white);
+        }
     }
 
     @Override

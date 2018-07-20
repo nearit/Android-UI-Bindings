@@ -513,7 +513,7 @@ public class PermissionsPresenterImplTest {
     }
 
     private void whenCustomHeader() {
-        when(params.getHeaderDrawable()).thenReturn(customHeaderResId);
+        when(params.getHeaderResourceId()).thenReturn(customHeaderResId);
     }
 
     private void whenBleIsNotAvailable() {
