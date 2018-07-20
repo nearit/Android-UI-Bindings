@@ -40,35 +40,9 @@ you are able to show the list of coupons with this sorting rationale:
 
 each set is ordered by the date the user earned the coupons.
 
-![coupon list](coupon_list.png)
+![coupon list](images/coupon_list.png)
 
 ## Advanced examples
-### Network error
-
-You can show a dialog when the request for coupons fails for a network, adding `enableNetErrorDialog()` to the builder.
-
-```java
-JAVA
-startActivity(NearITUIBindings.getInstance(YourActivity.this)
-                        .couponListIntentBuilder()
-                        .enableNetErrorDialog()
-                        .build()
-              );
-```
-
-```kotlin
-KOTLIN
-startActivity(NearITUIBindings.getInstance(this@YourActivity)
-                        .couponListIntentBuilder()
-                        .enableNetErrorDialog()
-                        .build()
-              )
-```
-
-![network problem](net_problem.gif)
-
-The user will be able to simply close the dialog or retry the download, triggering a refresh of the coupon list and dismissing the dialog.
-
 ### Advanced filter
 
 In your application you may want to show only coupons that are in certain states. With our builder you can request a list of only valid coupons:

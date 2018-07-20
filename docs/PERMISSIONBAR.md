@@ -5,9 +5,12 @@ Your app should ask the user to grant location permission and to turn the blueto
 If you want to show a persistent bar that alert the user if any permission is missing, this library provides a convenient `View`.
 This bar visually specifies what is missing (by showing/hiding the two icons) and will automatically hide itself when every permission has been granted.
 
-![missing_both](missing_both.png)
-![missing_bt](missing_bt.png)
-![missing_loc](missing_loc.png)
+![missing_both](images/permissions_bar_missing_all.png)
+![missing_both](images/permissions_bar_missing_many.png)
+![missing_both](images/permissions_bar_missing_permission.png)
+![missing_bt](images/permissions_bar_missing_bt.png)
+![missing_loc](images/permissions_bar_missing_loc.png)
+![missing_notif](images/permissions_bar_missing_notif.png)
 
 Add the following xml element where you want to show the bar
 
@@ -29,7 +32,7 @@ Kotlin version: if you use the [Kotlin Android Extensions plugin](https://kotlin
 
 It is **important** that you pass an Activity reference to the bar: by doing this, clicking the bar button will cause the launch of the permissions request flow.
 
-![bar](permissions_bar.gif)
+![bar](images/permissions_bar.gif)
 
 To set the activity use the following method in your activity `onCreate`:
 

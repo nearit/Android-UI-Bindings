@@ -38,7 +38,7 @@ If you want your app to ask user for both location and bluetooth permissions (an
 
 In this basic example, both location and bluetooth are required to be granted and turned on: you can check if the request succeded or failed in `onActivityResult(...)` by referring to the same request code.
 
-![NearIT-UI permissions request demo on Android](permissions_request.gif)
+![NearIT-UI permissions request demo on Android](images/permissions_dialog.gif)
 
 <br>
 
@@ -96,7 +96,7 @@ If your app uses Beacons, but you consider the bluetooth a non-blocking requirem
 ## No-UI request
 The whole permisison request flow, can be started without UI. 
 
-![NearIT-UI permissions request demo on Android](permissions_request_invisible.gif)
+![NearIT-UI permissions request demo on Android](images/permissions_invisible.gif)
 
 In order to start the permission flow without UI, you should chain `invisibleLayoutMode()` in the builder.
 
@@ -128,8 +128,8 @@ In order to start the permission flow without UI, you should chain `invisibleLay
 
 We provide a dialog that informs the user if flight-mode is ON or if he chose "Never ask again" on permission request. The dialogs send the user to the right settings screen.
 
-![Permissions - Flight mode](flight_mode.gif)
-![Permissions - Don't ask again](dont_ask_again.gif)
+![Permissions - Flight mode](images/flight_mode.gif)
+![Permissions - Don't ask again](images/dont_ask_again.gif)
 
 On devices pre-Lollipop (API < 18) BLE technology is not available and some of the Lollipop devices do not have a supported hardware. In those particular cases, we don't ask for bluetooth permission and we hide the bluetooth UI. 
 

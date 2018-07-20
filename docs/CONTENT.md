@@ -24,7 +24,7 @@ If you want your app to display a NearIT content in a pop-up dialog, use this si
 where, `content` is an instance of NearIT SDK `Content` class and `trackingInfo` is an instance of `TrackingInfo`. The Content detail window will automatically track user tap on the content CTA Button.
 Both instances get usually delivered together. If you don't have access to the `trackingInfo` instance you can call the builder with a `null` `trackingInfo`. Further information on contents and other in-app content can be found [here](http://nearit-android.readthedocs.io/en/latest/in-app-content/).
 
-![NearIT-UI content dialog](content.png)
+![NearIT-UI content dialog](images/content.png)
 
 When the user taps on the button, the link will be opened: some types of link will be managed by a specific app, if that app is installed (e.g. a Facebook link).
 
