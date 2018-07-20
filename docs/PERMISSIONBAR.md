@@ -93,7 +93,49 @@ KOTLIN
 permission_bar.unbindFromActivity()
 ```
 
-Because the permissions request flow launched by the `OK!` button is the same provided [here](PERMISSIONS.md), you can customize its behaviour and look.
+Based on permissions state, the PermissionBar will change its color and, eventually, hide itself. To have callbacks for those events, you can set a listener:
+
+```java
+JAVA
+bar.setOnBarStateChangeListener(new PermissionBar.OnBarStateChangeListener() {
+            @Override
+            public void onColorChanged(int color) {
+                /*  PermissionBar changed color:
+                 *  you can use the color to update some other component of your UI
+                 *
+                 *  WARNING: the int returned is the actual color, NOT the resourceId
+                 */
+            }
+
+            @Override
+            public void onViewGone() {
+                /*
+                 *  PermissionBar is gone
+                 */
+            }
+        });
+```
+
+```kotlin
+KOTLIN
+permission_bar.setOnBarStateChangeListener(object : PermissionBar.OnBarStateChangeListener {
+            override fun onColorChanged(color: Int) {
+                /*  PermissionBar changed color:
+                 *  you can use the color to update some other component of your UI
+                 *
+                 *  WARNING: the int returned is the actual color, NOT the resourceId
+                 */
+            }
+
+            override fun onViewGone() {
+                /*
+                 *  PermissionBar is gone
+                 */
+            }
+        })
+```
+
+Because the permissions request flow launched by the button is the same provided [here](PERMISSIONS.md), you can customize its behaviour and look.
 When you add the xml element you can set some attributes:
 
 ```xml
@@ -138,13 +180,16 @@ The other UI customizations available from xml attributes are:
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         
-        app:barBluetoothIcon="@drawable/your_drawable_bt_icon"
-        app:barLocationIcon="@drawable/your_drawable_loc_icon"
+        app:bluetoothIcon="@drawable/your_drawable_bt_icon"
+        app:locationIcon="@drawable/your_drawable_loc_icon"
+        app:notificationsIcon="@drawable/your_drawable_notif_icon"
+        app:sadFaceIcon="@drawable/your_drawable_sad_face_icon"
+        app:worriedFaceIcon="@drawable/your_drawable_worried_face_icon"
         
         />
 ```
 
-and let you change the bluetooth and location icons.
+and let you change the bluetooth, location, notifications and status icons.
 
 As usual, you can override our string/color/dimen resources by name. Just as a short example, you can change the bar colors this way:
 ```xml

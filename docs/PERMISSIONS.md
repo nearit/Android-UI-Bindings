@@ -179,7 +179,7 @@ Selector for the text color, `drawable/nearit_ui_selector_permission_button_text
 </selector>
 ```
 
-Additionaly, if you wish to replace the header image of the permissions request dialog, you must provide your own image and pass its id to the following method of the builder:
+Additionaly, if you wish to replace the images or the icons of the permissions request dialog, you must provide your own images and pass their ids to the right method of the builder:
 
 ```java
  JAVA
@@ -187,7 +187,13 @@ Additionaly, if you wish to replace the header image of the permissions request 
         NearITUIBindings.getInstance(YourActivity.this)
                 .permissionsIntentBuilder()
                 // ...
-                .setHeaderResourceId(R.drawable.your_image) 
+                .setHeaderResourceId(R.drawable.your_image)
+                .setBluetoothResourceId(R.drawable.your_image)
+                .setLocationResourceId(R.drawable.your_image)
+                .setNotificationsResourceId(R.drawable.your_image)
+                .setSadFaceResourceId(R.drawable.your_image)
+                .setWorriedFaceResourceId(R.drawable.your_image)
+                .setHappyFaceResourceId(R.drawable.your_image)
                 .build(),
         NEAR_PERMISSION_REQUEST);
 ```
@@ -198,7 +204,13 @@ Additionaly, if you wish to replace the header image of the permissions request 
         NearITUIBindings.getInstance(this@YourActivity)
                 .permissionsIntentBuilder()
                 // ...
-                .setHeaderResourceId(R.drawable.your_image) 
+                .setHeaderResourceId(R.drawable.your_image)
+                .setBluetoothResourceId(R.drawable.your_image)
+                .setLocationResourceId(R.drawable.your_image)
+                .setNotificationsResourceId(R.drawable.your_image)
+                .setSadFaceResourceId(R.drawable.your_image)
+                .setWorriedFaceResourceId(R.drawable.your_image)
+                .setHappyFaceResourceId(R.drawable.your_image)
                 .build(),
         NEAR_PERMISSION_REQUEST)
 ```
