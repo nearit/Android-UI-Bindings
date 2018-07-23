@@ -6,7 +6,7 @@ If you want to apply fonts that match your app style, you have to override our b
 In your `res/values/styles.xml` do something like this:
 
 ```xml
-<!--    REGULAR     -->
+    <!--    REGULAR     -->
     <style name="NearItUIGlobalTheme.RegularText" parent="NearItUIGlobalTheme">
         <item name="fontFamily">@font/your_font</item>
     </style>
