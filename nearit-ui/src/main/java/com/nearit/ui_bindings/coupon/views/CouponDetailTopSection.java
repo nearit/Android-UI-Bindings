@@ -171,7 +171,7 @@ public class CouponDetailTopSection extends RelativeLayout {
             case NOT_YET_VALID:
                 if (validityTextView != null) {
                     validityTextView.setText(getResources().getString(R.string.nearit_ui_coupon_validity_label_valid));
-                    validityTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_expired_color));
+                    validityTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_inactive_color));
                 }
                 if (notValidTextView != null) {
                     notValidTextView.setVisibility(VISIBLE);

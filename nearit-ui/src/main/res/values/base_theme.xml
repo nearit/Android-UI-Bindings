@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="NearItUIGlobalTheme" />
+
+    <color name="nearit_ui_black_text">#333333</color>
+    <color name="nearit_ui_grey_text">#777777</color>
+    <color name="nearit_ui_grey_pressed_text">#80777777</color>
+    <color name="nearit_ui_white_text">#FFFFFF</color>
+    <color name="nearit_ui_green_text">#68C600</color>
+    <color name="nearit_ui_red_text">#FF314F</color>
+    <color name="nearit_ui_backgrounds">#FFFFFF</color>
+
+    <!--    REGULAR     -->
+    <style name="NearItUIGlobalTheme.RegularText" parent="NearItUIGlobalTheme">
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+
+    <!--    ITALIC      -->
+    <style name="NearItUIGlobalTheme.ItalicText" parent="NearItUIGlobalTheme">
+        <item name="fontFamily">@raw/asap_regular</item>
+    </style>
+
+    <!--    BOLD        -->
+    <style name="NearItUIGlobalTheme.BoldText" parent="NearItUIGlobalTheme">
+        <item name="fontFamily">@raw/asap_bold</item>
+    </style>
+
+    <!--    MEDIUM      -->
+    <style name="NearItUIGlobalTheme.MediumText" parent="NearItUIGlobalTheme">
+        <item name="fontFamily">@raw/asap_medium</item>
+    </style>
+
+    <!--    BOLDITALIC      -->
+    <style name="NearItUIGlobalTheme.BoldItalicText" parent="NearItUIGlobalTheme">
+        <item name="fontFamily">@raw/asap_bolditalic</item>
+    </style>
+
+    <!--    MEDIUMITALIC        -->
+    <style name="NearItUIGlobalTheme.MediumItalicText" parent="NearItUIGlobalTheme">
+        <item name="fontFamily">@raw/asap_mediumitalic</item>
+    </style>
+
+</resources>

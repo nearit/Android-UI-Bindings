@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_below="@id/permission_button_text"
+            android:textAppearance="@style/NearItUIPermissionButtonLabelAppearance"
             android:textColor="@color/nearit_ui_worried_color"
             android:visibility="gone"
             android:layout_centerHorizontal="true" />

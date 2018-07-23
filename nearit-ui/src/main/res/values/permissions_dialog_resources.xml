@@ -3,12 +3,12 @@
     <!--  COLORS  -->
     <color name="nearit_ui_permissions_activity_background_color">@color/nearit_ui_real_white</color>
     <color name="nearit_ui_permission_not_given_button_background_color">@color/nearit_ui_black</color>
-    <color name="nearit_ui_permission_not_given_button_text_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_permission_not_given_button_text_color">@color/nearit_ui_white_text</color>
     <color name="nearit_ui_permission_button_selected_background_color">#f2f2f2</color>
-    <color name="nearit_ui_permission_button_selected_text_color">@color/nearit_ui_black</color>
-    <color name="nearit_ui_permissions_text_color">@color/nearit_ui_warm_grey</color>
-    <color name="nearit_ui_permissions_close_text_color">@color/nearit_ui_warm_grey</color>
-    <color name="nearit_ui_permissions_close_pressed_text_color">@color/nearit_ui_warm_grey_50</color>
+    <color name="nearit_ui_permission_button_selected_text_color">@color/nearit_ui_black_text</color>
+    <color name="nearit_ui_permissions_text_color">@color/nearit_ui_grey_text</color>
+    <color name="nearit_ui_permissions_close_text_color">@color/nearit_ui_grey_text</color>
+    <color name="nearit_ui_permissions_close_pressed_text_color">@color/nearit_ui_grey_pressed_text</color>
 
 
     <!--  DIMENSIONS  -->
@@ -21,6 +21,7 @@
     <dimen name="nearit_ui_permissions_activity_icon_margin">17dp</dimen>
     <!--  Text sizes  -->
     <dimen name="nearit_ui_permissions_text_size">15sp</dimen>
+    <dimen name="nearit_ui_permissions_button_label_size">12sp</dimen>
 
 
     <!--  STRINGS  -->
@@ -51,13 +52,15 @@
     <style name="NearItUIPermissionButtonTextAppearance" parent="NearItUIButtonTextAppearance">
         <item name="android:textColor">@drawable/nearit_ui_selector_permission_button_text_color</item>
     </style>
+    <style name="NearItUIPermissionButtonLabelAppearance" parent="NearItUIGlobalTheme.RegularText">
+        <item name="android:textSize">@dimen/nearit_ui_permissions_button_label_size</item>
+    </style>
     <style name="NearItUIPermissionsDismissButtonTextAppearance" parent="NearITUIDismissButtonTextAppearance">
         <item name="android:textColor">@drawable/nearit_ui_selector_permission_close_text_color</item>
     </style>
-    <style name="NearItUIPermissionsExplanationTextAppearance">
+    <style name="NearItUIPermissionsExplanationTextAppearance" parent="NearItUIGlobalTheme.RegularText">
         <item name="android:textSize">@dimen/nearit_ui_permissions_text_size</item>
         <item name="android:textColor">@color/nearit_ui_permissions_text_color</item>
-        <item name="fontFamily">@raw/asap_regular</item>
     </style>
 
 
