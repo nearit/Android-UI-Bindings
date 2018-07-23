@@ -13,10 +13,6 @@
     <color name="nearit_ui_grey">#CACACA</color>
     <color name="nearit_ui_warm_grey_50">#80777777</color>
     <color name="nearit_ui_black_35">#59333333</color>
-    <color name="nearit_ui_valid_green">#68C600</color>
-    <color name="nearit_ui_expired_red">#FF3434</color>
-    <color name="nearit_ui_scarlet_red">#D0011B</color>
-    <color name="nearit_ui_inactive_orange">#FC8C2A</color>
     <color name="nearit_ui_transparent">#00000000</color>
     <color name="nearit_ui_star_yellow">#F8D71C</color>
     <color name="nearit_ui_inbox_blue">#519fd0</color>
@@ -30,6 +26,7 @@
 
 
     <!--  DIMENSIONS  -->
+    <dimen name="nearit_ui_button_height">45dp</dimen>
     <dimen name="nearit_ui_button_text_size">15sp</dimen>
     <dimen name="nearit_ui_dismiss_button_text_size">15sp</dimen>
 
@@ -48,22 +45,19 @@
         <item name="windowNoTitle">true</item>
     </style>
     <!--  Buttons Text  -->
-    <style name="NearItUIButtonTextAppearance">
+    <style name="NearItUIButtonTextAppearance" parent="NearItUIGlobalTheme.BoldText">
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">@dimen/nearit_ui_button_text_size</item>
-        <item name="fontFamily">@raw/asap_bold</item>
     </style>
     <!--  Dismiss buttons text -->
-    <style name="NearITUIDismissButtonTextAppearance">
+    <style name="NearITUIDismissButtonTextAppearance" parent="NearItUIGlobalTheme.ItalicText">
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/nearit_ui_dismiss_button_text_size</item>
-        <item name="fontFamily">@raw/asap_italic</item>
     </style>
     <!--  Empty list text -->
-    <style name="NearItUIEmptyListTextAppearance">
+    <style name="NearItUIEmptyListTextAppearance" parent="NearItUIGlobalTheme.BoldItalicText">
         <item name="android:textColor">@color/nearit_ui_coupon_list_empty_list_text_color</item>
         <item name="android:textSize">@dimen/nearit_ui_coupon_list_empty_list_text_size</item>
-        <item name="fontFamily">@raw/asap_bolditalic</item>
     </style>
 
 
