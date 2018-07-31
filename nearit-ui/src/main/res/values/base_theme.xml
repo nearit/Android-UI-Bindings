@@ -18,7 +18,7 @@
 
     <!--    ITALIC      -->
     <style name="NearItUIGlobalTheme.ItalicText" parent="NearItUIGlobalTheme">
-        <item name="fontFamily">@raw/asap_regular</item>
+        <item name="fontFamily">@raw/asap_italic</item>
     </style>
 
     <!--    BOLD        -->
