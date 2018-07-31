@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--  COLORS  -->
-    <color name="nearit_ui_inbox_item_notif_text_color">@android:color/black</color>
+    <color name="nearit_ui_inbox_item_notif_text_color">@color/nearit_ui_black_text</color>
     <color name="nearit_ui_inbox_item_background_unread">@color/nearit_ui_real_white</color>
     <color name="nearit_ui_inbox_card_background_read">#efefef</color>
     <color name="nearit_ui_inbox_card_text_unread_color">@color/nearit_ui_inbox_blue</color>
-    <color name="nearit_ui_inbox_card_text_read_color">@color/nearit_ui_warm_grey</color>
+    <color name="nearit_ui_inbox_card_text_read_color">@color/nearit_ui_grey_text</color>
     <color name="nearit_ui_inbox_background_color">@color/nearit_ui_background_color</color>
 
 
@@ -66,15 +66,13 @@
     <!--  STYLES  -->
     <style name="NearITUIInboxActivityAppearance" parent="NearITUIFullScreenActivityAppearance" />
     <style name="NearITUIInboxListNoInboxTextAppearance" parent="NearItUIEmptyListTextAppearance" />
-    <style name="NearItUIInboxCardTimestampTextAppearance">
+    <style name="NearItUIInboxCardTimestampTextAppearance" parent="NearItUIGlobalTheme.ItalicText">
         <item name="android:textColor">@color/nearit_ui_inbox_card_text_read_color</item>
         <item name="android:textSize">@dimen/nearit_ui_inbox_timestamp_size</item>
-        <item name="fontFamily">@raw/asap_italic</item>
     </style>
-    <style name="NearItUIInboxCardNotificationTextAppearance">
+    <style name="NearItUIInboxCardNotificationTextAppearance" parent="NearItUIGlobalTheme.RegularText">
         <item name="android:textColor">@color/nearit_ui_inbox_item_notif_text_color</item>
         <item name="android:textSize">@dimen/nearit_ui_inbox_notification_size</item>
-        <item name="fontFamily">@raw/asap_regular</item>
     </style>
     <style name="NearItUIInboxCardButtonTextAppearance">
         <item name="android:textAllCaps">false</item>
