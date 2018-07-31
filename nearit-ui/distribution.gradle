@@ -26,27 +26,6 @@ allprojects {
 }
 
 /*
- *  Inject SDK and Google/Play services versions in docs
- */
-task injectVersionsInMDs {
-    def versionNumber = version
-    copy {
-        from('../docs/src/README.md') {
-            filter { it.replaceAll('@@versionNumber@@', "$versionNumber") }
-            filter { it.replaceAll('@@nearitVersionNumber@@', "$rootProject.ext.nearitMinVersionNumber") }
-        }
-        into '../'
-    }
-    doLast {
-        println "[INFO] version numbers injected"
-    }
-}
-configure(injectVersionsInMDs) {
-    group = 'Docs'
-    description = 'Add version codes in docs files'
-}
-
-/*
  *  Performs clean, build, maven install and publish on Bintray
  */
 task cleanBuildInstallPublish {
