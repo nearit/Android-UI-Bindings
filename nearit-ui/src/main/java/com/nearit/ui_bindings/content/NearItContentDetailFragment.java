@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.nearit.ui_bindings.content.views.ContentCTAButton;
 import com.nearit.ui_bindings.utils.LoadImageFromURL;
 
 import it.near.sdk.NearItManager;
+import it.near.sdk.logging.NearLog;
 import it.near.sdk.reactions.contentplugin.model.Content;
 import it.near.sdk.trackings.TrackingInfo;
 
@@ -32,6 +34,9 @@ import static it.near.sdk.recipes.models.Recipe.CTA_TAPPED;
  */
 
 public class NearItContentDetailFragment extends Fragment {
+
+    private static final String TAG = "NearItContentFragm";
+
     private static final String ARG_CONTENT = "content";
     private static final String ARG_TRACKING_INFO = "tracking_info";
     private static final String ARG_EXTRAS = "extras";
@@ -111,7 +116,12 @@ public class NearItContentDetailFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     NearItManager.getInstance().sendTracking(trackingInfo, CTA_TAPPED);
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(content.getCta().url)));
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(content.getCta().url));
+                    if (getActivity() != null && intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivity(intent);
+                    } else {
+                        Log.e(TAG, String.format("Unable to open link: %s", content.getCta().url));
+                    }
                 }
             });
         }
