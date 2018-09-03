@@ -3,7 +3,7 @@ repositories {
 }
 
 buildscript {
-    ext.kotlin_version = '1.2.51'
+    ext.kotlin_version = '1.2.60'
     repositories {
         maven { url 'https://maven.fabric.io/public' }
         jcenter()
@@ -58,11 +58,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    // implementation 'it.near.sdk:nearit-ui:1.1.25'
+    // implementation 'it.near.sdk:nearit-ui:1.1.26'
     implementation project(':nearit-ui')
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
     implementation "com.android.support:support-v4:$supportLibraryVersion"
-    implementation 'it.near.sdk:nearit:2.9.4'
+    implementation 'it.near.sdk:nearit:2.9.5'
 
     testImplementation 'junit:junit:4.12'
 
