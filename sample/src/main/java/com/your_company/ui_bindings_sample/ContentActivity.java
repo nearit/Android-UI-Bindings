@@ -36,6 +36,7 @@ public class ContentActivity extends AppCompatActivity {
                         //  Basic example with a complete content
                         NearITUIBindings.getInstance(getApplicationContext())
                                 .contentIntentBuilder(content, trackingInfo)
+                                .openLinksInWebView()
                                 .build());
             }
         });
@@ -52,6 +53,7 @@ public class ContentActivity extends AppCompatActivity {
                         NearITUIBindings.getInstance(getApplicationContext())
                                 .contentIntentBuilder(content, trackingInfo)
                                 .enableTapOutsideToClose()
+                                .openLinksInWebView()
                                 .build());
             }
         });
