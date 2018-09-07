@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.nearit.customtabs.CustomTabsHelper;
 import com.nearit.customtabs.WebViewFallback;
 import com.nearit.htmltextview.HtmlTextView;
+import com.nearit.htmltextview.NearItMovementMethod;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.content.views.ContentCTAButton;
 import com.nearit.ui_bindings.utils.LoadImageFromURL;
@@ -36,7 +37,7 @@ import static it.near.sdk.recipes.models.Recipe.CTA_TAPPED;
  * @author Federico Boschini
  */
 
-public class NearItContentDetailFragment extends Fragment {
+public class NearItContentDetailFragment extends Fragment implements NearItMovementMethod.OnMovementLinkClickListener {
 
     private static final String TAG = "NearItContentFragm";
 
@@ -107,6 +108,7 @@ public class NearItContentDetailFragment extends Fragment {
         if (content.contentString != null) {
             contentView.setVisibility(View.VISIBLE);
             contentView.setHtml(content.contentString);
+            contentView.setMovementMethod(new NearItMovementMethod(this, getContext()));
         }
 
         if (content.getImageLink() != null) {
@@ -123,9 +125,9 @@ public class NearItContentDetailFragment extends Fragment {
                     NearItManager.getInstance().sendTracking(trackingInfo, CTA_TAPPED);
                     if (getContext() != null) {
                         if (openLinksInTabs) {
-                            openInCustomTab();
+                            openInCustomTab(content.getCta().url);
                         } else {
-                            openUrl();
+                            openUrl(content.getCta().url);
                         }
                     }
                 }
@@ -135,7 +137,7 @@ public class NearItContentDetailFragment extends Fragment {
         return rootView;
     }
 
-    private void openInCustomTab() {
+    private void openInCustomTab(String url) {
         assert content.getCta() != null;
 
         if (getContext() != null) {
@@ -143,20 +145,29 @@ public class NearItContentDetailFragment extends Fragment {
             intentBuilder.setToolbarColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_webview_toolbar_color));
 
             CustomTabsHelper.openCustomTab(
-                    getContext(), intentBuilder.build(), Uri.parse(content.getCta().url), new WebViewFallback());
+                    getContext(), intentBuilder.build(), Uri.parse(url), new WebViewFallback());
         }
     }
 
-    private void openUrl() {
+    private void openUrl(String url) {
         assert content.getCta() != null;
 
         if (getContext() != null) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(content.getCta().url));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             if (intent.resolveActivity(getContext().getPackageManager()) != null) {
                 startActivity(intent);
             } else {
-                Log.e(TAG, String.format("Unable to open link: %s", content.getCta().url));
+                Log.e(TAG, String.format("Unable to open link: %s", url));
             }
+        }
+    }
+
+    @Override
+    public void onLinkClicked(String linkText, NearItMovementMethod.LinkType linkType) {
+        if (openLinksInTabs) {
+            openInCustomTab(linkText);
+        } else {
+            openUrl(linkText);
         }
     }
 }
