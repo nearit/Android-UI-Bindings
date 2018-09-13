@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.nearit.ui_bindings.inbox.viewholders.BaseViewHolder;
 import com.nearit.ui_bindings.inbox.viewholders.ContentNotificationViewHolder;
+import com.nearit.ui_bindings.inbox.viewholders.CouponNotificationViewHolder;
 import com.nearit.ui_bindings.inbox.viewholders.CustomJSONViewHolder;
 import com.nearit.ui_bindings.inbox.viewholders.FeedbackViewHolder;
 import com.nearit.ui_bindings.inbox.viewholders.SimpleNotificationViewHolder;
@@ -15,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 import it.near.sdk.reactions.contentplugin.model.Content;
+import it.near.sdk.reactions.couponplugin.model.Coupon;
 import it.near.sdk.reactions.customjsonplugin.model.CustomJSON;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
@@ -50,6 +52,8 @@ public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             return FeedbackViewHolder.VIEWTYPE;
         } else if (item.reaction instanceof CustomJSON) {
             return CustomJSONViewHolder.VIEWTYPE;
+        } else if (item.reaction instanceof Coupon) {
+            return CouponNotificationViewHolder.VIEWTYPE;
         } else {
             return super.getItemViewType(position);
         }
@@ -67,6 +71,8 @@ public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 return new FeedbackViewHolder(inflater, parent, inboxAdapterListener, readListener);
             case CustomJSONViewHolder.VIEWTYPE:
                 return new CustomJSONViewHolder(inflater, parent, inboxAdapterListener, readListener);
+            case CouponNotificationViewHolder.VIEWTYPE:
+                return new CouponNotificationViewHolder(inflater, parent, inboxAdapterListener, readListener);
             default:
                 return new SimpleNotificationViewHolder(inflater, parent, readListener);
         }

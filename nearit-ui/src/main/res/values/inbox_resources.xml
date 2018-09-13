@@ -44,6 +44,14 @@
     <dimen name="nearit_ui_feedback_notification_timestamp_top_margin">@dimen/nearit_ui_inbox_timestamp_top_margin</dimen>
     <dimen name="nearit_ui_feedback_notification_label_top_margin">@dimen/nearit_ui_inbox_label_top_margin</dimen>
     <dimen name="nearit_ui_feedback_notification_item_padding_rl">@dimen/nearit_ui_inbox_padding_rl</dimen>
+    <!-- Coupon -->
+    <dimen name="nearit_ui_coupon_notification_item_height">@dimen/nearit_ui_inbox_item_height</dimen>
+    <dimen name="nearit_ui_coupon_notification_item_padding_bottom">@dimen/nearit_ui_inbox_item_padding_bottom</dimen>
+    <dimen name="nearit_ui_coupon_notification_item_margin_left_right">@dimen/nearit_ui_inbox_item_margin_left_right</dimen>
+    <dimen name="nearit_ui_coupon_notification_item_padding_top">@dimen/nearit_ui_inbox_item_padding_top</dimen>
+    <dimen name="nearit_ui_coupon_notification_timestamp_top_margin">@dimen/nearit_ui_inbox_timestamp_top_margin</dimen>
+    <dimen name="nearit_ui_coupon_notification_label_top_margin">@dimen/nearit_ui_inbox_label_top_margin</dimen>
+    <dimen name="nearit_ui_coupon_notification_item_padding_rl">@dimen/nearit_ui_inbox_padding_rl</dimen>
     <!-- CustomJson -->
     <dimen name="nearit_ui_customjson_item_height">@dimen/nearit_ui_inbox_item_height</dimen>
     <dimen name="nearit_ui_customjson_item_padding_bottom">@dimen/nearit_ui_inbox_item_padding_bottom</dimen>
@@ -60,6 +68,7 @@
     <!--  STRINGS  -->
     <string name="nearit_ui_inbox_empty_list_text">No messages available</string>
     <string name="nearit_ui_inbox_content_button_label">See more</string>
+    <string name="nearit_ui_inbox_coupon_button_label">Open</string>
     <string name="nearit_ui_inbox_feedback_button_label">Open</string>
 
 
