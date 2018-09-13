@@ -38,6 +38,7 @@ public class CouponNotificationViewHolder extends BaseViewHolder<Coupon> {
 
     @Override
     protected void bindToView(Coupon coupon) {
+        if (coupon.claims == null) return;
         Claim claim = coupon.claims.get(0);
         if (claim == null) return;
         layout.setTimestamp(item.timestamp);
