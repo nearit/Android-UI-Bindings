@@ -23,6 +23,7 @@ import java.util.List;
 
 import it.near.sdk.NearItManager;
 import it.near.sdk.reactions.contentplugin.model.Content;
+import it.near.sdk.reactions.couponplugin.model.Coupon;
 import it.near.sdk.reactions.customjsonplugin.model.CustomJSON;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
@@ -55,13 +56,16 @@ public class InboxPresenterImplTest {
     private List<InboxItem> items;
     private InboxItem customJsonItem;
     private InboxItem feedbackItem;
+    private InboxItem couponItem;
     @Captor
     private ArgumentCaptor<List<InboxItem>> itemsCaptor;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
+        items = buildFullList();
         when(params.shouldIncludeCustomJSON()).thenReturn(true);
         when(params.shouldIncludeFeedbacks()).thenReturn(true);
+        when(params.shouldIncludeCoupons()).thenReturn(true);
         inboxPresenter = new InboxPresenterImpl(nearit, view, params);
     }
 
@@ -84,7 +88,6 @@ public class InboxPresenterImplTest {
 
     @Test
     public void startWithNoFilter_shouldNotFilterElements() {
-        items = buildFullList();
         mockInboxFromNear(items);
         inboxPresenter.start();
         verify(view).showInboxItems(items);
@@ -92,7 +95,6 @@ public class InboxPresenterImplTest {
 
     @Test
     public void refreshNoFilter_shouldRefresh() {
-        items = buildFullList();
         mockInboxFromNear(items);
         inboxPresenter.requestRefresh();
         verify(view).showInboxItems(items);
@@ -107,7 +109,6 @@ public class InboxPresenterImplTest {
 
     @Test
     public void startWithFeedBackFilter_shouldNotShowFeedback() {
-        items = buildFullList();
         when(params.shouldIncludeFeedbacks()).thenReturn(false);
         mockInboxFromNear(items);
         inboxPresenter.start();
@@ -118,13 +119,21 @@ public class InboxPresenterImplTest {
 
     @Test
     public void startWithCustomJsonFilter_shouldNotShowCustomJson() {
-        items = buildFullList();
         when(params.shouldIncludeCustomJSON()).thenReturn(false);
         mockInboxFromNear(items);
         inboxPresenter.start();
         verify(view).showInboxItems(itemsCaptor.capture());
         List<InboxItem> captured = itemsCaptor.getValue();
         assertThat(captured, not(hasItem(customJsonItem)));
+    }
+
+    @Test
+    public void startWithCouponFilter_shouldNotShowCoupon() {
+        when(params.shouldIncludeCoupons()).thenReturn(false);
+        mockInboxFromNear(items);
+        inboxPresenter.start();
+        verify(view).showInboxItems(itemsCaptor.capture());
+        assertThat(itemsCaptor.getValue(), not(hasItem(couponItem)));
     }
 
     @Test
@@ -200,6 +209,8 @@ public class InboxPresenterImplTest {
         customJsonItem.reaction = Mockito.mock(CustomJSON.class);
         feedbackItem = new InboxItem();
         feedbackItem.reaction = Mockito.mock(Feedback.class);
-        return Lists.newArrayList(simpleNotifItem, contentItem, customJsonItem, feedbackItem);
+        couponItem = new InboxItem();
+        couponItem.reaction = Mockito.mock(Coupon.class);
+        return Lists.newArrayList(simpleNotifItem, contentItem, customJsonItem, feedbackItem, couponItem);
     }
 }

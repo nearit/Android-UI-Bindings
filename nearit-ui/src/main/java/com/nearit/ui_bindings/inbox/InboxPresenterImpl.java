@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import it.near.sdk.NearItManager;
+import it.near.sdk.reactions.couponplugin.model.Coupon;
 import it.near.sdk.reactions.customjsonplugin.model.CustomJSON;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
@@ -61,12 +62,14 @@ class InboxPresenterImpl implements InboxContract.InboxPresenter {
             @Override
             public void onMessages(@NonNull List<InboxItem> inboxItemList) {
                 if (!params.shouldIncludeCustomJSON() ||
-                        !params.shouldIncludeFeedbacks()) {
+                        !params.shouldIncludeFeedbacks() ||
+                        !params.shouldIncludeCoupons()) {
                     inboxItemList = filter(inboxItemList, new CollectionsUtils.Predicate<InboxItem>() {
                         @Override
                         public boolean apply(InboxItem item) {
                             return (!(item.reaction instanceof CustomJSON) || params.shouldIncludeCustomJSON()) &&
-                                    (!(item.reaction instanceof Feedback) || params.shouldIncludeFeedbacks());
+                                    (!(item.reaction instanceof Feedback) || params.shouldIncludeFeedbacks()) &&
+                                    (!(item.reaction instanceof Coupon) || params.shouldIncludeCoupons());
                         }
                     });
                 }

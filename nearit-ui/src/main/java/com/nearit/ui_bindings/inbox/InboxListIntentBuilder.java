@@ -9,6 +9,7 @@ public class InboxListIntentBuilder {
     private int mNoInboxLayout = 0;
     private boolean includeCustomJSON = false;
     private boolean includeFeedbacks = true;
+    private boolean includeCoupons = false;
 
     public InboxListIntentBuilder(Context context) {
         this.context = context;
@@ -29,13 +30,18 @@ public class InboxListIntentBuilder {
         return this;
     }
 
+    public InboxListIntentBuilder includeCoupons() {
+        this.includeCoupons = true;
+        return this;
+    }
+
     public Intent build() {
         return NearITInboxActivity.createIntent(context, getParams());
     }
 
     @NonNull
     private InboxListExtraParams getParams() {
-        return new InboxListExtraParams(mNoInboxLayout, includeCustomJSON, includeFeedbacks);
+        return new InboxListExtraParams(mNoInboxLayout, includeCustomJSON, includeFeedbacks, includeCoupons);
     }
 
 

@@ -11,6 +11,7 @@ public class InboxListFragmentBuilder {
     private int mNoInboxLayout = 0;
     private boolean includeCustomJSON = false;
     private boolean includeFeedbacks = true;
+    private boolean includeCoupons = false;
 
     public InboxListFragmentBuilder() {}
 
@@ -29,13 +30,18 @@ public class InboxListFragmentBuilder {
         return this;
     }
 
+    public InboxListFragmentBuilder includeCoupons() {
+        this.includeCoupons = true;
+        return this;
+    }
+
     public NearITInboxFragment build() {
         return NearITInboxFragment.newInstance(getParams());
     }
 
     @NonNull
     private InboxListExtraParams getParams() {
-        return new InboxListExtraParams(mNoInboxLayout, includeCustomJSON, includeFeedbacks);
+        return new InboxListExtraParams(mNoInboxLayout, includeCustomJSON, includeFeedbacks, includeCoupons);
     }
 
 }

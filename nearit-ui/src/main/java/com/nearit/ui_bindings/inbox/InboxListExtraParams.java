@@ -8,17 +8,20 @@ public class InboxListExtraParams implements Parcelable {
     private final int noInboxCustomLayout;
     private final boolean includeCustomJSON;
     private final boolean includeFeedbacks;
+    private final boolean includeCoupons;
 
-    InboxListExtraParams(int noInboxCustomLayout, boolean includeCustomJSON, boolean includeFeedbacks) {
+    InboxListExtraParams(int noInboxCustomLayout, boolean includeCustomJSON, boolean includeFeedbacks, boolean includeCoupons) {
         this.noInboxCustomLayout = noInboxCustomLayout;
         this.includeCustomJSON = includeCustomJSON;
         this.includeFeedbacks = includeFeedbacks;
+        this.includeCoupons = includeCoupons;
     }
 
     private InboxListExtraParams(Parcel in) {
         noInboxCustomLayout = in.readInt();
         includeCustomJSON = in.readByte() != 0;
         includeFeedbacks = in.readByte() != 0;
+        includeCoupons = in.readByte() != 0;
     }
 
     @Override
@@ -26,6 +29,7 @@ public class InboxListExtraParams implements Parcelable {
         dest.writeInt(noInboxCustomLayout);
         dest.writeByte((byte) (includeCustomJSON ? 1 : 0));
         dest.writeByte((byte) (includeFeedbacks ? 1 : 0));
+        dest.writeByte((byte) (includeCoupons ? 1 : 0));
     }
 
     @Override
@@ -55,5 +59,9 @@ public class InboxListExtraParams implements Parcelable {
 
     public boolean shouldIncludeFeedbacks() {
         return includeFeedbacks;
+    }
+
+    public boolean shouldIncludeCoupons() {
+        return includeCoupons;
     }
 }
