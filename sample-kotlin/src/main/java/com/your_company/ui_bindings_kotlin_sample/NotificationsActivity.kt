@@ -6,20 +6,20 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.nearit.ui_bindings.NearITUIBindings
 
-class InboxActivity : AppCompatActivity() {
+class NotificationsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_inbox)
+        setContentView(R.layout.activity_notifications)
     }
 
-    fun openInbox(view: View) {
-        startActivity(NearITUIBindings.getInstance(this@InboxActivity)
+    fun openNotifications(view: View) {
+        startActivity(NearITUIBindings.getInstance(this@NotificationsActivity)
                 .notificationHistoryIntentBuilder()
                 .build())
     }
 
-    fun openInboxInActivity(view: View) {
-        startActivity(Intent(this@InboxActivity, InboxPlainActivity::class.java))
+    fun openNotificationsInActivity(view: View) {
+        startActivity(Intent(this@NotificationsActivity, NotificationsPlainActivity::class.java))
     }
 }

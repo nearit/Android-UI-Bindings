@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         style="@style/ButtonStyle"
-        android:text="Inbox"
-        android:onClick="openInbox"/>
+        android:text="Notifications"
+        android:onClick="openNotificationHistory"/>
 
 </LinearLayout>

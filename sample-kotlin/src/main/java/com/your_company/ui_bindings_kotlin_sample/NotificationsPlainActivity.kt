@@ -4,19 +4,19 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.nearit.ui_bindings.NearITUIBindings
 
-class InboxPlainActivity : AppCompatActivity() {
+class NotificationsPlainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_plain_inbox)
+        setContentView(R.layout.activity_plain_notifications)
 
-        val inboxFragment = NearITUIBindings.getInstance(this)
+        val notificationsFragment = NearITUIBindings.getInstance(this)
                 .notificationHistoryFragmentBuilder()
                 .build()
 
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.notifications_fragment_container, inboxFragment)
+                .replace(R.id.notifications_fragment_container, notificationsFragment)
                 .commit()
     }
 }

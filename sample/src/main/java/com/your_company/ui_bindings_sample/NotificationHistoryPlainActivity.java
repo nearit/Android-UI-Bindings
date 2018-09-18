@@ -11,18 +11,18 @@ import com.nearit.ui_bindings.NearITUIBindings;
  * @author Federico Boschini
  */
 
-public class InboxPlainActivity extends AppCompatActivity {
+public class NotificationHistoryPlainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plain_inbox);
+        setContentView(R.layout.activity_plain_notification_history);
 
-        Fragment inboxFragment = NearITUIBindings.getInstance(this)
+        Fragment notificationHistoryFragment = NearITUIBindings.getInstance(this)
                 .notificationHistoryFragmentBuilder()
                 .build();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.notifications_fragment_container, inboxFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.notifications_fragment_container, notificationHistoryFragment).commit();
     }
 
 }

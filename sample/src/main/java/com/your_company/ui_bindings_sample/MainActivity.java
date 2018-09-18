@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, ContentActivity.class));
     }
 
-    public void openInbox(View view) {
+    public void openNotificationHistory(View view) {
         startActivity(new Intent(this, NotificationsActivity.class));
     }
 
