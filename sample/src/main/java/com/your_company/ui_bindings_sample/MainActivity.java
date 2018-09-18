@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*public void openInbox(View view) {
-        startActivity(new Intent(this, InboxActivity.class));
+        startActivity(new Intent(this, NotificationsActivity.class));
     }*/
 
     @Override

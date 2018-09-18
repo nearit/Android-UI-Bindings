@@ -11,12 +11,12 @@ class InboxPlainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_plain_inbox)
 
         val inboxFragment = NearITUIBindings.getInstance(this)
-                .inboxFragmentBuilder()
+                .notificationHistoryFragmentBuilder()
                 .build()
 
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.inbox_fragment_container, inboxFragment)
+                .replace(R.id.notifications_fragment_container, inboxFragment)
                 .commit()
     }
 }

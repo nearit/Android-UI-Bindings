@@ -20,7 +20,7 @@ public class ContentNotificationViewHolder extends BaseViewHolder<Content> {
     private final Button button;
     private final NearITNotificationCardLayout layout;
 
-    public ContentNotificationViewHolder(LayoutInflater inflater, ViewGroup parent, final NotificationsAdapter.InboxAdapterListener listener, NotificationsAdapter.NotificationReadListener readListener) {
+    public ContentNotificationViewHolder(LayoutInflater inflater, ViewGroup parent, final NotificationsAdapter.NotificationAdapterListener listener, NotificationsAdapter.NotificationReadListener readListener) {
         super(inflater.inflate(R.layout.nearit_ui_notification_content_item, parent, false), readListener);
         layout = itemView.findViewById(R.id.layout);
         button = itemView.findViewById(R.id.detail_button);
@@ -30,7 +30,7 @@ public class ContentNotificationViewHolder extends BaseViewHolder<Content> {
                 item.read = true;
                 layout.setMessageUnread(false);
                 button.setTypeface(null, Typeface.NORMAL);
-                listener.onInboxItemTap(item);
+                listener.onNotificationTap(item);
             }
         });
     }

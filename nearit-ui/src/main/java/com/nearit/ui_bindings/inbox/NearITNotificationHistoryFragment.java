@@ -23,7 +23,7 @@ import java.util.List;
 import it.near.sdk.NearItManager;
 import it.near.sdk.recipes.inbox.model.InboxItem;
 
-public class NearITNotificationHistoryFragment extends Fragment implements NotificationHistoryContract.NotificationHistoryView, NotificationsAdapter.InboxAdapterListener, NotificationsAdapter.NotificationReadListener {
+public class NearITNotificationHistoryFragment extends Fragment implements NotificationHistoryContract.NotificationHistoryView, NotificationsAdapter.NotificationAdapterListener, NotificationsAdapter.NotificationReadListener {
 
     private static final String EXTRAS = "extras";
     private NotificationHistoryContract.NotificationHistoryPresenter presenter;
@@ -69,7 +69,7 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.nearit_ui_fragment_inbox, container, false);
+        View rootView = inflater.inflate(R.layout.nearit_ui_fragment_notification_history, container, false);
 
         emptyListText = rootView.findViewById(R.id.empty_notification_history_text);
         emptyListContainer = rootView.findViewById(R.id.empty_layout);
@@ -148,7 +148,7 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
     }
 
     @Override
-    public void onInboxItemTap(InboxItem itemList) {
+    public void onNotificationTap(InboxItem itemList) {
         presenter.itemClicked(itemList);
     }
 

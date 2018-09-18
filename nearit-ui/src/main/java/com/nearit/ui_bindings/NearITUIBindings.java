@@ -184,29 +184,13 @@ public class NearITUIBindings {
     }
 
 
-    /*      INBOX       */
+    /*      Notification History       */
 
-    /**
-     * @deprecated use {@link #inboxIntentBuilder()} instead
-     */
-    @Deprecated
-    public NotificationHistoryIntentBuilder createInboxListIntentBuilder() {
-        return this.inboxIntentBuilder();
-    }
-
-    public NotificationHistoryIntentBuilder inboxIntentBuilder() {
+    public NotificationHistoryIntentBuilder notificationHistoryIntentBuilder() {
         return new NotificationHistoryIntentBuilder(mContext);
     }
 
-    /**
-     *  @deprecated use {@link #inboxFragmentBuilder()} instead
-     */
-    @Deprecated
-    public NotificationHistoryFragmentBuilder createInboxListFragmentBuilder() {
-        return this.inboxFragmentBuilder();
-    }
-
-    public NotificationHistoryFragmentBuilder inboxFragmentBuilder() {
+    public NotificationHistoryFragmentBuilder notificationHistoryFragmentBuilder() {
         return new NotificationHistoryFragmentBuilder();
     }
 

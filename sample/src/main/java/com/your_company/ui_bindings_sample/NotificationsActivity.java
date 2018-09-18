@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 
-public class InboxActivity extends AppCompatActivity {
+public class NotificationsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -18,7 +18,7 @@ public class InboxActivity extends AppCompatActivity {
 
     public void openInbox(View view) {
         startActivity(NearITUIBindings.getInstance(this)
-                .inboxIntentBuilder()
+                .notificationHistoryIntentBuilder()
                 .includeCoupons()
                 .build()
         );

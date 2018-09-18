@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/nearit_ui_inbox_background_color"
+    android:background="@color/nearit_ui_notification_background_color"
     android:orientation="vertical">
 
     <FrameLayout
-        android:id="@+id/inbox_fragment_container"
+        android:id="@+id/notifications_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

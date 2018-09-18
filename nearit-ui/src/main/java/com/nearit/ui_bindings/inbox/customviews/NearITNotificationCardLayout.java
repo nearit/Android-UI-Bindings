@@ -14,36 +14,36 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class InboxCardLayout extends RelativeLayout {
+public class NearITNotificationCardLayout extends RelativeLayout {
 
     private static final int[] STATE_MESSAGE_UNREAD = {R.attr.state_message_unread};
 
     private boolean messageUnread;
     private TextView timestampTV, notificationTV;
 
-    public InboxCardLayout(Context context) {
+    public NearITNotificationCardLayout(Context context) {
         super(context);
         init();
     }
 
-    public InboxCardLayout(Context context, AttributeSet attrs) {
+    public NearITNotificationCardLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public InboxCardLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public NearITNotificationCardLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
     private void init() {
-        inflate(getContext(), R.layout.nearit_ui_inbox_card_layout, this);
+        inflate(getContext(), R.layout.nearit_ui_notification_card_layout, this);
         timestampTV = findViewById(R.id.timestampTextView);
         notificationTV = findViewById(R.id.notificationTextView);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public InboxCardLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public NearITNotificationCardLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -78,8 +78,8 @@ public class InboxCardLayout extends RelativeLayout {
         timestampTV.setTextColor(
                 getResources().getColor(
                         messageUnread ?
-                                R.color.nearit_ui_inbox_card_text_unread_color :
-                                R.color.nearit_ui_inbox_card_text_read_color
+                                R.color.nearit_ui_notification_card_text_unread_color :
+                                R.color.nearit_ui_notification_card_text_read_color
                 )
         );
     }

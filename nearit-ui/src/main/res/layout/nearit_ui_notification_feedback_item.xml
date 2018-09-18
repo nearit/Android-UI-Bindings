@@ -6,7 +6,7 @@
     android:layout_marginLeft="@dimen/nearit_ui_feedback_notification_item_margin_left_right"
     android:layout_marginRight="@dimen/nearit_ui_feedback_notification_item_margin_left_right"
     android:layout_marginTop="@dimen/nearit_ui_history_list_top_margin1"
-    android:background="@drawable/nearit_ui_inbox_item_background_selector"
+    android:background="@drawable/nearit_ui_notification_background_selector"
     android:paddingBottom="@dimen/nearit_ui_feedback_notification_item_padding_bottom"
     android:paddingLeft="@dimen/nearit_ui_feedback_notification_item_padding_rl"
     android:paddingRight="@dimen/nearit_ui_feedback_notification_item_padding_rl"

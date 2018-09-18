@@ -27,7 +27,7 @@ public class NearITNotificationHistoryActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.inbox_fragment_container,
+                .replace(R.id.notifications_fragment_container,
                         NearITNotificationHistoryFragment.newInstance(extras))
                 .commit();
     }

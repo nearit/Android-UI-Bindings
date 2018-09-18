@@ -20,7 +20,7 @@ public class FeedbackViewHolder extends BaseViewHolder<Feedback> {
     private final Button button;
     private final NearITNotificationCardLayout layout;
 
-    public FeedbackViewHolder(LayoutInflater inflater, ViewGroup parent, final NotificationsAdapter.InboxAdapterListener listener, NotificationsAdapter.NotificationReadListener readListener) {
+    public FeedbackViewHolder(LayoutInflater inflater, ViewGroup parent, final NotificationsAdapter.NotificationAdapterListener listener, NotificationsAdapter.NotificationReadListener readListener) {
         super(inflater.inflate(R.layout.nearit_ui_notification_feedback_item, parent, false), readListener);
         layout = itemView.findViewById(R.id.bg_layout);
         button = itemView.findViewById(R.id.detail_button);
@@ -30,7 +30,7 @@ public class FeedbackViewHolder extends BaseViewHolder<Feedback> {
                 item.read = true;
                 layout.setMessageUnread(false);
                 button.setTypeface(null, Typeface.NORMAL);
-                listener.onInboxItemTap(item);
+                listener.onNotificationTap(item);
             }
         });
     }
