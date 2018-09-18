@@ -22,7 +22,7 @@ import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
 import it.near.sdk.recipes.inbox.model.InboxItem;
 
-public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class NotificationsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private final NotificationReadListener readListener;
     private final LayoutInflater inflater;
@@ -30,7 +30,7 @@ public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private List<InboxItem> items = Collections.emptyList();
 
-    InboxAdapter(LayoutInflater inflater, InboxAdapterListener inboxAdapterListener, NotificationReadListener readListener) {
+    NotificationsAdapter(LayoutInflater inflater, InboxAdapterListener inboxAdapterListener, NotificationReadListener readListener) {
         this.inflater = inflater;
         this.inboxAdapterListener = inboxAdapterListener;
         this.readListener = readListener;

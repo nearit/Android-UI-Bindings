@@ -23,28 +23,28 @@ import java.util.List;
 import it.near.sdk.NearItManager;
 import it.near.sdk.recipes.inbox.model.InboxItem;
 
-public class NearITInboxFragment extends Fragment implements InboxContract.InboxView, InboxAdapter.InboxAdapterListener, InboxAdapter.NotificationReadListener {
+public class NearITNotificationHistoryFragment extends Fragment implements NotificationHistoryContract.NotificationHistoryView, NotificationsAdapter.InboxAdapterListener, NotificationsAdapter.NotificationReadListener {
 
     private static final String EXTRAS = "extras";
-    private InboxContract.InboxPresenter presenter;
-    private TextView noInboxText;
-    private RelativeLayout noInboxContainer;
-    private InboxAdapter inboxAdapter;
+    private NotificationHistoryContract.NotificationHistoryPresenter presenter;
+    private TextView emptyListText;
+    private RelativeLayout emptyListContainer;
+    private NotificationsAdapter notificationsAdapter;
     private SwipeRefreshLayout swipeToRefreshLayout;
 
-    private int customNoInboxLayoutRef = 0;
-    private View customNoInbox;
-    private InboxListExtraParams extras;
+    private int customEmptyListLayoutRef = 0;
+    private View customEmptyListView;
+    private NotificationHistoryExtraParams extras;
 
-    public static NearITInboxFragment newInstance(@Nullable InboxListExtraParams extras) {
-        NearITInboxFragment fragment = new NearITInboxFragment();
+    public static NearITNotificationHistoryFragment newInstance(@Nullable NotificationHistoryExtraParams extras) {
+        NearITNotificationHistoryFragment fragment = new NearITNotificationHistoryFragment();
         Bundle bundle =  new Bundle();
         bundle.putParcelable(EXTRAS, extras);
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    private void setPresenter(InboxContract.InboxPresenter presenter) {
+    private void setPresenter(NotificationHistoryContract.NotificationHistoryPresenter presenter) {
         this.presenter = presenter;
     }
 
@@ -55,14 +55,14 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
         if (getArguments() != null) {
             extras = getArguments().getParcelable(EXTRAS);
             if (extras != null) {
-                customNoInboxLayoutRef = extras.getNoInboxCustomLayout();
+                customEmptyListLayoutRef = extras.getEmptyListCustomLayout();
             }
         }
         loadPresenter();
     }
 
     private void loadPresenter() {
-        InboxContract.InboxPresenter presenter = new InboxPresenterImpl(NearItManager.getInstance(), this, extras);
+        NotificationHistoryContract.NotificationHistoryPresenter presenter = new NotificationHistoryPresenterImpl(NearItManager.getInstance(), this, extras);
         setPresenter(presenter);
     }
 
@@ -71,13 +71,13 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_inbox, container, false);
 
-        noInboxText = rootView.findViewById(R.id.no_inbox_text);
-        noInboxContainer = rootView.findViewById(R.id.empty_layout);
-        RecyclerView recyclerView = rootView.findViewById(R.id.inbox_list);
+        emptyListText = rootView.findViewById(R.id.empty_notification_history_text);
+        emptyListContainer = rootView.findViewById(R.id.empty_layout);
+        RecyclerView recyclerView = rootView.findViewById(R.id.notification_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        inboxAdapter = new InboxAdapter(inflater, this, this);
-        recyclerView.setAdapter(inboxAdapter);
+        notificationsAdapter = new NotificationsAdapter(inflater, this, this);
+        recyclerView.setAdapter(notificationsAdapter);
 
         swipeToRefreshLayout = rootView.findViewById(R.id.refresh_layout);
         swipeToRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -87,11 +87,11 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
             }
         });
 
-        if (customNoInboxLayoutRef != 0) {
-            customNoInbox = inflater.inflate(customNoInboxLayoutRef, noInboxContainer, false);
-            noInboxContainer.addView(customNoInbox);
+        if (customEmptyListLayoutRef != 0) {
+            customEmptyListView = inflater.inflate(customEmptyListLayoutRef, emptyListContainer, false);
+            emptyListContainer.addView(customEmptyListView);
         } else {
-            noInboxText.setVisibility(View.VISIBLE);
+            emptyListText.setVisibility(View.VISIBLE);
         }
 
         return rootView;
@@ -116,34 +116,34 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
     }
 
     @Override
-    public void showInboxItems(List<InboxItem> itemList) {
+    public void showNotificationHistory(List<InboxItem> itemList) {
         swipeToRefreshLayout.setRefreshing(false);
-        inboxAdapter.updateItems(itemList);
+        notificationsAdapter.updateItems(itemList);
     }
 
     @Override
     public void showEmptyLayout() {
-        showInboxItems(Collections.<InboxItem>emptyList());
-        if (customNoInbox != null) {
-            customNoInbox.setVisibility(View.VISIBLE);
-            noInboxContainer.setVisibility(View.VISIBLE);
+        showNotificationHistory(Collections.<InboxItem>emptyList());
+        if (customEmptyListView != null) {
+            customEmptyListView.setVisibility(View.VISIBLE);
+            emptyListContainer.setVisibility(View.VISIBLE);
         }
-        noInboxText.setVisibility(View.VISIBLE);
+        emptyListText.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideEmptyLayout() {
-        if (customNoInbox != null) {
-            customNoInbox.setVisibility(View.GONE);
-            noInboxContainer.setVisibility(View.GONE);
+        if (customEmptyListView != null) {
+            customEmptyListView.setVisibility(View.GONE);
+            emptyListContainer.setVisibility(View.GONE);
         }
-        noInboxText.setVisibility(View.GONE);
+        emptyListText.setVisibility(View.GONE);
     }
 
     @Override
     public void showRefreshError(String error) {
         swipeToRefreshLayout.setRefreshing(false);
-        inboxAdapter.updateItems(Collections.<InboxItem>emptyList());
+        notificationsAdapter.updateItems(Collections.<InboxItem>emptyList());
         Toast.makeText(getActivity(), "Error downloading inbox", Toast.LENGTH_SHORT).show();
     }
 
@@ -153,8 +153,8 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
     }
 
     @Override
-    public void openDetail(InboxItem inboxItem) {
-        NearITUIBindings.onNewContent(getActivity(), inboxItem.reaction, inboxItem.trackingInfo);
+    public void openDetail(InboxItem item) {
+        NearITUIBindings.onNewContent(getActivity(), item.reaction, item.trackingInfo);
     }
 
     @Override

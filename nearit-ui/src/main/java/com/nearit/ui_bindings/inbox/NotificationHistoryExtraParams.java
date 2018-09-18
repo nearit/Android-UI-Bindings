@@ -3,22 +3,22 @@ package com.nearit.ui_bindings.inbox;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class InboxListExtraParams implements Parcelable {
+public class NotificationHistoryExtraParams implements Parcelable {
 
-    private final int noInboxCustomLayout;
+    private final int emptyListCustomLayout;
     private final boolean includeCustomJSON;
     private final boolean includeFeedbacks;
     private final boolean includeCoupons;
 
-    InboxListExtraParams(int noInboxCustomLayout, boolean includeCustomJSON, boolean includeFeedbacks, boolean includeCoupons) {
-        this.noInboxCustomLayout = noInboxCustomLayout;
+    NotificationHistoryExtraParams(int emptyListCustomLayout, boolean includeCustomJSON, boolean includeFeedbacks, boolean includeCoupons) {
+        this.emptyListCustomLayout = emptyListCustomLayout;
         this.includeCustomJSON = includeCustomJSON;
         this.includeFeedbacks = includeFeedbacks;
         this.includeCoupons = includeCoupons;
     }
 
-    private InboxListExtraParams(Parcel in) {
-        noInboxCustomLayout = in.readInt();
+    private NotificationHistoryExtraParams(Parcel in) {
+        emptyListCustomLayout = in.readInt();
         includeCustomJSON = in.readByte() != 0;
         includeFeedbacks = in.readByte() != 0;
         includeCoupons = in.readByte() != 0;
@@ -26,7 +26,7 @@ public class InboxListExtraParams implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(noInboxCustomLayout);
+        dest.writeInt(emptyListCustomLayout);
         dest.writeByte((byte) (includeCustomJSON ? 1 : 0));
         dest.writeByte((byte) (includeFeedbacks ? 1 : 0));
         dest.writeByte((byte) (includeCoupons ? 1 : 0));
@@ -37,20 +37,20 @@ public class InboxListExtraParams implements Parcelable {
         return 0;
     }
 
-    public static final Creator<InboxListExtraParams> CREATOR = new Creator<InboxListExtraParams>() {
+    public static final Creator<NotificationHistoryExtraParams> CREATOR = new Creator<NotificationHistoryExtraParams>() {
         @Override
-        public InboxListExtraParams createFromParcel(Parcel in) {
-            return new InboxListExtraParams(in);
+        public NotificationHistoryExtraParams createFromParcel(Parcel in) {
+            return new NotificationHistoryExtraParams(in);
         }
 
         @Override
-        public InboxListExtraParams[] newArray(int size) {
-            return new InboxListExtraParams[size];
+        public NotificationHistoryExtraParams[] newArray(int size) {
+            return new NotificationHistoryExtraParams[size];
         }
     };
 
-    int getNoInboxCustomLayout() {
-        return noInboxCustomLayout;
+    int getEmptyListCustomLayout() {
+        return emptyListCustomLayout;
     }
 
     boolean shouldIncludeCustomJSON() {

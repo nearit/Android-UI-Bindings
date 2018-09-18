@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.nearit.ui_bindings.inbox.customviews.InboxCardLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.nearit.ui_bindings.inbox.customviews.NearITNotificationCardLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nearit_ui_content_notification_item_height"
     android:layout_marginLeft="@dimen/nearit_ui_content_notification_item_margin_left_right"
     android:layout_marginRight="@dimen/nearit_ui_content_notification_item_margin_left_right"
-    android:layout_marginTop="@dimen/nearit_ui_inbox_list_top_margin1"
+    android:layout_marginTop="@dimen/nearit_ui_history_list_top_margin1"
     android:background="@drawable/nearit_ui_inbox_item_background_selector"
     android:paddingBottom="@dimen/nearit_ui_content_notification_item_padding_bottom"
     android:paddingLeft="@dimen/nearit_ui_content_notification_item_padding_rl"
     android:paddingRight="@dimen/nearit_ui_content_notification_item_padding_rl"
     android:paddingTop="@dimen/nearit_ui_content_notification_item_padding_top"
-    android:elevation="@dimen/nearit_ui_inbox_card_elevation">
+    android:elevation="@dimen/nearit_ui_history_card_elevation">
 
     <Button
         android:id="@+id/detail_button"
-        android:text="@string/nearit_ui_inbox_content_button_label"
+        android:text="@string/nearit_ui_history_content_button_label"
 
-        style="@style/nearit_ui_inbox_card_button_style" />
+        style="@style/nearit_ui_notification_card_button_style" />
 
-</com.nearit.ui_bindings.inbox.customviews.InboxCardLayout>
+</com.nearit.ui_bindings.inbox.customviews.NearITNotificationCardLayout>

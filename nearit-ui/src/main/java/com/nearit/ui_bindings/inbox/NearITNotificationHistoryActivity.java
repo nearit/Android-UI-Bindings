@@ -10,15 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
 
-public class NearITInboxActivity extends AppCompatActivity {
+public class NearITNotificationHistoryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.nearit_ui_activity_inbox);
+        setContentView(R.layout.nearit_ui_activity_notification_history);
 
-        InboxListExtraParams extras = null;
+        NotificationHistoryExtraParams extras = null;
         Intent intent = getIntent();
         if (intent != null &&
                 intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
@@ -28,13 +28,13 @@ public class NearITInboxActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.inbox_fragment_container,
-                        NearITInboxFragment.newInstance(extras))
+                        NearITNotificationHistoryFragment.newInstance(extras))
                 .commit();
     }
 
     @NonNull
-    public static Intent createIntent(Context context, InboxListExtraParams extras) {
-        return new Intent(context, NearITInboxActivity.class)
+    public static Intent createIntent(Context context, NotificationHistoryExtraParams extras) {
+        return new Intent(context, NearITNotificationHistoryActivity.class)
                 .putExtra(ExtraConstants.EXTRA_FLOW_PARAMS, extras);
     }
 }

@@ -18,13 +18,13 @@ import it.near.sdk.recipes.models.Recipe;
 
 import static com.nearit.ui_bindings.utils.CollectionsUtils.filter;
 
-class InboxPresenterImpl implements InboxContract.InboxPresenter {
+class NotificationHistoryPresenterImpl implements NotificationHistoryContract.NotificationHistoryPresenter {
 
     private final NearItManager nearItManager;
-    private final InboxContract.InboxView view;
-    private final InboxListExtraParams params;
+    private final NotificationHistoryContract.NotificationHistoryView view;
+    private final NotificationHistoryExtraParams params;
 
-    InboxPresenterImpl(NearItManager nearItManager, InboxContract.InboxView view, InboxListExtraParams params) {
+    NotificationHistoryPresenterImpl(NearItManager nearItManager, NotificationHistoryContract.NotificationHistoryView view, NotificationHistoryExtraParams params) {
         this.nearItManager = nearItManager;
         this.view = view;
         this.params = params;
@@ -32,7 +32,7 @@ class InboxPresenterImpl implements InboxContract.InboxPresenter {
 
     @Override
     public void start() {
-        loadInbox();
+        loadHistory();
     }
 
     @Override
@@ -42,13 +42,13 @@ class InboxPresenterImpl implements InboxContract.InboxPresenter {
 
     @Override
     public void requestRefresh() {
-        loadInbox();
+        loadHistory();
     }
 
     @Override
-    public void itemClicked(InboxItem inboxItem) {
-        nearItManager.sendTracking(inboxItem.trackingInfo, Recipe.OPENED);
-        view.openDetail(inboxItem);
+    public void itemClicked(InboxItem item) {
+        nearItManager.sendTracking(item.trackingInfo, Recipe.OPENED);
+        view.openDetail(item);
     }
 
     @Override
@@ -57,14 +57,14 @@ class InboxPresenterImpl implements InboxContract.InboxPresenter {
             nearItManager.sendTracking(item.trackingInfo, Recipe.OPENED);
     }
 
-    private void loadInbox() {
+    private void loadHistory() {
         nearItManager.getInbox(new InboxManager.OnInboxMessages() {
             @Override
-            public void onMessages(@NonNull List<InboxItem> inboxItemList) {
+            public void onMessages(@NonNull List<InboxItem> itemList) {
                 if (!params.shouldIncludeCustomJSON() ||
                         !params.shouldIncludeFeedbacks() ||
                         !params.shouldIncludeCoupons()) {
-                    inboxItemList = filter(inboxItemList, new CollectionsUtils.Predicate<InboxItem>() {
+                    itemList = filter(itemList, new CollectionsUtils.Predicate<InboxItem>() {
                         @Override
                         public boolean apply(InboxItem item) {
                             return (!(item.reaction instanceof CustomJSON) || params.shouldIncludeCustomJSON()) &&
@@ -74,17 +74,17 @@ class InboxPresenterImpl implements InboxContract.InboxPresenter {
                     });
                 }
 
-                if (inboxItemList.isEmpty()) {
+                if (itemList.isEmpty()) {
                     view.showEmptyLayout();
                 } else {
-                    view.showInboxItems(inboxItemList);
+                    view.showNotificationHistory(itemList);
                     view.hideEmptyLayout();
                 }
             }
 
             @Override
             public void onError(String error) {
-                view.showInboxItems(Collections.<InboxItem>emptyList());
+                view.showNotificationHistory(Collections.<InboxItem>emptyList());
                 view.showEmptyLayout();
                 view.showRefreshError(error);
             }
