@@ -16,6 +16,7 @@ class NotificationsActivity : AppCompatActivity() {
     fun openNotifications(view: View) {
         startActivity(NearITUIBindings.getInstance(this@NotificationsActivity)
                 .notificationHistoryIntentBuilder()
+                .setTitle("My notifications")
                 .build())
     }
 
