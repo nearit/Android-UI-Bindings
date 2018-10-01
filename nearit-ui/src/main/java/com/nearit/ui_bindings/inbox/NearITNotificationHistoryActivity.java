@@ -23,6 +23,10 @@ public class NearITNotificationHistoryActivity extends AppCompatActivity {
         if (intent != null &&
                 intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
             extras = intent.getParcelableExtra(ExtraConstants.EXTRA_FLOW_PARAMS);
+            String activityTitle = extras.getActivityTitle();
+            if (activityTitle != null) {
+                setTitle(activityTitle);
+            }
         }
 
         getSupportFragmentManager()

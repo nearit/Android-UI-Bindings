@@ -33,6 +33,10 @@ public class NearItCouponListActivity extends AppCompatActivity {
                 intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
             extras = CouponListExtraParams.fromIntent(intent);
             isEnableTapToClose = extras.isEnableTapOutsideToClose();
+            String activityTitle = extras.getActivityTitle();
+            if (activityTitle != null) {
+                setTitle(activityTitle);
+            }
         }
 
         getSupportFragmentManager()

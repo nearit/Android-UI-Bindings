@@ -3,6 +3,7 @@ package com.nearit.ui_bindings.inbox;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 public class NotificationHistoryIntentBuilder {
     private final Context context;
@@ -10,6 +11,8 @@ public class NotificationHistoryIntentBuilder {
     private boolean includeCustomJSON = false;
     private boolean includeFeedbacks = true;
     private boolean includeCoupons = false;
+    @Nullable
+    private String activityTitle = null;
 
     public NotificationHistoryIntentBuilder(Context context) {
         this.context = context;
@@ -35,13 +38,18 @@ public class NotificationHistoryIntentBuilder {
         return this;
     }
 
+    public NotificationHistoryIntentBuilder setTitle(String title) {
+        this.activityTitle = title;
+        return this;
+    }
+
     public Intent build() {
         return NearITNotificationHistoryActivity.createIntent(context, getParams());
     }
 
     @NonNull
     private NotificationHistoryExtraParams getParams() {
-        return new NotificationHistoryExtraParams(mEmptyListLayout, includeCustomJSON, includeFeedbacks, includeCoupons);
+        return new NotificationHistoryExtraParams(mEmptyListLayout, includeCustomJSON, includeFeedbacks, includeCoupons, activityTitle);
     }
 
 
