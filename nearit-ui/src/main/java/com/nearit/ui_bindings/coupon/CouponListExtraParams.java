@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.nearit.ui_bindings.ExtraConstants;
 
@@ -27,6 +28,8 @@ public class CouponListExtraParams implements Parcelable {
     private final boolean expired;
     private final boolean inactive;
     private final boolean redeemed;
+    @Nullable
+    private final String activityTitle;
 
     CouponListExtraParams(
             int iconDrawable,
@@ -41,7 +44,8 @@ public class CouponListExtraParams implements Parcelable {
             boolean expired,
             boolean inactive,
             boolean redeemed,
-            boolean enableTapOutsideToClose) {
+            boolean enableTapOutsideToClose,
+            @Nullable String activityTitle) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
         this.noCouponLayout = noCouponLayout;
@@ -55,6 +59,7 @@ public class CouponListExtraParams implements Parcelable {
         this.expired = expired;
         this.inactive = inactive;
         this.redeemed = redeemed;
+        this.activityTitle = activityTitle;
     }
 
     CouponListExtraParams(
@@ -83,7 +88,8 @@ public class CouponListExtraParams implements Parcelable {
                 expired,
                 inactive,
                 redeemed,
-                DEFAULT_ENABLE_TAP_OUTSIDE_TO_CLOSE);
+                DEFAULT_ENABLE_TAP_OUTSIDE_TO_CLOSE,
+                null);
     }
 
     /**
@@ -126,6 +132,7 @@ public class CouponListExtraParams implements Parcelable {
             boolean expired = in.readInt() != 0;
             boolean inactive = in.readInt() != 0;
             boolean redeemed = in.readInt() != 0;
+            String activityTitle = in.readString();
             return new CouponListExtraParams(
                     iconDrawable,
                     separatorDrawable,
@@ -139,7 +146,8 @@ public class CouponListExtraParams implements Parcelable {
                     expired,
                     inactive,
                     redeemed,
-                    enableTapToClose
+                    enableTapToClose,
+                    activityTitle
             );
         }
 
@@ -169,6 +177,7 @@ public class CouponListExtraParams implements Parcelable {
         dest.writeInt(expired ? 1 : 0);
         dest.writeInt(inactive ? 1 : 0);
         dest.writeInt(redeemed ? 1 : 0);
+        dest.writeString(activityTitle);
     }
 
     int getIconDrawable() {
@@ -223,4 +232,8 @@ public class CouponListExtraParams implements Parcelable {
         return redeemed;
     }
 
+    @Nullable
+    public String getActivityTitle() {
+        return activityTitle;
+    }
 }

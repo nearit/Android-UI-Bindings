@@ -29,6 +29,7 @@ public class ContentPlainActivity extends AppCompatActivity {
 
         Fragment contentFragment = NearITUIBindings.getInstance(this)
                 .contentFragmentBuilder(content, trackingInfo)
+                .openLinksInWebView()
                 .build();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_container, contentFragment).commit();

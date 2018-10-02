@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="nearit_ui_webview_statusbar_color">@color/nearit_ui_real_black</color>
+    <color name="nearit_ui_webview_toolbar_color">@color/nearit_ui_real_white</color>
+    <color name="nearit_ui_webview_up_indicator_color">@color/nearit_ui_real_black</color>
+    <color name="nearit_ui_webview_title_text_color">@color/nearit_ui_real_black</color>
+
+    <dimen name="nearit_ui_webview_vertical_margin">16sp</dimen>
+    <dimen name="nearit_ui_webview_horizontal_margin">16sp</dimen>
+
+    <style name="NearITUIWebViewActivityAppearance" parent="NearITUIFullScreenActivityAppearance">
+        <item name="colorPrimary">@color/nearit_ui_webview_toolbar_color</item>
+        <item name="colorPrimaryDark">@color/nearit_ui_webview_statusbar_color</item>
+        <item name="titleTextColor">@color/nearit_ui_webview_title_text_color</item>
+        <item name="actionBarTheme">@style/ActionBarStyle</item>
+    </style>
+
+    <style name="ActionBarStyle" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/nearit_ui_webview_up_indicator_color</item>
+    </style>
+
+</resources>
