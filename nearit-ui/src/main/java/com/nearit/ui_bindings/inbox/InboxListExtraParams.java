@@ -2,23 +2,32 @@ package com.nearit.ui_bindings.inbox;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 public class InboxListExtraParams implements Parcelable {
 
     private final int noInboxCustomLayout;
     private final boolean includeCustomJSON;
     private final boolean includeFeedbacks;
+    @Nullable
+    private final String activityTitle;
 
-    InboxListExtraParams(int noInboxCustomLayout, boolean includeCustomJSON, boolean includeFeedbacks) {
+    InboxListExtraParams(int noInboxCustomLayout, boolean includeCustomJSON, boolean includeFeedbacks, @Nullable String activityTitle) {
         this.noInboxCustomLayout = noInboxCustomLayout;
         this.includeCustomJSON = includeCustomJSON;
         this.includeFeedbacks = includeFeedbacks;
+        this.activityTitle = activityTitle;
+    }
+
+    public InboxListExtraParams(int mNoInboxLayout, boolean includeCustomJSON, boolean includeFeedbacks) {
+        this(mNoInboxLayout, includeCustomJSON, includeFeedbacks, null);
     }
 
     private InboxListExtraParams(Parcel in) {
         noInboxCustomLayout = in.readInt();
         includeCustomJSON = in.readByte() != 0;
         includeFeedbacks = in.readByte() != 0;
+        activityTitle = in.readString();
     }
 
     @Override
@@ -26,6 +35,7 @@ public class InboxListExtraParams implements Parcelable {
         dest.writeInt(noInboxCustomLayout);
         dest.writeByte((byte) (includeCustomJSON ? 1 : 0));
         dest.writeByte((byte) (includeFeedbacks ? 1 : 0));
+        dest.writeString(activityTitle);
     }
 
     @Override
@@ -55,5 +65,10 @@ public class InboxListExtraParams implements Parcelable {
 
     public boolean shouldIncludeFeedbacks() {
         return includeFeedbacks;
+    }
+
+    @Nullable
+    public String getActivityTitle() {
+        return activityTitle;
     }
 }

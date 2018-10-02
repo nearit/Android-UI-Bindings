@@ -31,6 +31,7 @@ public class CouponsActivity extends AppCompatActivity {
         //  start an activity that shows a list of REAL coupons, with jagged borders
         startActivity(NearITUIBindings.getInstance(CouponsActivity.this)
                 .couponListIntentBuilder()
+                .setTitle("My coupons")
                 .jaggedBorders()
                 .enableNetErrorDialog()
                 .build());

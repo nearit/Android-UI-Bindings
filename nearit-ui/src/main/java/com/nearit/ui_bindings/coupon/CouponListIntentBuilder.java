@@ -2,6 +2,7 @@ package com.nearit.ui_bindings.coupon;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 
 /**
  * @author Federico Boschini
@@ -22,9 +23,17 @@ public class CouponListIntentBuilder {
     private boolean mExpired = false;
     private boolean mInactive = false;
     private boolean mRedeemed = false;
+    @Nullable
+    private String mActivityTitle = null;
 
     public CouponListIntentBuilder(Context context) {
         mContext = context;
+    }
+
+
+    public CouponListIntentBuilder setTitle(String title) {
+        mActivityTitle = title;
+        return this;
     }
 
     /**
@@ -128,7 +137,8 @@ public class CouponListIntentBuilder {
                 mExpired,
                 mInactive,
                 mRedeemed,
-                mEnableTapOutsideToClose);
+                mEnableTapOutsideToClose,
+                mActivityTitle);
     }
 
 }
