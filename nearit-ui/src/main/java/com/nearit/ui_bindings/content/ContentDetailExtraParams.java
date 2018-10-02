@@ -14,13 +14,16 @@ import com.nearit.ui_bindings.ExtraConstants;
 class ContentDetailExtraParams implements Parcelable {
 
     private final boolean enableTapOutsideToClose;
+    private final boolean openLinksInWebView;
 
-    ContentDetailExtraParams(boolean enableTapOutsideToClose) {
-        this.enableTapOutsideToClose = enableTapOutsideToClose;
+    ContentDetailExtraParams(boolean openLinksInWebView) {
+        this.enableTapOutsideToClose = false;
+        this.openLinksInWebView = openLinksInWebView;
     }
 
-    ContentDetailExtraParams() {
-        this.enableTapOutsideToClose = false;
+    ContentDetailExtraParams(boolean enableTapOutsideToClose, boolean openLinksInWebView) {
+        this.enableTapOutsideToClose = enableTapOutsideToClose;
+        this.openLinksInWebView = openLinksInWebView;
     }
 
     /**
@@ -51,8 +54,11 @@ class ContentDetailExtraParams implements Parcelable {
         @Override
         public ContentDetailExtraParams createFromParcel(Parcel in) {
             boolean enableTapToClose = in.readInt() != 0;
+            boolean openLinksInWebView = in.readInt() != 0;
+
             return new ContentDetailExtraParams(
-                    enableTapToClose
+                    enableTapToClose,
+                    openLinksInWebView
             );
         }
 
@@ -70,10 +76,15 @@ class ContentDetailExtraParams implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(enableTapOutsideToClose ? 1 : 0);
+        dest.writeInt(openLinksInWebView ? 1 : 0);
     }
 
     boolean isEnableTapOutsideToClose() {
         return enableTapOutsideToClose;
+    }
+
+    boolean isOpenLinksInWebView() {
+        return openLinksInWebView;
     }
 
 }

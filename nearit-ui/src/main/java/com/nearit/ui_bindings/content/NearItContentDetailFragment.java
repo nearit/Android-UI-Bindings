@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +19,15 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.nearit.customtabs.CustomTabsHelper;
+import com.nearit.customtabs.WebViewFallback;
 import com.nearit.htmltextview.HtmlTextView;
+import com.nearit.htmltextview.NearItMovementMethod;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.content.views.ContentCTAButton;
 import com.nearit.ui_bindings.utils.LoadImageFromURL;
 
 import it.near.sdk.NearItManager;
-import it.near.sdk.logging.NearLog;
 import it.near.sdk.reactions.contentplugin.model.Content;
 import it.near.sdk.trackings.TrackingInfo;
 
@@ -33,13 +37,15 @@ import static it.near.sdk.recipes.models.Recipe.CTA_TAPPED;
  * @author Federico Boschini
  */
 
-public class NearItContentDetailFragment extends Fragment {
+public class NearItContentDetailFragment extends Fragment implements NearItMovementMethod.OnMovementLinkClickListener {
 
     private static final String TAG = "NearItContentFragm";
 
     private static final String ARG_CONTENT = "content";
     private static final String ARG_TRACKING_INFO = "tracking_info";
     private static final String ARG_EXTRAS = "extras";
+
+    private boolean openLinksInTabs = false;
 
     private Content content;
     @Nullable
@@ -68,14 +74,14 @@ public class NearItContentDetailFragment extends Fragment {
             trackingInfo = args.getParcelable(ARG_TRACKING_INFO);
         }
 
-        ContentDetailExtraParams extras = null;
+        ContentDetailExtraParams extras;
         if (getArguments() != null) {
             extras = getArguments().getParcelable(ARG_EXTRAS);
+            if (extras != null) {
+                openLinksInTabs = extras.isOpenLinksInWebView();
+            }
         }
 
-        if (extras != null) {
-
-        }
 
     }
 
@@ -86,7 +92,7 @@ public class NearItContentDetailFragment extends Fragment {
         ScrollView scrollView = rootView.findViewById(R.id.content_scrollview);
         TextView titleTextView = rootView.findViewById(R.id.content_title);
         HtmlTextView contentView = rootView.findViewById(R.id.content_html);
-        ContentCTAButton ctaButton = rootView.findViewById(R.id.cta_button);
+        final ContentCTAButton ctaButton = rootView.findViewById(R.id.cta_button);
         ImageView contentImageView = rootView.findViewById(R.id.content_image);
         ProgressBar contentImageSpinner = rootView.findViewById(R.id.content_image_progress_bar);
         LinearLayout contentImageContainer = rootView.findViewById(R.id.content_image_container);
@@ -102,6 +108,7 @@ public class NearItContentDetailFragment extends Fragment {
         if (content.contentString != null) {
             contentView.setVisibility(View.VISIBLE);
             contentView.setHtml(content.contentString);
+            contentView.setMovementMethod(new NearItMovementMethod(this, getContext()));
         }
 
         if (content.getImageLink() != null) {
@@ -116,16 +123,51 @@ public class NearItContentDetailFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     NearItManager.getInstance().sendTracking(trackingInfo, CTA_TAPPED);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(content.getCta().url));
-                    if (getActivity() != null && intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                        startActivity(intent);
-                    } else {
-                        Log.e(TAG, String.format("Unable to open link: %s", content.getCta().url));
+                    if (getContext() != null) {
+                        if (openLinksInTabs) {
+                            openInCustomTab(content.getCta().url);
+                        } else {
+                            openUrl(content.getCta().url);
+                        }
                     }
                 }
             });
         }
 
         return rootView;
+    }
+
+    private void openInCustomTab(String url) {
+        assert content.getCta() != null;
+
+        if (getContext() != null) {
+            CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
+            intentBuilder.setToolbarColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_webview_toolbar_color));
+
+            CustomTabsHelper.openCustomTab(
+                    getContext(), intentBuilder.build(), Uri.parse(url), new WebViewFallback());
+        }
+    }
+
+    private void openUrl(String url) {
+        assert content.getCta() != null;
+
+        if (getContext() != null) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            if (intent.resolveActivity(getContext().getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                Log.e(TAG, String.format("Unable to open link: %s", url));
+            }
+        }
+    }
+
+    @Override
+    public void onLinkClicked(String linkText, NearItMovementMethod.LinkType linkType) {
+        if (openLinksInTabs) {
+            openInCustomTab(linkText);
+        } else {
+            openUrl(linkText);
+        }
     }
 }
