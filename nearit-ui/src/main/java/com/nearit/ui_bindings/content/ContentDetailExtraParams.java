@@ -16,14 +16,14 @@ class ContentDetailExtraParams implements Parcelable {
     private final boolean enableTapOutsideToClose;
     private final boolean openLinksInWebView;
 
-    ContentDetailExtraParams(boolean enableTapOutsideToClose, boolean openLinksInWebView) {
-        this.enableTapOutsideToClose = enableTapOutsideToClose;
+    ContentDetailExtraParams(boolean openLinksInWebView) {
+        this.enableTapOutsideToClose = false;
         this.openLinksInWebView = openLinksInWebView;
     }
 
-    ContentDetailExtraParams() {
-        this.enableTapOutsideToClose = false;
-        this.openLinksInWebView = false;
+    ContentDetailExtraParams(boolean enableTapOutsideToClose, boolean openLinksInWebView) {
+        this.enableTapOutsideToClose = enableTapOutsideToClose;
+        this.openLinksInWebView = openLinksInWebView;
     }
 
     /**

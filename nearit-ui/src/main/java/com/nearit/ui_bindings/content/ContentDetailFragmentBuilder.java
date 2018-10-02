@@ -13,10 +13,16 @@ public class ContentDetailFragmentBuilder {
     private final Content mContent;
     @Nullable
     private final TrackingInfo mTrackingInfo;
+    private boolean mOpenLinksInWebView = false;
 
     public ContentDetailFragmentBuilder(Content mContent, @Nullable TrackingInfo mTrackingInfo) {
         this.mContent = mContent;
         this.mTrackingInfo = mTrackingInfo;
+    }
+
+    public ContentDetailFragmentBuilder openLinksInWebView() {
+        mOpenLinksInWebView = true;
+        return this;
     }
 
     public NearItContentDetailFragment build() {
@@ -24,7 +30,7 @@ public class ContentDetailFragmentBuilder {
     }
 
     private ContentDetailExtraParams getParams() {
-        return new ContentDetailExtraParams();
+        return new ContentDetailExtraParams(mOpenLinksInWebView);
     }
 
 }
