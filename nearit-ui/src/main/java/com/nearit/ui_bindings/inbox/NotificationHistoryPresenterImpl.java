@@ -53,7 +53,7 @@ class NotificationHistoryPresenterImpl implements NotificationHistoryContract.No
 
     @Override
     public void onNotificationRead(InboxItem item) {
-        if (item.reaction instanceof SimpleNotification)
+        if (item.reaction instanceof SimpleNotification && !item.read)
             nearItManager.sendTracking(item.trackingInfo, Recipe.OPENED);
     }
 
