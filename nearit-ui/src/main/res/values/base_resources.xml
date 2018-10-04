@@ -4,6 +4,7 @@
     <color name="nearit_ui_error_color">#E54D4C</color>
     <color name="nearit_ui_error_color_50">#80E54D4C</color>
     <color name="nearit_ui_black">#333333</color>
+    <color name="nearit_ui_real_black">#000000</color>
     <color name="nearit_ui_black_50">#7f333333</color>
     <color name="nearit_ui_white">#E1E1E1</color>
     <color name="nearit_ui_white_two">#E1E1E1</color>

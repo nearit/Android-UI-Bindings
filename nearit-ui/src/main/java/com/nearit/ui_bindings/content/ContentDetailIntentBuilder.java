@@ -14,6 +14,7 @@ import it.near.sdk.trackings.TrackingInfo;
 public class ContentDetailIntentBuilder {
     private final Context mContext;
     private boolean mEnableTapOutsideToClose = false;
+    private boolean mOpenLinksInWebView = false;
     private final Content mContent;
     @Nullable
     private final TrackingInfo mTrackingInfo;
@@ -37,6 +38,11 @@ public class ContentDetailIntentBuilder {
         return this;
     }
 
+    public ContentDetailIntentBuilder openLinksInWebView() {
+        mOpenLinksInWebView = true;
+        return this;
+    }
+
     public Intent build() {
         if (mSingleInstance) return NearItContentDetailActivitySingleInstance.createIntent(mContext, mTrackingInfo, mContent, getParams());
         else return NearItContentDetailActivity.createIntent(mContext, mTrackingInfo, mContent, getParams());
@@ -44,7 +50,8 @@ public class ContentDetailIntentBuilder {
 
     private ContentDetailExtraParams getParams() {
         return new ContentDetailExtraParams(
-                mEnableTapOutsideToClose);
+                mEnableTapOutsideToClose,
+                mOpenLinksInWebView);
     }
 
 }

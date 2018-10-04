@@ -21,6 +21,7 @@ class ContentPlainActivity : AppCompatActivity() {
 
         val contentFragment = NearITUIBindings.getInstance(this@ContentPlainActivity)
                 .contentFragmentBuilder(content, trackingInfo)
+                .openLinksInWebView()
                 .build()
 
         supportFragmentManager
