@@ -229,4 +229,8 @@ public class NearItCouponListFragment extends Fragment implements CouponViewHold
         }
     }
 
+    public void refreshList() {
+        triggerRefresh();
+    }
+
 }
