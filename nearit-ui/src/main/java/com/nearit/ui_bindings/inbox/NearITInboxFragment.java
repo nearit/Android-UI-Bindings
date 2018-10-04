@@ -161,4 +161,8 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
     public void notificationRead(InboxItem item) {
         presenter.onNotificationRead(item);
     }
+
+    public void refreshList() {
+        presenter.requestRefresh();
+    }
 }
