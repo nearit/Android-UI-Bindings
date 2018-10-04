@@ -18,16 +18,21 @@ import it.near.sdk.recipes.models.Recipe;
 
 import static com.nearit.ui_bindings.utils.CollectionsUtils.filter;
 
-class InboxPresenterImpl implements InboxContract.InboxPresenter {
+class InboxPresenterImpl implements InboxContract.Presenter {
 
     private final NearItManager nearItManager;
-    private final InboxContract.InboxView view;
+    private final InboxContract.View view;
     private final InboxListExtraParams params;
 
-    InboxPresenterImpl(NearItManager nearItManager, InboxContract.InboxView view, InboxListExtraParams params) {
+    InboxPresenterImpl(NearItManager nearItManager, InboxContract.View view, InboxListExtraParams params) {
         this.nearItManager = nearItManager;
         this.view = view;
         this.params = params;
+        init();
+    }
+
+    private void init() {
+        view.injectPresenter(this);
     }
 
     @Override

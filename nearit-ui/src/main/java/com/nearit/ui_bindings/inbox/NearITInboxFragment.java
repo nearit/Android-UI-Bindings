@@ -23,17 +23,17 @@ import java.util.List;
 import it.near.sdk.NearItManager;
 import it.near.sdk.recipes.inbox.model.InboxItem;
 
-public class NearITInboxFragment extends Fragment implements InboxContract.InboxView, InboxAdapter.InboxAdapterListener, InboxAdapter.NotificationReadListener {
+public class NearITInboxFragment extends Fragment implements InboxContract.View, InboxAdapter.InboxAdapterListener, InboxAdapter.NotificationReadListener {
 
     private static final String EXTRAS = "extras";
-    private InboxContract.InboxPresenter presenter;
+    private InboxContract.Presenter presenter;
     private TextView noInboxText;
     private RelativeLayout noInboxContainer;
     private InboxAdapter inboxAdapter;
     private SwipeRefreshLayout swipeToRefreshLayout;
 
     private int customNoInboxLayoutRef = 0;
-    private View customNoInbox;
+    private android.view.View customNoInbox;
     private InboxListExtraParams extras;
 
     public static NearITInboxFragment newInstance(@Nullable InboxListExtraParams extras) {
@@ -42,10 +42,6 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
         bundle.putParcelable(EXTRAS, extras);
         fragment.setArguments(bundle);
         return fragment;
-    }
-
-    private void setPresenter(InboxContract.InboxPresenter presenter) {
-        this.presenter = presenter;
     }
 
     @Override
@@ -58,12 +54,13 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
                 customNoInboxLayoutRef = extras.getNoInboxCustomLayout();
             }
         }
-        loadPresenter();
+
+        new InboxPresenterImpl(NearItManager.getInstance(), this, extras);
     }
 
-    private void loadPresenter() {
-        InboxContract.InboxPresenter presenter = new InboxPresenterImpl(NearItManager.getInstance(), this, extras);
-        setPresenter(presenter);
+    @Override
+    public void injectPresenter(@NonNull InboxContract.Presenter presenter) {
+        this.presenter = presenter;
     }
 
     @Nullable
@@ -91,7 +88,7 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
             customNoInbox = inflater.inflate(customNoInboxLayoutRef, noInboxContainer, false);
             noInboxContainer.addView(customNoInbox);
         } else {
-            noInboxText.setVisibility(View.VISIBLE);
+            noInboxText.setVisibility(android.view.View.VISIBLE);
         }
 
         return rootView;
@@ -110,8 +107,8 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onPause() {
+        super.onPause();
         presenter.stop();
     }
 
@@ -125,19 +122,19 @@ public class NearITInboxFragment extends Fragment implements InboxContract.Inbox
     public void showEmptyLayout() {
         showInboxItems(Collections.<InboxItem>emptyList());
         if (customNoInbox != null) {
-            customNoInbox.setVisibility(View.VISIBLE);
-            noInboxContainer.setVisibility(View.VISIBLE);
+            customNoInbox.setVisibility(android.view.View.VISIBLE);
+            noInboxContainer.setVisibility(android.view.View.VISIBLE);
         }
-        noInboxText.setVisibility(View.VISIBLE);
+        noInboxText.setVisibility(android.view.View.VISIBLE);
     }
 
     @Override
     public void hideEmptyLayout() {
         if (customNoInbox != null) {
-            customNoInbox.setVisibility(View.GONE);
-            noInboxContainer.setVisibility(View.GONE);
+            customNoInbox.setVisibility(android.view.View.GONE);
+            noInboxContainer.setVisibility(android.view.View.GONE);
         }
-        noInboxText.setVisibility(View.GONE);
+        noInboxText.setVisibility(android.view.View.GONE);
     }
 
     @Override

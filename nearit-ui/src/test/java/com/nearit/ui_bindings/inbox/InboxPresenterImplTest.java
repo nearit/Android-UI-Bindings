@@ -3,8 +3,8 @@ package com.nearit.ui_bindings.inbox;
 import android.support.annotation.NonNull;
 
 import com.google.common.collect.Lists;
-import com.nearit.ui_bindings.inbox.InboxContract.InboxPresenter;
-import com.nearit.ui_bindings.inbox.InboxContract.InboxView;
+import com.nearit.ui_bindings.inbox.InboxContract.Presenter;
+import com.nearit.ui_bindings.inbox.InboxContract.View;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,11 +45,11 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class InboxPresenterImplTest {
 
-    private InboxPresenter inboxPresenter;
+    private Presenter inboxPresenter;
     @Mock
     private NearItManager nearit;
     @Mock
-    private InboxView view;
+    private View view;
     @Mock
     private InboxListExtraParams params;
     private List<InboxItem> items;

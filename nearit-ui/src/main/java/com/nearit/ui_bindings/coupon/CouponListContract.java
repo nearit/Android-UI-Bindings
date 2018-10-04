@@ -1,24 +1,26 @@
-package com.nearit.ui_bindings.inbox;
+package com.nearit.ui_bindings.coupon;
 
 import com.nearit.ui_bindings.base.BasePresenter;
 import com.nearit.ui_bindings.base.BaseView;
 
 import java.util.List;
 
-import it.near.sdk.recipes.inbox.model.InboxItem;
+import it.near.sdk.reactions.couponplugin.model.Coupon;
 
-interface InboxContract {
+/**
+ * @author Federico Boschini
+ */
+interface CouponListContract {
     interface View extends BaseView<Presenter> {
-        void showInboxItems(List<InboxItem> itemList);
+        void showCouponList(List<Coupon> couponList);
         void showEmptyLayout();
         void hideEmptyLayout();
         void showRefreshError(String error);
-        void openDetail(InboxItem inboxItem);
+        void openDetail(Coupon coupon);
     }
 
     interface Presenter extends BasePresenter {
         void requestRefresh();
-        void itemClicked(InboxItem inboxItem);
-        void onNotificationRead(InboxItem item);
+        void couponClicked(Coupon coupon);
     }
 }
