@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 import it.near.sdk.NearItManager;
-import it.near.sdk.recipes.inbox.model.InboxItem;
+import it.near.sdk.recipes.inbox.model.HistoryItem;
 
 public class NearITNotificationHistoryFragment extends Fragment implements NotificationHistoryContract.NotificationHistoryView, NotificationsAdapter.NotificationAdapterListener, NotificationsAdapter.NotificationReadListener {
 
@@ -116,14 +116,14 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
     }
 
     @Override
-    public void showNotificationHistory(List<InboxItem> itemList) {
+    public void showNotificationHistory(List<HistoryItem> itemList) {
         swipeToRefreshLayout.setRefreshing(false);
         notificationsAdapter.updateItems(itemList);
     }
 
     @Override
     public void showEmptyLayout() {
-        showNotificationHistory(Collections.<InboxItem>emptyList());
+        showNotificationHistory(Collections.<HistoryItem>emptyList());
         if (customEmptyListView != null) {
             customEmptyListView.setVisibility(View.VISIBLE);
             emptyListContainer.setVisibility(View.VISIBLE);
@@ -143,22 +143,22 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
     @Override
     public void showRefreshError(String error) {
         swipeToRefreshLayout.setRefreshing(false);
-        notificationsAdapter.updateItems(Collections.<InboxItem>emptyList());
+        notificationsAdapter.updateItems(Collections.<HistoryItem>emptyList());
         Toast.makeText(getActivity(), "Error downloading inbox", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onNotificationTap(InboxItem itemList) {
+    public void onNotificationTap(HistoryItem itemList) {
         presenter.itemClicked(itemList);
     }
 
     @Override
-    public void openDetail(InboxItem item) {
+    public void openDetail(HistoryItem item) {
         NearITUIBindings.onNewContent(getActivity(), item.reaction, item.trackingInfo);
     }
 
     @Override
-    public void notificationRead(InboxItem item) {
+    public void notificationRead(HistoryItem item) {
         presenter.onNotificationRead(item);
     }
 }

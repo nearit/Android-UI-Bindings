@@ -12,8 +12,8 @@ import it.near.sdk.reactions.couponplugin.model.Coupon;
 import it.near.sdk.reactions.customjsonplugin.model.CustomJSON;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
-import it.near.sdk.recipes.inbox.InboxManager;
-import it.near.sdk.recipes.inbox.model.InboxItem;
+import it.near.sdk.recipes.inbox.NotificationHistoryManager;
+import it.near.sdk.recipes.inbox.model.HistoryItem;
 import it.near.sdk.recipes.models.Recipe;
 
 import static com.nearit.ui_bindings.utils.CollectionsUtils.filter;
@@ -46,27 +46,27 @@ class NotificationHistoryPresenterImpl implements NotificationHistoryContract.No
     }
 
     @Override
-    public void itemClicked(InboxItem item) {
+    public void itemClicked(HistoryItem item) {
         nearItManager.sendTracking(item.trackingInfo, Recipe.OPENED);
         view.openDetail(item);
     }
 
     @Override
-    public void onNotificationRead(InboxItem item) {
+    public void onNotificationRead(HistoryItem item) {
         if (item.reaction instanceof SimpleNotification && !item.read)
             nearItManager.sendTracking(item.trackingInfo, Recipe.OPENED);
     }
 
     private void loadHistory() {
-        nearItManager.getInbox(new InboxManager.OnInboxMessages() {
+        nearItManager.getHistory(new NotificationHistoryManager.OnNotificationHistoryListener() {
             @Override
-            public void onMessages(@NonNull List<InboxItem> itemList) {
+            public void onNotifications(@NonNull List<HistoryItem> itemList) {
                 if (!params.shouldIncludeCustomJSON() ||
                         !params.shouldIncludeFeedbacks() ||
                         !params.shouldIncludeCoupons()) {
-                    itemList = filter(itemList, new CollectionsUtils.Predicate<InboxItem>() {
+                    itemList = filter(itemList, new CollectionsUtils.Predicate<HistoryItem>() {
                         @Override
-                        public boolean apply(InboxItem item) {
+                        public boolean apply(HistoryItem item) {
                             return (!(item.reaction instanceof CustomJSON) || params.shouldIncludeCustomJSON()) &&
                                     (!(item.reaction instanceof Feedback) || params.shouldIncludeFeedbacks()) &&
                                     (!(item.reaction instanceof Coupon) || params.shouldIncludeCoupons());
@@ -84,7 +84,7 @@ class NotificationHistoryPresenterImpl implements NotificationHistoryContract.No
 
             @Override
             public void onError(String error) {
-                view.showNotificationHistory(Collections.<InboxItem>emptyList());
+                view.showNotificationHistory(Collections.<HistoryItem>emptyList());
                 view.showEmptyLayout();
                 view.showRefreshError(error);
             }
