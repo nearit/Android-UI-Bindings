@@ -21,7 +21,7 @@ class CouponUtils {
         Collections.sort(list, new Comparator<Coupon>() {
             @Override
             public int compare(Coupon c1, Coupon c2) {
-                if (c1.getClaimedAtDate() == null || c2.getClaimedAt() == null) {
+                if (c1.getClaimedAtDate() == null || c2.getClaimedAtDate() == null) {
                     return 0;
                 }
                 Date c1Date = c1.getClaimedAtDate();
@@ -41,7 +41,7 @@ class CouponUtils {
     }
 
     static List<Coupon> getValid(List<Coupon> couponList) {
-        return filter(couponList, new CollectionsUtils.Predicate<Coupon>() {
+        List<Coupon> valid = filter(couponList, new CollectionsUtils.Predicate<Coupon>() {
             @Override
             public boolean apply(Coupon item) {
                 return item.getRedeemedAtDate() == null &&
@@ -49,33 +49,41 @@ class CouponUtils {
                         (item.getRedeemableFromDate() == null || item.getRedeemableFromDate().getTime() < System.currentTimeMillis());
             }
         });
+        sortByClaimedAtDate(valid);
+        return valid;
     }
 
     static List<Coupon> getExpired(List<Coupon> couponList) {
-        return filter(couponList, new CollectionsUtils.Predicate<Coupon>() {
+        List<Coupon> expired = filter(couponList, new CollectionsUtils.Predicate<Coupon>() {
             @Override
             public boolean apply(Coupon item) {
                 return item.getRedeemedAtDate() == null && item.getExpiresAtDate() != null && item.getExpiresAtDate().getTime() < System.currentTimeMillis();
             }
         });
+        sortByClaimedAtDate(expired);
+        return expired;
     }
 
     static List<Coupon> getInactive(List<Coupon> couponList) {
-        return filter(couponList, new CollectionsUtils.Predicate<Coupon>() {
+        List<Coupon> inactive = filter(couponList, new CollectionsUtils.Predicate<Coupon>() {
             @Override
             public boolean apply(Coupon item) {
                 return item.getRedeemableFromDate() != null && item.getRedeemableFromDate().getTime() > System.currentTimeMillis();
             }
         });
+        sortByClaimedAtDate(inactive);
+        return inactive;
     }
 
     static List<Coupon> getRedeemed(List<Coupon> couponList) {
-        return filter(couponList, new CollectionsUtils.Predicate<Coupon>() {
+        List<Coupon> redeemed = filter(couponList, new CollectionsUtils.Predicate<Coupon>() {
             @Override
             public boolean apply(Coupon item) {
                 return item.getRedeemedAtDate() != null;
             }
         });
+        sortByClaimedAtDate(redeemed);
+        return redeemed;
     }
 
 }
