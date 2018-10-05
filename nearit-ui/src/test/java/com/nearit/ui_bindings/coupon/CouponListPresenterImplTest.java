@@ -20,6 +20,7 @@ import it.near.sdk.NearItManager;
 import it.near.sdk.reactions.couponplugin.CouponListener;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
@@ -48,9 +49,15 @@ public class CouponListPresenterImplTest {
     @Mock
     private Coupon validCoupon;
     @Mock
+    private Coupon validCoupon2;
+    @Mock
     private Coupon expiredCoupon;
     @Mock
+    private Coupon expiredCoupon2;
+    @Mock
     private Coupon inactiveCoupon;
+    @Mock
+    private Coupon inactiveCoupon2;
     @Mock
     private Coupon redeemedCoupon;
 
@@ -204,6 +211,38 @@ public class CouponListPresenterImplTest {
     }
 
     @Test
+    public void onFetchSuccess_couponsAreShownOrderedByClaimDate() {
+        when(params.isDefaultList()).thenReturn(true);
+        presenter = new CouponListPresenterImpl(nearItManager, view, params);
+        mockGetCoupons(buildCouponList());
+
+        presenter.requestRefresh();
+
+        verify(view).showCouponList(captor.capture());
+        List<Coupon> expected = Lists.newArrayList(validCoupon2, validCoupon, inactiveCoupon2, inactiveCoupon);
+        List<Coupon> captured = captor.getValue();
+        assertThat(captured, is(expected));
+        verify(view).hideEmptyLayout();
+    }
+
+    @Test
+    public void onFetchSuccess_forCustomList_couponsAreShownOrderedByClaimDate() {
+        when(params.isRedeemed()).thenReturn(true);
+        when(params.isExpired()).thenReturn(true);
+        when(params.isInactive()).thenReturn(true);
+        presenter = new CouponListPresenterImpl(nearItManager, view, params);
+        mockGetCoupons(buildCouponList());
+
+        presenter.requestRefresh();
+
+        verify(view).showCouponList(captor.capture());
+        List<Coupon> expected = Lists.newArrayList(inactiveCoupon2, inactiveCoupon, expiredCoupon, expiredCoupon2, redeemedCoupon);
+        List<Coupon> captured = captor.getValue();
+        assertThat(captured, is(expected));
+        verify(view).hideEmptyLayout();
+    }
+
+    @Test
     public void onRefresh_ifCouponFetchError_showEmptyLayoutAndError() {
         mockGetCouponsError();
 
@@ -217,18 +256,32 @@ public class CouponListPresenterImplTest {
 
     private List<Coupon> buildCouponList() {
         buildCoupons();
-        return Lists.newArrayList(validCoupon, expiredCoupon, inactiveCoupon, redeemedCoupon);
+        return Lists.newArrayList(validCoupon, expiredCoupon, inactiveCoupon, expiredCoupon2, inactiveCoupon2, validCoupon2, redeemedCoupon);
     }
 
     private void buildCoupons() {
         when(validCoupon.getRedeemedAtDate()).thenReturn(null);
         when(validCoupon.getExpiresAtDate()).thenReturn(null);
         when(validCoupon.getRedeemableFromDate()).thenReturn(null);
+        when(validCoupon.getClaimedAtDate()).thenReturn(new Date(106, 3, 6));
+
+        when(validCoupon2.getRedeemedAtDate()).thenReturn(null);
+        when(validCoupon2.getExpiresAtDate()).thenReturn(null);
+        when(validCoupon2.getRedeemableFromDate()).thenReturn(null);
+        when(validCoupon2.getClaimedAtDate()).thenReturn(new Date(106, 3, 7));
 
         when(expiredCoupon.getRedeemedAtDate()).thenReturn(null);
         when(expiredCoupon.getExpiresAtDate()).thenReturn(new Date(106, 5, 6));
 
+        when(expiredCoupon2.getRedeemedAtDate()).thenReturn(null);
+        when(expiredCoupon2.getExpiresAtDate()).thenReturn(new Date(106, 5, 6));
+        when(expiredCoupon2.getClaimedAtDate()).thenReturn(new Date(106, 5, 5));
+
         when(inactiveCoupon.getRedeemableFromDate()).thenReturn(new Date(130, 5, 6));
+        when(inactiveCoupon.getClaimedAtDate()).thenReturn(new Date(106, 6, 5));
+
+        when(inactiveCoupon2.getRedeemableFromDate()).thenReturn(new Date(130, 5, 6));
+        when(inactiveCoupon2.getClaimedAtDate()).thenReturn(new Date(106, 6, 6));
 
         when(redeemedCoupon.getRedeemedAtDate()).thenReturn(new Date(106, 5, 6));
     }
