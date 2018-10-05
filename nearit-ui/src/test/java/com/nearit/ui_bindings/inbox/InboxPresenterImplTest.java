@@ -59,7 +59,7 @@ public class InboxPresenterImplTest {
     private ArgumentCaptor<List<InboxItem>> itemsCaptor;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         when(params.shouldIncludeCustomJSON()).thenReturn(true);
         when(params.shouldIncludeFeedbacks()).thenReturn(true);
         inboxPresenter = new InboxPresenterImpl(nearit, view, params);
