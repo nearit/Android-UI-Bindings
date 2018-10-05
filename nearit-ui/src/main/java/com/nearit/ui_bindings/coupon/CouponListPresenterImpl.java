@@ -8,6 +8,7 @@ import it.near.sdk.NearItManager;
 import it.near.sdk.reactions.couponplugin.CouponListener;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
+import static com.nearit.ui_bindings.coupon.CouponUtils.excludeRedeemed;
 import static com.nearit.ui_bindings.coupon.CouponUtils.getExpired;
 import static com.nearit.ui_bindings.coupon.CouponUtils.getInactive;
 import static com.nearit.ui_bindings.coupon.CouponUtils.getRedeemed;
@@ -67,27 +68,35 @@ public class CouponListPresenterImpl implements CouponListContract.Presenter {
         nearItManager.getCoupons(new CouponListener() {
             @Override
             public void onCouponsDownloaded(List<Coupon> coupons) {
+
+                List<Coupon> validList = getValid(coupons);
+                List<Coupon> inactiveList = getInactive(coupons);
+                List<Coupon> expiredList = getExpired(coupons);
+                List<Coupon> redeemedList = getRedeemed(coupons);
+
                 List<Coupon> filtered = new ArrayList<>();
                 if (defaultList) {
-                    filtered.addAll(getValid(coupons));
-                    filtered.addAll(getInactive(coupons));
+                    excludeRedeemed(coupons);
+                    filtered.addAll(validList);
+                    filtered.addAll(inactiveList);
                 } else {
                     if (valid) {
-                        filtered.addAll(getValid(coupons));
+                        filtered.addAll(validList);
                     }
 
                     if (inactive) {
-                        filtered.addAll(getInactive(coupons));
+                        filtered.addAll(inactiveList);
                     }
 
                     if (expired) {
-                        filtered.addAll(getExpired(coupons));
+                        filtered.addAll(expiredList);
                     }
 
                     if (redeemed) {
-                        filtered.addAll(getRedeemed(coupons));
+                        filtered.addAll(redeemedList);
                     }
                 }
+
 
                 if (filtered.isEmpty()) {
                     view.showEmptyLayout();

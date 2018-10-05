@@ -8,18 +8,11 @@ import android.view.ViewGroup;
 
 import com.nearit.ui_bindings.R;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
-import static com.nearit.ui_bindings.coupon.CouponUtils.excludeRedeemed;
-import static com.nearit.ui_bindings.coupon.CouponUtils.getExpired;
-import static com.nearit.ui_bindings.coupon.CouponUtils.getInactive;
-import static com.nearit.ui_bindings.coupon.CouponUtils.getRedeemed;
-import static com.nearit.ui_bindings.coupon.CouponUtils.getValid;
-import static com.nearit.ui_bindings.coupon.CouponUtils.sortByClaimedAtDate;
 
 /**
  * @author Federico Boschini
@@ -45,24 +38,7 @@ class CouponAdapter extends RecyclerView.Adapter<CouponViewHolder> {
     }
 
     void updateCoupons(List<Coupon> couponList) {
-        sortByClaimedAtDate(couponList);
-
-        //  filter out redeemed
-        List<Coupon> redeemedList = getRedeemed(couponList);
-        excludeRedeemed(couponList);
-
-        List<Coupon> validList = getValid(couponList);
-        List<Coupon> inactiveList = getInactive(couponList);
-        List<Coupon> expiredList = getExpired(couponList);
-
-        //  compose final list
-        List<Coupon> finalList = new ArrayList<>();
-        finalList.addAll(validList);
-        finalList.addAll(inactiveList);
-        finalList.addAll(expiredList);
-        finalList.addAll(redeemedList);
-
-        this.couponList = finalList;
+        this.couponList = couponList;
         notifyDataSetChanged();
     }
 
