@@ -36,6 +36,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doAnswer;
@@ -104,7 +105,7 @@ public class NotificationHistoryPresenterImplTest {
     public void refresh_canFail() {
         mockInboxError("error");
         notificationHistoryPresenter.requestRefresh();
-        verify(view).showRefreshError("error");
+        verify(view).showRefreshError(anyInt());
     }
 
     @Test
