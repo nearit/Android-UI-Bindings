@@ -84,7 +84,7 @@ public class NotificationHistoryPresenterImplTest {
         mockInboxError("error");
         notificationHistoryPresenter.start();
         verify(view, atLeastOnce()).showEmptyLayout();
-        verify(view).showRefreshError("error");
+        verify(view).showRefreshError(anyInt());
     }
 
     @Test
