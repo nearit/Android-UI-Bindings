@@ -2,6 +2,7 @@ package com.nearit.ui_bindings.inbox;
 
 import android.support.annotation.NonNull;
 
+import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.utils.CollectionsUtils;
 
 import java.util.Collections;
@@ -86,7 +87,7 @@ class NotificationHistoryPresenterImpl implements NotificationHistoryContract.No
             public void onError(String error) {
                 view.showNotificationHistory(Collections.<HistoryItem>emptyList());
                 view.showEmptyLayout();
-                view.showRefreshError(error);
+                view.showRefreshError(R.string.nearit_ui_history_error_message);
             }
         });
     }

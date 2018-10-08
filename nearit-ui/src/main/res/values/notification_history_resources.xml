@@ -70,6 +70,7 @@
     <string name="nearit_ui_history_content_button_label">See more</string>
     <string name="nearit_ui_history_coupon_button_label">Open</string>
     <string name="nearit_ui_history_feedback_button_label">Open</string>
+    <string name="nearit_ui_history_error_message">We could not get your notifications. Please try again later.</string>
 
 
     <!--  STYLES  -->

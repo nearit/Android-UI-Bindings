@@ -1,5 +1,7 @@
 package com.nearit.ui_bindings.inbox;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -138,6 +140,19 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
             emptyListContainer.setVisibility(View.GONE);
         }
         emptyListText.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showRefreshError(int res) {
+        Context context = getActivity();
+        if (context != null) {
+            try {
+                String errorMessage = context.getResources().getString(res);
+                showRefreshError(errorMessage);
+            } catch (Resources.NotFoundException e) {
+                showRefreshError("We could not get your notifications. Please try again later.");
+            }
+        }
     }
 
     @Override
