@@ -147,6 +147,7 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
 
     @Override
     public void showEmptyLayout() {
+        refreshLayout.setRefreshing(false);
         showCouponList(Collections.<Coupon>emptyList());
         if (customNoCoupon != null) {
             customNoCoupon.setVisibility(View.VISIBLE);
@@ -157,6 +158,7 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
 
     @Override
     public void hideEmptyLayout() {
+        refreshLayout.setRefreshing(false);
         if (customNoCoupon != null) {
             customNoCoupon.setVisibility(View.GONE);
             noCouponContainer.setVisibility(View.GONE);
@@ -207,6 +209,7 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
     }
 
     public void refreshList() {
+        refreshLayout.setRefreshing(true);
         presenter.requestRefresh();
     }
 }
