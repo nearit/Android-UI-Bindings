@@ -8,23 +8,23 @@ import android.view.View;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 
-public class InboxActivity extends AppCompatActivity {
+public class NotificationsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inbox);
+        setContentView(R.layout.activity_notifications);
     }
 
-    public void openInbox(View view) {
+    public void openNotificationHistory(View view) {
         startActivity(NearITUIBindings.getInstance(this)
-                .inboxIntentBuilder()
-                .setTitle("My coupons")
+                .notificationHistoryIntentBuilder()
+                .includeCoupons()
                 .build()
         );
     }
 
-    public void openInboxInActivity(View view) {
-        startActivity(new Intent(this, InboxPlainActivity.class));
+    public void openNotificationsInActivity(View view) {
+        startActivity(new Intent(this, NotificationHistoryPlainActivity.class));
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.your_company.ui_bindings_sample.InboxActivity">
+    tools:context="com.your_company.ui_bindings_sample.NotificationsActivity">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -30,16 +30,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 style="@style/ButtonStyle"
-                android:text="Inbox List"
-                android:onClick="openInbox"/>
+                android:text="History"
+                android:onClick="openNotificationHistory"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 style="@style/ButtonStyle"
-                android:text="Inbox List in Activity"
-                android:onClick="openInboxInActivity"/>
+                android:text="History in Activity"
+                android:onClick="openNotificationsInActivity"/>
 
 
         </LinearLayout>

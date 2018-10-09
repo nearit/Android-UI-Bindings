@@ -2,18 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/nearit_ui_inbox_background_color"
+    android:background="@color/nearit_ui_notification_background_color"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.nearit.ui_bindings.inbox.NearITInboxFragment">
+    tools:context="com.nearit.ui_bindings.inbox.NearITNotificationHistoryFragment">
     
     <TextView
-        android:id="@+id/no_inbox_text"
+        android:id="@+id/empty_notification_history_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textAppearance="@style/NearITUIInboxListNoInboxTextAppearance"
+        android:textAppearance="@style/NearITUIEmptyNotificationHistoryTextAppearance"
         android:visibility="gone"
-        android:text="@string/nearit_ui_inbox_empty_list_text"/>
+        android:text="@string/nearit_ui_history_empty_list_text"/>
 
     <RelativeLayout
         android:id="@+id/empty_layout"
@@ -26,7 +26,7 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/inbox_list"
+            android:id="@+id/notification_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingBottom="10dp"

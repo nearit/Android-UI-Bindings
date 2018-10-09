@@ -52,9 +52,9 @@
             android:launchMode="singleInstance"
             android:theme="@style/NearITUICouponListActivityAppearance"/>
 
-        <activity
-            android:name=".inbox.NearITInboxActivity"
-            android:launchMode="singleInstance" />
+        <activity android:name=".inbox.NearITNotificationHistoryActivity"
+            android:launchMode="singleInstance"
+            />
 
         <activity
             android:name=".warning.NearItUIWarningDialogActivity"

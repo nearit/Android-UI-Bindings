@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.nearit.ui_bindings.inbox.viewholders.BaseViewHolder;
 import com.nearit.ui_bindings.inbox.viewholders.ContentNotificationViewHolder;
+import com.nearit.ui_bindings.inbox.viewholders.CouponNotificationViewHolder;
 import com.nearit.ui_bindings.inbox.viewholders.CustomJSONViewHolder;
 import com.nearit.ui_bindings.inbox.viewholders.FeedbackViewHolder;
 import com.nearit.ui_bindings.inbox.viewholders.SimpleNotificationViewHolder;
@@ -15,33 +16,34 @@ import java.util.Collections;
 import java.util.List;
 
 import it.near.sdk.reactions.contentplugin.model.Content;
+import it.near.sdk.reactions.couponplugin.model.Coupon;
 import it.near.sdk.reactions.customjsonplugin.model.CustomJSON;
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 import it.near.sdk.reactions.simplenotificationplugin.model.SimpleNotification;
-import it.near.sdk.recipes.inbox.model.InboxItem;
+import it.near.sdk.recipes.inbox.model.HistoryItem;
 
-public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class NotificationsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private final NotificationReadListener readListener;
     private final LayoutInflater inflater;
-    private final InboxAdapterListener inboxAdapterListener;
+    private final NotificationAdapterListener notificationAdapterListener;
 
-    private List<InboxItem> items = Collections.emptyList();
+    private List<HistoryItem> items = Collections.emptyList();
 
-    InboxAdapter(LayoutInflater inflater, InboxAdapterListener inboxAdapterListener, NotificationReadListener readListener) {
+    NotificationsAdapter(LayoutInflater inflater, NotificationAdapterListener notificationAdapterListener, NotificationReadListener readListener) {
         this.inflater = inflater;
-        this.inboxAdapterListener = inboxAdapterListener;
+        this.notificationAdapterListener = notificationAdapterListener;
         this.readListener = readListener;
     }
 
-    public void updateItems(List<InboxItem> items) {
+    public void updateItems(List<HistoryItem> items) {
         this.items = items;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemViewType(int position) {
-        InboxItem item = items.get(position);
+        HistoryItem item = items.get(position);
         if (item.reaction instanceof SimpleNotification) {
             return SimpleNotificationViewHolder.VIEWTYPE;
         } else if (item.reaction instanceof Content) {
@@ -50,6 +52,8 @@ public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             return FeedbackViewHolder.VIEWTYPE;
         } else if (item.reaction instanceof CustomJSON) {
             return CustomJSONViewHolder.VIEWTYPE;
+        } else if (item.reaction instanceof Coupon) {
+            return CouponNotificationViewHolder.VIEWTYPE;
         } else {
             return super.getItemViewType(position);
         }
@@ -62,11 +66,13 @@ public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             case SimpleNotificationViewHolder.VIEWTYPE:
                 return new SimpleNotificationViewHolder(inflater, parent, readListener);
             case ContentNotificationViewHolder.VIEWTYPE:
-                return new ContentNotificationViewHolder(inflater, parent, inboxAdapterListener, readListener);
+                return new ContentNotificationViewHolder(inflater, parent, notificationAdapterListener, readListener);
             case FeedbackViewHolder.VIEWTYPE:
-                return new FeedbackViewHolder(inflater, parent, inboxAdapterListener, readListener);
+                return new FeedbackViewHolder(inflater, parent, notificationAdapterListener, readListener);
             case CustomJSONViewHolder.VIEWTYPE:
-                return new CustomJSONViewHolder(inflater, parent, inboxAdapterListener, readListener);
+                return new CustomJSONViewHolder(inflater, parent, notificationAdapterListener, readListener);
+            case CouponNotificationViewHolder.VIEWTYPE:
+                return new CouponNotificationViewHolder(inflater, parent, notificationAdapterListener, readListener);
             default:
                 return new SimpleNotificationViewHolder(inflater, parent, readListener);
         }
@@ -82,11 +88,11 @@ public class InboxAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         return items.size();
     }
 
-    public interface InboxAdapterListener {
-        void onInboxItemTap(InboxItem itemList);
+    public interface NotificationAdapterListener {
+        void onNotificationTap(HistoryItem itemList);
     }
 
     public interface NotificationReadListener {
-        void notificationRead(InboxItem item);
+        void notificationRead(HistoryItem item);
     }
 }
