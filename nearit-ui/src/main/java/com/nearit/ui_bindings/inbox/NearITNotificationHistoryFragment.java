@@ -126,6 +126,7 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
 
     @Override
     public void showEmptyLayout() {
+        swipeToRefreshLayout.setRefreshing(false);
         showNotificationHistory(Collections.<HistoryItem>emptyList());
         if (customEmptyListView != null) {
             customEmptyListView.setVisibility(View.VISIBLE);
@@ -136,6 +137,7 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
 
     @Override
     public void hideEmptyLayout() {
+        swipeToRefreshLayout.setRefreshing(false);
         if (customEmptyListView != null) {
             customEmptyListView.setVisibility(View.GONE);
             emptyListContainer.setVisibility(View.GONE);
@@ -145,6 +147,7 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
 
     @Override
     public void showRefreshError(int res) {
+        swipeToRefreshLayout.setRefreshing(false);
         Context context = getActivity();
         if (context != null) {
             try {
@@ -179,6 +182,7 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
     }
 
     public void refreshList() {
+        swipeToRefreshLayout.setRefreshing(true);
         presenter.requestRefresh();
     }
 }
