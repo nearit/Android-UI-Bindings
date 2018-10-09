@@ -4,6 +4,7 @@
     <color name="nearit_ui_error_color">#E54D4C</color>
     <color name="nearit_ui_error_color_50">#80E54D4C</color>
     <color name="nearit_ui_black">#333333</color>
+    <color name="nearit_ui_real_black">#000000</color>
     <color name="nearit_ui_black_50">#7f333333</color>
     <color name="nearit_ui_white">#E1E1E1</color>
     <color name="nearit_ui_white_two">#E1E1E1</color>
@@ -15,7 +16,7 @@
     <color name="nearit_ui_black_35">#59333333</color>
     <color name="nearit_ui_transparent">#00000000</color>
     <color name="nearit_ui_star_yellow">#F8D71C</color>
-    <color name="nearit_ui_inbox_blue">#519fd0</color>
+    <color name="nearit_ui_notification_history_blue">#519fd0</color>
     <color name="nearit_ui_sad_color">#FF4025</color>
     <color name="nearit_ui_worried_color">#FF9500</color>
     <!--    Lists background colors     -->

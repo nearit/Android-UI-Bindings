@@ -2,13 +2,10 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
-    <style name="NearITUICouponListActivityAppearance" parent="AppTheme" />
 
     <style name="ButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/button_selector</item>
@@ -17,7 +14,8 @@
         <item name="android:minHeight">0dp</item>
     </style>
 
-    <!--NEARIT-UI STYLE OVERRIDE EXAMPLE-->
+    <!--NEARIT-UI STYLE OVERRIDE EXAMPLES-->
+    <style name="NearITUICouponListActivityAppearance" parent="AppTheme" />
     <!--<style name="NearItUIPermissionsExplanationTextAppearance">
         <item name="android:textSize">20sp</item>
         <item name="fontFamily">@font/montserrat</item>

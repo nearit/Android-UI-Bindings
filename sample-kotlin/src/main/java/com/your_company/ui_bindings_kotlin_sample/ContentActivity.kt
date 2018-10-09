@@ -26,6 +26,7 @@ class ContentActivity : AppCompatActivity() {
                     //  Basic example with a complete content
                     NearITUIBindings.getInstance(this@ContentActivity)
                             .contentIntentBuilder(content, trackingInfo)
+                            .openLinksInWebView()
                             .build())
         }
 
@@ -38,6 +39,7 @@ class ContentActivity : AppCompatActivity() {
                     NearITUIBindings.getInstance(this@ContentActivity)
                             .contentIntentBuilder(content, trackingInfo)
                             .enableTapOutsideToClose()
+                            .openLinksInWebView()
                             .build())
         }
 
