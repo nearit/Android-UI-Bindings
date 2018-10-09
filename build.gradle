@@ -27,6 +27,6 @@ task clean(type: Delete) {
 }
 
 ext {
-    nearitMinVersionNumber = '2.9.0'
+    nearitMinVersionNumber = '2.10'
     supportLibraryVersion = '27.1.1'
 }

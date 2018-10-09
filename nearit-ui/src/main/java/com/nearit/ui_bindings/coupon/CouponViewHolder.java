@@ -21,9 +21,9 @@ import it.near.sdk.reactions.couponplugin.model.Coupon;
 /**
  * @author Federico Boschini
  */
-public class CouponViewHolder extends RecyclerView.ViewHolder {
+class CouponViewHolder extends RecyclerView.ViewHolder {
 
-    private final CouponListener couponListener;
+    private final CouponAdapter.CouponAdapterListener couponListener;
     private final Context context;
     private final View itemView;
     private final int iconPlaceholderResId;
@@ -40,7 +40,7 @@ public class CouponViewHolder extends RecyclerView.ViewHolder {
     private final TextView couponValidity;
     private final SimpleDateFormat formatDate;
 
-    CouponViewHolder(View itemView, CouponListener couponListener, Context context, int iconPlaceholderResId, boolean noIcon) {
+    CouponViewHolder(View itemView, CouponAdapter.CouponAdapterListener couponListener, Context context, int iconPlaceholderResId, boolean noIcon) {
         super(itemView);
         this.formatDate = new SimpleDateFormat(context.getResources().getString(R.string.nearit_ui_coupon_date_pretty_format), Locale.US);
         this.itemView = itemView;
@@ -55,11 +55,7 @@ public class CouponViewHolder extends RecyclerView.ViewHolder {
         couponValidity = itemView.findViewById(R.id.coupon_validity);
     }
 
-    interface CouponListener {
-        void onCouponClicked(Coupon coupon);
-    }
-
-    void bindData(final Coupon coupon) {
+    void setItem(final Coupon coupon) {
         if (noIcon) {
             if (couponIcon != null) {
                 couponIcon.setVisibility(View.GONE);

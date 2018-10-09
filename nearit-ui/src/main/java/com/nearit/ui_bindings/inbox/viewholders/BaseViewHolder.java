@@ -5,27 +5,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.nearit.ui_bindings.inbox.InboxAdapter;
+import com.nearit.ui_bindings.inbox.NotificationsAdapter;
 
-import it.near.sdk.recipes.inbox.model.InboxItem;
+import it.near.sdk.recipes.inbox.model.HistoryItem;
 import it.near.sdk.recipes.models.ReactionBundle;
 
 public abstract class BaseViewHolder<T extends ReactionBundle> extends RecyclerView.ViewHolder {
 
-    InboxItem item;
-    private final InboxAdapter.NotificationReadListener readListener;
+    HistoryItem item;
+    private final NotificationsAdapter.NotificationReadListener readListener;
 
-    BaseViewHolder(final View itemView, InboxAdapter.NotificationReadListener readListener) {
+    BaseViewHolder(final View itemView, NotificationsAdapter.NotificationReadListener readListener) {
         super(itemView);
         this.readListener = readListener;
     }
 
-    BaseViewHolder(LayoutInflater inflater, int res, ViewGroup parent, InboxAdapter.NotificationReadListener readListener) {
+    BaseViewHolder(LayoutInflater inflater, int res, ViewGroup parent, NotificationsAdapter.NotificationReadListener readListener) {
         super(inflater.inflate(res, parent, false));
         this.readListener = readListener;
     }
 
-    public void setItem(InboxItem item) {
+    public void setItem(HistoryItem item) {
         this.item = item;
         readListener.notificationRead(item);
         bindToView((T) item.reaction);

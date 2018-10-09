@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.nearit.ui_bindings.R;
-import com.nearit.ui_bindings.inbox.InboxAdapter;
-import com.nearit.ui_bindings.inbox.customviews.InboxCardLayout;
+import com.nearit.ui_bindings.inbox.NotificationsAdapter;
+import com.nearit.ui_bindings.inbox.customviews.NearITNotificationCardLayout;
 
 import it.near.sdk.reactions.customjsonplugin.model.CustomJSON;
 
@@ -18,10 +18,10 @@ public class CustomJSONViewHolder extends BaseViewHolder<CustomJSON> {
     public static final int VIEWTYPE = 4;
 
     private final Button button;
-    private final InboxCardLayout layout;
+    private final NearITNotificationCardLayout layout;
 
-    public CustomJSONViewHolder(LayoutInflater inflater, ViewGroup parent, final InboxAdapter.InboxAdapterListener listener, InboxAdapter.NotificationReadListener readListener) {
-        super(inflater.inflate(R.layout.nearit_ui_inbox_customjson_item, parent, false), readListener);
+    public CustomJSONViewHolder(LayoutInflater inflater, ViewGroup parent, final NotificationsAdapter.NotificationAdapterListener listener, NotificationsAdapter.NotificationReadListener readListener) {
+        super(inflater.inflate(R.layout.nearit_ui_notification_customjson_item, parent, false), readListener);
         layout = itemView.findViewById(R.id.layout);
         button = itemView.findViewById(R.id.detail_button);
         layout.setOnClickListener(new View.OnClickListener() {
@@ -30,7 +30,7 @@ public class CustomJSONViewHolder extends BaseViewHolder<CustomJSON> {
                 item.read = true;
                 layout.setMessageUnread(false);
                 button.setTypeface(null, Typeface.NORMAL);
-                listener.onInboxItemTap(item);
+                listener.onNotificationTap(item);
             }
         });
     }
@@ -44,8 +44,8 @@ public class CustomJSONViewHolder extends BaseViewHolder<CustomJSON> {
                 item.read ? Typeface.NORMAL : Typeface.BOLD);
         Context context = itemView.getContext();
         button.setTextColor(context.getResources().getColor(item.read ?
-                R.color.nearit_ui_inbox_card_text_read_color :
-                R.color.nearit_ui_inbox_card_text_unread_color)
+                R.color.nearit_ui_notification_card_text_read_color :
+                R.color.nearit_ui_notification_card_text_unread_color)
         );
     }
 }

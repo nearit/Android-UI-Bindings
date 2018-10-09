@@ -26,7 +26,7 @@
         <activity android:name=".CouponsActivity" />
         <activity android:name=".PermissionsActivity" />
         <activity android:name=".ContentActivity" />
-        <activity android:name=".InboxActivity" />
+        <activity android:name=".NotificationsActivity" />
         <activity
             android:name=".CouponPlainActivity"
             android:label="Coupon detail activity" />
@@ -40,8 +40,8 @@
             android:name=".CouponListPlainActivity"
             android:label="Coupon list activity" />
         <activity
-            android:name=".InboxPlainActivity"
-            android:label="Inbox activity" />
+            android:name=".NotificationHistoryPlainActivity"
+            android:label="Notification History activity" />
 
         <!--
         NearIT-UI Intent service, un-comment to enable this feature or replace it with your own if you want to handle notifications

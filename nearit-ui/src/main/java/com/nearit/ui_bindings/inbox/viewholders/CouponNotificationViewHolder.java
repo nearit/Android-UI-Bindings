@@ -11,22 +11,23 @@ import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.inbox.NotificationsAdapter;
 import com.nearit.ui_bindings.inbox.customviews.NearITNotificationCardLayout;
 
-import it.near.sdk.reactions.feedbackplugin.model.Feedback;
+import it.near.sdk.reactions.couponplugin.model.Claim;
+import it.near.sdk.reactions.couponplugin.model.Coupon;
 
-public class FeedbackViewHolder extends BaseViewHolder<Feedback> {
+public class CouponNotificationViewHolder extends BaseViewHolder<Coupon> {
 
-    public static final int VIEWTYPE = 3;
+    public static final int VIEWTYPE = 5;
 
     private final Button button;
     private final NearITNotificationCardLayout layout;
 
-    public FeedbackViewHolder(LayoutInflater inflater, ViewGroup parent, final NotificationsAdapter.NotificationAdapterListener listener, NotificationsAdapter.NotificationReadListener readListener) {
-        super(inflater.inflate(R.layout.nearit_ui_notification_feedback_item, parent, false), readListener);
-        layout = itemView.findViewById(R.id.bg_layout);
+    public CouponNotificationViewHolder(LayoutInflater inflater, ViewGroup parent, final NotificationsAdapter.NotificationAdapterListener listener, NotificationsAdapter.NotificationReadListener readListener) {
+        super(inflater.inflate(R.layout.nearit_ui_notification_coupon_item, parent, false), readListener);
+        layout = itemView.findViewById(R.id.layout);
         button = itemView.findViewById(R.id.detail_button);
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 item.read = true;
                 layout.setMessageUnread(false);
                 button.setTypeface(null, Typeface.NORMAL);
@@ -36,18 +37,19 @@ public class FeedbackViewHolder extends BaseViewHolder<Feedback> {
     }
 
     @Override
-    public void bindToView(Feedback feedback) {
+    protected void bindToView(Coupon coupon) {
+        if (coupon.claims == null) return;
+        Claim claim = coupon.claims.get(0);
+        if (claim == null) return;
         layout.setTimestamp(item.timestamp);
-        layout.setNotification(feedback.notificationMessage);
+        layout.setNotification(coupon.notificationMessage);
         layout.setMessageUnread(!item.read);
         button.setTypeface(null,
-                item.read ? Typeface.NORMAL : Typeface.BOLD);
+                item.read ? Typeface.NORMAL: Typeface.BOLD);
         Context context = itemView.getContext();
         button.setTextColor(context.getResources().getColor(item.read ?
                 R.color.nearit_ui_notification_card_text_read_color :
                 R.color.nearit_ui_notification_card_text_unread_color)
         );
     }
-
-
 }

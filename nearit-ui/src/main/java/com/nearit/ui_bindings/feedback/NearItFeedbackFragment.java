@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +31,6 @@ import it.near.sdk.recipes.NearITEventHandler;
 public class NearItFeedbackFragment extends Fragment {
     private static final String ARG_FEEDBACK = "feedback";
     private static final String ARG_EXTRAS = "extras";
-    private static final String SAVED_RATING = "rating";
     private static final String SAVED_IS_BUTTON_CHECKED = "button_state";
     private static final String SAVED_IS_ALERT_VISIBLE = "alert_state";
     private static final int NEAR_AUTOCLOSE_DELAY = 2000;
@@ -86,14 +84,14 @@ public class NearItFeedbackFragment extends Fragment {
 
         if (getArguments() != null) {
             feedback = getArguments().getParcelable(ARG_FEEDBACK);
-        }
-        FeedbackRequestExtras extras = getArguments().getParcelable(ARG_EXTRAS);
-        if (extras != null) {
-            hideTextResponse = extras.isHideTextResponse();
-            successIconResId = extras.getIconResId();
-            noSuccessIcon = extras.isNoSuccessIcon();
-            autoClose = extras.isAutoClose();
-            showCloseButton = extras.isShowCloseButton();
+            FeedbackRequestExtras extras = getArguments().getParcelable(ARG_EXTRAS);
+            if (extras != null) {
+                hideTextResponse = extras.isHideTextResponse();
+                successIconResId = extras.getIconResId();
+                noSuccessIcon = extras.isNoSuccessIcon();
+                autoClose = extras.isAutoClose();
+                showCloseButton = extras.isShowCloseButton();
+            }
         }
 
     }
@@ -189,8 +187,6 @@ public class NearItFeedbackFragment extends Fragment {
                     if (rating < 1.0f) {
                         ratingBar.setRating(1.0f);
                     }
-
-                    Log.d("RATING", String.valueOf(rating));
 
                     userRating = rating;
 

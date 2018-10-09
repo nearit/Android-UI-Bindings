@@ -12,8 +12,8 @@ import com.nearit.ui_bindings.coupon.CouponListFragmentBuilder;
 import com.nearit.ui_bindings.coupon.CouponListIntentBuilder;
 import com.nearit.ui_bindings.feedback.FeedbackFragmentBuilder;
 import com.nearit.ui_bindings.feedback.FeedbackIntentBuilder;
-import com.nearit.ui_bindings.inbox.InboxListFragmentBuilder;
-import com.nearit.ui_bindings.inbox.InboxListIntentBuilder;
+import com.nearit.ui_bindings.inbox.NotificationHistoryFragmentBuilder;
+import com.nearit.ui_bindings.inbox.NotificationHistoryIntentBuilder;
 import com.nearit.ui_bindings.notifications.NearItUIProximityListener;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
 
@@ -184,30 +184,14 @@ public class NearITUIBindings {
     }
 
 
-    /*      INBOX       */
+    /*      Notification History       */
 
-    /**
-     * @deprecated use {@link #inboxIntentBuilder()} instead
-     */
-    @Deprecated
-    public InboxListIntentBuilder createInboxListIntentBuilder() {
-        return this.inboxIntentBuilder();
+    public NotificationHistoryIntentBuilder notificationHistoryIntentBuilder() {
+        return new NotificationHistoryIntentBuilder(mContext);
     }
 
-    public InboxListIntentBuilder inboxIntentBuilder() {
-        return new InboxListIntentBuilder(mContext);
-    }
-
-    /**
-     *  @deprecated use {@link #inboxFragmentBuilder()} instead
-     */
-    @Deprecated
-    public InboxListFragmentBuilder createInboxListFragmentBuilder() {
-        return this.inboxFragmentBuilder();
-    }
-
-    public InboxListFragmentBuilder inboxFragmentBuilder() {
-        return new InboxListFragmentBuilder();
+    public NotificationHistoryFragmentBuilder notificationHistoryFragmentBuilder() {
+        return new NotificationHistoryFragmentBuilder();
     }
 
 
