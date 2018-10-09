@@ -46,10 +46,6 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
         return fragment;
     }
 
-    private void setPresenter(NotificationHistoryContract.NotificationHistoryPresenter presenter) {
-        this.presenter = presenter;
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

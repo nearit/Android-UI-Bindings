@@ -8,6 +8,7 @@ import java.util.List;
 import it.near.sdk.recipes.inbox.model.HistoryItem;
 
 class NotificationHistoryContract {
+
     interface NotificationHistoryView extends BaseView<NotificationHistoryPresenter> {
         void showNotificationHistory(List<HistoryItem> itemList);
         void showEmptyLayout();
