@@ -47,7 +47,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class NotificationHistoryPresenterImplTest {
 
-    private NotificationHistoryPresenter notificationHistoryPresenter;
+    private NotificationHistoryPresenter presenter;
     @Mock
     private NearItManager nearit;
     @Mock
@@ -67,13 +67,13 @@ public class NotificationHistoryPresenterImplTest {
         when(params.shouldIncludeCustomJSON()).thenReturn(true);
         when(params.shouldIncludeFeedbacks()).thenReturn(true);
         when(params.shouldIncludeCoupons()).thenReturn(true);
-        notificationHistoryPresenter = new NotificationHistoryPresenterImpl(nearit, view, params);
+        presenter = new NotificationHistoryPresenterImpl(nearit, view, params);
     }
 
     @Test
     public void start_emptyInbox() {
         mockInboxFromNear(new ArrayList<HistoryItem>());
-        notificationHistoryPresenter.start();
+        presenter.start();
         verify(view, atLeastOnce()).showEmptyLayout();
         verify(view, never()).hideEmptyLayout();
         verify(view, never()).showNotificationHistory(ArgumentMatchers.<HistoryItem>anyList());
@@ -82,7 +82,7 @@ public class NotificationHistoryPresenterImplTest {
     @Test
     public void start_onInboxError() {
         mockInboxError("error");
-        notificationHistoryPresenter.start();
+        presenter.start();
         verify(view, atLeastOnce()).showEmptyLayout();
         verify(view).showRefreshError(anyInt());
     }
@@ -90,21 +90,21 @@ public class NotificationHistoryPresenterImplTest {
     @Test
     public void startWithNoFilter_shouldNotFilterElements() {
         mockInboxFromNear(items);
-        notificationHistoryPresenter.start();
+        presenter.start();
         verify(view).showNotificationHistory(items);
     }
 
     @Test
     public void refreshNoFilter_shouldRefresh() {
         mockInboxFromNear(items);
-        notificationHistoryPresenter.requestRefresh();
+        presenter.requestRefresh();
         verify(view).showNotificationHistory(items);
     }
 
     @Test
     public void refresh_canFail() {
         mockInboxError("error");
-        notificationHistoryPresenter.requestRefresh();
+        presenter.requestRefresh();
         verify(view).showRefreshError(anyInt());
     }
 
@@ -112,7 +112,7 @@ public class NotificationHistoryPresenterImplTest {
     public void startWithFeedBackFilter_shouldNotShowFeedback() {
         when(params.shouldIncludeFeedbacks()).thenReturn(false);
         mockInboxFromNear(items);
-        notificationHistoryPresenter.start();
+        presenter.start();
         verify(view).showNotificationHistory(itemsCaptor.capture());
         List<HistoryItem> captured = itemsCaptor.getValue();
         assertThat(captured, not(hasItem(feedbackItem)));
@@ -122,7 +122,7 @@ public class NotificationHistoryPresenterImplTest {
     public void startWithCustomJsonFilter_shouldNotShowCustomJson() {
         when(params.shouldIncludeCustomJSON()).thenReturn(false);
         mockInboxFromNear(items);
-        notificationHistoryPresenter.start();
+        presenter.start();
         verify(view).showNotificationHistory(itemsCaptor.capture());
         List<HistoryItem> captured = itemsCaptor.getValue();
         assertThat(captured, not(hasItem(customJsonItem)));
@@ -132,7 +132,7 @@ public class NotificationHistoryPresenterImplTest {
     public void startWithCouponFilter_shouldNotShowCoupon() {
         when(params.shouldIncludeCoupons()).thenReturn(false);
         mockInboxFromNear(items);
-        notificationHistoryPresenter.start();
+        presenter.start();
         verify(view).showNotificationHistory(itemsCaptor.capture());
         assertThat(itemsCaptor.getValue(), not(hasItem(couponItem)));
     }
@@ -142,7 +142,7 @@ public class NotificationHistoryPresenterImplTest {
         HistoryItem item = new HistoryItem();
         TrackingInfo ti = new TrackingInfo();
         item.trackingInfo = ti;
-        notificationHistoryPresenter.itemClicked(item);
+        presenter.itemClicked(item);
         verify(nearit).sendTracking(ti, Recipe.OPENED);
         verify(view).openDetail(item);
     }
@@ -154,7 +154,7 @@ public class NotificationHistoryPresenterImplTest {
         TrackingInfo ti = new TrackingInfo();
         item.reaction = simpleNotification;
         item.trackingInfo = ti;
-        notificationHistoryPresenter.onNotificationRead(item);
+        presenter.onNotificationRead(item);
         verify(nearit).sendTracking(ti, Recipe.OPENED);
     }
 
@@ -165,13 +165,13 @@ public class NotificationHistoryPresenterImplTest {
         TrackingInfo ti = new TrackingInfo();
         item.reaction = simpleNotification;
         item.trackingInfo = ti;
-        notificationHistoryPresenter.onNotificationRead(item);
+        presenter.onNotificationRead(item);
         verify(nearit, never()).sendTracking(any(TrackingInfo.class), anyString());
         item.reaction = Mockito.mock(Content.class);
-        notificationHistoryPresenter.onNotificationRead(item);
+        presenter.onNotificationRead(item);
         verify(nearit, never()).sendTracking(any(TrackingInfo.class), anyString());
         item.reaction = Mockito.mock(CustomJSON.class);
-        notificationHistoryPresenter.onNotificationRead(item);
+        presenter.onNotificationRead(item);
         verify(nearit, never()).sendTracking(any(TrackingInfo.class), anyString());
     }
 

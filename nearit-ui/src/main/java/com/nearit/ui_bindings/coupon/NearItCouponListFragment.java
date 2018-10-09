@@ -14,36 +14,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.warning.NearItUIWarningDialogActivity;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import it.near.sdk.NearItManager;
-import it.near.sdk.reactions.couponplugin.CouponListener;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
-import static com.nearit.ui_bindings.coupon.CouponUtils.getExpired;
-import static com.nearit.ui_bindings.coupon.CouponUtils.getInactive;
-import static com.nearit.ui_bindings.coupon.CouponUtils.getRedeemed;
-import static com.nearit.ui_bindings.coupon.CouponUtils.getValid;
 
 /**
  * @author Federico Boschini
  */
 
-public class NearItCouponListFragment extends Fragment implements CouponViewHolder.CouponListener {
+public class NearItCouponListFragment extends Fragment implements CouponListContract.View, CouponAdapter.CouponAdapterListener {
 
-    private List<Coupon> couponList;
-    private static final String ARG_EXTRAS = "extras";
+    private static final String EXTRAS = "extras";
 
     private static final int NEAR_RETRY_CODE = 1111;
     private static final int NEAR_OPEN_WARNING_CODE = 3333;
 
-    @Nullable
+    private CouponListContract.Presenter presenter;
+
     private SwipeRefreshLayout refreshLayout;
     private RelativeLayout noCouponContainer;
     private CouponAdapter couponAdapter;
@@ -53,7 +49,9 @@ public class NearItCouponListFragment extends Fragment implements CouponViewHold
 
     private int separatorDrawable = 0, iconDrawable = 0;
     private boolean noSeparator = false, noIcon, jaggedBorders;
-    private boolean defaultList, valid, expired, inactive, redeemed, enableNetErrorDialog;
+    private boolean enableNetErrorDialog;
+
+    private CouponListExtraParams extras;
 
     public NearItCouponListFragment() {
     }
@@ -61,7 +59,7 @@ public class NearItCouponListFragment extends Fragment implements CouponViewHold
     public static NearItCouponListFragment newInstance(@Nullable Parcelable extras) {
         NearItCouponListFragment fragment = new NearItCouponListFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable(ARG_EXTRAS, extras);
+        bundle.putParcelable(EXTRAS, extras);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -71,7 +69,7 @@ public class NearItCouponListFragment extends Fragment implements CouponViewHold
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            CouponListExtraParams extras = getArguments().getParcelable(ARG_EXTRAS);
+            extras = getArguments().getParcelable(EXTRAS);
             if (extras != null) {
                 separatorDrawable = extras.getSeparatorDrawable();
                 iconDrawable = extras.getIconDrawable();
@@ -80,14 +78,16 @@ public class NearItCouponListFragment extends Fragment implements CouponViewHold
                 jaggedBorders = extras.isJaggedBorders();
                 noSeparator = extras.isNoSeparator();
                 noIcon = extras.isNoIcon();
-                defaultList = extras.isDefaultList();
-                valid = extras.isValid();
-                expired = extras.isExpired();
-                inactive = extras.isInactive();
-                redeemed = extras.isRedeemed();
             }
         }
 
+        new CouponListPresenterImpl(NearItManager.getInstance(), this, extras);
+
+    }
+
+    @Override
+    public void injectPresenter(@NonNull CouponListContract.Presenter presenter) {
+        this.presenter = presenter;
     }
 
     @Nullable
@@ -97,6 +97,19 @@ public class NearItCouponListFragment extends Fragment implements CouponViewHold
 
         noCouponText = rootView.findViewById(R.id.no_coupons_text);
         noCouponContainer = rootView.findViewById(R.id.empty_layout);
+        RecyclerView couponsRecyclerView = rootView.findViewById(R.id.coupons_list);
+        couponsRecyclerView.setHasFixedSize(true);
+        couponsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        couponAdapter = new CouponAdapter(getContext(), this, iconDrawable, noIcon, jaggedBorders);
+        couponsRecyclerView.setAdapter(couponAdapter);
+
+        refreshLayout = rootView.findViewById(R.id.refresh_layout);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.requestRefresh();
+            }
+        });
 
         if (customNoCouponLayoutRef != 0) {
             customNoCoupon = inflater.inflate(customNoCouponLayoutRef, noCouponContainer, false);
@@ -105,106 +118,81 @@ public class NearItCouponListFragment extends Fragment implements CouponViewHold
             noCouponText.setVisibility(View.VISIBLE);
         }
 
-        refreshLayout = rootView.findViewById(R.id.refresh_layout);
-
-        triggerRefresh();
-
-        couponAdapter = new CouponAdapter(getContext(), this, iconDrawable, noIcon, jaggedBorders);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        RecyclerView couponsRecyclerView = rootView.findViewById(R.id.coupons_list);
-        couponsRecyclerView.setLayoutManager(layoutManager);
-        couponsRecyclerView.setAdapter(couponAdapter);
-
         return rootView;
     }
 
-    private void triggerRefresh() {
-        if (refreshLayout != null) {
-            refreshLayout.post(new Runnable() {
-                @Override
-                public void run() {
-                    refreshLayout.setRefreshing(true);
-                    downloadCoupons();
-                }
-            });
-            refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    refreshLayout.setRefreshing(true);
-                    downloadCoupons();
-                }
-            });
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(EXTRAS, extras);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.stop();
+    }
+
+    @Override
+    public void showCouponList(List<Coupon> couponList) {
+        refreshLayout.setRefreshing(false);
+        couponAdapter.updateCoupons(couponList);
+    }
+
+    @Override
+    public void showEmptyLayout() {
+        refreshLayout.setRefreshing(false);
+        showCouponList(Collections.<Coupon>emptyList());
+        if (customNoCoupon != null) {
+            customNoCoupon.setVisibility(View.VISIBLE);
+            noCouponContainer.setVisibility(View.VISIBLE);
+        }
+        noCouponText.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideEmptyLayout() {
+        refreshLayout.setRefreshing(false);
+        if (customNoCoupon != null) {
+            customNoCoupon.setVisibility(View.GONE);
+            noCouponContainer.setVisibility(View.GONE);
+        }
+        noCouponText.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showRefreshError(String error) {
+        refreshLayout.setRefreshing(false);
+        couponAdapter.updateCoupons(Collections.<Coupon>emptyList());
+        if (enableNetErrorDialog && isAdded() && getActivity() != null){
+            startActivityForResult(NearItUIWarningDialogActivity.createIntent(getActivity()), NEAR_OPEN_WARNING_CODE);
+        } else {
+            Toast.makeText(getActivity(), "Error downloading coupons", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void downloadCoupons() {
-        NearItManager.getInstance().getCoupons(new CouponListener() {
-            @Override
-            public void onCouponsDownloaded(List<Coupon> list) {
-                couponList = list;
-                List<Coupon> filtered = new ArrayList<>();
-                if (defaultList) {
-                    filtered.addAll(getValid(couponList));
-                    filtered.addAll(getInactive(couponList));
-                } else {
-                    if (valid) {
-                        filtered.addAll(getValid(couponList));
-                    }
-
-                    if (inactive) {
-                        filtered.addAll(getInactive(couponList));
-                    }
-
-                    if (expired) {
-                        filtered.addAll(getExpired(couponList));
-                    }
-
-                    if (redeemed) {
-                        filtered.addAll(getRedeemed(couponList));
-                    }
-                }
-
-                couponAdapter.addData(filtered);
-
-                couponAdapter.notifyDataSetChanged();
-
-                if (couponAdapter.getItemCount() > 0) {
-                    if(customNoCoupon != null) {
-                        customNoCoupon.setVisibility(View.GONE);
-                        noCouponContainer.setVisibility(View.GONE);
-                    }
-                    noCouponText.setVisibility(View.GONE);
-                }
-                if (refreshLayout != null) {
-                    refreshLayout.setRefreshing(false);
-                }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == NEAR_OPEN_WARNING_CODE) {
+            if (resultCode == NEAR_RETRY_CODE) {
+                presenter.requestRefresh();
             }
-
-            @Override
-            public void onCouponDownloadError(String s) {
-                couponList = new ArrayList<>();
-                couponAdapter.addData(couponList);
-                couponAdapter.notifyDataSetChanged();
-                if (couponAdapter.getItemCount() == 0) {
-                    if (customNoCoupon != null) {
-                        customNoCoupon.setVisibility(View.VISIBLE);
-                        noCouponContainer.setVisibility(View.VISIBLE);
-                    } else {
-                        noCouponText.setVisibility(View.VISIBLE);
-                    }
-                }
-                if (refreshLayout != null) {
-                    refreshLayout.setRefreshing(false);
-                }
-                if (enableNetErrorDialog && isAdded() && getActivity() != null){
-                    startActivityForResult(NearItUIWarningDialogActivity.createIntent(getActivity()), NEAR_OPEN_WARNING_CODE);
-                }
-            }
-        });
+        }
     }
 
     @Override
     public void onCouponClicked(Coupon coupon) {
+        presenter.couponClicked(coupon);
+    }
+
+    @Override
+    public void openDetail(Coupon coupon) {
         CouponDetailIntentBuilder builder = NearITUIBindings.getInstance(getContext()).couponIntentBuilder(coupon, true);
         if (noSeparator) {
             builder.setNoSeparator();
@@ -220,13 +208,8 @@ public class NearItCouponListFragment extends Fragment implements CouponViewHold
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == NEAR_OPEN_WARNING_CODE) {
-            if (resultCode == NEAR_RETRY_CODE) {
-                triggerRefresh();
-            }
-        }
+    public void refreshList() {
+        refreshLayout.setRefreshing(true);
+        presenter.requestRefresh();
     }
-
 }

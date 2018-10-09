@@ -102,7 +102,6 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
                 if (permissionsManager.isFlightModeOn()) {
                     view.showAirplaneDialog();
                     flightModeDialogLaunched = true;
-                } else {
                 }
             } else {
                 //  DENIED

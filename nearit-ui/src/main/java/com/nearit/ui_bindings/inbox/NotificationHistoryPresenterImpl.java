@@ -29,6 +29,11 @@ class NotificationHistoryPresenterImpl implements NotificationHistoryContract.No
         this.nearItManager = nearItManager;
         this.view = view;
         this.params = params;
+        init();
+    }
+
+    private void init() {
+        view.injectPresenter(this);
     }
 
     @Override
