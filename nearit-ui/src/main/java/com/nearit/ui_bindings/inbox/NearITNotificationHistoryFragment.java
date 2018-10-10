@@ -32,6 +32,7 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
     private TextView emptyListText;
     private RelativeLayout emptyListContainer;
     private NotificationsAdapter notificationsAdapter;
+    @Nullable
     private SwipeRefreshLayout swipeToRefreshLayout;
 
     private int customEmptyListLayoutRef = 0;
@@ -79,12 +80,14 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
         recyclerView.setAdapter(notificationsAdapter);
 
         swipeToRefreshLayout = rootView.findViewById(R.id.refresh_layout);
-        swipeToRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                presenter.requestRefresh();
-            }
-        });
+        if (swipeToRefreshLayout != null) {
+            swipeToRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    presenter.requestRefresh();
+                }
+            });
+        }
 
         if (customEmptyListLayoutRef != 0) {
             customEmptyListView = inflater.inflate(customEmptyListLayoutRef, emptyListContainer, false);
@@ -116,13 +119,17 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
 
     @Override
     public void showNotificationHistory(List<HistoryItem> itemList) {
-        swipeToRefreshLayout.setRefreshing(false);
+        if (swipeToRefreshLayout != null) {
+            swipeToRefreshLayout.setRefreshing(false);
+        }
         notificationsAdapter.updateItems(itemList);
     }
 
     @Override
     public void showEmptyLayout() {
-        swipeToRefreshLayout.setRefreshing(false);
+        if (swipeToRefreshLayout != null) {
+            swipeToRefreshLayout.setRefreshing(false);
+        }
         showNotificationHistory(Collections.<HistoryItem>emptyList());
         if (customEmptyListView != null) {
             customEmptyListView.setVisibility(View.VISIBLE);
@@ -133,7 +140,9 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
 
     @Override
     public void hideEmptyLayout() {
-        swipeToRefreshLayout.setRefreshing(false);
+        if (swipeToRefreshLayout != null) {
+            swipeToRefreshLayout.setRefreshing(false);
+        }
         if (customEmptyListView != null) {
             customEmptyListView.setVisibility(View.GONE);
             emptyListContainer.setVisibility(View.GONE);
@@ -143,7 +152,9 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
 
     @Override
     public void showRefreshError(int res) {
-        swipeToRefreshLayout.setRefreshing(false);
+        if (swipeToRefreshLayout != null) {
+            swipeToRefreshLayout.setRefreshing(false);
+        }
         Context context = getActivity();
         if (context != null) {
             try {
@@ -157,7 +168,9 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
 
     @Override
     public void showRefreshError(String error) {
-        swipeToRefreshLayout.setRefreshing(false);
+        if (swipeToRefreshLayout != null) {
+            swipeToRefreshLayout.setRefreshing(false);
+        }
         notificationsAdapter.updateItems(Collections.<HistoryItem>emptyList());
         Toast.makeText(getActivity(), "Error downloading inbox", Toast.LENGTH_SHORT).show();
     }
@@ -178,7 +191,11 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
     }
 
     public void refreshList() {
-        swipeToRefreshLayout.setRefreshing(true);
+        if (!isAdded()) return;
+
+        if (swipeToRefreshLayout != null) {
+            swipeToRefreshLayout.setRefreshing(true);
+        }
         presenter.requestRefresh();
     }
 }
