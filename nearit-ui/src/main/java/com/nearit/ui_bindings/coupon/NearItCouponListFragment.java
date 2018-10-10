@@ -220,6 +220,8 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
     }
 
     public void refreshList() {
+        if (!isAdded()) return;
+
         if (refreshLayout != null) {
             refreshLayout.setRefreshing(true);
         }
