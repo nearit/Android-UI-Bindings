@@ -40,6 +40,7 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
 
     private CouponListContract.Presenter presenter;
 
+    @Nullable
     private SwipeRefreshLayout refreshLayout;
     private RelativeLayout noCouponContainer;
     private CouponAdapter couponAdapter;
@@ -104,12 +105,14 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
         couponsRecyclerView.setAdapter(couponAdapter);
 
         refreshLayout = rootView.findViewById(R.id.refresh_layout);
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                presenter.requestRefresh();
-            }
-        });
+        if (refreshLayout != null) {
+            refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    presenter.requestRefresh();
+                }
+            });
+        }
 
         if (customNoCouponLayoutRef != 0) {
             customNoCoupon = inflater.inflate(customNoCouponLayoutRef, noCouponContainer, false);
@@ -141,13 +144,17 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
 
     @Override
     public void showCouponList(List<Coupon> couponList) {
-        refreshLayout.setRefreshing(false);
+        if (refreshLayout != null) {
+            refreshLayout.setRefreshing(false);
+        }
         couponAdapter.updateCoupons(couponList);
     }
 
     @Override
     public void showEmptyLayout() {
-        refreshLayout.setRefreshing(false);
+        if (refreshLayout != null) {
+            refreshLayout.setRefreshing(false);
+        }
         showCouponList(Collections.<Coupon>emptyList());
         if (customNoCoupon != null) {
             customNoCoupon.setVisibility(View.VISIBLE);
@@ -158,7 +165,9 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
 
     @Override
     public void hideEmptyLayout() {
-        refreshLayout.setRefreshing(false);
+        if (refreshLayout != null) {
+            refreshLayout.setRefreshing(false);
+        }
         if (customNoCoupon != null) {
             customNoCoupon.setVisibility(View.GONE);
             noCouponContainer.setVisibility(View.GONE);
@@ -168,7 +177,9 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
 
     @Override
     public void showRefreshError(String error) {
-        refreshLayout.setRefreshing(false);
+        if (refreshLayout != null) {
+            refreshLayout.setRefreshing(false);
+        }
         couponAdapter.updateCoupons(Collections.<Coupon>emptyList());
         if (enableNetErrorDialog && isAdded() && getActivity() != null){
             startActivityForResult(NearItUIWarningDialogActivity.createIntent(getActivity()), NEAR_OPEN_WARNING_CODE);
@@ -209,7 +220,9 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
     }
 
     public void refreshList() {
-        refreshLayout.setRefreshing(true);
+        if (refreshLayout != null) {
+            refreshLayout.setRefreshing(true);
+        }
         presenter.requestRefresh();
     }
 }
