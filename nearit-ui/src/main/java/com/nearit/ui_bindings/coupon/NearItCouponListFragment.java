@@ -131,17 +131,17 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         presenter.start();
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         presenter.stop();
     }
-
+    
     @Override
     public void showCouponList(List<Coupon> couponList) {
         if (refreshLayout != null) {
