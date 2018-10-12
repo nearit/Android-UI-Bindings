@@ -106,14 +106,14 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         presenter.start();
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         presenter.stop();
     }
 
@@ -172,7 +172,7 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
             swipeToRefreshLayout.setRefreshing(false);
         }
         notificationsAdapter.updateItems(Collections.<HistoryItem>emptyList());
-        Toast.makeText(getActivity(), "Error downloading inbox", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
     }
 
     @Override

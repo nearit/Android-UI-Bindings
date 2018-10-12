@@ -131,14 +131,14 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         presenter.start();
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         presenter.stop();
     }
 
@@ -181,7 +181,7 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
             refreshLayout.setRefreshing(false);
         }
         couponAdapter.updateCoupons(Collections.<Coupon>emptyList());
-        if (enableNetErrorDialog && isAdded() && getActivity() != null){
+        if (enableNetErrorDialog && isAdded() && getActivity() != null) {
             startActivityForResult(NearItUIWarningDialogActivity.createIntent(getActivity()), NEAR_OPEN_WARNING_CODE);
         } else {
             Toast.makeText(getActivity(), "Error downloading coupons", Toast.LENGTH_SHORT).show();
