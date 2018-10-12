@@ -106,14 +106,14 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         presenter.start();
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         presenter.stop();
     }
 
