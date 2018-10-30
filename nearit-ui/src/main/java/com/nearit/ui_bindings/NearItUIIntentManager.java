@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.nearit.ui_bindings.content.ContentDetailIntentBuilder;
+
 import it.near.sdk.reactions.contentplugin.model.Content;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 import it.near.sdk.reactions.customjsonplugin.model.CustomJSON;
@@ -22,6 +24,8 @@ import it.near.sdk.utils.NearUtils;
 class NearItUIIntentManager implements ContentsListener {
 
     private static final String TAG = "NearITUIIntentManager";
+
+    public static boolean openLinksInWebView = false;
 
     private final Context context;
     private boolean intentManaged = false;
@@ -47,8 +51,9 @@ class NearItUIIntentManager implements ContentsListener {
     @Override
     public void gotContentNotification(Content content, TrackingInfo trackingInfo) {
         Log.d(TAG, "content notification received");
-        context.startActivity(NearITUIBindings.getInstance(context)
-                        .contentIntentBuilder(content, trackingInfo, true).build());
+        ContentDetailIntentBuilder builder = NearITUIBindings.getInstance(context).contentIntentBuilder(content, trackingInfo, true);
+        if (openLinksInWebView) builder.openLinksInWebView();
+        context.startActivity(builder.build());
         intentManaged = true;
     }
 
