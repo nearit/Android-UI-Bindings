@@ -144,8 +144,14 @@ public class NearItContentDetailFragment extends Fragment implements NearItMovem
             CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
             intentBuilder.setToolbarColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_webview_toolbar_color));
 
-            CustomTabsHelper.openCustomTab(
-                    getContext(), intentBuilder.build(), Uri.parse(url), new WebViewFallback());
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+
+            if (intent.resolveActivity(getContext().getPackageManager()) != null) {
+                CustomTabsHelper.openCustomTab(
+                        getContext(), intentBuilder.build(), Uri.parse(url), new WebViewFallback());
+            } else {
+                Log.e(TAG, String.format("Unable to open link: %s", url));
+            }
         }
     }
 
