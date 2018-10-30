@@ -208,6 +208,12 @@ public class NearITUIBindings {
         return new NearItUIIntentManager(context).manageContent(reactionBundle, trackingInfo);
     }
 
+    public static void openLinksInWebView() {
+        NearItUIIntentManager.openLinksInWebView = true;
+        ContentDetailIntentBuilder.openLinksInWebView = true;
+        ContentDetailFragmentBuilder.openLinksInWebView = true;
+    }
+
 
     public static NearITUIBindings getInstance(Context context) {
         return new NearITUIBindings(context);

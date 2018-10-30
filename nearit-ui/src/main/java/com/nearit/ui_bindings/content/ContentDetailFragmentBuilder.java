@@ -13,7 +13,7 @@ public class ContentDetailFragmentBuilder {
     private final Content mContent;
     @Nullable
     private final TrackingInfo mTrackingInfo;
-    private boolean mOpenLinksInWebView = false;
+    public static boolean openLinksInWebView = false;
 
     public ContentDetailFragmentBuilder(Content mContent, @Nullable TrackingInfo mTrackingInfo) {
         this.mContent = mContent;
@@ -21,7 +21,7 @@ public class ContentDetailFragmentBuilder {
     }
 
     public ContentDetailFragmentBuilder openLinksInWebView() {
-        mOpenLinksInWebView = true;
+        openLinksInWebView = true;
         return this;
     }
 
@@ -30,7 +30,7 @@ public class ContentDetailFragmentBuilder {
     }
 
     private ContentDetailExtraParams getParams() {
-        return new ContentDetailExtraParams(mOpenLinksInWebView);
+        return new ContentDetailExtraParams(openLinksInWebView);
     }
 
 }

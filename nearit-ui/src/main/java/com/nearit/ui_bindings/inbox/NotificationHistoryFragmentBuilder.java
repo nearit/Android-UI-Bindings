@@ -49,7 +49,12 @@ public class NotificationHistoryFragmentBuilder {
 
     @NonNull
     private NotificationHistoryExtraParams getParams() {
-        return new NotificationHistoryExtraParams(mEmptyListLayout, includeCustomJSON, includeFeedbacks, includeCoupons, activityTitle);
+        return new NotificationHistoryExtraParams(
+                mEmptyListLayout,
+                includeCustomJSON,
+                includeFeedbacks,
+                includeCoupons,
+                activityTitle);
     }
 
 }
