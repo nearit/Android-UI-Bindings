@@ -63,16 +63,16 @@ public class NotificationHistoryExtraParams implements Parcelable {
         return includeCustomJSON;
     }
 
-    public boolean shouldIncludeFeedbacks() {
+    boolean shouldIncludeFeedbacks() {
         return includeFeedbacks;
     }
 
-    public boolean shouldIncludeCoupons() {
+    boolean shouldIncludeCoupons() {
         return includeCoupons;
     }
 
     @Nullable
-    public String getActivityTitle() {
+    String getActivityTitle() {
         return activityTitle;
     }
 }
