@@ -15,5 +15,6 @@ public class NearItUISample extends Application {
         super.onCreate();
         //  this library will handle foreground notifications automatically and show the right dialog on tap
         NearITUIBindings.enableAutomaticForegroundNotifications(this);
+        NearITUIBindings.openLinksInWebView();
     }
 }
