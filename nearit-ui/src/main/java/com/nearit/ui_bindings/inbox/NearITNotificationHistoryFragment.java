@@ -172,7 +172,9 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
             swipeToRefreshLayout.setRefreshing(false);
         }
         notificationsAdapter.updateItems(Collections.<HistoryItem>emptyList());
-        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+        if (getActivity() != null) {
+            Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
