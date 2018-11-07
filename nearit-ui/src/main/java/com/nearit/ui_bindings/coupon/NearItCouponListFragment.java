@@ -181,10 +181,12 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
             refreshLayout.setRefreshing(false);
         }
         couponAdapter.updateCoupons(Collections.<Coupon>emptyList());
-        if (enableNetErrorDialog && isAdded() && getActivity() != null) {
-            startActivityForResult(NearItUIWarningDialogActivity.createIntent(getActivity()), NEAR_OPEN_WARNING_CODE);
-        } else {
-            Toast.makeText(getActivity(), "Error downloading coupons", Toast.LENGTH_SHORT).show();
+        if (getActivity() != null) {
+            if (enableNetErrorDialog && isAdded()) {
+                startActivityForResult(NearItUIWarningDialogActivity.createIntent(getActivity()), NEAR_OPEN_WARNING_CODE);
+            } else {
+                Toast.makeText(getActivity(), "Error downloading coupons", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
