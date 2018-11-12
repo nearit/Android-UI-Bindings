@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings.coupon;
+package com.nearit.ui_bindings.coupon.detail;
 
 import android.content.Context;
 import android.content.Intent;

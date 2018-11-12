@@ -1,5 +1,8 @@
 package com.nearit.ui_bindings.coupon;
 
+import com.nearit.ui_bindings.coupon.detail.CouponDetailExtraParams;
+import com.nearit.ui_bindings.coupon.detail.NearItCouponDetailFragment;
+
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 /**
