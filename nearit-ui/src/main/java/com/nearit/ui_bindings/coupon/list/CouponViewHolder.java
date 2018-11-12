@@ -1,6 +1,7 @@
-package com.nearit.ui_bindings.coupon;
+package com.nearit.ui_bindings.coupon.list;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +10,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.nearit.ui_bindings.ImageDownloadListener;
+import com.nearit.ui_bindings.NearItImageDownloader;
 import com.nearit.ui_bindings.R;
-import com.nearit.ui_bindings.utils.LoadImageFromURL;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -70,7 +72,43 @@ class CouponViewHolder extends RecyclerView.ViewHolder {
                 }
             }
             if (coupon.getIconSet() != null) {
-                new LoadImageFromURL(couponIcon, iconProgressBar).execute(coupon.getIconSet().getFullSize());
+                if (couponIcon != null) {
+                    couponIcon.setVisibility(View.GONE);
+                }
+                if (iconProgressBar != null) {
+                    iconProgressBar.setVisibility(View.VISIBLE);
+                }
+                NearItImageDownloader.getInstance().downloadImage(coupon.getIconSet().getFullSize(), new ImageDownloadListener() {
+                    @Override
+                    public void onSuccess(@Nullable Bitmap bitmap) {
+                        if (couponIcon != null) {
+                            couponIcon.setVisibility(View.VISIBLE);
+                            if (bitmap != null) {
+                                couponIcon.setScaleType(ImageView.ScaleType.FIT_XY);
+                                couponIcon.setAdjustViewBounds(true);
+                                couponIcon.setMinimumHeight(0);
+                                couponIcon.setImageBitmap(bitmap);
+                            } else {
+                                couponIcon.setImageResource(iconPlaceholderResId);
+                            }
+                        }
+                        if (iconProgressBar != null) {
+                            iconProgressBar.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onError() {
+                        if (couponIcon != null) {
+                            couponIcon.setVisibility(View.VISIBLE);
+                            couponIcon.setImageResource(iconPlaceholderResId);
+                        }
+                        if (iconProgressBar != null) {
+                            iconProgressBar.setVisibility(View.GONE);
+                        }
+                    }
+                });
+                //new LoadImageFromURL(couponIcon, iconProgressBar).execute(coupon.getIconSet().getFullSize());
             }
         }
         if (couponTitle != null) {
