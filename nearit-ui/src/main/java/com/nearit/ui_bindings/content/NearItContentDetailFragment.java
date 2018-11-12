@@ -113,7 +113,7 @@ public class NearItContentDetailFragment extends Fragment implements NearItMovem
 
         if (content.getImageLink() != null) {
             contentImageContainer.setVisibility(View.VISIBLE);
-            new LoadImageFromURL(contentImageView, contentImageSpinner, true).execute(content.getImageLink().getFullSize());
+            //new LoadImageFromURL(contentImageView, contentImageSpinner, true).execute(content.getImageLink().getFullSize());
         }
 
         if (content.getCta() != null) {
