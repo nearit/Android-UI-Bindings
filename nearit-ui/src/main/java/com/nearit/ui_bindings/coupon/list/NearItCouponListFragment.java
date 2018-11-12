@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings.coupon;
+package com.nearit.ui_bindings.coupon.list;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.nearit.ui_bindings.NearITUIBindings;
 import com.nearit.ui_bindings.R;
+import com.nearit.ui_bindings.coupon.CouponDetailIntentBuilder;
 import com.nearit.ui_bindings.warning.NearItUIWarningDialogActivity;
 
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings.coupon;
+package com.nearit.ui_bindings.coupon.list;
 
 import com.nearit.ui_bindings.base.BasePresenter;
 import com.nearit.ui_bindings.base.BaseView;
@@ -10,7 +10,7 @@ import it.near.sdk.reactions.couponplugin.model.Coupon;
 /**
  * @author Federico Boschini
  */
-interface CouponListContract {
+class CouponListContract {
     interface View extends BaseView<Presenter> {
         void showCouponList(List<Coupon> couponList);
         void showEmptyLayout();

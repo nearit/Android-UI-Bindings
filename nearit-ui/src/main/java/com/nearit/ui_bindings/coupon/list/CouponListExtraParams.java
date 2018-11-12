@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings.coupon;
+package com.nearit.ui_bindings.coupon.list;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,7 +31,7 @@ public class CouponListExtraParams implements Parcelable {
     @Nullable
     private final String activityTitle;
 
-    CouponListExtraParams(
+    public CouponListExtraParams(
             int iconDrawable,
             int separatorDrawable,
             int noCouponLayout,
@@ -62,7 +62,7 @@ public class CouponListExtraParams implements Parcelable {
         this.activityTitle = activityTitle;
     }
 
-    CouponListExtraParams(
+    public CouponListExtraParams(
             int iconDrawable,
             int separatorDrawable,
             int noCouponLayout,

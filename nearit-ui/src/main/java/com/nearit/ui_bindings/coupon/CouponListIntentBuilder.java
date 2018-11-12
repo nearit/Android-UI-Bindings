@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
+import com.nearit.ui_bindings.coupon.list.CouponListExtraParams;
+import com.nearit.ui_bindings.coupon.list.NearItCouponListActivity;
+
 /**
  * @author Federico Boschini
  */
