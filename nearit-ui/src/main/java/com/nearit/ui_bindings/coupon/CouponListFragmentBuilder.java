@@ -1,5 +1,8 @@
 package com.nearit.ui_bindings.coupon;
 
+import com.nearit.ui_bindings.coupon.list.CouponListExtraParams;
+import com.nearit.ui_bindings.coupon.list.NearItCouponListFragment;
+
 /**
  * @author Federico Boschini
  */

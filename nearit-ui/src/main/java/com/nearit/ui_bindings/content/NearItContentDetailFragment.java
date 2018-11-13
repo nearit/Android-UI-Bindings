@@ -25,7 +25,6 @@ import com.nearit.htmltextview.HtmlTextView;
 import com.nearit.htmltextview.NearItMovementMethod;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.content.views.ContentCTAButton;
-import com.nearit.ui_bindings.utils.LoadImageFromURL;
 
 import it.near.sdk.NearItManager;
 import it.near.sdk.reactions.contentplugin.model.Content;
@@ -113,7 +112,7 @@ public class NearItContentDetailFragment extends Fragment implements NearItMovem
 
         if (content.getImageLink() != null) {
             contentImageContainer.setVisibility(View.VISIBLE);
-            new LoadImageFromURL(contentImageView, contentImageSpinner, true).execute(content.getImageLink().getFullSize());
+            //new LoadImageFromURL(contentImageView, contentImageSpinner, true).execute(content.getImageLink().getFullSize());
         }
 
         if (content.getCta() != null) {

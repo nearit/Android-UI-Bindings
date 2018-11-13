@@ -3,6 +3,10 @@ package com.nearit.ui_bindings.coupon;
 import android.content.Context;
 import android.content.Intent;
 
+import com.nearit.ui_bindings.coupon.detail.CouponDetailExtraParams;
+import com.nearit.ui_bindings.coupon.detail.NearItCouponDetailActivity;
+import com.nearit.ui_bindings.coupon.detail.NearItCouponDetailActivitySingleInstance;
+
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 /**

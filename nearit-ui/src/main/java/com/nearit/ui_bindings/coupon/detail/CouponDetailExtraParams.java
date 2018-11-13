@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings.coupon;
+package com.nearit.ui_bindings.coupon.detail;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import com.nearit.ui_bindings.ExtraConstants;
  * @author Federico Boschini
  */
 
-class CouponDetailExtraParams implements Parcelable {
+public class CouponDetailExtraParams implements Parcelable {
 
     private final int iconDrawable;
     private final int separatorDrawable;
@@ -19,7 +19,7 @@ class CouponDetailExtraParams implements Parcelable {
     private final boolean noWakeLock;
     private final boolean enableTapOutsideToClose;
 
-    CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean noWakeLock, boolean enableTapOutsideToClose) {
+    public CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean noWakeLock, boolean enableTapOutsideToClose) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
         this.noSeparator = noSeparator;
@@ -27,7 +27,7 @@ class CouponDetailExtraParams implements Parcelable {
         this.enableTapOutsideToClose = enableTapOutsideToClose;
     }
 
-    CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean noWakeLock) {
+    public CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean noWakeLock) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
         this.noSeparator = noSeparator;

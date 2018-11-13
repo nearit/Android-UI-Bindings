@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings.coupon;
+package com.nearit.ui_bindings.coupon.detail;
 
 import android.content.Intent;
 import android.graphics.Rect;

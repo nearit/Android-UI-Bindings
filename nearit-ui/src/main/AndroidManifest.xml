@@ -15,13 +15,13 @@
             android:theme="@style/NearItUIPermissionsDialog" />
 
         <activity
-            android:name=".coupon.NearItCouponDetailActivity"
+            android:name=".coupon.detail.NearItCouponDetailActivity"
             android:launchMode="singleTask"
             android:excludeFromRecents="true"
             android:theme="@style/NearItUICouponDetailDialog" />
 
         <activity
-            android:name=".coupon.NearItCouponDetailActivitySingleInstance"
+            android:name=".coupon.detail.NearItCouponDetailActivitySingleInstance"
             android:launchMode="singleInstance"
             android:theme="@style/NearItUICouponDetailDialog" />
 
@@ -48,7 +48,7 @@
             android:theme="@style/NearItUIContentDetailDialog" />
 
         <activity
-            android:name=".coupon.NearItCouponListActivity"
+            android:name=".coupon.list.NearItCouponListActivity"
             android:launchMode="singleInstance"
             android:theme="@style/NearITUICouponListActivityAppearance"/>
 
