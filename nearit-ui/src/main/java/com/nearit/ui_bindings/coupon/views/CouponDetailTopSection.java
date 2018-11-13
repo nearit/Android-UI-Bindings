@@ -2,6 +2,7 @@ package com.nearit.ui_bindings.coupon.views;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.coupon.CouponConstants;
-import com.nearit.ui_bindings.coupon.QRcodeGenerator;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,8 +51,6 @@ public class CouponDetailTopSection extends RelativeLayout {
     @Nullable
     private TextView validityPeriodTextView;
 
-    private QRcodeGenerator qRcodeGenerator;
-
     public CouponDetailTopSection(Context context) {
         super(context);
     }
@@ -79,18 +77,22 @@ public class CouponDetailTopSection extends RelativeLayout {
         qrCodeImageView = findViewById(R.id.qr_code);
         serialTextView = findViewById(R.id.coupon_serial);
 
-        qRcodeGenerator = new QRcodeGenerator(250, 250, new QRcodeGenerator.GeneratorListener() {
-            @Override
-            public void onComplete(Bitmap qrcode) {
-                if (qrCodeImageView != null) {
-                    qrCodeImageView.setVisibility(VISIBLE);
-                    qrCodeImageView.setImageBitmap(qrcode);
-                }
-                if (qrCodeSpinner != null) {
-                    qrCodeSpinner.setVisibility(GONE);
-                }
-            }
-        });
+        if (qrCodeImageView != null) {
+            qrCodeImageView.setVisibility(View.GONE);
+        }
+        if (qrCodeSpinner != null) {
+            qrCodeSpinner.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void setQrCode(@NonNull Bitmap qrCode) {
+        if (qrCodeImageView != null) {
+            qrCodeImageView.setVisibility(VISIBLE);
+            qrCodeImageView.setImageBitmap(qrCode);
+        }
+        if (qrCodeSpinner != null) {
+            qrCodeSpinner.setVisibility(GONE);
+        }
     }
 
     public void setCouponView(Coupon coupon) {
@@ -130,15 +132,6 @@ public class CouponDetailTopSection extends RelativeLayout {
                 }
                 if (notValidTextView != null) {
                     notValidTextView.setVisibility(GONE);
-                }
-                if (qrCodeImageView != null) {
-                    if (coupon.getSerial() != null) {
-                        qrCodeImageView.setVisibility(View.GONE);
-                        if (qrCodeSpinner != null) {
-                            qrCodeSpinner.setVisibility(View.VISIBLE);
-                        }
-                        qRcodeGenerator.execute(coupon.getSerial());
-                    }
                 }
                 if (serialTextView != null) {
                     serialTextView.setText(coupon.getSerial());
