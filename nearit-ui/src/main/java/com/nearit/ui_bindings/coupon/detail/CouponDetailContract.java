@@ -15,6 +15,7 @@ class CouponDetailContract {
         void keepScreenOn();
         void hideSeparator();
         void setSeparator(int separatorDrawable);
+        void showQrCode(@NonNull Bitmap bitmap);
         void showTitle(@NonNull String title);
         void showValue(@NonNull String value);
         void showDescription(@NonNull String description);
@@ -27,7 +28,7 @@ class CouponDetailContract {
         void setDisabled();
     }
 
-    interface Presenter extends BasePresenter{
+    interface Presenter extends BasePresenter {
         void reloadImage();
     }
 
