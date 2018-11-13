@@ -10,6 +10,8 @@ import com.nearit.ui_bindings.ImageDownloadListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * @author Federico Boschini
@@ -17,10 +19,14 @@ import java.net.URL;
 
 public final class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
 
-    private final ImageDownloadListener listener;
+    private final HashSet<ImageDownloadListener> listeners = new HashSet<>();
 
     public LoadImageFromURL(@NonNull ImageDownloadListener listener) {
-        this.listener = listener;
+        listeners.add(listener);
+    }
+
+    public void addListener(@NonNull ImageDownloadListener listener) {
+        listeners.add(listener);
     }
 
     @Override
@@ -37,7 +43,15 @@ public final class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
 
     @Override
     protected void onPostExecute(Bitmap icon) {
-        if (icon != null) listener.onSuccess(icon);
-        else listener.onError();
+        Iterator<ImageDownloadListener> iterator = listeners.iterator();
+        while (iterator.hasNext()) {
+            ImageDownloadListener listener = iterator.next();
+            if (icon != null) {
+                listener.onSuccess(icon);
+            } else {
+                listener.onError();
+            }
+            iterator.remove();
+        }
     }
 }
