@@ -17,6 +17,8 @@ import com.nearit.ui_bindings.R;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
@@ -78,36 +80,36 @@ class CouponViewHolder extends RecyclerView.ViewHolder {
                 if (iconProgressBar != null) {
                     iconProgressBar.setVisibility(View.VISIBLE);
                 }
-                NearItImageDownloader.getInstance().downloadImage(coupon.getIconSet().getFullSize(), new ImageDownloadListener() {
-                    @Override
-                    public void onSuccess(@Nullable Bitmap bitmap) {
-                        if (couponIcon != null) {
-                            couponIcon.setVisibility(View.VISIBLE);
-                            if (bitmap != null) {
-                                couponIcon.setScaleType(ImageView.ScaleType.FIT_XY);
-                                couponIcon.setAdjustViewBounds(true);
-                                couponIcon.setMinimumHeight(0);
-                                couponIcon.setImageBitmap(bitmap);
-                            } else {
-                                couponIcon.setImageResource(iconPlaceholderResId);
+                try {
+                    NearItImageDownloader.getInstance().downloadImage(coupon.getIconSet().getFullSize(), new ImageDownloadListener() {
+                        @Override
+                        public void onSuccess(@Nullable Bitmap bitmap) {
+                            if (couponIcon != null) {
+                                couponIcon.setVisibility(View.VISIBLE);
+                                if (bitmap != null) {
+                                    couponIcon.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    couponIcon.setAdjustViewBounds(true);
+                                    couponIcon.setMinimumHeight(0);
+                                    couponIcon.setImageBitmap(bitmap);
+                                }
+                            }
+                            if (iconProgressBar != null) {
+                                iconProgressBar.setVisibility(View.GONE);
                             }
                         }
-                        if (iconProgressBar != null) {
-                            iconProgressBar.setVisibility(View.GONE);
-                        }
-                    }
 
-                    @Override
-                    public void onError() {
-                        if (couponIcon != null) {
-                            couponIcon.setVisibility(View.VISIBLE);
-                            couponIcon.setImageResource(iconPlaceholderResId);
+                        @Override
+                        public void onError() {
+                            hideSpinnerAndSetDefault();
                         }
-                        if (iconProgressBar != null) {
-                            iconProgressBar.setVisibility(View.GONE);
-                        }
-                    }
-                });
+                    }, 5000);
+                } catch (InterruptedException e) {
+                    hideSpinnerAndSetDefault();
+                } catch (ExecutionException e) {
+                    hideSpinnerAndSetDefault();
+                } catch (TimeoutException e) {
+                    hideSpinnerAndSetDefault();
+                }
                 //new LoadImageFromURL(couponIcon, iconProgressBar).execute(coupon.getIconSet().getFullSize());
             }
         }
@@ -124,6 +126,15 @@ class CouponViewHolder extends RecyclerView.ViewHolder {
                 couponListener.onCouponClicked(coupon);
             }
         });
+    }
+
+    private void hideSpinnerAndSetDefault() {
+        if (couponIcon != null) {
+            couponIcon.setVisibility(View.VISIBLE);
+        }
+        if (iconProgressBar != null) {
+            iconProgressBar.setVisibility(View.GONE);
+        }
     }
 
     private void setValidity(@Nullable Date redeemableFrom, @Nullable Date expiresAt, @Nullable Date redeemedAt) {
