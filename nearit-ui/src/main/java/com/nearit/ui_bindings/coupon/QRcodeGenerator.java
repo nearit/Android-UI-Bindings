@@ -3,6 +3,8 @@ package com.nearit.ui_bindings.coupon;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.nearit.ui_bindings.nearXing.BarcodeFormat;
 import com.nearit.ui_bindings.nearXing.WriterException;
@@ -14,13 +16,19 @@ import com.nearit.ui_bindings.nearXing.qrcode.QRCodeWriter;
  */
 
 public class QRcodeGenerator extends AsyncTask<String, Void, Bitmap> {
+
     private final int width;
     private final int height;
-    private final GeneratorListener listener;
 
-    public QRcodeGenerator(int width, int height, GeneratorListener listener) {
+    @Nullable
+    private GeneratorListener listener;
+
+    public QRcodeGenerator(int width, int height) {
         this.width = width;
         this.height = height;
+    }
+
+    public void setListener(@NonNull GeneratorListener listener) {
         this.listener = listener;
     }
 
@@ -35,7 +43,9 @@ public class QRcodeGenerator extends AsyncTask<String, Void, Bitmap> {
 
     @Override
     protected void onPostExecute(Bitmap qrCode) {
-        listener.onComplete(qrCode);
+        if (listener != null) {
+            listener.onComplete(qrCode);
+        }
     }
 
     private Bitmap generateQR(String serial, int width, int height) {
@@ -44,7 +54,9 @@ public class QRcodeGenerator extends AsyncTask<String, Void, Bitmap> {
         try {
             matrix = writer.encode(serial, BarcodeFormat.QR_CODE, width, height);
         } catch (WriterException ex) {
-            ex.printStackTrace();
+            if (listener != null) {
+                listener.onError();
+            }
         }
         Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
         for (int x = 0; x < width; x++) {
