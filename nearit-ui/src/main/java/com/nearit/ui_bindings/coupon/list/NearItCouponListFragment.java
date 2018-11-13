@@ -49,7 +49,7 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
     private View customNoCoupon;
     private int customNoCouponLayoutRef = 0;
 
-    private int separatorDrawable = 0, iconDrawable = 0;
+    private int separatorDrawable = 0, iconPlaceholderResId = 0;
     private boolean noSeparator = false, noIcon, jaggedBorders;
     private boolean enableNetErrorDialog;
 
@@ -74,7 +74,7 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
             extras = getArguments().getParcelable(EXTRAS);
             if (extras != null) {
                 separatorDrawable = extras.getSeparatorDrawable();
-                iconDrawable = extras.getIconDrawable();
+                iconPlaceholderResId = extras.getIconPlaceholderResId();
                 customNoCouponLayoutRef = extras.getNoCouponLayout();
                 enableNetErrorDialog = extras.isEnableNetErrorDialog();
                 jaggedBorders = extras.isJaggedBorders();
@@ -102,7 +102,7 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
         RecyclerView couponsRecyclerView = rootView.findViewById(R.id.coupons_list);
         couponsRecyclerView.setHasFixedSize(true);
         couponsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        couponAdapter = new CouponAdapter(getContext(), this, iconDrawable, noIcon, jaggedBorders);
+        couponAdapter = new CouponAdapter(getContext(), this, iconPlaceholderResId, noIcon, jaggedBorders);
         couponsRecyclerView.setAdapter(couponAdapter);
 
         refreshLayout = rootView.findViewById(R.id.refresh_layout);
@@ -211,8 +211,8 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
         if (noSeparator) {
             builder.setNoSeparator();
         }
-        if (iconDrawable != 0) {
-            builder.setIconPlaceholderResourceId(iconDrawable);
+        if (iconPlaceholderResId != 0) {
+            builder.setIconPlaceholderResourceId(iconPlaceholderResId);
         }
         if (separatorDrawable != 0) {
             builder.setSeparatorResourceId(separatorDrawable);

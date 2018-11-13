@@ -15,7 +15,7 @@ import com.nearit.ui_bindings.ExtraConstants;
 public class CouponListExtraParams implements Parcelable {
 
     private static final boolean DEFAULT_ENABLE_TAP_OUTSIDE_TO_CLOSE = false;
-    private final int iconDrawable;
+    private final int iconPlaceholderResId;
     private final int separatorDrawable;
     private final int noCouponLayout;
     private final boolean jaggedBorders;
@@ -32,7 +32,7 @@ public class CouponListExtraParams implements Parcelable {
     private final String activityTitle;
 
     public CouponListExtraParams(
-            int iconDrawable,
+            int iconPlaceholderResId,
             int separatorDrawable,
             int noCouponLayout,
             boolean enableNetErrorDialog,
@@ -46,7 +46,7 @@ public class CouponListExtraParams implements Parcelable {
             boolean redeemed,
             boolean enableTapOutsideToClose,
             @Nullable String activityTitle) {
-        this.iconDrawable = iconDrawable;
+        this.iconPlaceholderResId = iconPlaceholderResId;
         this.separatorDrawable = separatorDrawable;
         this.noCouponLayout = noCouponLayout;
         this.enableNetErrorDialog = enableNetErrorDialog;
@@ -63,7 +63,7 @@ public class CouponListExtraParams implements Parcelable {
     }
 
     public CouponListExtraParams(
-            int iconDrawable,
+            int iconPlaceholderResId,
             int separatorDrawable,
             int noCouponLayout,
             boolean enableNetErrorDialog,
@@ -76,7 +76,7 @@ public class CouponListExtraParams implements Parcelable {
             boolean inactive,
             boolean redeemed) {
         this(
-                iconDrawable,
+                iconPlaceholderResId,
                 separatorDrawable,
                 noCouponLayout,
                 enableNetErrorDialog,
@@ -119,7 +119,7 @@ public class CouponListExtraParams implements Parcelable {
     public static final Creator<CouponListExtraParams> CREATOR = new Creator<CouponListExtraParams>() {
         @Override
         public CouponListExtraParams createFromParcel(Parcel in) {
-            int iconDrawable = in.readInt();
+            int iconPlaceholderResId = in.readInt();
             int separatorDrawable = in.readInt();
             int noCouponLayout = in.readInt();
             boolean enableNetErrorDialog = in.readInt() != 0;
@@ -134,7 +134,7 @@ public class CouponListExtraParams implements Parcelable {
             boolean redeemed = in.readInt() != 0;
             String activityTitle = in.readString();
             return new CouponListExtraParams(
-                    iconDrawable,
+                    iconPlaceholderResId,
                     separatorDrawable,
                     noCouponLayout,
                     enableNetErrorDialog,
@@ -164,7 +164,7 @@ public class CouponListExtraParams implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(iconDrawable);
+        dest.writeInt(iconPlaceholderResId);
         dest.writeInt(separatorDrawable);
         dest.writeInt(noCouponLayout);
         dest.writeInt(enableNetErrorDialog ? 1 : 0);
@@ -180,8 +180,8 @@ public class CouponListExtraParams implements Parcelable {
         dest.writeString(activityTitle);
     }
 
-    int getIconDrawable() {
-        return iconDrawable;
+    int getIconPlaceholderResId() {
+        return iconPlaceholderResId;
     }
 
     int getSeparatorDrawable() {

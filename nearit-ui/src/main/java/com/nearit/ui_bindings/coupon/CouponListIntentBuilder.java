@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
+import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.coupon.list.CouponListExtraParams;
 import com.nearit.ui_bindings.coupon.list.NearItCouponListActivity;
 
@@ -13,7 +14,7 @@ import com.nearit.ui_bindings.coupon.list.NearItCouponListActivity;
 
 public class CouponListIntentBuilder {
     private final Context mContext;
-    private int mIconDrawable;
+    private int mIconPlaceholderResId = R.drawable.ic_nearit_ui_coupon_icon_placeholder;
     private int mSeparatorDrawable;
     private int mNoCouponLayout = 0;
     private boolean mEnableNetErrorDialog = false;
@@ -43,7 +44,7 @@ public class CouponListIntentBuilder {
      * Sets a custom icon as a placeholder for coupons without icon
      */
     public CouponListIntentBuilder setIconPlaceholderResourceId(int icon) {
-        mIconDrawable = icon;
+        mIconPlaceholderResId = icon;
         return this;
     }
 
@@ -128,7 +129,7 @@ public class CouponListIntentBuilder {
 
     private CouponListExtraParams getParams() {
         return new CouponListExtraParams(
-                mIconDrawable,
+                mIconPlaceholderResId,
                 mSeparatorDrawable,
                 mNoCouponLayout,
                 mEnableNetErrorDialog,
