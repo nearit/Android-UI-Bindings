@@ -6,9 +6,6 @@ import android.support.annotation.NonNull;
 import com.nearit.ui_bindings.utils.images.ImageDownloadListener;
 import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
-
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 /**
@@ -64,26 +61,19 @@ public class CouponDetailPresenterImpl implements CouponDetailContract.Presenter
         if (coupon.getIconSet() != null) {
             view.hideIcon();
             view.showSpinner();
-            try {
-                imageDownloader.downloadImage(coupon.getIconSet().getFullSize(), new ImageDownloadListener() {
-                    @Override
-                    public void onSuccess(@NonNull Bitmap bitmap) {
-                        view.showIcon(bitmap);
-                        view.hideSpinner();
-                    }
 
-                    @Override
-                    public void onError() {
-                        hideSpinnerAndSetDefault();
-                    }
-                }, 5000);
-            } catch (InterruptedException e) {
-                hideSpinnerAndSetDefault();
-            } catch (ExecutionException e) {
-                hideSpinnerAndSetDefault();
-            } catch (TimeoutException e) {
-                hideSpinnerAndSetDefault();
-            }
+            imageDownloader.downloadImage(coupon.getIconSet().getFullSize(), new ImageDownloadListener() {
+                @Override
+                public void onSuccess(@NonNull Bitmap bitmap) {
+                    view.showIcon(bitmap);
+                    view.hideSpinner();
+                }
+
+                @Override
+                public void onError() {
+                    hideSpinnerAndSetDefault();
+                }
+            });
         }
     }
 
