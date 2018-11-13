@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nearit.ui_bindings.coupon.QRcodeGenerator;
 import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
@@ -135,6 +136,16 @@ public class NearItCouponDetailFragment extends Fragment implements CouponDetail
     public void showQrCode(@NonNull Bitmap bitmap) {
         if (topSection != null) {
             topSection.setQrCode(bitmap);
+        }
+    }
+
+    @Override
+    public void showQrCodeError() {
+        if (topSection != null) {
+            topSection.hideQrCode();
+        }
+        if (getActivity() != null && isAdded()) {
+            Toast.makeText(getActivity(), R.string.nearit_ui_qr_code_error_message, Toast.LENGTH_SHORT).show();
         }
     }
 
