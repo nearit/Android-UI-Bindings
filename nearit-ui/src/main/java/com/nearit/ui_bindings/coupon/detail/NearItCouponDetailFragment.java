@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.nearit.ui_bindings.NearItImageDownloader;
+import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.coupon.views.CouponDetailTopSection;
 

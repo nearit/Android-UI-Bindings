@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings;
+package com.nearit.ui_bindings.utils.images;
 
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;

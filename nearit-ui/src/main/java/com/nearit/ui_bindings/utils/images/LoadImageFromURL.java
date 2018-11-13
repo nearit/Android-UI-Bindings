@@ -1,11 +1,9 @@
-package com.nearit.ui_bindings.utils;
+package com.nearit.ui_bindings.utils.images;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-
-import com.nearit.ui_bindings.ImageDownloadListener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,7 +15,7 @@ import java.util.Iterator;
  * @author Federico Boschini
  */
 
-public final class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
+public class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
 
     private final HashSet<ImageDownloadListener> listeners = new HashSet<>();
 

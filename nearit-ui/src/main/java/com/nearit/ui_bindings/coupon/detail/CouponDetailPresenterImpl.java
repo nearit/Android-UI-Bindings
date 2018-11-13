@@ -3,8 +3,8 @@ package com.nearit.ui_bindings.coupon.detail;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
-import com.nearit.ui_bindings.ImageDownloadListener;
-import com.nearit.ui_bindings.NearItImageDownloader;
+import com.nearit.ui_bindings.utils.images.ImageDownloadListener;
+import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
