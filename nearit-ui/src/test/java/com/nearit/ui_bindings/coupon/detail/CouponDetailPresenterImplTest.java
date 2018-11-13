@@ -16,8 +16,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 import java.util.Date;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
 
 import it.near.sdk.reactions.contentplugin.model.ImageSet;
 
@@ -25,7 +23,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -245,7 +242,7 @@ public class CouponDetailPresenterImplTest {
     }
 
     @Test
-    public void onStart_onImageError_showDefaultIfValidAndHideSpinner() throws InterruptedException, ExecutionException, TimeoutException {
+    public void onStart_onImageError_showDefaultIfValidAndHideSpinner() {
         String imageUrl = "sei";
         when(coupon.getIconSet()).thenReturn(imageSet);
         when(imageSet.getFullSize()).thenReturn(imageUrl);
@@ -261,7 +258,7 @@ public class CouponDetailPresenterImplTest {
     }
 
     @Test
-    public void onStart_onImageSuccess_showItAndHideSpinner() throws InterruptedException, ExecutionException, TimeoutException {
+    public void onStart_onImageSuccess_showItAndHideSpinner() {
         String imageUrl = "sei";
         int drawable = 6;
         when(coupon.getIconSet()).thenReturn(imageSet);
@@ -277,78 +274,27 @@ public class CouponDetailPresenterImplTest {
         verify(view).showIcon(bitmap);
     }
 
-    @Test
-    public void onStart_onImageTimeout_showDefaultAndHideSpinner() throws InterruptedException, ExecutionException, TimeoutException {
-        String imageUrl = "sei";
-        int drawable = 6;
-        when(coupon.getIconSet()).thenReturn(imageSet);
-        when(imageSet.getFullSize()).thenReturn(imageUrl);
-        when(params.getIconDrawable()).thenReturn(drawable);
-        doThrow(new TimeoutException()).when(imageDownloader).downloadImage(anyString(), any(ImageDownloadListener.class), anyInt());
-
-        presenter.start();
-
-        verify(view).hideIcon();
-        verify(view).showSpinner();
-        verify(view).hideSpinner();
-        verify(view).showIcon();
-    }
-
-    @Test
-    public void onStart_onImageInterrupted_showDefaultAndHideSpinner() throws InterruptedException, ExecutionException, TimeoutException {
-        String imageUrl = "sei";
-        int drawable = 6;
-        when(coupon.getIconSet()).thenReturn(imageSet);
-        when(imageSet.getFullSize()).thenReturn(imageUrl);
-        when(params.getIconDrawable()).thenReturn(drawable);
-        doThrow(new InterruptedException()).when(imageDownloader).downloadImage(anyString(), any(ImageDownloadListener.class), anyInt());
-
-        presenter.start();
-
-        verify(view).hideIcon();
-        verify(view).showSpinner();
-        verify(view).hideSpinner();
-        verify(view).showIcon();
-    }
-
-    @Test
-    public void onStart_onImageExecutionException_showDefaultAndHideSpinner() throws InterruptedException, ExecutionException, TimeoutException {
-        String imageUrl = "sei";
-        int drawable = 6;
-        when(coupon.getIconSet()).thenReturn(imageSet);
-        when(imageSet.getFullSize()).thenReturn(imageUrl);
-        when(params.getIconDrawable()).thenReturn(drawable);
-        doThrow(new ExecutionException(new Throwable())).when(imageDownloader).downloadImage(anyString(), any(ImageDownloadListener.class), anyInt());
-
-        presenter.start();
-
-        verify(view).hideIcon();
-        verify(view).showSpinner();
-        verify(view).hideSpinner();
-        verify(view).showIcon();
-    }
 
 
 
-
-    private void whenImageDownloadSuccess() throws InterruptedException, ExecutionException, TimeoutException {
+    private void whenImageDownloadSuccess() {
         doAnswer(new Answer() {
             @Override
             public Object answer(InvocationOnMock invocation) {
                 ((ImageDownloadListener) invocation.getArgument(1)).onSuccess(bitmap);
                 return null;
             }
-        }).when(imageDownloader).downloadImage(anyString(), any(ImageDownloadListener.class), anyInt());
+        }).when(imageDownloader).downloadImage(anyString(), any(ImageDownloadListener.class));
     }
 
-    private void whenImageDownloadError() throws InterruptedException, ExecutionException, TimeoutException {
+    private void whenImageDownloadError() {
         doAnswer(new Answer() {
             @Override
             public Object answer(InvocationOnMock invocation) {
                 ((ImageDownloadListener) invocation.getArgument(1)).onError();
                 return null;
             }
-        }).when(imageDownloader).downloadImage(anyString(), any(ImageDownloadListener.class), anyInt());
+        }).when(imageDownloader).downloadImage(anyString(), any(ImageDownloadListener.class));
     }
 
     private void whenValidCoupon() {
