@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.nearit.ui_bindings.coupon.QRcodeGenerator;
 import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.coupon.views.CouponDetailTopSection;
@@ -41,6 +43,8 @@ public class NearItCouponDetailFragment extends Fragment implements CouponDetail
     private ImageView couponIcon, separator;
     @Nullable
     private TextView couponName, couponValue, couponDescription;
+    @Nullable
+    private CouponDetailTopSection topSection;
 
     private Coupon coupon;
     private CouponDetailExtraParams params;
@@ -66,27 +70,28 @@ public class NearItCouponDetailFragment extends Fragment implements CouponDetail
             params = getArguments().getParcelable(ARG_EXTRAS);
         }
 
-        new CouponDetailPresenterImpl(this, coupon, params, NearItImageDownloader.getInstance());
+        new CouponDetailPresenterImpl(this, coupon, params, NearItImageDownloader.getInstance(), new QRcodeGenerator(250, 250));
     }
 
     @Override
-    public android.view.View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        android.view.View rootView = inflater.inflate(R.layout.nearit_ui_fragment_coupon_detail, container, false);
-
-        CouponDetailTopSection topSection = rootView.findViewById(R.id.coupon_detail_top_section);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.nearit_ui_fragment_coupon_detail, container, false);
 
         ScrollView scrollView = rootView.findViewById(R.id.coupon_detail_scrollview);
         scrollView.setVerticalScrollBarEnabled(false);
         scrollView.setHorizontalScrollBarEnabled(false);
 
-        topSection.setCouponView(coupon);
-
+        topSection = rootView.findViewById(R.id.coupon_detail_top_section);
         spinner = rootView.findViewById(R.id.coupon_icon_progress_bar);
         couponIcon = rootView.findViewById(R.id.coupon_icon);
         separator = rootView.findViewById(R.id.coupon_detail_separator);
         couponName = rootView.findViewById(R.id.coupon_title);
         couponValue = rootView.findViewById(R.id.coupon_value);
         couponDescription = rootView.findViewById(R.id.coupon_description);
+
+        if (topSection != null) {
+            topSection.setCouponView(coupon);
+        }
 
         return rootView;
     }
@@ -123,6 +128,13 @@ public class NearItCouponDetailFragment extends Fragment implements CouponDetail
     public void setSeparator(int separatorDrawable) {
         if (separator != null) {
             separator.setImageResource(separatorDrawable);
+        }
+    }
+
+    @Override
+    public void showQrCode(@NonNull Bitmap bitmap) {
+        if (topSection != null) {
+            topSection.setQrCode(bitmap);
         }
     }
 
