@@ -35,6 +35,7 @@ public class CouponDetailPresenterImpl implements CouponDetailContract.Presenter
         qRcodeGenerator.setListener(new QRcodeGenerator.GeneratorListener() {
             @Override
             public void onComplete(Bitmap qrCode) {
+                view.showQrCode(qrCode);
             }
 
             @Override
