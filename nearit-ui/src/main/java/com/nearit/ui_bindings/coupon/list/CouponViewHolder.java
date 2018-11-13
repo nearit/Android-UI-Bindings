@@ -80,37 +80,29 @@ class CouponViewHolder extends RecyclerView.ViewHolder {
                 if (iconProgressBar != null) {
                     iconProgressBar.setVisibility(View.VISIBLE);
                 }
-                try {
-                    NearItImageDownloader.getInstance().downloadImage(coupon.getIconSet().getFullSize(), new ImageDownloadListener() {
-                        @Override
-                        public void onSuccess(@Nullable Bitmap bitmap) {
-                            if (couponIcon != null) {
-                                couponIcon.setVisibility(View.VISIBLE);
-                                if (bitmap != null) {
-                                    couponIcon.setScaleType(ImageView.ScaleType.FIT_XY);
-                                    couponIcon.setAdjustViewBounds(true);
-                                    couponIcon.setMinimumHeight(0);
-                                    couponIcon.setImageBitmap(bitmap);
-                                }
-                            }
-                            if (iconProgressBar != null) {
-                                iconProgressBar.setVisibility(View.GONE);
-                            }
-                        }
 
-                        @Override
-                        public void onError() {
-                            hideSpinnerAndSetDefault();
+                NearItImageDownloader.getInstance().downloadImage(coupon.getIconSet().getFullSize(), new ImageDownloadListener() {
+                    @Override
+                    public void onSuccess(@Nullable Bitmap bitmap) {
+                        if (couponIcon != null) {
+                            couponIcon.setVisibility(View.VISIBLE);
+                            if (bitmap != null) {
+                                couponIcon.setScaleType(ImageView.ScaleType.FIT_XY);
+                                couponIcon.setAdjustViewBounds(true);
+                                couponIcon.setMinimumHeight(0);
+                                couponIcon.setImageBitmap(bitmap);
+                            }
                         }
-                    }, 5000);
-                } catch (InterruptedException e) {
-                    hideSpinnerAndSetDefault();
-                } catch (ExecutionException e) {
-                    hideSpinnerAndSetDefault();
-                } catch (TimeoutException e) {
-                    hideSpinnerAndSetDefault();
-                }
-                //new LoadImageFromURL(couponIcon, iconProgressBar).execute(coupon.getIconSet().getFullSize());
+                        if (iconProgressBar != null) {
+                            iconProgressBar.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onError() {
+                        hideSpinnerAndSetDefault();
+                    }
+                });
             }
         }
         if (couponTitle != null) {
@@ -180,7 +172,7 @@ class CouponViewHolder extends RecyclerView.ViewHolder {
         if (couponValidity != null) {
             String formattedRedeem;
             formattedRedeem = formatDate.format(redeemableFromDate);
-            couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_list_inactive_text).concat(" "+formattedRedeem));
+            couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_list_inactive_text).concat(" " + formattedRedeem));
             couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_inactive_text_color));
         }
     }
