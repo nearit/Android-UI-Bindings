@@ -16,6 +16,7 @@ class CouponDetailContract {
         void hideSeparator();
         void setSeparator(int separatorDrawable);
         void showQrCode(@NonNull Bitmap bitmap);
+        void showQrCodeError();
         void showTitle(@NonNull String title);
         void showValue(@NonNull String value);
         void showDescription(@NonNull String description);
