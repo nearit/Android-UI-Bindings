@@ -45,11 +45,11 @@ public class NearItImageDownloaderTest {
     @Mock
     private AsyncTask<String, Void, Bitmap> asyncTask;
 
-    @Rule
-    public NearLogRule emptyLoggerRule = new NearLogRule();
-
     @Captor
     private ArgumentCaptor<ImageDownloadListener> captor;
+
+    @Rule
+    public NearLogRule emptyLoggerRule = new NearLogRule();
 
     private NearItImageDownloader imageDownloader;
 
@@ -103,7 +103,7 @@ public class NearItImageDownloaderTest {
     }
 
     @Test
-    public void onDownloadImage_ifNotCachedAndNotRunning_createNewTaskAndAddIt() {
+    public void onDownloadImage_ifNotCachedAndNotRunning_createNewTaskAndExecIt() {
         when(cacheManager.getBitmapFromMemCache(url)).thenReturn(null);
         when(tasksManager.isAlreadyRunning(url)).thenReturn(false);
         when(tasksManager.createNewTask(any(ImageDownloadListener.class))).thenReturn(task);
@@ -112,11 +112,10 @@ public class NearItImageDownloaderTest {
 
         verify(tasksManager).createNewTask(any(ImageDownloadListener.class));
         verify(task).execute(url);
-        verify(tasksManager).addTask(url, task);
     }
 
     @Test
-    public void onDownloadImageWithTimeout_ifNotCachedAndNotRunning_createNewTaskAndAddIt() throws InterruptedException, ExecutionException, TimeoutException {
+    public void onDownloadImageWithTimeout_ifNotCachedAndNotRunning_createNewTaskAndExecIt() throws InterruptedException, ExecutionException, TimeoutException {
         when(cacheManager.getBitmapFromMemCache(url)).thenReturn(null);
         when(tasksManager.isAlreadyRunning(url)).thenReturn(false);
         when(tasksManager.createNewTask(any(ImageDownloadListener.class))).thenReturn(task);
@@ -127,7 +126,118 @@ public class NearItImageDownloaderTest {
         verify(tasksManager).createNewTask(any(ImageDownloadListener.class));
         verify(task).execute(url);
         verify(asyncTask).get(6, TimeUnit.MILLISECONDS);
+    }
+
+    @Test
+    public void onDownloadImage_ifSuccessful_addImageToCacheAndNotifyListener() {
+        when(cacheManager.getBitmapFromMemCache(url)).thenReturn(null);
+        when(tasksManager.isAlreadyRunning(url)).thenReturn(false);
+        when(tasksManager.createNewTask(any(ImageDownloadListener.class))).thenReturn(task);
+        when(task.execute(anyString())).thenReturn(asyncTask);
+
+        imageDownloader.downloadImage(url, listener);
+
+        verify(tasksManager).createNewTask(captor.capture());
+        ImageDownloadListener capturedListener = captor.getValue();
+        capturedListener.onSuccess(bitmap);
+
+        verify(cacheManager).addBitmapToMemoryCache(url, bitmap);
+        verify(listener).onSuccess(bitmap);
+    }
+
+    @Test
+    public void onDownloadImageWithTimeout_ifSuccessful_addImageToCacheAndNotifyListener() throws InterruptedException, ExecutionException, TimeoutException {
+        when(cacheManager.getBitmapFromMemCache(url)).thenReturn(null);
+        when(tasksManager.isAlreadyRunning(url)).thenReturn(false);
+        when(tasksManager.createNewTask(any(ImageDownloadListener.class))).thenReturn(task);
+        when(task.execute(anyString())).thenReturn(asyncTask);
+
+        imageDownloader.downloadImage(url, listener, 6);
+
+        verify(tasksManager).createNewTask(captor.capture());
+        ImageDownloadListener capturedListener = captor.getValue();
+        capturedListener.onSuccess(bitmap);
+
+        verify(cacheManager).addBitmapToMemoryCache(url, bitmap);
+        verify(listener).onSuccess(bitmap);
+    }
+
+    @Test
+    public void onDownloadImage_ifError_notifyListener() {
+        when(cacheManager.getBitmapFromMemCache(url)).thenReturn(null);
+        when(tasksManager.isAlreadyRunning(url)).thenReturn(false);
+        when(tasksManager.createNewTask(any(ImageDownloadListener.class))).thenReturn(task);
+        when(task.execute(anyString())).thenReturn(asyncTask);
+
+        imageDownloader.downloadImage(url, listener);
+
+        verify(tasksManager).createNewTask(captor.capture());
+        ImageDownloadListener capturedListener = captor.getValue();
+        capturedListener.onError();
+
+        verify(cacheManager, never()).addBitmapToMemoryCache(url, bitmap);
+        verify(listener).onError();
+    }
+
+    @Test
+    public void onDownloadImageWithTimeout_ifError_notifyListener() throws InterruptedException, ExecutionException, TimeoutException {
+        when(cacheManager.getBitmapFromMemCache(url)).thenReturn(null);
+        when(tasksManager.isAlreadyRunning(url)).thenReturn(false);
+        when(tasksManager.createNewTask(any(ImageDownloadListener.class))).thenReturn(task);
+        when(task.execute(anyString())).thenReturn(asyncTask);
+
+        imageDownloader.downloadImage(url, listener, 6);
+
+        verify(tasksManager).createNewTask(captor.capture());
+        ImageDownloadListener capturedListener = captor.getValue();
+        capturedListener.onError();
+
+        verify(cacheManager, never()).addBitmapToMemoryCache(url, bitmap);
+        verify(listener).onError();
+    }
+
+    @Test
+    public void onDownloadImage_ifNotCachedAndNotRunning_addNewTask() {
+        when(cacheManager.getBitmapFromMemCache(url)).thenReturn(null);
+        when(tasksManager.isAlreadyRunning(url)).thenReturn(false);
+        when(tasksManager.createNewTask(any(ImageDownloadListener.class))).thenReturn(task);
+        when(task.execute(anyString())).thenReturn(asyncTask);
+
+        imageDownloader.downloadImage(url, listener);
+
         verify(tasksManager).addTask(url, task);
+    }
+
+    @Test
+    public void onDownloadImage_removeTaskAfterSuccess() {
+        when(cacheManager.getBitmapFromMemCache(url)).thenReturn(null);
+        when(tasksManager.isAlreadyRunning(url)).thenReturn(false);
+        when(tasksManager.createNewTask(any(ImageDownloadListener.class))).thenReturn(task);
+        when(task.execute(anyString())).thenReturn(asyncTask);
+
+        imageDownloader.downloadImage(url, listener);
+
+        verify(tasksManager).createNewTask(captor.capture());
+        ImageDownloadListener capturedListener = captor.getValue();
+        capturedListener.onSuccess(bitmap);
+
+        verify(tasksManager).removeTask(url);
+    }
+
+    @Test
+    public void onDownloadImage_removeTaskAfterError() {
+        when(cacheManager.getBitmapFromMemCache(url)).thenReturn(null);
+        when(tasksManager.isAlreadyRunning(url)).thenReturn(false);
+        when(tasksManager.createNewTask(any(ImageDownloadListener.class))).thenReturn(task);
+        when(task.execute(anyString())).thenReturn(asyncTask);
+
+        imageDownloader.downloadImage(url, listener);
+
+        verify(tasksManager).createNewTask(captor.capture());
+        ImageDownloadListener capturedListener = captor.getValue();
+        capturedListener.onError();
+
+        verify(tasksManager).removeTask(url);
     }
 
 }
