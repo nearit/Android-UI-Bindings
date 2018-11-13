@@ -40,14 +40,9 @@ public class CouponDetailPresenterImpl implements CouponDetailContract.Presenter
 
             @Override
             public void onError() {
-
+                view.showQrCodeError();
             }
         });
-    }
-
-    @Override
-    public void reloadImage() {
-
     }
 
     @Override
