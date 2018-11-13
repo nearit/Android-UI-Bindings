@@ -1,14 +1,18 @@
 package com.nearit.ui_bindings.coupon.detail;
 
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 
 import com.nearit.ui_bindings.CouponStub;
+import com.nearit.ui_bindings.coupon.QRcodeGenerator;
 import com.nearit.ui_bindings.utils.images.ImageDownloadListener;
 import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
@@ -43,6 +47,11 @@ public class CouponDetailPresenterImplTest {
     private ImageSet imageSet;
     @Mock
     private Bitmap bitmap;
+    @Mock
+    private QRcodeGenerator qRcodeGenerator;
+
+    @Captor
+    private ArgumentCaptor<QRcodeGenerator.GeneratorListener> captor;
 
     private CouponStub coupon;
 
@@ -51,7 +60,7 @@ public class CouponDetailPresenterImplTest {
     @Before
     public void setUp() {
         coupon = Mockito.mock(CouponStub.class);
-        presenter = new CouponDetailPresenterImpl(view, coupon, params, imageDownloader);
+        presenter = new CouponDetailPresenterImpl(view, coupon, params, imageDownloader, qRcodeGenerator);
     }
 
     @Test
@@ -153,6 +162,38 @@ public class CouponDetailPresenterImplTest {
         presenter.start();
 
         verify(view, never()).setSeparator(anyInt());
+    }
+
+    @Test
+    public void onStart_qrCodeGenerationIsTriggered() {
+        String serial = "sei";
+        when(coupon.getSerial()).thenReturn(serial);
+        presenter.start();
+
+        verify(qRcodeGenerator).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, serial);
+    }
+
+    @Test
+    public void onQrCodeSuccess_showItInView() {
+        presenter.start();
+
+        verify(qRcodeGenerator).setListener(captor.capture());
+        QRcodeGenerator.GeneratorListener listener = captor.getValue();
+        listener.onComplete(bitmap);
+
+        verify(view).showQrCode(bitmap);
+    }
+
+    @Test
+    public void onQrCodeError_showError() {
+        presenter.start();
+
+        verify(qRcodeGenerator).setListener(captor.capture());
+        QRcodeGenerator.GeneratorListener listener = captor.getValue();
+        listener.onError();
+
+        verify(view, never()).showQrCode(any(Bitmap.class));
+        verify(view).showQrCodeError();
     }
 
     @Test
