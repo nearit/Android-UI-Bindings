@@ -60,5 +60,6 @@ public class QRcodeGenerator extends AsyncTask<String, Void, Bitmap> {
 
     public interface GeneratorListener {
         void onComplete(Bitmap qrCode);
+        void onError();
     }
 }
