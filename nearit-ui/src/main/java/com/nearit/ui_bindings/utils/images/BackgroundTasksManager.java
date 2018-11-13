@@ -2,9 +2,6 @@ package com.nearit.ui_bindings.utils.images;
 
 import android.support.annotation.NonNull;
 
-import com.nearit.ui_bindings.utils.images.ImageDownloadListener;
-import com.nearit.ui_bindings.utils.images.LoadImageFromURL;
-
 import java.util.HashMap;
 import java.util.Map;
 
