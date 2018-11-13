@@ -28,8 +28,6 @@ class CouponDetailContract {
         void setDisabled();
     }
 
-    interface Presenter extends BasePresenter {
-        void reloadImage();
-    }
+    interface Presenter extends BasePresenter { }
 
 }
