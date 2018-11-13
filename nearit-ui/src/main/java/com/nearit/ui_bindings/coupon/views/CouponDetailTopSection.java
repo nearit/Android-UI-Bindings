@@ -95,6 +95,15 @@ public class CouponDetailTopSection extends RelativeLayout {
         }
     }
 
+    public void hideQrCode() {
+        if (qrCodeImageView != null) {
+            qrCodeImageView.setVisibility(GONE);
+        }
+        if (qrCodeSpinner != null) {
+            qrCodeSpinner.setVisibility(GONE);
+        }
+    }
+
     public void setCouponView(Coupon coupon) {
         if (validityPeriodTextView != null) {
             String formattedExp = "", formattedRedeem = "";
