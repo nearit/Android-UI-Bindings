@@ -177,6 +177,20 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
     }
 
     @Override
+    public void showRefreshing() {
+        if (refreshLayout != null) {
+            refreshLayout.setRefreshing(true);
+        }
+    }
+
+    @Override
+    public void hideRefreshing() {
+        if (refreshLayout != null) {
+            refreshLayout.setRefreshing(false);
+        }
+    }
+
+    @Override
     public void showRefreshError(String error) {
         if (refreshLayout != null) {
             refreshLayout.setRefreshing(false);

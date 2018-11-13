@@ -65,6 +65,7 @@ public class CouponListPresenterImpl implements CouponListContract.Presenter {
     }
 
     private void loadCouponList() {
+        view.showRefreshing();
         nearItManager.getCoupons(new CouponListener() {
             @Override
             public void onCouponsDownloaded(List<Coupon> coupons) {
@@ -97,6 +98,7 @@ public class CouponListPresenterImpl implements CouponListContract.Presenter {
                     }
                 }
 
+                view.hideRefreshing();
 
                 if (filtered.isEmpty()) {
                     view.showEmptyLayout();
@@ -110,6 +112,7 @@ public class CouponListPresenterImpl implements CouponListContract.Presenter {
             public void onCouponDownloadError(String error) {
                 view.showCouponList(Collections.<Coupon>emptyList());
                 view.showEmptyLayout();
+                view.hideRefreshing();
                 view.showRefreshError(error);
             }
         });

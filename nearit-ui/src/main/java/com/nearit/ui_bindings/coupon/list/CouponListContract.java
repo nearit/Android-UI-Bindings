@@ -15,6 +15,8 @@ class CouponListContract {
         void showCouponList(List<Coupon> couponList);
         void showEmptyLayout();
         void hideEmptyLayout();
+        void showRefreshing();
+        void hideRefreshing();
         void showRefreshError(String error);
         void openDetail(Coupon coupon);
     }
