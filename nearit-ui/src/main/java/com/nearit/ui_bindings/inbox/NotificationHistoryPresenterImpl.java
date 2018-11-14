@@ -64,6 +64,7 @@ class NotificationHistoryPresenterImpl implements NotificationHistoryContract.No
     }
 
     private void loadHistory() {
+        view.showRefreshing();
         nearItManager.getHistory(new NotificationHistoryManager.OnNotificationHistoryListener() {
             @Override
             public void onNotifications(@NonNull List<HistoryItem> itemList) {
@@ -80,6 +81,8 @@ class NotificationHistoryPresenterImpl implements NotificationHistoryContract.No
                     });
                 }
 
+                view.hideRefreshing();
+
                 if (itemList.isEmpty()) {
                     view.showEmptyLayout();
                 } else {
@@ -92,6 +95,7 @@ class NotificationHistoryPresenterImpl implements NotificationHistoryContract.No
             public void onError(String error) {
                 view.showNotificationHistory(Collections.<HistoryItem>emptyList());
                 view.showEmptyLayout();
+                view.hideRefreshing();
                 view.showRefreshError(R.string.nearit_ui_history_error_message);
             }
         });
