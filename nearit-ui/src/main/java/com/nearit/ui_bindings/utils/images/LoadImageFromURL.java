@@ -19,11 +19,11 @@ public class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
 
     private final HashSet<ImageDownloadListener> listeners = new HashSet<>();
 
-    public LoadImageFromURL(@NonNull ImageDownloadListener listener) {
+    LoadImageFromURL(@NonNull ImageDownloadListener listener) {
         listeners.add(listener);
     }
 
-    public void addListener(@NonNull ImageDownloadListener listener) {
+    void addListener(@NonNull ImageDownloadListener listener) {
         listeners.add(listener);
     }
 
