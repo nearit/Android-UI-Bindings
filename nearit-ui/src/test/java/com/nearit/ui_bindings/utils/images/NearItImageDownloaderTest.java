@@ -14,6 +14,8 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.never;
@@ -33,16 +35,20 @@ public class NearItImageDownloaderTest {
     @Mock
     private BackgroundTasksManager tasksManager;
     @Mock
+    private Image image;
+    @Mock
     private Bitmap bitmap;
     @Mock
     private ImageDownloadListener listener;
     @Mock
     private LoadImageFromURL task;
     @Mock
-    private AsyncTask<String, Void, Bitmap> asyncTask;
+    private AsyncTask<String, Void, Image> asyncTask;
 
     @Captor
     private ArgumentCaptor<ImageDownloadListener> captor;
+    @Captor
+    private ArgumentCaptor<Image> imageCaptor;
 
     @Rule
     public NearLogRule emptyLoggerRule = new NearLogRule();
@@ -51,6 +57,7 @@ public class NearItImageDownloaderTest {
 
     @Before
     public void setUp() {
+        when(image.getBitmap()).thenReturn(bitmap);
         imageDownloader = new NearItImageDownloader(cacheManager, tasksManager);
     }
 
@@ -61,7 +68,10 @@ public class NearItImageDownloaderTest {
         imageDownloader.downloadImage(url, listener);
 
         verify(cacheManager, never()).addBitmapToMemoryCache(anyString(), any(Bitmap.class));
-        verify(listener).onSuccess(bitmap);
+        verify(listener).onSuccess(imageCaptor.capture());
+        Image actualImage = imageCaptor.getValue();
+        Bitmap actualBitmap = actualImage.getBitmap();
+        assertThat(actualBitmap, is(bitmap));
     }
 
     @Test
@@ -99,10 +109,10 @@ public class NearItImageDownloaderTest {
 
         verify(tasksManager).createNewTask(captor.capture());
         ImageDownloadListener capturedListener = captor.getValue();
-        capturedListener.onSuccess(bitmap);
+        capturedListener.onSuccess(image);
 
         verify(cacheManager).addBitmapToMemoryCache(url, bitmap);
-        verify(listener).onSuccess(bitmap);
+        verify(listener).onSuccess(image);
     }
 
     @Test
@@ -145,7 +155,7 @@ public class NearItImageDownloaderTest {
 
         verify(tasksManager).createNewTask(captor.capture());
         ImageDownloadListener capturedListener = captor.getValue();
-        capturedListener.onSuccess(bitmap);
+        capturedListener.onSuccess(image);
 
         verify(tasksManager).removeTask(url);
     }
