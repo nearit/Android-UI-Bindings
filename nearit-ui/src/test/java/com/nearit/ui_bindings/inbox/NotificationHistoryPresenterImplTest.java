@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Captor;
+import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
@@ -40,6 +41,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -106,6 +108,30 @@ public class NotificationHistoryPresenterImplTest {
         mockInboxError("error");
         presenter.requestRefresh();
         verify(view).showRefreshError(anyInt());
+    }
+
+    @Test
+    public void onRefresh_ifSuccess_showAndHideSpinner() {
+        mockInboxFromNear(items);
+
+        presenter.requestRefresh();
+
+        InOrder inOrderVerifier = inOrder(view);
+
+        inOrderVerifier.verify(view).showRefreshing();
+        inOrderVerifier.verify(view).hideRefreshing();
+    }
+
+    @Test
+    public void onRefresh_ifError_showAndHideSpinner() {
+        mockInboxError("error");
+
+        presenter.requestRefresh();
+
+        InOrder inOrderVerifier = inOrder(view);
+
+        inOrderVerifier.verify(view).showRefreshing();
+        inOrderVerifier.verify(view).hideRefreshing();
     }
 
     @Test
@@ -178,7 +204,7 @@ public class NotificationHistoryPresenterImplTest {
     private void mockInboxFromNear(final List<HistoryItem> items) {
         doAnswer(new Answer() {
                      @Override
-                     public Object answer(InvocationOnMock invocation) throws Throwable {
+                     public Object answer(InvocationOnMock invocation) {
                          ((NotificationHistoryManager.OnNotificationHistoryListener) invocation.getArguments()[0]).onNotifications(items);
                          return null;
                      }
@@ -189,7 +215,7 @@ public class NotificationHistoryPresenterImplTest {
     private void mockInboxError(final String errorMessage) {
         doAnswer(new Answer() {
                      @Override
-                     public Object answer(InvocationOnMock invocation) throws Throwable {
+                     public Object answer(InvocationOnMock invocation) {
                          ((NotificationHistoryManager.OnNotificationHistoryListener) invocation.getArguments()[0]).onError(errorMessage);
                          return null;
                      }
