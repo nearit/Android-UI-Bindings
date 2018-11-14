@@ -13,6 +13,8 @@ class NotificationHistoryContract {
         void showNotificationHistory(List<HistoryItem> itemList);
         void showEmptyLayout();
         void hideEmptyLayout();
+        void showRefreshing();
+        void hideRefreshing();
         void showRefreshError(int res);
         void showRefreshError(String error);
         void openDetail(HistoryItem item);
