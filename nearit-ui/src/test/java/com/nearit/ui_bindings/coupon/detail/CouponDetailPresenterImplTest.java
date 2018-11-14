@@ -3,7 +3,7 @@ package com.nearit.ui_bindings.coupon.detail;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
-import com.nearit.ui_bindings.CouponStub;
+import com.nearit.ui_bindings.stubs.CouponStub;
 import com.nearit.ui_bindings.coupon.QRcodeGenerator;
 import com.nearit.ui_bindings.utils.images.ImageDownloadListener;
 import com.nearit.ui_bindings.utils.images.NearItImageDownloader;

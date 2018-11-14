@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings;
+package com.nearit.ui_bindings.stubs;
 
 import android.content.Context;
 
