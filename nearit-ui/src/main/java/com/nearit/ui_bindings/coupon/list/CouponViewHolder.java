@@ -1,7 +1,6 @@
 package com.nearit.ui_bindings.coupon.list;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.nearit.ui_bindings.utils.images.Image;
 import com.nearit.ui_bindings.utils.images.ImageDownloadListener;
 import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
 import com.nearit.ui_bindings.R;
@@ -17,8 +17,6 @@ import com.nearit.ui_bindings.R;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
 
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
@@ -83,14 +81,14 @@ class CouponViewHolder extends RecyclerView.ViewHolder {
 
                 NearItImageDownloader.getInstance().downloadImage(coupon.getIconSet().getFullSize(), new ImageDownloadListener() {
                     @Override
-                    public void onSuccess(@Nullable Bitmap bitmap) {
+                    public void onSuccess(@Nullable Image image) {
                         if (couponIcon != null) {
                             couponIcon.setVisibility(View.VISIBLE);
-                            if (bitmap != null) {
+                            if (image != null && (image.getUrl().equals(coupon.getIconSet().getFullSize()))) {
                                 couponIcon.setScaleType(ImageView.ScaleType.FIT_XY);
                                 couponIcon.setAdjustViewBounds(true);
                                 couponIcon.setMinimumHeight(0);
-                                couponIcon.setImageBitmap(bitmap);
+                                couponIcon.setImageBitmap(image.getBitmap());
                             }
                         }
                         if (iconProgressBar != null) {
