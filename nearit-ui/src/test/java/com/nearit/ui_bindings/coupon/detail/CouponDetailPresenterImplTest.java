@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 
 import com.nearit.ui_bindings.stubs.CouponStub;
 import com.nearit.ui_bindings.coupon.QRcodeGenerator;
+import com.nearit.ui_bindings.utils.images.Image;
 import com.nearit.ui_bindings.utils.images.ImageDownloadListener;
 import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
 
@@ -46,6 +47,8 @@ public class CouponDetailPresenterImplTest {
     @Mock
     private ImageSet imageSet;
     @Mock
+    private Image image;
+    @Mock
     private Bitmap bitmap;
     @Mock
     private QRcodeGenerator qRcodeGenerator;
@@ -60,6 +63,7 @@ public class CouponDetailPresenterImplTest {
     @Before
     public void setUp() {
         coupon = Mockito.mock(CouponStub.class);
+        when(image.getBitmap()).thenReturn(bitmap);
         presenter = new CouponDetailPresenterImpl(view, coupon, params, imageDownloader, qRcodeGenerator);
     }
 
@@ -322,7 +326,7 @@ public class CouponDetailPresenterImplTest {
         doAnswer(new Answer() {
             @Override
             public Object answer(InvocationOnMock invocation) {
-                ((ImageDownloadListener) invocation.getArgument(1)).onSuccess(bitmap);
+                ((ImageDownloadListener) invocation.getArgument(1)).onSuccess(image);
                 return null;
             }
         }).when(imageDownloader).downloadImage(anyString(), any(ImageDownloadListener.class));
