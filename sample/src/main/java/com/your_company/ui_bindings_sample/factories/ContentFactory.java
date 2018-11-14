@@ -21,7 +21,7 @@ public class ContentFactory {
         content.title = "Title example";
         List<ImageSet> imageSets = new ArrayList<>();
         ImageSet image = new ImageSet();
-        image.setFullSize("https://www.nearit.com/wp-content/uploads/2017/06/comefunzionanearit_710x500.png");
+        image.setFullSize("https://prod-nearit-media.s3.amazonaws.com/uploads/image/image/73dd2e3c-8891-42c0-8641-ee4c53a56674/file.png");
         imageSets.add(image);
         content.setImages_links(imageSets);
         content.setCta(new ContentLink("Follow us", "https://www.facebook.com/nearitmobile/"));
@@ -34,7 +34,7 @@ public class ContentFactory {
         content.title = "Title example";
         List<ImageSet> imageSets = new ArrayList<>();
         ImageSet image = new ImageSet();
-        image.setFullSize("https://www.nearit.com/wp-content/uploads/2017/06/comefunzionanearit_710x500.png");
+        image.setFullSize("https://prod-nearit-media.s3.amazonaws.com/uploads/image/image/73dd2e3c-8891-42c0-8641-ee4c53a56674/file.png");
         imageSets.add(image);
         content.setImages_links(imageSets);
         return content;

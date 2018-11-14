@@ -15,7 +15,7 @@ object ContentFactory {
         content.contentString = "<a href=\"https://google.com\">LINK!</a>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali."
         content.title = "Title example"
         val image = ImageSet()
-        image.fullSize = "https://www.nearit.com/wp-content/uploads/2017/06/comefunzionanearit_710x500.png"
+        image.fullSize = "https://prod-nearit-media.s3.amazonaws.com/uploads/image/image/73dd2e3c-8891-42c0-8641-ee4c53a56674/file.png"
         content.images_links = listOf(image)
         content.cta = ContentLink("Follow us", "https://www.facebook.com/nearitmobile/")
         return content
@@ -26,7 +26,7 @@ object ContentFactory {
         content.contentString = "<a href=\"https://google.com\">LINK!</a>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali."
         content.title = "Title example"
         val image = ImageSet()
-        image.fullSize = "https://www.nearit.com/wp-content/uploads/2017/06/comefunzionanearit_710x500.png"
+        image.fullSize = "https://prod-nearit-media.s3.amazonaws.com/uploads/image/image/73dd2e3c-8891-42c0-8641-ee4c53a56674/file.png"
         content.images_links = listOf(image)
         return content
     }
