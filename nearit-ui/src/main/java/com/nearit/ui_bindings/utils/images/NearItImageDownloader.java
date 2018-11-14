@@ -48,10 +48,10 @@ public class NearItImageDownloader {
             } else {
                 LoadImageFromURL task = tasksManager.createNewTask(new ImageDownloadListener() {
                     @Override
-                    public void onSuccess(@NonNull Bitmap bitmap) {
-                        cacheManager.addBitmapToMemoryCache(url, bitmap);
+                    public void onSuccess(@NonNull Image image) {
+                        cacheManager.addBitmapToMemoryCache(url, image.getBitmap());
                         if (listener != null) {
-                            listener.onSuccess(bitmap);
+                            listener.onSuccess(image);
                         }
                         tasksManager.removeTask(url);
                     }
@@ -69,7 +69,7 @@ public class NearItImageDownloader {
                 tasksManager.addTask(url, task);
             }
         } else if (listener != null) {
-            listener.onSuccess(cached);
+            listener.onSuccess(new Image(cached, url));
         }
     }
 }

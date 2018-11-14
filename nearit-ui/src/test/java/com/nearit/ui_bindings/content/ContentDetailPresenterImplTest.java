@@ -3,6 +3,7 @@ package com.nearit.ui_bindings.content;
 import android.graphics.Bitmap;
 
 import com.nearit.ui_bindings.stubs.ContentStub;
+import com.nearit.ui_bindings.utils.images.Image;
 import com.nearit.ui_bindings.utils.images.ImageDownloadListener;
 import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
 
@@ -52,6 +53,8 @@ public class ContentDetailPresenterImplTest {
     private NearItManager nearItManager;
 
     @Mock
+    private Image image;
+    @Mock
     private Bitmap bitmap;
 
     @Captor
@@ -64,6 +67,7 @@ public class ContentDetailPresenterImplTest {
     @Before
     public void setUp() {
         content = Mockito.mock(ContentStub.class);
+        when(image.getBitmap()).thenReturn(bitmap);
         presenter = new ContentDetailPresenterImpl(view, content, trackingInfo, params, imageDownloader, nearItManager);
     }
 
@@ -173,10 +177,10 @@ public class ContentDetailPresenterImplTest {
         verifier.verify(view).showImageSpinner();
         verify(imageDownloader).downloadImage(anyString(), captor.capture());
         ImageDownloadListener listener = captor.getValue();
-        listener.onSuccess(bitmap);
+        listener.onSuccess(image);
 
         verifier.verify(view).hideImageSpinner();
-        verifier.verify(view).showImage(bitmap);
+        verifier.verify(view).showImage(image.getBitmap());
     }
 
     @Test
@@ -198,7 +202,7 @@ public class ContentDetailPresenterImplTest {
 
         verifier.verify(view).hideImageSpinner();
         verifier.verify(view).showImageRetry();
-        verify(view, never()).showImage(bitmap);
+        verify(view, never()).showImage(image.getBitmap());
     }
 
     @Test

@@ -1,9 +1,9 @@
 package com.nearit.ui_bindings.content;
 
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.nearit.ui_bindings.utils.images.Image;
 import com.nearit.ui_bindings.utils.images.ImageDownloadListener;
 import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
 
@@ -90,9 +90,9 @@ public class ContentDetailPresenterImpl implements ContentDetailContract.Present
             view.showImageSpinner();
             imageDownloader.downloadImage(content.getImageLink().getFullSize(), new ImageDownloadListener() {
                 @Override
-                public void onSuccess(@NonNull Bitmap bitmap) {
+                public void onSuccess(@NonNull Image image) {
                     view.hideImageSpinner();
-                    view.showImage(bitmap);
+                    view.showImage(image.getBitmap());
                 }
 
                 @Override

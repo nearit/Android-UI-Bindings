@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.nearit.ui_bindings.coupon.QRcodeGenerator;
+import com.nearit.ui_bindings.utils.images.Image;
 import com.nearit.ui_bindings.utils.images.ImageDownloadListener;
 import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
 
@@ -76,8 +77,8 @@ public class CouponDetailPresenterImpl implements CouponDetailContract.Presenter
 
             imageDownloader.downloadImage(coupon.getIconSet().getFullSize(), new ImageDownloadListener() {
                 @Override
-                public void onSuccess(@NonNull Bitmap bitmap) {
-                    view.showIcon(bitmap);
+                public void onSuccess(@NonNull Image image) {
+                    view.showIcon(image.getBitmap());
                     view.hideSpinner();
                 }
 
