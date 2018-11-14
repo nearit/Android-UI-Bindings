@@ -3,7 +3,7 @@ package com.nearit.ui_bindings.permissions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
-import com.nearit.ui_bindings.NearItManagerStub;
+import com.nearit.ui_bindings.stubs.NearItManagerStub;
 
 import org.junit.Before;
 import org.junit.Test;

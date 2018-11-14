@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,11 +20,11 @@ public class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
 
     private final HashSet<ImageDownloadListener> listeners = new HashSet<>();
 
-    public LoadImageFromURL(@NonNull ImageDownloadListener listener) {
+    LoadImageFromURL(@NonNull ImageDownloadListener listener) {
         listeners.add(listener);
     }
 
-    public void addListener(@NonNull ImageDownloadListener listener) {
+    void addListener(@NonNull ImageDownloadListener listener) {
         listeners.add(listener);
     }
 
@@ -43,11 +44,14 @@ public class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
     protected void onPostExecute(Bitmap icon) {
         Iterator<ImageDownloadListener> iterator = listeners.iterator();
         while (iterator.hasNext()) {
+            @Nullable
             ImageDownloadListener listener = iterator.next();
-            if (icon != null) {
-                listener.onSuccess(icon);
-            } else {
-                listener.onError();
+            if (listener != null) {
+                if (icon != null) {
+                    listener.onSuccess(icon);
+                } else {
+                    listener.onError();
+                }
             }
             iterator.remove();
         }

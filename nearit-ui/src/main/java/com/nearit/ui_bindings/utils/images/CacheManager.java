@@ -6,11 +6,11 @@ import android.util.LruCache;
 /**
  * @author Federico Boschini
  */
-public class CacheManager {
+class CacheManager {
 
     private LruCache<String, Bitmap> mMemoryCache;
 
-    public CacheManager() {
+    CacheManager() {
         // TODO: maybe fine-tune values
         final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
         final int cacheSize = maxMemory / 8;
@@ -22,13 +22,13 @@ public class CacheManager {
         };
     }
 
-    public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
+    void addBitmapToMemoryCache(String key, Bitmap bitmap) {
         if (getBitmapFromMemCache(key) == null) {
             mMemoryCache.put(key, bitmap);
         }
     }
 
-    public Bitmap getBitmapFromMemCache(String key) {
+    Bitmap getBitmapFromMemCache(String key) {
         return mMemoryCache.get(key);
     }
 

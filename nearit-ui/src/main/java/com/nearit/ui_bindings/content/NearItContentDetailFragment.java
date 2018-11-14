@@ -1,6 +1,7 @@
 package com.nearit.ui_bindings.content;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -9,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,17 +26,14 @@ import com.nearit.htmltextview.NearItMovementMethod;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.content.views.ContentCTAButton;
 
-import it.near.sdk.NearItManager;
+import it.near.sdk.logging.NearLog;
 import it.near.sdk.reactions.contentplugin.model.Content;
 import it.near.sdk.trackings.TrackingInfo;
-
-import static it.near.sdk.recipes.models.Recipe.CTA_TAPPED;
 
 /**
  * @author Federico Boschini
  */
-
-public class NearItContentDetailFragment extends Fragment implements NearItMovementMethod.OnMovementLinkClickListener {
+public class NearItContentDetailFragment extends Fragment implements ContentDetailContract.View, NearItMovementMethod.OnMovementLinkClickListener {
 
     private static final String TAG = "NearItContentFragm";
 
@@ -44,14 +41,27 @@ public class NearItContentDetailFragment extends Fragment implements NearItMovem
     private static final String ARG_TRACKING_INFO = "tracking_info";
     private static final String ARG_EXTRAS = "extras";
 
-    private boolean openLinksInTabs = false;
-
+    @Nullable
     private Content content;
     @Nullable
     private TrackingInfo trackingInfo;
 
-    public NearItContentDetailFragment() {
-    }
+    @Nullable
+    private TextView titleTextView;
+    @Nullable
+    private HtmlTextView contentTextView;
+    @Nullable
+    private ImageView contentImageView;
+    @Nullable
+    private ProgressBar imageSpinner;
+    @Nullable
+    private ContentCTAButton ctaButton;
+    @Nullable
+    private LinearLayout imageContainer;
+
+    private ContentDetailContract.Presenter presenter;
+
+    public NearItContentDetailFragment() {}
 
     public static NearItContentDetailFragment newInstance(Content content, @Nullable TrackingInfo trackingInfo, Parcelable extras) {
         NearItContentDetailFragment fragment = new NearItContentDetailFragment();
@@ -64,7 +74,7 @@ public class NearItContentDetailFragment extends Fragment implements NearItMovem
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Bundle args = getArguments();
@@ -73,72 +83,144 @@ public class NearItContentDetailFragment extends Fragment implements NearItMovem
             trackingInfo = args.getParcelable(ARG_TRACKING_INFO);
         }
 
-        ContentDetailExtraParams extras;
+        ContentDetailExtraParams params = null;
         if (getArguments() != null) {
-            extras = getArguments().getParcelable(ARG_EXTRAS);
-            if (extras != null) {
-                openLinksInTabs = extras.isOpenLinksInWebView();
-            }
+            params = getArguments().getParcelable(ARG_EXTRAS);
         }
 
-
+        ContentDetailPresenterImpl.obtain(this, content, trackingInfo, params);
     }
 
+    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.nearit_ui_fragment_content_detail, container, false);
 
-        ScrollView scrollView = rootView.findViewById(R.id.content_scrollview);
-        TextView titleTextView = rootView.findViewById(R.id.content_title);
-        HtmlTextView contentView = rootView.findViewById(R.id.content_html);
-        final ContentCTAButton ctaButton = rootView.findViewById(R.id.cta_button);
-        ImageView contentImageView = rootView.findViewById(R.id.content_image);
-        ProgressBar contentImageSpinner = rootView.findViewById(R.id.content_image_progress_bar);
-        LinearLayout contentImageContainer = rootView.findViewById(R.id.content_image_container);
+        imageSpinner = rootView.findViewById(R.id.content_image_progress_bar);
+        contentImageView = rootView.findViewById(R.id.content_image);
+        titleTextView = rootView.findViewById(R.id.content_title);
+        contentTextView = rootView.findViewById(R.id.content_html);
+        ctaButton = rootView.findViewById(R.id.cta_button);
+        imageContainer = rootView.findViewById(R.id.content_image_container);
 
+        ScrollView scrollView = rootView.findViewById(R.id.content_scrollview);
         scrollView.setHorizontalScrollBarEnabled(false);
         scrollView.setVerticalScrollBarEnabled(false);
-
-        if (content.title != null) {
-            titleTextView.setVisibility(View.VISIBLE);
-            titleTextView.setText(content.title);
-        }
-
-        if (content.contentString != null) {
-            contentView.setVisibility(View.VISIBLE);
-            contentView.setHtml(content.contentString);
-            contentView.setMovementMethod(new NearItMovementMethod(this, getContext()));
-        }
-
-        if (content.getImageLink() != null) {
-            contentImageContainer.setVisibility(View.VISIBLE);
-            //new LoadImageFromURL(contentImageView, contentImageSpinner, true).execute(content.getImageLink().getFullSize());
-        }
-
-        if (content.getCta() != null) {
-            ctaButton.setVisibility(View.VISIBLE);
-            ctaButton.setText(content.getCta().label);
-            ctaButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    NearItManager.getInstance().sendTracking(trackingInfo, CTA_TAPPED);
-                    if (getContext() != null) {
-                        if (openLinksInTabs) {
-                            openInCustomTab(content.getCta().url);
-                        } else {
-                            openUrl(content.getCta().url);
-                        }
-                    }
-                }
-            });
-        }
 
         return rootView;
     }
 
-    private void openInCustomTab(String url) {
-        assert content.getCta() != null;
+    @Override
+    public void onStart() {
+        super.onStart();
+        presenter.start();
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.stop();
+    }
+
+    @Override
+    public void showTitle(@NonNull String title) {
+        if (titleTextView != null) {
+            titleTextView.setVisibility(View.VISIBLE);
+            titleTextView.setText(title);
+        }
+    }
+
+    @Override
+    public void showContent(@NonNull String content) {
+        if (contentTextView != null) {
+            contentTextView.setVisibility(View.VISIBLE);
+            contentTextView.setHtml(content);
+            contentTextView.setMovementMethod(new NearItMovementMethod(this, getContext()));
+        }
+    }
+
+    @Override
+    public void showImageContainer() {
+        if (imageContainer != null) {
+            imageContainer.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void showImageSpinner() {
+        if (imageSpinner != null) {
+            imageSpinner.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void hideImageSpinner() {
+        if (imageSpinner != null) {
+            imageSpinner.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void hideImage() {
+        if (contentImageView != null) {
+            contentImageView.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void showImage(@NonNull Bitmap bitmap) {
+        if (contentImageView != null) {
+            contentImageView.setVisibility(View.VISIBLE);
+            contentImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            contentImageView.setAdjustViewBounds(true);
+            contentImageView.setMinimumHeight(0);
+            contentImageView.setImageBitmap(bitmap);
+        }
+    }
+
+    @Override
+    public void showImageRetry() {
+        if (contentImageView != null) {
+            contentImageView.setVisibility(View.VISIBLE);
+            contentImageView.setScaleType(ImageView.ScaleType.CENTER);
+            contentImageView.setAdjustViewBounds(false);
+            contentImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    presenter.reloadImage();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void showCtaButton(@NonNull String label) {
+        if (ctaButton != null) {
+            ctaButton.setVisibility(View.VISIBLE);
+            ctaButton.setText(label);
+            ctaButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    presenter.handleCtaTap();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void openLink(@NonNull String url) {
+        if (getContext() != null) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            if (intent.resolveActivity(getContext().getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                NearLog.e(TAG, String.format("Unable to open link: %s", url));
+            }
+        }
+    }
+
+    @Override
+    public void openLinkInWebView(@NonNull String url) {
         if (getContext() != null) {
             CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
             intentBuilder.setToolbarColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_webview_toolbar_color));
@@ -149,30 +231,18 @@ public class NearItContentDetailFragment extends Fragment implements NearItMovem
                 CustomTabsHelper.openCustomTab(
                         getContext(), intentBuilder.build(), Uri.parse(url), new WebViewFallback());
             } else {
-                Log.e(TAG, String.format("Unable to open link: %s", url));
-            }
-        }
-    }
-
-    private void openUrl(String url) {
-        assert content.getCta() != null;
-
-        if (getContext() != null) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            if (intent.resolveActivity(getContext().getPackageManager()) != null) {
-                startActivity(intent);
-            } else {
-                Log.e(TAG, String.format("Unable to open link: %s", url));
+                NearLog.e(TAG, String.format("Unable to open link: %s", url));
             }
         }
     }
 
     @Override
+    public void injectPresenter(@NonNull ContentDetailContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
     public void onLinkClicked(String linkText, NearItMovementMethod.LinkType linkType) {
-        if (openLinksInTabs) {
-            openInCustomTab(linkText);
-        } else {
-            openUrl(linkText);
-        }
+        presenter.handleLinkTap(linkText);
     }
 }
