@@ -19,7 +19,7 @@
         <LinearLayout
             android:id="@+id/content_image_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:minHeight="@dimen/nearit_ui_content_image_min_height"
