@@ -151,6 +151,20 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
     }
 
     @Override
+    public void showRefreshing() {
+        if (swipeToRefreshLayout != null) {
+            swipeToRefreshLayout.setRefreshing(true);
+        }
+    }
+
+    @Override
+    public void hideRefreshing() {
+        if (swipeToRefreshLayout != null) {
+            swipeToRefreshLayout.setRefreshing(false);
+        }
+    }
+
+    @Override
     public void showRefreshError(int res) {
         if (swipeToRefreshLayout != null) {
             swipeToRefreshLayout.setRefreshing(false);
