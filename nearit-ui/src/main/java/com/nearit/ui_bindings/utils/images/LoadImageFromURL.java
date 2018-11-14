@@ -16,7 +16,7 @@ import java.util.Iterator;
  * @author Federico Boschini
  */
 
-public class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
+public class LoadImageFromURL extends AsyncTask<String, Void, Image> {
 
     private final HashSet<ImageDownloadListener> listeners = new HashSet<>();
 
@@ -29,26 +29,27 @@ public class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
     }
 
     @Override
-    protected Bitmap doInBackground(String... urls) {
+    protected Image doInBackground(String... urls) {
         String url = urls[0];
-        Bitmap icon = null;
+        Image image = null;
         InputStream in;
         try {
             in = new URL(url).openStream();
-            icon = BitmapFactory.decodeStream(in);
+            Bitmap icon = BitmapFactory.decodeStream(in);
+            image = new Image(icon, url);
         } catch (IOException ignored) { }
-        return icon;
+        return image;
     }
 
     @Override
-    protected void onPostExecute(Bitmap icon) {
+    protected void onPostExecute(Image image) {
         Iterator<ImageDownloadListener> iterator = listeners.iterator();
         while (iterator.hasNext()) {
             @Nullable
             ImageDownloadListener listener = iterator.next();
             if (listener != null) {
-                if (icon != null) {
-                    listener.onSuccess(icon);
+                if (image != null) {
+                    listener.onSuccess(image);
                 } else {
                     listener.onError();
                 }
