@@ -17,10 +17,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nearit.ui_bindings.coupon.QRcodeGenerator;
+import com.nearit.customtabs.CustomTabsHelper;
 import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.coupon.views.CouponDetailTopSection;
+import com.nearit.ui_bindings.utils.qrcode.QRcodeGeneratorProvider;
 
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
@@ -71,7 +72,7 @@ public class NearItCouponDetailFragment extends Fragment implements CouponDetail
             params = getArguments().getParcelable(ARG_EXTRAS);
         }
 
-        new CouponDetailPresenterImpl(this, coupon, params, NearItImageDownloader.getInstance(), new QRcodeGenerator(250, 250));
+        new CouponDetailPresenterImpl(this, coupon, params, NearItImageDownloader.getInstance(), new QRcodeGeneratorProvider(250, 250));
     }
 
     @Override
