@@ -68,6 +68,7 @@
             android:focusable="true"
             android:textAppearance="@style/NearItUIContentTextAppearance"
             android:visibility="gone"
+            android:textIsSelectable="true"
             tools:visibility="visible"
             tools:text="Content\n\n\n\n\Example"
             android:paddingTop="@dimen/nearit_ui_content_margin2" />

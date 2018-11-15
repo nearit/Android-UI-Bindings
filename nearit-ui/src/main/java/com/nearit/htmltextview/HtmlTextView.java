@@ -21,7 +21,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RawRes;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.SpannedString;
+import android.text.style.URLSpan;
+import android.text.util.Linkify;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -96,14 +103,33 @@ public class HtmlTextView extends JellyBeanSpanFixTextView {
 
         html = htmlTagHandler.overrideTags(html);
 
+        final Spanned text;
         if (removeTrailingWhiteSpace) {
-            setText(removeHtmlBottomPadding(Html.fromHtml(html, imageGetter, htmlTagHandler)));
+            text = new SpannedString(removeHtmlBottomPadding(Html.fromHtml(html, imageGetter, htmlTagHandler)));
         } else {
-            setText(Html.fromHtml(html, imageGetter, htmlTagHandler));
+            text = Html.fromHtml(html, imageGetter, htmlTagHandler);
+        }
+        final SpannableString buffer = new SpannableString(text);
+
+        Linkify.addLinks(buffer, Linkify.WEB_URLS);
+
+        final URLSpan[] spans = text.getSpans(0, text.length(), URLSpan.class);
+
+        for(URLSpan us : spans) {
+            final int end = text.getSpanEnd(us); // Getting the spans position
+            final int start = text.getSpanStart(us);
+            buffer.setSpan(new URLSpan(us.getURL()) { // A new span with the same URL
+                @Override
+                public void onClick(View widget) {
+                    Log.e(TAG, getURL());
+                }
+            }, start, end, 0); //Overwriting the old span
         }
 
+        setText(buffer);
+
         // make links work
-        setMovementMethod(LocalLinkMovementMethod.getInstance());
+        setMovementMethod(NearItMovementMethod.getInstance());
     }
 
     /**
