@@ -97,6 +97,15 @@ public class CouponDetailPresenterImpl implements CouponDetailContract.Presenter
 
     }
 
+    @Override
+    public void handleLinkTap(@NonNull String link) {
+        if (params.isOpenLinksInWebView()) {
+            view.openLinkInWebView(link);
+        } else {
+            view.openLink(link);
+        }
+    }
+
     private void hideSpinnerAndSetDefault() {
         view.hideSpinner();
         view.showIcon();
