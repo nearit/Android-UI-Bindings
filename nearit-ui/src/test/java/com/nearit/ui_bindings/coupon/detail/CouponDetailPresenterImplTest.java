@@ -4,10 +4,11 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import com.nearit.ui_bindings.stubs.CouponStub;
-import com.nearit.ui_bindings.coupon.QRcodeGenerator;
+import com.nearit.ui_bindings.utils.qrcode.QRcodeGenerator;
 import com.nearit.ui_bindings.utils.images.Image;
 import com.nearit.ui_bindings.utils.images.ImageDownloadListener;
 import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
+import com.nearit.ui_bindings.utils.qrcode.QRcodeGeneratorProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,6 +52,9 @@ public class CouponDetailPresenterImplTest {
     @Mock
     private Bitmap bitmap;
     @Mock
+    private QRcodeGeneratorProvider qRcodeGeneratorProvider;
+
+    @Mock
     private QRcodeGenerator qRcodeGenerator;
 
     @Captor
@@ -64,12 +68,20 @@ public class CouponDetailPresenterImplTest {
     public void setUp() {
         coupon = Mockito.mock(CouponStub.class);
         when(image.getBitmap()).thenReturn(bitmap);
-        presenter = new CouponDetailPresenterImpl(view, coupon, params, imageDownloader, qRcodeGenerator);
+        when(qRcodeGeneratorProvider.getGenerator()).thenReturn(qRcodeGenerator);
+        presenter = new CouponDetailPresenterImpl(view, coupon, params, imageDownloader, qRcodeGeneratorProvider);
     }
 
     @Test
     public void onCreation_presenterIsInjected() {
         verify(view).injectPresenter(presenter);
+    }
+
+    @Test
+    public void onStart_requireAQrCodeGenerationTask() {
+        presenter.start();
+
+        verify(qRcodeGeneratorProvider).getGenerator();
     }
 
     @Test
@@ -319,7 +331,27 @@ public class CouponDetailPresenterImplTest {
         verify(view).showIcon(bitmap);
     }
 
+    @Test
+    public void onHandleLinkTap_ifOpenInWebView_openInWebView() {
+        String link = "linko";
+        when(params.isOpenLinksInWebView()).thenReturn(true);
 
+        presenter.handleLinkTap(link);
+
+        verify(view, never()).openLink(link);
+        verify(view).openLinkInWebView(link);
+    }
+
+    @Test
+    public void onHandleLinkTap_ifDONTOpenInWebView_openLinkTraditionally() {
+        String link = "linko";
+        when(params.isOpenLinksInWebView()).thenReturn(false);
+
+        presenter.handleLinkTap(link);
+
+        verify(view, never()).openLinkInWebView(link);
+        verify(view).openLink(link);
+    }
 
 
     private void whenImageDownloadSuccess() {

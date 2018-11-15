@@ -27,8 +27,13 @@ class CouponDetailContract {
         void showSpinner();
         void hideSpinner();
         void setDisabled();
+
+        void openLink(@NonNull String url);
+        void openLinkInWebView(@NonNull String url);
     }
 
-    interface Presenter extends BasePresenter { }
+    interface Presenter extends BasePresenter {
+        void handleLinkTap(@NonNull String link);
+    }
 
 }

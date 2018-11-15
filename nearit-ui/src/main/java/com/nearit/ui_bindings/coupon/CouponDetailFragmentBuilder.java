@@ -15,6 +15,7 @@ public class CouponDetailFragmentBuilder {
     private boolean mNoSeparator;
     private boolean mNoWakeLock;
     private final Coupon mCoupon;
+    public static boolean openLinksInWebView = false;
 
     public CouponDetailFragmentBuilder(Coupon coupon) {
         mCoupon = coupon;
@@ -52,6 +53,11 @@ public class CouponDetailFragmentBuilder {
         return this;
     }
 
+    public CouponDetailFragmentBuilder openLinksInWebView() {
+        openLinksInWebView = true;
+        return this;
+    }
+
     public NearItCouponDetailFragment build() {
         return NearItCouponDetailFragment.newInstance(mCoupon, getParams());
     }
@@ -61,7 +67,8 @@ public class CouponDetailFragmentBuilder {
                 mIconDrawable,
                 mSeparatorDrawable,
                 mNoSeparator,
-                mNoWakeLock
+                mNoWakeLock,
+                openLinksInWebView
         );
 
     }

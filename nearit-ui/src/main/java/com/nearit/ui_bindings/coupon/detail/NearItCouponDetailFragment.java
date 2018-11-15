@@ -1,10 +1,13 @@
 package com.nearit.ui_bindings.coupon.detail;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -17,11 +20,16 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nearit.ui_bindings.coupon.QRcodeGenerator;
+import com.nearit.customtabs.CustomTabsHelper;
+import com.nearit.customtabs.WebViewFallback;
+import com.nearit.htmltextview.HtmlTextView;
+import com.nearit.htmltextview.NearItMovementMethod;
 import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.coupon.views.CouponDetailTopSection;
+import com.nearit.ui_bindings.utils.qrcode.QRcodeGeneratorProvider;
 
+import it.near.sdk.logging.NearLog;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 import static android.view.View.GONE;
@@ -31,7 +39,9 @@ import static android.view.View.VISIBLE;
  * @author Federico Boschini
  */
 
-public class NearItCouponDetailFragment extends Fragment implements CouponDetailContract.View {
+public class NearItCouponDetailFragment extends Fragment implements CouponDetailContract.View, NearItMovementMethod.OnMovementLinkClickListener {
+
+    private static final String TAG = "NearItCouponFrag";
 
     private CouponDetailContract.Presenter presenter;
 
@@ -43,7 +53,9 @@ public class NearItCouponDetailFragment extends Fragment implements CouponDetail
     @Nullable
     private ImageView couponIcon, separator;
     @Nullable
-    private TextView couponName, couponValue, couponDescription;
+    private TextView couponName, couponValue;
+    @Nullable
+    private HtmlTextView couponDescription;
     @Nullable
     private CouponDetailTopSection topSection;
 
@@ -71,7 +83,7 @@ public class NearItCouponDetailFragment extends Fragment implements CouponDetail
             params = getArguments().getParcelable(ARG_EXTRAS);
         }
 
-        new CouponDetailPresenterImpl(this, coupon, params, NearItImageDownloader.getInstance(), new QRcodeGenerator(250, 250));
+        new CouponDetailPresenterImpl(this, coupon, params, NearItImageDownloader.getInstance(), new QRcodeGeneratorProvider(250, 250));
     }
 
     @Override
@@ -166,7 +178,8 @@ public class NearItCouponDetailFragment extends Fragment implements CouponDetail
     @Override
     public void showDescription(@NonNull String description) {
         if (couponDescription != null) {
-            couponDescription.setText(description);
+            couponDescription.setHtml(description);
+            couponDescription.setMovementMethod(new NearItMovementMethod(this, getContext()));
         }
     }
 
@@ -223,6 +236,40 @@ public class NearItCouponDetailFragment extends Fragment implements CouponDetail
             couponName.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_disabled_text_color));
             couponValue.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_disabled_text_color));
             couponDescription.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_disabled_text_color));
+        }
+    }
+
+    @Override
+    public void onLinkClicked(String linkText, NearItMovementMethod.LinkType linkType) {
+        presenter.handleLinkTap(linkText);
+    }
+
+    @Override
+    public void openLink(@NonNull String url) {
+        if (getContext() != null) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            if (intent.resolveActivity(getContext().getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                NearLog.e(TAG, String.format("Unable to open link: %s", url));
+            }
+        }
+    }
+
+    @Override
+    public void openLinkInWebView(@NonNull String url) {
+        if (getContext() != null) {
+            CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
+            intentBuilder.setToolbarColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_webview_toolbar_color));
+
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+
+            if (intent.resolveActivity(getContext().getPackageManager()) != null) {
+                CustomTabsHelper.openCustomTab(
+                        getContext(), intentBuilder.build(), Uri.parse(url), new WebViewFallback());
+            } else {
+                NearLog.e(TAG, String.format("Unable to open link: %s", url));
+            }
         }
     }
 
