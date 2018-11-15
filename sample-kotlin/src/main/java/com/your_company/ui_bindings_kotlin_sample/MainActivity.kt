@@ -12,8 +12,6 @@ import com.nearit.ui_bindings.NearITUIBindings
 
 class MainActivity : AppCompatActivity() {
 
-    private val TAG = "MainActivity"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -52,5 +50,11 @@ class MainActivity : AppCompatActivity() {
 
     fun openNotifications(view: View) {
         startActivity(Intent(this@MainActivity, NotificationsActivity::class.java))
+    }
+
+
+    companion object {
+        @Suppress("unused")
+        const val TAG = "MainActivity"
     }
 }
