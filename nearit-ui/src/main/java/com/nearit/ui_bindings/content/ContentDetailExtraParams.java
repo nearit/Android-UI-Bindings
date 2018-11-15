@@ -17,13 +17,13 @@ class ContentDetailExtraParams implements Parcelable {
     private final boolean openLinksInWebView;
 
     ContentDetailExtraParams(boolean openLinksInWebView) {
-        this.enableTapOutsideToClose = false;
         this.openLinksInWebView = openLinksInWebView;
+        this.enableTapOutsideToClose = false;
     }
 
-    ContentDetailExtraParams(boolean enableTapOutsideToClose, boolean openLinksInWebView) {
-        this.enableTapOutsideToClose = enableTapOutsideToClose;
+    ContentDetailExtraParams(boolean openLinksInWebView, boolean enableTapOutsideToClose) {
         this.openLinksInWebView = openLinksInWebView;
+        this.enableTapOutsideToClose = enableTapOutsideToClose;
     }
 
     /**
@@ -53,12 +53,12 @@ class ContentDetailExtraParams implements Parcelable {
     public static final Creator<ContentDetailExtraParams> CREATOR = new Creator<ContentDetailExtraParams>() {
         @Override
         public ContentDetailExtraParams createFromParcel(Parcel in) {
-            boolean enableTapToClose = in.readInt() != 0;
             boolean openLinksInWebView = in.readInt() != 0;
+            boolean enableTapToClose = in.readInt() != 0;
 
             return new ContentDetailExtraParams(
-                    enableTapToClose,
-                    openLinksInWebView
+                    openLinksInWebView,
+                    enableTapToClose
             );
         }
 
@@ -75,8 +75,8 @@ class ContentDetailExtraParams implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(enableTapOutsideToClose ? 1 : 0);
         dest.writeInt(openLinksInWebView ? 1 : 0);
+        dest.writeInt(enableTapOutsideToClose ? 1 : 0);
     }
 
     boolean isEnableTapOutsideToClose() {

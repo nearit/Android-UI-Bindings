@@ -50,8 +50,8 @@ public class ContentDetailIntentBuilder {
 
     private ContentDetailExtraParams getParams() {
         return new ContentDetailExtraParams(
-                mEnableTapOutsideToClose,
-                openLinksInWebView);
+                openLinksInWebView,
+                mEnableTapOutsideToClose);
     }
 
 }
