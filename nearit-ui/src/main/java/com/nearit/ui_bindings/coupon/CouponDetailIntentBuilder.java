@@ -23,6 +23,8 @@ public class CouponDetailIntentBuilder {
     private boolean mEnableTapOutsideToClose = false;
     private final Coupon mCoupon;
 
+    public static boolean openLinksInWebView = false;
+
     private final boolean mSingleInstance;
 
     public CouponDetailIntentBuilder(Context context, Coupon coupon, boolean singleInstance) {
@@ -73,6 +75,11 @@ public class CouponDetailIntentBuilder {
         return this;
     }
 
+    public CouponDetailIntentBuilder openLinksInWebView() {
+        openLinksInWebView = true;
+        return this;
+    }
+
     public Intent build() {
         if (mSingleInstance) return NearItCouponDetailActivitySingleInstance.createIntent(mContext, mCoupon, getParams());
         else return NearItCouponDetailActivity.createIntent(mContext, mCoupon, getParams());
@@ -84,6 +91,7 @@ public class CouponDetailIntentBuilder {
                 mSeparatorDrawable,
                 mNoSeparator,
                 mNoWakeLock,
+                openLinksInWebView,
                 mEnableTapOutsideToClose);
     }
 
