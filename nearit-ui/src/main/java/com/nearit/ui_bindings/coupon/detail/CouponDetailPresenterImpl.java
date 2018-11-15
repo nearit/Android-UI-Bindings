@@ -4,10 +4,11 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-import com.nearit.ui_bindings.coupon.QRcodeGenerator;
+import com.nearit.ui_bindings.utils.qrcode.QRcodeGenerator;
 import com.nearit.ui_bindings.utils.images.Image;
 import com.nearit.ui_bindings.utils.images.ImageDownloadListener;
 import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
+import com.nearit.ui_bindings.utils.qrcode.QRcodeGeneratorProvider;
 
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
@@ -20,30 +21,19 @@ public class CouponDetailPresenterImpl implements CouponDetailContract.Presenter
     private final Coupon coupon;
     private final CouponDetailExtraParams params;
     private final NearItImageDownloader imageDownloader;
-    private final QRcodeGenerator qRcodeGenerator;
+    private final QRcodeGeneratorProvider qRcodeGeneratorProvider;
 
-    CouponDetailPresenterImpl(CouponDetailContract.View view, Coupon coupon, CouponDetailExtraParams params, NearItImageDownloader imageDownloader, QRcodeGenerator qRcodeGenerator) {
+    CouponDetailPresenterImpl(CouponDetailContract.View view, Coupon coupon, CouponDetailExtraParams params, NearItImageDownloader imageDownloader, QRcodeGeneratorProvider qRcodeGeneratorProvider) {
         this.view = view;
         this.coupon = coupon;
         this.params = params;
         this.imageDownloader = imageDownloader;
-        this.qRcodeGenerator = qRcodeGenerator;
+        this.qRcodeGeneratorProvider = qRcodeGeneratorProvider;
         init();
     }
 
     private void init() {
         view.injectPresenter(this);
-        qRcodeGenerator.setListener(new QRcodeGenerator.GeneratorListener() {
-            @Override
-            public void onComplete(Bitmap qrCode) {
-                view.showQrCode(qrCode);
-            }
-
-            @Override
-            public void onError() {
-                view.showQrCodeError();
-            }
-        });
     }
 
     @Override
@@ -61,7 +51,19 @@ public class CouponDetailPresenterImpl implements CouponDetailContract.Presenter
             view.setSeparator(params.getSeparatorDrawable());
         }
 
-        qRcodeGenerator.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, coupon.getSerial());
+        QRcodeGenerator generator = qRcodeGeneratorProvider.getGenerator();
+        generator.setListener(new QRcodeGenerator.GeneratorListener() {
+            @Override
+            public void onComplete(Bitmap qrCode) {
+                view.showQrCode(qrCode);
+            }
+
+            @Override
+            public void onError() {
+                view.showQrCodeError();
+            }
+        });
+        generator.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, coupon.getSerial());
 
         if (coupon.getTitle() != null) view.showTitle(coupon.getTitle());
 
