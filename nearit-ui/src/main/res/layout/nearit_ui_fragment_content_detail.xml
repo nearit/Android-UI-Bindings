@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_scrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,13 +19,14 @@
         <LinearLayout
             android:id="@+id/content_image_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:minHeight="@dimen/nearit_ui_content_image_min_height"
             android:orientation="vertical"
             android:paddingTop="@dimen/nearit_ui_content_image_top_padding"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <ImageView
                 android:id="@+id/content_image"
@@ -38,7 +40,8 @@
                 android:id="@+id/content_image_progress_bar"
                 android:layout_width="@dimen/nearit_ui_content_image_progress_bar_dimen"
                 android:layout_height="@dimen/nearit_ui_content_image_progress_bar_dimen"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                tools:visibility="gone"/>
 
         </LinearLayout>
 
@@ -51,7 +54,9 @@
             android:gravity="center_horizontal"
             android:paddingTop="@dimen/nearit_ui_content_margin1"
             android:textAppearance="@style/NearItUIContentTitleTextAppearance"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="Title"/>
 
 
         <com.nearit.htmltextview.HtmlTextView
@@ -63,6 +68,9 @@
             android:focusable="true"
             android:textAppearance="@style/NearItUIContentTextAppearance"
             android:visibility="gone"
+            android:textIsSelectable="true"
+            tools:visibility="visible"
+            tools:text="Content\n\n\n\n\Example"
             android:paddingTop="@dimen/nearit_ui_content_margin2" />
 
 
@@ -71,7 +79,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nearit_ui_content_margin3"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible" />
 
     </LinearLayout>
 </ScrollView>

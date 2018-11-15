@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings.coupon;
+package com.nearit.ui_bindings.coupon.detail;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,27 +11,30 @@ import com.nearit.ui_bindings.ExtraConstants;
  * @author Federico Boschini
  */
 
-class CouponDetailExtraParams implements Parcelable {
+public class CouponDetailExtraParams implements Parcelable {
 
     private final int iconDrawable;
     private final int separatorDrawable;
     private final boolean noSeparator;
     private final boolean noWakeLock;
+    private final boolean openLinksInWebView;
     private final boolean enableTapOutsideToClose;
 
-    CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean noWakeLock, boolean enableTapOutsideToClose) {
+    public CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean noWakeLock, boolean openLinksInWebView, boolean enableTapOutsideToClose) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
         this.noSeparator = noSeparator;
         this.noWakeLock = noWakeLock;
+        this.openLinksInWebView = openLinksInWebView;
         this.enableTapOutsideToClose = enableTapOutsideToClose;
     }
 
-    CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean noWakeLock) {
+    public CouponDetailExtraParams(int iconDrawable, int separatorDrawable, boolean noSeparator, boolean noWakeLock, boolean openLinksInWebView) {
         this.iconDrawable = iconDrawable;
         this.separatorDrawable = separatorDrawable;
         this.noSeparator = noSeparator;
         this.noWakeLock = noWakeLock;
+        this.openLinksInWebView = openLinksInWebView;
         this.enableTapOutsideToClose = false;
     }
 
@@ -64,14 +67,16 @@ class CouponDetailExtraParams implements Parcelable {
         public CouponDetailExtraParams createFromParcel(Parcel in) {
             int iconDrawable = in.readInt();
             int separatorDrawable = in.readInt();
-            boolean noSeparator = in.readInt() !=0;
-            boolean noWakeLock = in.readInt() !=0;
-            boolean enableTapToClose = in.readInt() !=0;
+            boolean noSeparator = in.readInt() != 0;
+            boolean noWakeLock = in.readInt() != 0;
+            boolean openLinksInWebView = in.readInt() != 0;
+            boolean enableTapToClose = in.readInt() != 0;
             return new CouponDetailExtraParams(
                     iconDrawable,
                     separatorDrawable,
                     noSeparator,
                     noWakeLock,
+                    openLinksInWebView,
                     enableTapToClose
             );
         }
@@ -93,6 +98,7 @@ class CouponDetailExtraParams implements Parcelable {
         dest.writeInt(separatorDrawable);
         dest.writeInt(noSeparator ? 1 : 0);
         dest.writeInt(noWakeLock ? 1 : 0);
+        dest.writeInt(openLinksInWebView ? 1 : 0);
         dest.writeInt(enableTapOutsideToClose ? 1 : 0);
     }
 
@@ -114,5 +120,9 @@ class CouponDetailExtraParams implements Parcelable {
 
     boolean isNoWakeLock() {
         return noWakeLock;
+    }
+
+    public boolean isOpenLinksInWebView() {
+        return openLinksInWebView;
     }
 }

@@ -15,7 +15,7 @@ import static com.nearit.ui_bindings.utils.CollectionsUtils.filter;
 /**
  * @author Federico Boschini
  */
-class CouponUtils {
+public class CouponUtils {
 
     static void sortByClaimedAtDate(List<Coupon> list) {
         Collections.sort(list, new Comparator<Coupon>() {
@@ -30,7 +30,7 @@ class CouponUtils {
         });
     }
 
-    static void excludeRedeemed(List<Coupon> couponList) {
+    public static void excludeRedeemed(List<Coupon> couponList) {
         Iterator<Coupon> iterator = couponList.iterator();
         while (iterator.hasNext()) {
             Coupon c = iterator.next();
@@ -40,7 +40,7 @@ class CouponUtils {
         }
     }
 
-    static List<Coupon> getValid(List<Coupon> couponList) {
+    public static List<Coupon> getValid(List<Coupon> couponList) {
         List<Coupon> valid = filter(couponList, new CollectionsUtils.Predicate<Coupon>() {
             @Override
             public boolean apply(Coupon item) {
@@ -53,7 +53,7 @@ class CouponUtils {
         return valid;
     }
 
-    static List<Coupon> getExpired(List<Coupon> couponList) {
+    public static List<Coupon> getExpired(List<Coupon> couponList) {
         List<Coupon> expired = filter(couponList, new CollectionsUtils.Predicate<Coupon>() {
             @Override
             public boolean apply(Coupon item) {
@@ -64,7 +64,7 @@ class CouponUtils {
         return expired;
     }
 
-    static List<Coupon> getInactive(List<Coupon> couponList) {
+    public static List<Coupon> getInactive(List<Coupon> couponList) {
         List<Coupon> inactive = filter(couponList, new CollectionsUtils.Predicate<Coupon>() {
             @Override
             public boolean apply(Coupon item) {
@@ -75,7 +75,7 @@ class CouponUtils {
         return inactive;
     }
 
-    static List<Coupon> getRedeemed(List<Coupon> couponList) {
+    public static List<Coupon> getRedeemed(List<Coupon> couponList) {
         List<Coupon> redeemed = filter(couponList, new CollectionsUtils.Predicate<Coupon>() {
             @Override
             public boolean apply(Coupon item) {

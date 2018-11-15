@@ -21,6 +21,7 @@ import it.near.sdk.trackings.TrackingInfo;
  */
 public class BaseContentDetailActivity extends AppCompatActivity {
 
+    @SuppressWarnings("unused")
     private final static String TAG = "NearItContentDetailActiv";
 
     private ContentDetailExtraParams extras;

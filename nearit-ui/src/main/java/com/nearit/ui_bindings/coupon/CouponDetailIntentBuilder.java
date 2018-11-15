@@ -3,6 +3,10 @@ package com.nearit.ui_bindings.coupon;
 import android.content.Context;
 import android.content.Intent;
 
+import com.nearit.ui_bindings.coupon.detail.CouponDetailExtraParams;
+import com.nearit.ui_bindings.coupon.detail.NearItCouponDetailActivity;
+import com.nearit.ui_bindings.coupon.detail.NearItCouponDetailActivitySingleInstance;
+
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 /**
@@ -18,6 +22,8 @@ public class CouponDetailIntentBuilder {
     private boolean mNoWakeLock = false;
     private boolean mEnableTapOutsideToClose = false;
     private final Coupon mCoupon;
+
+    public static boolean openLinksInWebView = false;
 
     private final boolean mSingleInstance;
 
@@ -69,6 +75,11 @@ public class CouponDetailIntentBuilder {
         return this;
     }
 
+    public CouponDetailIntentBuilder openLinksInWebView() {
+        openLinksInWebView = true;
+        return this;
+    }
+
     public Intent build() {
         if (mSingleInstance) return NearItCouponDetailActivitySingleInstance.createIntent(mContext, mCoupon, getParams());
         else return NearItCouponDetailActivity.createIntent(mContext, mCoupon, getParams());
@@ -80,6 +91,7 @@ public class CouponDetailIntentBuilder {
                 mSeparatorDrawable,
                 mNoSeparator,
                 mNoWakeLock,
+                openLinksInWebView,
                 mEnableTapOutsideToClose);
     }
 

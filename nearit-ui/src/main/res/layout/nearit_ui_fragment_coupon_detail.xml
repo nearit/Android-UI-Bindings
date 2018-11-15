@@ -72,13 +72,16 @@
                 android:gravity="center_horizontal"
                 android:textAppearance="@style/NearItUICouponDetailValueTextAppearance" />
 
-            <TextView
+            <com.nearit.htmltextview.HtmlTextView
                 android:id="@+id/coupon_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:linksClickable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:textIsSelectable="true"
                 android:layout_marginTop="@dimen/nearit_ui_coupon_detail_margin4"
                 android:gravity="center_horizontal"
-                android:autoLink="web"
                 android:textAppearance="@style/NearItUICouponDetailDescriptionTextAppearance" />
 
         </LinearLayout>

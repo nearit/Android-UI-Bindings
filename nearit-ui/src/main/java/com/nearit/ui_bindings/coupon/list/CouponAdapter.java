@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings.coupon;
+package com.nearit.ui_bindings.coupon.list;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

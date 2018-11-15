@@ -16,6 +16,7 @@
     <!--  DIMENSIONS  -->
     <dimen name="nearit_ui_coupon_list_empty_list_text_size">18sp</dimen>
     <dimen name="nearit_ui_coupon_list_padding_left_right">10dp</dimen>
+    <dimen name="nearit_ui_coupon_list_padding_bottom">10dp</dimen>
     <dimen name="nearit_ui_coupon_list_coupon_height">150dp</dimen>
     <dimen name="nearit_ui_coupon_list_coupon_padding_left_right">27dp</dimen>
     <dimen name="nearit_ui_coupon_list_coupon_padding_bottom">17dp</dimen>

@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings.coupon;
+package com.nearit.ui_bindings.coupon.list;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -9,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.nearit.ui_bindings.utils.images.Image;
+import com.nearit.ui_bindings.utils.images.ImageDownloadListener;
+import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
 import com.nearit.ui_bindings.R;
-import com.nearit.ui_bindings.utils.LoadImageFromURL;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -70,7 +72,35 @@ class CouponViewHolder extends RecyclerView.ViewHolder {
                 }
             }
             if (coupon.getIconSet() != null) {
-                new LoadImageFromURL(couponIcon, iconProgressBar).execute(coupon.getIconSet().getFullSize());
+                if (couponIcon != null) {
+                    couponIcon.setVisibility(View.GONE);
+                }
+                if (iconProgressBar != null) {
+                    iconProgressBar.setVisibility(View.VISIBLE);
+                }
+
+                NearItImageDownloader.getInstance().downloadImage(coupon.getIconSet().getFullSize(), new ImageDownloadListener() {
+                    @Override
+                    public void onSuccess(@Nullable Image image) {
+                        if (couponIcon != null) {
+                            couponIcon.setVisibility(View.VISIBLE);
+                            if (image != null && (image.getUrl().equals(coupon.getIconSet().getFullSize()))) {
+                                couponIcon.setScaleType(ImageView.ScaleType.FIT_XY);
+                                couponIcon.setAdjustViewBounds(true);
+                                couponIcon.setMinimumHeight(0);
+                                couponIcon.setImageBitmap(image.getBitmap());
+                            }
+                        }
+                        if (iconProgressBar != null) {
+                            iconProgressBar.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onError() {
+                        hideSpinnerAndSetDefault();
+                    }
+                });
             }
         }
         if (couponTitle != null) {
@@ -86,6 +116,15 @@ class CouponViewHolder extends RecyclerView.ViewHolder {
                 couponListener.onCouponClicked(coupon);
             }
         });
+    }
+
+    private void hideSpinnerAndSetDefault() {
+        if (couponIcon != null) {
+            couponIcon.setVisibility(View.VISIBLE);
+        }
+        if (iconProgressBar != null) {
+            iconProgressBar.setVisibility(View.GONE);
+        }
     }
 
     private void setValidity(@Nullable Date redeemableFrom, @Nullable Date expiresAt, @Nullable Date redeemedAt) {
@@ -131,7 +170,7 @@ class CouponViewHolder extends RecyclerView.ViewHolder {
         if (couponValidity != null) {
             String formattedRedeem;
             formattedRedeem = formatDate.format(redeemableFromDate);
-            couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_list_inactive_text).concat(" "+formattedRedeem));
+            couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_list_inactive_text).concat(" " + formattedRedeem));
             couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_inactive_text_color));
         }
     }

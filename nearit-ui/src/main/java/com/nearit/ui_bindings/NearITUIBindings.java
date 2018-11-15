@@ -212,6 +212,8 @@ public class NearITUIBindings {
         NearItUIIntentManager.openLinksInWebView = true;
         ContentDetailIntentBuilder.openLinksInWebView = true;
         ContentDetailFragmentBuilder.openLinksInWebView = true;
+        CouponDetailIntentBuilder.openLinksInWebView = true;
+        CouponDetailFragmentBuilder.openLinksInWebView = true;
     }
 
 

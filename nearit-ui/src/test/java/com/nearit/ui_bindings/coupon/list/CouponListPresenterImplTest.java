@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings.coupon;
+package com.nearit.ui_bindings.coupon.list;
 
 import com.google.common.collect.Lists;
 
@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
+import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -26,6 +27,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -251,6 +253,31 @@ public class CouponListPresenterImplTest {
         verify(view).showCouponList(Collections.<Coupon>emptyList());
         verify(view).showEmptyLayout();
         verify(view).showRefreshError(getCouponsError);
+    }
+
+
+    @Test
+    public void onRefresh_ifSuccess_showAndHideSpinner() {
+        mockGetCoupons(buildCouponList());
+
+        presenter.requestRefresh();
+
+        InOrder inOrderVerifier = inOrder(view);
+
+        inOrderVerifier.verify(view).showRefreshing();
+        inOrderVerifier.verify(view).hideRefreshing();
+    }
+
+    @Test
+    public void onRefresh_ifError_showAndHideSpinner() {
+        mockGetCouponsError();
+
+        presenter.requestRefresh();
+
+        InOrder inOrderVerifier = inOrder(view);
+
+        inOrderVerifier.verify(view).showRefreshing();
+        inOrderVerifier.verify(view).hideRefreshing();
     }
 
 

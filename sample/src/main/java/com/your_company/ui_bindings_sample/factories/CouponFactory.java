@@ -17,7 +17,7 @@ public class CouponFactory {
         Claim claim = new Claim();
         claim.serial_number = "0123456789";
         coupon.name = "Long name for a coupon";
-        coupon.description = "Long coupon description, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali.";
+        coupon.description = "<a href=\"https://google.com\">LINK!</a>Long coupon description, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. https://nearit.com";
         coupon.value = "Value qwertyuioplkjhgfdsazxcvbnmpoiuytrewqasdfghj!";
         coupon.claims = new ArrayList<>();
         coupon.claims.add(claim);
