@@ -1,4 +1,4 @@
-package com.nearit.ui_bindings.coupon;
+package com.nearit.ui_bindings.utils.qrcode;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
