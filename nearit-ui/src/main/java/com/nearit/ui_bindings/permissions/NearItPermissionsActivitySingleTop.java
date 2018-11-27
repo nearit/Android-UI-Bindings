@@ -2,15 +2,17 @@ package com.nearit.ui_bindings.permissions;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+
+import com.nearit.ui_bindings.inbox.NearITNotificationHistoryActivitySingleInstance;
 
 /**
  * @author Federico Boschini
  */
-public class NearItPermissionsActivity extends AppCompatActivity {
+public class NearItPermissionsActivitySingleTop extends BasePermissionsActivity {
 
     public static Intent createIntent(Context context, PermissionsRequestExtraParams params) {
-        Intent intent = new Intent(context, NearItPermissionsActivity.class);
+        Intent intent = new Intent(context, NearITNotificationHistoryActivitySingleInstance.class);
         return BasePermissionsActivity.addExtras(intent, params);
     }
+
 }

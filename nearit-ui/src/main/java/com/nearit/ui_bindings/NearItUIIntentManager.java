@@ -29,29 +29,34 @@ class NearItUIIntentManager implements ContentsListener {
 
     private final Context context;
     private boolean intentManaged = false;
+    private NearItLaunchMode launchMode = NearItLaunchMode.STANDARD;
 
     NearItUIIntentManager(Context context) {
         this.context = context;
     }
 
-    boolean manageIntent(@Nullable Intent intent) {
+    boolean manageIntent(@Nullable Intent intent, NearItLaunchMode launchMode) {
+        this.launchMode = launchMode;
+        intentManaged = false;
         if (intent != null && intent.getExtras() != null && NearUtils.carriesNearItContent(intent)) {
             NearUtils.parseContents(intent, this);
         }
         return intentManaged;
     }
 
-    boolean manageContent(@Nullable ReactionBundle reaction, TrackingInfo trackingInfo) {
+    boolean manageContent(@Nullable ReactionBundle reaction, TrackingInfo trackingInfo, NearItLaunchMode launchMode) {
+        this.launchMode = launchMode;
+        intentManaged = false;
         if (reaction != null) {
             NearUtils.parseContents(reaction, trackingInfo, this);
         }
-        return false;
+        return intentManaged;
     }
 
     @Override
     public void gotContentNotification(Content content, TrackingInfo trackingInfo) {
         Log.d(TAG, "content notification received");
-        ContentDetailIntentBuilder builder = NearITUIBindings.getInstance(context).contentIntentBuilder(content, trackingInfo, true);
+        ContentDetailIntentBuilder builder = NearITUIBindings.getInstance(context).contentIntentBuilder(content, trackingInfo, launchMode);
         if (openLinksInWebView) builder.openLinksInWebView();
         context.startActivity(builder.build());
         intentManaged = true;
@@ -61,7 +66,7 @@ class NearItUIIntentManager implements ContentsListener {
     public void gotCouponNotification(Coupon coupon, TrackingInfo trackingInfo) {
         Log.d(TAG, "coupon notification received");
         context.startActivity(NearITUIBindings.getInstance(context)
-                .couponIntentBuilder(coupon, true).build());
+                .couponIntentBuilder(coupon, launchMode).build());
         intentManaged = true;
     }
 
@@ -69,7 +74,7 @@ class NearItUIIntentManager implements ContentsListener {
     public void gotFeedbackNotification(Feedback feedback, TrackingInfo trackingInfo) {
         Log.d(TAG, "feedback notification received");
         context.startActivity(NearITUIBindings.getInstance(context)
-                .feedbackIntentBuilder(feedback, true).build());
+                .feedbackIntentBuilder(feedback, launchMode).build());
         intentManaged = true;
     }
 
@@ -77,11 +82,13 @@ class NearItUIIntentManager implements ContentsListener {
     public void gotCustomJSONNotification(CustomJSON customJSON, TrackingInfo trackingInfo) {
         //  Not yet implemented
         Log.d(TAG, "customJson notification received");
+        intentManaged = false;
     }
 
     @Override
     public void gotSimpleNotification(SimpleNotification simpleNotification, TrackingInfo trackingInfo) {
         //  Not yet implemented
         Log.d(TAG, "simple notification received");
+        intentManaged = true;
     }
 }

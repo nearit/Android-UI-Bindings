@@ -9,6 +9,7 @@ import android.view.View;
 import com.nearit.ui_bindings.NearITUIBindings;
 
 import it.near.sdk.NearItManager;
+import it.near.sdk.utils.NearUtils;
 
 
 /**
@@ -59,10 +60,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-        boolean handled = NearITUIBindings.onNewIntent(this, intent);
-
-        if (!handled) {
+        if (NearUtils.carriesNearItContent(intent)) {
+            boolean handled = NearITUIBindings.onNewIntent(this, intent);
+            if (!handled) {
+                // it was a customJson
+            }
+        } else {
             //  intent was not carrying an in-app content
         }
+
     }
 }
