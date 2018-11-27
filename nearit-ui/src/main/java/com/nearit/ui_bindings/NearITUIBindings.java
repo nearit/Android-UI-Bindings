@@ -25,8 +25,6 @@ import it.near.sdk.trackings.TrackingInfo;
 
 public class NearITUIBindings {
 
-    private final static boolean SINGLE_INSTANCE_DEFAULT = false;
-
     private final Context mContext;
 
     private NearITUIBindings(Context context) {
@@ -45,8 +43,18 @@ public class NearITUIBindings {
     }
 
     public PermissionsRequestIntentBuilder permissionsIntentBuilder() {
-        return new PermissionsRequestIntentBuilder(mContext);
+        return this.permissionsIntentBuilder(NearItLaunchMode.STANDARD);
     }
+
+    public PermissionsRequestIntentBuilder permissionsIntentBuilder(NearItLaunchMode launchMode) {
+        return new PermissionsRequestIntentBuilder(mContext, launchMode);
+    }
+
+    public PermissionsRequestIntentBuilder permissionsIntentBuilder(NearItLaunchMode launchMode, int flags) {
+        return new PermissionsRequestIntentBuilder(mContext, launchMode, flags);
+    }
+
+
 
 
 
@@ -57,16 +65,48 @@ public class NearITUIBindings {
      */
     @Deprecated
     public CouponDetailIntentBuilder createCouponDetailIntentBuilder(Coupon coupon) {
-        return this.couponIntentBuilder(coupon);
+        return this.couponIntentBuilder(coupon, NearItLaunchMode.STANDARD);
     }
 
-    public CouponDetailIntentBuilder couponIntentBuilder(Coupon coupon) {
-        return this.couponIntentBuilder(coupon, SINGLE_INSTANCE_DEFAULT);
-    }
-
+    /**
+     * @deprecated use {@link #couponIntentBuilder(Coupon, NearItLaunchMode)}
+     *             with {@link NearItLaunchMode#SINGLE_INSTANCE} instead
+     */
+    @Deprecated
     public CouponDetailIntentBuilder couponIntentBuilder(Coupon coupon, boolean singleInstance) {
-        return new CouponDetailIntentBuilder(mContext, coupon, singleInstance);
+        return this.couponIntentBuilder(coupon, singleInstance ? NearItLaunchMode.SINGLE_INSTANCE : NearItLaunchMode.STANDARD);
     }
+
+    /**
+     * Entry point to get an intent to show a Coupon
+     * @param coupon: a NearIT {@link Coupon}
+     * @return the builder
+     */
+    public CouponDetailIntentBuilder couponIntentBuilder(Coupon coupon) {
+        return this.couponIntentBuilder(coupon, NearItLaunchMode.STANDARD);
+    }
+
+    /**
+     * Entry point to get an intent to show a Coupon, choosing the preferred launchMode
+     * @param coupon: a NearIT {@link Coupon}
+     * @param launchMode: the launchMode for the activity
+     * @return the builder
+     */
+    public CouponDetailIntentBuilder couponIntentBuilder(Coupon coupon, NearItLaunchMode launchMode) {
+        return new CouponDetailIntentBuilder(mContext, coupon, launchMode);
+    }
+
+    /**
+     * Entry point to get an intent to show a Coupon, choosing the preferred launchMode
+     * @param coupon: a NearIT {@link Coupon}
+     * @param launchMode: the launchMode for the activity
+     * @param flags: bitwise {@link Intent} flags
+     * @return the builder
+     */
+    public CouponDetailIntentBuilder couponIntentBuilder(Coupon coupon, NearItLaunchMode launchMode, int flags) {
+        return new CouponDetailIntentBuilder(mContext, coupon, launchMode, flags);
+    }
+
 
     /**
      * @deprecated use {@link #couponFragmentBuilder(Coupon)} instead
@@ -76,6 +116,11 @@ public class NearITUIBindings {
         return this.couponFragmentBuilder(coupon);
     }
 
+    /**
+     * Entry point to get a (Support) Fragment to show a Coupon
+     * @param coupon: a NearIT {@link Coupon}
+     * @return the builder
+     */
     public CouponDetailFragmentBuilder couponFragmentBuilder(Coupon coupon) {
         return new CouponDetailFragmentBuilder(coupon);
     }
@@ -88,8 +133,31 @@ public class NearITUIBindings {
         return this.couponListIntentBuilder();
     }
 
+    /**
+     * Entry point to get an intent to show the list of Coupons
+     * @return the builder
+     */
     public CouponListIntentBuilder couponListIntentBuilder() {
-        return new CouponListIntentBuilder(mContext);
+        return this.couponListIntentBuilder(NearItLaunchMode.STANDARD);
+    }
+
+    /**
+     * Entry point to get an intent to show the list of Coupons, choosing the preferred launchMode
+     * @param launchMode: the launchMode for the activity
+     * @return the builder
+     */
+    public CouponListIntentBuilder couponListIntentBuilder(NearItLaunchMode launchMode) {
+        return new CouponListIntentBuilder(mContext, launchMode);
+    }
+
+    /**
+     * Entry point to get an intent to show the list of Coupons, choosing the preferred launchMode and flags for the Intent
+     * @param launchMode: the launchMode for the activity
+     * @param flags: bitwise {@link Intent} flags
+     * @return the builder
+     */
+    public CouponListIntentBuilder couponListIntentBuilder(NearItLaunchMode launchMode, int flags) {
+        return new CouponListIntentBuilder(mContext, launchMode, flags);
     }
 
     /**
@@ -100,6 +168,10 @@ public class NearITUIBindings {
         return this.couponListFragmentBuilder();
     }
 
+    /**
+     * Entry point to get a (Support) Fragment to show the list of Coupons
+     * @return the builder
+     */
     public CouponListFragmentBuilder couponListFragmentBuilder() {
         return new CouponListFragmentBuilder();
     }
@@ -115,13 +187,45 @@ public class NearITUIBindings {
         return this.feedbackIntentBuilder(feedback);
     }
 
-    public FeedbackIntentBuilder feedbackIntentBuilder(Feedback feedback) {
-        return this.feedbackIntentBuilder(feedback, SINGLE_INSTANCE_DEFAULT);
+    /**
+     *  @deprecated use {@link #feedbackIntentBuilder(Feedback, NearItLaunchMode)}
+     *              with {@link NearItLaunchMode#SINGLE_INSTANCE} instead
+     */
+    @Deprecated
+    public FeedbackIntentBuilder feedbackIntentBuilder(Feedback feedback, boolean singleInstance) {
+        return this.feedbackIntentBuilder(feedback, singleInstance ? NearItLaunchMode.SINGLE_INSTANCE : NearItLaunchMode.STANDARD);
     }
 
-    public FeedbackIntentBuilder feedbackIntentBuilder(Feedback feedback, boolean singleInstance) {
-        return new FeedbackIntentBuilder(mContext, feedback, singleInstance);
+    /**
+     * Entry point to get an intent to show a Feedback
+     * @param feedback: a NearIT {@link Feedback}
+     * @return the builder
+     */
+    public FeedbackIntentBuilder feedbackIntentBuilder(Feedback feedback) {
+        return this.feedbackIntentBuilder(feedback, NearItLaunchMode.STANDARD);
     }
+
+    /**
+     * Entry point to get an intent to show a Feedback, choosing the preferred launchMode
+     * @param feedback: a NearIT {@link Feedback}
+     * @param launchMode: the launchMode for the activity
+     * @return the builder
+     */
+    public FeedbackIntentBuilder feedbackIntentBuilder(Feedback feedback, NearItLaunchMode launchMode) {
+        return new FeedbackIntentBuilder(mContext, feedback, launchMode);
+    }
+
+    /**
+     * Entry point to get an intent to show a Feedback, choosing the preferred launchMode and flags for the Intent
+     * @param feedback: a NearIT {@link Feedback}
+     * @param launchMode: the launchMode for the activity
+     * @param flags: bitwise {@link Intent} flags
+     * @return the builder
+     */
+    public FeedbackIntentBuilder feedbackIntentBuilder(Feedback feedback, NearItLaunchMode launchMode, int flags) {
+        return new FeedbackIntentBuilder(mContext, feedback, launchMode, flags);
+    }
+
 
     /**
      * @deprecated use {@link #feedbackFragmentBuilder(Feedback)} instead
@@ -131,6 +235,11 @@ public class NearITUIBindings {
         return this.feedbackFragmentBuilder(feedback);
     }
 
+    /**
+     * Entry point to get a (Support) Fragment to show a Feedback
+     * @param feedback: a NearIT {@link Feedback}
+     * @return the builder
+     */
     public FeedbackFragmentBuilder feedbackFragmentBuilder(Feedback feedback) {
         return new FeedbackFragmentBuilder(feedback);
     }
@@ -152,16 +261,48 @@ public class NearITUIBindings {
      */
     @Deprecated
     public ContentDetailIntentBuilder createContentDetailIntentBuilder(Content content, @Nullable TrackingInfo trackingInfo) {
-        return this.contentIntentBuilder(content, trackingInfo, SINGLE_INSTANCE_DEFAULT);
+        return this.contentIntentBuilder(content, trackingInfo, NearItLaunchMode.STANDARD);
     }
 
-    public ContentDetailIntentBuilder contentIntentBuilder(Content content, @Nullable TrackingInfo trackingInfo) {
-        return this.contentIntentBuilder(content, trackingInfo, SINGLE_INSTANCE_DEFAULT);
-    }
-
+    /**
+     *  @deprecated use {@link #contentIntentBuilder(Content, TrackingInfo, NearItLaunchMode)}
+     *              with {@link NearItLaunchMode#SINGLE_INSTANCE} instead
+     */
+    @Deprecated
     public ContentDetailIntentBuilder contentIntentBuilder(Content content, @Nullable TrackingInfo trackingInfo, boolean singleInstance) {
-        return new ContentDetailIntentBuilder(mContext, content, trackingInfo, singleInstance);
+        return this.contentIntentBuilder(content, trackingInfo, singleInstance ? NearItLaunchMode.SINGLE_INSTANCE : NearItLaunchMode.STANDARD);
     }
+
+    /**
+     * Entry point to get an intent to show a Content
+     * @param content: a NearIT {@link Content}
+     * @return the builder
+     */
+    public ContentDetailIntentBuilder contentIntentBuilder(Content content, @Nullable TrackingInfo trackingInfo) {
+        return this.contentIntentBuilder(content, trackingInfo, NearItLaunchMode.STANDARD);
+    }
+
+    /**
+     * Entry point to get an intent to show a Content, choosing the preferred launchMode
+     * @param content: a NearIT {@link Content}
+     * @param launchMode: the launchMode for the activity
+     * @return the builder
+     */
+    public ContentDetailIntentBuilder contentIntentBuilder(Content content, @Nullable TrackingInfo trackingInfo, NearItLaunchMode launchMode) {
+        return new ContentDetailIntentBuilder(mContext, content, trackingInfo, launchMode);
+    }
+
+    /**
+     * Entry point to get an intent to show a Content, choosing the preferred launchMode and flags for the Intent
+     * @param content: a NearIT {@link Content}
+     * @param launchMode: the launchMode for the activity
+     * @param flags: bitwise {@link Intent} flags
+     * @return the builder
+     */
+    public ContentDetailIntentBuilder contentIntentBuilder(Content content, @Nullable TrackingInfo trackingInfo, NearItLaunchMode launchMode, int flags) {
+        return new ContentDetailIntentBuilder(mContext, content, trackingInfo, launchMode, flags);
+    }
+
 
     /**
      * @deprecated use {@link #contentFragmentBuilder(Content, TrackingInfo)} instead, to get extra trackings
@@ -179,6 +320,11 @@ public class NearITUIBindings {
         return this.contentFragmentBuilder(content, trackingInfo);
     }
 
+    /**
+     * Entry point to get a (Support) Fragment to show a Content
+     * @param content: a NearIT {@link Content}
+     * @return the builder
+     */
     public ContentDetailFragmentBuilder contentFragmentBuilder(Content content, @Nullable TrackingInfo trackingInfo) {
         return new ContentDetailFragmentBuilder(content, trackingInfo);
     }
@@ -186,10 +332,38 @@ public class NearITUIBindings {
 
     /*      Notification History       */
 
+    /**
+     * Entry point to get an intent to show the Notification History, choosing the preferred launchMode and flags for the Intent
+     * @return the builder
+     */
     public NotificationHistoryIntentBuilder notificationHistoryIntentBuilder() {
-        return new NotificationHistoryIntentBuilder(mContext);
+        return this.notificationHistoryIntentBuilder(NearItLaunchMode.STANDARD);
     }
 
+    /**
+     * Entry point to get an intent to show the Notification History, choosing the preferred launchMode
+     * @param launchMode: the launchMode for the activity
+     * @return the builder
+     */
+    public NotificationHistoryIntentBuilder notificationHistoryIntentBuilder(NearItLaunchMode launchMode) {
+        return new NotificationHistoryIntentBuilder(mContext, launchMode);
+    }
+
+    /**
+     * Entry point to get an intent to show the Notification History, choosing the preferred launchMode and flags for the Intent
+     * @param launchMode: the launchMode for the activity
+     * @param flags: bitwise {@link Intent} flags
+     * @return the builder
+     */
+    public NotificationHistoryIntentBuilder notificationHistoryIntentBuilder(NearItLaunchMode launchMode, int flags) {
+        return new NotificationHistoryIntentBuilder(mContext, launchMode, flags);
+    }
+
+
+    /**
+     * Entry point to get a (Support) Fragment to show the Notification History
+     * @return the builder
+     */
     public NotificationHistoryFragmentBuilder notificationHistoryFragmentBuilder() {
         return new NotificationHistoryFragmentBuilder();
     }
@@ -200,14 +374,54 @@ public class NearITUIBindings {
         new NearItUIProximityListener(context);
     }
 
+    /**
+     * Automatically handle a new Intent to show a NearIT content
+     * @param context: a valid {@link Context}
+     * @param intent: an {@link Intent}
+     * @return true if the intent has been handled,
+     * false otherwise (not a {@link Content}, {@link Feedback} or {@link Coupon} or the intent was not carrying a NearIT content)
+     */
     public static boolean onNewIntent(Context context, Intent intent) {
-        return new NearItUIIntentManager(context).manageIntent(intent);
+        return onNewIntent(context, intent, NearItLaunchMode.STANDARD);
     }
 
+    /**
+     * Automatically handle a new Intent to show a NearIT content, choosing the preferred launchMode for the activity
+     * @param context: a valid {@link Context}
+     * @param intent: an {@link Intent}
+     * @param launchMode: the preferred launchMode
+     * @return true if the intent has been handled,
+     * false otherwise (not a {@link Content}, {@link Feedback} or {@link Coupon} or the intent was not carrying a NearIT content)
+     */
+    public static boolean onNewIntent(Context context, Intent intent, NearItLaunchMode launchMode) {
+        return new NearItUIIntentManager(context).manageIntent(intent, launchMode);
+    }
+
+    /**
+     * Automatically handle a NearIT content
+     * @param context: a valid {@link Context}
+     * @param reactionBundle: a {@link ReactionBundle}
+     * @param trackingInfo: {@link TrackingInfo} for the content
+     * @return true if the intent has been handled, false otherwise
+     */
     public static boolean onNewContent(Context context, ReactionBundle reactionBundle, TrackingInfo trackingInfo) {
-        return new NearItUIIntentManager(context).manageContent(reactionBundle, trackingInfo);
+        return onNewContent(context, reactionBundle, trackingInfo, NearItLaunchMode.STANDARD);
     }
 
+    /**
+     * Automatically handle a NearIT content
+     * @param context: a valid {@link Context}
+     * @param reactionBundle: a {@link ReactionBundle}
+     * @param trackingInfo: {@link TrackingInfo} for the content
+     * @return true if the intent has been handled, false otherwise
+     */
+    public static boolean onNewContent(Context context, ReactionBundle reactionBundle, TrackingInfo trackingInfo, NearItLaunchMode launchMode) {
+        return new NearItUIIntentManager(context).manageContent(reactionBundle, trackingInfo, launchMode);
+    }
+
+    /**
+     * Call this method to enable link opening in webViews (a.k.a. customTabs)
+     */
     public static void openLinksInWebView() {
         NearItUIIntentManager.openLinksInWebView = true;
         ContentDetailIntentBuilder.openLinksInWebView = true;
