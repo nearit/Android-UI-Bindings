@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
+import com.nearit.ui_bindings.NearItLaunchMode;
+
 import it.near.sdk.reactions.contentplugin.model.Content;
 import it.near.sdk.trackings.TrackingInfo;
 
@@ -19,13 +21,19 @@ public class ContentDetailIntentBuilder {
     @Nullable
     private final TrackingInfo mTrackingInfo;
 
-    private final boolean mSingleInstance;
+    private final NearItLaunchMode mLaunchMode;
+    private int mFlags;
 
-    public ContentDetailIntentBuilder(Context context, Content content, @Nullable TrackingInfo trackingInfo, boolean singleInstance) {
+    public ContentDetailIntentBuilder(Context context, Content content, @Nullable TrackingInfo trackingInfo, NearItLaunchMode launchMode) {
         mContext = context;
         mContent = content;
         mTrackingInfo = trackingInfo;
-        mSingleInstance = singleInstance;
+        mLaunchMode = launchMode;
+    }
+
+    public ContentDetailIntentBuilder(Context context, Content content, @Nullable TrackingInfo trackingInfo, NearItLaunchMode launchMode, int flags) {
+        this(context, content, trackingInfo, launchMode);
+        mFlags = flags;
     }
 
     /**
@@ -44,8 +52,24 @@ public class ContentDetailIntentBuilder {
     }
 
     public Intent build() {
-        if (mSingleInstance) return NearItContentDetailActivitySingleInstance.createIntent(mContext, mTrackingInfo, mContent, getParams());
-        else return NearItContentDetailActivity.createIntent(mContext, mTrackingInfo, mContent, getParams());
+        Intent intent;
+        switch (mLaunchMode) {
+            case SINGLE_INSTANCE:
+                intent = NearItContentDetailActivitySingleInstance.createIntent(mContext, mTrackingInfo, mContent, getParams());
+                break;
+            case SINGLE_TOP:
+                intent = NearItContentDetailActivitySingleTop.createIntent(mContext, mTrackingInfo, mContent, getParams());
+                break;
+            case SINGLE_TASK:
+                intent = NearItContentDetailActivitySingleTask.createIntent(mContext, mTrackingInfo, mContent, getParams());
+                break;
+            default:
+            case STANDARD:
+                intent = NearItContentDetailActivity.createIntent(mContext, mTrackingInfo, mContent, getParams());
+        }
+
+        intent.addFlags(mFlags);
+        return intent;
     }
 
     private ContentDetailExtraParams getParams() {
