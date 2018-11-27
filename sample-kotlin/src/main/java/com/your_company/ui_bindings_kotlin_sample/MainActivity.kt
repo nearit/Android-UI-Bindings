@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.nearit.ui_bindings.NearITUIBindings
+import it.near.sdk.utils.NearUtils
 
 /**
 * @author Federico Boschini
@@ -25,9 +26,12 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
 
-        val handled: Boolean = NearITUIBindings.onNewIntent(this, intent)
-
-        if(!handled) {
+        if (NearUtils.carriesNearItContent(intent)) {
+            val handled = NearITUIBindings.onNewIntent(this, intent)
+            if (!handled) {
+                // it was a customJson
+            }
+        } else {
             //  intent was not carrying an in-app content
         }
     }

@@ -11,13 +11,27 @@
             android:theme="@style/NearItUIPermissionsDialog" />
 
         <activity
-            android:name=".permissions.invisible.NearItInvisiblePermissionsActivity"
+            android:name=".permissions.NearItPermissionsActivitySingleInstance"
+            android:launchMode="singleInstance"
             android:theme="@style/NearItUIPermissionsDialog" />
 
         <activity
-            android:name=".coupon.detail.NearItCouponDetailActivity"
+            android:name=".permissions.NearItPermissionsActivitySingleTop"
+            android:launchMode="singleTop"
+            android:theme="@style/NearItUIPermissionsDialog" />
+
+        <activity
+            android:name=".permissions.NearItPermissionsActivitySingleTask"
             android:launchMode="singleTask"
-            android:excludeFromRecents="true"
+            android:theme="@style/NearItUIPermissionsDialog" />
+
+        <activity
+            android:name=".permissions.invisible.NearItInvisiblePermissionsActivity"
+            android:theme="@style/NearItUIPermissionsDialog" />
+
+        <!--    COUPON      -->
+        <activity
+            android:name=".coupon.detail.NearItCouponDetailActivity"
             android:theme="@style/NearItUICouponDetailDialog" />
 
         <activity
@@ -26,9 +40,18 @@
             android:theme="@style/NearItUICouponDetailDialog" />
 
         <activity
-            android:name=".feedback.NearItFeedbackActivity"
+            android:name=".coupon.detail.NearItCouponDetailActivitySingleTop"
+            android:launchMode="singleTop"
+            android:theme="@style/NearItUICouponDetailDialog" />
+
+        <activity
+            android:name=".coupon.detail.NearItCouponDetailActivitySingleTask"
             android:launchMode="singleTask"
-            android:excludeFromRecents="true"
+            android:theme="@style/NearItUICouponDetailDialog" />
+
+        <!--    FEEDBACK    -->
+        <activity
+            android:name=".feedback.NearItFeedbackActivity"
             android:theme="@style/NearItUIFeedbackDialog" />
 
         <activity
@@ -37,9 +60,18 @@
             android:theme="@style/NearItUIFeedbackDialog" />
 
         <activity
-            android:name=".content.NearItContentDetailActivity"
+            android:name=".feedback.NearItFeedbackActivitySingleTop"
+            android:launchMode="singleTop"
+            android:theme="@style/NearItUIFeedbackDialog" />
+
+        <activity
+            android:name=".feedback.NearItFeedbackActivitySingleTask"
             android:launchMode="singleTask"
-            android:excludeFromRecents="true"
+            android:theme="@style/NearItUIFeedbackDialog" />
+
+        <!--    CONTENT     -->
+        <activity
+            android:name=".content.NearItContentDetailActivity"
             android:theme="@style/NearItUIContentDetailDialog" />
 
         <activity
@@ -48,17 +80,50 @@
             android:theme="@style/NearItUIContentDetailDialog" />
 
         <activity
+            android:name=".content.NearItContentDetailActivitySingleTop"
+            android:launchMode="singleTask"
+            android:theme="@style/NearItUIContentDetailDialog" />
+
+        <activity
+            android:name=".content.NearItContentDetailActivitySingleTask"
+            android:launchMode="singleInstance"
+            android:theme="@style/NearItUIContentDetailDialog" />
+
+        <!--    COUPON LIST     -->
+        <activity
             android:name=".coupon.list.NearItCouponListActivity"
+            android:theme="@style/NearITUICouponListActivityAppearance"/>
+
+        <activity
+            android:name=".coupon.list.NearItCouponListActivitySingleInstance"
             android:launchMode="singleInstance"
             android:theme="@style/NearITUICouponListActivityAppearance"/>
 
-        <activity android:name=".inbox.NearITNotificationHistoryActivity"
-            android:launchMode="singleInstance"
-            />
+        <activity
+            android:name=".coupon.list.NearItCouponListActivitySingleTop"
+            android:launchMode="singleTop"
+            android:theme="@style/NearITUICouponListActivityAppearance"/>
+
+        <activity
+            android:name=".coupon.list.NearItCouponListActivitySingleTask"
+            android:launchMode="singleTask"
+            android:theme="@style/NearITUICouponListActivityAppearance"/>
+
+        <!--    NOTIFICATION HISTORY    -->
+        <activity android:name=".inbox.NearITNotificationHistoryActivity" />
+
+        <activity android:name=".inbox.NearITNotificationHistoryActivitySingleInstance"
+            android:launchMode="singleInstance" />
+
+        <activity android:name=".inbox.NearITNotificationHistoryActivitySingleTop"
+            android:launchMode="singleTop" />
+
+        <activity android:name=".inbox.NearITNotificationHistoryActivitySingleTask"
+            android:launchMode="singleTask" />
+
 
         <activity
             android:name=".warning.NearItUIWarningDialogActivity"
-            android:launchMode="singleTask"
             android:theme="@style/NearItUIWarningDialog" />
 
         <activity

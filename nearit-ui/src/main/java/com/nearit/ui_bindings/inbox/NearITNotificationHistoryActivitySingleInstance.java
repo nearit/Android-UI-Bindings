@@ -6,10 +6,10 @@ import android.content.Intent;
 /**
  * @author Federico Boschini
  */
-public class NearITNotificationHistoryActivity extends BaseNotificationHistoryActivity {
+public class NearITNotificationHistoryActivitySingleInstance extends BaseNotificationHistoryActivity {
 
     public static Intent createIntent(Context context, NotificationHistoryExtraParams params) {
-        Intent intent = new Intent(context, NearITNotificationHistoryActivity.class);
+        Intent intent = new Intent(context, NearITNotificationHistoryActivitySingleInstance.class);
         return BaseNotificationHistoryActivity.addExtras(intent, params);
     }
 

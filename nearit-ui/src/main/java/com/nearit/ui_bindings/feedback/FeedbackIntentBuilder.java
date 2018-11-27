@@ -3,6 +3,8 @@ package com.nearit.ui_bindings.feedback;
 import android.content.Context;
 import android.content.Intent;
 
+import com.nearit.ui_bindings.NearItLaunchMode;
+
 import it.near.sdk.reactions.feedbackplugin.model.Feedback;
 
 /**
@@ -19,14 +21,20 @@ public class FeedbackIntentBuilder {
     private int mIconResId;
     private boolean mEnableTapOutside;
 
-    private final boolean mSingleInstance;
+    private final NearItLaunchMode mLaunchMode;
+    private int mFlags;
 
-    public FeedbackIntentBuilder(Context context, Feedback feedback, boolean singleInstance) {
+    public FeedbackIntentBuilder(Context context, Feedback feedback, NearItLaunchMode launchMode) {
         mContext = context;
         mFeedback = feedback;
         mAutoCloseParentActivity = true;
         mShowCloseButton = true;
-        mSingleInstance = singleInstance;
+        mLaunchMode = launchMode;
+    }
+
+    public FeedbackIntentBuilder(Context context, Feedback feedback, NearItLaunchMode launchMode, int flags) {
+        this(context, feedback, launchMode);
+        mFlags = flags;
     }
 
     /**
@@ -62,8 +70,25 @@ public class FeedbackIntentBuilder {
     }
 
     public Intent build() {
-        if (mSingleInstance) return NearItFeedbackActivitySingleInstance.createIntent(mContext, mFeedback, getParams());
-        else return NearItFeedbackActivity.createIntent(mContext, mFeedback, getParams());
+        Intent intent;
+        switch (mLaunchMode) {
+            case SINGLE_INSTANCE:
+                intent = NearItFeedbackActivitySingleInstance.createIntent(mContext, mFeedback, getParams());
+                break;
+            case SINGLE_TOP:
+                intent = NearItFeedbackActivitySingleTop.createIntent(mContext, mFeedback, getParams());
+                break;
+            case SINGLE_TASK:
+                intent = NearItFeedbackActivitySingleTask.createIntent(mContext, mFeedback, getParams());
+                break;
+            case STANDARD:
+            default:
+                intent = NearItFeedbackActivity.createIntent(mContext, mFeedback, getParams());
+                break;
+        }
+
+        intent.addFlags(mFlags);
+        return intent;
     }
 
     private FeedbackRequestExtras getParams() {

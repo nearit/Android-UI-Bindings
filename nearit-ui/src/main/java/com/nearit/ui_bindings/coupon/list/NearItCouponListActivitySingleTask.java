@@ -9,12 +9,12 @@ import com.nearit.ui_bindings.ExtraConstants;
 /**
  * @author Federico Boschini
  */
-
-public class NearItCouponListActivity extends BaseCouponListActivity {
+public class NearItCouponListActivitySingleTask extends BaseCouponListActivity {
 
     @NonNull
     public static Intent createIntent(Context context, CouponListExtraParams params) {
-        return new Intent(context, NearItCouponListActivity.class)
+        return new Intent(context, NearItCouponListActivitySingleTask.class)
                 .putExtra(ExtraConstants.EXTRA_FLOW_PARAMS, params);
     }
+
 }

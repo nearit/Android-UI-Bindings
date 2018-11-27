@@ -3,9 +3,12 @@ package com.nearit.ui_bindings.coupon;
 import android.content.Context;
 import android.content.Intent;
 
+import com.nearit.ui_bindings.NearItLaunchMode;
 import com.nearit.ui_bindings.coupon.detail.CouponDetailExtraParams;
 import com.nearit.ui_bindings.coupon.detail.NearItCouponDetailActivity;
 import com.nearit.ui_bindings.coupon.detail.NearItCouponDetailActivitySingleInstance;
+import com.nearit.ui_bindings.coupon.detail.NearItCouponDetailActivitySingleTask;
+import com.nearit.ui_bindings.coupon.detail.NearItCouponDetailActivitySingleTop;
 
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
@@ -25,12 +28,18 @@ public class CouponDetailIntentBuilder {
 
     public static boolean openLinksInWebView = false;
 
-    private final boolean mSingleInstance;
+    private final NearItLaunchMode mLaunchMode;
+    private int mFlags;
 
-    public CouponDetailIntentBuilder(Context context, Coupon coupon, boolean singleInstance) {
+    public CouponDetailIntentBuilder(Context context, Coupon coupon, NearItLaunchMode launchMode) {
         mContext = context;
         mCoupon = coupon;
-        mSingleInstance = singleInstance;
+        mLaunchMode = launchMode;
+    }
+
+    public CouponDetailIntentBuilder(Context context, Coupon coupon, NearItLaunchMode launchMode, int flags) {
+        this(context, coupon, launchMode);
+        mFlags = flags;
     }
 
     /**
@@ -81,8 +90,24 @@ public class CouponDetailIntentBuilder {
     }
 
     public Intent build() {
-        if (mSingleInstance) return NearItCouponDetailActivitySingleInstance.createIntent(mContext, mCoupon, getParams());
-        else return NearItCouponDetailActivity.createIntent(mContext, mCoupon, getParams());
+        Intent intent;
+        switch (mLaunchMode) {
+            case SINGLE_INSTANCE:
+                intent = NearItCouponDetailActivitySingleInstance.createIntent(mContext, mCoupon, getParams());
+                break;
+            case SINGLE_TOP:
+                intent = NearItCouponDetailActivitySingleTop.createIntent(mContext, mCoupon, getParams());
+                break;
+            case SINGLE_TASK:
+                intent = NearItCouponDetailActivitySingleTask.createIntent(mContext, mCoupon, getParams());
+                break;
+            default:
+            case STANDARD:
+                intent = NearItCouponDetailActivity.createIntent(mContext, mCoupon, getParams());
+        }
+
+        intent.addFlags(mFlags);
+        return intent;
     }
 
     private CouponDetailExtraParams getParams() {

@@ -3,6 +3,7 @@ package com.nearit.ui_bindings.permissions;
 import android.content.Context;
 import android.content.Intent;
 
+import com.nearit.ui_bindings.NearItLaunchMode;
 import com.nearit.ui_bindings.permissions.invisible.NearItInvisiblePermissionsActivity;
 
 /**
@@ -26,8 +27,17 @@ public class PermissionsRequestIntentBuilder {
     private boolean noHeader = false;
     private boolean showNotificationsButton = false;
 
-    public PermissionsRequestIntentBuilder(Context context) {
+    private final NearItLaunchMode launchMode;
+    private int flags;
+
+    public PermissionsRequestIntentBuilder(Context context, NearItLaunchMode launchMode) {
         this.context = context;
+        this.launchMode = launchMode;
+    }
+
+    public PermissionsRequestIntentBuilder(Context context, NearItLaunchMode launchMode, int flags) {
+        this(context, launchMode);
+        this.flags = flags;
     }
 
     /**
@@ -81,7 +91,7 @@ public class PermissionsRequestIntentBuilder {
     }
 
     /**
-     *  Sets a custom header
+     * Sets a custom header
      */
     public PermissionsRequestIntentBuilder setHeaderResourceId(int headerResourceId) {
         this.headerResourceId = headerResourceId;
@@ -89,7 +99,7 @@ public class PermissionsRequestIntentBuilder {
     }
 
     /**
-     *  Sets a custom bluetoothIcon
+     * Sets a custom bluetoothIcon
      */
     public PermissionsRequestIntentBuilder setBluetoothResourceId(int bluetoothResourceId) {
         this.bluetoothResourceId = bluetoothResourceId;
@@ -97,7 +107,7 @@ public class PermissionsRequestIntentBuilder {
     }
 
     /**
-     *  Sets a custom locationIcon
+     * Sets a custom locationIcon
      */
     public PermissionsRequestIntentBuilder setLocationResourceId(int locationResourceId) {
         this.locationResourceId = locationResourceId;
@@ -105,7 +115,7 @@ public class PermissionsRequestIntentBuilder {
     }
 
     /**
-     *  Sets a custom notificationsIcon
+     * Sets a custom notificationsIcon
      */
     public PermissionsRequestIntentBuilder setNotificationsResourceId(int notificationsResourceId) {
         this.notificationsResourceId = notificationsResourceId;
@@ -113,7 +123,7 @@ public class PermissionsRequestIntentBuilder {
     }
 
     /**
-     *  Sets a custom sadFaceResourceId
+     * Sets a custom sadFaceResourceId
      */
     public PermissionsRequestIntentBuilder setSadFaceResourceId(int sadFaceResourceId) {
         this.sadFaceResourceId = sadFaceResourceId;
@@ -121,7 +131,7 @@ public class PermissionsRequestIntentBuilder {
     }
 
     /**
-     *  Sets a custom happyFaceResourceId
+     * Sets a custom happyFaceResourceId
      */
     public PermissionsRequestIntentBuilder setHappyFaceResourceId(int happyFaceResourceId) {
         this.happyFaceResourceId = happyFaceResourceId;
@@ -129,7 +139,7 @@ public class PermissionsRequestIntentBuilder {
     }
 
     /**
-     *  Sets a custom worriedFaceResourceId
+     * Sets a custom worriedFaceResourceId
      */
     public PermissionsRequestIntentBuilder setWorriedFaceResourceId(int worriedFaceResourceId) {
         this.worriedFaceResourceId = worriedFaceResourceId;
@@ -137,7 +147,7 @@ public class PermissionsRequestIntentBuilder {
     }
 
     /**
-     *  Sets no header
+     * Sets no header
      */
     public PermissionsRequestIntentBuilder setNoHeader() {
         this.noHeader = true;
@@ -145,8 +155,8 @@ public class PermissionsRequestIntentBuilder {
     }
 
     /**
-     *  Enables the notifications "permission".
-     *  If this is not called, notifications button will show only if "permission" is missing
+     * Enables the notifications "permission".
+     * If this is not called, notifications button will show only if "permission" is missing
      */
     @SuppressWarnings("unused")
     public PermissionsRequestIntentBuilder showNotificationsButton() {
@@ -158,7 +168,24 @@ public class PermissionsRequestIntentBuilder {
         if (invisibleLayoutMode) {
             return NearItInvisiblePermissionsActivity.createIntent(context, getParams());
         } else {
-            return NearItPermissionsActivity.createIntent(context, getParams());
+            Intent intent;
+            switch (launchMode) {
+                case SINGLE_INSTANCE:
+                    intent = NearItPermissionsActivity.createIntent(context, getParams());
+                    break;
+                case SINGLE_TOP:
+                    intent = NearItPermissionsActivity.createIntent(context, getParams());
+                    break;
+                case SINGLE_TASK:
+                    intent = NearItPermissionsActivity.createIntent(context, getParams());
+                    break;
+                default:
+                case STANDARD:
+                    intent = NearItPermissionsActivity.createIntent(context, getParams());
+            }
+
+            intent.addFlags(flags);
+            return intent;
         }
     }
 

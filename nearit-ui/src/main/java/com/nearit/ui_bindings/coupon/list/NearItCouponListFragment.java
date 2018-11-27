@@ -221,7 +221,7 @@ public class NearItCouponListFragment extends Fragment implements CouponListCont
 
     @Override
     public void openDetail(Coupon coupon) {
-        CouponDetailIntentBuilder builder = NearITUIBindings.getInstance(getContext()).couponIntentBuilder(coupon, true);
+        CouponDetailIntentBuilder builder = NearITUIBindings.getInstance(getContext()).couponIntentBuilder(coupon);
         if (noSeparator) {
             builder.setNoSeparator();
         }
