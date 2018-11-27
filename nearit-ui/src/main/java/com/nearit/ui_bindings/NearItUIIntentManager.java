@@ -37,6 +37,7 @@ class NearItUIIntentManager implements ContentsListener {
 
     boolean manageIntent(@Nullable Intent intent, NearItLaunchMode launchMode) {
         this.launchMode = launchMode;
+        intentManaged = false;
         if (intent != null && intent.getExtras() != null && NearUtils.carriesNearItContent(intent)) {
             NearUtils.parseContents(intent, this);
         }
@@ -45,10 +46,11 @@ class NearItUIIntentManager implements ContentsListener {
 
     boolean manageContent(@Nullable ReactionBundle reaction, TrackingInfo trackingInfo, NearItLaunchMode launchMode) {
         this.launchMode = launchMode;
+        intentManaged = false;
         if (reaction != null) {
             NearUtils.parseContents(reaction, trackingInfo, this);
         }
-        return false;
+        return intentManaged;
     }
 
     @Override
@@ -80,11 +82,13 @@ class NearItUIIntentManager implements ContentsListener {
     public void gotCustomJSONNotification(CustomJSON customJSON, TrackingInfo trackingInfo) {
         //  Not yet implemented
         Log.d(TAG, "customJson notification received");
+        intentManaged = false;
     }
 
     @Override
     public void gotSimpleNotification(SimpleNotification simpleNotification, TrackingInfo trackingInfo) {
         //  Not yet implemented
         Log.d(TAG, "simple notification received");
+        intentManaged = true;
     }
 }
