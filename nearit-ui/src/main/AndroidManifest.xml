@@ -11,6 +11,21 @@
             android:theme="@style/NearItUIPermissionsDialog" />
 
         <activity
+            android:name=".permissions.NearItPermissionsActivitySingleInstance"
+            android:launchMode="singleInstance"
+            android:theme="@style/NearItUIPermissionsDialog" />
+
+        <activity
+            android:name=".permissions.NearItPermissionsActivitySingleTop"
+            android:launchMode="singleTop"
+            android:theme="@style/NearItUIPermissionsDialog" />
+
+        <activity
+            android:name=".permissions.NearItPermissionsActivitySingleTask"
+            android:launchMode="singleTask"
+            android:theme="@style/NearItUIPermissionsDialog" />
+
+        <activity
             android:name=".permissions.invisible.NearItInvisiblePermissionsActivity"
             android:theme="@style/NearItUIPermissionsDialog" />
 
