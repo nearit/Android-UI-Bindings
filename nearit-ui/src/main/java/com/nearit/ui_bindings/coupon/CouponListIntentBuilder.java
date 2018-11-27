@@ -4,9 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
+import com.nearit.ui_bindings.NearItLaunchMode;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.coupon.list.CouponListExtraParams;
 import com.nearit.ui_bindings.coupon.list.NearItCouponListActivity;
+import com.nearit.ui_bindings.coupon.list.NearItCouponListActivitySingleInstance;
+import com.nearit.ui_bindings.coupon.list.NearItCouponListActivitySingleTask;
+import com.nearit.ui_bindings.coupon.list.NearItCouponListActivitySingleTop;
 
 /**
  * @author Federico Boschini
@@ -30,8 +34,17 @@ public class CouponListIntentBuilder {
     @Nullable
     private String mActivityTitle = null;
 
-    public CouponListIntentBuilder(Context context) {
+    private NearItLaunchMode mLaunchMode;
+    private int mFlags;
+
+    public CouponListIntentBuilder(Context context, NearItLaunchMode launchMode) {
         mContext = context;
+        mLaunchMode = launchMode;
+    }
+
+    public CouponListIntentBuilder(Context context, NearItLaunchMode launchMode, int flags) {
+        this(context, launchMode);
+        mFlags = flags;
     }
 
 
@@ -124,7 +137,24 @@ public class CouponListIntentBuilder {
         return this;
     }
     public Intent build() {
-        return NearItCouponListActivity.createIntent(mContext, getParams());
+        Intent intent;
+        switch (mLaunchMode) {
+            case SINGLE_INSTANCE:
+                intent = NearItCouponListActivitySingleInstance.createIntent(mContext, getParams());
+                break;
+            case SINGLE_TOP:
+                intent = NearItCouponListActivitySingleTop.createIntent(mContext, getParams());
+                break;
+            case SINGLE_TASK:
+                intent = NearItCouponListActivitySingleTask.createIntent(mContext, getParams());
+                break;
+            case STANDARD:
+            default:
+                intent = NearItCouponListActivity.createIntent(mContext, getParams());
+        }
+
+        intent.addFlags(mFlags);
+        return intent;
     }
 
     private CouponListExtraParams getParams() {
