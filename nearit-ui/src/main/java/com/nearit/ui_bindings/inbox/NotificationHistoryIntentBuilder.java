@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.nearit.ui_bindings.NearItLaunchMode;
+
 public class NotificationHistoryIntentBuilder {
     private final Context context;
     private int mEmptyListLayout = 0;
@@ -14,8 +16,17 @@ public class NotificationHistoryIntentBuilder {
     @Nullable
     private String activityTitle = null;
 
-    public NotificationHistoryIntentBuilder(Context context) {
+    private final NearItLaunchMode launchMode;
+    private int flags;
+
+    public NotificationHistoryIntentBuilder(Context context, NearItLaunchMode launchMode) {
         this.context = context;
+        this.launchMode = launchMode;
+    }
+
+    public NotificationHistoryIntentBuilder(Context context, NearItLaunchMode launchMode, int flags) {
+        this(context, launchMode);
+        this.flags = flags;
     }
 
     public NotificationHistoryIntentBuilder setEmptyListLayout(int res) {
@@ -44,7 +55,24 @@ public class NotificationHistoryIntentBuilder {
     }
 
     public Intent build() {
-        return NearITNotificationHistoryActivity.createIntent(context, getParams());
+        Intent intent;
+        switch (launchMode) {
+            case SINGLE_INSTANCE:
+                intent = NearITNotificationHistoryActivitySingleInstance.createIntent(context, getParams());
+                break;
+            case SINGLE_TOP:
+                intent = NearITNotificationHistoryActivitySingleTop.createIntent(context, getParams());
+                break;
+            case SINGLE_TASK:
+                intent = NearITNotificationHistoryActivitySingleTask.createIntent(context, getParams());
+                break;
+            default:
+            case STANDARD:
+                intent = NearITNotificationHistoryActivity.createIntent(context, getParams());
+        }
+
+        intent.addFlags(flags);
+        return intent;
     }
 
     @NonNull
