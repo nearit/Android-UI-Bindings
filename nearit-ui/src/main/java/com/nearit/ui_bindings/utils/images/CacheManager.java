@@ -23,9 +23,7 @@ class CacheManager {
     }
 
     void addBitmapToMemoryCache(String key, Bitmap bitmap) {
-        if (getBitmapFromMemCache(key) == null) {
-            mMemoryCache.put(key, bitmap);
-        }
+        mMemoryCache.put(key, bitmap);
     }
 
     Bitmap getBitmapFromMemCache(String key) {
