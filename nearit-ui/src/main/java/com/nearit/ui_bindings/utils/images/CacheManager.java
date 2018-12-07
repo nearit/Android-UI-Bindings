@@ -2,6 +2,7 @@ package com.nearit.ui_bindings.utils.images;
 
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.LruCache;
 
 /**
@@ -27,7 +28,8 @@ class CacheManager {
         mMemoryCache.put(key, bitmap);
     }
 
-    Bitmap getBitmapFromMemCache(String key) {
+    @Nullable
+    Bitmap getBitmapFromMemCache(@NonNull String key) {
         return mMemoryCache.get(key);
     }
 
