@@ -84,7 +84,7 @@ public class ContentDetailPresenterImpl implements ContentDetailContract.Present
     }
 
     private void downloadImage() {
-        if (content.getImageLink() != null) {
+        if (content.getImageLink() != null && content.getImageLink().getFullSize() != null) {
             view.showImageContainer();
             view.hideImage();
             view.showImageSpinner();
