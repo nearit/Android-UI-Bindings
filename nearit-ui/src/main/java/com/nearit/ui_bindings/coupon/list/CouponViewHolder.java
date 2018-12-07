@@ -71,7 +71,7 @@ class CouponViewHolder extends RecyclerView.ViewHolder {
                     couponIcon.setImageResource(iconPlaceholderResId);
                 }
             }
-            if (coupon.getIconSet() != null) {
+            if (coupon.getIconSet() != null && coupon.getIconSet().getFullSize() != null) {
                 if (couponIcon != null) {
                     couponIcon.setVisibility(View.GONE);
                 }
