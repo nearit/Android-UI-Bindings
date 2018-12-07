@@ -38,7 +38,7 @@ public class NearItImageDownloader {
     }
 
     public void downloadImage(@NonNull final String url, @Nullable final ImageDownloadListener listener) {
-        Bitmap cached = cacheManager.getBitmapFromMemCache(url);
+        @Nullable Bitmap cached = cacheManager.getBitmapFromMemCache(url);
         if (cached == null) {
             if (tasksManager.isAlreadyRunning(url)) {
                 NearLog.d(TAG, String.format("A background task for %s is already running", url));

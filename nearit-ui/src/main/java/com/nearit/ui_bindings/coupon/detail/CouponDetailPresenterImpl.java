@@ -73,7 +73,7 @@ public class CouponDetailPresenterImpl implements CouponDetailContract.Presenter
 
         if (params.getIconDrawable() != 0) view.showIcon(params.getIconDrawable());
 
-        if (coupon.getIconSet() != null) {
+        if (coupon.getIconSet() != null && coupon.getIconSet().getFullSize() != null) {
             view.hideIcon();
             view.showSpinner();
 

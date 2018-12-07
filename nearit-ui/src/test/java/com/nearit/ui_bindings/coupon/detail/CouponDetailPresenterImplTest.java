@@ -290,12 +290,37 @@ public class CouponDetailPresenterImplTest {
 
     @Test
     public void onStart_spinnerIsShownAndIconIsHidden() {
+        String url = "imageUrl";
         when(coupon.getIconSet()).thenReturn(imageSet);
+        when(imageSet.getFullSize()).thenReturn(url);
 
         presenter.start();
 
         verify(view).hideIcon();
         verify(view).showSpinner();
+    }
+
+    @Test
+    public void onStart_ifUrlIsNull_doNothingOnIcon() {
+        when(coupon.getIconSet()).thenReturn(imageSet);
+        when(imageSet.getFullSize()).thenReturn(null);
+
+        presenter.start();
+
+        verify(view, never()).hideIcon();
+        verify(view, never()).showSpinner();
+        verify(view, never()).showIcon(any(Bitmap.class));
+    }
+
+    @Test
+    public void onStart_ifIconIsNull_doNothingOnIcon() {
+        when(coupon.getIconSet()).thenReturn(null);
+
+        presenter.start();
+
+        verify(view, never()).hideIcon();
+        verify(view, never()).showSpinner();
+        verify(view, never()).showIcon(any(Bitmap.class));
     }
 
     @Test

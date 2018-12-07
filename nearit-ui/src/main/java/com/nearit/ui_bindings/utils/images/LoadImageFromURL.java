@@ -29,20 +29,22 @@ public class LoadImageFromURL extends AsyncTask<String, Void, Image> {
     }
 
     @Override
-    protected Image doInBackground(String... urls) {
+    protected Image doInBackground(@NonNull String... urls) {
         String url = urls[0];
         Image image = null;
         InputStream in;
-        try {
-            in = new URL(url).openStream();
-            Bitmap icon = BitmapFactory.decodeStream(in);
-            image = new Image(icon, url);
-        } catch (IOException ignored) { }
+        if (url != null) {
+            try {
+                in = new URL(url).openStream();
+                @Nullable Bitmap icon = BitmapFactory.decodeStream(in);
+                if (icon != null) image = new Image(icon, url);
+            } catch (IOException ignored) { }
+        }
         return image;
     }
 
     @Override
-    protected void onPostExecute(Image image) {
+    protected void onPostExecute(@Nullable Image image) {
         Iterator<ImageDownloadListener> iterator = listeners.iterator();
         while (iterator.hasNext()) {
             @Nullable
