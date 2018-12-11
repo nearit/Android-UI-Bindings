@@ -11,7 +11,7 @@ import com.nearit.ui_bindings.inbox.NearITNotificationHistoryActivitySingleInsta
 public class NearItPermissionsActivitySingleInstance extends BasePermissionsActivity {
 
     public static Intent createIntent(Context context, PermissionsRequestExtraParams params) {
-        Intent intent = new Intent(context, NearITNotificationHistoryActivitySingleInstance.class);
+        Intent intent = new Intent(context, NearItPermissionsActivitySingleInstance.class);
         return BasePermissionsActivity.addExtras(intent, params);
     }
 

@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nearit.ui_bindings.NearITUIBindings;
+import com.nearit.ui_bindings.NearItLaunchMode;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
 import com.nearit.ui_bindings.utils.PermissionsUtils;
@@ -175,7 +176,11 @@ public class PermissionBar extends RelativeLayout {
         okButton = findViewById(R.id.ok_button);
         okButton.setClickable(true);
 
-        final PermissionsRequestIntentBuilder builder = NearITUIBindings.getInstance(context).permissionsIntentBuilder();
+        final PermissionsRequestIntentBuilder builder =
+                NearITUIBindings.getInstance(context).permissionsIntentBuilder(
+                        NearItLaunchMode.STANDARD,
+                        Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                );
 
         if (noBeacon) {
             hideBluetoothIcon();
@@ -221,10 +226,7 @@ public class PermissionBar extends RelativeLayout {
             public void onClick(View v) {
                 if (activity != null) {
                     activity.startActivityForResult(
-                            builder
-                                    .build()
-                                    .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT),
-                            requestCode
+                            builder.build(), requestCode
                     );
                 }
             }
@@ -235,10 +237,7 @@ public class PermissionBar extends RelativeLayout {
             public void onClick(View v) {
                 if (activity != null) {
                     activity.startActivityForResult(
-                            builder
-                                    .build()
-                                    .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT),
-                            requestCode
+                            builder.build(), requestCode
                     );
                 }
             }

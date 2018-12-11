@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 /**
  * @author Federico Boschini
  */
-public class NearItPermissionsActivity extends AppCompatActivity {
+public class NearItPermissionsActivity extends BasePermissionsActivity {
 
     public static Intent createIntent(Context context, PermissionsRequestExtraParams params) {
         Intent intent = new Intent(context, NearItPermissionsActivity.class);
