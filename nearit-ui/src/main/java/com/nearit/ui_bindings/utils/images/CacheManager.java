@@ -1,6 +1,8 @@
 package com.nearit.ui_bindings.utils.images;
 
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.LruCache;
 
 /**
@@ -22,13 +24,12 @@ class CacheManager {
         };
     }
 
-    void addBitmapToMemoryCache(String key, Bitmap bitmap) {
-        if (getBitmapFromMemCache(key) == null) {
-            mMemoryCache.put(key, bitmap);
-        }
+    void addBitmapToMemoryCache(@NonNull String key, @NonNull Bitmap bitmap) {
+        mMemoryCache.put(key, bitmap);
     }
 
-    Bitmap getBitmapFromMemCache(String key) {
+    @Nullable
+    Bitmap getBitmapFromMemCache(@NonNull String key) {
         return mMemoryCache.get(key);
     }
 

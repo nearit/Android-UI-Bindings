@@ -57,10 +57,10 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    // implementation 'it.near.sdk:nearit-ui:2.10.8'
+    // implementation 'it.near.sdk:nearit-ui:2.10.9'
     implementation project(':nearit-ui')
 
-    implementation 'it.near.sdk:nearit:2.10.2'
+    implementation 'it.near.sdk:nearit:2.10.5'
 
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
     implementation "com.android.support:support-v4:$supportLibraryVersion"

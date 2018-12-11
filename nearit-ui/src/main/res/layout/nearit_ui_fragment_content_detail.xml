@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:focusableInTouchMode="true"
             android:gravity="center"
             android:minHeight="@dimen/nearit_ui_content_image_min_height"
             android:orientation="vertical"
@@ -55,6 +56,7 @@
             android:gravity="center_horizontal"
             android:paddingTop="@dimen/nearit_ui_content_margin1"
             android:textAppearance="@style/NearItUIContentTitleTextAppearance"
+            android:focusableInTouchMode="true"
             android:visibility="gone"
             tools:visibility="visible"
             tools:text="Title"/>
