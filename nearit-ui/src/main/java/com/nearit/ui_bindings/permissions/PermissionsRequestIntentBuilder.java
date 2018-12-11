@@ -171,13 +171,13 @@ public class PermissionsRequestIntentBuilder {
             Intent intent;
             switch (launchMode) {
                 case SINGLE_INSTANCE:
-                    intent = NearItPermissionsActivity.createIntent(context, getParams());
+                    intent = NearItPermissionsActivitySingleInstance.createIntent(context, getParams());
                     break;
                 case SINGLE_TOP:
-                    intent = NearItPermissionsActivity.createIntent(context, getParams());
+                    intent = NearItPermissionsActivitySingleTop.createIntent(context, getParams());
                     break;
                 case SINGLE_TASK:
-                    intent = NearItPermissionsActivity.createIntent(context, getParams());
+                    intent = NearItPermissionsActivitySingleTask.createIntent(context, getParams());
                     break;
                 default:
                 case STANDARD:
