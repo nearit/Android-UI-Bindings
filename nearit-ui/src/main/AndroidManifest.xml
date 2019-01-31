@@ -110,16 +110,20 @@
             android:theme="@style/NearITUICouponListActivityAppearance"/>
 
         <!--    NOTIFICATION HISTORY    -->
-        <activity android:name=".inbox.NearITNotificationHistoryActivity" />
+        <activity android:name=".inbox.NearITNotificationHistoryActivity"
+            android:theme="@style/NearITUINotificationHistoryActivityAppearance" />
 
         <activity android:name=".inbox.NearITNotificationHistoryActivitySingleInstance"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance"
+            android:theme="@style/NearITUINotificationHistoryActivityAppearance" />
 
         <activity android:name=".inbox.NearITNotificationHistoryActivitySingleTop"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:theme="@style/NearITUINotificationHistoryActivityAppearance" />
 
         <activity android:name=".inbox.NearITNotificationHistoryActivitySingleTask"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/NearITUINotificationHistoryActivityAppearance" />
 
 
         <activity
