@@ -16,6 +16,7 @@
 
     <!--NEARIT-UI STYLE OVERRIDE EXAMPLES-->
     <style name="NearITUICouponListActivityAppearance" parent="AppTheme" />
+    <style name="NearITUINotificationHistoryActivityAppearance" parent="AppTheme" />
     <!--<style name="NearItUIPermissionsExplanationTextAppearance">
         <item name="android:textSize">20sp</item>
         <item name="fontFamily">@font/montserrat</item>
