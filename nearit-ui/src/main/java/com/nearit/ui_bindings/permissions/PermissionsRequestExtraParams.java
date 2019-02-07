@@ -28,6 +28,7 @@ public class PermissionsRequestExtraParams implements Parcelable {
     private int happyFaceResourceId;
     private final boolean noHeader;
     private final boolean showNotificationsButton;
+    private final String explanation;
 
     PermissionsRequestExtraParams(
             boolean enableTapToClose,
@@ -43,7 +44,8 @@ public class PermissionsRequestExtraParams implements Parcelable {
             int worriedFaceResourceId,
             int happyFaceResourceId,
             boolean noHeader,
-            boolean showNotificationsButton) {
+            boolean showNotificationsButton,
+            String explanation) {
         this.enableTapToClose = enableTapToClose;
         this.autoStartRadar = autoStartRadar;
         this.invisibleLayoutMode = invisibleLayoutMode;
@@ -58,6 +60,7 @@ public class PermissionsRequestExtraParams implements Parcelable {
         this.happyFaceResourceId = happyFaceResourceId;
         this.noHeader = noHeader;
         this.showNotificationsButton = showNotificationsButton;
+        this.explanation = explanation;
     }
 
     /**
@@ -102,6 +105,7 @@ public class PermissionsRequestExtraParams implements Parcelable {
         dest.writeInt(happyFaceResourceId);
         dest.writeInt(noHeader ? 1 : 0);
         dest.writeInt(showNotificationsButton ? 1 : 0);
+        dest.writeString(explanation);
     }
 
     @Override
@@ -126,6 +130,7 @@ public class PermissionsRequestExtraParams implements Parcelable {
             int happyResourceId = in.readInt();
             boolean noHeader = in.readInt() != 0;
             boolean showNotificationsButton = in.readInt() != 0;
+            String explanation = in.readString();
 
             return new PermissionsRequestExtraParams(
                     enableTapToClose,
@@ -141,7 +146,8 @@ public class PermissionsRequestExtraParams implements Parcelable {
                     worriedResourceId,
                     happyResourceId,
                     noHeader,
-                    showNotificationsButton);
+                    showNotificationsButton,
+                    explanation);
         }
 
         @Override
@@ -208,5 +214,9 @@ public class PermissionsRequestExtraParams implements Parcelable {
 
     public void setNoBeacon(boolean noBeacon) {
         this.noBeacon = noBeacon;
+    }
+
+    public String getExplanation() {
+        return explanation;
     }
 }
