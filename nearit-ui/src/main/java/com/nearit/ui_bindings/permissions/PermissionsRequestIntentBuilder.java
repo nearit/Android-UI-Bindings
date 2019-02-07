@@ -2,6 +2,7 @@ package com.nearit.ui_bindings.permissions;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
 import com.nearit.ui_bindings.NearItLaunchMode;
 import com.nearit.ui_bindings.permissions.invisible.NearItInvisiblePermissionsActivity;
@@ -26,6 +27,7 @@ public class PermissionsRequestIntentBuilder {
     private int happyFaceResourceId;
     private boolean noHeader = false;
     private boolean showNotificationsButton = false;
+    private String explanation;
 
     private final NearItLaunchMode launchMode;
     private int flags;
@@ -155,6 +157,14 @@ public class PermissionsRequestIntentBuilder {
     }
 
     /**
+     * Sets the explanation text
+     */
+    public PermissionsRequestIntentBuilder setExplanation(@NonNull String explanation) {
+        this.explanation = explanation;
+        return this;
+    }
+
+    /**
      * Enables the notifications "permission".
      * If this is not called, notifications button will show only if "permission" is missing
      */
@@ -204,7 +214,8 @@ public class PermissionsRequestIntentBuilder {
                 worriedFaceResourceId,
                 happyFaceResourceId,
                 noHeader,
-                showNotificationsButton);
+                showNotificationsButton,
+                explanation);
     }
 
 }
