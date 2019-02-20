@@ -214,7 +214,9 @@ public class NearItFeedbackFragment extends Fragment {
                     if (userRating < 1.0f) {
                         userRating = 1.0f;
                     }
-                    userComment = commentBox != null ? commentBox.getText().toString() : "";
+                    if (commentBox != null && !commentBox.getText().toString().trim().equals("")) {
+                        userComment = commentBox.getText().toString();
+                    }
                     NearItManager.getInstance().sendEvent(new FeedbackEvent(feedback, (int) userRating, userComment), new NearITEventHandler() {
                         @Override
                         public void onSuccess() {
