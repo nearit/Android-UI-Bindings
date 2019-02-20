@@ -62,10 +62,10 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    // implementation 'it.near.sdk:nearit-ui:2.11.1'
+    // implementation 'it.near.sdk:nearit-ui:2.11.2'
     implementation project(':nearit-ui')
 
-    implementation 'it.near.sdk:nearit:2.11.0'
+    implementation 'it.near.sdk:nearit:2.11.1'
 
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
     implementation "com.android.support:support-v4:$supportLibraryVersion"
