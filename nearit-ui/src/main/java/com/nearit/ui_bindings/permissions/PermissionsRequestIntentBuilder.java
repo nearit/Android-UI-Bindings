@@ -17,6 +17,7 @@ public class PermissionsRequestIntentBuilder {
     private boolean radarAutoStart = false;
     private boolean invisibleLayoutMode = false;
     private boolean noBeacon = false;
+    private boolean noNotifications = false;
     private boolean nonBlockingBeacon = false;
     private int headerResourceId;
     private int bluetoothResourceId;
@@ -79,6 +80,16 @@ public class PermissionsRequestIntentBuilder {
      */
     public PermissionsRequestIntentBuilder noBeacon() {
         noBeacon = true;
+        return this;
+    }
+
+    /**
+     * Avoid handling notification "permission"
+     * <p>
+     * <p> Default: false
+     */
+    public PermissionsRequestIntentBuilder noNotifications() {
+        noNotifications = true;
         return this;
     }
 
@@ -205,6 +216,7 @@ public class PermissionsRequestIntentBuilder {
                 radarAutoStart,
                 invisibleLayoutMode,
                 noBeacon,
+                noNotifications,
                 nonBlockingBeacon,
                 headerResourceId,
                 bluetoothResourceId,
