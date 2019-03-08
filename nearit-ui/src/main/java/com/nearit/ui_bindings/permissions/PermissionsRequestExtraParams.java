@@ -18,6 +18,7 @@ public class PermissionsRequestExtraParams implements Parcelable {
     private final boolean autoStartRadar;
     private final boolean invisibleLayoutMode;
     private boolean noBeacon;
+    private boolean noNotifications;
     private final boolean nonBlockingBeacon;
     private int headerResourceId;
     private int bluetoothResourceId;
@@ -35,6 +36,7 @@ public class PermissionsRequestExtraParams implements Parcelable {
             boolean autoStartRadar,
             boolean invisibleLayoutMode,
             boolean noBeacon,
+            boolean noNotifications,
             boolean nonBlockingBeacon,
             int headerResourceId,
             int bluetoothResourceId,
@@ -50,6 +52,7 @@ public class PermissionsRequestExtraParams implements Parcelable {
         this.autoStartRadar = autoStartRadar;
         this.invisibleLayoutMode = invisibleLayoutMode;
         this.noBeacon = noBeacon;
+        this.noNotifications = noNotifications;
         this.nonBlockingBeacon = nonBlockingBeacon;
         this.headerResourceId = headerResourceId;
         this.bluetoothResourceId = bluetoothResourceId;
@@ -95,6 +98,7 @@ public class PermissionsRequestExtraParams implements Parcelable {
         dest.writeInt(autoStartRadar ? 1 : 0);
         dest.writeInt(invisibleLayoutMode ? 1 : 0);
         dest.writeInt(noBeacon ? 1 : 0);
+        dest.writeInt(noNotifications ? 1 : 0);
         dest.writeInt(nonBlockingBeacon ? 1 : 0);
         dest.writeInt(headerResourceId);
         dest.writeInt(bluetoothResourceId);
@@ -120,6 +124,7 @@ public class PermissionsRequestExtraParams implements Parcelable {
             boolean autoStartRadar = in.readInt() != 0;
             boolean invisibleLayoutMode = in.readInt() != 0;
             boolean noBeacon = in.readInt() != 0;
+            boolean noNotifications = in.readInt() != 0;
             boolean nonBlockingBeacon = in.readInt() != 0;
             int headerResourceId = in.readInt();
             int bluetoothResourceId = in.readInt();
@@ -137,6 +142,7 @@ public class PermissionsRequestExtraParams implements Parcelable {
                     autoStartRadar,
                     invisibleLayoutMode,
                     noBeacon,
+                    noNotifications,
                     nonBlockingBeacon,
                     headerResourceId,
                     bluetoothResourceId,
@@ -170,6 +176,10 @@ public class PermissionsRequestExtraParams implements Parcelable {
 
     public boolean isNoBeacon() {
         return noBeacon;
+    }
+
+    public boolean isNoNotifications() {
+        return noNotifications;
     }
 
     public boolean isNonBlockingBeacon() {
@@ -214,6 +224,10 @@ public class PermissionsRequestExtraParams implements Parcelable {
 
     public void setNoBeacon(boolean noBeacon) {
         this.noBeacon = noBeacon;
+    }
+
+    public void setNoNotifications(boolean noNotifications) {
+        this.noNotifications = noNotifications;
     }
 
     public String getExplanation() {
