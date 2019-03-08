@@ -86,7 +86,7 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
         if (!params.isNoBeacon() && permissionsManager.isBleAvailable() && !permissionsManager.isBluetoothOn()) {
             view.turnOnBluetooth();
         } else {
-            if (!permissionsManager.areNotificationsEnabled()) {
+            if (!permissionsManager.areNotificationsEnabled() && !params.isNoNotifications()) {
                 view.showNotificationsDialog();
             } else {
                 finalCheck();
@@ -122,7 +122,7 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
         if (requestCode == NEAR_BLUETOOTH_SETTINGS_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 if (checkLocation()) {
-                    if (permissionsManager.areNotificationsEnabled()) {
+                    if (permissionsManager.areNotificationsEnabled() || params.isNoNotifications()) {
                         finalCheck();
                     } else {
                         notificationsDialogLaunched = true;
@@ -203,7 +203,7 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
             if (permissionsManager.isBleAvailable() && !params.isNoBeacon() && !permissionsManager.isBluetoothOn()) {
                 onLocationServicesOn();
             } else {
-                if (!permissionsManager.areNotificationsEnabled()) {
+                if (!permissionsManager.areNotificationsEnabled() && !params.isNoNotifications()) {
                     state.setNotificationsAsked();
                     view.showNotificationsDialog();
                 } else {
