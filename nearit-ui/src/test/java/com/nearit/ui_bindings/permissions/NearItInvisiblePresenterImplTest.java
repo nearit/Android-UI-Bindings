@@ -162,6 +162,20 @@ public class NearItInvisiblePresenterImplTest {
     }
 
     @Test
+    public void onStart_locationGrantedAndON_bluetoothAvailableAndON_NotificationOff_noNotification_doNOTshowDialog() {
+        whenLocationPermissionIsGranted();
+        whenLocationIsOn();
+        whenBleIsAvailable();
+        whenBluetoothIsOn();
+        whenNotificationsAreOff();
+        whenNoNotifications();
+
+        presenter.start();
+
+        verify(view, never()).showNotificationsDialog();
+    }
+
+    @Test
     public void onLocationResultKO_finishWithSomeResult() {
         whenBleIsAvailable();
         whenBluetoothIsOff();
@@ -195,6 +209,20 @@ public class NearItInvisiblePresenterImplTest {
         presenter.handleActivityResult(NEAR_BLUETOOTH_SETTINGS_CODE, RESULT_OK, intent);
 
         verify(view).showNotificationsDialog();
+    }
+
+    @Test
+    public void onBluetoothResultOK_ifNotificationsOFF_ifNoNotification_doNOTshowDialog() {
+        whenLocationPermissionIsGranted();
+        whenLocationIsOn();
+        whenBleIsAvailable();
+        whenBluetoothIsOn();
+        whenNotificationsAreOff();
+        whenNoNotifications();
+
+        presenter.handleActivityResult(NEAR_BLUETOOTH_SETTINGS_CODE, RESULT_OK, intent);
+
+        verify(view, never()).showNotificationsDialog();
     }
 
     @Test
@@ -234,6 +262,17 @@ public class NearItInvisiblePresenterImplTest {
         presenter.onLocationServicesOn();
 
         verify(view).showNotificationsDialog();
+    }
+
+    @Test
+    public void onLocationServiceOn_ifNoBeaconAndNotificationOff_ifNoNotification_showNotificationsDialog() {
+        whenNoBeacon();
+        whenNotificationsAreOff();
+        whenNoNotifications();
+
+        presenter.onLocationServicesOn();
+
+        verify(view, never()).showNotificationsDialog();
     }
 
     @Test
@@ -347,6 +386,10 @@ public class NearItInvisiblePresenterImplTest {
 
     private void whenNoBeacon() {
         when(params.isNoBeacon()).thenReturn(true);
+    }
+
+    private void whenNoNotifications() {
+        when(params.isNoNotifications()).thenReturn(true);
     }
 
     private void whenBleIsAvailable() {
