@@ -1,7 +1,9 @@
 package com.nearit.ui_bindings.inbox;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.nearit.ui_bindings.NearITUIBindings;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.utils.CollectionsUtils;
 
@@ -20,6 +22,8 @@ import it.near.sdk.recipes.models.Recipe;
 import static com.nearit.ui_bindings.utils.CollectionsUtils.filter;
 
 class NotificationHistoryPresenterImpl implements NotificationHistoryContract.NotificationHistoryPresenter {
+
+    public static final String TAG = "NotificationHistoryPres";
 
     private final NearItManager nearItManager;
     private final NotificationHistoryContract.NotificationHistoryView view;
@@ -54,6 +58,13 @@ class NotificationHistoryPresenterImpl implements NotificationHistoryContract.No
     @Override
     public void itemClicked(HistoryItem item) {
         nearItManager.sendTracking(item.trackingInfo, Recipe.OPENED);
+        if (item.reaction instanceof CustomJSON) {
+            if (NearITUIBindings.customJsonFromHistoryListener != null) {
+                NearITUIBindings.customJsonFromHistoryListener.onCustomJsonClicked((CustomJSON) item.reaction, item.trackingInfo);
+            } else {
+                Log.e(TAG, "A CustomJson was tapped but no listener was set. Set it with `NearITUIBindings.getInstance(context).setOnCustomJsonClickedFromHistoryListener(yourListener)`");
+            }
+        }
         view.openDetail(item);
     }
 
