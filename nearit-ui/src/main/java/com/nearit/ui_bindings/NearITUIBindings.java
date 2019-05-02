@@ -2,6 +2,7 @@ package com.nearit.ui_bindings;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.nearit.ui_bindings.content.ContentDetailFragmentBuilder;
@@ -12,6 +13,7 @@ import com.nearit.ui_bindings.coupon.CouponListFragmentBuilder;
 import com.nearit.ui_bindings.coupon.CouponListIntentBuilder;
 import com.nearit.ui_bindings.feedback.FeedbackFragmentBuilder;
 import com.nearit.ui_bindings.feedback.FeedbackIntentBuilder;
+import com.nearit.ui_bindings.inbox.HistoryCustomJsonListener;
 import com.nearit.ui_bindings.inbox.NotificationHistoryFragmentBuilder;
 import com.nearit.ui_bindings.inbox.NotificationHistoryIntentBuilder;
 import com.nearit.ui_bindings.notifications.NearItUIProximityListener;
@@ -26,6 +28,8 @@ import it.near.sdk.trackings.TrackingInfo;
 public class NearITUIBindings {
 
     private final Context mContext;
+    @Nullable
+    public static HistoryCustomJsonListener customJsonFromHistoryListener;
 
     private NearITUIBindings(Context context) {
         mContext = context;
@@ -368,6 +372,20 @@ public class NearITUIBindings {
         return new NotificationHistoryFragmentBuilder();
     }
 
+    /**
+     * Set a listener to be notified when a CustomJSON notification is tapped from Notification History.
+     * @param listener: a HistoryCustomJsonListener instance
+     */
+    public void setOnCustomJsonClickedFromHistoryListener(@NonNull HistoryCustomJsonListener listener) {
+        customJsonFromHistoryListener = listener;
+    }
+
+    /**
+     * Remove a previously set HistoryCustomJsonListener.
+     */
+    public void removeOnCustomJsonClickedFromHistoryListener() {
+        customJsonFromHistoryListener = null;
+    }
 
 
     public static void enableAutomaticForegroundNotifications(Context context) {
