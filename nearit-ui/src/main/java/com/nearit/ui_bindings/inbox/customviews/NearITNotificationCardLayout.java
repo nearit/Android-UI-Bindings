@@ -76,11 +76,7 @@ public class NearITNotificationCardLayout extends RelativeLayout {
         notificationTV.setTypeface(null,
                 messageUnread ? Typeface.BOLD : Typeface.NORMAL);
         timestampTV.setTextColor(
-                getResources().getColor(
-                        messageUnread ?
-                                R.color.nearit_ui_notification_card_text_unread_color :
-                                R.color.nearit_ui_notification_card_text_read_color
-                )
+                getResources().getColor(R.color.nearit_ui_notification_card_text_read_color)
         );
     }
 
