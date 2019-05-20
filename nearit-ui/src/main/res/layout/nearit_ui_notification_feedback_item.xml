@@ -25,6 +25,6 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:clickable="false"
-        app:text="@string/nearit_ui_history_content_button_label"/>
+        app:text="@string/nearit_ui_history_feedback_button_label"/>
 
 </com.nearit.ui_bindings.inbox.customviews.NearITNotificationCardLayout>
