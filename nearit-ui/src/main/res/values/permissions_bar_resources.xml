@@ -3,7 +3,6 @@
     <!--  COLORS  -->
     <color name="nearit_ui_permission_bar_sad_color">@color/nearit_ui_sad_color</color>
     <color name="nearit_ui_permission_bar_worried_color">@color/nearit_ui_worried_color</color>
-    <color name="nearit_ui_permission_bar_background_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_permission_bar_alert_text_color">@color/nearit_ui_white_text</color>
     <color name="nearit_ui_permission_bar_button_background_color">@color/nearit_ui_black</color>
     <color name="nearit_ui_permission_bar_button_pressed_background_color">@color/nearit_ui_black_50</color>
@@ -12,7 +11,6 @@
     <!--  DIMENSIONS  -->
     <dimen name="nearit_ui_permission_bar_height">50dp</dimen>
     <dimen name="nearit_ui_permission_bar_main_padding">9dp</dimen>
-    <dimen name="nearit_ui_permission_bar_margin1">5dp</dimen>
     <dimen name="nearit_ui_permission_bar_text_left_right_margin">11dp</dimen>
     <dimen name="nearit_ui_permission_bar_button_height">30dp</dimen>
     <dimen name="nearit_ui_permission_bar_button_width">100dp</dimen>
@@ -23,7 +21,6 @@
 
     <!--  STRINGS  -->
     <string name="nearit_ui_permission_bar_alert_text">Check all missing permissions</string>
-    <string name="nearit_ui_permission_bar_button_text">OK!</string>
 
 
     <!--  STYLES  -->

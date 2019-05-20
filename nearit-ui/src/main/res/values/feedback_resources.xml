@@ -32,9 +32,6 @@
     <dimen name="nearit_ui_feedback_margin2">22dp</dimen>
     <dimen name="nearit_ui_feedback_margin3">16dp</dimen>
     <dimen name="nearit_ui_feedback_margin4">16dp</dimen>
-    <dimen name="nearit_ui_feedback_margin5">30dp</dimen>
-    <dimen name="nearit_ui_feedback_margin6">8dp</dimen>
-    <dimen name="nearit_ui_feedback_margin7">22dp</dimen>
     <dimen name="nearit_ui_feedback_margin8">23dp</dimen>
     <dimen name="nearit_ui_feedback_margin9">5dp</dimen>
     <dimen name="nearit_ui_feedback_margin10">13dp</dimen>

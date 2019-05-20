@@ -36,9 +36,4 @@
         <item name="fontFamily">@raw/asap_bolditalic</item>
     </style>
 
-    <!--    MEDIUMITALIC        -->
-    <style name="NearItUIGlobalTheme.MediumItalicText" parent="NearItUIGlobalTheme">
-        <item name="fontFamily">@raw/asap_mediumitalic</item>
-    </style>
-
 </resources>
