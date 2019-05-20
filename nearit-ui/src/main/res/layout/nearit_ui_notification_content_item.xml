@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.nearit.ui_bindings.inbox.customviews.NearITNotificationCardLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nearit_ui_content_notification_item_height"
@@ -13,9 +14,17 @@
     android:paddingTop="@dimen/nearit_ui_content_notification_item_padding_top"
     android:elevation="@dimen/nearit_ui_history_card_elevation">
 
-    <Button
+    <com.nearit.ui_bindings.inbox.customviews.NearITNotificationCardButton
         android:id="@+id/detail_button"
-        android:text="@string/nearit_ui_history_content_button_label"
-        style="@style/nearit_ui_notification_card_button_style" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:minHeight="0dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:clickable="false"
+        app:text="@string/nearit_ui_history_content_button_label"/>
 
 </com.nearit.ui_bindings.inbox.customviews.NearITNotificationCardLayout>
