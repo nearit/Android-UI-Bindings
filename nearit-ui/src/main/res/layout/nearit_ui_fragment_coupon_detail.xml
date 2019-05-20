@@ -60,11 +60,11 @@
 
                 <TextView
                     android:id="@+id/coupon_title"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/nearit_ui_coupon_detail_margin2"
-                    android:textAppearance="@style/NearItUICouponDetailTitleTextAppearance"
-                    android:layout_marginStart="@dimen/nearit_ui_coupon_detail_margin2" />
+                    android:layout_marginStart="@dimen/nearit_ui_coupon_detail_margin2"
+                    android:textAppearance="@style/NearItUICouponDetailTitleTextAppearance" />
 
             </LinearLayout>
 
