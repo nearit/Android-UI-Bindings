@@ -18,7 +18,9 @@
         android:focusable="true"
         android:background="?attr/selectableItemBackground"
         android:paddingLeft="2.5dp"
-        android:paddingStart="2.5dp">
+        android:paddingStart="2.5dp"
+        android:paddingRight="2.5dp"
+        android:paddingEnd="2.5dp">
 
         <ImageView
             android:layout_width="wrap_content"
