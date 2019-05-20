@@ -3,8 +3,6 @@ package com.nearit.ui_bindings.permissions;
 import android.content.Context;
 import android.content.Intent;
 
-import com.nearit.ui_bindings.inbox.NearITNotificationHistoryActivitySingleInstance;
-
 /**
  * @author Federico Boschini
  */
