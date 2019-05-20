@@ -16,7 +16,6 @@
     <Button
         android:id="@+id/detail_button"
         android:text="@string/nearit_ui_history_coupon_button_label"
-
         style="@style/nearit_ui_notification_card_button_style" />
 
 </com.nearit.ui_bindings.inbox.customviews.NearITNotificationCardLayout>

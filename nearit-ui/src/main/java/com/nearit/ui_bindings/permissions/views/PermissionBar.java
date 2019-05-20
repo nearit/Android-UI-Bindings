@@ -10,10 +10,14 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -176,6 +180,8 @@ public class PermissionBar extends RelativeLayout {
         okButton = findViewById(R.id.ok_button);
         okButton.setClickable(true);
 
+        handleRTL();
+
         final PermissionsRequestIntentBuilder builder =
                 NearITUIBindings.getInstance(context).permissionsIntentBuilder(
                         NearItLaunchMode.STANDARD,
@@ -220,7 +226,6 @@ public class PermissionBar extends RelativeLayout {
             builder.setWorriedFaceResourceId(happyIconResId);
         }
 
-
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -247,6 +252,24 @@ public class PermissionBar extends RelativeLayout {
         getContext().registerReceiver(mReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
 
         checkPermissionsAndUpdateUI();
+    }
+
+    private void handleRTL() {
+        alertMessage.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                alertMessage.getViewTreeObserver().removeOnPreDrawListener(this);
+                if (ViewCompat.getLayoutDirection(alertMessage) == ViewCompat.LAYOUT_DIRECTION_RTL) {
+                    ViewCompat.setLayoutDirection(alertMessage, ViewCompat.LAYOUT_DIRECTION_RTL);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                        alertMessage.setTextDirection(TEXT_DIRECTION_RTL);
+                    } else {
+                        alertMessage.setGravity(Gravity.START);
+                    }
+                }
+                return true;
+            }
+        });
     }
 
     private void hideBluetoothIcon() {

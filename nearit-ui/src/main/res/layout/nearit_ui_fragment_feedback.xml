@@ -45,7 +45,6 @@
             android:id="@+id/feedback_rating_bar_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:paddingBottom="28dp"
             android:paddingTop="28dp"
             android:gravity="center_horizontal">
@@ -93,7 +92,7 @@
 
                 android:background="@drawable/nearit_ui_edittext_background"
                 android:padding="2dp"
-                android:gravity="top|left"
+                android:gravity="top|start"
                 android:inputType="textMultiLine"
                 android:lines="@integer/nearit_ui_feedback_comment_box_lines"
                 android:minLines="@integer/nearit_ui_feedback_comment_box_min_lines"

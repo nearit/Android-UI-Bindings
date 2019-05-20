@@ -55,7 +55,7 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
     private PermissionButton locationButton;
     private PermissionButton bleButton;
     private PermissionButton notificationsButton;
-    private TextView explanationText, closeButton;
+    private TextView closeButton;
 
     @Nullable
     private ImageView headerImageView;
@@ -75,8 +75,7 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
         bleButton = findViewById(R.id.ble_button);
         notificationsButton = findViewById(R.id.notification_button);
         headerImageView = findViewById(R.id.header);
-        explanationText = findViewById(R.id.permissions_explanation);
-
+        TextView explanationText = findViewById(R.id.permissions_explanation);
 
         Intent intent = getIntent();
         if (intent.hasExtra(ExtraConstants.EXTRA_FLOW_PARAMS)) {
