@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nearit_ui_coupon_list_coupon_height"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginTop="@dimen/nearit_ui_coupon_list_coupon_margin1"
     android:background="@drawable/nearit_ui_selector_coupon_list_coupon_background"
     android:orientation="horizontal"
@@ -34,11 +35,10 @@
     </LinearLayout>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/coupon_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/coupon_title"
@@ -47,6 +47,7 @@
             android:layout_marginRight="@dimen/nearit_ui_coupon_list_coupon_margin4"
             android:layout_marginEnd="@dimen/nearit_ui_coupon_list_coupon_margin4"
             android:gravity="center_vertical"
+            tools:text="titolo: sei"
             android:textAppearance="@style/NearItUICouponListTitleTextAppearance" />
 
         <TextView
@@ -56,18 +57,24 @@
             android:layout_marginRight="@dimen/nearit_ui_coupon_list_coupon_margin5"
             android:layout_marginEnd="@dimen/nearit_ui_coupon_list_coupon_margin5"
             android:layout_marginTop="@dimen/nearit_ui_coupon_list_coupon_margin6"
+            android:layout_below="@id/coupon_title"
             android:gravity="center_vertical"
             android:maxLines="2"
+            tools:text="valore: sei"
             android:textAppearance="@style/NearItUICouponListValueTextAppearance" />
 
         <TextView
             android:id="@+id/coupon_validity"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/nearit_ui_coupon_list_coupon_validity_height"
             android:layout_marginTop="@dimen/nearit_ui_coupon_list_coupon_margin7"
             android:gravity="end"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            tools:text="Valid coupon"
             android:textAppearance="@style/NearItUICouponListValidityTextAppearance" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
