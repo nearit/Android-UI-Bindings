@@ -13,7 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
         android:src="@drawable/ic_nearit_ui_notifications"/>
 
     <ImageView
@@ -21,7 +23,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
         android:src="@drawable/ic_nearit_ui_bluetooth_white"/>
 
     <ImageView
@@ -29,7 +33,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
         android:src="@drawable/ic_nearit_ui_location_white"/>
 
 </LinearLayout>

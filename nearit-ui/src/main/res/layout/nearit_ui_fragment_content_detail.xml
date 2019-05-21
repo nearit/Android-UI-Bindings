@@ -14,7 +14,9 @@
         android:focusableInTouchMode="true"
         android:paddingBottom="@dimen/nearit_ui_content_vertical_padding"
         android:paddingLeft="@dimen/nearit_ui_content_horizontal_padding"
+        android:paddingStart="@dimen/nearit_ui_content_horizontal_padding"
         android:paddingRight="@dimen/nearit_ui_content_horizontal_padding"
+        android:paddingEnd="@dimen/nearit_ui_content_horizontal_padding"
         android:paddingTop="@dimen/nearit_ui_content_vertical_padding">
 
         <LinearLayout

@@ -31,7 +31,9 @@
             android:clipToPadding="false"
             android:paddingBottom="@dimen/nearit_ui_coupon_list_padding_bottom"
             android:paddingLeft="@dimen/nearit_ui_coupon_list_padding_left_right"
-            android:paddingRight="@dimen/nearit_ui_coupon_list_padding_left_right" />
+            android:paddingStart="@dimen/nearit_ui_coupon_list_padding_left_right"
+            android:paddingRight="@dimen/nearit_ui_coupon_list_padding_left_right"
+            android:paddingEnd="@dimen/nearit_ui_coupon_list_padding_left_right" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

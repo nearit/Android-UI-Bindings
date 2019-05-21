@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     android:background="@drawable/nearit_ui_coupon_top_section_background"
     android:paddingLeft="@dimen/nearit_ui_coupon_detail_horizontal_padding"
-    android:paddingRight="@dimen/nearit_ui_coupon_detail_horizontal_padding">
+    android:paddingStart="@dimen/nearit_ui_coupon_detail_horizontal_padding"
+    android:paddingRight="@dimen/nearit_ui_coupon_detail_horizontal_padding"
+    android:paddingEnd="@dimen/nearit_ui_coupon_detail_horizontal_padding">
 
     <LinearLayout
         android:id="@+id/coupon_validity_section"
