@@ -22,6 +22,6 @@
         android:layout_marginStart="10dp"
         android:layout_centerVertical="true"
         android:scaleX="@integer/nearit_ui_rtl_flip_factor"
-        android:src="@drawable/nearit_ui_button_arrow"/>
+        style="@style/NearITUINotificationCardButton"/>
 
 </RelativeLayout>
