@@ -3,7 +3,7 @@ repositories {
 }
 
 buildscript {
-    ext.kotlin_version = '1.3.21'
+    ext.kotlin_version = '1.3.31'
     repositories {
         maven { url 'https://maven.fabric.io/public' }
         jcenter()
@@ -57,7 +57,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    // implementation 'it.near.sdk:nearit-ui:2.11.5'
+    // implementation 'it.near.sdk:nearit-ui:2.11.7'
     implementation project(':nearit-ui')
 
     implementation 'it.near.sdk:nearit:2.11.2'

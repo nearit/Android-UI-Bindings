@@ -2,7 +2,6 @@ package com.nearit.ui_bindings.permissions;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 
 /**
  * @author Federico Boschini

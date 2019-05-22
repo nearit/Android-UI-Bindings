@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2015 Google Inc. All Rights Reserved.
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright 2015 Google Inc. All Rights Reserved.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -18,9 +17,11 @@
     android:id="@+id/webview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/nearit_ui_webview_vertical_margin"
+    android:paddingStart="@dimen/nearit_ui_webview_horizontal_margin"
     android:paddingLeft="@dimen/nearit_ui_webview_horizontal_margin"
-    android:paddingRight="@dimen/nearit_ui_webview_horizontal_margin"
     android:paddingTop="@dimen/nearit_ui_webview_vertical_margin"
+    android:paddingEnd="@dimen/nearit_ui_webview_horizontal_margin"
+    android:paddingRight="@dimen/nearit_ui_webview_horizontal_margin"
+    android:paddingBottom="@dimen/nearit_ui_webview_vertical_margin"
     tools:context="com.nearit.customtabs.WebViewActivity" />
 

@@ -1,14 +1,12 @@
 package com.nearit.ui_bindings.inbox.viewholders;
 
-import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.inbox.NotificationsAdapter;
+import com.nearit.ui_bindings.inbox.customviews.NearITNotificationCardButton;
 import com.nearit.ui_bindings.inbox.customviews.NearITNotificationCardLayout;
 
 import it.near.sdk.reactions.contentplugin.model.Content;
@@ -17,7 +15,7 @@ public class ContentNotificationViewHolder extends BaseViewHolder<Content> {
 
     public static final int VIEWTYPE = 2;
 
-    private final Button button;
+    private final NearITNotificationCardButton button;
     private final NearITNotificationCardLayout layout;
 
     public ContentNotificationViewHolder(LayoutInflater inflater, ViewGroup parent, final NotificationsAdapter.NotificationAdapterListener listener, NotificationsAdapter.NotificationReadListener readListener) {
@@ -29,7 +27,7 @@ public class ContentNotificationViewHolder extends BaseViewHolder<Content> {
             public void onClick(View view) {
                 item.read = true;
                 layout.setMessageUnread(false);
-                button.setTypeface(null, Typeface.NORMAL);
+                button.setRead();
                 listener.onNotificationTap(item);
             }
         });
@@ -40,12 +38,10 @@ public class ContentNotificationViewHolder extends BaseViewHolder<Content> {
         layout.setTimestamp(item.timestamp);
         layout.setNotification(content.notificationMessage);
         layout.setMessageUnread(!item.read);
-        button.setTypeface(null,
-                item.read ? Typeface.NORMAL : Typeface.BOLD);
-        Context context = itemView.getContext();
-        button.setTextColor(context.getResources().getColor(item.read ?
-                R.color.nearit_ui_notification_card_text_read_color :
-                R.color.nearit_ui_notification_card_text_unread_color)
-        );
+        if (item.read) {
+            button.setRead();
+        } else {
+            button.setUnread();
+        }
     }
 }

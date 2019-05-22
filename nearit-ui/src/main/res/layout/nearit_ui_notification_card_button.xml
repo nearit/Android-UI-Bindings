@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/nearit_ui_detail_button_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textAppearance="@style/NearItUINotificationButtonTextAppearance"
+        tools:text="See more"/>
+
+    <ImageView
+        android:id="@+id/nearit_ui_detail_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/nearit_ui_detail_button_text"
+        android:layout_toEndOf="@id/nearit_ui_detail_button_text"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_centerVertical="true"
+        android:scaleX="@integer/nearit_ui_rtl_flip_factor"
+        android:src="@drawable/nearit_ui_button_arrow"/>
+
+</RelativeLayout>

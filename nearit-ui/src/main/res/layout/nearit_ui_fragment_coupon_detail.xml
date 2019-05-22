@@ -33,7 +33,9 @@
             android:orientation="vertical"
             android:paddingBottom="@dimen/nearit_ui_coupon_detail_bottom_padding"
             android:paddingLeft="@dimen/nearit_ui_coupon_detail_horizontal_padding"
-            android:paddingRight="@dimen/nearit_ui_coupon_detail_horizontal_padding">
+            android:paddingStart="@dimen/nearit_ui_coupon_detail_horizontal_padding"
+            android:paddingRight="@dimen/nearit_ui_coupon_detail_horizontal_padding"
+            android:paddingEnd="@dimen/nearit_ui_coupon_detail_horizontal_padding">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,9 +60,10 @@
 
                 <TextView
                     android:id="@+id/coupon_title"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/nearit_ui_coupon_detail_margin2"
+                    android:layout_marginStart="@dimen/nearit_ui_coupon_detail_margin2"
                     android:textAppearance="@style/NearItUICouponDetailTitleTextAppearance" />
 
             </LinearLayout>
