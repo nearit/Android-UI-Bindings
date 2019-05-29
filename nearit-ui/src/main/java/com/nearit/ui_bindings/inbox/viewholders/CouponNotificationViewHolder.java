@@ -9,7 +9,6 @@ import com.nearit.ui_bindings.inbox.NotificationsAdapter;
 import com.nearit.ui_bindings.inbox.customviews.NearITNotificationCardButton;
 import com.nearit.ui_bindings.inbox.customviews.NearITNotificationCardLayout;
 
-import it.near.sdk.reactions.couponplugin.model.Claim;
 import it.near.sdk.reactions.couponplugin.model.Coupon;
 
 public class CouponNotificationViewHolder extends BaseViewHolder<Coupon> {
@@ -36,9 +35,6 @@ public class CouponNotificationViewHolder extends BaseViewHolder<Coupon> {
 
     @Override
     protected void bindToView(Coupon coupon) {
-        if (coupon.claims == null) return;
-        Claim claim = coupon.claims.get(0);
-        if (claim == null) return;
         layout.setTimestamp(item.timestamp);
         layout.setNotification(coupon.notificationMessage);
         layout.setMessageUnread(!item.read);
