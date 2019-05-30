@@ -179,11 +179,6 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
     }
 
     @Override
-    public void handleActivityResult(int requestCode, int resultCode) {
-        checkPermissions();
-    }
-
-    @Override
     public void onDialogCanceled() {
         checkPermissions();
     }
@@ -211,11 +206,12 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
         }
 
         /* LOCATION */
-        if (permissionsManager.isLocationPermissionGranted() == LOCATION_PERMISSION_GRANTED && permissionsManager.areLocationServicesOn()) {
+        int locationPermission = permissionsManager.isLocationPermissionGranted();
+        if (locationPermission == LOCATION_PERMISSION_GRANTED && permissionsManager.areLocationServicesOn()) {
             view.setLocationButtonHappy();
         }
 
-        switch (permissionsManager.isLocationPermissionGranted()) {
+        switch (locationPermission) {
             case LOCATION_PERMISSION_GRANTED:
                 if (state.getLocationAsked()) {
                     if (!permissionsManager.areLocationServicesOn()) {

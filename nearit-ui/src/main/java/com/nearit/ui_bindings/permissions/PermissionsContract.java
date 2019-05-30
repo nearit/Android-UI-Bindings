@@ -1,7 +1,5 @@
 package com.nearit.ui_bindings.permissions;
 
-import android.support.annotation.NonNull;
-
 import com.nearit.ui_bindings.base.BasePresenter;
 import com.nearit.ui_bindings.base.BaseView;
 
@@ -71,7 +69,5 @@ interface PermissionsContract {
 
         void handleLocationPermissionGranted();
         void handleLocationPermissionDenied();
-
-        void handleActivityResult(int requestCode, int resultCode);
     }
 }

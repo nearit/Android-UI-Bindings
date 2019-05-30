@@ -150,7 +150,7 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        presenter.handleActivityResult(requestCode, resultCode);
+        presenter.checkPermissions();
     }
 
     @Override
@@ -354,7 +354,8 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
 
     @Override
     public void requestLocationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        // TODO: fix check when Q is stable
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             requestPermissions(new String[]{android.Manifest.permission.ACCESS_BACKGROUND_LOCATION}, NEAR_PERMISSION_REQUEST_FINE_LOCATION);
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -409,7 +410,8 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
 
     @Override
     public boolean shouldShowRequestPermissionRationale() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        // TODO: fix check when Q is stable
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             return ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION);
         } else return ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION);
     }
@@ -422,7 +424,8 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
         builder.setPositiveButton(R.string.nearit_ui_go_to_settings, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 Intent intent;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                // TODO: fix check when Q is stable
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                     intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
                 } else {
                     intent = new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);

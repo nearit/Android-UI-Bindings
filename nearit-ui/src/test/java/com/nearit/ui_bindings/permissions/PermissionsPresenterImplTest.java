@@ -10,8 +10,6 @@ import org.mockito.MockitoAnnotations;
 
 import it.near.sdk.NearItManager;
 
-import static android.app.Activity.RESULT_OK;
-import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_BLUETOOTH_SETTINGS_CODE;
 import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_DENIED;
 import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_GRANTED;
 import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_ONLY_IN_USE;
@@ -292,7 +290,7 @@ public class PermissionsPresenterImplTest {
         whenLocationPermissionIsGranted();
         whenLocationIsOn();
 
-        presenter.handleActivityResult(1, 2);
+        presenter.checkPermissions();
 
         verify(view).setLocationButtonHappy();
     }
@@ -303,7 +301,7 @@ public class PermissionsPresenterImplTest {
         whenLocationIsOn();
         whenLocationPermissionIsNotGranted();
 
-        presenter.handleActivityResult(1, 2);
+        presenter.checkPermissions();
 
         verify(view).setLocationButtonSad();
     }
@@ -314,7 +312,7 @@ public class PermissionsPresenterImplTest {
         whenLocationIsOff();
         whenLocationPermissionIsGranted();
 
-        presenter.handleActivityResult(1, 2);
+        presenter.checkPermissions();
 
         verify(view).setLocationButtonWorriedServices();
     }
@@ -325,7 +323,7 @@ public class PermissionsPresenterImplTest {
         whenLocationIsOff();
         whenLocationPermissionIsNotGranted();
 
-        presenter.handleActivityResult(1, 2);
+        presenter.checkPermissions();
 
         verify(view).setLocationButtonSad();
     }
@@ -334,7 +332,7 @@ public class PermissionsPresenterImplTest {
     public void onActivityResult_ifBluetoothOff_checkPermissionsAndUpdateUI() {
         whenBluetoothIsOff();
 
-        presenter.handleActivityResult(1, 2);
+        presenter.checkPermissions();
 
         verify(view).resetBluetoothButton();
     }
@@ -343,7 +341,7 @@ public class PermissionsPresenterImplTest {
     public void onActivityResult_ifBluetoothOn_checkPermissionsAndUpdateUI() {
         whenBluetoothIsOn();
 
-        presenter.handleActivityResult(1, 2);
+        presenter.checkPermissions();
 
         verify(view).setBluetoothButtonHappy();
     }
@@ -353,7 +351,7 @@ public class PermissionsPresenterImplTest {
         whenNotificationsAsked();
         whenNotificationsAreOff();
 
-        presenter.handleActivityResult(1, 2);
+        presenter.checkPermissions();
 
         verify(view).setNotificationsButtonSad();
     }
@@ -362,7 +360,7 @@ public class PermissionsPresenterImplTest {
     public void onActivityResult_ifNotificationsOn_notificationsHappy() {
         whenNotificationsAreOn();
 
-        presenter.handleActivityResult(NEAR_BLUETOOTH_SETTINGS_CODE, RESULT_OK);
+        presenter.checkPermissions();
 
         verify(view).setNotificationsButtonHappy();
     }
