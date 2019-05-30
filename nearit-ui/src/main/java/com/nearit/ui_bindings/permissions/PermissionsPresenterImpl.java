@@ -1,13 +1,11 @@
 package com.nearit.ui_bindings.permissions;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-
 import it.near.sdk.NearItManager;
 
 import static com.nearit.ui_bindings.permissions.views.PermissionButton.NO_ICON;
+import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_ONLY_IN_USE;
+import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_GRANTED;
+import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_DENIED;
 
 /**
  * @author Federico Boschini
@@ -108,24 +106,37 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
 
     private void askLocationPermission() {
 
-        boolean isPermissionGranted = permissionsManager.isLocationPermissionGranted();
+        int isPermissionGranted = permissionsManager.isLocationPermissionGranted();
 
-        if (isPermissionGranted) {
-            if (!permissionsManager.isFlightModeOn()) {
-                state.setLocationAsked();
-                view.turnOnLocationServices(params.isInvisibleLayoutMode() && !params.isNoBeacon());
-            } else {
-                view.showAirplaneDialog();
-            }
-        } else {
-            boolean alreadyAsked;
-            alreadyAsked = state.getLocationPermissionAsked();
-            if (alreadyAsked && !view.shouldShowRequestPermissionRationale()) {
-                view.showDontAskAgainDialog();
-            } else {
-                state.setLocationPermissionAsked();
-                view.requestLocationPermission();
-            }
+        switch (isPermissionGranted) {
+            case LOCATION_PERMISSION_GRANTED:
+                if (!permissionsManager.isFlightModeOn()) {
+                    state.setLocationAsked();
+                    view.turnOnLocationServices(params.isInvisibleLayoutMode() && !params.isNoBeacon());
+                } else {
+                    view.showAirplaneDialog();
+                }
+                break;
+            case LOCATION_PERMISSION_ONLY_IN_USE:
+                boolean asked;
+                asked = state.getLocationPermissionAsked();
+                if (asked && !view.shouldShowRequestPermissionRationale()) {
+                    view.showDontAskAgainDialog();
+                } else {
+                    state.setLocationPermissionAsked();
+                    view.requestLocationPermission();
+                }
+                break;
+            case LOCATION_PERMISSION_DENIED:
+                boolean alreadyAsked;
+                alreadyAsked = state.getLocationPermissionAsked();
+                if (alreadyAsked && !view.shouldShowRequestPermissionRationale()) {
+                    view.showDontAskAgainDialog();
+                } else {
+                    state.setLocationPermissionAsked();
+                    view.requestLocationPermission();
+                }
+                break;
         }
     }
 
@@ -134,7 +145,7 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
         checkPermissions();
     }
 
-    @SuppressLint("MissingPermission")
+    @SuppressWarnings("MissingPermission")
     @Override
     public void finalCheck() {
         if (checkLocation()) {
@@ -153,24 +164,22 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
     }
 
     @Override
-    public void handlePermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == NEAR_PERMISSION_REQUEST_FINE_LOCATION) {
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if (!permissionsManager.isFlightModeOn()) {
-                    state.setLocationAsked();
-                    view.turnOnLocationServices(params.isInvisibleLayoutMode() && !params.isNoBeacon());
-                } else {
-                    view.showAirplaneDialog();
-                }
-            } else {
-                checkPermissions();
-            }
+    public void handleLocationPermissionGranted() {
+        if (!permissionsManager.isFlightModeOn()) {
+            state.setLocationAsked();
+            view.turnOnLocationServices(params.isInvisibleLayoutMode() && !params.isNoBeacon());
+        } else {
+            view.showAirplaneDialog();
         }
     }
 
     @Override
-    public void handleActivityResult(int requestCode, int resultCode, Intent data) {
+    public void handleLocationPermissionDenied() {
+        checkPermissions();
+    }
+
+    @Override
+    public void handleActivityResult(int requestCode, int resultCode) {
         checkPermissions();
     }
 
@@ -189,6 +198,8 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
         if (state.getBluetoothAsked() || state.getLocationAsked() || state.getNotificationsAsked()) {
             view.refreshCloseText();
         }
+
+        /* BLUETOOTH */
         if (permissionsManager.isBluetoothOn()) {
             view.setBluetoothButtonHappy();
         } else {
@@ -199,22 +210,32 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
             }
         }
 
-        if (permissionsManager.isLocationPermissionGranted() && permissionsManager.areLocationServicesOn()) {
+        /* LOCATION */
+        if (permissionsManager.isLocationPermissionGranted() == LOCATION_PERMISSION_GRANTED && permissionsManager.areLocationServicesOn()) {
             view.setLocationButtonHappy();
-        } else {
-            if (state.getLocationAsked()) {
-                if (permissionsManager.isLocationPermissionGranted()) {
-                    if (!permissionsManager.areLocationServicesOn()) {
-                        view.setLocationButtonWorried();
-                    }
-                } else {
-                    view.setLocationButtonSad();
-                }
-            } else {
-                view.resetLocationButton();
-            }
         }
 
+        switch (permissionsManager.isLocationPermissionGranted()) {
+            case LOCATION_PERMISSION_GRANTED:
+                if (state.getLocationAsked()) {
+                    if (!permissionsManager.areLocationServicesOn()) {
+                        view.setLocationButtonWorriedServices();
+                    } /* NOT REACHABLE else {  } */
+                } else view.resetLocationButton();
+                break;
+            case LOCATION_PERMISSION_ONLY_IN_USE:
+                view.setLocationButtonWorriedWhenInUse();
+                break;
+            default:
+                if (state.getLocationPermissionAsked()) {
+                    view.setLocationButtonSad();
+                } else {
+                    view.resetLocationButton();
+                }
+
+        }
+
+        /* NOTIFICATIONS */
         if (permissionsManager.areNotificationsEnabled()) {
             view.setNotificationsButtonHappy();
         } else {
@@ -229,7 +250,7 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
 
     private boolean checkLocation() {
         return permissionsManager.areLocationServicesOn() &&
-                permissionsManager.isLocationPermissionGranted();
+                permissionsManager.isLocationPermissionGranted() == LOCATION_PERMISSION_GRANTED;
     }
 
 }

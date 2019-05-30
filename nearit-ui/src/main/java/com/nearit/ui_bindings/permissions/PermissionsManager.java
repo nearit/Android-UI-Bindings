@@ -23,7 +23,7 @@ public class PermissionsManager {
         return PermissionsUtils.areNotificationsEnabled(context);
     }
 
-    public boolean isLocationPermissionGranted() {
+    public int isLocationPermissionGranted() {
         return PermissionsUtils.checkLocationPermission(context);
     }
 

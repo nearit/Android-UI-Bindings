@@ -1,8 +1,5 @@
 package com.nearit.ui_bindings.permissions.invisible;
 
-import android.content.Intent;
-import android.support.annotation.NonNull;
-
 import com.nearit.ui_bindings.base.BasePresenter;
 import com.nearit.ui_bindings.base.BaseView;
 
@@ -22,8 +19,8 @@ public interface InvisiblePermissionsContract {
         void finishWithKoResult();
 
         void requestLocationPermission();
-        void turnOnLocationServices(boolean needBle);
-        void turnOnBluetooth();
+        void requestLocationServices(boolean needBle);
+        void requestBluetooth();
 
         boolean shouldShowRequestPermissionRationale();
     }
@@ -32,8 +29,12 @@ public interface InvisiblePermissionsContract {
         void onDialogClosed();
         void onLocationServicesOn();
 
-        void handlePermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults);
-        void handleActivityResult(int requestCode, int resultCode, Intent data);
+        void handleLocationPermissionGranted();
+        void handleLocationPermissionDenied();
+
+        void handleLocationServicesDenied();
+        void handleBluetoothGranted();
+        void handleBluetoothDenied();
     }
 
 }

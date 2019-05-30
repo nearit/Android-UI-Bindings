@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -138,12 +139,18 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        presenter.handlePermissionResult(requestCode, permissions, grantResults);
+        if (requestCode == NEAR_PERMISSION_REQUEST_FINE_LOCATION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                presenter.handleLocationPermissionGranted();
+            } else {
+                presenter.handleLocationPermissionDenied();
+            }
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        presenter.handleActivityResult(requestCode, resultCode, data);
+        presenter.handleActivityResult(requestCode, resultCode);
     }
 
     @Override
@@ -243,7 +250,18 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
     }
 
     @Override
-    public void setLocationButtonWorried() {
+    public void setLocationButtonWorriedWhenInUse() {
+        setLocationButtonWorried();
+        locationButton.setWorriedLabel(getResources().getString(R.string.nearit_ui_location_button_worried_when_in_use_text));
+    }
+
+    @Override
+    public void setLocationButtonWorriedServices() {
+        setLocationButtonWorried();
+        locationButton.setWorriedLabel(getResources().getString(R.string.nearit_ui_location_button_worried_text));
+    }
+
+    private void setLocationButtonWorried() {
         locationButton.setWorried();
         locationButton.setText(getResources().getString(R.string.nearit_ui_location_button_text));
         locationButton.setWorriedLabel(getResources().getString(R.string.nearit_ui_location_button_worried_text));
@@ -336,8 +354,12 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
 
     @Override
     public void requestLocationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, NEAR_PERMISSION_REQUEST_FINE_LOCATION);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            requestPermissions(new String[]{android.Manifest.permission.ACCESS_BACKGROUND_LOCATION}, NEAR_PERMISSION_REQUEST_FINE_LOCATION);
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, NEAR_PERMISSION_REQUEST_FINE_LOCATION);
+            }
         }
     }
 
@@ -387,7 +409,9 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
 
     @Override
     public boolean shouldShowRequestPermissionRationale() {
-        return ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            return ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+        } else return ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION);
     }
 
     @Override
@@ -397,7 +421,12 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
 
         builder.setPositiveButton(R.string.nearit_ui_go_to_settings, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                Intent intent = new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
+                Intent intent;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+                } else {
+                    intent = new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
+                }
                 startActivity(intent);
             }
         });

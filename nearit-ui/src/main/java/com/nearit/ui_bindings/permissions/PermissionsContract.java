@@ -1,6 +1,5 @@
 package com.nearit.ui_bindings.permissions;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import com.nearit.ui_bindings.base.BasePresenter;
@@ -31,7 +30,8 @@ interface PermissionsContract {
         void resetBluetoothButton();
 
         void setLocationButtonHappy();
-        void setLocationButtonWorried();
+        void setLocationButtonWorriedServices();
+        void setLocationButtonWorriedWhenInUse();
         void setLocationButtonSad();
         void resetLocationButton();
 
@@ -68,7 +68,10 @@ interface PermissionsContract {
         void finalCheck();
 
         void onLocationServicesOn();
-        void handlePermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults);
-        void handleActivityResult(int requestCode, int resultCode, Intent data);
+
+        void handleLocationPermissionGranted();
+        void handleLocationPermissionDenied();
+
+        void handleActivityResult(int requestCode, int resultCode);
     }
 }

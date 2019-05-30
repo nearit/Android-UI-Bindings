@@ -1,11 +1,13 @@
 package com.nearit.ui_bindings.permissions.invisible;
 
 import android.Manifest;
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,7 +29,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
+import com.nearit.ui_bindings.permissions.PermissionsManager;
 import com.nearit.ui_bindings.permissions.PermissionsRequestExtraParams;
+import com.nearit.ui_bindings.permissions.State;
+
+import it.near.sdk.NearItManager;
 
 import static com.nearit.ui_bindings.permissions.invisible.NearItInvisiblePresenterImpl.NEAR_BLUETOOTH_SETTINGS_CODE;
 import static com.nearit.ui_bindings.permissions.invisible.NearItInvisiblePresenterImpl.NEAR_LOCATION_SETTINGS_CODE;
@@ -51,7 +57,13 @@ public class NearItInvisiblePermissionsActivity extends AppCompatActivity implem
             params = PermissionsRequestExtraParams.fromIntent(intent);
         }
 
-        NearItInvisiblePresenterImpl.obtain(this, params, this);
+        new NearItInvisiblePresenterImpl(
+                this,
+                params,
+                PermissionsManager.obtain(this),
+                State.obtain(this),
+                NearItManager.getInstance()
+        );
     }
 
     @Override
@@ -68,12 +80,24 @@ public class NearItInvisiblePermissionsActivity extends AppCompatActivity implem
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        presenter.handleActivityResult(requestCode, resultCode, data);
+        if (requestCode == NEAR_LOCATION_SETTINGS_CODE && resultCode != Activity.RESULT_OK) {
+            presenter.handleLocationServicesDenied();
+        }
+        if (requestCode == NEAR_BLUETOOTH_SETTINGS_CODE) {
+            if (resultCode == Activity.RESULT_OK) presenter.handleBluetoothGranted();
+            else presenter.handleBluetoothDenied();
+        }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        presenter.handlePermissionResult(requestCode, permissions, grantResults);
+        if (requestCode == NEAR_PERMISSION_REQUEST_FINE_LOCATION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                presenter.handleLocationPermissionGranted();
+            } else {
+                presenter.handleLocationPermissionDenied();
+            }
+        }
     }
 
     @Override
@@ -95,7 +119,7 @@ public class NearItInvisiblePermissionsActivity extends AppCompatActivity implem
     }
 
     @Override
-    public void turnOnLocationServices(boolean needBle) {
+    public void requestLocationServices(boolean needBle) {
         LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
@@ -133,7 +157,7 @@ public class NearItInvisiblePermissionsActivity extends AppCompatActivity implem
     }
 
     @Override
-    public void turnOnBluetooth() {
+    public void requestBluetooth() {
         Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
         startActivityForResult(enableBtIntent, NEAR_BLUETOOTH_SETTINGS_CODE);
     }

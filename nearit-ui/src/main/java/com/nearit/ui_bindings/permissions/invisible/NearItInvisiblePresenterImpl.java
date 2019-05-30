@@ -1,17 +1,13 @@
 package com.nearit.ui_bindings.permissions.invisible;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-
 import com.nearit.ui_bindings.permissions.PermissionsManager;
 import com.nearit.ui_bindings.permissions.PermissionsRequestExtraParams;
 import com.nearit.ui_bindings.permissions.State;
 
 import it.near.sdk.NearItManager;
+
+import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_GRANTED;
+import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_ONLY_IN_USE;
 
 /**
  * @author Federico Boschini
@@ -84,7 +80,7 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
     @Override
     public void onLocationServicesOn() {
         if (!params.isNoBeacon() && permissionsManager.isBleAvailable() && !permissionsManager.isBluetoothOn()) {
-            view.turnOnBluetooth();
+            view.requestBluetooth();
         } else {
             if (!permissionsManager.areNotificationsEnabled() && !params.isNoNotifications()) {
                 view.showNotificationsDialog();
@@ -95,51 +91,47 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
     }
 
     @Override
-    public void handlePermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == NEAR_PERMISSION_REQUEST_FINE_LOCATION) {
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if (permissionsManager.isFlightModeOn()) {
-                    view.showAirplaneDialog();
-                    flightModeDialogLaunched = true;
-                }
-            } else {
-                //  DENIED
+    public void handleLocationPermissionGranted() {
+        if (permissionsManager.isFlightModeOn()) {
+            view.showAirplaneDialog();
+            flightModeDialogLaunched = true;
+        }
+    }
+
+    @Override
+    public void handleLocationPermissionDenied() {
+        // Location Permission denied
+        finalCheck();
+    }
+
+    @Override
+    public void handleLocationServicesDenied() {
+        // Location Services dialog canceled
+        finalCheck();
+    }
+
+    @Override
+    public void handleBluetoothGranted() {
+        if (checkLocation()) {
+            if (permissionsManager.areNotificationsEnabled() || params.isNoNotifications()) {
                 finalCheck();
+            } else {
+                notificationsDialogLaunched = true;
+                view.showNotificationsDialog();
+            }
+        } else {
+            if (permissionsManager.isLocationPermissionGranted() == LOCATION_PERMISSION_GRANTED) {
+                askLocationServices();
+            } else {
+                askLocationPermission();
             }
         }
     }
 
     @Override
-    public void handleActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == NEAR_LOCATION_SETTINGS_CODE) {
-            if (resultCode != Activity.RESULT_OK) {
-                //  CANCELED
-                finalCheck();
-            }
-        }
-
-        if (requestCode == NEAR_BLUETOOTH_SETTINGS_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                if (checkLocation()) {
-                    if (permissionsManager.areNotificationsEnabled() || params.isNoNotifications()) {
-                        finalCheck();
-                    } else {
-                        notificationsDialogLaunched = true;
-                        view.showNotificationsDialog();
-                    }
-                } else {
-                    if (!permissionsManager.isLocationPermissionGranted()) {
-                        askLocationPermission();
-                    } else {
-                        askLocationServices();
-                    }
-                }
-            } else {
-                //  CANCELED
-                finalCheck();
-            }
-        }
+    public void handleBluetoothDenied() {
+        // Bluetooth dialog canceled
+        finalCheck();
     }
 
     @Override
@@ -167,7 +159,7 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
         }
     }
 
-    @SuppressLint("MissingPermission")
+    @SuppressWarnings("MissingPermission")
     private void onPermissionsReady() {
         if (params.isAutoStartRadar()) {
             nearItManager.startRadar();
@@ -177,28 +169,30 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
 
     private void askLocationPermission() {
 
-        boolean isPermissionGranted = permissionsManager.isLocationPermissionGranted();
+        int isPermissionGranted = permissionsManager.isLocationPermissionGranted();
 
-        if (isPermissionGranted) {
-            askLocationServices();
-        } else {
-            boolean alreadyAsked;
-            alreadyAsked = state.getLocationPermissionAsked();
-            if (alreadyAsked && !view.shouldShowRequestPermissionRationale()) {
-                view.showDontAskAgainDialog();
-                dontAskAgainDialogLaunched = true;
-            } else {
-                state.setLocationPermissionAsked();
-                state.setLocationAsked();
-                view.requestLocationPermission();
-            }
+        switch (isPermissionGranted) {
+            case LOCATION_PERMISSION_ONLY_IN_USE:
+            case LOCATION_PERMISSION_GRANTED:
+                askLocationServices();
+                break;
+            default:
+                boolean alreadyAsked;
+                alreadyAsked = state.getLocationPermissionAsked();
+                if (alreadyAsked && !view.shouldShowRequestPermissionRationale()) {
+                    view.showDontAskAgainDialog();
+                    dontAskAgainDialogLaunched = true;
+                } else {
+                    state.setLocationPermissionAsked();
+                    view.requestLocationPermission();
+                }
         }
     }
 
     private void askLocationServices() {
         if (!permissionsManager.areLocationServicesOn()) {
             state.setLocationAsked();
-            view.turnOnLocationServices(permissionsManager.isBleAvailable() && !params.isNoBeacon());
+            view.requestLocationServices(permissionsManager.isBleAvailable() && !params.isNoBeacon());
         } else {
             if (permissionsManager.isBleAvailable() && !params.isNoBeacon() && !permissionsManager.isBluetoothOn()) {
                 onLocationServicesOn();
@@ -215,10 +209,8 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
 
     private boolean checkLocation() {
         return permissionsManager.areLocationServicesOn() &&
-                permissionsManager.isLocationPermissionGranted();
+                (permissionsManager.isLocationPermissionGranted() == LOCATION_PERMISSION_GRANTED
+                        || permissionsManager.isLocationPermissionGranted() == LOCATION_PERMISSION_ONLY_IN_USE);
     }
 
-    public static NearItInvisiblePresenterImpl obtain(InvisiblePermissionsContract.InvisiblePermissionsView view, PermissionsRequestExtraParams params, Context context) {
-        return new NearItInvisiblePresenterImpl(view, params, PermissionsManager.obtain(context), State.obtain(context), NearItManager.getInstance());
-    }
 }
