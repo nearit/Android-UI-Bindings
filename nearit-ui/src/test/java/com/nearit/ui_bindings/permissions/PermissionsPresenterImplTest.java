@@ -1,8 +1,5 @@
 package com.nearit.ui_bindings.permissions;
 
-import android.content.Intent;
-import android.content.pm.PackageManager;
-
 import com.nearit.ui_bindings.stubs.NearItManagerStub;
 
 import org.junit.Before;
@@ -15,7 +12,9 @@ import it.near.sdk.NearItManager;
 
 import static android.app.Activity.RESULT_OK;
 import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_BLUETOOTH_SETTINGS_CODE;
-import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_PERMISSION_REQUEST_FINE_LOCATION;
+import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_DENIED;
+import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_GRANTED;
+import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_ONLY_IN_USE;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.never;
@@ -30,9 +29,6 @@ public class PermissionsPresenterImplTest {
     private PermissionsContract.PermissionsPresenter presenter;
 
     private int customHeaderResId = 666;
-
-    @Mock
-    private Intent intent;
 
     @Mock
     private PermissionsContract.PermissionsView view;
@@ -192,13 +188,14 @@ public class PermissionsPresenterImplTest {
     }
 
     @Test
-    public void onStart_ifLocationAskedAndOff_locationSad() {
+    public void onStart_ifLocationAskedAndOff_locationWorried() {
         whenLocationIsOff();
         whenLocationAsked();
+        whenLocationPermissionIsGranted();
 
         presenter.start();
 
-        verify(view).setLocationButtonSad();
+        verify(view).setLocationButtonWorriedServices();
     }
 
     @Test
@@ -209,6 +206,16 @@ public class PermissionsPresenterImplTest {
         presenter.start();
 
         verify(view).setLocationButtonSad();
+    }
+
+    @Test
+    public void onStart_ifLocationPermissionAskedAndOnlyInUse_locationWorried() {
+        whenLocationPermissionOnlyInUse();
+        whenLocationAsked();
+
+        presenter.start();
+
+        verify(view).setLocationButtonWorriedWhenInUse();
     }
 
     @Test
@@ -243,10 +250,8 @@ public class PermissionsPresenterImplTest {
     @Test
     public void onPermissionResult_ifGrantedAndFlightModeOff_turnOnLocation() {
         whenFlightModeIsOff();
-        String[] permissions = {};
-        int[] results = {PackageManager.PERMISSION_GRANTED};
 
-        presenter.handlePermissionResult(NEAR_PERMISSION_REQUEST_FINE_LOCATION, permissions, results);
+        presenter.handleLocationPermissionGranted();
 
         verify(view).turnOnLocationServices(anyBoolean());
     }
@@ -254,10 +259,8 @@ public class PermissionsPresenterImplTest {
     @Test
     public void onPermissionResult_ifGrantedAndFlightMode_showFlightDialog() {
         whenFlightModeIsOn();
-        String[] permissions = {};
-        int[] results = {PackageManager.PERMISSION_GRANTED};
 
-        presenter.handlePermissionResult(NEAR_PERMISSION_REQUEST_FINE_LOCATION, permissions, results);
+        presenter.handleLocationPermissionGranted();
 
         verify(view).showAirplaneDialog();
         verify(view, never()).turnOnLocationServices(anyBoolean());
@@ -267,10 +270,8 @@ public class PermissionsPresenterImplTest {
     public void onPermissionResult_ifNotGranted_checkPermissionsAndRefreshUI() {
         whenNotificationsAsked();
         whenNotificationsAreOff();
-        String[] permissions = {};
-        int[] results = {PackageManager.PERMISSION_DENIED};
 
-        presenter.handlePermissionResult(NEAR_PERMISSION_REQUEST_FINE_LOCATION, permissions, results);
+        presenter.handleLocationPermissionDenied();
 
         verify(view).setNotificationsButtonSad();
     }
@@ -291,7 +292,7 @@ public class PermissionsPresenterImplTest {
         whenLocationPermissionIsGranted();
         whenLocationIsOn();
 
-        presenter.handleActivityResult(1, 2, intent);
+        presenter.handleActivityResult(1, 2);
 
         verify(view).setLocationButtonHappy();
     }
@@ -302,7 +303,7 @@ public class PermissionsPresenterImplTest {
         whenLocationIsOn();
         whenLocationPermissionIsNotGranted();
 
-        presenter.handleActivityResult(1, 2, intent);
+        presenter.handleActivityResult(1, 2);
 
         verify(view).setLocationButtonSad();
     }
@@ -313,9 +314,9 @@ public class PermissionsPresenterImplTest {
         whenLocationIsOff();
         whenLocationPermissionIsGranted();
 
-        presenter.handleActivityResult(1, 2, intent);
+        presenter.handleActivityResult(1, 2);
 
-        verify(view).setLocationButtonWorried();
+        verify(view).setLocationButtonWorriedServices();
     }
 
     @Test
@@ -324,7 +325,7 @@ public class PermissionsPresenterImplTest {
         whenLocationIsOff();
         whenLocationPermissionIsNotGranted();
 
-        presenter.handleActivityResult(1, 2, intent);
+        presenter.handleActivityResult(1, 2);
 
         verify(view).setLocationButtonSad();
     }
@@ -333,7 +334,7 @@ public class PermissionsPresenterImplTest {
     public void onActivityResult_ifBluetoothOff_checkPermissionsAndUpdateUI() {
         whenBluetoothIsOff();
 
-        presenter.handleActivityResult(1, 2, intent);
+        presenter.handleActivityResult(1, 2);
 
         verify(view).resetBluetoothButton();
     }
@@ -342,7 +343,7 @@ public class PermissionsPresenterImplTest {
     public void onActivityResult_ifBluetoothOn_checkPermissionsAndUpdateUI() {
         whenBluetoothIsOn();
 
-        presenter.handleActivityResult(1, 2, intent);
+        presenter.handleActivityResult(1, 2);
 
         verify(view).setBluetoothButtonHappy();
     }
@@ -352,7 +353,7 @@ public class PermissionsPresenterImplTest {
         whenNotificationsAsked();
         whenNotificationsAreOff();
 
-        presenter.handleActivityResult(1, 2, intent);
+        presenter.handleActivityResult(1, 2);
 
         verify(view).setNotificationsButtonSad();
     }
@@ -361,7 +362,7 @@ public class PermissionsPresenterImplTest {
     public void onActivityResult_ifNotificationsOn_notificationsHappy() {
         whenNotificationsAreOn();
 
-        presenter.handleActivityResult(NEAR_BLUETOOTH_SETTINGS_CODE, RESULT_OK, intent);
+        presenter.handleActivityResult(NEAR_BLUETOOTH_SETTINGS_CODE, RESULT_OK);
 
         verify(view).setNotificationsButtonHappy();
     }
@@ -444,6 +445,29 @@ public class PermissionsPresenterImplTest {
     @Test
     public void onLocationTapped_ifDeniedCanAskAgain_askItAndRemember() {
         whenLocationPermissionIsNotGranted();
+        whenPermissionAlreadyAsked();
+        whenCanAskAgain();
+
+        presenter.onLocationTapped();
+
+        verify(state).setLocationPermissionAsked();
+        verify(view).requestLocationPermission();
+    }
+
+    @Test
+    public void onLocationTapped_ifOnlyInUseAndNeverAskAgain_showDialog() {
+        whenLocationPermissionOnlyInUse();
+        whenPermissionAlreadyAsked();
+        whenShouldNotAskAgain();
+
+        presenter.onLocationTapped();
+
+        verify(view).showDontAskAgainDialog();
+    }
+
+    @Test
+    public void onLocationTapped_ifOnlyInUseCanAskAgain_askItAndRemember() {
+        whenLocationPermissionOnlyInUse();
         whenPermissionAlreadyAsked();
         whenCanAskAgain();
 
@@ -625,11 +649,15 @@ public class PermissionsPresenterImplTest {
     }
 
     private void whenLocationPermissionIsNotGranted() {
-        when(permissionsManager.isLocationPermissionGranted()).thenReturn(false);
+        when(permissionsManager.isLocationPermissionGranted()).thenReturn(LOCATION_PERMISSION_DENIED);
     }
 
     private void whenLocationPermissionIsGranted() {
-        when(permissionsManager.isLocationPermissionGranted()).thenReturn(true);
+        when(permissionsManager.isLocationPermissionGranted()).thenReturn(LOCATION_PERMISSION_GRANTED);
+    }
+
+    private void whenLocationPermissionOnlyInUse() {
+        when(permissionsManager.isLocationPermissionGranted()).thenReturn(LOCATION_PERMISSION_ONLY_IN_USE);
     }
 
     private void whenPermissionAlreadyAsked() {

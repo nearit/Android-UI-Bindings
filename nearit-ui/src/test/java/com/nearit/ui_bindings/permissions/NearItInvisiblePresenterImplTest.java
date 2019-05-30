@@ -1,8 +1,5 @@
 package com.nearit.ui_bindings.permissions;
 
-import android.content.Intent;
-import android.content.pm.PackageManager;
-
 import com.nearit.ui_bindings.stubs.NearItManagerStub;
 import com.nearit.ui_bindings.permissions.invisible.InvisiblePermissionsContract;
 import com.nearit.ui_bindings.permissions.invisible.NearItInvisiblePresenterImpl;
@@ -15,10 +12,9 @@ import org.mockito.MockitoAnnotations;
 
 import it.near.sdk.NearItManager;
 
-import static android.app.Activity.RESULT_OK;
-import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_BLUETOOTH_SETTINGS_CODE;
-import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_LOCATION_SETTINGS_CODE;
-import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_PERMISSION_REQUEST_FINE_LOCATION;
+import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_DENIED;
+import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_GRANTED;
+import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_ONLY_IN_USE;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -30,9 +26,6 @@ import static org.mockito.Mockito.when;
 public class NearItInvisiblePresenterImplTest {
 
     private InvisiblePermissionsContract.InvisiblePermissionsPresenter presenter;
-
-    @Mock
-    private Intent intent;
 
     @Mock
     private InvisiblePermissionsContract.InvisiblePermissionsView view;
@@ -71,6 +64,19 @@ public class NearItInvisiblePresenterImplTest {
     }
 
     @Test
+    public void onStart_ifAllPermissionsGrantedOnlyInUse_finishWithOK() {
+        whenNotificationsAreOn();
+        whenBleIsAvailable();
+        whenBluetoothIsOn();
+        whenLocationIsOn();
+        whenLocationPermissionOnlyInUse();
+
+        presenter.start();
+
+        verify(view).finishWithOkResult();
+    }
+
+    @Test
     public void onStart_ifFlightMode_showDialog() {
         whenFlightModeIsOn();
 
@@ -96,7 +102,16 @@ public class NearItInvisiblePresenterImplTest {
 
         presenter.start();
 
-        verify(view).turnOnLocationServices(anyBoolean());
+        verify(view).requestLocationServices(anyBoolean());
+    }
+
+    @Test
+    public void onStart_ifLocationGrantedOnlyInUse_turnOnLocation() {
+        whenLocationPermissionOnlyInUse();
+
+        presenter.start();
+
+        verify(view).requestLocationServices(anyBoolean());
     }
 
     @Test
@@ -145,12 +160,37 @@ public class NearItInvisiblePresenterImplTest {
 
         presenter.start();
 
-        verify(view).turnOnBluetooth();
+        verify(view).requestBluetooth();
+    }
+
+    @Test
+    public void onStart_ifLocationGrantedOnlyInUseLocationOnAndBluetoothAvailableButOff_turnItOn() {
+        whenLocationPermissionOnlyInUse();
+        whenLocationIsOn();
+        whenBluetoothIsOff();
+        whenBleIsAvailable();
+
+        presenter.start();
+
+        verify(view).requestBluetooth();
     }
 
     @Test
     public void onStart_ifLocationGrantedONBluetoothAvailableAndONNotificationsOff_showDialog() {
         whenLocationPermissionIsGranted();
+        whenLocationIsOn();
+        whenBleIsAvailable();
+        whenBluetoothIsOn();
+        whenNotificationsAreOff();
+
+        presenter.start();
+
+        verify(view).showNotificationsDialog();
+    }
+
+    @Test
+    public void onStart_ifLocationGrantedOnlyInUseAndLocationOnAndBluetoothAvailableAndONNotificationsOff_showDialog() {
+        whenLocationPermissionOnlyInUse();
         whenLocationIsOn();
         whenBleIsAvailable();
         whenBluetoothIsOn();
@@ -176,11 +216,25 @@ public class NearItInvisiblePresenterImplTest {
     }
 
     @Test
+    public void onStart_locationGrantedOnlyInUseAndLocationON_bluetoothAvailableAndON_NotificationOff_noNotification_doNOTshowDialog() {
+        whenLocationPermissionOnlyInUse();
+        whenLocationIsOn();
+        whenBleIsAvailable();
+        whenBluetoothIsOn();
+        whenNotificationsAreOff();
+        whenNoNotifications();
+
+        presenter.start();
+
+        verify(view, never()).showNotificationsDialog();
+    }
+
+    @Test
     public void onLocationResultKO_finishWithSomeResult() {
         whenBleIsAvailable();
         whenBluetoothIsOff();
 
-        presenter.handleActivityResult(NEAR_LOCATION_SETTINGS_CODE, 6, intent);
+        presenter.handleLocationPermissionDenied();
 
         verify(view).finishWithKoResult();
     }
@@ -193,7 +247,20 @@ public class NearItInvisiblePresenterImplTest {
         whenBluetoothIsOn();
         whenNotificationsAreOn();
 
-        presenter.handleActivityResult(NEAR_BLUETOOTH_SETTINGS_CODE, RESULT_OK, intent);
+        presenter.handleBluetoothGranted();
+
+        verify(view).finishWithOkResult();
+    }
+
+    @Test
+    public void onBluetoothResultOK_ifAllPermissionsOKAndOnlyInUse_finishWithOK() {
+        whenLocationPermissionOnlyInUse();
+        whenLocationIsOn();
+        whenBleIsAvailable();
+        whenBluetoothIsOn();
+        whenNotificationsAreOn();
+
+        presenter.handleBluetoothGranted();
 
         verify(view).finishWithOkResult();
     }
@@ -206,7 +273,20 @@ public class NearItInvisiblePresenterImplTest {
         whenBluetoothIsOn();
         whenNotificationsAreOff();
 
-        presenter.handleActivityResult(NEAR_BLUETOOTH_SETTINGS_CODE, RESULT_OK, intent);
+        presenter.handleBluetoothGranted();
+
+        verify(view).showNotificationsDialog();
+    }
+
+    @Test
+    public void onBluetoothResultOK_ifNotificationsOFFAndLocationOnlyInUse_showDialog() {
+        whenLocationPermissionOnlyInUse();
+        whenLocationIsOn();
+        whenBleIsAvailable();
+        whenBluetoothIsOn();
+        whenNotificationsAreOff();
+
+        presenter.handleBluetoothGranted();
 
         verify(view).showNotificationsDialog();
     }
@@ -220,7 +300,21 @@ public class NearItInvisiblePresenterImplTest {
         whenNotificationsAreOff();
         whenNoNotifications();
 
-        presenter.handleActivityResult(NEAR_BLUETOOTH_SETTINGS_CODE, RESULT_OK, intent);
+        presenter.handleBluetoothGranted();
+
+        verify(view, never()).showNotificationsDialog();
+    }
+
+    @Test
+    public void onBluetoothResultOK_ifNotificationsOFF_ifNoNotificationAndLocationOnlyInUse_doNOTshowDialog() {
+        whenLocationPermissionOnlyInUse();
+        whenLocationIsOn();
+        whenBleIsAvailable();
+        whenBluetoothIsOn();
+        whenNotificationsAreOff();
+        whenNoNotifications();
+
+        presenter.handleBluetoothGranted();
 
         verify(view, never()).showNotificationsDialog();
     }
@@ -230,9 +324,19 @@ public class NearItInvisiblePresenterImplTest {
         whenLocationPermissionIsGranted();
         whenLocationIsOff();
 
-        presenter.handleActivityResult(NEAR_BLUETOOTH_SETTINGS_CODE, RESULT_OK, intent);
+        presenter.handleBluetoothGranted();
 
-        verify(view).turnOnLocationServices(anyBoolean());
+        verify(view).requestLocationServices(anyBoolean());
+    }
+
+    @Test
+    public void onBluetoothResultOK_ifLocationOnlyInUseButServicesOFF_turnItOn() {
+        whenLocationPermissionOnlyInUse();
+        whenLocationIsOff();
+
+        presenter.handleBluetoothGranted();
+
+        verify(view).requestLocationServices(anyBoolean());
     }
 
     @Test
@@ -240,7 +344,7 @@ public class NearItInvisiblePresenterImplTest {
         whenLocationPermissionIsNotGranted();
         whenLocationIsOn();
 
-        presenter.handleActivityResult(NEAR_BLUETOOTH_SETTINGS_CODE, RESULT_OK, intent);
+        presenter.handleBluetoothGranted();
 
         verify(view).requestLocationPermission();
     }
@@ -249,7 +353,7 @@ public class NearItInvisiblePresenterImplTest {
     public void onBluetoothResultKO_finishWithSomeResult() {
         whenLocationPermissionIsNotGranted();
 
-        presenter.handleActivityResult(NEAR_BLUETOOTH_SETTINGS_CODE, 6, intent);
+        presenter.handleBluetoothDenied();
 
         verify(view).finishWithKoResult();
     }
@@ -282,7 +386,7 @@ public class NearItInvisiblePresenterImplTest {
 
         presenter.onLocationServicesOn();
 
-        verify(view).turnOnBluetooth();
+        verify(view).requestBluetooth();
     }
 
     @Test
@@ -290,6 +394,19 @@ public class NearItInvisiblePresenterImplTest {
         whenBluetoothIsOn();
         whenLocationIsOn();
         whenLocationPermissionIsGranted();
+        whenFlightModeIsOff();
+        whenNotificationsAreOn();
+
+        presenter.onLocationServicesOn();
+
+        verify(view).finishWithOkResult();
+    }
+
+    @Test
+    public void onLocationServicesOn_ifAllPermissionsOKAndOnlyInUseAndFlightOff_finishWithOK() {
+        whenBluetoothIsOn();
+        whenLocationIsOn();
+        whenLocationPermissionOnlyInUse();
         whenFlightModeIsOff();
         whenNotificationsAreOn();
 
@@ -314,8 +431,37 @@ public class NearItInvisiblePresenterImplTest {
     }
 
     @Test
+    public void onLocationServicesOn_ifAllPermissionsAndOnlyInUseOKAndAutoStart_startRadarAndfinishWithOK() {
+        whenBluetoothIsOn();
+        whenLocationIsOn();
+        whenLocationPermissionOnlyInUse();
+        whenFlightModeIsOff();
+        whenNotificationsAreOn();
+        whenAutoStartRadar();
+
+        presenter.onLocationServicesOn();
+
+        verify(nearItManager).startRadar();
+        verify(view).finishWithOkResult();
+    }
+
+    @Test
     public void onLocationServicesOn_ifLocationStillGrantedButOff_finishWithKO() {
         whenLocationPermissionIsGranted();
+        whenLocationIsOff();
+        whenFlightModeIsOff();
+        whenNotificationsAreOn();
+        whenBleIsAvailable();
+        whenBluetoothIsOn();
+
+        presenter.onLocationServicesOn();
+
+        verify(view).finishWithKoResult();
+    }
+
+    @Test
+    public void onLocationServicesOn_ifLocationStillGrantedOnlyInUseButOff_finishWithKO() {
+        whenLocationPermissionOnlyInUse();
         whenLocationIsOff();
         whenFlightModeIsOff();
         whenNotificationsAreOn();
@@ -343,12 +489,9 @@ public class NearItInvisiblePresenterImplTest {
 
     @Test
     public void onPermissionResult_ifNotGranted_finishWithKO() {
-        String[] permissions = {};
-        int[] results = {PackageManager.PERMISSION_DENIED};
+        presenter.handleLocationPermissionDenied();
 
-        presenter.handlePermissionResult(NEAR_PERMISSION_REQUEST_FINE_LOCATION, permissions, results);
-
-        verify(view, never()).turnOnLocationServices(anyBoolean());
+        verify(view, never()).requestLocationServices(anyBoolean());
         verify(view, never()).showAirplaneDialog();
 
         verify(view).finishWithKoResult();
@@ -358,12 +501,9 @@ public class NearItInvisiblePresenterImplTest {
     public void onPermissionResult_ifGrantedAndFlightOn_showDialog() {
         whenFlightModeIsOn();
 
-        String[] permissions = {};
-        int[] results = {PackageManager.PERMISSION_GRANTED};
+        presenter.handleLocationPermissionGranted();
 
-        presenter.handlePermissionResult(NEAR_PERMISSION_REQUEST_FINE_LOCATION, permissions, results);
-
-        verify(view, never()).turnOnLocationServices(anyBoolean());
+        verify(view, never()).requestLocationServices(anyBoolean());
         verify(view).showAirplaneDialog();
     }
 
@@ -371,6 +511,18 @@ public class NearItInvisiblePresenterImplTest {
     public void onDialogClosed_ifBluetoothAvailableAndOff_finalCheckAndFinishWithKO() {
         whenLocationIsOn();
         whenLocationPermissionIsGranted();
+        whenBleIsAvailable();
+        whenBluetoothIsOff();
+
+        presenter.onDialogClosed();
+
+        verify(view).finishWithKoResult();
+    }
+
+    @Test
+    public void onDialogClosed_ifBluetoothAvailableAndOffAndLocationOnlyInUse_finalCheckAndFinishWithKO() {
+        whenLocationIsOn();
+        whenLocationPermissionOnlyInUse();
         whenBleIsAvailable();
         whenBluetoothIsOff();
 
@@ -429,11 +581,15 @@ public class NearItInvisiblePresenterImplTest {
     }
 
     private void whenLocationPermissionIsNotGranted() {
-        when(permissionsManager.isLocationPermissionGranted()).thenReturn(false);
+        when(permissionsManager.isLocationPermissionGranted()).thenReturn(LOCATION_PERMISSION_DENIED);
     }
 
     private void whenLocationPermissionIsGranted() {
-        when(permissionsManager.isLocationPermissionGranted()).thenReturn(true);
+        when(permissionsManager.isLocationPermissionGranted()).thenReturn(LOCATION_PERMISSION_GRANTED);
+    }
+
+    private void whenLocationPermissionOnlyInUse() {
+        when(permissionsManager.isLocationPermissionGranted()).thenReturn(LOCATION_PERMISSION_ONLY_IN_USE);
     }
 
     private void whenPermissionAlreadyAsked() {
