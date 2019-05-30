@@ -8,7 +8,7 @@ references:
   container_config: &container_config
     docker:
       # specify the version you desire here
-      - image: circleci/android:api-26-alpha
+      - image: circleci/android:api-28-alpha
     working_directory: ~/repo
     environment:
       # Customize the JVM maximum heap limit
