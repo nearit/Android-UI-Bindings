@@ -29,18 +29,21 @@ class FeedbackPlainActivity : AppCompatActivity() {
                 .feedbackFragmentBuilder(feedback)
                 .build()
 
-
-        supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.feedback_container, feedbackFragment)
-                .commit()
+        feedbackFragment?.run {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.feedback_container, this)
+                    .commit()
+        }
 
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         //  Save the fragment instance
-        supportFragmentManager.putFragment(outState, "feedbackFragment", feedbackFragment)
+        feedbackFragment?.run {
+            supportFragmentManager.putFragment(outState, "feedbackFragment", this)
+        }
     }
 
 }
