@@ -1,9 +1,11 @@
 package com.nearit.ui_bindings.utils;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
@@ -18,15 +20,54 @@ public class PermissionsUtils {
 
     private final static String TAG = "PermissionsUtils";
 
+    public final static int LOCATION_PERMISSION_GRANTED = 0;
+    public final static int LOCATION_PERMISSION_ONLY_IN_USE = 1;
+    public final static int LOCATION_PERMISSION_DENIED = -1;
+
     /**
      * Checks the location permission. On devices with API < 23 the permission is granted on app installation,
      * and this method will always return 'true'.
      *
      * @param context a valid Context
-     * @return 'true' or 'false' depending on whether the user granted the permission or not.
+     * @return {@link PermissionsUtils#LOCATION_PERMISSION_GRANTED} if "fully" granted (even in background)
+     * {@link PermissionsUtils#LOCATION_PERMISSION_ONLY_IN_USE} if granted while app is in use (Android Q)
+     * {@link PermissionsUtils#LOCATION_PERMISSION_DENIED} otherwise
      */
-    public static boolean checkLocationPermission(Context context) {
-        return ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    public static int checkLocationPermission(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            if (checkBackgroundLocationPermission(context)) {
+                return LOCATION_PERMISSION_GRANTED;
+            } else if (checkForegroundLocationPermission(context)) {
+                return LOCATION_PERMISSION_ONLY_IN_USE;
+            }
+        } else if (checkForegroundLocationPermission(context)) {
+            return LOCATION_PERMISSION_GRANTED;
+        }
+        return LOCATION_PERMISSION_DENIED;
+    }
+
+    /**
+     * Checks the background location permission.
+     *
+     * @param context a valid Context
+     * @return true if granted, false otherwise
+     */
+    public static boolean checkBackgroundLocationPermission(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            return ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED;
+        } else return checkForegroundLocationPermission(context);
+    }
+
+    /**
+     * Checks the foreground location permission.
+     *
+     * @param context a valid Context
+     * @return true if granted, false otherwise
+     */
+    public static boolean checkForegroundLocationPermission(Context context) {
+        return ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED;
     }
 
     /**
@@ -37,7 +78,8 @@ public class PermissionsUtils {
      */
     public static boolean checkLocationServices(Context context) {
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        return (locationManager != null && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) | (locationManager != null && locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
+        return (locationManager != null && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+                || (locationManager != null && locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
     }
 
     /**
@@ -48,7 +90,9 @@ public class PermissionsUtils {
      * 'false' otherwise.
      */
     public static boolean checkBluetooth(Context context) {
-        return !isBleAvailable(context) || (BluetoothAdapter.getDefaultAdapter() != null && BluetoothAdapter.getDefaultAdapter().isEnabled());
+        return !isBleAvailable(context)
+                || (BluetoothAdapter.getDefaultAdapter() != null
+                && BluetoothAdapter.getDefaultAdapter().isEnabled());
     }
 
 
@@ -60,7 +104,7 @@ public class PermissionsUtils {
      */
     public static boolean isBleAvailable(Context context) {
         boolean available = false;
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
             NearLog.d(TAG, "BLE not supported prior to API 18");
         } else if (!context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             NearLog.d(TAG, "BLE not available on this device");
@@ -83,7 +127,7 @@ public class PermissionsUtils {
 
     /**
      * Checks if notifications are enabled. Works with every API version
-     *
+     * <p>
      * Please, check {@link NotificationManagerCompat#areNotificationsEnabled()} for implementation
      *
      * @param context a valid Context
