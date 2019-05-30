@@ -227,12 +227,11 @@ public class PermissionsPresenterImpl implements PermissionsContract.Permissions
                 view.setLocationButtonWorriedWhenInUse();
                 break;
             default:
-                if (state.getLocationPermissionAsked()) {
+                if (state.getLocationAsked()) {
                     view.setLocationButtonSad();
                 } else {
                     view.resetLocationButton();
                 }
-
         }
 
         /* NOTIFICATIONS */
