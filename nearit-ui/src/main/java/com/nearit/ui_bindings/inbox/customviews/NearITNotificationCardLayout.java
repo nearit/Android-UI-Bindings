@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -76,7 +77,7 @@ public class NearITNotificationCardLayout extends RelativeLayout {
         notificationTV.setTypeface(null,
                 messageUnread ? Typeface.BOLD : Typeface.NORMAL);
         timestampTV.setTextColor(
-                getResources().getColor(R.color.nearit_ui_notification_card_text_read_color)
+                ContextCompat.getColor(getContext(), R.color.nearit_ui_notification_card_text_read_color)
         );
     }
 

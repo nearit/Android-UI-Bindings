@@ -3,6 +3,7 @@ package com.nearit.ui_bindings.permissions.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.widget.ImageView;
@@ -73,9 +74,7 @@ public class PermissionButton extends RelativeLayout {
     }
 
     private void setFace(int iconRes) {
-        face.setImageDrawable(
-                ResourcesCompat.getDrawable(getResources(), iconRes, null)
-        );
+        face.setImageDrawable(ContextCompat.getDrawable(getContext(), iconRes));
         invalidate();
         requestLayout();
     }
@@ -124,7 +123,7 @@ public class PermissionButton extends RelativeLayout {
     public void setWorriedLabel(String labelText) {
         this.label.setText(labelText);
         this.label.setVisibility(VISIBLE);
-        this.label.setTextColor(getResources().getColor(R.color.nearit_ui_worried_color));
+        this.label.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_worried_color));
         invalidate();
         requestLayout();
     }
@@ -132,7 +131,7 @@ public class PermissionButton extends RelativeLayout {
     public void setSadLabel(String labelText) {
         this.label.setText(labelText);
         this.label.setVisibility(VISIBLE);
-        this.label.setTextColor(getResources().getColor(R.color.nearit_ui_sad_color));
+        this.label.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_sad_color));
         invalidate();
         requestLayout();
     }
@@ -187,9 +186,7 @@ public class PermissionButton extends RelativeLayout {
         super.dispatchDraw(canvas);
         text.setText(buttonText);
         if (iconRes != NO_ICON) {
-            icon.setImageDrawable(
-                    ResourcesCompat.getDrawable(getResources(), iconRes, null)
-            );
+            icon.setImageDrawable(ContextCompat.getDrawable(getContext(), iconRes));
         }
     }
 }

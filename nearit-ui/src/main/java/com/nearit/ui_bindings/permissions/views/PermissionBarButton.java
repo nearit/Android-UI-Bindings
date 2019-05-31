@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -104,21 +105,15 @@ public class PermissionBarButton extends RelativeLayout {
     }
 
     public void setNotificationIcon(int resId) {
-        notificationIcon.setImageDrawable(
-                    ResourcesCompat.getDrawable(getResources(), resId, null)
-            );
+        notificationIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), resId));
     }
 
     public void setBluetoothIcon(int resId) {
-        bluetoothIcon.setImageDrawable(
-                ResourcesCompat.getDrawable(getResources(), resId, null)
-        );
+        bluetoothIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), resId));
     }
 
     public void setLocationIcon(int resId) {
-        locationIcon.setImageDrawable(
-                ResourcesCompat.getDrawable(getResources(), resId, null)
-        );
+        locationIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), resId));
     }
 
     @SuppressLint("ClickableViewAccessibility")

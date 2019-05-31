@@ -172,7 +172,7 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
         Context context = getActivity();
         if (context != null) {
             try {
-                String errorMessage = context.getResources().getString(res);
+                String errorMessage = getString(res);
                 showRefreshError(errorMessage);
             } catch (Resources.NotFoundException e) {
                 showRefreshError("We could not get your notifications. Please try again later.");

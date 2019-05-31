@@ -216,13 +216,13 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
     @Override
     public void setBluetoothButtonHappy() {
         bleButton.setHappy();
-        bleButton.setText(getResources().getString(R.string.nearit_ui_bluetooth_button_on_text));
+        bleButton.setText(getString(R.string.nearit_ui_bluetooth_button_on_text));
     }
 
     @Override
     public void setBluetoothButtonSad() {
         bleButton.setSad();
-        bleButton.setText(getResources().getString(R.string.nearit_ui_bluetooth_button_off_text));
+        bleButton.setText(getString(R.string.nearit_ui_bluetooth_button_off_text));
         bleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -245,14 +245,14 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
     @Override
     public void setLocationButtonHappy() {
         locationButton.setHappy();
-        locationButton.setText(getResources().getString(R.string.nearit_ui_location_button_on_text));
+        locationButton.setText(getString(R.string.nearit_ui_location_button_on_text));
         locationButton.hideLabel();
     }
 
     @Override
     public void setLocationButtonWorriedWhenInUse() {
         setLocationButtonWorried();
-        locationButton.setWorriedLabel(getResources().getString(R.string.nearit_ui_location_button_worried_when_in_use_text));
+        locationButton.setWorriedLabel(getString(R.string.nearit_ui_location_button_worried_when_in_use_text));
     }
 
     @Override
@@ -263,8 +263,8 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
 
     private void setLocationButtonWorried() {
         locationButton.setWorried();
-        locationButton.setText(getResources().getString(R.string.nearit_ui_location_button_text));
-        locationButton.setWorriedLabel(getResources().getString(R.string.nearit_ui_location_button_worried_text));
+        locationButton.setText(getString(R.string.nearit_ui_location_button_text));
+        locationButton.setWorriedLabel(getString(R.string.nearit_ui_location_button_worried_text));
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -276,8 +276,8 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
     @Override
     public void setLocationButtonSad() {
         locationButton.setSad();
-        locationButton.setText(getResources().getString(R.string.nearit_ui_location_button_text));
-        locationButton.setSadLabel(getResources().getString(R.string.nearit_ui_location_button_sad_text));
+        locationButton.setText(getString(R.string.nearit_ui_location_button_text));
+        locationButton.setSadLabel(getString(R.string.nearit_ui_location_button_sad_text));
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -338,7 +338,7 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
 
     @Override
     public void refreshCloseText() {
-        closeButton.setText(getResources().getString(R.string.nearit_ui_close_permissions_text));
+        closeButton.setText(getString(R.string.nearit_ui_close_permissions_text));
     }
 
     @Override

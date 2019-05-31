@@ -44,7 +44,7 @@ class CouponViewHolder extends RecyclerView.ViewHolder {
 
     CouponViewHolder(View itemView, CouponAdapter.CouponAdapterListener couponListener, Context context, int iconPlaceholderResId, boolean noIcon) {
         super(itemView);
-        this.formatDate = new SimpleDateFormat(context.getResources().getString(R.string.nearit_ui_coupon_date_pretty_format), Locale.US);
+        this.formatDate = new SimpleDateFormat(context.getString(R.string.nearit_ui_coupon_date_pretty_format), Locale.US);
         this.itemView = itemView;
         this.couponListener = couponListener;
         this.context = context;
@@ -161,7 +161,7 @@ class CouponViewHolder extends RecyclerView.ViewHolder {
 
     private void setValid() {
         if (couponValidity != null) {
-            couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_list_valid_text));
+            couponValidity.setText(context.getString(R.string.nearit_ui_coupon_list_valid_text));
             couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_valid_text_color));
         }
     }
@@ -170,21 +170,21 @@ class CouponViewHolder extends RecyclerView.ViewHolder {
         if (couponValidity != null) {
             String formattedRedeem;
             formattedRedeem = formatDate.format(redeemableFromDate);
-            couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_list_inactive_text).concat(" " + formattedRedeem));
+            couponValidity.setText(context.getString(R.string.nearit_ui_coupon_list_inactive_text).concat(" " + formattedRedeem));
             couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_inactive_text_color));
         }
     }
 
     private void setExpired() {
         if (couponValidity != null) {
-            couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_list_expired_text));
+            couponValidity.setText(context.getString(R.string.nearit_ui_coupon_list_expired_text));
             couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_expired_text_color));
         }
     }
 
     private void setRedeemed() {
         if (couponValidity != null) {
-            couponValidity.setText(context.getResources().getString(R.string.nearit_ui_coupon_list_redeemed_text));
+            couponValidity.setText(context.getString(R.string.nearit_ui_coupon_list_redeemed_text));
             couponValidity.setTextColor(ContextCompat.getColor(context, R.color.nearit_ui_coupon_list_redeemed_text_color));
         }
     }

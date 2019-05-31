@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -54,12 +55,12 @@ public class NearITNotificationCardButton extends RelativeLayout {
 
     public void setRead() {
         buttonTextView.setTypeface(null, Typeface.NORMAL);
-        buttonTextView.setTextColor(getResources().getColor(R.color.nearit_ui_notification_card_text_read_color));
+        buttonTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_notification_card_text_read_color));
     }
 
     public void setUnread() {
         buttonTextView.setTypeface(null, Typeface.BOLD);
-        buttonTextView.setTextColor(getResources().getColor(R.color.nearit_ui_notification_card_text_unread_color));
+        buttonTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_notification_card_text_unread_color));
     }
 
     @Override

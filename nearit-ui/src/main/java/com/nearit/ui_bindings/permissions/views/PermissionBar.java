@@ -153,7 +153,7 @@ public class PermissionBar extends RelativeLayout {
             if (a.getString(R.styleable.NearItUIBar_barAlertText) != null) {
                 alertMessageText = a.getString(R.styleable.NearItUIBar_barAlertText);
             } else {
-                alertMessageText = getContext().getResources().getString(R.string.nearit_ui_permission_bar_alert_text);
+                alertMessageText = getContext().getString(R.string.nearit_ui_permission_bar_alert_text);
             }
             btIconResId = a.getResourceId(R.styleable.NearItUIBar_bluetoothIcon, NO_ICON);
             locIconResId = a.getResourceId(R.styleable.NearItUIBar_locationIcon, NO_ICON);

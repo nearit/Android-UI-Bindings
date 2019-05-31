@@ -34,7 +34,7 @@ import static com.nearit.ui_bindings.coupon.CouponConstants.VALID;
 
 public class CouponDetailTopSection extends RelativeLayout {
 
-    private final SimpleDateFormat formatDate = new SimpleDateFormat(getResources().getString(R.string.nearit_ui_coupon_date_pretty_format), Locale.US);
+    private final SimpleDateFormat formatDate = new SimpleDateFormat(getContext().getString(R.string.nearit_ui_coupon_date_pretty_format), Locale.US);
 
     @Nullable
     private TextView notValidTextView;
@@ -112,18 +112,18 @@ public class CouponDetailTopSection extends RelativeLayout {
             validityPeriodTextView.setVisibility(VISIBLE);
 
             if (validityTextView != null) {
-                validityTextView.setText(getResources().getString(R.string.nearit_ui_coupon_validity_label_valid));
+                validityTextView.setText(getContext().getString(R.string.nearit_ui_coupon_validity_label_valid));
             }
 
             if (coupon.getRedeemableFromDate() != null && coupon.getExpiresAtDate() != null) {
-                validityPeriod = getResources().getString(R.string.nearit_ui_coupon_validity_period_from_to);
+                validityPeriod = getContext().getString(R.string.nearit_ui_coupon_validity_period_from_to);
                 formattedRedeem = formatDate.format(coupon.getRedeemableFromDate());
                 formattedExp = formatDate.format(coupon.getExpiresAtDate());
             } else if (coupon.getExpiresAtDate() != null) {
-                validityPeriod = getResources().getString(R.string.nearit_ui_coupon_validity_period_until);
+                validityPeriod = getContext().getString(R.string.nearit_ui_coupon_validity_period_until);
                 formattedExp = formatDate.format(coupon.getExpiresAtDate());
             } else if (coupon.getRedeemableFromDate() != null) {
-                validityPeriod = getResources().getString(R.string.nearit_ui_coupon_validity_period_from);
+                validityPeriod = getContext().getString(R.string.nearit_ui_coupon_validity_period_from);
                 formattedRedeem = formatDate.format(coupon.getRedeemableFromDate());
             } else {
                 if (validityTextView != null) {
@@ -148,12 +148,12 @@ public class CouponDetailTopSection extends RelativeLayout {
                 break;
             case EXPIRED:
                 if (validityTextView != null) {
-                    validityTextView.setText(getResources().getString(R.string.nearit_ui_coupon_validity_label_valid));
+                    validityTextView.setText(getContext().getString(R.string.nearit_ui_coupon_validity_label_valid));
                     validityTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_expired_color));
                 }
                 if (notValidTextView != null) {
                     notValidTextView.setVisibility(VISIBLE);
-                    notValidTextView.setText(getResources().getString(R.string.nearit_ui_coupon_expired_text));
+                    notValidTextView.setText(getContext().getString(R.string.nearit_ui_coupon_expired_text));
                     notValidTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_expired_color));
                 }
 
@@ -172,12 +172,12 @@ public class CouponDetailTopSection extends RelativeLayout {
                 break;
             case NOT_YET_VALID:
                 if (validityTextView != null) {
-                    validityTextView.setText(getResources().getString(R.string.nearit_ui_coupon_validity_label_valid));
+                    validityTextView.setText(getContext().getString(R.string.nearit_ui_coupon_validity_label_valid));
                     validityTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_inactive_color));
                 }
                 if (notValidTextView != null) {
                     notValidTextView.setVisibility(VISIBLE);
-                    notValidTextView.setText(getResources().getString(R.string.nearit_ui_coupon_inactive_text));
+                    notValidTextView.setText(getContext().getString(R.string.nearit_ui_coupon_inactive_text));
                     notValidTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_inactive_color));
                 }
 
@@ -196,13 +196,15 @@ public class CouponDetailTopSection extends RelativeLayout {
                 break;
             case REDEEMED:
                 if (validityTextView != null) {
-                    validityTextView.setText(getResources().getString(R.string.nearit_ui_coupon_validity_label_redeemed));
+                    validityTextView.setText(getContext().getString(R.string.nearit_ui_coupon_validity_label_redeemed));
                     validityTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_expired_color));
                 }
-                validityPeriodTextView.setText(formatDate.format(coupon.getRedeemedAtDate()));
+                if (coupon.getRedeemedAtDate() != null) {
+                    validityPeriodTextView.setText(formatDate.format(coupon.getRedeemedAtDate()));
+                }
                 if (notValidTextView != null) {
                     notValidTextView.setVisibility(VISIBLE);
-                    notValidTextView.setText(getResources().getString(R.string.nearit_ui_coupon_redeemed_text));
+                    notValidTextView.setText(getContext().getString(R.string.nearit_ui_coupon_redeemed_text));
                     notValidTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_coupon_detail_expired_color));
                 }
 
