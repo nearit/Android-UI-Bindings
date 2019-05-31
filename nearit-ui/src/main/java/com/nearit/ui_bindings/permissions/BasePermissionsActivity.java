@@ -39,6 +39,9 @@ import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.permissions.views.PermissionButton;
 
+import java.util.Collections;
+import java.util.List;
+
 import it.near.sdk.NearItManager;
 
 import static com.nearit.ui_bindings.permissions.PermissionsPresenterImpl.NEAR_BLUETOOTH_SETTINGS_CODE;
@@ -354,13 +357,12 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
 
     @Override
     public void requestLocationPermission() {
-        // TODO: fix check when Q is stable
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            requestPermissions(new String[]{android.Manifest.permission.ACCESS_BACKGROUND_LOCATION}, NEAR_PERMISSION_REQUEST_FINE_LOCATION);
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, NEAR_PERMISSION_REQUEST_FINE_LOCATION);
-            }
+        List<String> permissions = Collections.singletonList(Manifest.permission.ACCESS_FINE_LOCATION);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            permissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(permissions.toArray(new String[0]), NEAR_PERMISSION_REQUEST_FINE_LOCATION);
         }
     }
 

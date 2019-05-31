@@ -33,6 +33,9 @@ import com.nearit.ui_bindings.permissions.PermissionsManager;
 import com.nearit.ui_bindings.permissions.PermissionsRequestExtraParams;
 import com.nearit.ui_bindings.permissions.State;
 
+import java.util.Collections;
+import java.util.List;
+
 import it.near.sdk.NearItManager;
 
 import static com.nearit.ui_bindings.permissions.invisible.NearItInvisiblePresenterImpl.NEAR_BLUETOOTH_SETTINGS_CODE;
@@ -113,8 +116,12 @@ public class NearItInvisiblePermissionsActivity extends AppCompatActivity implem
 
     @Override
     public void requestLocationPermission() {
+        List<String> permissions = Collections.singletonList(Manifest.permission.ACCESS_FINE_LOCATION);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            permissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, NEAR_PERMISSION_REQUEST_FINE_LOCATION);
+            requestPermissions(permissions.toArray(new String[0]), NEAR_PERMISSION_REQUEST_FINE_LOCATION);
         }
     }
 
