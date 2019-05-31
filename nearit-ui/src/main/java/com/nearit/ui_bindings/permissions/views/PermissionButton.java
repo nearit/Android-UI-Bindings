@@ -120,6 +120,14 @@ public class PermissionButton extends RelativeLayout {
         requestLayout();
     }
 
+    public void setLabel(String labelText) {
+        this.label.setText(labelText);
+        this.label.setVisibility(VISIBLE);
+        this.label.setTextColor(ContextCompat.getColor(getContext(), R.color.nearit_ui_real_white));
+        invalidate();
+        requestLayout();
+    }
+
     public void setWorriedLabel(String labelText) {
         this.label.setText(labelText);
         this.label.setVisibility(VISIBLE);

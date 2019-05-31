@@ -40,11 +40,12 @@
     <string name="nearit_ui_go_to_settings_notification_title">Notifications are disabled</string>
     <string name="nearit_ui_go_to_settings_notification_message">Please, change your selection and enable them</string>
     <string name="nearit_ui_location_button_sad_text">permission denied</string>
-    <string name="nearit_ui_location_button_worried_text">services are off</string>
+    <string name="nearit_ui_location_button_worried_text">turn it on</string>
     <string name="nearit_ui_location_button_worried_when_in_use_text">only in use</string>
     <string name="nearit_ui_bluetooth_button_on_text">Bluetooth on</string>
     <string name="nearit_ui_bluetooth_button_off_text">Bluetooth off</string>
     <string name="nearit_ui_location_button_on_text">Location on</string>
+    <string name="nearit_ui_location_button_off_text">Location is off</string>
     <string name="nearit_ui_location_button_text">Location</string>
 
 

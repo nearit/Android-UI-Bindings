@@ -261,7 +261,8 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
     @Override
     public void setLocationButtonWorriedServices() {
         setLocationButtonWorried();
-        locationButton.setWorriedLabel(getResources().getString(R.string.nearit_ui_location_button_worried_text));
+        locationButton.setText(getString(R.string.nearit_ui_location_button_off_text));
+        locationButton.setLabel(getString(R.string.nearit_ui_location_button_worried_text));
     }
 
     private void setLocationButtonWorried() {
