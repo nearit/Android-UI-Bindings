@@ -34,8 +34,7 @@ public class PermissionsUtils {
      * {@link PermissionsUtils#LOCATION_PERMISSION_DENIED} otherwise
      */
     public static int checkLocationPermission(Context context) {
-        // TODO: fix check when Q is stable
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             if (checkBackgroundLocationPermission(context)) {
                 return LOCATION_PERMISSION_GRANTED;
             } else if (checkForegroundLocationPermission(context)) {
@@ -54,8 +53,7 @@ public class PermissionsUtils {
      * @return true if granted, false otherwise
      */
     public static boolean checkBackgroundLocationPermission(Context context) {
-        // TODO: fix check when Q is stable
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             return ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_BACKGROUND_LOCATION)
                     == PackageManager.PERMISSION_GRANTED;
         } else return checkForegroundLocationPermission(context);

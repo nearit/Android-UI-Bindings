@@ -410,8 +410,7 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
 
     @Override
     public boolean shouldShowRequestPermissionRationale() {
-        // TODO: fix check when Q is stable
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             return ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION);
         } else return ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION);
     }
@@ -424,8 +423,7 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
         builder.setPositiveButton(R.string.nearit_ui_go_to_settings, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 Intent intent;
-                // TODO: fix check when Q is stable
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
                 } else {
                     intent = new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
