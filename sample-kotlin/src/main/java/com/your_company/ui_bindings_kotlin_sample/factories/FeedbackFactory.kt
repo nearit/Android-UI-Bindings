@@ -13,6 +13,7 @@ object FeedbackFactory {
     init {
         feedback.question = "This is an example question: how do you rate your recent experience?"
         feedback.id = "test_feedback_id_will_not_work"
+        @Suppress("DEPRECATION")
         feedback.recipeId = "test_recipe_id_will_not_work"
     }
 

@@ -13,6 +13,7 @@ class NotificationsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_notifications)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun openNotifications(view: View) {
         startActivity(NearITUIBindings.getInstance(this@NotificationsActivity)
                 .notificationHistoryIntentBuilder()
@@ -20,6 +21,7 @@ class NotificationsActivity : AppCompatActivity() {
                 .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun openNotificationsInActivity(view: View) {
         startActivity(Intent(this@NotificationsActivity, NotificationsPlainActivity::class.java))
     }

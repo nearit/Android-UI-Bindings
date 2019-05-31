@@ -36,22 +36,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun openPermission(view: View) {
         startActivity(Intent(this@MainActivity, PermissionsActivity::class.java))
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun openCoupons(view: View) {
         startActivity(Intent(this@MainActivity, CouponsActivity::class.java))
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun openFeedback(view: View) {
         startActivity(Intent(this@MainActivity, FeedbackActivity::class.java))
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun openContent(view: View) {
         startActivity(Intent(this@MainActivity, ContentActivity::class.java))
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun openNotifications(view: View) {
         startActivity(Intent(this@MainActivity, NotificationsActivity::class.java))
     }

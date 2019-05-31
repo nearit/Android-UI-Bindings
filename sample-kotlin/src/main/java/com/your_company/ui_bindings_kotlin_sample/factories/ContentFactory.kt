@@ -10,6 +10,7 @@ import it.near.sdk.reactions.contentplugin.model.ImageSet
 
 object ContentFactory {
 
+    @Suppress("DEPRECATION")
     fun getCompleteContent(): Content {
         val content = Content()
         content.contentString = "<a href=\"https://google.com\">LINK!</a>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. https://nearit.com"
@@ -21,6 +22,7 @@ object ContentFactory {
         return content
     }
 
+    @Suppress("DEPRECATION")
     fun getNoCTAContent(): Content {
         val content = Content()
         content.contentString = "<a href=\"https://google.com\">LINK!</a>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali. https://nearit.com"

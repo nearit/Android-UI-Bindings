@@ -20,6 +20,7 @@ class CouponsActivity : AppCompatActivity() {
 
     /*  COUPON LIST EXAMPLES    */
 
+    @Suppress("UNUSED_PARAMETER")
     fun onDefaultClicked(view: View) {
         //  start an activity that shows a list of REAL coupons, with jagged borders
         startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
@@ -29,6 +30,7 @@ class CouponsActivity : AppCompatActivity() {
                 .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onValidClicked(view: View) {
         startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
                 .couponListIntentBuilder()
@@ -36,6 +38,7 @@ class CouponsActivity : AppCompatActivity() {
                 .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onInactiveClicked(view: View) {
         startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
                 .couponListIntentBuilder()
@@ -43,6 +46,7 @@ class CouponsActivity : AppCompatActivity() {
                 .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onExpiredClicked(view: View) {
         startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
                 .couponListIntentBuilder()
@@ -50,6 +54,7 @@ class CouponsActivity : AppCompatActivity() {
                 .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onRedeemedClicked(view: View) {
         startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
                 .couponListIntentBuilder()
@@ -57,6 +62,7 @@ class CouponsActivity : AppCompatActivity() {
                 .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onValidAndInactiveClicked(view: View) {
         startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
                 .couponListIntentBuilder()
@@ -65,6 +71,7 @@ class CouponsActivity : AppCompatActivity() {
                 .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onValidAndExpiredClicked(view: View) {
         startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
                 .couponListIntentBuilder()
@@ -73,6 +80,7 @@ class CouponsActivity : AppCompatActivity() {
                 .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onValidAndRedeemedClicked(view: View) {
         startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
                 .couponListIntentBuilder()
@@ -81,6 +89,7 @@ class CouponsActivity : AppCompatActivity() {
                 .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onInactiveAndExpiredClicked(view: View) {
         startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
                 .couponListIntentBuilder()
@@ -89,6 +98,7 @@ class CouponsActivity : AppCompatActivity() {
                 .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onInactiveAndRedeemedClicked(view: View) {
         startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
                 .couponListIntentBuilder()
@@ -97,6 +107,7 @@ class CouponsActivity : AppCompatActivity() {
                 .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onExpiredAndRedeemedClicked(view: View) {
         startActivity(NearITUIBindings.getInstance(this@CouponsActivity)
                 .couponListIntentBuilder()
@@ -105,6 +116,7 @@ class CouponsActivity : AppCompatActivity() {
                 .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onPlainCouponListClicked(view: View) {
         //  start a plain activity that shows the fragment fullscreen
         //  please check it
@@ -112,7 +124,7 @@ class CouponsActivity : AppCompatActivity() {
     }
 
     /*  COUPON DETAIL EXAMPLES    */
-
+    @Suppress("UNUSED_PARAMETER")
     fun onValidDetailClicked(view: View) {
         //  In a real scenario the coupon is provided by the NearIT SDK
         val validCoupon = CouponFactory.getValidCoupon()
@@ -123,6 +135,7 @@ class CouponsActivity : AppCompatActivity() {
                         .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onInactiveDetailClicked(view: View) {
         //  In a real scenario the coupon is provided by the NearIT SDK
         val validCoupon = CouponFactory.getInactiveCoupon()
@@ -133,6 +146,7 @@ class CouponsActivity : AppCompatActivity() {
                         .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onExpiredDetailClicked(view: View) {
         val expiredCoupon = CouponFactory.getExpiredCoupon()
         startActivity(
@@ -144,6 +158,7 @@ class CouponsActivity : AppCompatActivity() {
                         .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onCustomIconDetailClicked(view: View) {
         //  In a real scenario the coupon is provided by the NearIT SDK
         val validCoupon = CouponFactory.getValidCoupon()
@@ -155,6 +170,7 @@ class CouponsActivity : AppCompatActivity() {
                         .build())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onPlainCouponClicked(view: View) {
         //  start a plain activity that shows the fragment fullscreen
         //  please check it
