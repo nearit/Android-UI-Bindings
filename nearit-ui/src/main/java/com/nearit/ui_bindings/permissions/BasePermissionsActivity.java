@@ -39,7 +39,7 @@ import com.nearit.ui_bindings.ExtraConstants;
 import com.nearit.ui_bindings.R;
 import com.nearit.ui_bindings.permissions.views.PermissionButton;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import it.near.sdk.NearItManager;
@@ -357,8 +357,9 @@ public class BasePermissionsActivity extends AppCompatActivity implements Permis
 
     @Override
     public void requestLocationPermission() {
-        List<String> permissions = Collections.singletonList(Manifest.permission.ACCESS_FINE_LOCATION);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        List<String> permissions = new ArrayList<>();
+        permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             permissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
