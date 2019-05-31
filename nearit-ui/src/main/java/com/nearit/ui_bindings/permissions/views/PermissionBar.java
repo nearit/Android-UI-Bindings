@@ -29,6 +29,7 @@ import com.nearit.ui_bindings.permissions.PermissionsRequestIntentBuilder;
 import com.nearit.ui_bindings.utils.PermissionsUtils;
 
 import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_GRANTED;
+import static com.nearit.ui_bindings.utils.PermissionsUtils.LOCATION_PERMISSION_ONLY_IN_USE;
 
 /**
  * @author Federico Boschini
@@ -375,15 +376,21 @@ public class PermissionBar extends RelativeLayout {
                 hideBluetoothIcon();
             }
 
-            if (PermissionsUtils.checkLocationPermission(context) != LOCATION_PERMISSION_GRANTED) {
-                showLocationIcon();
-                setSad();
-            } else {
-                hideLocationIcon();
-                if (!PermissionsUtils.checkLocationServices(context)) {
+            switch (PermissionsUtils.checkLocationPermission(context)) {
+                case LOCATION_PERMISSION_GRANTED:
+                    hideLocationIcon();
+                    if (!PermissionsUtils.checkLocationServices(context)) {
+                        showLocationIcon();
+                        setWorried();
+                    }
+                    break;
+                case LOCATION_PERMISSION_ONLY_IN_USE:
                     showLocationIcon();
                     setWorried();
-                }
+                    break;
+                default:
+                    showLocationIcon();
+                    setSad();
             }
 
         }
