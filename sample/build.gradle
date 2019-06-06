@@ -45,18 +45,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    flavorDimensions "test"
-
-    productFlavors {
-        sampleTest {
-            dimension "test"
-            minSdkVersion 18
-        }
-        sample {
-
-        }
-    }
 }
 
 dependencies {
@@ -71,11 +59,8 @@ dependencies {
     implementation "com.android.support:support-v4:$supportLibraryVersion"
 
     testImplementation 'junit:junit:4.12'
-
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
-    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.3'
 
 }
 apply plugin: 'com.google.gms.google-services'
