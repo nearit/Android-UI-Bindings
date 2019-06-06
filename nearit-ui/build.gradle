@@ -21,12 +21,12 @@ apply plugin: 'com.novoda.build-properties'
 apply from: 'distribution.gradle'
 
 android {
-    compileSdkVersion 'android-Q'
-    buildToolsVersion '29.0.0 rc3'
+    compileSdkVersion 29
+    buildToolsVersion '29.0.0'
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 'Q'
+        targetSdkVersion 29
         versionCode 1
         versionName version
 
