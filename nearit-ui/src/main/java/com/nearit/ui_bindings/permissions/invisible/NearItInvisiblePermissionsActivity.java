@@ -118,7 +118,7 @@ public class NearItInvisiblePermissionsActivity extends AppCompatActivity implem
     public void requestLocationPermission() {
         List<String> permissions = new ArrayList<>();
         permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             permissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
