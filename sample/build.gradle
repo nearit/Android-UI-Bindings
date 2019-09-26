@@ -55,7 +55,9 @@ dependencies {
 
     implementation 'it.near.sdk:nearit:2.12.4'
 
+    //noinspection GradleCompatible
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+    //noinspection GradleCompatible
     implementation "com.android.support:support-v4:$supportLibraryVersion"
 
     testImplementation 'junit:junit:4.12'

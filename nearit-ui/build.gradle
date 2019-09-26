@@ -44,10 +44,15 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    //noinspection GradleCompatible
     api "com.android.support:recyclerview-v7:$supportLibraryVersion"
+    //noinspection GradleCompatible
     api "com.android.support:customtabs:$supportLibraryVersion"
+    //noinspection GradleCompatible
     implementation "com.android.support:design:$supportLibraryVersion"
+    //noinspection GradleCompatible
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+    //noinspection GradleCompatible
     implementation "com.android.support:support-v4:$supportLibraryVersion"
 
     testImplementation 'junit:junit:4.12'
