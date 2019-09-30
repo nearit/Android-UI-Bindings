@@ -232,22 +232,14 @@ public class PermissionBar extends RelativeLayout {
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (activity != null) {
-                    activity.startActivityForResult(
-                            builder.build(), requestCode
-                    );
-                }
+                requestPermissions(builder);
             }
         });
 
         okButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (activity != null) {
-                    activity.startActivityForResult(
-                            builder.build(), requestCode
-                    );
-                }
+                requestPermissions(builder);
             }
         });
 
@@ -255,6 +247,14 @@ public class PermissionBar extends RelativeLayout {
         getContext().registerReceiver(mReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
 
         checkPermissionsAndUpdateUI();
+    }
+
+    private void requestPermissions(PermissionsRequestIntentBuilder builder) {
+        if (activity != null) {
+            activity.startActivityForResult(
+                    builder.build(), requestCode
+            );
+        }
     }
 
     private void handleRTL() {

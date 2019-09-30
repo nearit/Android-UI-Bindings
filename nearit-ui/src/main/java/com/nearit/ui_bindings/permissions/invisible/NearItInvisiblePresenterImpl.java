@@ -208,6 +208,7 @@ public class NearItInvisiblePresenterImpl implements InvisiblePermissionsContrac
     }
 
     private boolean checkLocation() {
+        // TODO: maybe return false if LOCATION_PERMISSION_ONLY_IN_USE ?
         return permissionsManager.areLocationServicesOn() &&
                 (permissionsManager.isLocationPermissionGranted() == LOCATION_PERMISSION_GRANTED
                         || permissionsManager.isLocationPermissionGranted() == LOCATION_PERMISSION_ONLY_IN_USE);
