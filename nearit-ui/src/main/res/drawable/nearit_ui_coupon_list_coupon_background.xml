@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/coupon_background">
-    <corners android:radius="2dp"/>
+    <corners android:radius="@dimen/nearit_ui_coupon_card_corner_radius"/>
     <solid android:color="@color/nearit_ui_coupon_list_coupon_background_color" />
 </shape>
