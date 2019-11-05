@@ -3,6 +3,6 @@
     android:id="@+id/button"
     android:padding="10dp"
     android:shape="rectangle">
+    <corners android:radius="@dimen/nearit_ui_button_corner_radius" />
     <solid android:color="@color/nearit_ui_permission_bar_button_background_color" />
-    <corners android:radius="3dp" />
 </shape>

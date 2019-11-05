@@ -26,11 +26,11 @@ buildProperties {
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "28.0.3"
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "com.your_company.ui_bindings_sample"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -62,10 +62,10 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    // implementation 'it.near.sdk:nearit-ui:2.11.9'
+    // implementation 'it.near.sdk:nearit-ui:2.11.10'
     implementation project(':nearit-ui')
 
-    implementation 'it.near.sdk:nearit:2.11.2'
+    implementation 'it.near.sdk:nearit:2.12.4'
 
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
     implementation "com.android.support:support-v4:$supportLibraryVersion"
