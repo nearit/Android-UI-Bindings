@@ -13,6 +13,6 @@
         android:bottomLeftRadius="0dp"
         android:bottomRightRadius="0dp"
         android:radius="1dp"
-        android:topLeftRadius="5dp"
-        android:topRightRadius="5dp" />
+        android:topLeftRadius="@dimen/nearit_ui_coupon_detail_corner_radius"
+        android:topRightRadius="@dimen/nearit_ui_coupon_detail_corner_radius" />
 </shape>

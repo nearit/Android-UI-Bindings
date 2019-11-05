@@ -10,8 +10,8 @@
         android:top="1dp" />
 
     <corners
-        android:bottomLeftRadius="5dp"
-        android:bottomRightRadius="5dp"
+        android:bottomLeftRadius="@dimen/nearit_ui_coupon_detail_corner_radius"
+        android:bottomRightRadius="@dimen/nearit_ui_coupon_detail_corner_radius"
         android:radius="1dp"
         android:topLeftRadius="0dp"
         android:topRightRadius="0dp" />
