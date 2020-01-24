@@ -1,5 +1,6 @@
 package com.nearit.ui_bindings.inbox;
 
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -18,7 +19,7 @@ public class NotificationHistoryFragmentBuilder {
 
     public NotificationHistoryFragmentBuilder() {}
 
-    public NotificationHistoryFragmentBuilder setEmptyListLayout(int res) {
+    public NotificationHistoryFragmentBuilder setEmptyListLayout(@LayoutRes int res) {
         this.mEmptyListLayout = res;
         return this;
     }

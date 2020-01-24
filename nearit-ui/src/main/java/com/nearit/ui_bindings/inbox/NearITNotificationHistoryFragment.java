@@ -3,6 +3,7 @@ package com.nearit.ui_bindings.inbox;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,13 +36,14 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
     @Nullable
     private SwipeRefreshLayout swipeToRefreshLayout;
 
+    @LayoutRes
     private int customEmptyListLayoutRef = 0;
     private View customEmptyListView;
     private NotificationHistoryExtraParams extras;
 
     public static NearITNotificationHistoryFragment newInstance(@Nullable NotificationHistoryExtraParams extras) {
         NearITNotificationHistoryFragment fragment = new NearITNotificationHistoryFragment();
-        Bundle bundle =  new Bundle();
+        Bundle bundle = new Bundle();
         bundle.putParcelable(EXTRAS, extras);
         fragment.setArguments(bundle);
         return fragment;

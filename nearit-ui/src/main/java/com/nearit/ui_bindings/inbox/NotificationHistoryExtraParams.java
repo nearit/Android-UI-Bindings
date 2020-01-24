@@ -2,10 +2,12 @@ package com.nearit.ui_bindings.inbox;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 
 public class NotificationHistoryExtraParams implements Parcelable {
 
+    @LayoutRes
     private final int emptyListCustomLayout;
     private final boolean includeCustomJSON;
     private final boolean includeFeedbacks;
@@ -13,7 +15,7 @@ public class NotificationHistoryExtraParams implements Parcelable {
     @Nullable
     private final String activityTitle;
 
-    NotificationHistoryExtraParams(int emptyListCustomLayout, boolean includeCustomJSON, boolean includeFeedbacks, boolean includeCoupons, @Nullable String activityTitle) {
+    NotificationHistoryExtraParams(@LayoutRes int emptyListCustomLayout, boolean includeCustomJSON, boolean includeFeedbacks, boolean includeCoupons, @Nullable String activityTitle) {
         this.emptyListCustomLayout = emptyListCustomLayout;
         this.includeCustomJSON = includeCustomJSON;
         this.includeFeedbacks = includeFeedbacks;
