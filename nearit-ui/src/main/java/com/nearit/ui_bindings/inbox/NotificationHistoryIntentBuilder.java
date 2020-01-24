@@ -2,6 +2,7 @@ package com.nearit.ui_bindings.inbox;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -29,7 +30,7 @@ public class NotificationHistoryIntentBuilder {
         this.flags = flags;
     }
 
-    public NotificationHistoryIntentBuilder setEmptyListLayout(int res) {
+    public NotificationHistoryIntentBuilder setEmptyListLayout(@LayoutRes int res) {
         this.mEmptyListLayout = res;
         return this;
     }
