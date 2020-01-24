@@ -27,9 +27,10 @@ class NotificationHistoryPresenterImpl implements NotificationHistoryContract.No
 
     private final NearItManager nearItManager;
     private final NotificationHistoryContract.NotificationHistoryView view;
+    @NonNull
     private final NotificationHistoryExtraParams params;
 
-    NotificationHistoryPresenterImpl(NearItManager nearItManager, NotificationHistoryContract.NotificationHistoryView view, NotificationHistoryExtraParams params) {
+    NotificationHistoryPresenterImpl(NearItManager nearItManager, NotificationHistoryContract.NotificationHistoryView view, @NonNull NotificationHistoryExtraParams params) {
         this.nearItManager = nearItManager;
         this.view = view;
         this.params = params;

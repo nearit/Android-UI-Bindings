@@ -3,6 +3,7 @@ package com.nearit.ui_bindings.inbox;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,11 @@ import it.near.sdk.recipes.inbox.model.HistoryItem;
 public class NearITNotificationHistoryFragment extends Fragment implements NotificationHistoryContract.NotificationHistoryView, NotificationsAdapter.NotificationAdapterListener, NotificationsAdapter.NotificationReadListener {
 
     private static final String EXTRAS = "extras";
+    public static final String EMPTY_LIST_ARG = "nearit_inbox_empty_layout";
+    public static final String INCLUDE_CUSTOM_JSON_ARG = "nearit_inbox_include_json";
+    public static final String INCLUDE_FEEDBACKS_ARG = "nearit_inbox_include_feedback";
+    public static final String INCLUDE_COUPONS_ARG = "nearit_inbox_include_coupons";
+    public static final String ACTIVITY_TITLE_ARG = "nearit_inbox_activity_title";
     private NotificationHistoryContract.NotificationHistoryPresenter presenter;
     private TextView emptyListText;
     private RelativeLayout emptyListContainer;
@@ -35,13 +41,14 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
     @Nullable
     private SwipeRefreshLayout swipeToRefreshLayout;
 
+    @LayoutRes
     private int customEmptyListLayoutRef = 0;
     private View customEmptyListView;
     private NotificationHistoryExtraParams extras;
 
     public static NearITNotificationHistoryFragment newInstance(@Nullable NotificationHistoryExtraParams extras) {
         NearITNotificationHistoryFragment fragment = new NearITNotificationHistoryFragment();
-        Bundle bundle =  new Bundle();
+        Bundle bundle = new Bundle();
         bundle.putParcelable(EXTRAS, extras);
         fragment.setArguments(bundle);
         return fragment;
@@ -51,14 +58,36 @@ public class NearITNotificationHistoryFragment extends Fragment implements Notif
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            extras = getArguments().getParcelable(EXTRAS);
-            if (extras != null) {
-                customEmptyListLayoutRef = extras.getEmptyListCustomLayout();
-            }
-        }
+        extras = getParams(getArguments());
+        customEmptyListLayoutRef = extras.getEmptyListCustomLayout();
 
         new NotificationHistoryPresenterImpl(NearItManager.getInstance(), this, extras);
+    }
+
+    private NotificationHistoryExtraParams getParams(@Nullable Bundle arguments) {
+        int emptyLayout = NotificationHistoryExtraParams.EMPTY_LIST_CUSTOM_LAYOUT_DEFAULT;
+        boolean includeJson = NotificationHistoryExtraParams.INCLUDE_CUSTOM_JSON_DEFAULT;
+        boolean includeFeedback = NotificationHistoryExtraParams.INCLUDE_FEEDBACKS_DEFAULT;
+        boolean includeCoupon = NotificationHistoryExtraParams.INCLUDE_COUPONS_DEFAULT;
+        String title = NotificationHistoryExtraParams.ACTIVITY_TITLE_DEFAULT;
+        if (arguments != null) {
+            if (arguments.containsKey(EXTRAS)) {
+                return arguments.getParcelable(EXTRAS);
+            } else {
+                emptyLayout = arguments.getInt(EMPTY_LIST_ARG, NotificationHistoryExtraParams.EMPTY_LIST_CUSTOM_LAYOUT_DEFAULT);
+                includeJson = arguments.getBoolean(INCLUDE_CUSTOM_JSON_ARG, NotificationHistoryExtraParams.INCLUDE_CUSTOM_JSON_DEFAULT);
+                includeFeedback = arguments.getBoolean(INCLUDE_FEEDBACKS_ARG, NotificationHistoryExtraParams.INCLUDE_FEEDBACKS_DEFAULT);
+                includeCoupon = arguments.getBoolean(INCLUDE_COUPONS_ARG, NotificationHistoryExtraParams.INCLUDE_COUPONS_DEFAULT);
+                title = arguments.getString(ACTIVITY_TITLE_ARG, NotificationHistoryExtraParams.ACTIVITY_TITLE_DEFAULT);
+            }
+        }
+        return new NotificationHistoryExtraParams(
+                emptyLayout,
+                includeJson,
+                includeFeedback,
+                includeCoupon,
+                title
+        );
     }
 
     @Override
