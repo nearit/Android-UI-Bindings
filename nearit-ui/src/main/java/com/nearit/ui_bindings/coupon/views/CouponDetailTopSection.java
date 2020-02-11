@@ -106,8 +106,7 @@ public class CouponDetailTopSection extends RelativeLayout {
 
     public void setCouponView(Coupon coupon) {
         if (validityPeriodTextView != null) {
-            String formattedExp = "", formattedRedeem = "";
-            String validityPeriod = "";
+            String formattedExp, formattedRedeem;
 
             validityPeriodTextView.setVisibility(VISIBLE);
 
@@ -116,22 +115,24 @@ public class CouponDetailTopSection extends RelativeLayout {
             }
 
             if (coupon.getRedeemableFromDate() != null && coupon.getExpiresAtDate() != null) {
-                validityPeriod = getResources().getString(R.string.nearit_ui_coupon_validity_period_from_to);
+                String format = getResources().getString(R.string.nearit_ui_coupon_validity_period_from_to);
                 formattedRedeem = formatDate.format(coupon.getRedeemableFromDate());
                 formattedExp = formatDate.format(coupon.getExpiresAtDate());
+                validityPeriodTextView.setText(String.format(format, formattedRedeem, formattedExp));
             } else if (coupon.getExpiresAtDate() != null) {
-                validityPeriod = getResources().getString(R.string.nearit_ui_coupon_validity_period_until);
+                String format = getResources().getString(R.string.nearit_ui_coupon_validity_period_until);
                 formattedExp = formatDate.format(coupon.getExpiresAtDate());
+                validityPeriodTextView.setText(String.format(format, formattedExp));
             } else if (coupon.getRedeemableFromDate() != null) {
-                validityPeriod = getResources().getString(R.string.nearit_ui_coupon_validity_period_from);
+                String format = getResources().getString(R.string.nearit_ui_coupon_validity_period_from);
                 formattedRedeem = formatDate.format(coupon.getRedeemableFromDate());
+                validityPeriodTextView.setText(String.format(format, formattedRedeem));
             } else {
                 if (validityTextView != null) {
                     validityTextView.setText(R.string.nearit_ui_coupon_validity_label_valid_no_period);
                 }
                 validityPeriodTextView.setVisibility(GONE);
             }
-            validityPeriodTextView.setText(String.format(validityPeriod, formattedRedeem, formattedExp));
         }
 
         switch (checkValidity(coupon)) {
