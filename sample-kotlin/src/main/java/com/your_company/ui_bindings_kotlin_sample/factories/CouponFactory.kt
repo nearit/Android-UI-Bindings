@@ -21,8 +21,8 @@ object CouponFactory {
     }
 
     fun getValidCoupon(): Coupon {
-        coupon.redeemable_from = "2017-09-01T00:00:00.000Z"
-        coupon.expires_at = "2099-10-30T23:59:59.999Z"
+        // coupon.redeemable_from = "2017-09-01T00:00:00.000Z"
+        // coupon.expires_at = "2099-10-30T23:59:59.999Z"
         return coupon
     }
 
