@@ -3,6 +3,7 @@ package com.nearit.ui_bindings.content;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
+import com.nearit.htmltextview.NearItMovementMethod;
 import com.nearit.ui_bindings.base.BasePresenter;
 import com.nearit.ui_bindings.base.BaseView;
 
@@ -30,7 +31,7 @@ class ContentDetailContract {
     }
 
     interface Presenter extends BasePresenter {
-        void handleLinkTap(@NonNull String link);
+        void handleLinkTap(@NonNull String link, @NonNull NearItMovementMethod.LinkType type);
         void handleCtaTap();
         void reloadImage();
     }

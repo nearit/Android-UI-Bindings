@@ -2,6 +2,7 @@ package com.nearit.ui_bindings.content;
 
 import android.graphics.Bitmap;
 
+import com.nearit.htmltextview.NearItMovementMethod;
 import com.nearit.ui_bindings.stubs.ContentStub;
 import com.nearit.ui_bindings.utils.images.Image;
 import com.nearit.ui_bindings.utils.images.ImageDownloadListener;
@@ -29,13 +30,14 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
  * @author Federico Boschini
  */
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.Silent.class)
 public class ContentDetailPresenterImplTest {
 
     @Mock
@@ -252,14 +254,31 @@ public class ContentDetailPresenterImplTest {
     }
 
     @Test
-    public void onHandleLinkTap_ifOpenInWebView_openIt() {
+    public void onHandleLinkTap_ifWebAndOpenInWebView_openIt() {
         String link = "ghiacciolo";
         when(params.isOpenLinksInWebView()).thenReturn(true);
 
-        presenter.handleLinkTap(link);
+        presenter.handleLinkTap(link, NearItMovementMethod.LinkType.WEB_URL);
 
         verify(view, never()).openLink(anyString());
         verify(view).openLinkInWebView(link);
+    }
+
+    @Test
+    public void onHandleLinkTap_ifNOTWeb_DoNOTOpenInWebView() {
+        String mailLink = "mailto:ghiacciolo@gelato.it";
+        String telLink = "tel:+390611223666";
+        String anyLink = "noTypeLink";
+        when(params.isOpenLinksInWebView()).thenReturn(true);
+
+        presenter.handleLinkTap(mailLink, NearItMovementMethod.LinkType.EMAIL_ADDRESS);
+        presenter.handleLinkTap(telLink, NearItMovementMethod.LinkType.PHONE);
+        presenter.handleLinkTap(anyLink, NearItMovementMethod.LinkType.NONE);
+
+        verify(view).openLink(mailLink);
+        verify(view).openLink(telLink);
+        verify(view).openLink(anyLink);
+        verify(view, never()).openLinkInWebView(anyString());
     }
 
     @Test
@@ -267,9 +286,12 @@ public class ContentDetailPresenterImplTest {
         String link = "gelato";
         when(params.isOpenLinksInWebView()).thenReturn(false);
 
-        presenter.handleLinkTap(link);
+        presenter.handleLinkTap(link, NearItMovementMethod.LinkType.WEB_URL);
+        presenter.handleLinkTap(link, NearItMovementMethod.LinkType.EMAIL_ADDRESS);
+        presenter.handleLinkTap(link, NearItMovementMethod.LinkType.PHONE);
+        presenter.handleLinkTap(link, NearItMovementMethod.LinkType.NONE);
 
-        verify(view).openLink(link);
+        verify(view, times(4)).openLink(link);
         verify(view, never()).openLinkInWebView(anyString());
     }
 
