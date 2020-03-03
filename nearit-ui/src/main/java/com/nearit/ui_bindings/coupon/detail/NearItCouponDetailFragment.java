@@ -241,7 +241,7 @@ public class NearItCouponDetailFragment extends Fragment implements CouponDetail
 
     @Override
     public void onLinkClicked(String linkText, NearItMovementMethod.LinkType linkType) {
-        presenter.handleLinkTap(linkText);
+        presenter.handleLinkTap(linkText, linkType);
     }
 
     @Override
