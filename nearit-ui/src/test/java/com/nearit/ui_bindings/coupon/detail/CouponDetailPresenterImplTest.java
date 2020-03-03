@@ -3,6 +3,7 @@ package com.nearit.ui_bindings.coupon.detail;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
+import com.nearit.htmltextview.NearItMovementMethod;
 import com.nearit.ui_bindings.stubs.CouponStub;
 import com.nearit.ui_bindings.utils.qrcode.QRcodeGenerator;
 import com.nearit.ui_bindings.utils.images.Image;
@@ -30,6 +31,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -357,25 +359,45 @@ public class CouponDetailPresenterImplTest {
     }
 
     @Test
-    public void onHandleLinkTap_ifOpenInWebView_openInWebView() {
+    public void onHandleLinkTap_ifWebAndOpenInWebView_openInWebView() {
         String link = "linko";
         when(params.isOpenLinksInWebView()).thenReturn(true);
 
-        presenter.handleLinkTap(link);
+        presenter.handleLinkTap(link, NearItMovementMethod.LinkType.WEB_URL);
 
         verify(view, never()).openLink(link);
         verify(view).openLinkInWebView(link);
     }
 
     @Test
-    public void onHandleLinkTap_ifDONTOpenInWebView_openLinkTraditionally() {
+    public void onHandleLinkTap_ifNOTWeb_DoNOTOpenInWebView() {
+        String mailLink = "mailto:ghiacciolo@gelato.it";
+        String telLink = "tel:+390611223666";
+        String anyLink = "noTypeLink";
+        when(params.isOpenLinksInWebView()).thenReturn(true);
+
+        presenter.handleLinkTap(mailLink, NearItMovementMethod.LinkType.EMAIL_ADDRESS);
+        presenter.handleLinkTap(telLink, NearItMovementMethod.LinkType.PHONE);
+        presenter.handleLinkTap(anyLink, NearItMovementMethod.LinkType.NONE);
+
+        verify(view).openLink(mailLink);
+        verify(view).openLink(telLink);
+        verify(view).openLink(anyLink);
+        verify(view, never()).openLinkInWebView(anyString());
+    }
+
+    @Test
+    public void onHandleLinkTap_ifClassicLinkOpening_openIt() {
         String link = "linko";
         when(params.isOpenLinksInWebView()).thenReturn(false);
 
-        presenter.handleLinkTap(link);
+        presenter.handleLinkTap(link, NearItMovementMethod.LinkType.WEB_URL);
+        presenter.handleLinkTap(link, NearItMovementMethod.LinkType.EMAIL_ADDRESS);
+        presenter.handleLinkTap(link, NearItMovementMethod.LinkType.PHONE);
+        presenter.handleLinkTap(link, NearItMovementMethod.LinkType.NONE);
 
-        verify(view, never()).openLinkInWebView(link);
-        verify(view).openLink(link);
+        verify(view, times(4)).openLink(link);
+        verify(view, never()).openLinkInWebView(anyString());
     }
 
 

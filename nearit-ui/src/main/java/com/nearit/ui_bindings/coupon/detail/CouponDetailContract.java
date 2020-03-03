@@ -3,6 +3,7 @@ package com.nearit.ui_bindings.coupon.detail;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
+import com.nearit.htmltextview.NearItMovementMethod;
 import com.nearit.ui_bindings.base.BasePresenter;
 import com.nearit.ui_bindings.base.BaseView;
 
@@ -33,7 +34,7 @@ class CouponDetailContract {
     }
 
     interface Presenter extends BasePresenter {
-        void handleLinkTap(@NonNull String link);
+        void handleLinkTap(@NonNull String link, @NonNull NearItMovementMethod.LinkType type);
     }
 
 }
