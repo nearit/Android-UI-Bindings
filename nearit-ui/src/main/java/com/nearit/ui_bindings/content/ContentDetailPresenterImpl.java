@@ -3,6 +3,7 @@ package com.nearit.ui_bindings.content;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.nearit.htmltextview.NearItMovementMethod;
 import com.nearit.ui_bindings.utils.images.Image;
 import com.nearit.ui_bindings.utils.images.ImageDownloadListener;
 import com.nearit.ui_bindings.utils.images.NearItImageDownloader;
@@ -58,11 +59,20 @@ public class ContentDetailPresenterImpl implements ContentDetailContract.Present
     public void stop() { }
 
     @Override
-    public void handleLinkTap(@NonNull String link) {
-        if (params.isOpenLinksInWebView()) {
-            view.openLinkInWebView(link);
-        } else {
-            view.openLink(link);
+    public void handleLinkTap(@NonNull String link, @NonNull NearItMovementMethod.LinkType type) {
+        switch (type) {
+            case WEB_URL:
+                if (params.isOpenLinksInWebView()) {
+                    view.openLinkInWebView(link);
+                } else {
+                    view.openLink(link);
+                }
+                break;
+            case PHONE:
+            case EMAIL_ADDRESS:
+            case NONE:
+                view.openLink(link);
+                break;
         }
     }
 

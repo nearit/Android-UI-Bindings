@@ -243,6 +243,6 @@ public class NearItContentDetailFragment extends Fragment implements ContentDeta
 
     @Override
     public void onLinkClicked(String linkText, NearItMovementMethod.LinkType linkType) {
-        presenter.handleLinkTap(linkText);
+        presenter.handleLinkTap(linkText, linkType);
     }
 }
